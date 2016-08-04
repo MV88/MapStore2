@@ -23,11 +23,15 @@ const MapCard = React.createClass({
         map: React.PropTypes.object,
         viewerUrl: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.func]),
         onMetadataEdit: React.PropTypes.func,
+        onCreateThumbnail: React.PropTypes.func,
+        onDeleteThumbnail: React.PropTypes.func,
         onMapDelete: React.PropTypes.func,
         mapType: React.PropTypes.string
     },
     getDefaultProps() {
         return {
+            onCreateThumbnail: ()=> {},
+            onDeleteThumbnail: ()=> {},
             onMetadataEdit: ()=> {},
             onMapDelete: ()=> {},
             style: {
@@ -54,7 +58,7 @@ const MapCard = React.createClass({
     getCardStyle() {
         if (this.props.map.thumbnail) {
             return assign({}, this.props.style, {
-                backgroundImage: 'url(' + this.props.map.thumbnail + ')'
+                backgroundImage: 'url(' + decodeURIComponent(this.props.map.thumbnail) + ')'
             });
         }
         return this.props.style;
@@ -81,7 +85,7 @@ const MapCard = React.createClass({
         return (
            <GridCard className="map-thumb" style={this.getCardStyle()} header={this.props.map.title || this.props.map.name} actions={availableAction}>
                <div className="map-thumb-description">{this.props.map.description}</div>
-               <MetadataModal ref="metadataModal" show={this.state.displayMetadataEdit} onHide={this.close} onClose={this.close} map={this.props.map} onMetadataEdit={this.props.onMetadataEdit}/>
+               <MetadataModal ref="metadataModal" show={this.state.displayMetadataEdit} onHide={this.close} onClose={this.close} map={this.props.map} onMetadataEdit={this.props.onMetadataEdit} onDeleteThumbnail={this.props.onDeleteThumbnail} onCreateThumbnail={this.props.onCreateThumbnail}/>
                <ConfirmModal ref="deleteMapModal" show={this.state.displayDeleteDialog} onHide={this.close} onClose={this.close} onConfirm={this.onConfirmDelete} titleText={<Message msgId="manager.deleteMap" />} confirmText={<Message msgId="manager.deleteMap" />} cancelText={<Message msgId="cancel" />} body={<Message msgId="manager.deleteMapMessage" />} />
            </GridCard>
         );

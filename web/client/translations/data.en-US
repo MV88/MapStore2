@@ -109,8 +109,9 @@
             "description": "Description",
             "namePlaceholder": "Map Name",
             "descriptionPlaceholder": "Map Description",
-            "saveTitle": "Save Map",
-            "saveText": "Save current map?"
+            "saveTitle": "Save map",
+            "saveText": "Save current map?",
+            "thumbnail": "Thumbnail"
         },
         "print":{
             "paneltitle": "Print",

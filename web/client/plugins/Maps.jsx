@@ -8,7 +8,7 @@
 
 const React = require('react');
 const {connect} = require('react-redux');
-const {loadMaps, updateMapMetadata, deleteMap} = require('../actions/maps');
+const {loadMaps, updateMapMetadata, deleteMap, createThumbnail, deleteThumbnail} = require('../actions/maps');
 const ConfigUtils = require('../utils/ConfigUtils');
 const MapsGrid = connect((state) => {
     return {
@@ -20,6 +20,8 @@ const MapsGrid = connect((state) => {
 }, {
     loadMaps,
     updateMapMetadata,
+    createThumbnail,
+    deleteThumbnail,
     deleteMap
 })(require('../components/maps/MapGrid'));
 

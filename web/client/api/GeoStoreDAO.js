@@ -53,6 +53,15 @@ var Api = {
     addBaseUrl: function(options) {
         return assign(options, {baseURL: ConfigUtils.getDefaults().geoStoreUrl});
     },
+    putResourceAttribute: function(resourceId, name, value, type, options) {
+        return axios.put(
+            "resources/resource/" + resourceId + "/attributes/" + name + "/" + value, null,
+            this.addBaseUrl(_.merge({
+                headers: {
+                    'Content-Type': "application/xml"
+                }
+            }, options)));
+    },
     putResourceMetadata: function(resourceId, newName, newDescription, options) {
         return axios.put(
             "resources/resource/" + resourceId,
@@ -71,6 +80,31 @@ var Api = {
             this.addBaseUrl(_.merge({
                 headers: {
                     'Content-Type': "application/json"
+                }
+            }, options)));
+    },
+    postPermissions: function(resourceId, canRead, canWrite, group, options) {
+        return axios.post(
+            "resources/resource/" + resourceId + "/permissions",
+            "<SecurityRuleList><SecurityRule>" +
+            "<canRead>" + (canRead || "") + "</canRead><canWrite>" + (canWrite || "") + "</canWrite>" +
+            "<group><groupName>" + (group && group.groupName || "") + "</groupName><id>" + (group && group.id || "") + "</id></group>" +
+            "</SecurityRule></SecurityRuleList>",
+            this.addBaseUrl(_.merge({
+                headers: {
+                    'Content-Type': "application/xml"
+                }
+            }, options)));
+    },
+    postResource: function(name, data, category, options) {
+        return axios.post(
+            "resources/",
+                "<Resource><description></description><metadata></metadata>" +
+                "<name>" + (name || "") + "</name><category><name>" + (category || "") + "</name></category>" +
+                "<store><data><![CDATA[" + (data || "") + "]]></data></store></Resource>",
+            this.addBaseUrl(_.merge({
+                headers: {
+                    'Content-Type': "application/xml"
                 }
             }, options)));
     },
