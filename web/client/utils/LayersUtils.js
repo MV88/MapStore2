@@ -111,7 +111,6 @@ var LayersUtils = {
             groups: groups.map((group) => getNormalizedGroup(group, normalizedLayers))
         };
     },
-
     sortLayers: (groups, allLayers) => {
         return allLayers.filter((layer) => layer.group === 'background')
             .concat(reorderLayers(groups, allLayers));
