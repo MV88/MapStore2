@@ -14,27 +14,6 @@ var {LAYER_LOADING, LAYER_LOAD, LAYER_ERROR, CHANGE_LAYER_PROPERTIES, CHANGE_GRO
 var assign = require('object-assign');
 var {isObject, isArray, head, isString} = require('lodash');
 
-const getLayer = (layerName, allLayers) => {
-    return head(allLayers.filter((layer) => layer.id === layerName));
-};
-const initialReorderLayers = (groups, allLayers) => {
-    return groups.slice(0).reverse().reduce((previous, group) => {
-        return previous.concat(
-            group.nodes.slice(0).reverse().reduce((layerss, node) => {
-                if (isObject(node)) {
-                    return layerss.concat(initialReorderLayers([node], allLayers));
-                }
-                return layerss.concat(getLayer(node, allLayers));
-            }, [])
-            );
-    }, []);
-};
-const reorderLayers = (groups, allLayers) => {
-    return initialReorderLayers(groups, allLayers);
-};
-function sortLayers(groups, allLayers) {
-    return reorderLayers(groups, allLayers);
-}
 const LayersUtils = require('../utils/LayersUtils');
 
 const deepChange = (nodes, findValue, propName, propValue) => {
@@ -173,7 +152,7 @@ function layers(state = [], action) {
                 });
                 const newNodes = action.node === 'root' ? reorderedNodes :
                     deepChange(state.groups, action.node, 'nodes', reorderedNodes);
-                let newLayers = action.sortLayers ? sortLayers(newNodes, state.flat) : state.flat;
+                let newLayers = action.sortLayers ? action.sortLayers(newNodes, state.flat) : state.flat;
                 return assign({}, state, {groups: newNodes, flat: newLayers});
             }
         }
@@ -201,7 +180,7 @@ function layers(state = [], action) {
                 const groupId = (action.options.group || 'Default');
                 const newGroups = moveNode(state.groups, action.node, groupId, newLayers);
 
-                let orderedNewLayers = LayersUtils.sortLayers ? sortLayers(newGroups, newLayers) : newLayers;
+                let orderedNewLayers = LayersUtils.sortLayers ? LayersUtils.sortLayers(newGroups, newLayers) : newLayers;
                 return assign({}, state, {
                     flat: orderedNewLayers,
                     groups: newGroups
@@ -248,7 +227,7 @@ function layers(state = [], action) {
             if (groupId !== "background") {
                 newGroups = moveNode(newGroups, newLayer.id, groupId, newLayers, action.foreground);
             }
-            let orderedNewLayers = LayersUtils.sortLayers ? sortLayers(newGroups, newLayers) : newLayers;
+            let orderedNewLayers = LayersUtils.sortLayers ? LayersUtils.sortLayers(newGroups, newLayers) : newLayers;
             return {
                     flat: orderedNewLayers,
                     groups: newGroups
