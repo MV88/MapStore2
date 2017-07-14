@@ -41,7 +41,25 @@ const scalesSelector = createSelector(
     }
 );
 
+const canSaveMapSelector = (state) => {
+    let map = state.map && state.map.present || state.map || state.config && state.config.map || null;
+    if (map && map.mapId && state && state.security && state.security.user) {
+        if (state.maps && state.maps.results) {
+            let mapId = map.mapId;
+            let currentMap = state.maps.results.filter(item=> item && '' + item.id === mapId);
+            if (currentMap && currentMap.length > 0 && currentMap[0].canEdit) {
+                return true;
+            }
+        }
+        if (map.info && map.info.canEdit) {
+            return true;
+        }
+    }
+    return false;
+};
+
 module.exports = {
     mapSelector,
-    scalesSelector
+    scalesSelector,
+    canSaveMapSelector
 };
