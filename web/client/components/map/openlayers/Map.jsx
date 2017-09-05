@@ -11,7 +11,6 @@ var React = require('react');
 var assign = require('object-assign');
 
 var CoordinatesUtils = require('../../../utils/CoordinatesUtils');
-var projUtils = require('../../../utils/openlayers/projUtils');
 var ConfigUtils = require('../../../utils/ConfigUtils');
 var mapUtils = require('../../../utils/MapUtils');
 
@@ -34,7 +33,6 @@ class OpenlayersMap extends React.Component {
         onLayerLoading: PropTypes.func,
         onLayerLoad: PropTypes.func,
         onLayerError: PropTypes.func,
-        projectionDefs: PropTypes.array,
         resize: PropTypes.number,
         measurement: PropTypes.object,
         changeMeasurementState: PropTypes.func,
@@ -60,13 +58,6 @@ class OpenlayersMap extends React.Component {
         interactive: true
     };
 
-    componentWillMount() {
-        if (this.props.projectionDefs) {
-            this.props.projectionDefs.forEach((proj) => {
-                projUtils.addProjections(proj.code, proj.extent, proj.worldExtent);
-            });
-        }
-    }
     componentDidMount() {
         var center = CoordinatesUtils.reproject([this.props.center.x, this.props.center.y], 'EPSG:4326', this.props.projection);
 
