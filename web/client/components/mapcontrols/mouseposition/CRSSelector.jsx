@@ -37,8 +37,11 @@ class CRSSelector extends React.Component {
     render() {
         var val;
         var label;
+        let availableCRS = {};
         var list = [];
-        const availableCRS = CoordinatesUtils.filterCRSList(this.props.availableCRS, this.props.filterAllowedCRS, this.props.additionalCRS, this.props.projectionDefs );
+        if (Object.keys(this.props.availableCRS).length) {
+            availableCRS = CoordinatesUtils.filterCRSList(this.props.availableCRS, this.props.filterAllowedCRS, this.props.additionalCRS, this.props.projectionDefs );
+        }
         for (let crs in availableCRS) {
             if (availableCRS.hasOwnProperty(crs)) {
                 val = crs;
