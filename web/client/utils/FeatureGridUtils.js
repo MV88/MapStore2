@@ -6,12 +6,39 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const {get, findIndex, isNil} = require('lodash');
+const {get, findIndex, isNil, find} = require('lodash');
 
 const {getFeatureTypeProperties, isGeometryType, isValid, isValidValueForPropertyName, findGeometryProperty, getPropertyDesciptor} = require('./ogc/WFS/base');
 const getGeometryName = (describe) => get(findGeometryProperty(describe), "name");
 const getPropertyName = (name, describe) => name === "geometry" ? getGeometryName(describe) : name;
 
+const React = require('react');
+const Editor = require('../components/data/featuregrid/editors/AttributeEditor');
+const NumberEditor = require('../components/data/featuregrid/editors//NumberEditor');
+const AutocompleteEditor = require('../components/data/featuregrid/editors//AutocompleteEditor');
+
+let defaultEditors = {
+    "defaultEditor": (props) => <Editor {...props}/>,
+    "int": (props) => <NumberEditor dataType="int" inputProps={{step: 1, type: "number"}} {...props}/>,
+    "number": (props) => <NumberEditor dataType="number" inputProps={{step: 1, type: "number"}} {...props}/>,
+    "string": (props) => props.autocompleteEnabled ?
+        <AutocompleteEditor dataType="string" {...props}/> :
+        <Editor dataType="string" {...props}/>
+};
+let Editors = {};
+const isPresent = (editorName) => {
+    return Object.keys(Editors).indexOf(editorName) !== -1;
+};
+
+const testRule = (rule = {}, values = {}) => {
+    if (Object.keys(rule).length > 0) {
+        return Object.keys(rule).reduce( (p, c) => {
+            const r = new RegExp(rule[c]);
+            return p && r.test(values[c]);
+        }, true);
+    }
+    return false;
+};
 const getRow = (i, rows) => rows[i];
 /* eslint-disable */
 
@@ -109,6 +136,28 @@ module.exports = {
     hasValidNewFeatures: (newFeatures=[], describeFeatureType) => newFeatures.map(f => isValid(f, describeFeatureType)).reduce((acc, cur) => cur && acc, true),
     applyAllChanges: (orig, changes = {}) => applyChanges(orig, changes[orig.id] || {}),
     applyChanges,
+    EditorsUtils: {
+        setEditor: ({name, editors = defaultEditors}) => {
+            Editors[name] = editors;
+        },
+        removeEditor: (name) => {
+            if (isPresent(name)) {
+                delete Editors[name];
+                return true;
+            }
+            return false;
+        },
+        cleanEditors: () => {
+            Editors = {};
+        },
+        getEditor: ({attribute, url, typeName}, rules = []) => {
+            const editor = find(rules, (r) => testRule(r.regex, {attribute, url, typeName }));
+            if (!!editor) {
+                return Editors[editor.editor](editor.editorProps);
+            }
+            return null;
+        }
+    },
     gridUpdateToQueryUpdate: ({attribute, operator, value, type} = {}, oldFilterObj = {}) => {
         return {
             ...oldFilterObj,

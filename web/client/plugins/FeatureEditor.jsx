@@ -53,6 +53,7 @@ const FeatureDock = (props = {
             footer={getFooter(props)}>
             {getDialogs(props.tools)}
             <Grid
+                customEditorsOptions={props.customEditorsOptions}
                 autocompleteEnabled={props.autocompleteEnabled}
                 url={props.url}
                 typeName={props.typeName}
