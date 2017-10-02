@@ -1,4 +1,5 @@
-const {featureTypeToGridColumns, getToolColumns, getRow, getGridEvents, applyAllChanges, createNewAndEditingFilter, EditorsUtils} = require('../../../../utils/FeatureGridUtils');
+const {featureTypeToGridColumns, getToolColumns, getRow, getGridEvents, applyAllChanges, createNewAndEditingFilter} = require('../../../../utils/FeatureGridUtils');
+const EditorUtils = require('../../../../utils/EditorUtils');
 const {compose, withPropsOnChange, withHandlers, defaultProps} = require('recompose');
 const {getFilterRenderer} = require('../filterRenderers');
 const {manageFilterRendererState} = require('../enhancers/filterRenderers');
@@ -73,7 +74,7 @@ const featuresToGrid = compose(
                 }, {
                     getEditor: (desc) => {
                         // if configured it return the custom editor depending on the localtype of the present column
-                        const editor = EditorsUtils.getEditor({attribute: desc.name, url: props.url, typeName: props.typeName}, props.customEditorsOptions.rules);
+                        const editor = EditorUtils.getCustomEditor({attribute: desc.name, url: props.url, typeName: props.typeName}, props.customEditorsOptions && props.customEditorsOptions.rules || []);
                         if ( editor && !!editor[desc.localType] ) {
                             if (!!editor.defaultEditor) {
                                 // if a custom default editor is set, it is going to be used

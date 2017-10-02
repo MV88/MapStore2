@@ -11,7 +11,8 @@ const { LOCATION_CHANGE } = require('react-router-redux');
 const axios = require('../libs/ajax');
 const bbox = require('@turf/bbox');
 const {fidFilter} = require('../utils/ogc/Filter/filter');
-const {getDefaultFeatureProjection, EditorsUtils} = require('../utils/FeatureGridUtils');
+const {getDefaultFeatureProjection} = require('../utils/FeatureGridUtils');
+const EditorUtils = require('../utils/EditorUtils');
 const {isSimpleGeomType} = require('../utils/MapUtils');
 const assign = require('object-assign');
 const {changeDrawingStatus, GEOMETRY_CHANGED} = require('../actions/draw');
@@ -569,9 +570,9 @@ module.exports = {
     addCustomEditors: (action$) =>
         action$.ofType(SETUP_CUSTOM_EDITORS)
         .switchMap((action) => {
-            EditorsUtils.cleanEditors();
+            EditorUtils.cleanEditors();
             Object.keys(action.editors).forEach(ed => {
-                EditorsUtils.setEditor({name: ed, editors: action.editors[ed]});
+                EditorUtils.setEditor({name: ed, editors: action.editors[ed]});
             });
             return Rx.Observable.empty();
         })
