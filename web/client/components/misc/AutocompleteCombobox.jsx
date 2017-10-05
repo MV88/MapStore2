@@ -20,7 +20,9 @@ const streamEnhancer = mapPropsStream(props$ => {
         return p.autocompleteStreamFactory(props$);
     });
     return fetcherStream.combineLatest(props$, (data, props) => ({
-        data: isArray(data && data.fetchedData && data.fetchedData.values) ? data.fetchedData.values.map(v => {return {label: v, value: v}; }) : [],
+        data: isArray(data && data.fetchedData && data.fetchedData.values) ? data.fetchedData.values.map(v => {
+            return {label: v.DESVIA + " " + v.TESTO + " " + v.CODICE_CONTROLLO, value: v.CODICE_CONTROLLO};
+        }) : [],
         valuesCount: data && data.fetchedData && data.fetchedData.size,
         currentPage: props && props.currentPage,
         maxFeatures: props && props.maxFeatures,
@@ -37,19 +39,6 @@ const streamEnhancer = mapPropsStream(props$ => {
     }));
 });
 
-// component enhanced with props from stream, and local state
-const PagedComboboxEnhanced = streamEnhancer(
-    ({ open, toggle, select, focus, change, value, valuesCount,
-    loadNextPage, loadPrevPage, maxFeatures, currentPage,
-    busy, data, loading = false }) => {
-        const numberOfPages = Math.ceil(valuesCount / maxFeatures);
-        return (<PagedCombobox
-            pagination={{firstPage: currentPage === 1, lastPage: currentPage === numberOfPages, paginated: true, loadPrevPage, loadNextPage}}
-            busy={busy} dropUp={false} data={data} open={open}
-            onFocus={focus} onToggle={toggle} onChange={change} onSelect={select}
-            selectedValue={value} loading={loading}/>);
-    });
-
 // state enhancer for local props
 const addStateHandlers = compose(
     withStateHandlers((props) => ({
@@ -61,6 +50,7 @@ const addStateHandlers = compose(
         url: props.url,
         typeName: props.typeName,
         value: props.value,
+        valueField: props.valueField,
         attribute: props.column && props.column.key,
         autocompleteStreamFactory: props.autocompleteStreamFactory
     }), {
@@ -126,6 +116,20 @@ const addStateHandlers = compose(
         })
     })
 );
+
+// component enhanced with props from stream, and local state
+const PagedComboboxEnhanced = streamEnhancer(
+    ({ open, toggle, select, focus, change, value, valuesCount, valueField,
+    loadNextPage, loadPrevPage, maxFeatures, currentPage,
+    busy, data, loading = false }) => {
+        const numberOfPages = Math.ceil(valuesCount / maxFeatures);
+        return (<PagedCombobox
+            pagination={{firstPage: currentPage === 1, lastPage: currentPage === numberOfPages, paginated: true, loadPrevPage, loadNextPage}}
+            busy={busy} dropUp={false} data={data} open={open} valueField={valueField}
+            onFocus={focus} onToggle={toggle} onChange={change} onSelect={select}
+            selectedValue={value} loading={loading}
+            />);
+    });
 
 const AutocompleteCombobox = addStateHandlers(PagedComboboxEnhanced);
 
