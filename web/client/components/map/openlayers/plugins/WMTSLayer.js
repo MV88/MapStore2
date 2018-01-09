@@ -44,7 +44,8 @@ Layers.registerType('wmts', {
 
         const matrixIds = WMTSUtils.limitMatrix(options.matrixIds && WMTSUtils.getMatrixIds(options.matrixIds, tilMatrixSetName || srs) || WMTSUtils.getDefaultMatrixId(options), resolutions.length);
 
-        const origin = tileMatrixSet && tileMatrixSet.TileMatrix && tileMatrixSet.TileMatrix[1] && tileMatrixSet.TileMatrix[1].TopLeftCorner && CoordinatesUtils.parseString(tileMatrixSet.TileMatrix[1].TopLeftCorner) || {};
+        const origin = tileMatrixSet && tileMatrixSet.TileMatrix && tileMatrixSet.TileMatrix[1] && tileMatrixSet.TileMatrix[1].TopLeftCorner &&
+        CoordinatesUtils.parseString(tileMatrixSet.TileMatrix[1].TopLeftCorner) || {};
 
         let bbox = null;
 

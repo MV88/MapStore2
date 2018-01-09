@@ -7,11 +7,12 @@
  */
 
 const assign = require('object-assign');
-const {head, isArray, isString, castArray, isObject} = require('lodash');
+const {head, isArray, isString, castArray, isObject, isEmpty, memoize} = require('lodash');
 const urlUtil = require('url');
 const CoordinatesUtils = require('./CoordinatesUtils');
 const LayersUtils = require('./LayersUtils');
 const WMTSUtils = require('./WMTSUtils');
+const MapUtils = require('./MapUtils');
 
 const WMS = require('../api/WMS');
 
@@ -19,13 +20,27 @@ const getBaseCatalogUrl = (url) => {
     return url && url.replace(/\/csw$/, "/");
 };
 
-const getWMTSBBox = (record) => {
+const getWMTSBBox = (record, tileMatrixSetName) => {
     let layer = record;
     let bbox = (layer["ows:WGS84BoundingBox"]);
-    if (!bbox) {
+    const tileMatrixSet = head(layer.TileMatrixSet.filter(tM => tM['ows:Identifier'] === tileMatrixSetName));
+    bbox = {
+        "ows:LowerCorner": "-180 -90",
+        "ows:UpperCorner": "180 90"
+    };
+    // TOPLEFTCORNER IS IN LAT/LON PAIRS but CoordinatesUtils.parseString expect the first one to be the longitude coord
+    const origin = layer && tileMatrixSet && tileMatrixSet.TileMatrix && tileMatrixSet.TileMatrix[1] && tileMatrixSet.TileMatrix[1].TopLeftCorner &&
+    CoordinatesUtils.parseString(tileMatrixSet.TileMatrix[1].TopLeftCorner.split(" ").reverse().join(" ")) || {};
+    if (!!(!isEmpty(origin) && origin.x
+    && parseFloat(bbox["ows:LowerCorner"].split(" ")[0]) === -180 && parseFloat(bbox["ows:LowerCorner"].split(" ")[1]) === -90
+    && parseFloat(bbox["ows:UpperCorner"].split(" ")[0]) === 180 && parseFloat(bbox["ows:UpperCorner"].split(" ")[1]) === 90
+    && layer && tileMatrixSet && tileMatrixSet.TileMatrix[1] && tileMatrixSet.TileMatrix[1].ScaleDenominator
+    && tileMatrixSet.TileMatrix[1].MatrixWidth && tileMatrixSet.TileMatrix[1].MatrixHeight
+    && tileMatrixSet.TileMatrix[1].TileWidth && tileMatrixSet.TileMatrix[1].TileHeight)) {
+        const res = MapUtils.getResolutionsForScales([tileMatrixSet.TileMatrix[1].ScaleDenominator], "EPSG:4326", 96);
         bbox = {
-            "ows:LowerCorner": "-180.0 -90.0",
-            "ows:UpperCorner": "180.0 90.0"
+            "ows:LowerCorner": origin.x.toString() + " " + (origin.y - tileMatrixSet.TileMatrix[1].MatrixHeight * tileMatrixSet.TileMatrix[1].TileHeight * res).toString(),
+            "ows:UpperCorner": (origin.x + tileMatrixSet.TileMatrix[1].MatrixWidth * tileMatrixSet.TileMatrix[1].TileWidth * res).toString() + " " + (origin.y - 1).toString()
         };
     }
     return bbox;
@@ -182,8 +197,15 @@ const converters = {
                         [tileMatrixSRS]: levels
                     });
                 }, {});
+                const buildSRSMap = memoize((srs) => {
+                    return srs.reduce((previous, current) => {
+                        return assign(previous, {[current]: true});
+                    }, {});
+                });
+                const allowedSRS = buildSRSMap(record.SRS);
+                const tileMatrixSetName = WMTSUtils.getTileMatrixSet(record.TileMatrixSet, "EPSG:4326", allowedSRS, matrixIds);
 
-                const bbox = getWMTSBBox(record);
+                const bbox = getWMTSBBox(record, tileMatrixSetName);
                 return {
                 title: getNodeText(record["ows:Title"] || record["ows:Identifier"]),
                 description: getNodeText(record["ows:Abstract"] || record["ows:Title"] || record["ows:Identifier"]),
