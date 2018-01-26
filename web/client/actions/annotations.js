@@ -28,15 +28,45 @@ const FILTER_ANNOTATIONS = 'ANNOTATIONS:FILTER';
 const CLOSE_ANNOTATIONS = 'ANNOTATIONS:CLOSE';
 const CONFIRM_CLOSE_ANNOTATIONS = 'ANNOTATIONS:CONFIRM_CLOSE';
 const CANCEL_CLOSE_ANNOTATIONS = 'ANNOTATIONS:CANCEL_CLOSE';
+const STOP_DRAWING = 'ANNOTATIONS:STOP_DRAWING';
 
 const {head} = require('lodash');
-
-function editAnnotation(id, featureType) {
+const DEFAULT_ANNOTATIONS_STYLES = {
+    "Point": {
+        iconGlyph: 'comment',
+        iconShape: 'square',
+        iconColor: 'blue'
+    },
+    "LineString": {
+        color: '#ffcc33',
+        opacity: 1,
+        weight: 3,
+        fillColor: '#ffffff',
+        fillOpacity: 0.2,
+        clickable: false,
+        editing: {
+            fill: 1
+        }
+    },
+    "Polygon": {
+        color: '#ffcc33',
+        opacity: 1,
+        weight: 3,
+        fillColor: '#ffffff',
+        fillOpacity: 0.2,
+        clickable: false,
+        editing: {
+            fill: 1
+        }
+    }
+};
+function editAnnotation(id) {
     return (dispatch, getState) => {
+        const feature = head(head(getState().layers.flat.filter(l => l.id === 'annotations')).features.filter(f => f.properties.id === id));
         dispatch({
             type: EDIT_ANNOTATION,
-            feature: head(head(getState().layers.flat.filter(l => l.id === 'annotations')).features.filter(f => f.properties.id === id)),
-            featureType
+            feature,
+            featureType: feature.geometry.type
         });
     };
 }
@@ -91,9 +121,10 @@ function saveAnnotation(id, fields, geometry, style, newFeature) {
     };
 }
 
-function toggleAdd() {
+function toggleAdd(featureType) {
     return {
-        type: TOGGLE_ADD
+        type: TOGGLE_ADD,
+        featureType
     };
 }
 
@@ -181,6 +212,12 @@ function cancelCloseAnnotations() {
     };
 }
 
+function stopDrawing() {
+    return {
+        type: STOP_DRAWING
+    };
+}
+
 module.exports = {
     SHOW_ANNOTATION,
     EDIT_ANNOTATION,
@@ -204,6 +241,8 @@ module.exports = {
     CLOSE_ANNOTATIONS,
     CONFIRM_CLOSE_ANNOTATIONS,
     CANCEL_CLOSE_ANNOTATIONS,
+    STOP_DRAWING,
+    stopDrawing,
     editAnnotation,
     newAnnotation,
     removeAnnotation,
@@ -225,5 +264,6 @@ module.exports = {
     filterAnnotations,
     closeAnnotations,
     confirmCloseAnnotations,
-    cancelCloseAnnotations
+    cancelCloseAnnotations,
+    DEFAULT_ANNOTATIONS_STYLES
 };

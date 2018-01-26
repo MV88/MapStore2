@@ -122,6 +122,7 @@ function getStyle(options) {
         style = {
             stroke: new ol.style.Stroke( options.style.stroke ? options.style.stroke : {
                 color: options.style.color || 'blue',
+                lineDash: options.style.highlight ? [10] : [0],
                 width: options.style.weight || 1,
                 opacity: options.style.opacity || 1
             }),

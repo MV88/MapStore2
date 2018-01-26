@@ -133,7 +133,7 @@ class DrawSupport extends React.Component {
     addFeatures = ({features, drawMethod, options}) => {
         features.forEach((g) => {
             let geometry = g;
-            if (geometry.geometry) {
+            if (geometry.geometry && geometry.geometry.type !== "GeometryCollection") {
                 geometry = reprojectGeoJson(geometry, this.props.options.featureProjection, this.props.map.getView().getProjection().getCode()).geometry;
             }
             const feature = new ol.Feature({
@@ -221,27 +221,44 @@ class DrawSupport extends React.Component {
             if (!isSimpleGeomType(this.props.drawMethod)) {
                 let geom = evt.feature.getGeometry();
                 let g;
+                let geomCollection = null;
                 let features = head(this.drawSource.getFeatures());
                 if (features === undefined) {
                     g = this.toMulti(this.createOLGeometry({type: drawMethod, coordinates: null}));
                 } else {
                     g = this.toMulti(head(this.drawSource.getFeatures()).getGeometry());
                 }
-                switch (this.props.drawMethod) {
-                    case "MultiPoint": g.appendPoint(geom); break;
-                    case "MultiLineString": g.appendLineString(geom); break;
-                    case "MultiPolygon": {
-                        let coords = geom.getCoordinates();
-                        coords[0].push(coords[0][0]);
-                        geom.setCoordinates(coords);
-                        head(this.drawSource.getFeatures()).getGeometry().appendPolygon(geom);
-                        break;
+                if (geom.getType() !== getSimpleGeomType(g.getType())) {
+                    // FIND GEOMETRY OF SAME TYPE FROM GEOM COLLECTION and update
+                    geomCollection = new ol.geom.GeometryCollection([g, geom]);
+                    this.sketchFeature.setGeometry(geomCollection);
+                } else {
+                    // APPEND TO SAME TYPE
+                    switch (this.props.drawMethod) {
+                        case "MultiPoint": g.appendPoint(geom); break;
+                        case "MultiLineString": g.appendLineString(geom); break;
+                        case "MultiPolygon": {
+                            let coords = geom.getCoordinates();
+                            coords[0].push(coords[0][0]);
+                            geom.setCoordinates(coords);
+                            head(this.drawSource.getFeatures()).getGeometry().appendPolygon(geom);
+                            break;
+                        }
+                        default: break;
                     }
-                    default: break;
+                    this.sketchFeature.setGeometry(g);
                 }
-                this.sketchFeature.setGeometry(g);
             }
             const feature = this.fromOLFeature(this.sketchFeature, startingPoint);
+            feature.style = {
+                fillColor: '#FFFFFF',
+                strokeColor: '#ffcc33',
+                strokeWidth: 2
+            };
+            const vectorSource = new ol.source.Vector({
+                features: (new ol.format.GeoJSON()).readFeatures(feature)
+              });
+            this.drawLayer.setSource(vectorSource);
             // this.addModifyInteraction();
             const geojsonFormat = new ol.format.GeoJSON();
             let newFeature = reprojectGeoJson(geojsonFormat.writeFeatureObject(this.sketchFeature.clone()), this.props.map.getView().getProjection().getCode(), this.props.options.featureProjection);
@@ -512,28 +529,67 @@ class DrawSupport extends React.Component {
         let geometry = feature.getGeometry();
         let extent = geometry.getExtent();
         let center = ol.extent.getCenter(extent);
-        let coordinates = geometry.getCoordinates();
         let radius;
-
         let type = geometry.getType();
-        if (startingPoint) {
-            coordinates = concat(startingPoint, coordinates);
-            geometry.setCoordinates(coordinates);
+        if (geometry.getCoordinates) {
+            let coordinates = geometry.getCoordinates();
+            if (startingPoint) {
+                coordinates = concat(startingPoint, coordinates);
+                geometry.setCoordinates(coordinates);
+            }
+            if (this.props.drawMethod === "Circle") {
+                radius = Math.sqrt(Math.pow(center[0] - coordinates[0][0][0], 2) + Math.pow(center[1] - coordinates[0][0][1], 2));
+            }
+            return assign({}, {
+                id: feature.get('id'),
+                type,
+                extent,
+                center,
+                coordinates,
+                radius,
+                style: this.fromOlStyle(feature.getStyle()),
+                projection: this.props.map.getView().getProjection().getCode()
+            });
         }
-
-        if (this.props.drawMethod === "Circle") {
-            radius = Math.sqrt(Math.pow(center[0] - coordinates[0][0][0], 2) + Math.pow(center[1] - coordinates[0][0][1], 2));
-        }
-
+        let geometries = geometry.getGeometries().map(g => {
+            extent = g.getExtent();
+            center = ol.extent.getCenter(extent);
+            let coordinates = g.getCoordinates();
+            if (startingPoint) {
+                coordinates = concat(startingPoint, coordinates);
+                g.setCoordinates(coordinates);
+            }
+            if (this.props.drawMethod === "Circle") {
+                radius = Math.sqrt(Math.pow(center[0] - coordinates[0][0][0], 2) + Math.pow(center[1] - coordinates[0][0][1], 2));
+            }
+            return assign({}, {
+                id: feature.get('id'),
+                type: g.getType(),
+                extent,
+                center,
+                coordinates,
+                radius,
+                style: {
+                    fillColor: '#FFFFFF',
+                    strokeColor: '#ffcc33',
+                    strokeWidth: 2
+                },
+                projection: this.props.map.getView().getProjection().getCode()
+            });
+        });
+        type = "GeometryCollection";
         return assign({}, {
+            type: "Feature",
             id: feature.get('id'),
-            type,
-            extent,
-            center,
-            coordinates,
-            radius,
-            style: this.fromOlStyle(feature.getStyle()),
-            projection: this.props.map.getView().getProjection().getCode()
+            style: {
+                fillColor: '#FFFFFF',
+                strokeColor: '#ffcc33',
+                strokeWidth: 2
+            },
+            geometry: {
+                type,
+                geometries
+            }
         });
     };
 
@@ -654,15 +710,31 @@ class DrawSupport extends React.Component {
         this.props.map.addInteraction(this.translateInteraction);
     }
 
-    createOLGeometry = ({type, coordinates, radius, center}) => {
+    createOLGeometry = ({type, coordinates, radius, center, geometries}) => {
         let geometry;
-
+        let geoms;
+        if (geometries) {
+            geoms = geometries.map(g => {
+                switch (g.type) {
+                    case "Point": { geometry = new ol.geom.Point(coordinates ? coordinates : []); break; }
+                    case "LineString": { geometry = new ol.geom.LineString(coordinates ? coordinates : []); break; }
+                    case "MultiPoint": { geometry = new ol.geom.MultiPoint(coordinates ? coordinates : []); break; }
+                    case "MultiLineString": { geometry = new ol.geom.MultiLineString(coordinates ? coordinates : []); break; }
+                    case "MultiPolygon": { geometry = new ol.geom.MultiPolygon(coordinates ? coordinates : []); break; }
+                    // defaults is Polygon
+                    default: { geometry = radius && center ?
+                            ol.geom.Polygon.fromCircle(new ol.geom.Circle([center.x, center.y], radius), 100) : new ol.geom.Polygon(coordinates ? coordinates : []);
+                    }
+                }
+            });
+        }
         switch (type) {
             case "Point": { geometry = new ol.geom.Point(coordinates ? coordinates : []); break; }
             case "LineString": { geometry = new ol.geom.LineString(coordinates ? coordinates : []); break; }
             case "MultiPoint": { geometry = new ol.geom.MultiPoint(coordinates ? coordinates : []); break; }
             case "MultiLineString": { geometry = new ol.geom.MultiLineString(coordinates ? coordinates : []); break; }
             case "MultiPolygon": { geometry = new ol.geom.MultiPolygon(coordinates ? coordinates : []); break; }
+            case "GeometryCollection": { geometry = new ol.geom.GeometryCollection(geoms ? geoms : []); break; }
             // defaults is Polygon
             default: { geometry = radius && center ?
                     ol.geom.Polygon.fromCircle(new ol.geom.Circle([center.x, center.y], radius), 100) : new ol.geom.Polygon(coordinates ? coordinates : []);

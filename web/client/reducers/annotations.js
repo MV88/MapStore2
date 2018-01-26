@@ -14,20 +14,25 @@ const {REMOVE_ANNOTATION, CONFIRM_REMOVE_ANNOTATION, CANCEL_REMOVE_ANNOTATION, C
         CONFIRM_CLOSE_ANNOTATIONS, CANCEL_CLOSE_ANNOTATIONS,
         EDIT_ANNOTATION, CANCEL_EDIT_ANNOTATION, SAVE_ANNOTATION, TOGGLE_ADD,
     UPDATE_ANNOTATION_GEOMETRY, VALIDATION_ERROR, REMOVE_ANNOTATION_GEOMETRY, TOGGLE_STYLE,
-    SET_STYLE, NEW_ANNOTATION, SHOW_ANNOTATION, CANCEL_SHOW_ANNOTATION, FILTER_ANNOTATIONS} = require('../actions/annotations');
+    SET_STYLE, NEW_ANNOTATION, SHOW_ANNOTATION, CANCEL_SHOW_ANNOTATION, FILTER_ANNOTATIONS, DEFAULT_ANNOTATIONS_STYLES, STOP_DRAWING} = require('../actions/annotations');
 
 const uuid = require('uuid');
-const defaultMarker = {
+/*const defaultMarker = {
     iconGlyph: 'comment',
     iconColor: 'blue',
     iconShape: 'square'
-};
+};*/
+
 
 function annotations(state = { validationErrors: {} }, action) {
     switch (action.type) {
         case REMOVE_ANNOTATION:
             return assign({}, state, {
                 removing: action.id
+            });
+        case STOP_DRAWING:
+            return assign({}, state, {
+                drawing: false
             });
         case REMOVE_ANNOTATION_GEOMETRY:
             return assign({}, state, {
@@ -36,7 +41,7 @@ function annotations(state = { validationErrors: {} }, action) {
         case EDIT_ANNOTATION:
             return assign({}, state, {
                 editing: assign({}, action.feature, {
-                    style: action.feature.style || defaultMarker
+                    style: action.feature.style || DEFAULT_ANNOTATIONS_STYLES[action.featureType || state.featureType]
                 }),
                 originalStyle: null,
                 featureType: action.featureType
@@ -52,7 +57,7 @@ function annotations(state = { validationErrors: {} }, action) {
                     properties: {
                         id
                     },
-                    style: defaultMarker
+                    style: DEFAULT_ANNOTATIONS_STYLES[action.featureType || state.featureType]
                 },
                 originalStyle: null,
                 featureType: action.featureType
@@ -112,7 +117,10 @@ function annotations(state = { validationErrors: {} }, action) {
             });
         case TOGGLE_ADD:
             return assign({}, state, {
-                drawing: !state.drawing
+                drawing: !state.drawing,
+                featureType: action.featureType || state.featureType/*,
+                // MOVE THE FOLLOWING STATE PROPERTIES TO A DIFFERENT ACTION ??
+                editing: { ...state.editing, style: DEFAULT_ANNOTATIONS_STYLES[action.featureType || state.featureType] || state.editing.style}*/
             });
         case TOGGLE_STYLE:
             return assign({}, state, {

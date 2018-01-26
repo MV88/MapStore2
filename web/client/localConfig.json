@@ -33,6 +33,12 @@
     "projectionDefs": [],
     "initialState": {
       "defaultState": {
+        "annotations": {
+          "config": {
+            "multiGeometry": true,
+            "validationErrors": {}
+          }
+        },
         "catalog": {
           "default": {
             "newService": {

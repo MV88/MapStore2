@@ -1,5 +1,5 @@
 /*
- * Copyright 2017, GeoSolutions Sas.
+ * Copyright 2018, GeoSolutions Sas.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -9,15 +9,14 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
-const {Button, Glyphicon} = require('react-bootstrap');
-const TButton = require('../../data/featuregrid/toolbars/TButton');
-
+const Toolbar = require('../../misc/toolbar/Toolbar');
 const Message = require('../../I18N/Message');
-
-const {FormControl, ButtonGroup, Grid, Row, Col} = require('react-bootstrap');
-
+const {FormControl, Grid, Row, Col, Nav, NavItem, Glyphicon} = require('react-bootstrap');
+const DropdownFeatureType = require('./DropdownFeatureType');
 const ReactQuill = require('react-quill');
 require('react-quill/dist/quill.snow.css');
+const tooltip = require('../../misc/enhancers/tooltip');
+const NavItemT = tooltip(NavItem);
 
 const {isFunction} = require('lodash');
 
@@ -48,7 +47,7 @@ const bbox = require('@turf/bbox');
  * @prop {function} onRemove triggered when the user clicks on the remove button
  * @prop {function} onSave triggered when the user clicks on the save button
  * @prop {function} onError triggered when a validation error occurs
- * @prop {function} onAddGeometry triggered when the user clicks on the add point button
+ * @prop {function} onAddGeometry triggered when the user clicks on the add point button TODO FIX THIS
  * @prop {function} onDeleteGeometry triggered when the user clicks on the remove points button
  * @prop {function} onStyleGeometry triggered when the user clicks on the style button
  * @prop {function} onSetStyle triggered when the user changes a style property
@@ -72,6 +71,7 @@ class AnnotationsEditor extends React.Component {
         onDeleteGeometry: PropTypes.func,
         onStyleGeometry: PropTypes.func,
         onSetStyle: PropTypes.func,
+        onStopDrawing: PropTypes.func,
         onZoom: PropTypes.func,
         editing: PropTypes.object,
         drawing: PropTypes.bool,
@@ -129,11 +129,11 @@ class AnnotationsEditor extends React.Component {
                 const isError = editing && this.props.errors[field.name];
                 const additionalCls = isError ? 'field-error' : '';
                 return (
-                    <span><p key={field.name} className={"mapstore-annotations-info-viewer-item mapstore-annotations-info-viewer-" + field.name + ' ' + additionalCls}>
+                    <span key={field.name}><div key={field.name} className={"mapstore-annotations-info-viewer-item mapstore-annotations-info-viewer-" + field.name + ' ' + additionalCls}>
                         {field.showLabel ? <label><Message msgId={"annotations.field." + field.name}/></label> : null}
                         {isError ? this.renderErrorOn(field.name) : ''}
                         {this.renderProperty(field, this.props[field.name] || field.value, editing)}
-                    </p>
+                    </div>
                     </span>
                 );
             });
@@ -147,54 +147,91 @@ class AnnotationsEditor extends React.Component {
     };
 
     renderViewButtons = () => {
-        return (<ButtonGroup className="mapstore-annotations-info-viewer-buttons">
-                <Button bsStyle="primary" onClick={this.zoom}><Glyphicon glyph="zoom-to" />&nbsp;<Message msgId="annotations.zoomTo" /></Button>
-                <Button bsStyle="primary" onClick={() => this.props.onEdit(this.props.id, this.props.config.multiGeometry ? 'MultiPoint' : 'Point')}><Glyphicon glyph="pencil"/>&nbsp;<Message msgId="annotations.edit"/></Button>
-                <Button bsStyle="primary" onClick={() => this.props.onRemove(this.props.id)}><Glyphicon glyph="ban-circle"/>&nbsp;<Message msgId="annotations.remove"/></Button>
-                {this.props.showBack ? <Button bsStyle="primary" onClick={() => this.props.onCancel()}><Glyphicon glyph="back"/>&nbsp;<Message msgId="annotations.back"/></Button> : null }
-            </ButtonGroup>);
+        return (
+            <Grid fluid style={this.props.styling ? { width: '100%', boxShadow: 'none'} : { width: '100%' }}>
+                <Row className="noTopMargin">
+                    <Col xs={12} className="text-center">
+                        <Toolbar
+                            btnDefaultProps={{ className: 'square-button-md', bsStyle: 'primary'}}
+                            buttons={[ {
+                                glyph: 'back',
+                                tooltipId: "annotations.back",
+                                visible: true,
+                                onClick: () => {this.props.onCancel(); }
+                            }, {
+                                glyph: "pencil",
+                                tooltipId: "annotations.edit",
+                                visible: true,
+                                multiGeometry: this.props.config.multiGeometry,
+                                onClick: () => {this.props.onEdit(this.props.id); },
+                                disabled: !this.props.config.multiGeometry && this.props.editing && this.props.editing.geometry,
+                                bsStyle: this.props.drawing ? "success" : "primary"
+                            }, {
+                                glyph: 'trash',
+                                tooltipId: "annotations.remove",
+                                visible: true,
+                                onClick: () => {this.props.onRemove(this.props.id); }
+                            }, {
+                                glyph: 'zoom-to',
+                                tooltipId: "annotations.zoomTo",
+                                visible: this.props.showBack,
+                                onClick: () => {this.zoom(); }
+                            }
+                        ]}/>
+                    </Col>
+                </Row>
+            </Grid>);
     };
 
     renderEditingButtons = () => {
         return (<Grid className="mapstore-annotations-info-viewer-buttons" fluid>
-                    <Row>
-                        <Col xs={7}>
-                            <TButton
-                                id="edit-geometry"
-                                tooltip={<Message msgId="annotations.addMarker"/>}
-                                onClick={this.props.onAddGeometry}
-                                visible
-                                disabled={!this.props.config.multiGeometry && this.props.editing && this.props.editing.geometry}
-                                className="square-button-md"
-                                active={this.props.drawing}
-                                glyph="pencil-add"/>
-                            <TButton
-                                id="style-annotation-geometry"
-                                tooltip={<Message msgId="annotations.styleGeometry"/>}
-                                onClick={this.props.onStyleGeometry}
-                                visible
-                                className="square-button-md"
-                                glyph="1-stilo"/>
-                            <TButton
-                                id="delete-annotation-geometry"
-                                tooltip={<Message msgId="annotations.deleteGeometry"/>}
-                                onClick={this.props.onDeleteGeometry}
-                                visible
-                                className="square-button-md"
-                                glyph="trash"/>
-                        </Col>
-                        <Col xs={5}>
-                            <ButtonGroup id="mapstore-annotations-info-viewer-edit-buttons">
-                                <Button bsStyle="primary" onClick={this.save}><Glyphicon glyph="floppy-disk"/>&nbsp;<Message msgId="annotations.save"/></Button>
-                                <Button bsStyle="primary" onClick={this.cancelEdit}><Glyphicon glyph="remove"/>&nbsp;<Message msgId="annotations.cancel"/></Button>
-                            </ButtonGroup>
+                    <Row className="text-center noTopMargin">
+                        <Col xs={12}>
+                            <Toolbar
+                                btnDefaultProps={{ className: 'square-button-md', bsStyle: 'primary'}}
+                                buttons={[ {
+                                    glyph: 'back',
+                                    tooltipId: "annotations.back",
+                                    visible: true,
+                                    onClick: this.cancelEdit
+                                }, {
+                                    glyph: "pencil-add",
+                                    el: DropdownFeatureType,
+                                    tooltipId: "annotations.addMarker",
+                                    visible: true,
+                                    multiGeometry: this.props.config.multiGeometry,
+                                    onClick: this.props.onAddGeometry,
+                                    onSetStyle: this.props.onSetStyle,
+                                    onStopDrawing: this.props.onStopDrawing,
+                                    disabled: !this.props.config.multiGeometry && this.props.editing && this.props.editing.geometry,
+                                    drawing: this.props.drawing,
+                                    bsStyle: this.props.drawing ? "success" : "primary"
+                                }, {
+                                    glyph: 'polygon-trash',
+                                    tooltipId: "annotations.deleteGeometry",
+                                    visible: true,
+                                    onClick: this.props.onDeleteGeometry
+                                }, {
+                                    glyph: 'dropper',
+                                    tooltipId: "annotations.styleGeometry",
+                                    visible: true,
+                                    onClick: this.props.onStyleGeometry
+                                }, {
+                                    glyph: 'floppy-disk',
+                                    tooltipId: "annotations.save",
+                                    visible: true,
+                                    onClick: this.save
+                                }
+                            ]}/>
+
                         </Col>
             </Row>
         </Grid>);
     };
 
     renderButtons = (editing) => {
-        return editing ? this.renderEditingButtons() : this.renderViewButtons();
+        const toolbar = editing ? this.renderEditingButtons() : this.renderViewButtons();
+        return (<div className="mapstore-annotations-info-viewer-buttons">{toolbar}</div>);
     };
 
     renderProperty = (field, prop, editing) => {
@@ -218,7 +255,7 @@ class AnnotationsEditor extends React.Component {
                 const Component = fieldValue;
                 return <Component annotation={this.props.feature} />;
             default:
-                return fieldValue;
+                return (<p>{fieldValue}</p>);
         }
     };
 
@@ -243,10 +280,41 @@ class AnnotationsEditor extends React.Component {
     renderStyler = () => {
         const glyphRenderer = (option) => (<div><span className={"fa fa-" + option.value}/><span> {option.label}</span></div>);
         return (<div className="mapstore-annotations-info-viewer-styler">
-            <div className="mapstore-annotations-info-viewer-styler-buttons">
-                <Button bsStyle="primary" onClick={this.props.onSaveStyle}><Glyphicon glyph="floppy-disk"/>&nbsp;<Message msgId="annotations.save"/></Button>
-                <Button bsStyle="primary" onClick={this.props.onCancelStyle}><Glyphicon glyph="remove"/>&nbsp;<Message msgId="annotations.cancel"/></Button>
+            <div>
+                <Grid className="mapstore-annotations-info-viewer-styler-buttons" fluid style={this.props.styling ? { width: '100%', boxShadow: 'none'} : { width: '100%' }}>
+                    <Row className="noTopMargin">
+                        <Col xs={12} className="text-center">
+                            <Toolbar
+                                btnDefaultProps={{ className: 'square-button-md', bsStyle: 'primary'}}
+                                buttons={[ {
+                                    glyph: 'back',
+                                    tooltipId: "annotations.back",
+                                    visible: true,
+                                    onClick: this.props.onCancelStyle
+                                },
+                                {
+                                    glyph: 'floppy-disk',
+                                    tooltipId: "annotations.save",
+                                    visible: true,
+                                    onClick: this.props.onSaveStyle
+                                }
+                            ]}/>
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
+            <Row className="ms-style-header">
+                <Col xs={12}>
+                    <Nav bsStyle="tabs" activeKey={this.props.editing && this.props.editing.geometry && this.fromGeomTypeToTabStyler(this.props.editing.geometry.type)} justified>
+                        {this.props.editing && this.props.editing.geometry && this.fromGeomTypeToTabStyler(this.props.editing.geometry.type) &&
+                        (<NavItemT tooltip="Marker style" eventKey="marker" onClick={() => { this.setState({ styleType: 'marker' }); }}>
+                            <Glyphicon glyph="point"/>
+                        </NavItemT>)}
+                        {this.props.editing && this.props.editing.geometry && this.fromGeomTypeToTabStyler(this.props.editing.geometry.type) && (<NavItemT tooltip="Polyline style" eventKey="line" onClick={() => { this.setState({ styleType: 'line' }); }}><Glyphicon glyph="line"/></NavItemT>)}
+                        {this.props.editing && this.props.editing.geometry && this.fromGeomTypeToTabStyler(this.props.editing.geometry.type) && (<NavItemT tooltip="Polygon style" eventKey="polygon" onClick={() => { this.setState({ styleType: 'polygon' }); }}><Glyphicon glyph="polygon"/></NavItemT>)}
+                    </Nav>
+                </Col>
+            </Row>
             <div className="mapstore-annotations-info-viewer-markers">{this.renderMarkers(this.getConfig().markers)}</div>
             <Select
                 options={this.getConfig().glyphs.map(g => ({
@@ -267,7 +335,13 @@ class AnnotationsEditor extends React.Component {
         }
         return (
             <div className="mapstore-annotations-info-viewer-items">
-                {items}
+                <Grid fluid>
+                    <Row>
+                        <Col xs={12}>
+                            {items}
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
         );
     };
@@ -352,6 +426,21 @@ class AnnotationsEditor extends React.Component {
             this.props.onError(errors);
         }
     };
+
+    fromGeomTypeToTabStyler(type) {
+        switch (type) {
+            case "Point": case "MultiPoint": {
+                return "marker";
+            }
+            case "LineString": case "MultiLineString": {
+                return "line";
+            }
+            case "Polygon": case "MultiPolygon": {
+                return "polygon";
+            }
+            default: return "marker";
+        }
+    }
 }
 
 module.exports = AnnotationsEditor;

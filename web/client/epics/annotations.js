@@ -14,7 +14,7 @@ const {hideMapinfoMarker, purgeMapInfoResults} = require('../actions/mapInfo');
 
 const {updateAnnotationGeometry, setStyle, toggleStyle, cleanHighlight, toggleAdd,
     CONFIRM_REMOVE_ANNOTATION, SAVE_ANNOTATION, EDIT_ANNOTATION, CANCEL_EDIT_ANNOTATION,
-    TOGGLE_ADD, SET_STYLE, RESTORE_STYLE, HIGHLIGHT, CLEAN_HIGHLIGHT, CONFIRM_CLOSE_ANNOTATIONS} = require('../actions/annotations');
+    TOGGLE_ADD, SET_STYLE, RESTORE_STYLE, HIGHLIGHT, CLEAN_HIGHLIGHT, CONFIRM_CLOSE_ANNOTATIONS, STOP_DRAWING} = require('../actions/annotations');
 
 const {GEOMETRY_CHANGED} = require('../actions/draw');
 const {PURGE_MAPINFO_RESULTS} = require('../actions/mapInfo');
@@ -25,9 +25,32 @@ const assign = require('object-assign');
 const {annotationsLayerSelector} = require('../selectors/annotations');
 
 const annotationsStyle = {
-    iconGlyph: 'comment',
-    iconShape: 'square',
-    iconColor: 'blue'
+    "Point": {
+        iconGlyph: 'comment',
+        iconShape: 'square',
+        iconColor: 'blue'},
+    "LineString": {
+        color: '#ffcc33',
+        opacity: 1,
+        weight: 3,
+        fillColor: '#ffffff',
+        fillOpacity: 0.2,
+        clickable: false,
+        editing: {
+            fill: 1
+        }
+    },
+    "Polygon": {
+        color: '#ffcc33',
+        opacity: 1,
+        weight: 3,
+        fillColor: '#ffffff',
+        fillOpacity: 0.2,
+        clickable: false,
+        editing: {
+            fill: 1
+        }
+    }
 };
 
 const {changeDrawingStatus} = require('../actions/draw');
@@ -58,19 +81,21 @@ const mergeGeometry = (features) => {
     });
 };
 
-const toggleDrawOrEdit = (state) => {
+const toggleDrawOrEdit = (state, featureType) => {
     const drawing = state.annotations.drawing;
     const feature = state.annotations.editing;
-    const type = state.annotations.featureType;
+    const type = featureType || state.annotations.featureType;
+    const multiGeom = state.annotations.config.multiGeometry;
     const drawOptions = {
         featureProjection: "EPSG:4326",
-        stopAfterDrawing: type === 'Point',
+        stopAfterDrawing: !multiGeom,
         editEnabled: !drawing,
         drawEnabled: drawing
     };
-    return changeDrawingStatus("drawOrEdit", type, "annotations", [feature], drawOptions, assign({}, feature.style, {
+    return changeDrawingStatus("drawOrEdit", type, "annotations", [feature], drawOptions,
+    assign({}, feature.style, {
         highlight: false
-    }) || annotationsStyle);
+    }) || annotationsStyle[type]);
 };
 
 const createNewFeature = (action) => {
@@ -139,7 +164,7 @@ module.exports = (viewer) => ({
                     name: "Annotations",
                     rowViewer: viewer,
                     hideLoading: true,
-                    style: annotationsStyle,
+                    style: annotationsStyle.Point, // TODO FIX THIS
                     features: [createNewFeature(action)],
                     handleClickOnLayer: true
                 })
@@ -157,6 +182,10 @@ module.exports = (viewer) => ({
             ]);
         }),
     startDrawMarkerEpic: (action$, store) => action$.ofType(TOGGLE_ADD)
+        .switchMap( (a) => {
+            return Rx.Observable.of(toggleDrawOrEdit(store.getState(), a.featureType));
+        }),
+    stopDrawingMultiGeom: (action$, store) => action$.ofType(STOP_DRAWING)
         .switchMap( () => {
             return Rx.Observable.of(toggleDrawOrEdit(store.getState()));
         }),
@@ -165,7 +194,7 @@ module.exports = (viewer) => ({
         .switchMap( (action) => {
             return Rx.Observable.from([
                 updateAnnotationGeometry(mergeGeometry(action.features))
-            ].concat(store.getState().annotations.featureType === 'Point' && store.getState().annotations.drawing ? [toggleAdd()] : []));
+            ].concat(!store.getState().annotations.config.multiGeometry && store.getState().annotations.drawing ? [toggleAdd()] : []));
         }),
     setStyleEpic: (action$, store) => action$.ofType(SET_STYLE)
         .switchMap( () => {
