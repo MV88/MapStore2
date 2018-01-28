@@ -150,7 +150,7 @@ class Annotations extends React.Component {
 
     renderItems = (annotation) => {
         const cardActions = {
-            onMouseEnter: () => {this.props.onCleanHighlight(); this.props.onHighlight(annotation.properties.id); },
+            onMouseEnter: () => {this.props.onHighlight(annotation.properties.id); },
             onMouseLeave: this.props.onCleanHighlight,
             onClick: () => this.props.onDetail(annotation.properties.id)
         };

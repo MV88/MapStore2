@@ -19,6 +19,7 @@ const annotationsLayerSelector = createSelector([
 const annotationsInfoSelector = (state) => (assign({}, {
     editing: state.annotations && state.annotations.editing,
     drawing: state.annotations && !!state.annotations.drawing,
+    stylerType: state.annotations.stylerType,
     styling: state.annotations && !!state.annotations.styling,
     errors: state.annotations.validationErrors
 }, (state.annotations && state.annotations.config) ? {

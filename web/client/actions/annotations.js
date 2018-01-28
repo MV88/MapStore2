@@ -29,6 +29,7 @@ const CLOSE_ANNOTATIONS = 'ANNOTATIONS:CLOSE';
 const CONFIRM_CLOSE_ANNOTATIONS = 'ANNOTATIONS:CONFIRM_CLOSE';
 const CANCEL_CLOSE_ANNOTATIONS = 'ANNOTATIONS:CANCEL_CLOSE';
 const STOP_DRAWING = 'ANNOTATIONS:STOP_DRAWING';
+const CHANGE_STYLER = 'ANNOTATIONS:CHANGE_STYLER';
 
 const {head} = require('lodash');
 const DEFAULT_ANNOTATIONS_STYLES = {
@@ -217,6 +218,12 @@ function stopDrawing() {
         type: STOP_DRAWING
     };
 }
+function changeStyler(stylerType) {
+    return {
+        type: CHANGE_STYLER,
+        stylerType
+    };
+}
 
 module.exports = {
     SHOW_ANNOTATION,
@@ -242,6 +249,7 @@ module.exports = {
     CONFIRM_CLOSE_ANNOTATIONS,
     CANCEL_CLOSE_ANNOTATIONS,
     STOP_DRAWING,
+    CHANGE_STYLER, changeStyler,
     stopDrawing,
     editAnnotation,
     newAnnotation,

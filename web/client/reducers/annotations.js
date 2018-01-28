@@ -11,10 +11,14 @@ const assign = require('object-assign');
 const {PURGE_MAPINFO_RESULTS} = require('../actions/mapInfo');
 const {TOGGLE_CONTROL} = require('../actions/controls');
 const {REMOVE_ANNOTATION, CONFIRM_REMOVE_ANNOTATION, CANCEL_REMOVE_ANNOTATION, CLOSE_ANNOTATIONS,
-        CONFIRM_CLOSE_ANNOTATIONS, CANCEL_CLOSE_ANNOTATIONS,
-        EDIT_ANNOTATION, CANCEL_EDIT_ANNOTATION, SAVE_ANNOTATION, TOGGLE_ADD,
+    CONFIRM_CLOSE_ANNOTATIONS, CANCEL_CLOSE_ANNOTATIONS,
+    EDIT_ANNOTATION, CANCEL_EDIT_ANNOTATION, SAVE_ANNOTATION, TOGGLE_ADD,
     UPDATE_ANNOTATION_GEOMETRY, VALIDATION_ERROR, REMOVE_ANNOTATION_GEOMETRY, TOGGLE_STYLE,
-    SET_STYLE, NEW_ANNOTATION, SHOW_ANNOTATION, CANCEL_SHOW_ANNOTATION, FILTER_ANNOTATIONS, DEFAULT_ANNOTATIONS_STYLES, STOP_DRAWING} = require('../actions/annotations');
+    SET_STYLE, NEW_ANNOTATION, SHOW_ANNOTATION, CANCEL_SHOW_ANNOTATION, FILTER_ANNOTATIONS, DEFAULT_ANNOTATIONS_STYLES, STOP_DRAWING,
+    CHANGE_STYLER} = require('../actions/annotations');
+
+const {getAvailableStyler} = require('../utils/AnnotationsUtils');
+const {head} = require('lodash');
 
 const uuid = require('uuid');
 /*const defaultMarker = {
@@ -30,6 +34,10 @@ function annotations(state = { validationErrors: {} }, action) {
             return assign({}, state, {
                 removing: action.id
             });
+        case CHANGE_STYLER:
+            return assign({}, state, {
+                stylerType: action.stylerType
+            });
         case STOP_DRAWING:
             return assign({}, state, {
                 drawing: false
@@ -43,6 +51,7 @@ function annotations(state = { validationErrors: {} }, action) {
                 editing: assign({}, action.feature, {
                     style: action.feature.style || DEFAULT_ANNOTATIONS_STYLES[action.featureType || state.featureType]
                 }),
+                stylerType: head(getAvailableStyler(action.feature.geometry)),
                 originalStyle: null,
                 featureType: action.featureType
             });

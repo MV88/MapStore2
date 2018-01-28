@@ -711,36 +711,26 @@ class DrawSupport extends React.Component {
     }
 
     createOLGeometry = ({type, coordinates, radius, center, geometries}) => {
-        let geometry;
-        let geoms;
-        if (geometries) {
-            geoms = geometries.map(g => {
-                switch (g.type) {
-                    case "Point": { geometry = new ol.geom.Point(coordinates ? coordinates : []); break; }
-                    case "LineString": { geometry = new ol.geom.LineString(coordinates ? coordinates : []); break; }
-                    case "MultiPoint": { geometry = new ol.geom.MultiPoint(coordinates ? coordinates : []); break; }
-                    case "MultiLineString": { geometry = new ol.geom.MultiLineString(coordinates ? coordinates : []); break; }
-                    case "MultiPolygon": { geometry = new ol.geom.MultiPolygon(coordinates ? coordinates : []); break; }
-                    // defaults is Polygon
-                    default: { geometry = radius && center ?
-                            ol.geom.Polygon.fromCircle(new ol.geom.Circle([center.x, center.y], radius), 100) : new ol.geom.Polygon(coordinates ? coordinates : []);
-                    }
-                }
-            });
+        if (type === "GeometryCollection" && geometries.length) {
+            return new ol.geom.GeometryCollection(geometries.map(g => this.olGeomFromType({type: g.type})));
         }
+        return this.olGeomFromType({type, coordinates, radius, center});
+    };
+
+    olGeomFromType = ({type, coordinates, radius, center}) => {
+        let geometry;
         switch (type) {
             case "Point": { geometry = new ol.geom.Point(coordinates ? coordinates : []); break; }
             case "LineString": { geometry = new ol.geom.LineString(coordinates ? coordinates : []); break; }
             case "MultiPoint": { geometry = new ol.geom.MultiPoint(coordinates ? coordinates : []); break; }
             case "MultiLineString": { geometry = new ol.geom.MultiLineString(coordinates ? coordinates : []); break; }
             case "MultiPolygon": { geometry = new ol.geom.MultiPolygon(coordinates ? coordinates : []); break; }
-            case "GeometryCollection": { geometry = new ol.geom.GeometryCollection(geoms ? geoms : []); break; }
             // defaults is Polygon
             default: { geometry = radius && center ?
                     ol.geom.Polygon.fromCircle(new ol.geom.Circle([center.x, center.y], radius), 100) : new ol.geom.Polygon(coordinates ? coordinates : []);
             }
         }
         return geometry;
-    };
+    }
 }
 module.exports = DrawSupport;

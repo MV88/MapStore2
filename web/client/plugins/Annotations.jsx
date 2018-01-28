@@ -19,7 +19,7 @@ const {createSelector} = require('reselect');
 const {cancelRemoveAnnotation, confirmRemoveAnnotation, editAnnotation, newAnnotation, removeAnnotation, cancelEditAnnotation,
     saveAnnotation, toggleAdd, validationError, removeAnnotationGeometry, toggleStyle, setStyle, restoreStyle,
     highlight, cleanHighlight, showAnnotation, cancelShowAnnotation, filterAnnotations, closeAnnotations,
-    cancelCloseAnnotations, confirmCloseAnnotations, stopDrawing} =
+    cancelCloseAnnotations, confirmCloseAnnotations, stopDrawing, changeStyler} =
     require('../actions/annotations');
 
 const { zoomToExtent } = require('../actions/map');
@@ -29,6 +29,8 @@ const {mapLayoutValuesSelector} = require('../selectors/maplayout');
 const commonEditorActions = {
     onEdit: editAnnotation,
     onCancelEdit: cancelEditAnnotation,
+    onChangeStyler: changeStyler,
+    onCleanHighlight: cleanHighlight,
     onError: validationError,
     onSave: saveAnnotation,
     onRemove: removeAnnotation,
