@@ -121,8 +121,6 @@ class AnnotationsPanel extends React.Component {
     };
 
     render() {
-        const content = <Annotations {...this.props}/>;
-
         return this.props.active ? (
             <ContainerDimensions>
             { ({ width }) =>
@@ -135,7 +133,7 @@ class AnnotationsPanel extends React.Component {
                             dockStyle={this.props.dockStyle} {...this.props.dockProps}
                             isVisible={this.props.active}
                             size={this.props.width / width > 1 ? 1 : this.props.width / width} >
-                                {content}
+                                <Annotations {...this.props} width={this.props.width}/>
                     </Dock>
                 </span>
             </span>

@@ -17,7 +17,8 @@ class LineThumb extends React.Component {
         linejoin: PropTypes.string,
         stroke: PropTypes.string,
         strokeOuter: PropTypes.string,
-        style: PropTypes.string
+        style: PropTypes.string,
+        styleRect: PropTypes.object
     };
 
     static defaultProps = {
@@ -37,9 +38,9 @@ class LineThumb extends React.Component {
                     d={"M25 75 L50 50 L75 75 L100 75"}
                     strokeLinecap={this.props.linecap}
                     strokeLinejoin={this.props.linejoin}
-                    stroke={this.props.stroke}
-                    strokeWidth="10"
-                    fill="none"/>
+                    stroke={this.props.styleRect.color || this.props.stroke}
+                    strokeWidth={this.props.styleRect.weight || 10}
+                    fill={this.props.styleRect.fillColor}/>
             </svg>
         </div>
         );

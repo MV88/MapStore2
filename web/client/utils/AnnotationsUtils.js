@@ -11,7 +11,7 @@ const AnnotationsUtils = {
      * Retrieves a non duplicated list of stylers
      * @return {string[]} it returns the array of available styler from geometry of a feature
     */
-    getAvailableStyler: ({type, geometries}) => {
+    getAvailableStyler: ({type = "Point", geometries = {}} = {}) => {
         switch (type) {
             case "Point": case "MultiPoint": {
                 return ["marker"];
@@ -24,7 +24,7 @@ const AnnotationsUtils = {
             }
             case "GeometryCollection": {
                 return geometries.reduce((p, c) => {
-                    return (c.indexOf(p) !== -1) ? p : p.concat(AnnotationsUtils.getAvailableStyler(c));
+                    return (p.indexOf(c.type) !== -1) ? p : p.concat(AnnotationsUtils.getAvailableStyler(c));
                 }, []);
             }
             default: return ["marker"];

@@ -88,7 +88,8 @@ class AnnotationsEditor extends React.Component {
         showBack: PropTypes.bool,
         config: PropTypes.object,
         feature: PropTypes.object,
-        maxZoom: PropTypes.number
+        maxZoom: PropTypes.number,
+        width: PropTypes.number
     };
 
     static defaultProps = {
@@ -211,6 +212,7 @@ class AnnotationsEditor extends React.Component {
                             multiGeometry: this.props.config.multiGeometry,
                             onClick: this.props.onAddGeometry,
                             onSetStyle: this.props.onSetStyle,
+                            style: this.props.editing.style, // TODO FIX FOR MULTI GEOM
                             onStopDrawing: this.props.onStopDrawing,
                             disabled: !this.props.config.multiGeometry && this.props.editing && this.props.editing.geometry,
                             drawing: this.props.drawing,
@@ -224,6 +226,7 @@ class AnnotationsEditor extends React.Component {
                             glyph: 'dropper',
                             tooltipId: "annotations.styleGeometry",
                             visible: true,
+                            disabled: this.props.editing && !this.props.editing.geometry,
                             onClick: this.props.onStyleGeometry
                         }, {
                             glyph: 'floppy-disk',
@@ -296,7 +299,7 @@ class AnnotationsEditor extends React.Component {
                 case LINE: return (<NavItemT tooltip="Polyline style" eventKey={LINE} onClick={() => {
                     if (this.props.stylerType !== LINE) {
                         this.props.onChangeStyler(LINE);
-                }
+                    }
                 }}><Glyphicon glyph="line"/></NavItemT>);
                 case POLYGON: return (<NavItemT tooltip="Polygon style" eventKey={POLYGON} onClick={() => {
                     if (this.props.stylerType !== POLYGON) {
@@ -308,7 +311,7 @@ class AnnotationsEditor extends React.Component {
         });
     };
 
-    renderStylerBody = (stylerType) => {
+    renderStylerBody = (stylerType = "marker") => {
         switch (stylerType) {
             case "marker": {
                 const glyphRenderer = (option) => (<div><span className={"fa fa-" + option.value}/><span> {option.label}</span></div>);
@@ -325,15 +328,15 @@ class AnnotationsEditor extends React.Component {
                         onChange={this.selectGlyph}/>
                 </div>);
             }
-            case "lineString": return <StylePolyline setStyleParameter={() => {}} shapeStyle={this.props.editing.style}/>;
-            case "polygon": return <StylePolygon setStyleParameter={() => {}} shapeStyle={this.props.editing.style}/>;
+            case "lineString": return <StylePolyline setStyleParameter={(style) => this.props.onSetStyle(style)} shapeStyle={this.props.editing.style} width={this.props.width} />;
+            case "polygon": return <StylePolygon setStyleParameter={(style) => this.props.onSetStyle(style)} shapeStyle={this.props.editing.style} width={this.props.width}/>;
             default: return null;
         }
     };
 
     renderStyler = () => {
         const {editing, onCancelStyle, onSaveStyle} = this.props;
-        const stylerTabs = getAvailableStyler(editing.geometry);
+        const stylerTabs = editing.geometry ? getAvailableStyler(editing.geometry) : [];
         return (<div className="mapstore-annotations-info-viewer-styler">
             <Grid className="mapstore-annotations-info-viewer-styler-buttons" fluid style={{width: '100%', boxShadow: 'none'}}>
                 <Row className="noTopMargin">

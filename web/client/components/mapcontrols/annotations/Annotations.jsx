@@ -88,7 +88,8 @@ class Annotations extends React.Component {
         config: PropTypes.object,
         filter: PropTypes.string,
         onFilter: PropTypes.func,
-        classNameSelector: PropTypes.func
+        classNameSelector: PropTypes.func,
+        width: PropTypes.number
     };
 
     static contextTypes = {
@@ -125,17 +126,17 @@ class Annotations extends React.Component {
     renderThumbnail = ({style, featureType}) => {
         if (featureType !== "MultiPoint" && featureType === "LineString" || featureType === "MultiLineString" ) {
             return (<span className={"mapstore-annotations-panel-card"}>
-            <LineThumb/>
+            <LineThumb styleRect={style}/>
         </span>);
         }
         if (featureType === "GeometryCollection") {
             return (<span className={"mapstore-annotations-panel-card"}>
-            <MultiGeomThumb/>
+            <MultiGeomThumb styleRect={style}/>
         </span>);
         }
         if (featureType !== "MultiPoint" && featureType === "Polygon" || featureType === "MultiPolygon" ) {
             return (<span className={"mapstore-annotations-panel-card"}>
-            <PolygonThumb/>
+            <PolygonThumb styleRect={style}/>
         </span>);
         }
 
@@ -172,10 +173,10 @@ class Annotations extends React.Component {
         const annotation = this.props.annotations && head(this.props.annotations.filter(a => a.properties.id === this.props.current));
         const Editor = this.props.editor;
         if (this.props.mode === 'detail') {
-            return <Editor feature={annotation} showBack id={this.props.current} config={this.props.config} {...annotation.properties}/>;
+            return <Editor feature={annotation} showBack id={this.props.current} config={this.props.config} width={this.props.width} {...annotation.properties}/>;
         }
         // mode = editing
-        return this.props.editing && <Editor feature={annotation} id={this.props.editing.properties && this.props.editing.properties.id || uuidv1()} config={this.props.config} {...this.props.editing.properties}/>;
+        return this.props.editing && <Editor feature={annotation} id={this.props.editing.properties && this.props.editing.properties.id || uuidv1()} width={this.props.width} config={this.props.config} {...this.props.editing.properties}/>;
     };
 
     renderHeader() {

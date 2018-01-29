@@ -9,15 +9,18 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const {Grid, Row, Col} = require('react-bootstrap');
-const ColorPicker = require('./ColorPicker');
+const assign = require('object-assign');
+const ColorSelector = require('./ColorSelector');
 const StyleCanvas = require('./StyleCanvas');
 const Slider = require('react-nouislider');
 const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
 numberLocalizer();
 require('react-widgets/lib/less/react-widgets.less');
+const {hexToRgbObj, rgbToHex} = require('../../utils/ColorUtils');
 
-class StylePolygon extends React.Component {
+class StylePolyline extends React.Component {
     static propTypes = {
+        width: PropTypes.number,
         shapeStyle: PropTypes.object,
         setStyleParameter: PropTypes.func
     };
@@ -33,7 +36,9 @@ class StylePolygon extends React.Component {
                         <Col xs={12}>
                             <div className="ms-marker-preview" style={{display: 'flex', width: '100%', height: 104}}>
                                 <StyleCanvas style={{ padding: 0, margin: "auto", display: "block"}}
-                                    shapeStyle={this.props.shapeStyle}
+                                    shapeStyle={assign({}, this.props.shapeStyle, {
+                                        color: this.addOpacityToColor(hexToRgbObj(this.props.shapeStyle.color), this.props.shapeStyle.opacity)
+                                    })}
                                     geomType="Polyline"
                                     height={40}
                                 />
@@ -45,7 +50,17 @@ class StylePolygon extends React.Component {
                             Stroke:
                         </Col>
                         <Col xs={6} style={{position: 'static'}}>
-                            <ColorPicker color={{r: 33, g: 33, b: 33, a: 100}}/>
+                            <ColorSelector color={this.addOpacityToColor(hexToRgbObj(this.props.shapeStyle.color), this.props.shapeStyle.opacity)}
+                                width={this.props.width}
+                                onChangeColor={c => {
+                                    const color = rgbToHex(c.r, c.g, c.b);
+                                    const opacity = c.a;
+                                    const newStyle = assign({}, this.props.shapeStyle, {
+                                        color,
+                                        opacity
+                                    });
+                                    this.props.setStyleParameter(newStyle);
+                                }}/>
                         </Col>
                     </Row>
                     <Row>
@@ -54,15 +69,31 @@ class StylePolygon extends React.Component {
                         </Col>
                         <Col xs={6} style={{position: 'static'}}>
                             <div className="mapstore-slider with-tooltip">
-                                <Slider tooltips start={[2]} format={{
-                                           from: value => Math.round(value),
-                                           to: value => Math.round(value) + ' px'
-                                       }} range={{min: 0, max: 20}}/>
+                                <Slider tooltips step={1}
+                                    start={[this.props.shapeStyle.weight]}
+                                    format={{
+                                        from: value => Math.round(value),
+                                        to: value => Math.round(value) + ' px'
+                                    }}
+                                    range={{min: 0, max: 20}}
+                                    onChange={(values) => {
+                                        const weight = parseInt(values[0].replace(' px', ''), 10);
+                                        const newStyle = assign({}, this.props.shapeStyle, {
+                                            weight
+                                        });
+                                        this.props.setStyleParameter(newStyle);
+                                    }}
+                                    />
                                 </div>
                         </Col>
                     </Row>
                 </Grid>);
     }
+    addOpacityToColor = (color, opacity) => {
+        return assign({}, color, {
+            a: opacity
+        });
+    }
 }
 
-module.exports = StylePolygon;
+module.exports = StylePolyline;

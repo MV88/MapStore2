@@ -16,8 +16,10 @@ class PolygonThumb extends React.Component {
         linecap: PropTypes.string,
         linejoin: PropTypes.string,
         stroke: PropTypes.string,
+        fill: PropTypes.string,
         strokeOuter: PropTypes.string,
-        style: PropTypes.string
+        style: PropTypes.string,
+        styleRect: PropTypes.object
     };
 
     static defaultProps = {
@@ -33,13 +35,16 @@ class PolygonThumb extends React.Component {
         return (
             <div className="ms-thumb-geom">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox={"0 0 100 100"}>
-                <path
-                    d={"M25 75 L25 25 L75 25 L75 75 Z"}
-                    strokeLinecap={this.props.linecap}
-                    strokeLinejoin={this.props.linejoin}
-                    stroke={this.props.stroke}
-                    strokeWidth="10"
-                    fill="none"/>
+
+                <rect width="50" height="50" x="25" y="25" style={{
+                        fill: this.props.styleRect.fillColor,
+                        strokeWidth: this.props.styleRect.weight || 3,
+                        stroke: this.props.styleRect.color || this.props.stroke,
+                        fillOpacity: this.props.styleRect.fillOpacity,
+                        opacity: this.props.styleRect.opacity
+                    }}
+                />
+
             </svg>
         </div>
         );

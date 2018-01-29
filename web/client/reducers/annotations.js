@@ -122,7 +122,8 @@ function annotations(state = { validationErrors: {} }, action) {
             return assign({}, state, {
                 editing: assign({}, state.editing, {
                     geometry: action.geometry
-                })
+                }),
+                stylerType: state.stylerType ? state.stylerType : head(getAvailableStyler(action.geometry))
             });
         case TOGGLE_ADD:
             return assign({}, state, {

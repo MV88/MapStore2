@@ -131,13 +131,13 @@ class DrawSupport extends React.Component {
     };
 
     addFeatures = ({features, drawMethod, options}) => {
-        features.forEach((g) => {
-            let geometry = g;
+        features.forEach((f) => {
+            let geometry = f;
             if (geometry.geometry && geometry.geometry.type !== "GeometryCollection") {
                 geometry = reprojectGeoJson(geometry, this.props.options.featureProjection, this.props.map.getView().getProjection().getCode()).geometry;
             }
             const feature = new ol.Feature({
-                geometry: this.createOLGeometry(geometry)
+                geometry: this.createOLGeometry(geometry.geometry ? geometry.geometry : geometry)
             });
             this.drawSource.addFeature(feature);
         });
@@ -166,7 +166,7 @@ class DrawSupport extends React.Component {
         if (this.drawInteraction) {
             this.removeDrawInteraction();
         }
-        this.drawInteraction = new ol.interaction.Draw(this.drawPropertiesForGeometryType(drawMethod, maxPoints, this.drawSource));
+        this.drawInteraction = new ol.interaction.Draw(this.drawPropertiesForGeometryType(drawMethod, maxPoints, this.drawSource, this.props.style));
         this.props.map.disableEventListener('singleclick');
         this.drawInteraction.on('drawstart', function(evt) {
             this.sketchFeature = evt.feature;
@@ -205,7 +205,7 @@ class DrawSupport extends React.Component {
         if (this.drawInteraction) {
             this.removeDrawInteraction();
         }
-        this.drawInteraction = new ol.interaction.Draw(this.drawPropertiesForGeometryType(getSimpleGeomType(drawMethod), maxPoints, isSimpleGeomType(drawMethod) ? this.drawSource : null ));
+        this.drawInteraction = new ol.interaction.Draw(this.drawPropertiesForGeometryType(getSimpleGeomType(drawMethod), maxPoints, isSimpleGeomType(drawMethod) ? this.drawSource : null, this.props.style ));
         this.props.map.disableEventListener('singleclick');
         this.drawInteraction.on('drawstart', function(evt) {
             this.sketchFeature = evt.feature;
@@ -250,11 +250,6 @@ class DrawSupport extends React.Component {
                 }
             }
             const feature = this.fromOLFeature(this.sketchFeature, startingPoint);
-            feature.style = {
-                fillColor: '#FFFFFF',
-                strokeColor: '#ffcc33',
-                strokeWidth: 2
-            };
             const vectorSource = new ol.source.Vector({
                 features: (new ol.format.GeoJSON()).readFeatures(feature)
               });
@@ -285,11 +280,11 @@ class DrawSupport extends React.Component {
         this.setDoubleClickZoomEnabled(false);
     };
 
-    drawPropertiesForGeometryType = (geometryType, maxPoints, source) => {
+    drawPropertiesForGeometryType = (geometryType, maxPoints, source, style) => {
         let drawBaseProps = {
             source,
             type: /** @type {ol.geom.GeometryType} */ geometryType,
-            style: new ol.style.Style({
+            style: VectorStyle.getStyle({style}) || new ol.style.Style({
                 fill: new ol.style.Fill({
                     color: 'rgba(255, 255, 255, 0.2)'
                 }),
@@ -342,7 +337,7 @@ class DrawSupport extends React.Component {
                 roiProps.geometryFunction = ol.interaction.Draw.createRegularPolygon(roiProps.maxPoints);
                 break;
             }
-            case "Point": case "LineString": case "Polygon": case "MultiPoint": case "MultiLineString": case "MultiPolygon": {
+            case "Point": case "LineString": case "Polygon": case "MultiPoint": case "MultiLineString": case "MultiPolygon": case "GeometryCollection": {
                 if (geometryType === "LineString") {
                     roiProps.maxPoints = maxPoints;
                 }
@@ -569,11 +564,7 @@ class DrawSupport extends React.Component {
                 center,
                 coordinates,
                 radius,
-                style: {
-                    fillColor: '#FFFFFF',
-                    strokeColor: '#ffcc33',
-                    strokeWidth: 2
-                },
+                style: this.fromOlStyle(feature.getStyle()),
                 projection: this.props.map.getView().getProjection().getCode()
             });
         });
@@ -581,11 +572,7 @@ class DrawSupport extends React.Component {
         return assign({}, {
             type: "Feature",
             id: feature.get('id'),
-            style: {
-                fillColor: '#FFFFFF',
-                strokeColor: '#ffcc33',
-                strokeWidth: 2
-            },
+            style: this.fromOlStyle(feature.getStyle()),
             geometry: {
                 type,
                 geometries
@@ -612,19 +599,20 @@ class DrawSupport extends React.Component {
     };
 
     toOlStyle = (style, selected) => {
-        let color = style && style.fillColor ? style.fillColor : [255, 255, 255, 0.2];
-        if (typeof color === 'string') {
-            color = this.hexToRgb(color);
+        let fillColor = style && style.fillColor ? style.fillColor : [255, 255, 255, 0.2];
+        if (typeof fillColor === 'string') {
+            fillColor = this.hexToRgb(fillColor).concat([style.fillOpacity >= 0 && style.fillOpacity <= 1 ? style.fillOpacity : 1]);
         }
 
         if (style && style.fillTransparency) {
-            color[3] = style.fillTransparency;
+            fillColor[3] = style.fillTransparency;
         }
 
-        let strokeColor = style && style.strokeColor ? style.strokeColor : '#ffcc33';
+        let strokeColor = style && style.strokeColor || style.color ? style.strokeColor || style.color : '#ffcc33';
         if (selected) {
             strokeColor = '#4a90e2';
         }
+        strokeColor = this.hexToRgb(strokeColor).concat([style.opacity]);
 
         if (style && (style.iconUrl || style.iconGlyph)) {
             return VectorStyle.getMarkerStyle({
@@ -634,19 +622,19 @@ class DrawSupport extends React.Component {
 
         return new ol.style.Style({
             fill: new ol.style.Fill({
-                color: color
+                color: fillColor
             }),
             stroke: new ol.style.Stroke({
                 color: strokeColor,
-                width: style && style.strokeWidth ? style.strokeWidth : 2
+                width: style && style.strokeWidth || style.weight ? style.strokeWidth || style.weight : 2
             }),
             image: new ol.style.Circle({
-                radius: style && style.strokeWidth ? style.strokeWidth : 5,
-                fill: new ol.style.Fill({ color: style && style.strokeColor ? style.strokeColor : '#ffcc33' })
+                radius: style && style.strokeWidth || style.weight ? style.strokeWidth || style.weight : 5,
+                fill: new ol.style.Fill({ color: style && style.strokeColor || style.color ? style.strokeColor || style.color : '#ffcc33' })
             }),
             text: new ol.style.Text({
                 text: style && style.text ? style.text : '',
-                fill: new ol.style.Fill({ color: style && style.strokeColor ? style.strokeColor : '#000' }),
+                fill: new ol.style.Fill({ color: style && style.strokeColor || style.color ? style.strokeColor || style.color : '#000' }),
                 stroke: new ol.style.Stroke({ color: '#fff', width: 2 }),
                 font: style && style.fontSize ? style.fontSize + 'px helvetica' : ''
             })

@@ -11,6 +11,7 @@ const image = new ol.style.Circle({
 });
 
 const Icons = require('../../../utils/openlayers/Icons');
+const {hexToRgb} = require('../../../utils/ColorUtils');
 
 const defaultStyles = {
   'Point': () => [new ol.style.Style({
@@ -121,14 +122,12 @@ function getStyle(options) {
     if (!style && options.style) {
         style = {
             stroke: new ol.style.Stroke( options.style.stroke ? options.style.stroke : {
-                color: options.style.color || 'blue',
+                color: hexToRgb(options.style && options.style.color || "#0000FF").concat([options.style.opacity || 1]),
                 lineDash: options.style.highlight ? [10] : [0],
-                width: options.style.weight || 1,
-                opacity: options.style.opacity || 1
+                width: options.style.weight || 1
             }),
             fill: new ol.style.Fill(options.style.fill ? options.style.fill : {
-                color: options.style.fillColor || 'blue',
-                opacity: options.style.fillOpacity || 1
+                color: hexToRgb(options.style && options.style.fillColor || "#0000FF").concat([options.style.fillOpacity || 1])
             })
         };
 
