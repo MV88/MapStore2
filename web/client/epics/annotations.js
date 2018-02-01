@@ -23,35 +23,7 @@ const {head} = require('lodash');
 const assign = require('object-assign');
 
 const {annotationsLayerSelector} = require('../selectors/annotations');
-
-const annotationsStyle = {
-    "Point": {
-        iconGlyph: 'comment',
-        iconShape: 'square',
-        iconColor: 'blue'},
-    "LineString": {
-        color: '#ffcc33',
-        opacity: 1,
-        weight: 3,
-        fillColor: '#ffffff',
-        fillOpacity: 0.2,
-        clickable: false,
-        editing: {
-            fill: 1
-        }
-    },
-    "Polygon": {
-        color: '#ffcc33',
-        opacity: 1,
-        weight: 3,
-        fillColor: '#ffffff',
-        fillOpacity: 0.2,
-        clickable: false,
-        editing: {
-            fill: 1
-        }
-    }
-};
+const {DEFAULT_ANNOTATIONS_STYLES} = require('../utils/AnnotationsUtils');
 
 const {changeDrawingStatus} = require('../actions/draw');
 
@@ -95,7 +67,7 @@ const toggleDrawOrEdit = (state, featureType) => {
     return changeDrawingStatus("drawOrEdit", type, "annotations", [feature], drawOptions,
     assign({}, feature.style, {
         highlight: false
-    }) || annotationsStyle[type]);
+    }) || DEFAULT_ANNOTATIONS_STYLES[type]);
 };
 
 const createNewFeature = (action) => {
@@ -164,7 +136,7 @@ module.exports = (viewer) => ({
                     name: "Annotations",
                     rowViewer: viewer,
                     hideLoading: true,
-                    style: annotationsStyle.Point, // TODO FIX THIS
+                    style: action.style,
                     features: [createNewFeature(action)],
                     handleClickOnLayer: true
                 })

@@ -5,7 +5,41 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-
+const STYLE_POINT = {
+    iconGlyph: 'comment',
+    iconShape: 'square',
+    iconColor: 'blue'
+};
+const STYLE_LINE = {
+    color: '#ffcc33',
+    opacity: 1,
+    weight: 3,
+    fillColor: '#ffffff',
+    fillOpacity: 0.2,
+    clickable: false,
+    editing: {
+        fill: 1
+    }
+};
+const STYLE_POLYGON = {
+    color: '#ffcc33',
+    opacity: 1,
+    weight: 3,
+    fillColor: '#ffffff',
+    fillOpacity: 0.2,
+    clickable: false,
+    editing: {
+        fill: 1
+    }
+};
+const DEFAULT_ANNOTATIONS_STYLES = {
+    "Point": STYLE_POINT,
+    "MultiPoint": STYLE_POINT,
+    "LineString": STYLE_LINE,
+    "MultiLineString": STYLE_LINE,
+    "Polygon": STYLE_POLYGON,
+    "MultiPolygon": STYLE_POLYGON
+};
 const AnnotationsUtils = {
     /**
      * Retrieves a non duplicated list of stylers
@@ -29,7 +63,11 @@ const AnnotationsUtils = {
             }
             default: return ["marker"];
         }
-    }
+    },
+    DEFAULT_ANNOTATIONS_STYLES,
+    STYLE_POINT,
+    STYLE_LINE,
+    STYLE_POLYGON
 
 };
 

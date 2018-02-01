@@ -17,6 +17,7 @@ const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
 numberLocalizer();
 require('react-widgets/lib/less/react-widgets.less');
 const {hexToRgbObj, rgbToHex} = require('../../utils/ColorUtils');
+const Message = require('../I18N/Message');
 
 class StylePolyline extends React.Component {
     static propTypes = {
@@ -25,19 +26,25 @@ class StylePolyline extends React.Component {
         setStyleParameter: PropTypes.func
     };
 
+    static contextTypes = {
+        messages: PropTypes.object
+    };
+
     static defaultProps = {
         shapeStyle: {},
         setStyleParameter: () => {}
     };
 
     render() {
+        const styleType = !!this.props.shapeStyle.MultiLineString ? "MultiLineString" : "LineString";
+        const style = this.props.shapeStyle[styleType];
         return (<Grid fluid style={{ width: '100%' }} className="ms-style">
                     <Row>
                         <Col xs={12}>
                             <div className="ms-marker-preview" style={{display: 'flex', width: '100%', height: 104}}>
                                 <StyleCanvas style={{ padding: 0, margin: "auto", display: "block"}}
-                                    shapeStyle={assign({}, this.props.shapeStyle, {
-                                        color: this.addOpacityToColor(hexToRgbObj(this.props.shapeStyle.color), this.props.shapeStyle.opacity)
+                                    shapeStyle={assign({}, style, {
+                                        color: this.addOpacityToColor(hexToRgbObj(style.color), style.opacity)
                                     })}
                                     geomType="Polyline"
                                     height={40}
@@ -47,17 +54,16 @@ class StylePolyline extends React.Component {
                     </Row>
                     <Row>
                         <Col xs={6}>
-                            Stroke:
+                            <Message msgId="draw.stroke"/>
                         </Col>
                         <Col xs={6} style={{position: 'static'}}>
-                            <ColorSelector color={this.addOpacityToColor(hexToRgbObj(this.props.shapeStyle.color), this.props.shapeStyle.opacity)}
+                            <ColorSelector color={this.addOpacityToColor(hexToRgbObj(style.color), style.opacity)}
                                 width={this.props.width}
                                 onChangeColor={c => {
                                     const color = rgbToHex(c.r, c.g, c.b);
                                     const opacity = c.a;
                                     const newStyle = assign({}, this.props.shapeStyle, {
-                                        color,
-                                        opacity
+                                        [styleType]: assign({}, style, {color, opacity})
                                     });
                                     this.props.setStyleParameter(newStyle);
                                 }}/>
@@ -65,12 +71,12 @@ class StylePolyline extends React.Component {
                     </Row>
                     <Row>
                         <Col xs={6}>
-                            Stroke Width:
+                            <Message msgId="draw.strokeWidth"/>
                         </Col>
                         <Col xs={6} style={{position: 'static'}}>
                             <div className="mapstore-slider with-tooltip">
                                 <Slider tooltips step={1}
-                                    start={[this.props.shapeStyle.weight]}
+                                    start={[style.weight]}
                                     format={{
                                         from: value => Math.round(value),
                                         to: value => Math.round(value) + ' px'
@@ -79,7 +85,7 @@ class StylePolyline extends React.Component {
                                     onChange={(values) => {
                                         const weight = parseInt(values[0].replace(' px', ''), 10);
                                         const newStyle = assign({}, this.props.shapeStyle, {
-                                            weight
+                                            [styleType]: assign({}, style, {weight})
                                         });
                                         this.props.setStyleParameter(newStyle);
                                     }}

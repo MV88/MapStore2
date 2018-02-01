@@ -19,7 +19,8 @@ const {createSelector} = require('reselect');
 const {cancelRemoveAnnotation, confirmRemoveAnnotation, editAnnotation, newAnnotation, removeAnnotation, cancelEditAnnotation,
     saveAnnotation, toggleAdd, validationError, removeAnnotationGeometry, toggleStyle, setStyle, restoreStyle,
     highlight, cleanHighlight, showAnnotation, cancelShowAnnotation, filterAnnotations, closeAnnotations,
-    cancelCloseAnnotations, confirmCloseAnnotations, stopDrawing, changeStyler} =
+    cancelCloseAnnotations, confirmCloseAnnotations, stopDrawing, changeStyler, setUnsavedChanges, toggleUnsavedChangesModal, changedProperties,
+    setUnsavedStyle, toggleUnsavedStyleModal} =
     require('../actions/annotations');
 
 const { zoomToExtent } = require('../actions/map');
@@ -35,6 +36,11 @@ const commonEditorActions = {
     onSave: saveAnnotation,
     onRemove: removeAnnotation,
     onAddGeometry: toggleAdd,
+    onSetUnsavedChanges: setUnsavedChanges,
+    onSetUnsavedStyle: setUnsavedStyle,
+    onChangeProperties: changedProperties,
+    onToggleUnsavedChangesModal: toggleUnsavedChangesModal,
+    onToggleUnsavedStyleModal: toggleUnsavedStyleModal,
     onStyleGeometry: toggleStyle,
     onCancelStyle: restoreStyle,
     onSaveStyle: toggleStyle,
@@ -51,6 +57,11 @@ const AnnotationsEditor = connect(annotationsInfoSelector,
 
 const AnnotationsInfoViewer = connect(annotationsInfoSelector,
 {
+    onCancelRemove: cancelRemoveAnnotation,
+    onCancelEdit: cancelEditAnnotation,
+    onCancelClose: cancelCloseAnnotations,
+    onConfirmClose: confirmCloseAnnotations,
+    onConfirmRemove: confirmRemoveAnnotation,
     ...commonEditorActions
 })(require('../components/mapcontrols/annotations/AnnotationsEditor'));
 
@@ -61,6 +72,10 @@ const panelSelector = createSelector([annotationsListSelector], (list) => ({
 
 const Annotations = connect(panelSelector, {
     onCancelRemove: cancelRemoveAnnotation,
+    onCancelStyle: restoreStyle,
+    onCancelEdit: cancelEditAnnotation,
+    onToggleUnsavedChangesModal: toggleUnsavedChangesModal,
+    onToggleUnsavedStyleModal: toggleUnsavedStyleModal,
     onConfirmRemove: confirmRemoveAnnotation,
     onCancelClose: cancelCloseAnnotations,
     onConfirmClose: confirmCloseAnnotations,
@@ -190,6 +205,5 @@ module.exports = {
     reducers: {
         annotations: require('../reducers/annotations')
     },
-    epics: require('../epics/annotations'
-)(AnnotationsInfoViewer)
+    epics: require('../epics/annotations')(AnnotationsInfoViewer)
 };

@@ -396,6 +396,11 @@
             "s_priority_info": "Utilisé pour trier les résultats de recherche, des valeurs plus élevées en premier. Les résultats Nominatim ont priorité = 5",
             "serviceslistempty": "Aucun service personnalisé n'a été défini"
         },
+        "draw": {
+            "fill": "Remplissage:",
+            "stroke": "Ligne:",
+            "strokeWidth": "Largeur de ligne:"
+        },
         "drawLocal": {
             "draw": {
                 "toolbar": {

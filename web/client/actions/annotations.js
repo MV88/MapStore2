@@ -30,37 +30,14 @@ const CONFIRM_CLOSE_ANNOTATIONS = 'ANNOTATIONS:CONFIRM_CLOSE';
 const CANCEL_CLOSE_ANNOTATIONS = 'ANNOTATIONS:CANCEL_CLOSE';
 const STOP_DRAWING = 'ANNOTATIONS:STOP_DRAWING';
 const CHANGE_STYLER = 'ANNOTATIONS:CHANGE_STYLER';
+const UNSAVED_CHANGES = 'ANNOTATIONS:UNSAVED_CHANGES';
+const TOGGLE_CHANGES_MODAL = 'ANNOTATIONS:TOGGLE_CHANGES_MODAL';
+const CHANGED_PROPERTIES = 'ANNOTATIONS:CHANGED_PROPERTIES';
+const UNSAVED_STYLE = 'ANNOTATIONS:UNSAVED_STYLE';
+const TOGGLE_STYLE_MODAL = 'ANNOTATIONS:TOGGLE_STYLE_MODAL';
 
 const {head} = require('lodash');
-const DEFAULT_ANNOTATIONS_STYLES = {
-    "Point": {
-        iconGlyph: 'comment',
-        iconShape: 'square',
-        iconColor: 'blue'
-    },
-    "LineString": {
-        color: '#ffcc33',
-        opacity: 1,
-        weight: 3,
-        fillColor: '#ffffff',
-        fillOpacity: 0.2,
-        clickable: false,
-        editing: {
-            fill: 1
-        }
-    },
-    "Polygon": {
-        color: '#ffcc33',
-        opacity: 1,
-        weight: 3,
-        fillColor: '#ffffff',
-        fillOpacity: 0.2,
-        clickable: false,
-        editing: {
-            fill: 1
-        }
-    }
-};
+
 function editAnnotation(id) {
     return (dispatch, getState) => {
         const feature = head(head(getState().layers.flat.filter(l => l.id === 'annotations')).features.filter(f => f.properties.id === id));
@@ -71,46 +48,45 @@ function editAnnotation(id) {
         });
     };
 }
-
-function newAnnotation(featureType) {
+function newAnnotation() {
     return {
-        type: NEW_ANNOTATION,
-        featureType
+        type: NEW_ANNOTATION
     };
 }
-
+function changedProperties(field, value) {
+    return {
+        type: CHANGED_PROPERTIES,
+        field,
+        value
+    };
+}
 function removeAnnotation(id) {
     return {
         type: REMOVE_ANNOTATION,
         id
     };
 }
-
 function removeAnnotationGeometry() {
     return {
         type: REMOVE_ANNOTATION_GEOMETRY
     };
 }
-
 function confirmRemoveAnnotation(id) {
     return {
         type: CONFIRM_REMOVE_ANNOTATION,
         id
     };
 }
-
 function cancelRemoveAnnotation() {
     return {
         type: CANCEL_REMOVE_ANNOTATION
     };
 }
-
 function cancelEditAnnotation() {
     return {
         type: CANCEL_EDIT_ANNOTATION
     };
 }
-
 function saveAnnotation(id, fields, geometry, style, newFeature) {
     return {
         type: SAVE_ANNOTATION,
@@ -121,101 +97,108 @@ function saveAnnotation(id, fields, geometry, style, newFeature) {
         newFeature
     };
 }
-
 function toggleAdd(featureType) {
     return {
         type: TOGGLE_ADD,
         featureType
     };
 }
-
 function toggleStyle() {
     return {
         type: TOGGLE_STYLE
     };
 }
-
 function restoreStyle() {
     return {
         type: RESTORE_STYLE
     };
 }
-
 function setStyle(style) {
     return {
         type: SET_STYLE,
         style
     };
 }
-
 function updateAnnotationGeometry(geometry) {
     return {
         type: UPDATE_ANNOTATION_GEOMETRY,
         geometry
     };
 }
-
 function validationError(errors) {
     return {
         type: VALIDATION_ERROR,
         errors
     };
 }
-
 function highlight(id) {
     return {
         type: HIGHLIGHT,
         id
     };
 }
-
 function cleanHighlight() {
     return {
         type: CLEAN_HIGHLIGHT
     };
 }
-
 function showAnnotation(id) {
     return {
         type: SHOW_ANNOTATION,
         id
     };
 }
-
 function cancelShowAnnotation() {
     return {
         type: CANCEL_SHOW_ANNOTATION
     };
 }
-
 function filterAnnotations(filter) {
     return {
         type: FILTER_ANNOTATIONS,
         filter
     };
 }
-
 function closeAnnotations() {
     return {
         type: CLOSE_ANNOTATIONS
     };
 }
-
 function confirmCloseAnnotations() {
     return {
         type: CONFIRM_CLOSE_ANNOTATIONS
     };
 }
-
+function setUnsavedChanges(unsavedChanges) {
+    return {
+        type: UNSAVED_CHANGES,
+        unsavedChanges
+    };
+}
+function setUnsavedStyle(unsavedStyle) {
+    return {
+        type: UNSAVED_STYLE,
+        unsavedStyle
+    };
+}
 function cancelCloseAnnotations() {
     return {
         type: CANCEL_CLOSE_ANNOTATIONS
     };
 }
-
 function stopDrawing() {
     return {
         type: STOP_DRAWING
+    };
+}
+function toggleUnsavedChangesModal() {
+    return {
+        type: TOGGLE_CHANGES_MODAL
+    };
+}
+function toggleUnsavedStyleModal() {
+    return {
+        type: TOGGLE_STYLE_MODAL
     };
 }
 function changeStyler(stylerType) {
@@ -224,7 +207,6 @@ function changeStyler(stylerType) {
         stylerType
     };
 }
-
 module.exports = {
     SHOW_ANNOTATION,
     EDIT_ANNOTATION,
@@ -248,9 +230,13 @@ module.exports = {
     CLOSE_ANNOTATIONS,
     CONFIRM_CLOSE_ANNOTATIONS,
     CANCEL_CLOSE_ANNOTATIONS,
-    STOP_DRAWING,
+    STOP_DRAWING, stopDrawing,
     CHANGE_STYLER, changeStyler,
-    stopDrawing,
+    UNSAVED_CHANGES, setUnsavedChanges,
+    UNSAVED_STYLE, setUnsavedStyle,
+    TOGGLE_CHANGES_MODAL, toggleUnsavedChangesModal,
+    TOGGLE_STYLE_MODAL, toggleUnsavedStyleModal,
+    CHANGED_PROPERTIES, changedProperties,
     editAnnotation,
     newAnnotation,
     removeAnnotation,
@@ -272,6 +258,5 @@ module.exports = {
     filterAnnotations,
     closeAnnotations,
     confirmCloseAnnotations,
-    cancelCloseAnnotations,
-    DEFAULT_ANNOTATIONS_STYLES
+    cancelCloseAnnotations
 };

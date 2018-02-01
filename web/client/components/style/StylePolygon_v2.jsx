@@ -17,11 +17,17 @@ const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
 numberLocalizer();
 require('react-widgets/lib/less/react-widgets.less');
 const {hexToRgbObj, rgbToHex} = require('../../utils/ColorUtils');
+const Message = require('../I18N/Message');
+
 class StylePolygon extends React.Component {
     static propTypes = {
         shapeStyle: PropTypes.object,
         width: PropTypes.number,
         setStyleParameter: PropTypes.func
+    };
+
+    static contextTypes = {
+        messages: PropTypes.object
     };
 
     static defaultProps = {
@@ -30,14 +36,16 @@ class StylePolygon extends React.Component {
     };
 
     render() {
+        const styleType = !!this.props.shapeStyle.MultiPolygon ? "MultiPolygon" : "Polygon";
+        const style = this.props.shapeStyle[styleType];
         return (<Grid fluid style={{ width: '100%' }} className="ms-style">
                     <Row>
                         <Col xs={12}>
                             <div className="ms-marker-preview" style={{display: 'flex', width: '100%', height: 104}}>
                                 <StyleCanvas style={{ padding: 0, margin: "auto", display: "block"}}
-                                    shapeStyle={assign({}, this.props.shapeStyle, {
-                                        color: this.addOpacityToColor(hexToRgbObj(this.props.shapeStyle.color), this.props.shapeStyle.opacity),
-                                        fill: this.addOpacityToColor(hexToRgbObj(this.props.shapeStyle.fillColor), this.props.shapeStyle.fillOpacity)
+                                    shapeStyle={assign({}, style, {
+                                        color: this.addOpacityToColor(hexToRgbObj(style.color), style.opacity),
+                                        fill: this.addOpacityToColor(hexToRgbObj(style.fillColor), style.fillOpacity)
                                     })}
                                     geomType="Polygon"
                                 />
@@ -46,15 +54,14 @@ class StylePolygon extends React.Component {
                     </Row>
                     <Row>
                         <Col xs={6}>
-                            Fill:
+                            <Message msgId="draw.fill"/>
                         </Col>
                         <Col xs={6} style={{position: 'static'}}>
-                            <ColorSelector key="poly-fill" color={this.addOpacityToColor(hexToRgbObj(this.props.shapeStyle.fillColor), this.props.shapeStyle.fillOpacity)} width={this.props.width} onChangeColor={c => {
+                            <ColorSelector key="poly-fill" color={this.addOpacityToColor(hexToRgbObj(style.fillColor), style.fillOpacity)} width={this.props.width} onChangeColor={c => {
                                 const fillColor = rgbToHex(c.r, c.g, c.b);
                                 const fillOpacity = c.a;
                                 const newStyle = assign({}, this.props.shapeStyle, {
-                                    fillColor,
-                                    fillOpacity
+                                    [styleType]: assign({}, this.props.shapeStyle[styleType], {fillColor, fillOpacity})
                                 });
                                 this.props.setStyleParameter(newStyle);
                             }}/>
@@ -62,15 +69,14 @@ class StylePolygon extends React.Component {
                     </Row>
                     <Row>
                         <Col xs={6}>
-                            Stroke:
+                            <Message msgId="draw.stroke"/>
                         </Col>
                         <Col xs={6} style={{position: 'static'}}>
-                            <ColorSelector color={this.addOpacityToColor(hexToRgbObj(this.props.shapeStyle.color), this.props.shapeStyle.opacity)} width={this.props.width} onChangeColor={c => {
+                            <ColorSelector color={this.addOpacityToColor(hexToRgbObj(style.color), style.opacity)} width={this.props.width} onChangeColor={c => {
                                 const color = rgbToHex(c.r, c.g, c.b);
                                 const opacity = c.a;
                                 const newStyle = assign({}, this.props.shapeStyle, {
-                                    color,
-                                    opacity
+                                    [styleType]: assign({}, style, {color, opacity})
                                 });
                                 this.props.setStyleParameter(newStyle);
                             }}/>
@@ -78,12 +84,12 @@ class StylePolygon extends React.Component {
                     </Row>
                     <Row>
                         <Col xs={6}>
-                            Stroke Width:
+                            <Message msgId="draw.strokeWidth"/>
                         </Col>
                         <Col xs={6} style={{position: 'static'}}>
                             <div className="mapstore-slider with-tooltip">
                                 <Slider tooltips step={1}
-                                    start={[this.props.shapeStyle.weight]}
+                                    start={[style.weight]}
                                     format={{
                                         from: value => Math.round(value),
                                         to: value => Math.round(value) + ' px'
@@ -92,7 +98,7 @@ class StylePolygon extends React.Component {
                                     onChange={(values) => {
                                         const weight = parseInt(values[0].replace(' px', ''), 10);
                                         const newStyle = assign({}, this.props.shapeStyle, {
-                                            weight
+                                            [styleType]: assign({}, style, {weight})
                                         });
                                         this.props.setStyleParameter(newStyle);
                                     }}

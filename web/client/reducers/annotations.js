@@ -14,10 +14,10 @@ const {REMOVE_ANNOTATION, CONFIRM_REMOVE_ANNOTATION, CANCEL_REMOVE_ANNOTATION, C
     CONFIRM_CLOSE_ANNOTATIONS, CANCEL_CLOSE_ANNOTATIONS,
     EDIT_ANNOTATION, CANCEL_EDIT_ANNOTATION, SAVE_ANNOTATION, TOGGLE_ADD,
     UPDATE_ANNOTATION_GEOMETRY, VALIDATION_ERROR, REMOVE_ANNOTATION_GEOMETRY, TOGGLE_STYLE,
-    SET_STYLE, NEW_ANNOTATION, SHOW_ANNOTATION, CANCEL_SHOW_ANNOTATION, FILTER_ANNOTATIONS, DEFAULT_ANNOTATIONS_STYLES, STOP_DRAWING,
-    CHANGE_STYLER} = require('../actions/annotations');
+    SET_STYLE, NEW_ANNOTATION, SHOW_ANNOTATION, CANCEL_SHOW_ANNOTATION, FILTER_ANNOTATIONS, STOP_DRAWING,
+    CHANGE_STYLER, UNSAVED_CHANGES, TOGGLE_CHANGES_MODAL, CHANGED_PROPERTIES, TOGGLE_STYLE_MODAL, UNSAVED_STYLE} = require('../actions/annotations');
 
-const {getAvailableStyler} = require('../utils/AnnotationsUtils');
+const {getAvailableStyler, DEFAULT_ANNOTATIONS_STYLES} = require('../utils/AnnotationsUtils');
 const {head} = require('lodash');
 
 const uuid = require('uuid');
@@ -44,13 +44,16 @@ function annotations(state = { validationErrors: {} }, action) {
             });
         case REMOVE_ANNOTATION_GEOMETRY:
             return assign({}, state, {
-                removing: 'geometry'
+                removing: 'geometry',
+                stylerType: "",
+                unsavedChanges: true,
+                editing: assign({}, state.editing, {
+                    style: {}
+                })
             });
         case EDIT_ANNOTATION:
             return assign({}, state, {
-                editing: assign({}, action.feature, {
-                    style: action.feature.style || DEFAULT_ANNOTATIONS_STYLES[action.featureType || state.featureType]
-                }),
+                editing: assign({}, action.feature),
                 stylerType: head(getAvailableStyler(action.feature.geometry)),
                 originalStyle: null,
                 featureType: action.featureType
@@ -65,11 +68,9 @@ function annotations(state = { validationErrors: {} }, action) {
                     newFeature: true,
                     properties: {
                         id
-                    },
-                    style: DEFAULT_ANNOTATIONS_STYLES[action.featureType || state.featureType]
+                    }
                 },
-                originalStyle: null,
-                featureType: action.featureType
+                originalStyle: null
             });
         case CONFIRM_REMOVE_ANNOTATION:
             return assign({}, state, {
@@ -87,10 +88,32 @@ function annotations(state = { validationErrors: {} }, action) {
             return assign({}, state, {
                 closing: true
             });
+        case UNSAVED_CHANGES:
+            return assign({}, state, {
+                unsavedChanges: action.unsavedChanges
+            });
+        case UNSAVED_STYLE:
+            return assign({}, state, {
+                unsavedStyle: action.unsavedStyle
+            });
         case CONFIRM_CLOSE_ANNOTATIONS:
         case CANCEL_CLOSE_ANNOTATIONS:
             return assign({}, state, {
                 closing: false
+            });
+        case TOGGLE_CHANGES_MODAL:
+            return assign({}, state, {
+                showUnsavedChangesModal: !state.showUnsavedChangesModal
+            });
+        case TOGGLE_STYLE_MODAL:
+            return assign({}, state, {
+                showUnsavedStyleModal: !state.showUnsavedStyleModal
+            });
+        case CHANGED_PROPERTIES:
+            return assign({}, state, {
+                editedFields: assign({}, state.editedFields, {
+                    [action.field]: action.value
+                })
             });
         case CANCEL_EDIT_ANNOTATION:
             return assign({}, state, {
@@ -98,7 +121,9 @@ function annotations(state = { validationErrors: {} }, action) {
                 drawing: false,
                 styling: false,
                 originalStyle: null,
-                validationErrors: {}
+                validationErrors: {},
+                editedFields: {},
+                unsavedChanges: false
             });
         case SAVE_ANNOTATION:
             return assign({}, state, {
@@ -106,7 +131,9 @@ function annotations(state = { validationErrors: {} }, action) {
                 drawing: false,
                 styling: false,
                 originalStyle: null,
-                validationErrors: {}
+                validationErrors: {},
+                editedFields: {},
+                unsavedChanges: false
             });
         case PURGE_MAPINFO_RESULTS:
             return assign({}, state, {
@@ -116,22 +143,30 @@ function annotations(state = { validationErrors: {} }, action) {
                 styling: false,
                 drawing: false,
                 originalStyle: null,
-                filter: null
+                filter: null,
+                unsavedChanges: false
             });
         case UPDATE_ANNOTATION_GEOMETRY:
             return assign({}, state, {
                 editing: assign({}, state.editing, {
                     geometry: action.geometry
                 }),
-                stylerType: state.stylerType ? state.stylerType : head(getAvailableStyler(action.geometry))
+                stylerType: state.stylerType ? state.stylerType : head(getAvailableStyler(action.geometry)),
+                unsavedChanges: true
             });
-        case TOGGLE_ADD:
+        case TOGGLE_ADD: {
+            const type = action.featureType || state.featureType;
             return assign({}, state, {
                 drawing: !state.drawing,
-                featureType: action.featureType || state.featureType/*,
-                // MOVE THE FOLLOWING STATE PROPERTIES TO A DIFFERENT ACTION ??
-                editing: { ...state.editing, style: DEFAULT_ANNOTATIONS_STYLES[action.featureType || state.featureType] || state.editing.style}*/
-            });
+                featureType: action.featureType || state.featureType,
+                editing: assign({}, state.editing, {
+                        style: assign({}, state.editing.style, {
+                            type: Object.keys(state.editing.style || {}).length > 1 ? "GeometryCollection" : type,
+                            [type]: state.editing.style && state.editing.style[type] || DEFAULT_ANNOTATIONS_STYLES[type]
+                        })
+                    })
+                });
+        }
         case TOGGLE_STYLE:
             return assign({}, state, {
                 styling: !state.styling

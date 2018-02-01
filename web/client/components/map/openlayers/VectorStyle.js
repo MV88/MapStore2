@@ -117,6 +117,7 @@ function getMarkerStyle(options) {
 }
 
 function getStyle(options) {
+
     let style = options.nativeStyle;
     const geomType = (options.style && options.style.type) || (options.features && options.features[0] ? options.features[0].geometry.type : undefined);
     if (!style && options.style) {
@@ -136,6 +137,9 @@ function getStyle(options) {
                 image: new ol.style.Circle(assign({}, style, {radius: options.style.radius || 5}))
             };
         }
+        /*if (options.fcoll) {
+            return [new ol.style.Style(style), ...getMarkerStyle(options)];
+        }*/
         if (options.style.iconUrl || options.style.iconGlyph) {
             const markerStyle = getMarkerStyle(options);
 
@@ -153,7 +157,38 @@ function getStyle(options) {
         } else {
             style = new ol.style.Style(style);
         }
+
+        /*
+        ***********************************************************************
+        managing new style structure
+        */
+        if (geomType === "MultiLineString" || geomType === "LineString") {
+            style = {
+                stroke: new ol.style.Stroke( options.style[geomType].stroke ? options.style[geomType].stroke : {
+                    color: hexToRgb(options.style && options.style[geomType].color || "#0000FF").concat([options.style[geomType].opacity || 1]),
+                    lineDash: options.style.highlight ? [10] : [0],
+                    width: options.style[geomType].weight || 1
+                })
+            };
+            return new ol.style.Style(style);
+        }
+        if (geomType === "MultiPolygon" || geomType === "Polygon") {
+            style = {
+                stroke: new ol.style.Stroke( options.style[geomType].stroke ? options.style[geomType].stroke : {
+                    color: hexToRgb(options.style && options.style[geomType].color || "#0000FF").concat([options.style[geomType].opacity || 1]),
+                    lineDash: options.style.highlight ? [10] : [0],
+                    width: options.style[geomType].weight || 1
+                }),
+                fill: new ol.style.Fill(options.style[geomType].fill ? options.style[geomType].fill : {
+                    color: hexToRgb(options.style && options.style[geomType].fillColor || "#0000FF").concat([options.style[geomType].fillOpacity || 1])
+                })
+            };
+            return new ol.style.Style(style);
+        }
     }
+    /*
+    ***********************************************************************
+    */
     return (options.styleName && !options.overrideOLStyle) ? (feature) => {
         if (options.styleName === "marker") {
             const type = feature.getGeometry().getType();

@@ -394,6 +394,11 @@
             "s_priority_info": "Used to sort search results, higher values first. Nominatim results have priority = 5",
             "serviceslistempty": "No custom services defined"
         },
+        "draw": {
+            "fill": "Fill:",
+            "stroke": "Stroke:",
+            "strokeWidth": "Stroke Width:"
+        },
         "drawLocal": {
             "draw": {
                 "toolbar": {

@@ -71,12 +71,18 @@ class Annotations extends React.Component {
         toggleControl: PropTypes.func,
 
         closing: PropTypes.bool,
+        showUnsavedChangesModal: PropTypes.bool,
+        showUnsavedStyleModal: PropTypes.bool,
         editing: PropTypes.object,
         removing: PropTypes.object,
         onCancelRemove: PropTypes.func,
         onConfirmRemove: PropTypes.func,
         onCancelClose: PropTypes.func,
+        onToggleUnsavedChangesModal: PropTypes.func,
+        onToggleUnsavedStyleModal: PropTypes.func,
         onConfirmClose: PropTypes.func,
+        onCancelEdit: PropTypes.func,
+        onCancelStyle: PropTypes.func,
         onAdd: PropTypes.func,
         onHighlight: PropTypes.func,
         onCleanHighlight: PropTypes.func,
@@ -124,19 +130,19 @@ class Annotations extends React.Component {
     };
 
     renderThumbnail = ({style, featureType}) => {
-        if (featureType !== "MultiPoint" && featureType === "LineString" || featureType === "MultiLineString" ) {
+        if (featureType === "LineString" || featureType === "MultiLineString" ) {
             return (<span className={"mapstore-annotations-panel-card"}>
-            <LineThumb styleRect={style}/>
+            <LineThumb styleRect={style[featureType]}/>
+        </span>);
+        }
+        if (featureType === "Polygon" || featureType === "MultiPolygon" ) {
+            return (<span className={"mapstore-annotations-panel-card"}>
+            <PolygonThumb styleRect={style[featureType]}/>
         </span>);
         }
         if (featureType === "GeometryCollection") {
             return (<span className={"mapstore-annotations-panel-card"}>
             <MultiGeomThumb styleRect={style}/>
-        </span>);
-        }
-        if (featureType !== "MultiPoint" && featureType === "Polygon" || featureType === "MultiPolygon" ) {
-            return (<span className={"mapstore-annotations-panel-card"}>
-            <PolygonThumb styleRect={style}/>
         </span>);
         }
 
@@ -206,7 +212,7 @@ class Annotations extends React.Component {
                                     glyph: 'plus',
                                     tooltip: <Message msgId="annotations.add"/>,
                                     visible: this.props.mode === "list",
-                                    onClick: () => { this.props.onAdd(this.props.config.multiGeometry ? 'MultiPoint' : 'Point'); }
+                                    onClick: () => { this.props.onAdd(); }
                                 }
                             ]}/>
                     </Col>
@@ -230,12 +236,36 @@ class Annotations extends React.Component {
 
     render() {
         let body = null;
-        if (this.props.closing) {
+        if (this.props.closing ) {
             body = (<ConfirmDialog
                     show
                     modal
                     onClose={this.props.onCancelClose}
                     onConfirm={this.props.onConfirmClose}
+                    confirmButtonBSStyle="default"
+                    closeGlyph="1-close"
+                    confirmButtonContent={<Message msgId="annotations.confirm" />}
+                    closeText={<Message msgId="annotations.cancel" />}>
+                    <Message msgId="annotations.undo"/>
+                </ConfirmDialog>);
+        } else if (this.props.showUnsavedChangesModal) {
+            body = (<ConfirmDialog
+                    show
+                    modal
+                    onClose={this.props.onToggleUnsavedChangesModal}
+                    onConfirm={() => { this.props.onCancelEdit(); this.props.onToggleUnsavedChangesModal(); }}
+                    confirmButtonBSStyle="default"
+                    closeGlyph="1-close"
+                    confirmButtonContent={<Message msgId="annotations.confirm" />}
+                    closeText={<Message msgId="annotations.cancel" />}>
+                    <Message msgId="annotations.undo"/>
+                </ConfirmDialog>);
+        } else if (this.props.showUnsavedStyleModal) {
+            body = (<ConfirmDialog
+                    show
+                    modal
+                    onClose={this.props.onToggleUnsavedStyleModal}
+                    onConfirm={() => { this.props.onCancelStyle(); this.props.onToggleUnsavedStyleModal(); }}
                     confirmButtonBSStyle="default"
                     closeGlyph="1-close"
                     confirmButtonContent={<Message msgId="annotations.confirm" />}
