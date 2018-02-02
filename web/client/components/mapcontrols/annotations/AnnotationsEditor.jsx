@@ -520,11 +520,11 @@ class AnnotationsEditor extends React.Component {
         return this.props.onSetStyle(assign({}, {
             "Point": {
                 ...this.getConfig().markersConfig.getStyle(marker.style),
-                iconGlyph: this.props.editing.style.Point.iconGlyph
+                iconGlyph: this.props.editing.style.Point && this.props.editing.style.Point.iconGlyph
             },
             "MultiPoint": {
                 ...this.getConfig().markersConfig.getStyle(marker.style),
-                iconGlyph: this.props.editing.style.MultiPoint.iconGlyph
+                iconGlyph: this.props.editing.style.MultiPoint && this.props.editing.style.MultiPoint.iconGlyph
             }
         }));
     };

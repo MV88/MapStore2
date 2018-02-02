@@ -130,6 +130,8 @@ class Annotations extends React.Component {
     };
 
     renderThumbnail = ({style, featureType}) => {
+        const markerStyle = style.MultiPoint || style.Point;
+        const marker = markerStyle ? this.getConfig().getMarkerFromStyle(markerStyle) : {};
         if (featureType === "LineString" || featureType === "MultiLineString" ) {
             return (<span className={"mapstore-annotations-panel-card"}>
             <LineThumb styleRect={style[featureType]}/>
@@ -142,11 +144,14 @@ class Annotations extends React.Component {
         }
         if (featureType === "GeometryCollection") {
             return (<span className={"mapstore-annotations-panel-card"}>
-            <MultiGeomThumb styleRect={style}/>
+            <MultiGeomThumb styleMultiGeom={style}/>
+            {markerStyle ? (<span className={"mapstore-annotations-panel-card"}>
+                <div className={"mapstore-annotations-panel-card-thumbnail-" + marker.name} style={{...marker.thumbnailStyle, margin: 'auto', textAlign: 'center', color: '#ffffff', marginLeft: 7}}>
+                    <span className={"mapstore-annotations-panel-card-thumbnail " + this.getConfig().getGlyphClassName(markerStyle)} style={{marginTop: 0, marginLeft: -7}}/>
+                </div>
+            </span>) : null}
         </span>);
         }
-        const markerStyle = style.MultiPoint || style.Point;
-        const marker = this.getConfig().getMarkerFromStyle(markerStyle);
         return (
             <span className={"mapstore-annotations-panel-card"}>
                 <div className={"mapstore-annotations-panel-card-thumbnail-" + marker.name} style={{...marker.thumbnailStyle, margin: 'auto', textAlign: 'center', color: '#ffffff', marginLeft: 7}}>

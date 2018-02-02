@@ -17,6 +17,7 @@ class MultiGeomThumb extends React.Component {
         linejoin: PropTypes.string,
         stroke: PropTypes.string,
         strokeOuter: PropTypes.string,
+        styleMultiGeom: PropTypes.object,
         style: PropTypes.string
     };
 
@@ -26,27 +27,32 @@ class MultiGeomThumb extends React.Component {
         linejoin: 'round', // miter round bevel
         stroke: '#ffcc33',
         strokeOuter: '#fff',
+        styleMultiGeom: {},
         style: 'solid'
     };
 
     render() {
+
+        let styleLine = this.props.styleMultiGeom.MultiLineString || this.props.styleMultiGeom.LineString;
+        let stylePolygon = this.props.styleMultiGeom.MultiPolygon || this.props.styleMultiGeom.Polygon;
         return (
             <div className="ms-thumb-geom">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox={"0 0 100 100"}>
                 <path
-                    d={"M0 100 L0 50 L50 50 L50 100 Z"}
+                    d={"M10 15 L10 65"}
                     strokeLinecap={this.props.linecap}
                     strokeLinejoin={this.props.linejoin}
-                    stroke={this.props.stroke}
-                    strokeWidth="10"
-                    fill="none"/>
-                <path
-                    d={"M0 0 L25 0 L50 25 L75 0"}
-                    strokeLinecap={this.props.linecap}
-                    strokeLinejoin={this.props.linejoin}
-                    stroke={this.props.stroke}
-                    strokeWidth="10"
-                    fill="none"/>
+                    stroke={styleLine.color || this.props.stroke}
+                    strokeWidth={styleLine.weight || 10}
+                    fill={styleLine.fillColor}/>
+                <rect width="50" height="50" x="40" y="15" style={{
+                        fill: stylePolygon.fillColor,
+                        strokeWidth: stylePolygon.weight || 3,
+                        stroke: stylePolygon.color || this.props.stroke,
+                        fillOpacity: stylePolygon.fillOpacity,
+                        opacity: stylePolygon.opacity
+                    }}
+                />
             </svg>
         </div>
         );

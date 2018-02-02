@@ -37,6 +37,7 @@ class StylePolygon extends React.Component {
 
     render() {
         const styleType = !!this.props.shapeStyle.MultiPolygon ? "MultiPolygon" : "Polygon";
+        const otherStyleType = !this.props.shapeStyle.MultiPolygon ? "MultiPolygon" : "Polygon";
         const style = this.props.shapeStyle[styleType];
         return (<Grid fluid style={{ width: '100%' }} className="ms-style">
                     <Row>
@@ -61,7 +62,8 @@ class StylePolygon extends React.Component {
                                 const fillColor = rgbToHex(c.r, c.g, c.b);
                                 const fillOpacity = c.a;
                                 const newStyle = assign({}, this.props.shapeStyle, {
-                                    [styleType]: assign({}, this.props.shapeStyle[styleType], {fillColor, fillOpacity})
+                                    [styleType]: assign({}, style, {fillColor, fillOpacity}),
+                                    [otherStyleType]: assign({}, style, {fillColor, fillOpacity})
                                 });
                                 this.props.setStyleParameter(newStyle);
                             }}/>
@@ -76,7 +78,8 @@ class StylePolygon extends React.Component {
                                 const color = rgbToHex(c.r, c.g, c.b);
                                 const opacity = c.a;
                                 const newStyle = assign({}, this.props.shapeStyle, {
-                                    [styleType]: assign({}, style, {color, opacity})
+                                    [styleType]: assign({}, style, {color, opacity}),
+                                    [otherStyleType]: assign({}, style, {color, opacity})
                                 });
                                 this.props.setStyleParameter(newStyle);
                             }}/>
@@ -94,11 +97,12 @@ class StylePolygon extends React.Component {
                                         from: value => Math.round(value),
                                         to: value => Math.round(value) + ' px'
                                     }}
-                                    range={{min: 0, max: 20}}
+                                    range={{min: 0, max: 15}}
                                     onChange={(values) => {
                                         const weight = parseInt(values[0].replace(' px', ''), 10);
                                         const newStyle = assign({}, this.props.shapeStyle, {
-                                            [styleType]: assign({}, style, {weight})
+                                            [styleType]: assign({}, style, {weight}),
+                                            [otherStyleType]: assign({}, style, {weight})
                                         });
                                         this.props.setStyleParameter(newStyle);
                                     }}

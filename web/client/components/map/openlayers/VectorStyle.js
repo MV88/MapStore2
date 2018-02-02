@@ -1,6 +1,8 @@
 var markerIcon = require('./img/marker-icon.png');
 var markerShadow = require('./img/marker-shadow.png');
+const {DEFAULT_ANNOTATIONS_STYLES} = require('../../../utils/AnnotationsUtils');
 var ol = require('openlayers');
+const {reprojectGeoJson} = require('../../../utils/CoordinatesUtils');
 
 const assign = require('object-assign');
 
@@ -116,18 +118,23 @@ function getMarkerStyle(options) {
     return null;
 }
 
-const getValidStyle = (geomType, options ) => {
+const getValidStyle = (geomType, options = { style: DEFAULT_ANNOTATIONS_STYLES} ) => {
     let style;
     if (geomType === "MultiLineString" || geomType === "LineString") {
-        style = {
-            stroke: new ol.style.Stroke( options.style[geomType].stroke ? options.style[geomType].stroke : {
+        style = options.style[geomType] ? {
+            stroke: new ol.style.Stroke( options.style[geomType] && options.style[geomType].stroke ? options.style[geomType].stroke : {
                 color: hexToRgb(options.style && options.style[geomType].color || "#0000FF").concat([options.style[geomType].opacity || 1]),
                 lineDash: options.style.highlight ? [10] : [0],
                 width: options.style[geomType].weight || 1
-            })
-        };
+            }) } : {
+                stroke: new ol.style.Stroke( DEFAULT_ANNOTATIONS_STYLES[geomType] && DEFAULT_ANNOTATIONS_STYLES[geomType].stroke ? DEFAULT_ANNOTATIONS_STYLES[geomType].stroke : {
+                    color: hexToRgb(options.style && DEFAULT_ANNOTATIONS_STYLES[geomType].color || "#0000FF").concat([DEFAULT_ANNOTATIONS_STYLES[geomType].opacity || 1]),
+                    lineDash: options.style.highlight ? [10] : [0],
+                    width: DEFAULT_ANNOTATIONS_STYLES[geomType].weight || 1
+                }) };
         return new ol.style.Style(style);
     }
+
     if ((geomType === "MultiPoint" || geomType === "Point") && options.style[geomType].iconUrl || options.style[geomType].iconGlyph) {
         return getMarkerStyle({style: {...options.style[geomType], highlight: options.style.highlight}});
 
@@ -191,27 +198,39 @@ function getStyle(options) {
         managing new style structure
         */
         if (geomType === "GeometryCollection") {
-            const markerStyles = getMarkerStyle(options);
             style = function(f) {
                 var feature = this || f;
+                let markerStyles;
+                /*const geojsonFormat = new ol.format.GeoJSON();
+                let newFeature = reprojectGeoJson(geojsonFormat.writeFeatureObject(feature.clone()), "EPSG:3857", "EPSG:4326");*/
+
                 let type = feature.getGeometry().getType();
                 if (feature.getGeometry().getType() === "GeometryCollection") {
                     let geometries = feature.getGeometry().getGeometries();
-                    return geometries.map(g => {
-                        type = g.getType();
+                    let styles = geometries.reduce((p, c) => {
+                        type = c.getType();
                         if (type === "Point" || type === "MultiPoint") {
-                            return markerStyles.map((m => {
-                                m.setGeometry(g);
+                            markerStyles = getMarkerStyle({style: {...options.style[type], highlight: options.style.highlight}});
+                            return p.concat(markerStyles.map(m => {
+                                m.setGeometry(c);
                                 return m;
-                            }))[1];
+                            }));
                         }
                         let gStyle = getValidStyle(type, options);
-                        gStyle.setGeometry(g);
-                        return gStyle;
-                    });
+                        gStyle.setGeometry(c);
+                        return p.concat([gStyle]);
+                    }, []);
+                    return styles;
                 }
                 if (type === "Point" || type === "MultiPoint") {
-                    return markerStyles;
+                    // markerStyles = getMarkerStyle({style: {...options.style[type], highlight: options.style.highlight}});
+                    return new ol.style.Style({
+                      image: image,
+                      geometry: feature.getGeometry()
+                  });/* markerStyles.map(m => {
+                        m.setGeometry(feature.getGeometry());
+                        return m;
+                    });*/
                 }
                 return getValidStyle(type, options);
             };
