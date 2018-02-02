@@ -74,9 +74,9 @@ class DrawSupport extends React.Component {
  * cleanAndContinueDrawing it cleares the drawn features and allows to continue drawing features
 */
     componentWillReceiveProps(newProps) {
-        /*if (this.drawLayer) {
+        if (this.drawLayer) {
             this.updateFeatureStyles(newProps.features);
-        }*/
+        }
 
         if (!newProps.drawStatus && this.selectInteraction) {
             this.selectInteraction.getFeatures().clear();
@@ -105,7 +105,7 @@ class DrawSupport extends React.Component {
                 if (f.style) {
                     let olFeature = this.toOlFeature(f);
                     if (olFeature) {
-                        olFeature.setStyle(f.style.type ? VectorStyle.getStyle(f) : this.toOlStyle(f.style, f.selected));
+                        olFeature.setStyle(f.style && f.style.type ? VectorStyle.getStyle(f) : this.toOlStyle(f.style, f.selected));
                     }
                 }
             });
@@ -113,12 +113,16 @@ class DrawSupport extends React.Component {
     };
 
     addLayer = (newProps, addInteraction) => {
+        let layerStyle = null;
+        if (newProps.style) {
+            layerStyle = newProps.style.type ? VectorStyle.getStyle(newProps) : this.toOlStyle(newProps.style, null, newProps.features[0] && newProps.features[0].type);
+        }
         this.geojson = new ol.format.GeoJSON();
         this.drawSource = new ol.source.Vector();
         this.drawLayer = new ol.layer.Vector({
             source: this.drawSource,
             zIndex: 100000000,
-            style: newProps.style.type ? VectorStyle.getStyle(newProps) : this.toOlStyle(newProps.style, null, newProps.features[0] && newProps.features[0].type)
+            style: layerStyle
         });
 
         this.props.map.addLayer(this.drawLayer);
@@ -167,7 +171,11 @@ class DrawSupport extends React.Component {
             this.drawSource.clear();
             this.addFeatures(newProps);
             if (newProps.style) {
-                this.drawLayer.setStyle(this.toOlStyle(newProps.style));
+                /*let layerStyle = null;
+                if (newProps.style) {
+                    layerStyle = newProps.style.type ? VectorStyle.getStyle(newProps) : this.toOlStyle(newProps.style, null, newProps.features[0] && newProps.features[0].type);
+                }*/
+                this.drawLayer.setStyle(VectorStyle.getStyle(newProps));
             }
         }
     };

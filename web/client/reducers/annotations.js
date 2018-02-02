@@ -18,7 +18,7 @@ const {REMOVE_ANNOTATION, CONFIRM_REMOVE_ANNOTATION, CANCEL_REMOVE_ANNOTATION, C
     CHANGE_STYLER, UNSAVED_CHANGES, TOGGLE_CHANGES_MODAL, CHANGED_PROPERTIES, TOGGLE_STYLE_MODAL, UNSAVED_STYLE} = require('../actions/annotations');
 
 const {getAvailableStyler, DEFAULT_ANNOTATIONS_STYLES} = require('../utils/AnnotationsUtils');
-const {head} = require('lodash');
+const {head, includes} = require('lodash');
 
 const uuid = require('uuid');
 /*const defaultMarker = {
@@ -26,7 +26,6 @@ const uuid = require('uuid');
     iconColor: 'blue',
     iconShape: 'square'
 };*/
-
 
 function annotations(state = { validationErrors: {} }, action) {
     switch (action.type) {
@@ -155,13 +154,17 @@ function annotations(state = { validationErrors: {} }, action) {
                 unsavedChanges: true
             });
         case TOGGLE_ADD: {
+            const validValues = Object.keys(DEFAULT_ANNOTATIONS_STYLES);
+            const styleProps = Object.keys(state.editing.style || {});
             const type = action.featureType || state.featureType;
+            const newtype = styleProps.concat([action.featureType]).filter(s => includes(validValues, s)).length > 1 ? "GeometryCollection" : type;
             return assign({}, state, {
                 drawing: !state.drawing,
-                featureType: action.featureType || state.featureType,
+                featureType: type,
+                featureDrawingType: type,
                 editing: assign({}, state.editing, {
                         style: assign({}, state.editing.style, {
-                            type: Object.keys(state.editing.style || {}).length > 1 ? "GeometryCollection" : type,
+                            type: newtype,
                             [type]: state.editing.style && state.editing.style[type] || DEFAULT_ANNOTATIONS_STYLES[type]
                         })
                     })
@@ -182,7 +185,8 @@ function annotations(state = { validationErrors: {} }, action) {
         case SET_STYLE:
             return assign({}, state, {
                 editing: assign({}, state.editing, {
-                    style: assign({}, state.editing.style || {}, action.style)
+                    style: assign({}, state.editing.style || {}, action.style,
+                        {type: state.editing.style.type})
                 })
             });
         case SHOW_ANNOTATION:

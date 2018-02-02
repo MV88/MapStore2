@@ -12,9 +12,10 @@ const React = require('react');
 const uuidv1 = require('uuid/v1');
 const assign = require('object-assign');
 
-const getStyle = (type, style, defaultStyle = DEFAULT_ANNOTATIONS_STYLES) => {
+const getStyle = (type, multiType, style, defaultStyle = DEFAULT_ANNOTATIONS_STYLES) => {
     return assign({}, style, {
-        [type]: assign({}, defaultStyle[type], style[type]),
+        [type]: assign({}, defaultStyle[type], style[type] || {}),
+        [multiType]: assign({}, defaultStyle[type], style[type] || {}),
         type
     });
 };
@@ -22,9 +23,9 @@ const getStyle = (type, style, defaultStyle = DEFAULT_ANNOTATIONS_STYLES) => {
 const DropdownButtonT = tooltip(DropdownButton);
 const DropdownFeatureType = ({onClick = () => {}, onStopDrawing = () => {}, onSetStyle = () => {}, bsStyle = "primary", ...props} = {}) => (
     <DropdownButtonT id={props.idDropDown || uuidv1()} tooltip={props.tooltip} className="square-button-md" bsStyle={bsStyle} title={<Glyphicon glyph={props.glyph}/>} disabled={!!props.disabled} noCaret onClick={() => {onStopDrawing(); }}>
-        <MenuItem onClick={() => { onClick("MultiPoint"); onSetStyle(getStyle("MultiPoint", props.style && props.style.MultiPoint || {})); }} eventKey="1"><Glyphicon glyph="point"/>&nbsp; Marker</MenuItem>
-        <MenuItem onClick={() => { onClick("MultiLineString"); onSetStyle(getStyle("MultiLineString", props.style && props.style.MultiLineString || {})); }} eventKey="2"><Glyphicon glyph="line"/>&nbsp; Line</MenuItem>
-        <MenuItem onClick={() => { onClick("MultiPolygon"); onSetStyle(getStyle("MultiPolygon", props.style && props.style.MultiPolygon || {})); }} eventKey="3"><Glyphicon glyph="polygon"/>&nbsp; Polygon</MenuItem>
+        <MenuItem onClick={() => { onClick("MultiPoint"); onSetStyle(getStyle("Point", "MultiPoint", props.style || {})); }} eventKey="1"><Glyphicon glyph="point"/>&nbsp; Marker</MenuItem>
+        <MenuItem onClick={() => { onClick("MultiLineString"); onSetStyle(getStyle("LineString", "MultiLineString", props.style || {})); }} eventKey="2"><Glyphicon glyph="line"/>&nbsp; Line</MenuItem>
+        <MenuItem onClick={() => { onClick("MultiPolygon"); onSetStyle(getStyle("Polygon", "MultiPolygon", props.style || {})); }} eventKey="3"><Glyphicon glyph="polygon"/>&nbsp; Polygon</MenuItem>
     </DropdownButtonT>
 );
 

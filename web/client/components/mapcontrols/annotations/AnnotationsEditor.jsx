@@ -237,7 +237,7 @@ class AnnotationsEditor extends React.Component {
                             multiGeometry: this.props.config.multiGeometry,
                             onClick: this.props.onAddGeometry,
                             onSetStyle: this.props.onSetStyle,
-                            style: this.props.editing.style, // TODO FIX FOR MULTI GEOM
+                            style: this.props.editing.style,
                             onStopDrawing: this.props.onStopDrawing,
                             disabled: !this.props.config.multiGeometry && this.props.editing && this.props.editing.geometry,
                             drawing: this.props.drawing,
@@ -349,7 +349,7 @@ class AnnotationsEditor extends React.Component {
                         }))}
                         optionRenderer={glyphRenderer}
                         valueRenderer={glyphRenderer}
-                        value={this.props.editing.style.iconGlyph}
+                        value={this.props.editing.style.MultiPoint.iconGlyph || this.props.editing.style.Point.iconGlyph}
                         onChange={(option) => {this.selectGlyph(option); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }}/>
                 </div>);
             }
@@ -513,18 +513,32 @@ class AnnotationsEditor extends React.Component {
     };
 
     isCurrentStyle = (m) => {
-        return this.getConfig().markersConfig.matches(this.props.editing.style, m.style);
+        return this.getConfig().markersConfig.matches(this.props.editing.style.MultiPoint, m.style);
     };
 
     selectStyle = (marker) => {
-        return this.props.onSetStyle(assign(this.getConfig().markersConfig.getStyle(marker.style), {
-            iconGlyph: this.props.editing.style.iconGlyph
+        return this.props.onSetStyle(assign({}, {
+            "Point": {
+                ...this.getConfig().markersConfig.getStyle(marker.style),
+                iconGlyph: this.props.editing.style.Point.iconGlyph
+            },
+            "MultiPoint": {
+                ...this.getConfig().markersConfig.getStyle(marker.style),
+                iconGlyph: this.props.editing.style.MultiPoint.iconGlyph
+            }
         }));
     };
 
     selectGlyph = (option) => {
         return this.props.onSetStyle(assign({}, this.props.editing.style, {
-            iconGlyph: option.value
+            "Point": {
+                ...this.props.editing.style.Point,
+                iconGlyph: option.value
+            },
+            "MultiPoint": {
+                ...this.props.editing.style.MultiPoint,
+                iconGlyph: option.value
+            }
         }));
     };
 

@@ -116,6 +116,37 @@ function getMarkerStyle(options) {
     return null;
 }
 
+const getValidStyle = (geomType, options ) => {
+    let style;
+    if (geomType === "MultiLineString" || geomType === "LineString") {
+        style = {
+            stroke: new ol.style.Stroke( options.style[geomType].stroke ? options.style[geomType].stroke : {
+                color: hexToRgb(options.style && options.style[geomType].color || "#0000FF").concat([options.style[geomType].opacity || 1]),
+                lineDash: options.style.highlight ? [10] : [0],
+                width: options.style[geomType].weight || 1
+            })
+        };
+        return new ol.style.Style(style);
+    }
+    if ((geomType === "MultiPoint" || geomType === "Point") && options.style[geomType].iconUrl || options.style[geomType].iconGlyph) {
+        return getMarkerStyle({style: {...options.style[geomType], highlight: options.style.highlight}});
+
+    }
+    if (geomType === "MultiPolygon" || geomType === "Polygon") {
+        style = {
+            stroke: new ol.style.Stroke( options.style[geomType].stroke ? options.style[geomType].stroke : {
+                color: hexToRgb(options.style && options.style[geomType].color || "#0000FF").concat([options.style[geomType].opacity || 1]),
+                lineDash: options.style.highlight ? [10] : [0],
+                width: options.style[geomType].weight || 1
+            }),
+            fill: new ol.style.Fill(options.style[geomType].fill ? options.style[geomType].fill : {
+                color: hexToRgb(options.style && options.style[geomType].fillColor || "#0000FF").concat([options.style[geomType].fillOpacity || 1])
+            })
+        };
+        return new ol.style.Style(style);
+    }
+};
+
 function getStyle(options) {
 
     let style = options.nativeStyle;
@@ -137,9 +168,6 @@ function getStyle(options) {
                 image: new ol.style.Circle(assign({}, style, {radius: options.style.radius || 5}))
             };
         }
-        /*if (options.fcoll) {
-            return [new ol.style.Style(style), ...getMarkerStyle(options)];
-        }*/
         if (options.style.iconUrl || options.style.iconGlyph) {
             const markerStyle = getMarkerStyle(options);
 
@@ -162,29 +190,34 @@ function getStyle(options) {
         ***********************************************************************
         managing new style structure
         */
-        if (geomType === "MultiLineString" || geomType === "LineString") {
-            style = {
-                stroke: new ol.style.Stroke( options.style[geomType].stroke ? options.style[geomType].stroke : {
-                    color: hexToRgb(options.style && options.style[geomType].color || "#0000FF").concat([options.style[geomType].opacity || 1]),
-                    lineDash: options.style.highlight ? [10] : [0],
-                    width: options.style[geomType].weight || 1
-                })
+        if (geomType === "GeometryCollection") {
+            const markerStyles = getMarkerStyle(options);
+            style = function(f) {
+                var feature = this || f;
+                let type = feature.getGeometry().getType();
+                if (feature.getGeometry().getType() === "GeometryCollection") {
+                    let geometries = feature.getGeometry().getGeometries();
+                    return geometries.map(g => {
+                        type = g.getType();
+                        if (type === "Point" || type === "MultiPoint") {
+                            return markerStyles.map((m => {
+                                m.setGeometry(g);
+                                return m;
+                            }))[1];
+                        }
+                        let gStyle = getValidStyle(type, options);
+                        gStyle.setGeometry(g);
+                        return gStyle;
+                    });
+                }
+                if (type === "Point" || type === "MultiPoint") {
+                    return markerStyles;
+                }
+                return getValidStyle(type, options);
             };
-            return new ol.style.Style(style);
+            return style;
         }
-        if (geomType === "MultiPolygon" || geomType === "Polygon") {
-            style = {
-                stroke: new ol.style.Stroke( options.style[geomType].stroke ? options.style[geomType].stroke : {
-                    color: hexToRgb(options.style && options.style[geomType].color || "#0000FF").concat([options.style[geomType].opacity || 1]),
-                    lineDash: options.style.highlight ? [10] : [0],
-                    width: options.style[geomType].weight || 1
-                }),
-                fill: new ol.style.Fill(options.style[geomType].fill ? options.style[geomType].fill : {
-                    color: hexToRgb(options.style && options.style[geomType].fillColor || "#0000FF").concat([options.style[geomType].fillOpacity || 1])
-                })
-            };
-            return new ol.style.Style(style);
-        }
+        return getValidStyle(geomType, options);
     }
     /*
     ***********************************************************************
@@ -203,6 +236,8 @@ function getStyle(options) {
         return defaultStyles[options.styleName](options);
     } : style || styleFunction;
 }
+
+
 module.exports = {
     getStyle,
     getMarkerStyle,

@@ -23,7 +23,7 @@ const {head} = require('lodash');
 const assign = require('object-assign');
 
 const {annotationsLayerSelector} = require('../selectors/annotations');
-const {DEFAULT_ANNOTATIONS_STYLES} = require('../utils/AnnotationsUtils');
+// const {DEFAULT_ANNOTATIONS_STYLES} = require('../utils/AnnotationsUtils');
 
 const {changeDrawingStatus} = require('../actions/draw');
 
@@ -64,10 +64,7 @@ const toggleDrawOrEdit = (state, featureType) => {
         editEnabled: !drawing,
         drawEnabled: drawing
     };
-    return changeDrawingStatus("drawOrEdit", type, "annotations", [feature], drawOptions,
-    assign({}, feature.style, {
-        highlight: false
-    }) || DEFAULT_ANNOTATIONS_STYLES[type]);
+    return changeDrawingStatus("drawOrEdit", type, "annotations", [feature], drawOptions, feature.style/* || {[type]: DEFAULT_ANNOTATIONS_STYLES[type]}*/);
 };
 
 const createNewFeature = (action) => {
@@ -158,6 +155,7 @@ module.exports = (viewer) => ({
             return Rx.Observable.of(toggleDrawOrEdit(store.getState(), a.featureType));
         }),
     stopDrawingMultiGeom: (action$, store) => action$.ofType(STOP_DRAWING)
+        .filter(() => !!store.getState().annotations.editing.geometry)
         .switchMap( () => {
             return Rx.Observable.of(toggleDrawOrEdit(store.getState()));
         }),

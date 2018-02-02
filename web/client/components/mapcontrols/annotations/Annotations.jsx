@@ -145,12 +145,12 @@ class Annotations extends React.Component {
             <MultiGeomThumb styleRect={style}/>
         </span>);
         }
-
-        const marker = this.getConfig().getMarkerFromStyle(style);
+        const markerStyle = style.MultiPoint || style.Point;
+        const marker = this.getConfig().getMarkerFromStyle(markerStyle);
         return (
             <span className={"mapstore-annotations-panel-card"}>
                 <div className={"mapstore-annotations-panel-card-thumbnail-" + marker.name} style={{...marker.thumbnailStyle, margin: 'auto', textAlign: 'center', color: '#ffffff', marginLeft: 7}}>
-                    <span className={"mapstore-annotations-panel-card-thumbnail " + this.getConfig().getGlyphClassName(style)} style={{marginTop: 0, marginLeft: -7}}/>
+                    <span className={"mapstore-annotations-panel-card-thumbnail " + this.getConfig().getGlyphClassName(markerStyle)} style={{marginTop: 0, marginLeft: -7}}/>
                 </div>
             </span>);
     };
