@@ -1,6 +1,8 @@
 var markerIcon = require('./img/marker-icon.png');
 var markerShadow = require('./img/marker-shadow.png');
+const {DEFAULT_ANNOTATIONS_STYLES} = require('../../../utils/AnnotationsUtils');
 var ol = require('openlayers');
+// const {reprojectGeoJson} = require('../../../utils/CoordinatesUtils');
 
 const assign = require('object-assign');
 
@@ -11,6 +13,7 @@ const image = new ol.style.Circle({
 });
 
 const Icons = require('../../../utils/openlayers/Icons');
+const {hexToRgb} = require('../../../utils/ColorUtils');
 
 const defaultStyles = {
   'Point': () => [new ol.style.Style({
@@ -115,19 +118,72 @@ function getMarkerStyle(options) {
     return null;
 }
 
-function getStyle(options) {
+const getValidStyle = (geomType, options = { style: DEFAULT_ANNOTATIONS_STYLES}, isDrawing, textValues ) => {
+    let style;
+    if (geomType === "MultiLineString" || geomType === "LineString") {
+        style = options.style[geomType] ? {
+            stroke: new ol.style.Stroke( options.style[geomType] && options.style[geomType].stroke ? options.style[geomType].stroke : {
+                color: hexToRgb(options.style && options.style[geomType].color || "#0000FF").concat([options.style[geomType].opacity || 1]),
+                lineDash: options.style.highlight ? [10] : [0],
+                width: options.style[geomType].weight || 1
+            }),
+            image: isDrawing ? image : null
+            } : {
+                stroke: new ol.style.Stroke( DEFAULT_ANNOTATIONS_STYLES[geomType] && DEFAULT_ANNOTATIONS_STYLES[geomType].stroke ? DEFAULT_ANNOTATIONS_STYLES[geomType].stroke : {
+                    color: hexToRgb(options.style && DEFAULT_ANNOTATIONS_STYLES[geomType].color || "#0000FF").concat([DEFAULT_ANNOTATIONS_STYLES[geomType].opacity || 1]),
+                    lineDash: options.style.highlight ? [10] : [0],
+                    width: DEFAULT_ANNOTATIONS_STYLES[geomType].weight || 1
+                }) };
+        return new ol.style.Style(style);
+    }
+
+    if ((geomType === "MultiPoint" || geomType === "Point") && options.style[geomType].iconUrl || options.style[geomType].iconGlyph) {
+        return isDrawing ? new ol.style.Style({
+            image: image
+        }) : getMarkerStyle({style: {...options.style[geomType], highlight: options.style.highlight}});
+
+    }
+    if (geomType === "Text" && options.style[geomType].font) {
+        return isDrawing ? new ol.style.Style({
+            image: image
+        }) : new ol.style.Style({
+            text: new ol.style.Text({
+                text: textValues[0] || "",
+                font: '14px FontAwesome',
+                fill: new ol.style.Fill({color: '#000000'})
+            })
+        });
+
+    }
+    if (geomType === "MultiPolygon" || geomType === "Polygon") {
+        style = {
+            stroke: new ol.style.Stroke( options.style[geomType].stroke ? options.style[geomType].stroke : {
+                color: hexToRgb(options.style && options.style[geomType].color || "#0000FF").concat([options.style[geomType].opacity || 1]),
+                lineDash: options.style.highlight ? [10] : [0],
+                width: options.style[geomType].weight || 1
+            }),
+            image: isDrawing ? image : null,
+            fill: new ol.style.Fill(options.style[geomType].fill ? options.style[geomType].fill : {
+                color: hexToRgb(options.style && options.style[geomType].fillColor || "#0000FF").concat([options.style[geomType].fillOpacity || 1])
+            })
+        };
+        return new ol.style.Style(style);
+    }
+};
+
+function getStyle(options, isDrawing = false, textValues = []) {
+
     let style = options.nativeStyle;
     const geomType = (options.style && options.style.type) || (options.features && options.features[0] ? options.features[0].geometry.type : undefined);
     if (!style && options.style) {
         style = {
             stroke: new ol.style.Stroke( options.style.stroke ? options.style.stroke : {
-                color: options.style.color || 'blue',
-                width: options.style.weight || 1,
-                opacity: options.style.opacity || 1
+                color: hexToRgb(options.style && options.style.color || "#0000FF").concat([options.style.opacity || 1]),
+                lineDash: options.style.highlight ? [10] : [0],
+                width: options.style.weight || 1
             }),
             fill: new ol.style.Fill(options.style.fill ? options.style.fill : {
-                color: options.style.fillColor || 'blue',
-                opacity: options.style.fillOpacity || 1
+                color: hexToRgb(options.style && options.style.fillColor || "#0000FF").concat([options.style.fillOpacity || 1])
             })
         };
 
@@ -153,7 +209,62 @@ function getStyle(options) {
         } else {
             style = new ol.style.Style(style);
         }
-    }
+
+        /*
+        ***********************************************************************
+        managing new style structure
+        */
+        if (geomType === "GeometryCollection") {
+            style = function(f) {
+                var feature = this || f;
+                let markerStyles;
+                let type = feature.getGeometry().getType();
+                let textIndexes = feature.get("textGeometriesIndexes") || [0];
+                let textValue = feature.get("textValues") || [""];
+                if (feature.getGeometry().getType() === "GeometryCollection") {
+                    let geometries = feature.getGeometry().getGeometries();
+                    let styles = geometries.reduce((p, c, i) => {
+                        type = c.getType();
+                        if (textIndexes.indexOf(i) !== -1) {
+                            let gStyle = getValidStyle("Text", options, isDrawing, [textValue[textIndexes.indexOf(i)]]);
+                            gStyle.setGeometry(c);
+                            return p.concat([gStyle]);
+                        }
+                        if (type === "Point" || type === "MultiPoint") {
+                            markerStyles = getMarkerStyle({style: {...options.style[type], highlight: options.style.highlight}});
+                            return p.concat(markerStyles.map(m => {
+                                m.setGeometry(c);
+                                return m;
+                            }));
+                        }
+                        let gStyle = getValidStyle(type, options, isDrawing, textValues);
+                        gStyle.setGeometry(c);
+                        return p.concat([gStyle]);
+                    }, []);
+                    return styles;
+                }
+                if (type === "Point" || type === "MultiPoint") {
+                    markerStyles = getMarkerStyle({style: {...options.style[type], highlight: options.style.highlight}});
+                    return isDrawing ? new ol.style.Style({
+                      image: image,
+                      geometry: feature.getGeometry()
+                    }) : markerStyles.map(m => {
+                        m.setGeometry(feature.getGeometry());
+                        return m;
+                    });
+                }
+                return getValidStyle(type, options, isDrawing, textValues);
+            };
+            return style;
+        }
+        return getValidStyle(geomType, options, isDrawing, textValues);
+    }/*
+    if (geomType === "Text") {
+        style = function(f) {
+            var feature = this || f;
+        }
+    }*/
+
     return (options.styleName && !options.overrideOLStyle) ? (feature) => {
         if (options.styleName === "marker") {
             const type = feature.getGeometry().getType();
@@ -168,6 +279,8 @@ function getStyle(options) {
         return defaultStyles[options.styleName](options);
     } : style || styleFunction;
 }
+
+
 module.exports = {
     getStyle,
     getMarkerStyle,
