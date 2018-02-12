@@ -11,10 +11,19 @@ const PropTypes = require('prop-types');
 const ConfirmDialog = require('../../misc/ConfirmDialog');
 const Message = require('../../I18N/Message');
 const LocaleUtils = require('../../../utils/LocaleUtils');
-const {Glyphicon, Button, ButtonGroup} = require('react-bootstrap');
+const LineThumb = require('../../../components/style/thumbGeoms/LineThumb.jsx');
+const MultiGeomThumb = require('../../../components/style/thumbGeoms/MultiGeomThumb.jsx');
+const PolygonThumb = require('../../../components/style/thumbGeoms/PolygonThumb.jsx');
 const {head} = require('lodash');
 const assign = require('object-assign');
 const Filter = require('../../misc/Filter');
+const uuidv1 = require('uuid/v1');
+
+const {Grid, Col, Row, Glyphicon, Button} = require('react-bootstrap');
+const BorderLayout = require('../../layout/BorderLayout');
+const Toolbar = require('../../misc/toolbar/Toolbar');
+const SideGrid = require('../../misc/cardgrids/SideGrid');
+
 
 const defaultConfig = require('./AnnotationsConfig');
 
@@ -57,13 +66,23 @@ const defaultConfig = require('./AnnotationsConfig');
  */
 class Annotations extends React.Component {
     static propTypes = {
+        id: PropTypes.string,
+        styling: PropTypes.bool,
+        toggleControl: PropTypes.func,
+
         closing: PropTypes.bool,
+        showUnsavedChangesModal: PropTypes.bool,
+        showUnsavedStyleModal: PropTypes.bool,
         editing: PropTypes.object,
         removing: PropTypes.object,
         onCancelRemove: PropTypes.func,
         onConfirmRemove: PropTypes.func,
         onCancelClose: PropTypes.func,
+        onToggleUnsavedChangesModal: PropTypes.func,
+        onToggleUnsavedStyleModal: PropTypes.func,
         onConfirmClose: PropTypes.func,
+        onCancelEdit: PropTypes.func,
+        onCancelStyle: PropTypes.func,
         onAdd: PropTypes.func,
         onHighlight: PropTypes.func,
         onCleanHighlight: PropTypes.func,
@@ -75,7 +94,8 @@ class Annotations extends React.Component {
         config: PropTypes.object,
         filter: PropTypes.string,
         onFilter: PropTypes.func,
-        classNameSelector: PropTypes.func
+        classNameSelector: PropTypes.func,
+        width: PropTypes.number
     };
 
     static contextTypes = {
@@ -85,7 +105,8 @@ class Annotations extends React.Component {
     static defaultProps = {
         mode: 'list',
         config: defaultConfig,
-        classNameSelector: () => ''
+        classNameSelector: () => '',
+        toggleControl: () => {}
     };
 
     getConfig = () => {
@@ -108,57 +129,156 @@ class Annotations extends React.Component {
         </div>);
     };
 
-    renderThumbnail = (style) => {
-        const marker = this.getConfig().getMarkerFromStyle(style);
-        return (<div className={"mapstore-annotations-panel-card-thumbnail-" + marker.name} style={marker.thumbnailStyle}>
-            <span className={"mapstore-annotations-panel-card-thumbnail " + this.getConfig().getGlyphClassName(style)}>
-        </span></div>);
+    renderThumbnail = ({style, featureType, geometry}) => {
+        const markerStyle = style.MultiPoint || style.Point;
+        const marker = markerStyle ? this.getConfig().getMarkerFromStyle(markerStyle) : {};
+        if (featureType === "LineString" || featureType === "MultiLineString" ) {
+            return (<span className={"mapstore-annotations-panel-card"}>
+            <LineThumb styleRect={style[featureType]}/>
+        </span>);
+        }
+        if (featureType === "Polygon" || featureType === "MultiPolygon" ) {
+            return (<span className={"mapstore-annotations-panel-card"}>
+            <PolygonThumb styleRect={style[featureType]}/>
+        </span>);
+        }
+        if (featureType === "GeometryCollection") {
+            return (<span className={"mapstore-annotations-panel-card"}>
+            <MultiGeomThumb styleMultiGeom={style} geometry={geometry}/>
+            {markerStyle ? (<span className={"mapstore-annotations-panel-card"}>
+                <div className={"mapstore-annotations-panel-card-thumbnail-" + marker.name} style={{...marker.thumbnailStyle, margin: 'auto', textAlign: 'center', color: '#ffffff', marginLeft: 7}}>
+                    <span className={"mapstore-annotations-panel-card-thumbnail " + this.getConfig().getGlyphClassName(markerStyle)} style={{marginTop: 0, marginLeft: -7}}/>
+                </div>
+            </span>) : null}
+        </span>);
+        }
+        return (
+            <span className={"mapstore-annotations-panel-card"}>
+                <div className={"mapstore-annotations-panel-card-thumbnail-" + marker.name} style={{...marker.thumbnailStyle, margin: 'auto', textAlign: 'center', color: '#ffffff', marginLeft: 7}}>
+                    <span className={"mapstore-annotations-panel-card-thumbnail " + this.getConfig().getGlyphClassName(markerStyle)} style={{marginTop: 0, marginLeft: -7}}/>
+                </div>
+            </span>);
     };
 
-    renderCard = (annotation) => {
-        return (<div className={"mapstore-annotations-panel-card " + this.props.classNameSelector(annotation)} onMouseOver={() => this.props.onHighlight(annotation.properties.id)} onMouseOut={this.props.onCleanHighlight} onClick={() => this.props.onDetail(annotation.properties.id)}>
-            <span className="mapstore-annotations-panel-card-thumbnail">{this.renderThumbnail(annotation.style)}</span>
-            {this.getConfig().fields.map(f => this.renderField(f, annotation))}
-        </div>);
+    renderItems = (annotation) => {
+        const cardActions = {
+            onMouseEnter: () => {this.props.onHighlight(annotation.properties.id); },
+            onMouseLeave: this.props.onCleanHighlight,
+            onClick: () => this.props.onDetail(annotation.properties.id)
+        };
+        return {
+            ...this.getConfig().fields.reduce( (p, c)=> {
+                return assign({}, p, {[c.name]: this.renderField(c, annotation)});
+            }, {}),
+            preview: this.renderThumbnail({style: annotation.style, featureType: annotation.geometry.type, geometry: annotation.geometry }),
+            ...cardActions
+        };
     };
 
     renderCards = () => {
-        const annotation = this.props.annotations && head(this.props.annotations.filter(a => a.properties.id === this.props.current));
         if (this.props.mode === 'list') {
-            return [<ButtonGroup id="mapstore-annotations-panel-buttons">
-                <Button bsStyle="primary" onClick={() => this.props.onAdd(this.props.config.multiGeometry ? 'MultiPoint' : 'Point')}><Glyphicon glyph="plus"/>&nbsp;<Message msgId="annotations.add"/></Button>
-            </ButtonGroup>,
-            <Filter
-                filterPlaceholder={LocaleUtils.getMessageById(this.context.messages, "annotations.filter")}
-                filterText={this.props.filter}
-                onFilter={this.props.onFilter}/>,
-            <div className="mapstore-annotations-panel-cards">{this.props.annotations.filter(this.applyFilter).map(a => this.renderCard(a))}</div>
-            ];
+            return (
+            <SideGrid items={this.props.annotations.filter(this.applyFilter).map(a => this.renderItems(a))}/>
+            );
         }
+        const annotation = this.props.annotations && head(this.props.annotations.filter(a => a.properties.id === this.props.current));
         const Editor = this.props.editor;
         if (this.props.mode === 'detail') {
-            return <Editor feature={annotation} showBack id={this.props.current} config={this.props.config} {...annotation.properties}/>;
+            return <Editor feature={annotation} showBack id={this.props.current} config={this.props.config} width={this.props.width} {...annotation.properties}/>;
         }
         // mode = editing
-        return this.props.editing && <Editor feature={annotation} id={this.props.editing.properties.id} config={this.props.config} {...this.props.editing.properties}/>;
+        return this.props.editing && <Editor feature={annotation} id={this.props.editing.properties && this.props.editing.properties.id || uuidv1()} width={this.props.width} config={this.props.config} {...this.props.editing.properties}/>;
     };
 
+    renderHeader() {
+        return (
+            <Grid fluid className="ms-header" style={this.props.styling || this.props.mode !== "list" ? { width: '100%', boxShadow: 'none'} : { width: '100%' }}>
+                <Row>
+                    <Col xs={2}>
+                        <Button className="square-button no-events">
+                            <Glyphicon glyph="comment"/>
+                        </Button>
+                    </Col>
+                    <Col xs={8}>
+                        <h4><Message msgId="annotations.title"/></h4>
+                    </Col>
+                    <Col xs={2}>
+                        <Button className="square-button no-border" onClick={this.props.toggleControl} >
+                            <Glyphicon glyph="1-close"/>
+                        </Button>
+                    </Col>
+                </Row>
+                {this.props.mode === "list" && <span><Row>
+                    <Col xs={12} className="text-center">
+                        <Toolbar
+                            btnDefaultProps={{ className: 'square-button-md', bsStyle: 'primary'}}
+                            buttons={[
+                                {
+                                    glyph: 'plus',
+                                    tooltip: <Message msgId="annotations.add"/>,
+                                    visible: this.props.mode === "list",
+                                    onClick: () => { this.props.onAdd(); }
+                                }
+                            ]}/>
+                    </Col>
+            </Row>
+            <Row>
+                <Col xs={12}>
+                    <Filter
+                        filterPlaceholder={LocaleUtils.getMessageById(this.context.messages, "annotations.filter")}
+                        filterText={this.props.filter}
+                        onFilter={this.props.onFilter} />
+                </Col>
+            </Row></span>}
+            {this.props.styling && <Row className="ms-style-header">
+                <Col xs={12}>
+                    tabs
+                </Col>
+            </Row>}
+        </Grid>
+        );
+    }
+
     render() {
-        if (this.props.closing) {
-            return (<ConfirmDialog
-                show
-                modal
-                onClose={this.props.onCancelClose}
-                onConfirm={this.props.onConfirmClose}
-                confirmButtonBSStyle="default"
-                closeGlyph="1-close"
-                confirmButtonContent={<Message msgId="annotations.confirm" />}
-                closeText={<Message msgId="annotations.cancel" />}>
-                <Message msgId="annotations.undo"/>
+        let body = null;
+        if (this.props.closing ) {
+            body = (<ConfirmDialog
+                    show
+                    modal
+                    onClose={this.props.onCancelClose}
+                    onConfirm={this.props.onConfirmClose}
+                    confirmButtonBSStyle="default"
+                    closeGlyph="1-close"
+                    confirmButtonContent={<Message msgId="annotations.confirm" />}
+                    closeText={<Message msgId="annotations.cancel" />}>
+                    <Message msgId="annotations.undo"/>
                 </ConfirmDialog>);
-        }
-        if (this.props.removing) {
-            return (<ConfirmDialog
+        } else if (this.props.showUnsavedChangesModal) {
+            body = (<ConfirmDialog
+                    show
+                    modal
+                    onClose={this.props.onToggleUnsavedChangesModal}
+                    onConfirm={() => { this.props.onCancelEdit(); this.props.onToggleUnsavedChangesModal(); }}
+                    confirmButtonBSStyle="default"
+                    closeGlyph="1-close"
+                    confirmButtonContent={<Message msgId="annotations.confirm" />}
+                    closeText={<Message msgId="annotations.cancel" />}>
+                    <Message msgId="annotations.undo"/>
+                </ConfirmDialog>);
+        } else if (this.props.showUnsavedStyleModal) {
+            body = (<ConfirmDialog
+                    show
+                    modal
+                    onClose={this.props.onToggleUnsavedStyleModal}
+                    onConfirm={() => { this.props.onCancelStyle(); this.props.onToggleUnsavedStyleModal(); }}
+                    confirmButtonBSStyle="default"
+                    closeGlyph="1-close"
+                    confirmButtonContent={<Message msgId="annotations.confirm" />}
+                    closeText={<Message msgId="annotations.cancel" />}>
+                    <Message msgId="annotations.undo"/>
+                </ConfirmDialog>);
+        } else if (this.props.removing) {
+            body = (<ConfirmDialog
                 show
                 modal
                 onClose={this.props.onCancelRemove}
@@ -169,10 +289,13 @@ class Annotations extends React.Component {
                 closeText={<Message msgId="annotations.cancel" />}>
                 <Message msgId={this.props.mode === 'editing' ? "annotations.removegeometry" : "annotations.removeannotation"}/>
                 </ConfirmDialog>);
+        } else {
+            body = (<span> {this.renderCards()} </span>);
         }
-        return (<div className="mapstore-annotations-panel">
-            {this.renderCards()}
-        </div>);
+        return (<BorderLayout id={this.props.id} header={this.renderHeader()}>
+            {body}
+        </BorderLayout>);
+
     }
 
     applyFilter = (annotation) => {

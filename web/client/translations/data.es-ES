@@ -395,6 +395,11 @@
             "s_priority_info": "Usado para ordenar los resultados de búsqueda, de mayor a menor. Les resultados Nominatim tienen prioridad = 5",
             "serviceslistempty": "Ningún servicio personalizado definido"
         },
+        "draw": {
+            "fill": "Relleno:",
+            "stroke": "Línea:",
+            "strokeWidth": "Ancho de línea:"
+        },
         "drawLocal": {
             "draw": {
                 "toolbar": {
@@ -665,6 +670,12 @@
             "field": {
                 "title": "Título",
                 "description": "Descripción"
+            },
+            "titles": {
+                "marker": " Marcador",
+                "line": " Línea",
+                "polygon": " Polígono",
+                "text": " Texto"
             }
         },
         "users": {

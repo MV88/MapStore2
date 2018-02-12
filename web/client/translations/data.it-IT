@@ -395,6 +395,11 @@
             "s_priority_info": "Usato per ordinare i risultati, i valori più alti vengono visualizzati per primi. Nominatim ha priorità = 5",
             "serviceslistempty": "Nessun servizio definito"
         },
+        "draw": {
+            "fill": "Riempimento:",
+            "stroke": "Linea:",
+            "strokeWidth": "Larghezza Linea:"
+        },
         "drawLocal": {
             "draw": {
                 "toolbar": {
@@ -665,6 +670,12 @@
             "field": {
                 "title": "Titolo",
                 "description": "Descrizione"
+            },
+            "titles": {
+                "marker": " Marker",
+                "line": " Linea",
+                "polygon": " Poligono",
+                "text": " Testo"
             }
         },
         "users": {

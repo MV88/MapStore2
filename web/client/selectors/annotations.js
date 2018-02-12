@@ -17,9 +17,19 @@ const annotationsLayerSelector = createSelector([
 );
 
 const annotationsInfoSelector = (state) => (assign({}, {
+    removing: state.annotations && state.annotations.removing,
+    showUnsavedChangesModal: state.annotations && state.annotations.showUnsavedChangesModal,
+    showUnsavedStyleModal: state.annotations && state.annotations.showUnsavedStyleModal,
+    closing: state.annotations && !!state.annotations.closing,
     editing: state.annotations && state.annotations.editing,
     drawing: state.annotations && !!state.annotations.drawing,
+    stylerType: state.annotations.stylerType,
+    drawingText: state.annotations.drawingText,
+    mode: state.annotations && state.annotations.editing && 'editing' || state.annotations.current && 'detail' || 'list',
+    editedFields: state.annotations.editedFields,
     styling: state.annotations && !!state.annotations.styling,
+    unsavedChanges: state.annotations && state.annotations.unsavedChanges,
+    unsavedStyle: state.annotations && state.annotations.unsavedStyle,
     errors: state.annotations.validationErrors
 }, (state.annotations && state.annotations.config) ? {
     config: state.annotations && state.annotations.config
@@ -35,6 +45,8 @@ const annotationsListSelector = createSelector([
     annotationsLayerSelector
 ], (info, annotations, layer) => (assign({}, {
     removing: annotations.removing,
+    showUnsavedChangesModal: annotations.showUnsavedChangesModal,
+    showUnsavedStyleModal: annotations.showUnsavedStyleModal,
     closing: !!annotations.closing,
     mode: annotations.editing && 'editing' || annotations.current && 'detail' || 'list',
     annotations: layer && layer.features || [],
