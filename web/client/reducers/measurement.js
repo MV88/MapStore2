@@ -8,8 +8,12 @@
 
 const {
     CHANGE_MEASUREMENT_TOOL,
-    CHANGE_MEASUREMENT_STATE
+    CHANGE_MEASUREMENT_STATE,
+    CHANGE_UOM,
+    CHANGE_FORMULA,
+    CHANGED_GEOMETRY
 } = require('../actions/measurement');
+const {calculateVincentyDistance, calculateGeodesicDistance} = require('../utils/CoordinatesUtils');
 
 const {TOGGLE_CONTROL, RESET_CONTROLS} = require('../actions/controls');
 
@@ -18,7 +22,11 @@ const assign = require('object-assign');
 function measurement(state = {
     lineMeasureEnabled: false,
     areaMeasureEnabled: false,
-    bearingMeasureEnabled: false
+    bearingMeasureEnabled: false,
+    uom: {
+        length: {unit: 'm', label: 'm'},
+        area: {unit: 'sqm', label: 'm²'}
+    }
 }, action) {
     switch (action.type) {
     case CHANGE_MEASUREMENT_TOOL:
@@ -39,8 +47,40 @@ function measurement(state = {
             area: action.area,
             bearing: action.bearing,
             lenUnit: action.lenUnit,
-            areaUnit: action.areaUnit
+            areaUnit: action.areaUnit,
+            feature: action.feature
         });
+    case CHANGE_UOM: {
+        const prop = action.uom === "length" ? "lenUnit" : "lenArea";
+        const {value, label} = action.value;
+        return assign({}, state, {
+            [prop]: value,
+            uom: assign({}, action.previousUom, {
+                [action.uom]: {
+                    unit: value,
+                    label
+                }
+            })
+        });
+    }
+    case CHANGE_FORMULA: {
+        let len = 0;
+        if (action.formula === "Haversine") {
+            len = calculateGeodesicDistance(state.feature.geometry.coordinates);
+        } else {
+            len = calculateVincentyDistance(state.feature.geometry.coordinates);
+        }
+        return assign({}, state, {
+            lengthFormula: action.formula,
+            len
+        });
+    }
+    case CHANGED_GEOMETRY: {
+        const {feature} = action;
+        return assign({}, state, {
+            feature
+        });
+    }
     case TOGGLE_CONTROL:
         {
             // TODO: remove this when the controls will be able to be mutually exclusive

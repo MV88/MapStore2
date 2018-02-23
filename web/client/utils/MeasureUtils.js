@@ -32,6 +32,8 @@ function getFormattedLength(unit = "m", length = 0) {
         return this.mTokm(length);
     case 'mi':
         return this.mTomi(length);
+    case 'nm':
+        return this.mTonm(length);
     default:
         return length;
     }
@@ -47,6 +49,8 @@ function getFormattedArea(unit = "sqm", area = 0) {
         return this.sqmTosqkm(area);
     case 'sqmi':
         return this.sqmTosqmi(area);
+    case 'sqnm':
+        return this.sqmTosqnm(area);
     default:
         return area;
     }
@@ -75,6 +79,10 @@ function mTomi(length) {
     return length * 0.000621371;
 }
 
+function mTonm(length) {
+    return length * 0.000539956803;
+}
+
 function sqmTosqft(area) {
     return area * 10.7639;
 }
@@ -86,6 +94,9 @@ function sqmTosqkm(area) {
 function sqmTosqmi(area) {
     return area * 0.000000386102159;
 }
+function sqmTosqnm(area) {
+    return area * 0.00000029155;
+}
 
 module.exports = {
     getFormattedBearingValue,
@@ -95,7 +106,9 @@ module.exports = {
     mToft,
     mTokm,
     mTomi,
+    mTonm,
     sqmTosqmi,
     sqmTosqkm,
+    sqmTosqnm,
     sqmTosqft
 };

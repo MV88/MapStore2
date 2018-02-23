@@ -206,7 +206,7 @@
                 }
               }
             }
-          }, "AutoMapUpdate", "HelpLink", "Share", "DrawerMenu", "Version", "Notifications", "BackgroundSelector", "Annotations",
+          }, "AutoMapUpdate", "DrawerMenu", "Version", "Notifications", "BackgroundSelector",
             {
                 "name": "Identify",
                 "cfg": {
@@ -274,21 +274,8 @@
                         {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
                     ]
                 }
-            }, "Tutorial", "MapFooter", {
+            }, "MapFooter", {
                 "name": "Measure"
-            }, "Print", "ShapeFile", {
-                "name": "Settings",
-                "cfg": {
-                    "wrap": true
-                }
-            }, {
-                "name": "MetadataExplorer",
-                "cfg": {
-                    "wrap": true
-                }
-            }, {
-              "name": "About",
-              "showIn": ["BurgerMenu"]
             }, {
               "name": "MousePosition",
               "cfg": {
@@ -345,7 +332,7 @@
                 "declineUrl" : "http://www.google.com"
                 }
             },
-            "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig", "WidgetsBuilder", "Widgets"
+            "OmniBar", "Login", "Save", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig", "WidgetsBuilder", "Widgets"
         ],
         "embedded": [{
                 "name": "Map",
