@@ -208,15 +208,17 @@ const ColorUtils = {
             b: rgb[2]
         };
     },
+    colorToHexStr: (color = 'red') => tinycolor(color).toHexString(),
     /**
     * convert any valid css color to rgba str
-    * @param (String) color any valid css color
-    * @param (number) opacity 0 - 1 alpha value
-    * @return (String) rgba string
+    * @param {string} color any valid css color
+    * @param {number} opacity 0 - 1 alpha value
+    * @param {string} defaultColor any valid css color
+    * @return {string} rgba string or undefined if color and defaultColor are undefined
     */
-    colorToRgbaStr: (color = "#0000FF", alpha) => {
+    colorToRgbaStr: (color, alpha, defaultColor) => {
         const c = tinycolor(color);
-        return c.setAlpha(toNumber(alpha !== undefined ? alpha : c.getAlpha())).toRgbString();
+        return color && c.setAlpha(toNumber(alpha !== undefined ? alpha : c.getAlpha())).toRgbString() || defaultColor;
     }
 
 };

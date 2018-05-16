@@ -80,9 +80,10 @@ const VectorUtils = {
         });
     },
     /**
+    TODO complete this method
     * This method creates a valid geoJSON for layer creatd from GeometryCollection
     * The leaflet toGeoJSON transforms the layer created by VectorUtils.geometryToLayer in a
-    * featureCollection of FeatureCollections in that case becuse for each L.FeatureGroup it creates a FeatureCollection.
+    * featureCollection of FeatureCollections in that case because for each L.FeatureGroup it creates a FeatureCollection.
     * Thus we need to recreate a GeometryCollection and also Multi geoms instead of FeatureCollections
     * @return {object} a valid geoJSON
     */
@@ -94,6 +95,7 @@ const VectorUtils = {
     },
     geometryToLayer: function(geojson, options) {
         var geometry = geojson.type === 'Feature' ? geojson.geometry : geojson;
+        let style = options.style && options.style[geometry.type] || options.style;
         var coords = geometry ? geometry.coordinates : null;
         var layers = [];
         var props = {style: options.style, ...geojson};
@@ -117,7 +119,6 @@ const VectorUtils = {
             return null;
         }
         let layer;
-        let style;
         switch (geometry.type) {
         case 'Point':
             latlng = coordsToLatLng(coords);
@@ -134,7 +135,7 @@ const VectorUtils = {
             return new L.FeatureGroup(layers);
 
         case 'LineString':
-            style = options.style && options.style.LineString ? {...options.style.LineString} : {...options.style};
+            // style = options.style && options.style.LineString ? {...options.style.LineString} : {...options.style};
             style = assign({}, style, {
                 dashArray: options.style.highlight ? "10" : null
             });
@@ -143,7 +144,7 @@ const VectorUtils = {
             layer.msId = geojson.id;
             return layer;
         case 'MultiLineString':
-            style = options.style && options.style.MultiLineString ? {...options.style.MultiLineString} : {...options.style};
+            // style = options.style && options.style.MultiLineString ? {...options.style.MultiLineString} : {...options.style};
             style = assign({}, style, {
                 dashArray: options.style.highlight ? "10" : null
             });
@@ -157,7 +158,7 @@ const VectorUtils = {
             }
             return new L.FeatureGroup(layers);
         case 'Polygon':
-            style = options.style && options.style.Polygon ? {...options.style.Polygon} : {...options.style};
+            // style = options.style && options.style.Polygon ? {...options.style.Polygon} : {...options.style};
             style = assign({}, style, {
                 dashArray: options.style.highlight ? "10" : null
             });
@@ -166,7 +167,7 @@ const VectorUtils = {
             layer.msId = geojson.id;
             return layer;
         case 'MultiPolygon':
-            style = options.style && options.style.MultiPolygon ? {...options.style.MultiPolygon} : {...options.style};
+            // style = options.style && options.style.MultiPolygon ? {...options.style.MultiPolygon} : {...options.style};
             style = assign({}, style, {
                 dashArray: options.style.highlight ? "10" : null
             });

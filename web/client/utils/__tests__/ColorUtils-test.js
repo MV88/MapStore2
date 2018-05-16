@@ -1,5 +1,5 @@
 /*
- * Copyright 2017, GeoSolutions Sas.
+ * Copyright 2018, GeoSolutions Sas.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -26,5 +26,8 @@ describe('Test the ColorUtils', () => {
         const rgbaColor = ColorUtils.colorToRgbaStr("rgba(255, 255, 255, 0.8)");
         expect(rgbaColor).toBe("rgba(255, 255, 255, 0.8)");
     });
-
+    it('colorToRgbaStr undefined color', () => {
+        const rgbaColor = ColorUtils.colorToRgbaStr();
+        expect(rgbaColor).toBe(undefined);
+    });
 });
