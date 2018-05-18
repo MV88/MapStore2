@@ -68,7 +68,7 @@ const defaultStyles = {
     "MultiPolygon": STYLE_POLYGON
 };
 
-/*
+
 const strokeStyle = (options, defaultsStyle = {color: 'blue', width: 3, lineDash: [4]}) => ({
     stroke: new ol.style.Stroke(
         options.style ?
@@ -96,7 +96,7 @@ const fillStyle = (options, defaultsStyle = {color: 'rgba(0, 0, 255, 0.1)'}) => 
     )
 });
 
-const defaultStyles = {
+const defaultOLStyles = {
     'Point': () => [new ol.style.Style({
         image: image
     })],
@@ -165,7 +165,7 @@ const defaultStyles = {
     })
     })]
 };
-*/
+
 /*
 OLD
 var styleFunction = function(feature, options) {
@@ -173,7 +173,7 @@ var styleFunction = function(feature, options) {
 */
 const styleFunction = function(feature, options) {
     const type = feature.getGeometry().getType();
-    return defaultStyles[type](options && options.style && options.style[type] && {style: {...options.style[type]}} || options || {});
+    return defaultOLStyles[type](options && options.style && options.style[type] && {style: {...options.style[type]}} || options || {});
 };
 
 function getMarkerStyle(options) {
@@ -381,7 +381,6 @@ function getStyle(options, isDrawing = false, textValues = []) {
         return defaultOLStyles[options.styleName](options);
     } : style || styleFunction;
 }
-
 
 module.exports = {
     getStyle,
