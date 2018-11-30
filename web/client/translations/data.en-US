@@ -558,9 +558,12 @@
             "serviceslistempty": "No custom services defined"
         },
         "draw": {
-            "fill": "Fill:",
-            "stroke": "Stroke:",
-            "strokeWidth": "Stroke Width:",
+            "fill": "Fill",
+            "stroke": "Stroke",
+            "color": "Color",
+            "lineDash": "LineDash",
+            "opacity": "Opacity",
+            "width": "Width",
             "font": {
                 "textColor": "text color",
                 "family": "font-family",
@@ -799,6 +802,7 @@
             "save": "Save",
             "cancel": "Cancel",
             "back": "Back",
+            "applyStyle": "Apply Style",
             "addMarker": "Add a new geometry",
             "styleGeometry": "Change style",
             "deleteGeometry": "Remove all annotation geometries",

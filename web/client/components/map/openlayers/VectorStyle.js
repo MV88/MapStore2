@@ -376,6 +376,8 @@ const getValidStyle = (geomType, options = { style: defaultStyles}, isDrawing, t
 
 function getStyle(options, isDrawing = false, textValues = []) {
 
+    // this is causing max call stack size exceeded because it contains ol functions and it comes from the store
+    // we suggest to remove this behaviour
     let style = options.nativeStyle;
     let type;
     let textStrings = textValues;

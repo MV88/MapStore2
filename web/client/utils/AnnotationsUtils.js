@@ -204,6 +204,9 @@ const AnnotationsUtils = {
                     if (f.properties && f.properties.isText) {
                         return {type: "Text"};
                     }
+                    if (f.properties && f.properties.isSymbol) {
+                        return {type: "Symbol"};
+                    }
                     return {type: f.geometry.type};
                 });
                 return {type: "FeatureCollection", features: featuresTypes};
@@ -218,6 +221,9 @@ const AnnotationsUtils = {
     getAvailableStyler: ({type = "Point", geometries = [], features = []} = {}) => {
         switch (type) {
             case "Point": case "MultiPoint": {
+                return [AnnotationsUtils.getRelativeStyler(type)];
+            }
+            case "Symbol": {
                 return [AnnotationsUtils.getRelativeStyler(type)];
             }
             case "LineString": case "MultiLineString": {
@@ -253,6 +259,9 @@ const AnnotationsUtils = {
         switch (type) {
             case "Point": case "MultiPoint": {
                 return "marker";
+            }
+            case "Symbol": {
+                return "symbol";
             }
             case "Circle": {
                 return "circle";

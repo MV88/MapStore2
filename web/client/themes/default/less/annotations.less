@@ -28,7 +28,37 @@
 
 .mapstore-annotations-info-viewer-styler {
     min-height: 600px;
+    .mapstore-switch-panel {
+        .shadow-soft;
+        border: none;
+        padding: 8px;
+    }
+    .mapstore-annotations-info-viewer-styler-container {
+        .ms2-border-layout-content {
+            overflow: auto;
+        }
+    }
+
+    .ms-style {
+        .Select {
+            border-radius: 0;
+            > * {
+                border-radius: 0;
+            }
+            width: 100%;
+            margin: 0;
+        }
+        .Select-menu-outer {
+            z-index: 10;
+            .shadow-soft;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+        }
+    }
 }
+
 
 .mapstore-annotations-info-viewer-styler .Select {
     clear: both;

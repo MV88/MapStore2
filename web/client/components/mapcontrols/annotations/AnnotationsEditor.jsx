@@ -9,25 +9,25 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const MARKER = "marker";
-const LINE = "lineString";
-const POLYGON = "polygon";
-const CIRCLE = "circle";
-const TEXT = "text";
+// const LINE = "lineString";
+// const POLYGON = "polygon";
+// const CIRCLE = "circle";
+const SYMBOL = "symbol";
+// const TEXT = "text";
 const Toolbar = require('../../misc/toolbar/Toolbar');
 const Portal = require('../../misc/Portal');
 const GeometryEditor = require('./GeometryEditor');
 const PolygonStyler = require('../../style/PolygonStyler');
 const CircleStyler = require('../../style/CircleStyler');
+const BorderLayout = require('../../layout/BorderLayout');
 const TextStyler = require('../../style/TextStyler');
-const PolylineStyler = require('../../style/PolylineStyler');
+// const PolylineStyler = require('../../style/PolylineStyler');
+const Manager = require('../../style/vector/Manager');
 const Message = require('../../I18N/Message');
-const { FormControl, Grid, Row, Col, Nav, NavItem, Glyphicon } = require('react-bootstrap');
+const { FormControl, Grid, Row, Col, FormGroup, Radio, Form, ControlLabel } = require('react-bootstrap');
 const DropdownFeatureType = require('./DropdownFeatureType');
 const ReactQuill = require('react-quill');
 require('react-quill/dist/quill.snow.css');
-const tooltip = require('../../misc/enhancers/tooltip');
-const NavItemT = tooltip(NavItem);
-const { getAvailableStyler, convertGeoJSONToInternalModel } = require('../../../utils/AnnotationsUtils');
 const { isFunction } = require('lodash');
 
 const ConfirmDialog = require('../../misc/ConfirmDialog');
@@ -107,6 +107,8 @@ const bbox = require('@turf/bbox');
  * @prop {number} maxZoom max zoome the for annotation (default 18)
  * @prop {function} onDeleteFeature triggered when user click on trash icon of the coordinate editor
  * @prop {number} width of the annotation panel
+ * @prop {string} pointType the type of the point, values are "marker" or "symbol"
+ * @prop {array} lineDashOptions the type of the point, values are "marker" or "symbol"
  *
  * In addition, as the Identify viewer interface mandates, every feature attribute is mapped as a component property (in addition to the feature object).
  */
@@ -183,7 +185,9 @@ class AnnotationsEditor extends React.Component {
         onChangeFormat: PropTypes.func,
         format: PropTypes.string,
         aeronauticalOptions: PropTypes.object,
-        onDeleteFeature: PropTypes.func
+        onDeleteFeature: PropTypes.func,
+        pointType: PropTypes.string,
+        lineDashOptions: PropTypes.array
     };
 
     static defaultProps = {
@@ -196,6 +200,7 @@ class AnnotationsEditor extends React.Component {
         coordinateEditorEnabled: false,
         feature: {},
         maxZoom: 18,
+        pointType: "marker",
         stylerType: "marker"
     };
     /**
@@ -431,57 +436,49 @@ class AnnotationsEditor extends React.Component {
         });
     };
 
-    renderStylerTAB = (stylerTabs) => {
-        return stylerTabs.map(e => {
-            switch (e) {
-                case MARKER: return (<NavItemT eventKey={MARKER} onClick={() => {
-                    if (this.props.stylerType !== MARKER) {
-                        this.props.onChangeStyler(MARKER);
-                    }
-                }}><Glyphicon glyph="point" /></NavItemT>);
-                case CIRCLE: return (<NavItemT eventKey={CIRCLE} onClick={() => {
-                    if (this.props.stylerType !== CIRCLE) {
-                        this.props.onChangeStyler(CIRCLE);
-                    }
-                }}><Glyphicon glyph="1-circle" /></NavItemT>);
-                case LINE: return (<NavItemT eventKey={LINE} onClick={() => {
-                    if (this.props.stylerType !== LINE) {
-                        this.props.onChangeStyler(LINE);
-                    }
-                }}><Glyphicon glyph="line" /></NavItemT>);
-                case TEXT: return (<NavItemT eventKey={TEXT} onClick={() => {
-                    if (this.props.stylerType !== TEXT) {
-                        this.props.onChangeStyler(TEXT);
-                    }
-                }}><Glyphicon glyph="text-colour" /></NavItemT>);
-                case POLYGON: return (<NavItemT eventKey={POLYGON} onClick={() => {
-                    if (this.props.stylerType !== POLYGON) {
-                        this.props.onChangeStyler(POLYGON);
-                    }
-                }}><Glyphicon glyph="polygon" /></NavItemT>);
-                default: return null;
-            }
-        });
-    };
-
     renderStylerBody = (stylerType = "marker") => {
         switch (stylerType) {
-            case "marker": {
+            case "marker": case "symbol": {
+                const {pointType} = this.props;
                 const glyphRenderer = (option) => (<div><span className={"fa fa-" + option.value} /><span> {option.label}</span></div>);
+
                 return (<div className="mapstore-annotations-info-viewer-markers">
-                    {this.renderMarkers(this.getConfig().markers)}
-                    <Select
-                        options={this.getConfig().glyphs.map(g => ({
-                            label: g,
-                            value: g
-                        }))}
-                        optionRenderer={glyphRenderer}
-                        valueRenderer={glyphRenderer}
-                        value={this.props.editing.style.MultiPoint.iconGlyph || this.props.editing.style.Point.iconGlyph}
-                        onChange={(option) => { this.selectGlyph(option); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} />
+                    <Form inline>
+                        <FormGroup>
+                            <ControlLabel>Point type: </ControlLabel>{' '}
+                            <Radio name="radioGroup" inline checked={pointType === "symbol"} onClick={() => {
+                                this.props.onChangeStyler(SYMBOL);
+                            }}>Symbol</Radio>{' '}
+                            <Radio name="radioGroup" inline checked={pointType === "marker"} onClick={() => {
+                                this.props.onChangeStyler(MARKER);
+                            }}>Marker</Radio>{' '}
+                        </FormGroup>
+                    </Form>
+                    {pointType === "marker" &&
+                    <div>
+                        {this.renderMarkers(this.getConfig().markers)}
+                        <Select
+                            options={this.getConfig().glyphs.map(g => ({
+                                label: g,
+                                value: g
+                            }))}
+                            optionRenderer={glyphRenderer}
+                            valueRenderer={glyphRenderer}
+                            value={this.props.editing.style.MultiPoint.iconGlyph || this.props.editing.style.Point.iconGlyph}
+                            onChange={(option) => { this.selectGlyph(option); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} />
+                    </div>}
                 </div>);
             }
-            case "lineString": return <PolylineStyler setStyleParameter={(style) => { this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} shapeStyle={this.props.editing.style} width={this.props.width} />;
+            /*case "lineString": return <PolylineStyler setStyleParameter={(style) => { this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} shapeStyle={this.props.editing.style} width={this.props.width} />;*/
+            case "lineString": return (<Manager
+                setStyleParameter={(style) => {
+                    this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true);
+                    this.props.onSetUnsavedChanges(true);
+                }}
+                style={this.props.editing.style}
+                width={this.props.width}
+                lineDashOptions={this.props.lineDashOptions}
+                />);
             case "text": return <TextStyler setStyleParameter={(style) => { this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} shapeStyle={this.props.editing.style} width={this.props.width} />;
             case "polygon": return <PolygonStyler setStyleParameter={(style) => { this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} shapeStyle={this.props.editing.style} width={this.props.width} />;
             case "circle": return <CircleStyler setStyleParameter={(style) => { this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} shapeStyle={this.props.editing.style} width={this.props.width} />;
@@ -490,8 +487,7 @@ class AnnotationsEditor extends React.Component {
     };
 
     renderStyler = () => {
-        const { editing, onCancelStyle, onSaveStyle, stylerType, onSetUnsavedStyle, onToggleUnsavedStyleModal } = this.props;
-        const stylerTabs = editing.features && editing.features.length ? getAvailableStyler(convertGeoJSONToInternalModel(editing)) : [];
+        const { onCancelStyle, onSaveStyle, stylerType, onSetUnsavedStyle, onToggleUnsavedStyleModal } = this.props;
         return (<div className="mapstore-annotations-info-viewer-styler">
             <Grid className="mapstore-annotations-info-viewer-styler-buttons" fluid style={{ width: '100%', boxShadow: 'none' }}>
                 <Row className="noTopMargin">
@@ -511,8 +507,8 @@ class AnnotationsEditor extends React.Component {
                                 }
                             },
                             {
-                                glyph: 'floppy-disk',
-                                tooltipId: "annotations.save",
+                                glyph: 'ok',
+                                tooltipId: "annotations.applyStyle",
                                 visible: true,
                                 onClick: () => {
                                     onSaveStyle();
@@ -523,16 +519,10 @@ class AnnotationsEditor extends React.Component {
                         />
                     </Col>
                 </Row>
-                <Row className="ms-style-header">
-                    <Nav bsStyle="tabs" activeKey={stylerType} justified>
-                        {this.renderStylerTAB(stylerTabs)}
-                    </Nav>
-                </Row>
-                <Row>
-                    <Col xs={12}>
+                <BorderLayout
+            className="mapstore-annotations-info-viewer-styler-container">
                         {this.renderStylerBody(stylerType)}
-                    </Col>
-                </Row>
+                    </BorderLayout>
             </Grid>
         </div>);
     };
@@ -574,6 +564,7 @@ class AnnotationsEditor extends React.Component {
         );
     };
 
+    /* seems duplicated
     renderModals = () => {
         if (this.props.closing) {
             return (<Portal><ConfirmDialog
@@ -601,6 +592,7 @@ class AnnotationsEditor extends React.Component {
                 </ConfirmDialog></Portal>);
         }
     }
+    */
 
     renderError = (editing) => {
         return editing ? (Object.keys(this.props.errors)

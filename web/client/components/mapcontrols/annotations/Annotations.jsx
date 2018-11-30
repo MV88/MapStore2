@@ -113,8 +113,9 @@ class Annotations extends React.Component {
         onFilter: PropTypes.func,
         classNameSelector: PropTypes.func,
         width: PropTypes.number,
-        onDownload: React.PropTypes.func,
-        onLoadAnnotations: React.PropTypes.func
+        onDownload: PropTypes.func,
+        onLoadAnnotations: PropTypes.func,
+        lineDashOptions: PropTypes.array
     };
 
     static contextTypes = {
@@ -214,7 +215,7 @@ class Annotations extends React.Component {
             return <Editor feature={annotation} showBack id={this.props.current} config={this.props.config} width={this.props.width} {...annotation.properties}/>;
         }
         // mode = editing
-        return this.props.editing && <Editor feature={annotation} id={this.props.editing.properties && this.props.editing.properties.id || uuidv1()} width={this.props.width} config={this.props.config} {...this.props.editing.properties}/>;
+        return this.props.editing && <Editor feature={annotation} id={this.props.editing.properties && this.props.editing.properties.id || uuidv1()} width={this.props.width} config={this.props.config} {...this.props.editing.properties} lineDashOptions={this.props.lineDashOptions}/>;
     };
 
     renderHeader() {
