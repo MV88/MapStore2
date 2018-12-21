@@ -20,8 +20,7 @@ const STYLE_CIRCLE = {
     opacity: 1,
     weight: 3,
     fillColor: '#ffffff',
-    fillOpacity: 0.2,
-    radius: 10
+    fillOpacity: 0.2
 };
 const STYLE_POINT = {
     iconGlyph: 'comment',
@@ -37,14 +36,14 @@ const STYLE_TEXT = {
     font: "14px Arial",
     textAlign: 'center',
     color: '#000000',
-    opacity: 1
+    opacity: 1,
+    fillColor: '#000000',
+    fillOpacity: 1
 };
 const STYLE_LINE = {
     color: '#ffcc33',
     opacity: 1,
     weight: 3,
-    fillColor: '#ffffff',
-    fillOpacity: 0.2,
     editing: {
         fill: 1
     }

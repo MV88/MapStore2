@@ -42,10 +42,9 @@ const unsavedGeometrySelector = (state) => get(state, "annotations.unsavedGeomet
 const unsavedStyleSelector = (state) => get(state, "annotations.unsavedStyle", false);
 const errorsSelector = (state) => get(state, "annotations.validationErrors", {});
 const configSelector = (state) => get(state, "annotations.config", {});
-// const lineDashOptionsSelector = (state) => get(state, "annotations.lineDashOptions", {});
+const symbolListSelector = (state) => get(state, "annotations.symbolList", []);
 
 const annotationsInfoSelector = (state) => (assign({}, {
-    // lineDashOptions: lineDashOptionsSelector(state),
     showEdit: isOpenlayers(state),
     mouseHoverEvents: isMapInfoOpen(state),
     closing: closingSelector(state),
@@ -70,7 +69,8 @@ const annotationsInfoSelector = (state) => (assign({}, {
     styling: stylingSelector(state),
     unsavedChanges: unsavedChangesSelector(state),
     unsavedGeometry: unsavedGeometrySelector(state),
-    unsavedStyle: unsavedStyleSelector(state)
+    unsavedStyle: unsavedStyleSelector(state),
+    symbolList: symbolListSelector(state)
     }) );
 
 const annotationsSelector = (state) => ({

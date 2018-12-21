@@ -13,11 +13,11 @@ const { join} = require('lodash');
 require('react-widgets/lib/less/react-widgets.less');
 
 /**
- * Component used to manage lineDash property for a stroke style
+ * Component used to manage dashArray property for a stroke style
 */
-class LineDash extends React.Component {
+class DashArray extends React.Component {
     static propTypes = {
-        lineDash: PropTypes.array,
+        dashArray: PropTypes.array,
         menuPlacement: PropTypes.string,
         clearable: PropTypes.bool,
         value: PropTypes.string,
@@ -29,7 +29,7 @@ class LineDash extends React.Component {
     };
 
     static defaultProps = {
-        lineDash: [1, 0],
+        dashArray: [1, 0],
         menuPlacement: "top",
         clearable: false,
         onChange: () => {},
@@ -51,10 +51,10 @@ class LineDash extends React.Component {
                 clearable={this.props.clearable}
                 optionRenderer={this.props.optionRenderer || this.styleRenderer}
                 valueRenderer={this.props.valueRenderer || this.styleRenderer}
-                value={join(this.props.lineDash, ', ')}
+                value={join(this.props.dashArray, ', ')}
                 onChange={({value}) => {
-                    const lineDash = value.split(', ');
-                    this.props.onChange(lineDash);
+                    const dashArray = value.split(', ');
+                    this.props.onChange(dashArray);
                 }}
             />);
     }
@@ -65,7 +65,7 @@ class LineDash extends React.Component {
     */
     styleRenderer = (option) => {
         const pattern = this.props.styleRendererPattern ||
-            (<svg style={{ height: 25, width: '100%' }} viewBox="0 0 300 25">
+            (<svg style={{ height: 33, width: '100%' }} viewBox="0 0 300 25">
                 <path
                     stroke={'#333333'}
                     strokeWidth={4}
@@ -79,4 +79,4 @@ class LineDash extends React.Component {
     }
 }
 
-module.exports = LineDash;
+module.exports = DashArray;

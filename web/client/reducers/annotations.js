@@ -20,12 +20,12 @@ const {REMOVE_ANNOTATION, CONFIRM_REMOVE_ANNOTATION, CANCEL_REMOVE_ANNOTATION, C
     CHANGE_STYLER, UNSAVED_CHANGES, TOGGLE_GEOMETRY_MODAL, TOGGLE_CHANGES_MODAL, CHANGED_PROPERTIES, TOGGLE_STYLE_MODAL, UNSAVED_STYLE,
     ADD_TEXT, CHANGED_SELECTED, RESET_COORD_EDITOR, CHANGE_RADIUS, CHANGE_TEXT,
     ADD_NEW_FEATURE, SET_INVALID_SELECTED, TOGGLE_DELETE_FT_MODAL, CONFIRM_DELETE_FEATURE, HIGHLIGHT_POINT,
-    CHANGE_FORMAT
+    CHANGE_FORMAT, UPDATE_SYMBOLS
 } = require('../actions/annotations');
 
 const {validateCoordsArray, getAvailableStyler, DEFAULT_ANNOTATIONS_STYLES, convertGeoJSONToInternalModel, addIds, validateFeature, getComponents} = require('../utils/AnnotationsUtils');
 const {set} = require('../utils/ImmutableUtils');
-const {head, includes, findIndex, isNil, slice} = require('lodash');
+const {head, /*includes,*/ findIndex, isNil, slice} = require('lodash');
 
 const uuid = require('uuid');
 
@@ -141,7 +141,6 @@ function annotations(state = { validationErrors: {} }, action) {
                 return state;
             }
             selected = set("properties.canEdit", true, selected);
-
             if (selected && selected.properties && selected.properties.isCircle) {
                 selected = set("geometry.coordinates", selected.properties.center, selected);
                 selected = set("geometry.type", "Circle", selected);
@@ -162,9 +161,12 @@ function annotations(state = { validationErrors: {} }, action) {
             }), state);
             newState = set(`editing.tempFeatures`, newState.editing.features, newState);
             if (ftChangedIndex === -1) {
+
                 newState = set("editing.features", newState.editing.features.concat([selectedGeoJSON]), newState);
             } else {
+                selectedGeoJSON = set("style", newState.editing.features[ftChangedIndex].style, selectedGeoJSON);
                 newState = set(`editing.features[${ftChangedIndex}]`, selectedGeoJSON, newState);
+                selected = set("style", newState.editing.features[ftChangedIndex].style, selected);
             }
             return assign({}, newState, {
                 selected,
@@ -174,6 +176,7 @@ function annotations(state = { validationErrors: {} }, action) {
         }
         case DRAWING_FEATURE: {
             let selected = head(action.features) || null;
+            selected = set("style", state.selected.style, selected);
             let newState = state;
             if (selected && selected.properties && selected.properties.isCircle) {
                 selected = set("properties.polygonGeom", selected.geometry, selected);
@@ -507,23 +510,25 @@ function annotations(state = { validationErrors: {} }, action) {
                 unsavedChanges: false
             });
         case TOGGLE_ADD: {
-            const validValues = Object.keys(DEFAULT_ANNOTATIONS_STYLES);
-            const styleProps = Object.keys(state.editing.style || {});
+            // TODO verify and clean this reducer
+            // const validValues = Object.keys(DEFAULT_ANNOTATIONS_STYLES);
+            // const styleProps = Object.keys(state.editing.style || {});
             const type = action.featureType || state.featureType;
-            let newtype = styleProps.concat([action.featureType]).filter(s => includes(validValues, s)).length > 1 ? "FeatureCollection" : type;
+            // let newtype = styleProps.concat([action.featureType]).filter(s => includes(validValues, s)).length > 1 ? "FeatureCollection" : type;
             let properties = {
                 id: uuid.v1(),
                 isValidFeature: false,
                 canEdit: true
             };
             if (type === "Text") {
-                newtype = "FeatureCollection";
+                // newtype = "FeatureCollection";
                 properties = set("isText", true, properties);
             }
             if (type === "Circle") {
                 properties = set("isCircle", true, properties);
+                properties = set("isDrawing", true, properties);
             }
-            let selected = {type: "Feature", geometry: {type, coordinates: getBaseCoord(type)}, properties};
+            let selected = {type: "Feature", geometry: {type, coordinates: getBaseCoord(type)}, properties, style: {...DEFAULT_ANNOTATIONS_STYLES[type], id: uuid.v1()}};
 
             let geojsonFt = set("geometry.type", type === "Text" ? "Point" : type === "Circle" ? "Polygon" : type, selected);
             geojsonFt = set("geometry.coordinates", type === "Circle" ? [[]] : [], geojsonFt);
@@ -539,13 +544,9 @@ function annotations(state = { validationErrors: {} }, action) {
                 validationErrors: {},
                 coordinateEditorEnabled: true,
                 editing: assign({}, newState.editing, {
-                        features: type === "Circle" ? newState.editing.features : newState.editing.features.map(f => {
+                        features: /*type === "Circle" ? newState.editing.features : */newState.editing.features.map(f => {
                             return set("properties.canEdit", false, f);
-                        }).concat([geojsonFt]),
-                        style: assign({}, newState.editing.style, {
-                            type: newtype,
-                            [type]: newState.editing.style && newState.editing.style[type] || DEFAULT_ANNOTATIONS_STYLES[type]
-                        })
+                        }).concat([geojsonFt])
                 }),
                 stylerType: head(getAvailableStyler(convertGeoJSONToInternalModel(selected.geometry))),
                 selected
@@ -555,21 +556,23 @@ function annotations(state = { validationErrors: {} }, action) {
             return assign({}, state, {
                 styling: !state.styling
             }, !state.styling ? {
-                originalStyle: assign({}, state.editing.style, {
-                    highlight: false
-                })
+                originalStyle: state.selected.style
             } : {});
         case VALIDATION_ERROR:
             return assign({}, state, {
                 validationErrors: action.errors
             });
-        case SET_STYLE:
-            return assign({}, state, {
-                editing: assign({}, state.editing, {
-                    style: assign({}, state.editing.style || {}, action.style,
-                        {type: state.editing.style.type})
-                })
-            });
+        case SET_STYLE: {
+            // TODO test this
+            // const selstyle = state.selected.style;
+            let selected = set("style", action.style, state.selected);
+            let originalFeatureIndex = findIndex(state.editing.features, ftTemp => ftTemp.properties.id === state.selected.properties.id);
+            if (originalFeatureIndex !== -1) {
+                let editing = set(`features[${originalFeatureIndex}].style`, action.style, state.editing);
+                return assign({}, state, { selected, editing });
+            }
+            return assign({}, state, { selected });
+        }
         case SHOW_ANNOTATION:
             return assign({}, state, {
                 current: action.id
@@ -605,6 +608,9 @@ function annotations(state = { validationErrors: {} }, action) {
         }
         case CHANGE_FORMAT: {
             return {...state, format: action.format};
+        }
+        case UPDATE_SYMBOLS: {
+            return {...state, symbolList: action.symbols || []};
         }
         case FILTER_ANNOTATIONS:
             return assign({}, state, {

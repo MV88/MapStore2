@@ -104,7 +104,7 @@ const applyNewChanges = (features, changedFeatures, updates, updatesGeom) =>
  * The properties represent the shape of the state
  * @prop {string[]} editingAllowedRoles array of user roles allowed to enter in edit mode
  * @prop {boolean} canEdit flag used to enable editing on the feature grid
- * @prop {object} filters filters for quick search. `{attribute: "name", value: "filter_value", opeartor: "=", rawValue: "the fitler raw value"}`
+ * @prop {object} filters filters for quick search. `{attribute: "name", value: "filter_value", opeartor: "=", rawValue: "the filter raw value"}`
  * @prop {boolan} enableColumnFilters enables column filter. [configurable]
  * @prop {boolean} open feature grid open or close
  * @prop {string} mode `VIEW` or `EDIT`

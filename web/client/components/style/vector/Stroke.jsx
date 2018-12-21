@@ -9,8 +9,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const {Row, Col} = require('react-bootstrap');
-const assign = require('object-assign');
-const {isNil} = require('lodash');
+const {isNil, isEqual} = require('lodash');
 const tinycolor = require("tinycolor2");
 const Slider = require('react-nouislider');
 
@@ -21,7 +20,8 @@ numberLocalizer();
 const Message = require('../../I18N/Message');
 const OpacitySlider = require('../../TOC/fragments/OpacitySlider');
 const ColorSelector = require('../ColorSelector');
-const LineDash = require('./LineDash');
+const DashArray = require('./DashArray');
+const {addOpacityToColor} = require('../../../utils/VectorStyleUtils');
 
 /**
  * Styler for the stroke properties of a vector style
@@ -31,7 +31,6 @@ class Stroke extends React.Component {
         style: PropTypes.object,
         lineDashOptions: PropTypes.array,
         onChange: PropTypes.func,
-        addOpacityToColor: PropTypes.func,
         width: PropTypes.number
     };
 
@@ -42,10 +41,13 @@ class Stroke extends React.Component {
             { value: "10, 50, 20" },
             { value: "30, 20" }
         ],
-        onChange: () => {},
-        addOpacityToColor: (color, opacity) => ( assign({}, color, { a: opacity }) )
+        onChange: () => {}
     };
 
+    shouldComponentUpdate(nextProps) {
+        return !isEqual(this.props.style, nextProps.style)
+         || !isEqual(this.props.lineDashOptions, nextProps.lineDashOptions);
+    }
     render() {
         const {style} = this.props;
         return (<div>
@@ -59,10 +61,11 @@ class Stroke extends React.Component {
                     <Message msgId="draw.lineDash"/>
                 </Col>
                 <Col xs={6} style={{position: "static"}}>
-                    <LineDash
+                    <DashArray
                         options={this.props.lineDashOptions}
-                        onChange={(lineDash) => {
-                            this.props.onChange(style.id, {lineDash});
+                        dashArray={style.dashArray}
+                        onChange={(dashArray) => {
+                            this.props.onChange(style.id, {dashArray});
                         }}
                     />
                 </Col>
@@ -72,7 +75,7 @@ class Stroke extends React.Component {
                     <Message msgId="draw.color"/>
                 </Col>
                 <Col xs={6} style={{position: "static"}}>
-                    <ColorSelector color={this.props.addOpacityToColor(tinycolor(style.color).toRgb(), style.opacity)} width={"100%" || this.props.width}
+                    <ColorSelector color={addOpacityToColor(tinycolor(style.color).toRgb(), style.opacity)} width={this.props.width}
                         onChangeColor={c => {
                             if (!isNil(c)) {
                                 const color = tinycolor(c).toHexString();
@@ -88,7 +91,7 @@ class Stroke extends React.Component {
                 </Col>
                 <Col xs={6} style={{position: 'static'}}>
                     <OpacitySlider
-                        opacity={style.opacity}
+                        opacity={isNil(style.opacity) ? 0.2 : style.opacity}
                         onChange={(opacity) => {
                             this.props.onChange(style.id, {opacity});
                         }}/>
@@ -103,7 +106,7 @@ class Stroke extends React.Component {
                         <Slider
                             tooltips
                             step={1}
-                            start={[style.weight]}
+                            start={[style.weight || style.width || 1]}
                             format={{
                                 from: value => Math.round(value),
                                 to: value => Math.round(value) + ' px'
@@ -111,10 +114,10 @@ class Stroke extends React.Component {
                             range={{min: 1, max: 15}}
                             onChange={(values) => {
                                 const weight = parseInt(values[0].replace(' px', ''), 10);
-                                this.props.onChange("weight", {weight});
+                                this.props.onChange(style.id, {weight});
                             }}
                         />
-                        </div>
+                    </div>
                 </Col>
             </Row>
         </div>);

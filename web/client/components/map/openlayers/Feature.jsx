@@ -9,8 +9,8 @@ const PropTypes = require('prop-types');
 
 var React = require('react');
 var ol = require('openlayers');
-const {isEqual} = require('lodash');
-const VectorStyle = require('./VectorStyle');
+const {isEqual, find} = require('lodash');
+const {parseStyles} = require('./VectorStyle_refactor');
 const {transformPolygonToCircle} = require('../../../utils/DrawSupportUtils');
 
 class Feature extends React.Component {
@@ -86,8 +86,17 @@ class Feature extends React.Component {
             }).forEach(
                 (f) => f.getGeometry().transform(props.featuresCrs, props.crs || 'EPSG:3857'));
 
-            if (props.style && (props.style !== props.layerStyle)) {
-                this._feature.forEach((f) => { f.setStyle(VectorStyle.getStyle({style: {...props.style, type: f.getGeometry().getType()}, properties: f.getProperties()})); });
+            if (props.style && (props.style !== props.layerStyle)) { // TODO test this logic with other functionalities
+                // props.style has only highlight: true
+                this._feature.forEach((f) => {
+                    if ( props.type === "FeatureCollection") {
+                        let thisFt = find(props.features, (ft) => ft.properties.id === f.getProperties().id);
+                        f.setStyle(() => parseStyles(thisFt, props.style && props.style.highlight || props.style.useSelectedStyle || false));
+                    } else {
+                        f.setStyle(() => parseStyles(props.style)); // missing originalFeature?
+                    }
+                });
+                /*{VectorStyle.getStyle({style: {...props.style, type: f.getGeometry().getType()}, properties: f.getProperties()}*/
             }
             props.container.getSource().addFeatures(this._feature);
         }

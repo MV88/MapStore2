@@ -50,6 +50,12 @@ const HIGHLIGHT_POINT = 'ANNOTATIONS:HIGHLIGHT_POINT';
 const TOGGLE_DELETE_FT_MODAL = 'ANNOTATIONS:TOGGLE_DELETE_FT_MODAL';
 const CONFIRM_DELETE_FEATURE = 'ANNOTATIONS:CONFIRM_DELETE_FEATURE';
 const CHANGE_FORMAT = 'ANNOTATIONS:CHANGE_FORMAT';
+const UPDATE_SYMBOLS = 'ANNOTATIONS:UPDATE_SYMBOLS';
+
+const updateSymbols = (symbols = []) => ({
+        type: UPDATE_SYMBOLS,
+        symbols
+    });
 
 function loadAnnotations(features, override = false) {
     return {
@@ -379,6 +385,7 @@ module.exports = {
     confirmCloseAnnotations,
     cancelCloseAnnotations,
     DOWNLOAD, download,
+    UPDATE_SYMBOLS, updateSymbols,
     OPEN_EDITOR, openEditor,
     CONFIRM_DELETE_FEATURE, confirmDeleteFeature,
     TOGGLE_DELETE_FT_MODAL, toggleDeleteFtModal,

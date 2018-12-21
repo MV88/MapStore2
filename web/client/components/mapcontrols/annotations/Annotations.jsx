@@ -76,6 +76,11 @@ const defaultConfig = require('./AnnotationsConfig');
  * @prop {function} onFilter triggered when the user enters some text in the filtering widget
  * @prop {function} classNameSelector optional selector to assign custom a CSS class to annotations, based on
  * @prop {function} onDownload triggered when the user clicks on the download annotations button
+ * @prop {function} onUpdateSymbols triggered when user click on refresh icon of the symbols addon
+ * @prop {object[]} lineDashOptions list of options for dashed lines
+ * @prop {string} symbolsPath path to the svg folder
+ * @prop {object[]} symbolList list of symbols
+ *
  * the annotation's attributes.
  */
 class Annotations extends React.Component {
@@ -115,7 +120,10 @@ class Annotations extends React.Component {
         width: PropTypes.number,
         onDownload: PropTypes.func,
         onLoadAnnotations: PropTypes.func,
-        lineDashOptions: PropTypes.array
+        onUpdateSymbols: PropTypes.func,
+        lineDashOptions: PropTypes.array,
+        symbolList: PropTypes.array,
+        symbolsPath: PropTypes.string
     };
 
     static contextTypes = {
@@ -127,6 +135,7 @@ class Annotations extends React.Component {
         config: defaultConfig,
         classNameSelector: () => '',
         toggleControl: () => {},
+        onUpdateSymbols: () => {},
         onLoadAnnotations: () => {}
     };
     state = {
@@ -215,7 +224,11 @@ class Annotations extends React.Component {
             return <Editor feature={annotation} showBack id={this.props.current} config={this.props.config} width={this.props.width} {...annotation.properties}/>;
         }
         // mode = editing
-        return this.props.editing && <Editor feature={annotation} id={this.props.editing.properties && this.props.editing.properties.id || uuidv1()} width={this.props.width} config={this.props.config} {...this.props.editing.properties} lineDashOptions={this.props.lineDashOptions}/>;
+        return this.props.editing && <Editor feature={annotation} id={this.props.editing.properties && this.props.editing.properties.id || uuidv1()} width={this.props.width} config={this.props.config} {...this.props.editing.properties} lineDashOptions={this.props.lineDashOptions}
+        symbolsPath={this.props.symbolsPath}
+        onUpdateSymbols={this.props.onUpdateSymbols}
+        symbolList={this.props.symbolList}
+        />;
     };
 
     renderHeader() {

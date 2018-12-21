@@ -87,6 +87,7 @@ const getTextStyle = (tempStyle, valueText, highlight = false) => {
             text: valueText || "",
             font: tempStyle.font,
             fill: new ol.style.Fill({
+                // WRONG, SETTING A FILL STYLE WITH A COLOR (STROKE) ATTRIBUTE
                 color: colorToRgbaStr(tempStyle.stroke || tempStyle.color || '#000000', tempStyle.opacity || 1)
             }),
             // halo
@@ -286,7 +287,7 @@ const getValidStyle = (geomType, options = { style: defaultStyles}, isDrawing, t
             }),
             new ol.style.Style(tempStyle ? {
                 stroke: new ol.style.Stroke( tempStyle && tempStyle.stroke ? tempStyle.stroke : {
-                    color: options.style.useSelectedStyle ? blue : colorToRgbaStr(options.style && tempStyle.color || "#0000FF", tempStyle.opacity || 1),
+                    color: colorToRgbaStr(options.style && tempStyle.color || "#0000FF", tempStyle.opacity || 1),
                     lineDash: options.style.highlight ? [10] : [0],
                     width: tempStyle.weight || 1
                 }),
@@ -300,7 +301,7 @@ const getValidStyle = (geomType, options = { style: defaultStyles}, isDrawing, t
             })
         ];
         let startEndPointStyles = options.style.useSelectedStyle ? startEndPolylineStyle({radius: tempStyle.weight, applyToPolygon: true}, {radius: tempStyle.weight, applyToPolygon: true}) : [];
-        return [...styles, ...startEndPointStyles];
+        return [ ...startEndPointStyles, ...styles];
     }
 
     if ((geomType === "MultiPoint" || geomType === "Point") && (tempStyle.iconUrl || tempStyle.iconGlyph) ) {

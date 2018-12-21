@@ -7,14 +7,16 @@
 */
 
 const React = require('react');
+const axios = require('axios');
 const PropTypes = require('prop-types');
 const defaultIcon = require('../map/openlayers/img/marker-icon.png');
+
 
 class StyleCanvas extends React.Component {
     static propTypes = {
         style: PropTypes.object,
         shapeStyle: PropTypes.object,
-        geomType: PropTypes.oneOf(['Polygon', 'Polyline', 'Point', 'Marker', undefined]),
+        geomType: PropTypes.oneOf(['Polygon', 'Polyline', 'Point', 'Marker', 'Text', 'Symbol', 'Circle', undefined]),
         width: PropTypes.number,
         height: PropTypes.number
     };
@@ -48,30 +50,101 @@ class StyleCanvas extends React.Component {
         ctx.fillStyle = this.props.shapeStyle.fill ? `rgba(${ this.props.shapeStyle.fill.r }, ${ this.props.shapeStyle.fill.g }, ${ this.props.shapeStyle.fill.b }, ${ this.props.shapeStyle.fill.a })` : null;
         ctx.strokeStyle = this.props.shapeStyle.color ? `rgba(${ this.props.shapeStyle.color.r }, ${ this.props.shapeStyle.color.g }, ${ this.props.shapeStyle.color.b }, ${ this.props.shapeStyle.color.a })` : null;
         ctx.lineWidth = this.props.shapeStyle.width || this.props.shapeStyle.weight;
+        if (this.props.shapeStyle.dashArray && this.props.shapeStyle.dashArray.length) {
+            ctx.setLineDash(this.props.shapeStyle.dashArray);
+        }
         switch (this.props.geomType) {
-        case 'Polygon': {
-            this.paintPolygon(ctx);
-            break;
-        }
-        case 'Polyline': {
-            this.paintPolyline(ctx);
-            break;
-        }
-        case 'Point': {
-            this.paintPoint(ctx, this.props.shapeStyle.markName);
-            break;
-        }
-        case 'Marker': {
-            this.paintMarker(ctx);
-            break;
-        }
-        default: {
-            return;
-        }
+            case 'Polygon': {
+                this.paintPolygon(ctx);
+                break;
+            }
+            case 'Polyline': {
+                this.paintPolyline(ctx);
+                break;
+            }
+            case 'Point': {
+                this.paintPoint(ctx, this.props.shapeStyle.markName);
+                this.paintPoint(ctx, this.props.shapeStyle.markName);
+                break;
+            }
+            case 'Circle': {
+                this.paintPoint(ctx, "circle");
+                break;
+            }
+            case 'Marker': {
+                this.paintMarker(ctx);
+                break;
+            }
+            case 'Text': {
+                this.paintText(ctx);
+                break;
+            }
+            case 'Symbol': {
+                this.paintSymbol(ctx);
+            }
+            default: {
+
+                return;
+            }
         }
         ctx.restore();
     };
 
+    paintSymbol = (ctx) => {
+        let icon = new Image();
+        let iconNotFound = new Image();
+        iconNotFound.src = require('./vector/iconNotFound.png');
+
+        // Get the string representation of a DOM node (removes the node)
+        const domNodeToString = (domNode) => {
+            let element = document.createElement("div");
+            element.appendChild(domNode);
+            return element.innerHTML;
+        };
+
+        /**
+         * it load an svg and it override some style option,
+         * then it create and object URL that can be cached in a dictionary
+        */
+        // TODO think about adding a try catch for loading the not found icon
+        axios.get(this.props.shapeStyle.iconUrl, { 'Content-Type': "image/svg+xml;charset=utf-8" })
+            .then(response => {
+                const DOMURL = window.URL || window.webkitURL || window;
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(response.data, 'image/svg+xml'); // create a dom element
+                const svg = doc.firstElementChild; // fetch svg element
+
+                // override attributes to the first svg tag
+                svg.setAttribute("fill", "#00FF00" || this.props.shapeStyle.fillColor );
+
+                const svgBlob = new Blob([domNodeToString(svg)], { type: "image/svg+xml;charset=utf-8" });
+                const url = DOMURL.createObjectURL(svgBlob); // TODO store this url in cache
+                icon.src = url;
+                icon.onload = () => {
+                    try {
+                        // only when loaded draw the customized svg
+                        ctx.drawImage(icon, (this.props.width / 2) - (icon.width / 2), (this.props.height / 2) - (icon.height / 2));
+                        DOMURL.revokeObjectURL(url); // TODO not sure about this, we may want to store this
+                    } catch (e) {
+                        return;
+                    }
+                };
+            });
+        icon.onerror = () => {
+            iconNotFound.onload = () => {
+                try {
+                    ctx.drawImage(iconNotFound, (this.props.width / 2) - (iconNotFound.width / 2), (this.props.height / 2) - (iconNotFound.height / 2));
+                } catch (e) {
+                    return;
+                }
+            };
+        };
+    }
+    paintText = (ctx) => {
+        ctx.font = this.props.shapeStyle.font || '14px Arial';
+        ctx.textAlign = this.props.shapeStyle.textAlign || 'center';
+        ctx.fillText(this.props.shapeStyle.label || "New", this.props.width / 2, this.props.height / 2);
+    };
     paintPolygon = (ctx) => {
         ctx.transform(1, 0, 0, 1, -27.5, 0);
         ctx.moveTo(55, 8);
@@ -81,8 +154,6 @@ class StyleCanvas extends React.Component {
         ctx.lineTo(55, 72);
         ctx.lineTo(37.5, 40);
         ctx.closePath();
-       // ctx.moveTo(117.5, 40);
-       // ctx.arc(77.5, 40, 40, 0, 2 * Math.PI);
         ctx.fill();
         ctx.stroke();
     };
@@ -95,7 +166,6 @@ class StyleCanvas extends React.Component {
     };
 
     paintPoint = (ctx, markName) => {
-        // ctx.moveTo(50, 40);
         let r = this.props.shapeStyle.radius;
         let rm = r / 2;
         switch (markName) {
@@ -109,7 +179,6 @@ class StyleCanvas extends React.Component {
         }
         case 'triangle': {
             let h = Math.sqrt(3) * r / 2;
-                // ctx.arc(50, 48.5, rm, 0, 2 * Math.PI);
             let bc = h / 3;
             ctx.moveTo(50, 48.5 - 2 * bc);
             ctx.lineTo(50 + rm, 48.5 + bc);
@@ -140,7 +209,6 @@ class StyleCanvas extends React.Component {
     };
 
     paintMarker = (ctx) => {
-        // ctx.moveTo(50, 40);
         let icon = new Image();
         icon.src = defaultIcon;
         try {

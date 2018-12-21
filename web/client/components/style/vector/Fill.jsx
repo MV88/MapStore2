@@ -9,7 +9,6 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const {Row, Col} = require('react-bootstrap');
-const assign = require('object-assign');
 const {isNil} = require('lodash');
 const tinycolor = require("tinycolor2");
 
@@ -21,6 +20,7 @@ numberLocalizer();
 const Message = require('../../I18N/Message');
 const OpacitySlider = require('../../TOC/fragments/OpacitySlider');
 const ColorSelector = require('../ColorSelector');
+const {addOpacityToColor} = require('../../../utils/VectorStyleUtils');
 
 /**
  * Styler for the stroke properties of a vector style
@@ -29,14 +29,12 @@ class Fill extends React.Component {
     static propTypes = {
         style: PropTypes.object,
         onChange: PropTypes.func,
-        addOpacityToColor: PropTypes.func,
         width: PropTypes.number
     };
 
     static defaultProps = {
         style: {},
-        onChange: () => {},
-        addOpacityToColor: (color, opacity) => ( assign({}, color, { a: opacity }) )
+        onChange: () => {}
     };
 
     render() {
@@ -52,7 +50,7 @@ class Fill extends React.Component {
                     <Message msgId="draw.color"/>
                 </Col>
                 <Col xs={6} style={{position: "static"}}>
-                    <ColorSelector color={this.props.addOpacityToColor(tinycolor(style.color).toRgb(), style.opacity)} width={"100%" || this.props.width}
+                    <ColorSelector color={addOpacityToColor(tinycolor(style.fillColor).toRgb(), style.fillOpacity)} width={"100%" || this.props.width}
                         onChangeColor={c => {
                             if (!isNil(c)) {
                                 const fillColor = tinycolor(c).toHexString();
@@ -68,7 +66,7 @@ class Fill extends React.Component {
                 </Col>
                 <Col xs={6} style={{position: 'static'}}>
                     <OpacitySlider
-                        opacity={style.opacity}
+                        opacity={style.fillOpacity}
                         onChange={(fillOpacity) => {
                             this.props.onChange(style.id, {fillOpacity});
                         }}/>

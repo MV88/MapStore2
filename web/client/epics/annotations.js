@@ -303,10 +303,11 @@ module.exports = (viewer) => ({
         }),
     setStyleEpic: (action$, store) => action$.ofType(SET_STYLE)
         .switchMap( () => {
-            const {style, ...feature} = store.getState().annotations.editing;
+            // TODO verify if we need to override the style here or in the store
+            let feature = store.getState().annotations.editing;
             let projectedFeature = reprojectGeoJson(feature, "EPSG:4326", "EPSG:3857");
             return Rx.Observable.from([
-                changeDrawingStatus("replace", store.getState().annotations.featureType, "annotations", [projectedFeature], {}, assign({}, style, {highlight: false}))
+                changeDrawingStatus("replace", store.getState().annotations.featureType, "annotations", [projectedFeature], {}, assign({}, store.getState().annotations.selected.style, {highlight: false}))
             ]
             );
         }),

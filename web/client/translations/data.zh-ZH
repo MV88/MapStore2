@@ -1040,7 +1040,7 @@
                 "downloadGridData": "Download grid data",
                 "hideShowColumns": "Hide/show columns",
                 "zoomAll": "Zoom to page extent",
-                "syncOnMap": "Sync map with fitler"
+                "syncOnMap": "Sync map with filter"
             }
         },
         "wfsdownload": {

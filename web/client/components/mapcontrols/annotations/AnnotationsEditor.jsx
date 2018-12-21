@@ -8,23 +8,23 @@
 
 const PropTypes = require('prop-types');
 const React = require('react');
-const MARKER = "marker";
+// const MARKER = "marker";
 // const LINE = "lineString";
 // const POLYGON = "polygon";
 // const CIRCLE = "circle";
-const SYMBOL = "symbol";
+// const SYMBOL = "symbol";
 // const TEXT = "text";
 const Toolbar = require('../../misc/toolbar/Toolbar');
 const Portal = require('../../misc/Portal');
 const GeometryEditor = require('./GeometryEditor');
-const PolygonStyler = require('../../style/PolygonStyler');
-const CircleStyler = require('../../style/CircleStyler');
+// const PolygonStyler = require('../../style/PolygonStyler');
+// const CircleStyler = require('../../style/CircleStyler');
 const BorderLayout = require('../../layout/BorderLayout');
-const TextStyler = require('../../style/TextStyler');
+// const TextStyler = require('../../style/TextStyler');
 // const PolylineStyler = require('../../style/PolylineStyler');
 const Manager = require('../../style/vector/Manager');
 const Message = require('../../I18N/Message');
-const { FormControl, Grid, Row, Col, FormGroup, Radio, Form, ControlLabel } = require('react-bootstrap');
+const { FormControl, Grid, Row, Col/*, FormGroup, Radio, Form, ControlLabel*/ } = require('react-bootstrap');
 const DropdownFeatureType = require('./DropdownFeatureType');
 const ReactQuill = require('react-quill');
 require('react-quill/dist/quill.snow.css');
@@ -32,7 +32,7 @@ const { isFunction } = require('lodash');
 
 const ConfirmDialog = require('../../misc/ConfirmDialog');
 const assign = require('object-assign');
-const Select = require('react-select');
+// const Select = require('react-select');
 const PluginsUtils = require('../../../utils/PluginsUtils');
 const defaultConfig = require('./AnnotationsConfig');
 const bbox = require('@turf/bbox');
@@ -106,9 +106,12 @@ const bbox = require('@turf/bbox');
  * @prop {object} aeronauticalOptions options for aeronautical format (seconds decimals and step)
  * @prop {number} maxZoom max zoome the for annotation (default 18)
  * @prop {function} onDeleteFeature triggered when user click on trash icon of the coordinate editor
+ * @prop {function} onUpdateSymbols triggered when user click on refresh icon of the symbols addon
  * @prop {number} width of the annotation panel
  * @prop {string} pointType the type of the point, values are "marker" or "symbol"
- * @prop {array} lineDashOptions the type of the point, values are "marker" or "symbol"
+ * @prop {object[]} lineDashOptions list of options for dashed lines
+ * @prop {object[]} symbolList list of symbols
+ * @prop {string} symbolsPath path to the svg folder
  *
  * In addition, as the Identify viewer interface mandates, every feature attribute is mapped as a component property (in addition to the feature object).
  */
@@ -187,7 +190,10 @@ class AnnotationsEditor extends React.Component {
         aeronauticalOptions: PropTypes.object,
         onDeleteFeature: PropTypes.func,
         pointType: PropTypes.string,
-        lineDashOptions: PropTypes.array
+        symbolsPath: PropTypes.string,
+        onUpdateSymbols: PropTypes.func,
+        lineDashOptions: PropTypes.array,
+        symbolList: PropTypes.array
     };
 
     static defaultProps = {
@@ -314,7 +320,7 @@ class AnnotationsEditor extends React.Component {
                             onClick: this.props.onAddGeometry,
                             onAddText: this.props.onAddText,
                             onSetStyle: this.props.onSetStyle,
-                            style: this.props.editing.style,
+                            style: this.props.selected && this.props.selected.style || this.props.editing.style,
                             onStartDrawing: this.props.onStartDrawing,
                             disabled: !this.props.config.multiGeometry && this.props.editing && this.props.editing.features && this.props.editing.features.length,
                             drawing: this.props.drawing,
@@ -332,11 +338,6 @@ class AnnotationsEditor extends React.Component {
                             visible: this.props.editing && this.props.editing.features && this.props.editing.features.length,
                             onClick: this.props.onDeleteGeometry
                         }, {
-                            glyph: 'dropper',
-                            tooltipId: "annotations.styleGeometry",
-                            visible: this.props.editing && this.props.editing.features && this.props.editing.features.length,
-                            onClick: this.props.onStyleGeometry
-                        }, {
                             glyph: 'floppy-disk',
                             tooltipId: "annotations.save",
                             visible: true,
@@ -353,7 +354,7 @@ class AnnotationsEditor extends React.Component {
                 <Col xs={12}>
                     <Toolbar
                         btnDefaultProps={{ className: 'square-button-md', bsStyle: 'primary' }}
-                        buttons={[{
+                        buttons={[/*{
                             glyph: 'arrow-left',
                             tooltipId: "annotations.back",
                             visible: true,
@@ -364,15 +365,48 @@ class AnnotationsEditor extends React.Component {
                                     this.props.onResetCoordEditor();
                                 }
                             }
+                        },*/
+                        {
+                            glyph: 'arrow-left',
+                            tooltipId: "annotations.back",
+                            visible: true,
+                            onClick: () => {
+                                if (this.props.styling) {
+                                    if (this.props.unsavedStyle) {
+                                        this.props.onToggleUnsavedStyleModal();
+                                    } else {
+                                        this.props.onCancelStyle();
+                                    }
+                                } else {
+                                    if (this.props.unsavedGeometry) {
+                                        this.props.onToggleUnsavedGeometryModal();
+                                    } else {
+                                        this.props.onResetCoordEditor();
+                                    }
+                                }
+                            }
                         }, {
                             glyph: 'trash',
                             tooltipId: "annotations.deleteFeature",
-                            visible: true,
+                            visible: !this.props.styling,
                             onClick: this.props.onToggleDeleteFtModal
                         }, {
+                            glyph: 'dropper',
+                            tooltipId: "annotations.styleGeometry",
+                            visible: !this.props.styling && /*this.props.editing && this.props.editing.features && this.props.editing.features.length &&*/ this.props.selected,
+                            onClick: this.props.onStyleGeometry
+                        }, {// only in styler
+                            glyph: 'ok',
+                            tooltipId: "annotations.applyStyle",
+                            visible: this.props.styling,
+                            onClick: () => {
+                                this.props.onSaveStyle();
+                                this.props.onSetUnsavedStyle(false);
+                            }
+                        }, {// only in coord editor
                             glyph: 'floppy-disk',
                             tooltipId: "annotations.save",
-                            visible: true,
+                            visible: !this.props.styling,
                             disabled: this.props.selected && this.props.selected.properties && !this.props.selected.properties.isValidFeature,
                             onClick: () => {
                                 if (this.props.selected) {
@@ -436,95 +470,67 @@ class AnnotationsEditor extends React.Component {
         });
     };
 
-    renderStylerBody = (stylerType = "marker") => {
+    renderStylerBody = (/*stylerType = "marker"*/) => {
+        return (<Manager
+            onChangeStyle={(style) => {
+                this.props.onSetStyle(style);
+                this.props.onSetUnsavedStyle(true);
+                this.props.onSetUnsavedChanges(true);
+            }}
+            style={this.props.selected && this.props.selected.style || this.props.editing.style}
+            width={this.props.width}
+            symbolsPath={this.props.symbolsPath}
+            onUpdateSymbols={this.props.onUpdateSymbols}
+            symbolList={this.props.symbolList}
+            lineDashOptions={this.props.lineDashOptions}
+            markersOptions={this.getConfig()}
+            />);
+        /*
         switch (stylerType) {
             case "marker": case "symbol": {
-                const {pointType} = this.props;
-                const glyphRenderer = (option) => (<div><span className={"fa fa-" + option.value} /><span> {option.label}</span></div>);
-
-                return (<div className="mapstore-annotations-info-viewer-markers">
-                    <Form inline>
-                        <FormGroup>
-                            <ControlLabel>Point type: </ControlLabel>{' '}
-                            <Radio name="radioGroup" inline checked={pointType === "symbol"} onClick={() => {
-                                this.props.onChangeStyler(SYMBOL);
-                            }}>Symbol</Radio>{' '}
-                            <Radio name="radioGroup" inline checked={pointType === "marker"} onClick={() => {
-                                this.props.onChangeStyler(MARKER);
-                            }}>Marker</Radio>{' '}
-                        </FormGroup>
-                    </Form>
-                    {pointType === "marker" &&
-                    <div>
-                        {this.renderMarkers(this.getConfig().markers)}
-                        <Select
-                            options={this.getConfig().glyphs.map(g => ({
-                                label: g,
-                                value: g
-                            }))}
-                            optionRenderer={glyphRenderer}
-                            valueRenderer={glyphRenderer}
-                            value={this.props.editing.style.MultiPoint.iconGlyph || this.props.editing.style.Point.iconGlyph}
-                            onChange={(option) => { this.selectGlyph(option); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} />
-                    </div>}
-                </div>);
+                return (<Manager
+                    onChangeStyle={(style) => {
+                        this.props.onSetStyle(style);
+                        this.props.onSetUnsavedStyle(true);
+                        this.props.onSetUnsavedChanges(true);
+                    }}
+                    style={this.props.selected && this.props.selected.style || this.props.editing.style}
+                    width={this.props.width}
+                    symbolsPath={this.props.symbolsPath}
+                    onUpdateSymbols={this.props.onUpdateSymbols}
+                    symbolList={this.props.symbolList}
+                    configMarkers={this.getConfig()}
+                    />);
             }
-            /*case "lineString": return <PolylineStyler setStyleParameter={(style) => { this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} shapeStyle={this.props.editing.style} width={this.props.width} />;*/
             case "lineString": return (<Manager
                 setStyleParameter={(style) => {
-                    this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true);
+                    this.props.onSetStyle(style);
+                    this.props.onSetUnsavedStyle(true);
                     this.props.onSetUnsavedChanges(true);
                 }}
                 style={this.props.editing.style}
                 width={this.props.width}
                 lineDashOptions={this.props.lineDashOptions}
                 />);
-            case "text": return <TextStyler setStyleParameter={(style) => { this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} shapeStyle={this.props.editing.style} width={this.props.width} />;
+            case "text": return (<Manager
+                setStyleParameter={(style) => {
+                    this.props.onSetStyle(style);
+                    this.props.onSetUnsavedStyle(true);
+                    this.props.onSetUnsavedChanges(true);
+                }}
+                style={this.props.editing.style}
+                width={this.props.width} />);
             case "polygon": return <PolygonStyler setStyleParameter={(style) => { this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} shapeStyle={this.props.editing.style} width={this.props.width} />;
             case "circle": return <CircleStyler setStyleParameter={(style) => { this.props.onSetStyle(style); this.props.onSetUnsavedStyle(true); this.props.onSetUnsavedChanges(true); }} shapeStyle={this.props.editing.style} width={this.props.width} />;
             default: return null;
-        }
+        }*/
     };
 
     renderStyler = () => {
-        const { onCancelStyle, onSaveStyle, stylerType, onSetUnsavedStyle, onToggleUnsavedStyleModal } = this.props;
-        return (<div className="mapstore-annotations-info-viewer-styler">
-            <Grid className="mapstore-annotations-info-viewer-styler-buttons" fluid style={{ width: '100%', boxShadow: 'none' }}>
-                <Row className="noTopMargin">
-                    <Col xs={12} className="text-center">
-                        <Toolbar
-                            btnDefaultProps={{ className: 'square-button-md', bsStyle: 'primary' }}
-                            buttons={[{
-                                glyph: 'arrow-left',
-                                tooltipId: "annotations.back",
-                                visible: true,
-                                onClick: () => {
-                                    if (this.props.unsavedStyle) {
-                                        onToggleUnsavedStyleModal();
-                                    } else {
-                                        onCancelStyle();
-                                    }
-                                }
-                            },
-                            {
-                                glyph: 'ok',
-                                tooltipId: "annotations.applyStyle",
-                                visible: true,
-                                onClick: () => {
-                                    onSaveStyle();
-                                    onSetUnsavedStyle(false);
-                                }
-                            }
-                            ]}
-                        />
-                    </Col>
-                </Row>
-                <BorderLayout
+        return (<BorderLayout
             className="mapstore-annotations-info-viewer-styler-container">
-                        {this.renderStylerBody(stylerType)}
-                    </BorderLayout>
-            </Grid>
-        </div>);
+                {this.renderStylerBody("marker" || this.props.stylerType)}
+        </BorderLayout>);
     };
 
     renderBody = (editing) => {
@@ -532,8 +538,8 @@ class AnnotationsEditor extends React.Component {
         if (items.length === 0) {
             return null;
         }
-        return (
-            <div className="mapstore-annotations-info-viewer-items">
+        return (<div className="mapstore-annotations-info-viewer-items mapstore-annotations-info-viewer-styler">
+            {this.props.styling ? this.renderStyler() : (
                 <Grid fluid>
                     {!this.props.coordinateEditorEnabled && <Row>
                         <Col xs={12}>
@@ -560,8 +566,8 @@ class AnnotationsEditor extends React.Component {
                         </Col>
                     </Row>}
                 </Grid>
-            </div>
-        );
+            )}
+        </div>);
     };
 
     /* seems duplicated
@@ -684,9 +690,6 @@ class AnnotationsEditor extends React.Component {
     }
 
     render() {
-        if (this.props.styling) {
-            return this.renderStyler();
-        }
         const editing = this.props.editing && (this.props.editing.properties.id === this.props.id);
         let mouseHoverEvents = this.props.mouseHoverEvents ? {
             onMouseEnter: () => {
@@ -697,8 +700,7 @@ class AnnotationsEditor extends React.Component {
             }
         } : {};
         return (
-            <div className={"mapstore-annotations-info-viewer" + (this.props.mouseHoverEvents ? " hover-background" : "")} {...mouseHoverEvents}
-            >
+            <div className={"mapstore-annotations-info-viewer" + (this.props.mouseHoverEvents ? " hover-background" : "")} {...mouseHoverEvents}>
                 {this.renderButtons(editing, this.props.coordinateEditorEnabled)}
                 {this.renderError(editing)}
                 {this.renderModals()}
@@ -738,7 +740,8 @@ class AnnotationsEditor extends React.Component {
     };
 
     selectGlyph = (option) => {
-        return this.props.onSetStyle(assign({}, this.props.editing.style, {
+        return this.props.onSetStyle(
+            assign({}, this.props.editing.style, {
             "Point": {
                 ...this.props.editing.style.Point,
                 iconGlyph: option && option.value || ""
