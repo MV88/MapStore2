@@ -29,6 +29,9 @@ const FEATURE_INFO_CLICK = 'FEATURE_INFO_CLICK';
 const TOGGLE_MAPINFO_STATE = 'TOGGLE_MAPINFO_STATE';
 const UPDATE_CENTER_TO_MARKER = 'UPDATE_CENTER_TO_MARKER';
 const CLOSE_IDENTIFY = 'IDENTIFY:CLOSE_IDENTIFY';
+const CHANGE_CLICK_POINT = 'IDENTIFY:CHANGE_CLICK_POINT';
+const CHANGE_FORMAT = 'IDENTIFY:CHANGE_FORMAT';
+const TOGGLE_SHOW_COORD_EDITOR = 'IDENTIFY:TOGGLE_SHOW_COORD_EDITOR';
 
 /**
  * Private
@@ -216,9 +219,33 @@ function featureInfoClick(point, layer) {
         layer
     };
 }
+function changeClickPoint(coord, val) {
+    return {
+        type: CHANGE_CLICK_POINT,
+        coord,
+        val
+    };
+}
 
 const closeIdentify = () => ({
     type: CLOSE_IDENTIFY
+});
+
+/**
+ * change format of coordinate editor
+ * @prop {string} format
+*/
+const changeFormat = (format) => ({
+    type: CHANGE_FORMAT,
+    format
+});
+/**
+ * change format of coordinate editor
+ * @prop {string} format
+*/
+const toggleShowCoordinateEditor = (showCoordinateEditor) => ({
+    type: TOGGLE_SHOW_COORD_EDITOR,
+    showCoordinateEditor
 });
 
 module.exports = {
@@ -240,6 +267,9 @@ module.exports = {
     TOGGLE_MAPINFO_STATE,
     UPDATE_CENTER_TO_MARKER,
     CLOSE_IDENTIFY,
+    CHANGE_CLICK_POINT, changeClickPoint,
+    TOGGLE_SHOW_COORD_EDITOR, toggleShowCoordinateEditor,
+    CHANGE_FORMAT, changeFormat,
     closeIdentify,
     getFeatureInfo,
     changeMapInfoState,

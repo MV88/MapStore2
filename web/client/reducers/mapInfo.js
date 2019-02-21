@@ -23,7 +23,10 @@ const {
     CLEAR_WARNING,
     FEATURE_INFO_CLICK,
     TOGGLE_MAPINFO_STATE,
-    UPDATE_CENTER_TO_MARKER
+    UPDATE_CENTER_TO_MARKER,
+    CHANGE_CLICK_POINT,
+    CHANGE_FORMAT,
+    TOGGLE_SHOW_COORD_EDITOR
 } = require('../actions/mapInfo');
 
 const {RESET_CONTROLS} = require('../actions/controls');
@@ -91,6 +94,19 @@ function mapInfo(state = initState, action) {
             clickPoint: action.point,
             clickLayer: action.layer || null
         });
+    }
+    case CHANGE_CLICK_POINT: {
+        const coord = action.coord === "lat" ? "lat" : "lng";
+        return {
+            ...state,
+            clickPoint: {
+                ...state.clickPoint,
+                latlng: {
+                    ...state.clickPoint.latlng,
+                    [coord]: action.val
+                }
+            }
+        };
     }
     case CHANGE_MAPINFO_FORMAT: {
         return assign({}, state, {
@@ -184,6 +200,18 @@ function mapInfo(state = initState, action) {
         return assign({}, state, {
             centerToMarker: action.status
         });
+    }
+    case CHANGE_FORMAT: {
+        return {
+            ...state,
+            formatCoord: action.format
+        };
+    }
+    case TOGGLE_SHOW_COORD_EDITOR: {
+        return {
+            ...state,
+            showCoordinateEditor: !action.showCoordinateEditor
+        };
     }
     default:
         return state;

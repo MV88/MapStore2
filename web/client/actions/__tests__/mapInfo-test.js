@@ -29,7 +29,8 @@ var {
     hideMapinfoRevGeocode,
     getVectorInfo,
     toggleMapInfoState,
-    updateCenterToMarker
+    updateCenterToMarker,
+    CHANGE_CLICK_POINT, changeClickPoint
 } = require('../mapInfo');
 
 describe('Test correctness of the map actions', () => {
@@ -205,5 +206,13 @@ describe('Test correctness of the map actions', () => {
         const retval = updateCenterToMarker('enabled');
         expect(retval.type).toBe(UPDATE_CENTER_TO_MARKER);
         expect(retval.status).toBe('enabled');
+    });
+    it('changeClickPoint', () => {
+        const coord = "lat";
+        const val = 3.6;
+        const retval = changeClickPoint(coord, val);
+        expect(retval.type).toBe(CHANGE_CLICK_POINT);
+        expect(retval.coord).toBe(coord);
+        expect(retval.val).toBe(val);
     });
 });

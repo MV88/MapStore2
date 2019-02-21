@@ -8,7 +8,7 @@
 
 const expect = require('expect');
 const mapInfo = require('../mapInfo');
-const { featureInfoClick } = require('../../actions/mapInfo');
+const { featureInfoClick, changeClickPoint } = require('../../actions/mapInfo');
 const assign = require('object-assign');
 
 require('babel-polyfill');
@@ -261,6 +261,33 @@ describe('Test the mapInfo reducer', () => {
         state = mapInfo({}, {type: 'UPDATE_CENTER_TO_MARKER', status: 'enabled'});
         expect(state).toExist();
         expect(state.centerToMarker).toBe('enabled');
+
+    });
+    it('change click point coords', () => {
+        const coord = "lat";
+        const val = 3.6;
+        let state = mapInfo({
+            point: {
+            latlng: {
+                lon: 3.5
+            }
+        }}, changeClickPoint(coord, val));
+        expect(state).toExist();
+        expect(state.point).toEqual({
+            latlng: {
+                lon: 3.5,
+                lat: val
+            }
+        });
+
+        state = mapInfo(state, changeClickPoint("lon", val));
+        expect(state).toExist();
+        expect(state.point).toEqual({
+            latlng: {
+                lon: val,
+                lat: val
+            }
+        });
 
     });
 });
