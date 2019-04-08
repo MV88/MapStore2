@@ -12,5 +12,6 @@ before_install:
 branches:
   only:
     - master
+    - sciadro
     - /^[cC]\d{3}[\w-]*/
     - /^\d{4}\.\d{2}.[\d|x]{2}$/
