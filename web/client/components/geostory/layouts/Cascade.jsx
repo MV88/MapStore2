@@ -72,6 +72,7 @@ const Cascade = ({
     onVisibilityChange = () => {},
     editMedia = () => {},
     update = () => {},
+    updateSection = () => {},
     remove = () => {}
 }) => (<BorderLayout className="ms-cascade-story">
     <ContainerDimensions
@@ -89,6 +90,7 @@ const Cascade = ({
                                     add={add}
                                     editMedia={editMedia}
                                     update={update}
+                                    updateSection={updateSection}
                                     remove={remove}
                                     key={sectionId}
                                     id={sectionId}

@@ -83,6 +83,14 @@ const toolButtons = {
         tooltipId: fit === "contain" ? "geostory.contentToolbar.fit" : "geostory.contentToolbar.cover",
         onClick: () => update('fit', fit === "contain" ? "cover" : "contain") // toggle
     }),
+    cover: ({ cover, updateSection = () => {} }) => ({
+        // using normal ToolbarButton because this is a toggle button without options
+        value: cover,
+        glyph: "resize-vertical",
+        visible: true,
+        tooltipId: "geostory.contentToolbar.contentHeight",
+        onClick: () => updateSection({cover: !cover}) // toggle
+    }),
     editMedia: ({ path, editMedia = () => {} }) => ({
         // using normal ToolbarButton because this has no options
         glyph: "pencil",
