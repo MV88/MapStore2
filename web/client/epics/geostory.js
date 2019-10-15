@@ -205,8 +205,12 @@ export const editMediaForBackgroundEpic = (action$, store) =>
  */
 export const loadGeostoryEpic = (action$, {getState = () => {}}) => action$
     .ofType(LOAD_GEOSTORY)
-    .switchMap( ({id}) =>
-        Observable.defer(() => {
+    .switchMap( ({id}) => {
+        const loggedIn = isLoggedIn(getState());
+        if (!loggedIn) {
+            return Observable.of(loadGeostoryError({status: 403}));
+        }
+        return Observable.defer(() => {
             if (id && isNaN(parseInt(id, 10))) {
                 return axios.get(`configs/${id}.json`)
                     // not return anything else that data in this case
@@ -237,6 +241,7 @@ export const loadGeostoryEpic = (action$, {getState = () => {}}) => action$
                     if (e.status === 403 ) {
                         message = "geostory.errors.loading.pleaseLogin";
                         if (isLoggedIn(getState())) {
+                            // TODO only in view mode
                             message = "geostory.errors.loading.geostoryNotAccessible";
                         }
                     } else if (e.status === 404) {
@@ -254,8 +259,8 @@ export const loadGeostoryEpic = (action$, {getState = () => {}}) => action$
                         loadGeostoryError({...e, messageId: message})
                     );
                 }
-            ))
-    );
+            ));
+    });
 /**
  * Triggers reload of last loaded story when user login-logout
  * @param {Observable} action$ the stream of redux actions
