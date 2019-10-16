@@ -22,6 +22,7 @@ import {
     REMOVE,
     SELECT_CARD,
     SET_CONTROL,
+    SET_EDIT_ALLOWED,
     SET_RESOURCE,
     SAVED,
     SAVE_ERROR
@@ -196,6 +197,9 @@ export default (state = INITIAL_STATE, action) => {
     case SET_RESOURCE: {
         const { resource } = action;
         return set(`resource`, resource, state);
+    }
+    case SET_EDIT_ALLOWED: {
+        return set(`isEditAllowed`, action.editing, state);
     }
     case SAVED: {
         return unset(`errors.save`, state);

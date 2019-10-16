@@ -19,6 +19,10 @@ export const createPathSelector = path => state => get(state, getEffectivePath(`
  */
 export const isCollapsedSelector = state => get(state, "geostory.isCollapsed", false);
 /**
+ * return the status of the possibility to edit the story
+ */
+export const isEditAllowedSelector = state => get(state, "geostory.isEditAllowed", false);
+/**
  * gets the currentStory from the state
  * @returns {object} the object the represents the state
  */

@@ -42,6 +42,8 @@ import {
     saveGeoStoryError,
     setControl,
     setResource,
+    setEditAllowed,
+    setEditing,
     storySaved,
     update
 } from '../actions/geostory';
@@ -58,7 +60,7 @@ import { show, error } from '../actions/notifications';
 import { LOGIN_SUCCESS, LOGOUT } from '../actions/security';
 
 
-import { isLoggedIn } from '../selectors/security';
+import { isLoggedIn, isAdminUserSelector } from '../selectors/security';
 import { resourceIdSelectorCreator, createPathSelector, currentStorySelector, resourcesSelector} from '../selectors/geostory';
 import { currentMediaTypeSelector, sourceIdSelector} from '../selectors/mediaEditor';
 
@@ -206,8 +208,8 @@ export const editMediaForBackgroundEpic = (action$, store) =>
 export const loadGeostoryEpic = (action$, {getState = () => {}}) => action$
     .ofType(LOAD_GEOSTORY)
     .switchMap( ({id}) => {
-        const loggedIn = isLoggedIn(getState());
-        if (!loggedIn) {
+        const user = isLoggedIn(getState());
+        if (!user) {
             return Observable.of(loadGeostoryError({status: 403}));
         }
         return Observable.defer(() => {
@@ -225,13 +227,20 @@ export const loadGeostoryEpic = (action$, {getState = () => {}}) => action$
                 }
                 return true;
             })
-            .switchMap(({ data, ...resource }) =>
-                Observable.of(
+            .switchMap(({ data, ...resource }) => {
+                let actions = isAdminUserSelector(getState()) ? [
+                    setEditAllowed(true)
+                ] : [
+                    setEditing(false),
+                    setEditAllowed(false)
+                ];
+                return Observable.from([
                     geostoryLoaded(id),
                     setCurrentStory(isString(data) ? JSON.parse(data) : data),
-                    setResource(resource)
-                )
-            )
+                    setResource(resource),
+                    ...actions
+                ]);
+            })
             // adds loading status to the start and to the end of the stream and handles exceptions
             .let(wrapStartStop(
                 loadingGeostory(true, "loading"),

@@ -30,6 +30,7 @@ export const UPDATE = "GEOSTORY:UPDATE";
 export const UPDATE_CURRENT_PAGE = "GEOSTORY:UPDATE_CURRENT_PAGE";
 export const MOVED = "GEOSTORY:MOVED";
 export const MOVE = "GEOSTORY:MOVE";
+export const SET_EDIT_ALLOWED = "GEOSTORY:SET_EDIT_ALLOWED";
 
 /**
  * Adds an entry to current story. The entry can be a section, a content or anything to append in an array (even sub-content)
@@ -55,6 +56,11 @@ export const addResource = ( id, mediaType, data ) => ({type: ADD_RESOURCE, id, 
  * @param {boolean} editing editing mode. true to activate, false to deactivate.
 */
 export const setEditing = (editing) => ({ type: CHANGE_MODE, mode: editing ? Modes.EDIT : Modes.VIEW});
+/**
+ * enables/disables editing mode.
+ * @param {boolean} editing editing mode. true to activate, false to deactivate.
+*/
+export const setEditAllowed = (editing) => ({ type: SET_EDIT_ALLOWED, editing});
 /**
  * Edits a resource in the current story
  */
