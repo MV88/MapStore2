@@ -6,14 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {head, get} = require('lodash');
+import { head, get } from 'lodash';
+
 // TODO missing escape of cdata entries (you should split the ]]> and put the two parts of it in adjacent CDATA sections).
 // e.g.
 // <![CDATA[Certain tokens like ]]> can be difficult and <invalid>]]>
 // should be written as
 // <![CDATA[Certain tokens like ]]]]><![CDATA[> can be difficult and <valid>]]>
 const toCData = (value) => /[<>&'"]/.test(value) ? `<![CDATA[${value}]]>` : value;
-const {processOGCGeometry} = require("../GML");
+import { processOGCGeometry } from '../GML';
 const WFS_TO_GML = {
     "1.0.0": "2.0",
     "1.1.0": "3.1.1",

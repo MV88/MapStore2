@@ -5,9 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const ConfigUtils = require("../../utils/ConfigUtils");
+import ConfigUtils from '../../utils/ConfigUtils';
+
+import geostore from '../../observables/geostore';
 const ApiProviders = {
-    geostore: require("../../observables/geostore")
+    geostore
 };
 /**
  * MapStore Persistence layer.

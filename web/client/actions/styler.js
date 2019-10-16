@@ -11,8 +11,8 @@ const SET_STYLER_LAYER = 'SET_STYLER_LAYER';
 const STYLE_SAVE_ERROR = 'STYLE_SAVE_ERROR';
 const STYLER_RESET = 'STYLER_RESET';
 
-const {getLayer} = require('../api/geoserver/Layers');
-const {saveStyle} = require('../api/geoserver/Styles');
+import { getLayer } from '../api/geoserver/Layers';
+import { saveStyle } from '../api/geoserver/Styles';
 
 function setStylerLayer(layer) {
     return {

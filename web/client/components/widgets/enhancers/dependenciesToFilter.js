@@ -5,19 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {compose, withPropsOnChange} = require('recompose');
-const CoordinatesUtils = require('../../../utils/CoordinatesUtils');
-const FilterUtils = require('../../../utils/FilterUtils');
-const filterBuilder = require('../../../utils/ogc/Filter/FilterBuilder');
-const fromObject = require('../../../utils/ogc/Filter/fromObject');
-const { getDependencyLayerParams } = require('./utils');
-const { find } = require('lodash');
+import { compose, withPropsOnChange } from 'recompose';
+
+import CoordinatesUtils from '../../../utils/CoordinatesUtils';
+import FilterUtils from '../../../utils/FilterUtils';
+import filterBuilder from '../../../utils/ogc/Filter/FilterBuilder';
+import fromObject from '../../../utils/ogc/Filter/fromObject';
+import { getDependencyLayerParams } from './utils';
+import { find } from 'lodash';
 const getCqlFilter = (layer, dependencies) => {
     const params = getDependencyLayerParams(layer, dependencies);
     const cqlFilterKey = find(Object.keys(params || {}), (k = "") => k.toLowerCase() === "cql_filter");
     return params && cqlFilterKey && params[cqlFilterKey];
 };
-const { read } = require('../../../utils/ogc/Filter/CQL/parser');
+import { read } from '../../../utils/ogc/Filter/CQL/parser';
 const getLayerFilter = ({layerFilter} = {}) => layerFilter;
 
 /**

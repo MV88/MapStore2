@@ -5,8 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Url = require('url');
-const { trimStart } = require('lodash');
+import Url from 'url';
+
+import { trimStart } from 'lodash';
 /**
  * Utility functions for Share tools.
  * @memberof utils

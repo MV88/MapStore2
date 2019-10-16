@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const { createSelector} = require('reselect');
+import { createSelector } from 'reselect';
 
 const playbackSettingsSelector = state => state && state.playback && state.playback.settings;
 const frameDurationSelector = state => ((playbackSettingsSelector(state) || {}).frameDuration || 5); // seconds

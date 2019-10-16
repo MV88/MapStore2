@@ -6,8 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 // Disable ESLint because some of the names to include are not in camel case
-const expect = require('expect');
-const {ogcComparisonOperators, ogcLogicalOperators, ogcSpatialOperators, logical, spatial, comparison, literal, propertyName} = require('../operators');
+import expect from 'expect';
+
+import {
+    ogcComparisonOperators,
+    ogcLogicalOperators,
+    ogcSpatialOperators,
+    logical,
+    spatial,
+    comparison,
+    literal,
+    propertyName,
+} from '../operators';
 
 describe('OGC Operators', () => {
     it('comparison object', () => {

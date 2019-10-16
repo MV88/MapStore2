@@ -1,4 +1,4 @@
-const {isNil, get, head} = require('lodash');
+import { isNil, get, head } from 'lodash';
 
 /**
  * Selects the featureType name of the query filterObject

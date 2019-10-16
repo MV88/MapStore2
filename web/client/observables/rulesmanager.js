@@ -1,12 +1,11 @@
-const Rx = require('rxjs');
-
-const GeoFence = require('../api/geoserver/GeoFence');
-const ConfigUtils = require('../utils/ConfigUtils');
-const { trim} = require("lodash");
-const WMS = require('../api/WMS');
-const {getLayerCapabilities, describeLayer} = require("./wms");
-const {describeFeatureType} = require("./wfs");
-const {RULE_SAVED} = require("../actions/rulesmanager");
+import Rx from 'rxjs';
+import GeoFence from '../api/geoserver/GeoFence';
+import ConfigUtils from '../utils/ConfigUtils';
+import { trim } from 'lodash';
+import WMS from '../api/WMS';
+import { getLayerCapabilities, describeLayer } from './wms';
+import { describeFeatureType } from './wfs';
+import { RULE_SAVED } from '../actions/rulesmanager';
 
 const fixUrl = (url) => {
     const u = trim(url, "/");

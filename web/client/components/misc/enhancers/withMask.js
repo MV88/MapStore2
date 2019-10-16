@@ -5,8 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {branch, nest} = require('recompose');
+import React from 'react';
+
+import { branch, nest } from 'recompose';
 /**
  * Add a grayed out mask to a component.
  * @param {function} showMask gets props as argument and returns true if the enhancer should be applied

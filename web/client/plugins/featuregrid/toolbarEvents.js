@@ -1,5 +1,7 @@
-const {toggleControl} = require('../../actions/controls');
-const {toggleTool,
+import { toggleControl } from '../../actions/controls';
+
+import {
+    toggleTool,
     toggleEditMode,
     toggleViewMode,
     closeFeatureGridConfirm,
@@ -12,12 +14,11 @@ const {toggleTool,
     startDrawingFeature,
     deleteGeometry,
     openAdvancedSearch,
-    zoomAll
-} = require('../../actions/featuregrid');
-const {
-    createChart
-} = require('../../actions/widgets');
-const {toggleSyncWms} = require('../../actions/wfsquery');
+    zoomAll,
+} from '../../actions/featuregrid';
+
+import { createChart } from '../../actions/widgets';
+import { toggleSyncWms } from '../../actions/wfsquery';
 
 module.exports = {
     createFeature: () => createNewFeatures([{}]),

@@ -26,7 +26,7 @@ LessNodeResolve.prototype = {
     minVersion: [2, 4, 0]
 };
 
-const less = require('less');
+import less from 'less';
 
 module.exports = {
     renderFromLess: (theme, container, path, callback) => {

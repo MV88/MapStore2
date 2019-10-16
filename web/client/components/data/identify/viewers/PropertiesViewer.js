@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropertiesViewer = require('./row/PropertiesViewer');
+import React from 'react';
+
+import PropertiesViewer from './row/PropertiesViewer';
 
 module.exports = ({response, layer, rowViewer}) => {
     const RowViewer = (layer && layer.rowViewer) || rowViewer || PropertiesViewer;

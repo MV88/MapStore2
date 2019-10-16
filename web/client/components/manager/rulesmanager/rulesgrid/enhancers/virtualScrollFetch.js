@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const { loadRules } = require('../../../../../observables/rulesmanager');
+import Rx from 'rxjs';
+
+import { loadRules } from '../../../../../observables/rulesmanager';
 const sameFilter = ({filters: f1}, {filters: f2}) => f1 === f2;
-const {updatePages, getPagesToLoad} = require('../../../../../utils/RulesGridUtils');
+import { updatePages, getPagesToLoad } from '../../../../../utils/RulesGridUtils';
 /**
  * Create an operator that responds to page$ request stream.
  * While loading the pages request are stored and the last request is emitted on load end

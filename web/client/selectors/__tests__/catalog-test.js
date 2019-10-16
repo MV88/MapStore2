@@ -6,8 +6,9 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {
+import expect from 'expect';
+
+import {
     activeSelector,
     authkeyParamNameSelector,
     delayAutoSearchSelector,
@@ -26,10 +27,10 @@ const {
     selectedServiceTypeSelector,
     selectedServiceSelector,
     servicesSelector,
-    serviceListOpenSelector
-} = require("../catalog");
+    serviceListOpenSelector,
+} from '../catalog';
 
-const {set} = require('../../utils/ImmutableUtils');
+import { set } from '../../utils/ImmutableUtils';
 const url = "https://demo.geo-solutions.it/geoserver/wms";
 const state = {
     controls: {

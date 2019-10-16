@@ -1,6 +1,6 @@
-const {isString, isDate, get, castArray} = require('lodash');
-const moment = require('moment');
-const LocaleUtils = require('./LocaleUtils');
+import { isString, isDate, get, castArray } from 'lodash';
+import moment from 'moment';
+import LocaleUtils from './LocaleUtils';
 
 const ROUND_RESOLUTION_REGEX = /PT?[\d\.]+[YMWDHMS]/;
 

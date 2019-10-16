@@ -6,11 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {
-    SET_STYLE_PARAMETER
-} = require('../actions/style');
+import { SET_STYLE_PARAMETER } from '../actions/style';
 
-const assign = require('object-assign');
+import assign from 'object-assign';
 
 const initialSpec = {
     color: { r: 0, g: 0, b: 255, a: 1 },

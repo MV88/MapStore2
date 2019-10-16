@@ -6,15 +6,16 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const uuidv1 = require('uuid/v1');
-const LocaleUtils = require('./LocaleUtils');
-const {extraMarkers} = require('./MarkerUtils');
-const {geometryFunctions, fetchStyle, hashAndStringify} = require('./VectorStyleUtils');
-const {set} = require('./ImmutableUtils');
-const {values, isNil, slice, head, castArray, last, isArray, findIndex, isString} = require('lodash');
-const uuid = require('uuid');
-const turfCenter = require('@turf/center').default;
-const assign = require('object-assign');
+import uuidv1 from 'uuid/v1';
+
+import LocaleUtils from './LocaleUtils';
+import { extraMarkers } from './MarkerUtils';
+import { geometryFunctions, fetchStyle, hashAndStringify } from './VectorStyleUtils';
+import { set } from './ImmutableUtils';
+import { values, isNil, slice, head, castArray, last, isArray, findIndex, isString } from 'lodash';
+import uuid from 'uuid';
+import turfCenter from '@turf/center';
+import assign from 'object-assign';
 
 
 const STYLE_CIRCLE = {

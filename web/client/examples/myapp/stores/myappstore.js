@@ -1,7 +1,6 @@
-var {createStore, combineReducers, applyMiddleware} = require('redux');
-
-var thunkMiddleware = require('redux-thunk');
-var mapConfig = require('../../../reducers/config');
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import mapConfig from '../../../reducers/config';
 
 // reducers
 const reducers = combineReducers({

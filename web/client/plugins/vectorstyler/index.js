@@ -5,10 +5,10 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const {connect} = require('react-redux');
-const {setVectorStyleParameter} = require('../../actions/vectorstyler');
+import { connect } from 'react-redux';
 
-const {symbolselector} = require('../../selectors/vectorstyler');
+import { setVectorStyleParameter } from '../../actions/vectorstyler';
+import { symbolselector } from '../../selectors/vectorstyler';
 
 const StylePolygon = connect(symbolselector, {
     setStyleParameter: setVectorStyleParameter.bind(null, 'symbol')
@@ -22,7 +22,7 @@ const StylePolyline = connect(symbolselector, {
     setStyleParameter: setVectorStyleParameter.bind(null, 'symbol')
 })(require('../../components/style/StylePolyline'));
 
-const ScaleDenominator = require("../../components/style/ScaleDenominator");
+import ScaleDenominator from '../../components/style/ScaleDenominator';
 
 module.exports = {
     StylePolygon,

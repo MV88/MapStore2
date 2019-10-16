@@ -6,7 +6,7 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const {get} = require('lodash');
+import { get } from 'lodash';
 
 /**
  * selects currentmap state

@@ -1,7 +1,7 @@
-const {getWPSURL} = require('./common');
-const {Observable} = require('rxjs');
-var axios = require('../../libs/ajax');
-const {interceptOGCError} = require('../../utils/ObservableUtils');
+import { getWPSURL } from './common';
+import { Observable } from 'rxjs';
+import axios from '../../libs/ajax';
+import { interceptOGCError } from '../../utils/ObservableUtils';
 
 module.exports = {
     describeProcess: (url, identifier) =>

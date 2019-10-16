@@ -1,4 +1,4 @@
-const { withPropsOnChange } = require("recompose");
+import { withPropsOnChange } from 'recompose';
 
 /*
  * Copyright 2018, GeoSolutions Sas.

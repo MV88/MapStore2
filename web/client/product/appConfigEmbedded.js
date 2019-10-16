@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const {updateMapLayoutEpic} = require('../epics/maplayout');
-const {readQueryParamsOnMapEpic} = require('../epics/queryparams');
+import { updateMapLayoutEpic } from '../epics/maplayout';
+
+import { readQueryParamsOnMapEpic } from '../epics/queryparams';
 
 module.exports = {
     mode: "embedded",

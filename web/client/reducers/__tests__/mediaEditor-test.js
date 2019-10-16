@@ -9,7 +9,7 @@ import expect from 'expect';
 
 import mediaEditor, {DEFAULT_STATE} from '../mediaEditor';
 
-const {
+import {
     chooseMedia,
     hide,
     loadMediaSuccess,
@@ -19,8 +19,8 @@ const {
     setMediaService,
     setMediaType,
     show,
-    updateItem
-} = require('../../actions/mediaEditor');
+    updateItem,
+} from '../../actions/mediaEditor';
 
 describe('Test the mediaEditor reducer', () => {
 

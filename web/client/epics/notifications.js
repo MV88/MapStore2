@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const Rx = require('rxjs');
-const {clear} = require('../actions/notifications');
-const {LOCATION_CHANGE} = require('connected-react-router');
+import Rx from 'rxjs';
+
+import { clear } from '../actions/notifications';
+import { LOCATION_CHANGE } from 'connected-react-router';
 
 /**
  * Clear all notifications on LOCATION_CHANGE.

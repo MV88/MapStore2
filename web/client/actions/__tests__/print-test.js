@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const {
+import expect from 'expect';
+
+import {
     PRINT_CAPABILITIES_LOADED,
     PRINT_CAPABILITIES_ERROR,
     SET_PRINT_PARAMETER,
@@ -25,8 +26,8 @@ const {
     changeMapPrintPreview,
     printSubmit,
     printSubmitting,
-    printCancel
-} = require('../print');
+    printCancel,
+} from '../print';
 
 describe('Test correctness of the print actions', () => {
 

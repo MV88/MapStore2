@@ -6,16 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-var {
+import expect from 'expect';
+
+import {
     taskSuccess,
     taskStarted,
     taskError,
     startTask,
     TASK_STARTED,
     TASK_SUCCESS,
-    TASK_ERROR
-} = require('../tasks');
+    TASK_ERROR,
+} from '../tasks';
 
 describe('Test correctness of the tasks actions', () => {
     it('test taskSuccess action', () => {

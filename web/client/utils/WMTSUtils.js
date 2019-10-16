@@ -7,8 +7,9 @@
  */
 
 
-const CoordinatesUtils = require('./CoordinatesUtils');
-const {isString, isArray, isObject, head, castArray, slice } = require('lodash');
+import CoordinatesUtils from './CoordinatesUtils';
+
+import { isString, isArray, isObject, head, castArray, slice } from 'lodash';
 
 const WMTSUtils = {
     getDefaultMatrixId: (options) => {

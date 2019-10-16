@@ -5,8 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-// const axios = require('axios');
-const FileUtils = require('../utils/FileUtils');
+
+import FileUtils from '../utils/FileUtils';
+
 const CHANGE_SNAPSHOT_STATE = 'CHANGE_SNAPSHOT_STATE';
 const SNAPSHOT_ERROR = 'SNAPSHOT_ERROR';
 const SNAPSHOT_READY = 'SNAPSHOT_READY';

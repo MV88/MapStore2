@@ -1,4 +1,4 @@
-const {head} = require('lodash');
+import { head } from 'lodash';
 
 const getFormatByName = (outF) => {
     const extension = outF.split(/[^\w]/)[1];

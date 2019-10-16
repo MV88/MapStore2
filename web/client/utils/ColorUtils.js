@@ -5,8 +5,9 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
-const tinycolor = require("tinycolor2");
-const {toNumber} = require("lodash");
+import tinycolor from 'tinycolor2';
+
+import { toNumber } from 'lodash';
 
 /**
  * Porting of various MapStore(1) utilities for random/color scale generations

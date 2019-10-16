@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const ajax = require('../libs/ajax');
-// const {endsWith, replace} = require('lodash');
-const {Observable} = require('rxjs');
-const {parseXML, interceptOGCError} = require('../utils/ObservableUtils');
+import { Observable } from 'rxjs';
+
+import ajax from '../libs/ajax';
+import { interceptOGCError, parseXML } from '../utils/ObservableUtils';
 
 // TODO: remove this. It should be automatically the correct address
 // const toMultiDimURL = url => endsWith(url, "wms") ? replace(url, "wms", "gwc/service/wmts") : url;

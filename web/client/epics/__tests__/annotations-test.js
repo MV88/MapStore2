@@ -6,27 +6,49 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const configureMockStore = require('redux-mock-store').default;
-const { createEpicMiddleware, combineEpics } = require('redux-observable');
-const {ADD_LAYER, UPDATE_NODE, CHANGE_LAYER_PROPERTIES} = require('../../actions/layers');
-const {CHANGE_DRAWING_STATUS, drawingFeatures, DRAWING_FEATURE, selectFeatures} = require('../../actions/draw');
-const {set} = require('../../utils/ImmutableUtils');
-const {HIDE_MAPINFO_MARKER, PURGE_MAPINFO_RESULTS, purgeMapInfoResults} = require('../../actions/mapInfo');
-const {configureMap} = require('../../actions/config');
-const {CLOSE_IDENTIFY} = require('../../actions/mapInfo');
-const {editAnnotation, confirmRemoveAnnotation, saveAnnotation, startDrawing, cancelEditAnnotation,
-    setStyle, highlight, cleanHighlight, download, loadAnnotations, SET_STYLE, toggleStyle,
-    resetCoordEditor, changeRadius, changeText, changeSelected, confirmDeleteFeature, openEditor, SHOW_ANNOTATION
-} = require('../../actions/annotations');
-const {TOGGLE_CONTROL, toggleControl, SET_CONTROL_PROPERTY} = require('../../actions/controls');
+import configureMockStore from 'redux-mock-store';
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
+import { ADD_LAYER, UPDATE_NODE, CHANGE_LAYER_PROPERTIES } from '../../actions/layers';
+import { CHANGE_DRAWING_STATUS, drawingFeatures, DRAWING_FEATURE, selectFeatures } from '../../actions/draw';
+import { set } from '../../utils/ImmutableUtils';
+import { HIDE_MAPINFO_MARKER, PURGE_MAPINFO_RESULTS, purgeMapInfoResults } from '../../actions/mapInfo';
+import { configureMap } from '../../actions/config';
+import { CLOSE_IDENTIFY } from '../../actions/mapInfo';
+
+import {
+    editAnnotation,
+    confirmRemoveAnnotation,
+    saveAnnotation,
+    startDrawing,
+    cancelEditAnnotation,
+    setStyle,
+    highlight,
+    cleanHighlight,
+    download,
+    loadAnnotations,
+    SET_STYLE,
+    toggleStyle,
+    resetCoordEditor,
+    changeRadius,
+    changeText,
+    changeSelected,
+    confirmDeleteFeature,
+    openEditor,
+    SHOW_ANNOTATION,
+} from '../../actions/annotations';
+
+import { TOGGLE_CONTROL, toggleControl, SET_CONTROL_PROPERTY } from '../../actions/controls';
+import addAnnotationsLayerEpiceditAnnotationEpicremoveAnnotationEpicsaveAnnotationEpicnewAnnotationEpicaddAnnotationEpicdisableInteractionsEpiccancelEditAnnotationEpicstartDrawingMultiGeomEpicendDrawGeomEpicendDrawTextEpiccancelTextAnnotationsEpicsetAnnotationStyleEpicrestoreStyleEpichighlighAnnotationEpiccleanHighlightAnnotationEpiccloseAnnotationsEpicconfirmCloseAnnotationsEpicdownloadAnnotationsonLoadAnnotationsonChangedSelectedFeatureEpiconBackToEditingFeatureEpicredrawOnChangeRadiusEpicredrawOnChangeTextEpiceditSelectedFeatureEpiceditCircleFeatureEpicpurgeMapInfoEpiccloseMeasureToolEpicopenEditorEpicFactory from '../annotations';
+
 const {addAnnotationsLayerEpic, editAnnotationEpic, removeAnnotationEpic, saveAnnotationEpic, newAnnotationEpic, addAnnotationEpic,
     disableInteractionsEpic, cancelEditAnnotationEpic, startDrawingMultiGeomEpic, endDrawGeomEpic, endDrawTextEpic, cancelTextAnnotationsEpic,
     setAnnotationStyleEpic, restoreStyleEpic, highlighAnnotationEpic, cleanHighlightAnnotationEpic, closeAnnotationsEpic, confirmCloseAnnotationsEpic,
     downloadAnnotations, onLoadAnnotations, onChangedSelectedFeatureEpic, onBackToEditingFeatureEpic, redrawOnChangeRadiusEpic, redrawOnChangeTextEpic,
     editSelectedFeatureEpic, editCircleFeatureEpic, purgeMapInfoEpic, closeMeasureToolEpic, openEditorEpic
-} = require('../annotations')({});
+} = addAnnotationsLayerEpiceditAnnotationEpicremoveAnnotationEpicsaveAnnotationEpicnewAnnotationEpicaddAnnotationEpicdisableInteractionsEpiccancelEditAnnotationEpicstartDrawingMultiGeomEpicendDrawGeomEpicendDrawTextEpiccancelTextAnnotationsEpicsetAnnotationStyleEpicrestoreStyleEpichighlighAnnotationEpiccleanHighlightAnnotationEpiccloseAnnotationsEpicconfirmCloseAnnotationsEpicdownloadAnnotationsonLoadAnnotationsonChangedSelectedFeatureEpiconBackToEditingFeatureEpicredrawOnChangeRadiusEpicredrawOnChangeTextEpiceditSelectedFeatureEpiceditCircleFeatureEpicpurgeMapInfoEpiccloseMeasureToolEpicopenEditorEpicFactory({});
+
 const rootEpic = combineEpics(addAnnotationsLayerEpic, editAnnotationEpic, removeAnnotationEpic, saveAnnotationEpic, newAnnotationEpic, addAnnotationEpic,
     disableInteractionsEpic, cancelEditAnnotationEpic, startDrawingMultiGeomEpic, endDrawGeomEpic, endDrawTextEpic, cancelTextAnnotationsEpic,
     setAnnotationStyleEpic, restoreStyleEpic, highlighAnnotationEpic, cleanHighlightAnnotationEpic, closeAnnotationsEpic, confirmCloseAnnotationsEpic,
@@ -35,7 +57,7 @@ const rootEpic = combineEpics(addAnnotationsLayerEpic, editAnnotationEpic, remov
 );
 const epicMiddleware = createEpicMiddleware(rootEpic);
 const mockStore = configureMockStore([epicMiddleware]);
-const {testEpic, addTimeoutEpic, TEST_TIMEOUT} = require('./epicTestUtils');
+import { testEpic, addTimeoutEpic, TEST_TIMEOUT } from './epicTestUtils';
 const ft = {
     type: "Feature",
     geometry: {

@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {isNil} = require('lodash');
-const {set} = require('./ImmutableUtils');
-const {colorToRgbaStr} = require('./ColorUtils');
-const axios = require('axios');
-const SLDParser = require('geostyler-sld-parser').default;
+import { isNil } from 'lodash';
+
+import { set } from './ImmutableUtils';
+import { colorToRgbaStr } from './ColorUtils';
+import axios from 'axios';
+import SLDParser from 'geostyler-sld-parser';
 const StyleParsers = {
     sld: new SLDParser()
 };

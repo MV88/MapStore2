@@ -104,7 +104,7 @@ function download(annotation) {
     };
 }
 
-const {head} = require('lodash');
+import { head } from 'lodash';
 
 function editAnnotation(id) {
     return (dispatch, getState) => {

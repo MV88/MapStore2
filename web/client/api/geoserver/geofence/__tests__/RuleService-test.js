@@ -7,20 +7,22 @@
  */
 
 const BASE_URL = "TEST";
-const RuleService = require('../RuleService')({
+
+import MockAdapter from 'axios-mock-adapter';
+import expect from 'expect';
+
+import axios from '../../../../libs/ajax';
+import GF_RULE from '../../../../test-resources/geofence/rest/rules/full_rule1.json';
+import GS_RULE from '../../../../test-resources/geoserver/rest/geofence/full_rule1.json';
+import RULES from '../../../../test-resources/geoserver/rest/geofence/rules.json';
+import ruleServiceFactory from '../RuleService';
+
+const ruleService = ruleServiceFactory({
     addBaseUrl: (opts) => ({...opts, baseURL: BASE_URL}),
     getGeoServerInstance: () => ({url: BASE_URL})
 });
-const RULES = require('../../../../test-resources/geoserver/rest/geofence/rules.json');
-const GF_RULE = require('../../../../test-resources/geofence/rest/rules/full_rule1.json');
-const GS_RULE = require('../../../../test-resources/geoserver/rest/geofence/full_rule1.json');
-const expect = require('expect');
-
-const axios = require('../../../../libs/ajax');
-const MockAdapter = require('axios-mock-adapter');
 
 let mockAxios;
-
 
 describe('RuleService API for GeoFence StandAlone', () => {
     beforeEach(done => {
@@ -40,7 +42,7 @@ describe('RuleService API for GeoFence StandAlone', () => {
             expect(config.params).toEqual(PARAMS);
             return [200, RULES];
         });
-        RuleService.getRulesCount(PARAMS)
+        ruleService.getRulesCount(PARAMS)
             .then(v => {
                 expect(v).toBe(2);
                 done();
@@ -55,7 +57,7 @@ describe('RuleService API for GeoFence StandAlone', () => {
             expect(config.params).toEqual({...PARAMS, page: 1, entries: 10});
             return [200, RULES];
         });
-        RuleService.loadRules(1, PARAMS, 10).then(v => {
+        ruleService.loadRules(1, PARAMS, 10).then(v => {
             expect(v.rules).toExist();
             expect(v.rules.length).toBe(2);
             // check the rules are converted in internal format
@@ -71,7 +73,7 @@ describe('RuleService API for GeoFence StandAlone', () => {
             expect(config.params).toEqual({ targetPriority: 1, rulesIds: '1,2' });
             return [200, RULES];
         });
-        RuleService.moveRules(1, [{id: 1 }, { id: 2 }]).then(v => {
+        ruleService.moveRules(1, [{id: 1 }, { id: 2 }]).then(v => {
             expect(v.rules).toExist();
             expect(v.rules.length).toBe(2);
             done();
@@ -89,7 +91,7 @@ describe('RuleService API for GeoFence StandAlone', () => {
             expect(rule).toEqual(GS_RULE);
             return [200];
         });
-        RuleService.addRule(GF_RULE).then(() => {
+        ruleService.addRule(GF_RULE).then(() => {
             done();
         });
     });
@@ -100,7 +102,7 @@ describe('RuleService API for GeoFence StandAlone', () => {
             expect(config.method).toBe('delete');
             return [200];
         });
-        RuleService.deleteRule(1).then(() => {
+        ruleService.deleteRule(1).then(() => {
             done();
         });
     });

@@ -6,14 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const {
-    UPDATE_ADDITIONAL_LAYER, updateAdditionalLayer,
-    REMOVE_ADDITIONAL_LAYER, removeAdditionalLayer,
-    REMOVE_ALL_ADDITIONAL_LAYERS, removeAllAdditionalLayers,
-    UPDATE_OPTIONS_BY_OWNER, updateOptionsByOwner
-} = require('../additionallayers');
+import {
+    REMOVE_ADDITIONAL_LAYER,
+    REMOVE_ALL_ADDITIONAL_LAYERS,
+    UPDATE_ADDITIONAL_LAYER,
+    UPDATE_OPTIONS_BY_OWNER,
+    removeAdditionalLayer,
+    removeAllAdditionalLayers,
+    updateAdditionalLayer,
+    updateOptionsByOwner
+} from '../additionallayers';
 
 describe('Test additional layers actions', () => {
 

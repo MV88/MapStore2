@@ -6,10 +6,11 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const {isArray, isObject, isEqual, get} = require('lodash');
-const {searchListByAttributes} = require('../../../api/GeoStoreDAO');
-const {compose, withState, lifecycle} = require('recompose');
+import Rx from 'rxjs';
+
+import { isArray, isObject, isEqual, get } from 'lodash';
+import { searchListByAttributes } from '../../../api/GeoStoreDAO';
+import { compose, withState, lifecycle } from 'recompose';
 
 /*
  * send a search list request to GeoStore with NAME and ATTRIBUTE filters

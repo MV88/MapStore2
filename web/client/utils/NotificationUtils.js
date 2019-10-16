@@ -1,4 +1,4 @@
-const {error, success} = require('../actions/notifications');
+import { error, success } from '../actions/notifications';
 
 
 module.exports = {

@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const L = require('leaflet');
-const MapUtils = require('../MapUtils');
-const CoordinatesUtils = require('../CoordinatesUtils');
-const {head, isNumber} = require('lodash');
+import L from 'leaflet';
+
+import MapUtils from '../MapUtils';
+import CoordinatesUtils from '../CoordinatesUtils';
+import { head, isNumber } from 'lodash';
 
 const isInRange = function(col, row, ranges) {
     if (col < ranges.cols.min || col > ranges.cols.max) {

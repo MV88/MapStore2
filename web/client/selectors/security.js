@@ -6,8 +6,9 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const assign = require('object-assign');
-const {get} = require('lodash');
+import assign from 'object-assign';
+
+import { get } from 'lodash';
 
 const rulesSelector = (state) => {
     if (!state.security || !state.security.rules) {

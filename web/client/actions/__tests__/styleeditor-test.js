@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const {
+import {
     UPDATE_TEMPORARY_STYLE,
     UPDATE_STATUS,
     TOGGLE_STYLE_EDITOR,
@@ -40,8 +40,8 @@ const {
     deleteStyle,
     initStyleService,
     setEditPermissionStyleEditor,
-    setDefaultStyle
-} = require('../styleeditor');
+    setDefaultStyle,
+} from '../styleeditor';
 
 describe('Test the styleeditor actions', () => {
 

@@ -6,11 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Layers = require('../../../../utils/leaflet/Layers');
-const SimpleGraticule = require('leaflet-simple-graticule/L.SimpleGraticule');
-const assign = require('object-assign');
+import Layers from '../../../../utils/leaflet/Layers';
 
-require('leaflet-simple-graticule/L.SimpleGraticule.css');
+import SimpleGraticule from 'leaflet-simple-graticule/L.SimpleGraticule';
+import assign from 'object-assign';
+import 'leaflet-simple-graticule/L.SimpleGraticule.css';
 
 Layers.registerType('graticule', {
     create: (options) => {

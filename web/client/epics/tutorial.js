@@ -6,17 +6,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const {START_TUTORIAL, UPDATE_TUTORIAL, INIT_TUTORIAL, closeTutorial, setupTutorial} = require('../actions/tutorial');
-const {CHANGE_MAP_VIEW} = require('../actions/map');
-const {MAPS_LIST_LOADED} = require('../actions/maps');
-const {TOGGLE_3D} = require('../actions/globeswitcher');
+import Rx from 'rxjs';
+
+import {
+    START_TUTORIAL,
+    UPDATE_TUTORIAL,
+    INIT_TUTORIAL,
+    closeTutorial,
+    setupTutorial,
+} from '../actions/tutorial';
+
+import { CHANGE_MAP_VIEW } from '../actions/map';
+import { MAPS_LIST_LOADED } from '../actions/maps';
+import { TOGGLE_3D } from '../actions/globeswitcher';
 
 const findTutorialId = path => path.match(/\/(viewer)\/(\w+)\/(\d+)/) && path.replace(/\/(viewer)\/(\w+)\/(\d+)/, "$2")
     || path.match(/\/(\w+)\/(\d+)/) && path.replace(/\/(\w+)\/(\d+)/, "$1")
     || path.match(/\/(\w+)\//) && path.replace(/\/(\w+)\//, "$1");
-const { LOCATION_CHANGE } = require('connected-react-router');
-const {isEmpty, isArray, isObject} = require('lodash');
+import { LOCATION_CHANGE } from 'connected-react-router';
+import { isEmpty, isArray, isObject } from 'lodash';
 
 /**
  * Closes the tutorial if 3D button has been toggled

@@ -7,7 +7,8 @@
  */
 
 
-const {fidFilter} = require('../Filter/base');
+import { fidFilter } from '../Filter/base';
+
 /**
  * Generate WFS delete features
  * @function

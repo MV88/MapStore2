@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('axios');
-const combineURLs = require('axios/lib/helpers/combineURLs');
-const url = require('url');
-const ConfigUtils = require('../utils/ConfigUtils');
+import axios from 'axios';
 
-const SecurityUtils = require('../utils/SecurityUtils');
-const assign = require('object-assign');
-const {isObject, omitBy, isNil} = require('lodash');
-const urlUtil = require('url');
+import combineURLs from 'axios/lib/helpers/combineURLs';
+import url from 'url';
+import ConfigUtils from '../utils/ConfigUtils';
+import SecurityUtils from '../utils/SecurityUtils';
+import assign from 'object-assign';
+import { isObject, omitBy, isNil } from 'lodash';
+import urlUtil from 'url';
 
 /**
  * Internal helper that adds an extra paramater to an axios configuration.

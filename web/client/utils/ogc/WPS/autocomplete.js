@@ -1,7 +1,8 @@
 // const wfsRequestBuilder = require('../WFS/RequestBuilder');
 // const {getFeature, property, query} = wfsRequestBuilder({wfsVersion: "1.1.0"});
-const FilterUtils = require('../../FilterUtils');
-const filterBuilder = require('../Filter/FilterBuilder');
+import FilterUtils from '../../FilterUtils';
+
+import filterBuilder from '../Filter/FilterBuilder';
 const {and} = filterBuilder({});
 
 const getWpsPayload = ({layerName, layerFilter, attribute, maxFeatures, startIndex, value}) => {

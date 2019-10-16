@@ -6,11 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const FeatureInfoUtils = require("./FeatureInfoUtils");
+import FeatureInfoUtils from './FeatureInfoUtils';
+
 const INFO_FORMATS = FeatureInfoUtils.INFO_FORMATS;
 const INFO_FORMATS_BY_MIME_TYPE = FeatureInfoUtils.INFO_FORMATS_BY_MIME_TYPE;
-const pointOnSurface = require('turf-point-on-surface');
-const {findIndex} = require('lodash');
+import pointOnSurface from 'turf-point-on-surface';
+import { findIndex } from 'lodash';
+import iconUrl from '../components/map/openlayers/img/marker-icon.png';
+import '../components/data/identify/viewers/JSONViewer';
+import '../components/data/identify/viewers/JSONViewer';
+import '../components/data/identify/viewers/HTMLViewer';
+import '../components/data/identify/viewers/TextViewer';
+import wms from './mapinfo/wms';
+import wmts from './mapinfo/wmts';
+import vector from './mapinfo/vector';
 
 const MapInfoUtils = {
     /**
@@ -107,7 +116,7 @@ const MapInfoUtils = {
                     coordinates: [parseFloat(clickedPoint.lng), parseFloat(clickedPoint.lat)]
                 },
                 style: [{
-                    iconUrl: require('../components/map/openlayers/img/marker-icon.png'),
+                    iconUrl,
                     iconAnchor: [12, 41], // in leaflet there is no anchor in fraction
                     iconSize: [25, 41]
                 }]
@@ -173,10 +182,10 @@ const MapInfoUtils = {
     },
     getViewers() {
         return {
-            [FeatureInfoUtils.INFO_FORMATS.PROPERTIES]: require('../components/data/identify/viewers/JSONViewer'),
-            [FeatureInfoUtils.INFO_FORMATS.JSON]: require('../components/data/identify/viewers/JSONViewer'),
-            [FeatureInfoUtils.INFO_FORMATS.HTML]: require('../components/data/identify/viewers/HTMLViewer'),
-            [FeatureInfoUtils.INFO_FORMATS.TEXT]: require('../components/data/identify/viewers/TextViewer')
+            FeatureInfoUtils.INFO_FORMATS.PROPERTIES,
+            FeatureInfoUtils.INFO_FORMATS.JSON,
+            FeatureInfoUtils.INFO_FORMATS.HTML,
+            FeatureInfoUtils.INFO_FORMATS.TEXT
         };
     },
     defaultQueryableFilter(l) {
@@ -187,9 +196,9 @@ const MapInfoUtils = {
         ;
     },
     services: {
-        wms: require('./mapinfo/wms'),
-        wmts: require('./mapinfo/wmts'),
-        vector: require('./mapinfo/vector')
+        wms,
+        wmts,
+        vector
     },
     /**
      * To get the custom viewer with the given type

@@ -6,11 +6,21 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const Rx = require('rxjs');
-const { compose, branch, withState, withHandlers, defaultProps, mapPropsStream, createEventHandler } = require('recompose');
-const handleSaveModal = require('../modals/enhancers/handleSaveModal');
-const handleResourceDownload = require('../modals/enhancers/handleResourceDownload');
-const { updateResource } = require('../../../api/persistence');
+import Rx from 'rxjs';
+
+import {
+    compose,
+    branch,
+    withState,
+    withHandlers,
+    defaultProps,
+    mapPropsStream,
+    createEventHandler,
+} from 'recompose';
+
+import handleSaveModal from '../modals/enhancers/handleSaveModal';
+import handleResourceDownload from '../modals/enhancers/handleResourceDownload';
+import { updateResource } from '../../../api/persistence';
 
 const handleSave = mapPropsStream(props$ => {
     const { handler: onSave, stream: saveEventStream$ } = createEventHandler();

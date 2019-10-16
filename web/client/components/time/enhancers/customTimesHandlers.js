@@ -5,12 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { withHandlers} = require('recompose');
-const {trim} = require('lodash');
-const moment = require('moment');
+import { withHandlers } from 'recompose';
+
+import { trim } from 'lodash';
+import moment from 'moment';
 
 const isValidOffset = (start, end) => moment(end).diff(start) > 0;
-const { getStartEnd } = require('../../../utils/TimeUtils');
+import { getStartEnd } from '../../../utils/TimeUtils';
 
 
 /**

@@ -8,16 +8,10 @@
 // Disable ESLint because some of the names to include are not in camel case
 /* eslint-disable */
 // include base schemas and name spaces
-const {
-        OWS_1_0_0,
-        WMS_1_0_0,
-        WMS_1_1_0,
-        WMS_1_1_1,
-        WMS_1_3_0
-} = require('ogc-schemas');
+import { OWS_1_0_0, WMS_1_0_0, WMS_1_1_0, WMS_1_1_1, WMS_1_3_0 } from 'ogc-schemas';
 
-const XLink_1_0 = require('w3c-schemas').XLink_1_0;
-const {Jsonix} = require('jsonix');
+import { XLink_1_0 } from 'w3c-schemas';
+import { Jsonix } from 'jsonix';
 const context = new Jsonix.Context([
     OWS_1_0_0,
     XLink_1_0,

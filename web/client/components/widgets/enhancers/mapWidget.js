@@ -5,10 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const deleteWidget = require('./deleteWidget');
+import deleteWidget from './deleteWidget';
 
-const {compose} = require('recompose');
-const {editableWidget, defaultIcons, withHeaderTools} = require('./tools');
+import { compose } from 'recompose';
+import { editableWidget, defaultIcons, withHeaderTools } from './tools';
 
 module.exports = compose(
     deleteWidget,

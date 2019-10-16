@@ -5,8 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Undoable = require('redux-undo');
-const assign = require('object-assign');
+import Undoable from 'redux-undo';
+
+import assign from 'object-assign';
 
 const mapConfigHistory = (reducer) => {
     return (state, action) => {

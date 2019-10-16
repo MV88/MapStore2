@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const { isString } = require('lodash');
-const { parseString } = require('xml2js');
-const { stripPrefix } = require('xml2js/lib/processors');
+import Rx from 'rxjs';
+
+import { isString } from 'lodash';
+import { parseString } from 'xml2js';
+import { stripPrefix } from 'xml2js/lib/processors';
 const xmlToJson = xml => {
     if (!isString(xml)) {
         return Rx.Observable.of(xml);

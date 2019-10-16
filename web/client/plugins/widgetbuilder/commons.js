@@ -5,9 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {createSelector} = require('reselect');
-const { getEditingWidget, dependenciesSelector, getEditorSettings, getWidgetLayer, availableDependenciesSelector} = require('../../selectors/widgets');
-const { showConnectionsSelector } = require('../../selectors/dashboard');
+import { createSelector } from 'reselect';
+
+import {
+    getEditingWidget,
+    dependenciesSelector,
+    getEditorSettings,
+    getWidgetLayer,
+    availableDependenciesSelector,
+} from '../../selectors/widgets';
+
+import { showConnectionsSelector } from '../../selectors/dashboard';
 
 const wizardStateToProps = ( stateProps = {}, dispatchProps = {}, ownProps = {}) => ({
     ...ownProps,

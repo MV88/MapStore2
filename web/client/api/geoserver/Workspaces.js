@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../../libs/ajax');
+import axios from '../../libs/ajax';
 
 
 var Api = {

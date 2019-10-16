@@ -6,13 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const {findKey} = require('lodash');
-const {MAPS_LOAD_MAP, MAPS_LIST_LOADED} = require("../actions/maps");
-const {
-    DASHBOARDS_LIST_LOADED
-} = require('../actions/dashboards');
-const {onTabSelected} = require("../actions/contenttabs");
+import Rx from 'rxjs';
+
+import { findKey } from 'lodash';
+import { MAPS_LOAD_MAP, MAPS_LIST_LOADED } from '../actions/maps';
+import { DASHBOARDS_LIST_LOADED } from '../actions/dashboards';
+import { onTabSelected } from '../actions/contenttabs';
 /**
 * Update Maps and Dashboards counts to select contenttabs each tab has to have a key in its ContentTab configuration
 * @param {object} action

@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {
+import {
     editWidget,
     editNewWidget,
     changeEditorSetting,
@@ -22,16 +22,15 @@ const {
     toggleCollapse,
     toggleCollapseAll,
     toggleTray,
-    DEFAULT_TARGET
-} = require('../../actions/widgets');
-const {configureMap} = require('../../actions/config');
-const {dashboardLoaded} = require('../../actions/dashboard');
-const widgets = require('../widgets');
-const {getFloatingWidgets, getVisibleFloatingWidgets, getCollapsedIds} = require('../../selectors/widgets');
+    DEFAULT_TARGET,
+} from '../../actions/widgets';
 
-
-const expect = require('expect');
-const {find} = require('lodash');
+import { configureMap } from '../../actions/config';
+import { dashboardLoaded } from '../../actions/dashboard';
+import widgets from '../widgets';
+import { getFloatingWidgets, getVisibleFloatingWidgets, getCollapsedIds } from '../../selectors/widgets';
+import expect from 'expect';
+import { find } from 'lodash';
 
 describe('Test the widgets reducer', () => {
     it('initial state', () => {

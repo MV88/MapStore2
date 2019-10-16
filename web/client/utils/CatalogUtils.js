@@ -6,16 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const assign = require('object-assign');
-const {head, isArray, isString, castArray, isObject, sortBy, uniq, includes} = require('lodash');
-const urlUtil = require('url');
-const CoordinatesUtils = require('./CoordinatesUtils');
-const ConfigUtils = require('./ConfigUtils');
-const LayersUtils = require('./LayersUtils');
-const LocaleUtils = require('./LocaleUtils');
-const WMTSUtils = require('./WMTSUtils');
+import assign from 'object-assign';
 
-const WMS = require('../api/WMS');
+import { head, isArray, isString, castArray, isObject, sortBy, uniq, includes } from 'lodash';
+import urlUtil from 'url';
+import CoordinatesUtils from './CoordinatesUtils';
+import ConfigUtils from './ConfigUtils';
+import LayersUtils from './LayersUtils';
+import LocaleUtils from './LocaleUtils';
+import WMTSUtils from './WMTSUtils';
+import WMS from '../api/WMS';
 
 const getBaseCatalogUrl = (url) => {
     return url && url.replace(/\/csw$/, "/");

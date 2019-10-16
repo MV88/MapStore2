@@ -1,5 +1,5 @@
 
-const {get} = require('lodash');
+import { get } from 'lodash';
 
 module.exports = {
     pathnameSelector: (state) => get(state, "router.location.pathname") || "/"

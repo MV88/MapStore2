@@ -10,7 +10,7 @@ const SET_CONTROL_PROPERTY = 'SET_CONTROL_PROPERTY';
 const SET_CONTROL_PROPERTIES = 'SET_CONTROL_PROPERTIES';
 const RESET_CONTROLS = 'RESET_CONTROLS';
 
-const { fromPairs, chunk } = require('lodash');
+import { fromPairs, chunk } from 'lodash';
 
 /**
  * Toggle a control property

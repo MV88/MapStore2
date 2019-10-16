@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {withHandlers, defaultProps} = require('recompose');
-const MapInfoUtils = require('../../../../utils/MapInfoUtils');
+import { withHandlers, defaultProps } from 'recompose';
+
+import MapInfoUtils from '../../../../utils/MapInfoUtils';
 
 /**
  * Enhancer for setting page index of Default Viewer in DefaultViewer/IdentifyContainer plugin

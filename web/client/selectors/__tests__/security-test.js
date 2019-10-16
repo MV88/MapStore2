@@ -6,16 +6,18 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {
+import expect from 'expect';
+
+import {
     userSelector,
     userRoleSelector,
     isAdminUserSelector,
     rulesSelector,
     securityTokenSelector,
     userGroupSecuritySelector,
-    userParamsSelector
-} = require('../security');
+    userParamsSelector,
+} from '../security';
+
 const id = 1833;
 const name = 'teo';
 const role = 'ADMIN';

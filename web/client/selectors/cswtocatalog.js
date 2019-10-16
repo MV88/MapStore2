@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const assign = require('object-assign');
-const {head} = require('lodash');
-const urlUtil = require('url');
+import assign from 'object-assign';
+
+import { head } from 'lodash';
+import urlUtil from 'url';
 
 
 const getBaseCatalogUrl = (url) => {

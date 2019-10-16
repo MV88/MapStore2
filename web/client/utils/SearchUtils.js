@@ -1,3 +1,5 @@
+import iconUrl from '../product/assets/img/marker-icon-red.png';
+import shadowUrl from '../product/assets/img/marker-shadow.png';
 /*
  * Copyright 2019, GeoSolutions Sas.
  * All rights reserved.
@@ -6,8 +8,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 const defaultIconStyle = {
-    iconUrl: require('../product/assets/img/marker-icon-red.png'),
-    shadowUrl: require('../product/assets/img/marker-shadow.png'),
+    iconUrl,
+    shadowUrl,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],

@@ -1,5 +1,5 @@
-var expect = require('expect');
-var FeatureInfoUtils = require('../FeatureInfoUtils');
+import expect from 'expect';
+import FeatureInfoUtils from '../FeatureInfoUtils';
 
 describe('FeatureInfoUtils', () => {
     // **********************************

@@ -5,16 +5,21 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const {connect} = require('react-redux');
-const {compose} = require('redux');
-const ConfigUtils = require('../../utils/ConfigUtils');
-const {FormControl, FormGroup, ControlLabel} = require('react-bootstrap');
+import React from 'react';
 
-const {setPrintParameter, changePrintZoomLevel, changeMapPrintPreview, printCancel} =
-    require('../../actions/print');
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import ConfigUtils from '../../utils/ConfigUtils';
+import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 
-const {setControlProperty} = require('../../actions/controls');
+import {
+    setPrintParameter,
+    changePrintZoomLevel,
+    changeMapPrintPreview,
+    printCancel,
+} from '../../actions/print';
+
+import { setControlProperty } from '../../actions/controls';
 
 const TextWithLabel = (props) => {
     return (
@@ -55,7 +60,7 @@ const Sheet = connect((state) => ({
     onChange: setPrintParameter.bind(null, 'sheet')
 })(require('../../components/print/Sheet'));
 
-const {currentLayouts, twoPageEnabled} = require('../../selectors/print');
+import { currentLayouts, twoPageEnabled } from '../../selectors/print';
 
 const LegendOption = connect((state) => ({
     checked: state.print && state.print.spec && !!state.print.spec.includeLegend,

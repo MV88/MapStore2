@@ -6,19 +6,16 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const { Observable } = require('rxjs');
-const { updateLayerDimension, changeLayerProperties, ADD_LAYER} = require('../actions/layers');
-const {MAP_CONFIG_LOADED} = require('../actions/config');
-const { error } = require('../actions/notifications');
+import { Observable } from 'rxjs';
 
-const { SET_CURRENT_TIME, MOVE_TIME, SET_OFFSET_TIME, updateLayerDimensionData} = require('../actions/dimension');
-const { layersWithTimeDataSelector, offsetTimeSelector, currentTimeSelector } = require('../selectors/dimension');
-const {describeDomains} = require('../api/MultiDim');
-const {
-    domainsToDimensionsObject
-} = require('../utils/TimeUtils');
-
-const { pick, find, replace, endsWith, get } = require('lodash');
+import { updateLayerDimension, changeLayerProperties, ADD_LAYER } from '../actions/layers';
+import { MAP_CONFIG_LOADED } from '../actions/config';
+import { error } from '../actions/notifications';
+import { SET_CURRENT_TIME, MOVE_TIME, SET_OFFSET_TIME, updateLayerDimensionData } from '../actions/dimension';
+import { layersWithTimeDataSelector, offsetTimeSelector, currentTimeSelector } from '../selectors/dimension';
+import { describeDomains } from '../api/MultiDim';
+import { domainsToDimensionsObject } from '../utils/TimeUtils';
+import { pick, find, replace, endsWith, get } from 'lodash';
 /**
  * Tries to get the layer's information form the URL.
  * TODO: find out a better way to do this

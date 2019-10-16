@@ -1,4 +1,4 @@
-const Rx = require('rxjs');
+import Rx from 'rxjs';
 
 module.exports = {
     generateActionTrigger: (startAction) => {

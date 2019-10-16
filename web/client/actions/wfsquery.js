@@ -33,7 +33,7 @@ function toggleLayerFilter() {
         type: TOGGLE_LAYER_FILTER
     };
 }
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
 function layerSelectedForSearch(id) {
     return {

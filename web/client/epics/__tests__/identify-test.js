@@ -6,15 +6,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const { ZOOM_TO_POINT, clickOnMap } = require('../../actions/map');
-const { FEATURE_INFO_CLICK, UPDATE_CENTER_TO_MARKER, PURGE_MAPINFO_RESULTS, NEW_MAPINFO_REQUEST, LOAD_FEATURE_INFO, NO_QUERYABLE_LAYERS, ERROR_FEATURE_INFO, EXCEPTIONS_FEATURE_INFO, SHOW_MAPINFO_MARKER, HIDE_MAPINFO_MARKER, GET_VECTOR_INFO, loadFeatureInfo, featureInfoClick, closeIdentify, toggleHighlightFeature } = require('../../actions/mapInfo');
-const { getFeatureInfoOnFeatureInfoClick, zoomToVisibleAreaEpic, onMapClick, closeFeatureAndAnnotationEditing, handleMapInfoMarker, featureInfoClickOnHighligh, closeFeatureInfoOnCatalogOpenEpic } = require('../identify');
-const { CLOSE_ANNOTATIONS } = require('../../actions/annotations');
-const { testEpic, TEST_TIMEOUT, addTimeoutEpic } = require('./epicTestUtils');
-const { registerHook } = require('../../utils/MapUtils');
-const { setControlProperties } = require('../../actions/controls');
+import { ZOOM_TO_POINT, clickOnMap } from '../../actions/map';
+
+import {
+    FEATURE_INFO_CLICK,
+    UPDATE_CENTER_TO_MARKER,
+    PURGE_MAPINFO_RESULTS,
+    NEW_MAPINFO_REQUEST,
+    LOAD_FEATURE_INFO,
+    NO_QUERYABLE_LAYERS,
+    ERROR_FEATURE_INFO,
+    EXCEPTIONS_FEATURE_INFO,
+    SHOW_MAPINFO_MARKER,
+    HIDE_MAPINFO_MARKER,
+    GET_VECTOR_INFO,
+    loadFeatureInfo,
+    featureInfoClick,
+    closeIdentify,
+    toggleHighlightFeature,
+} from '../../actions/mapInfo';
+
+import {
+    getFeatureInfoOnFeatureInfoClick,
+    zoomToVisibleAreaEpic,
+    onMapClick,
+    closeFeatureAndAnnotationEditing,
+    handleMapInfoMarker,
+    featureInfoClickOnHighligh,
+    closeFeatureInfoOnCatalogOpenEpic,
+} from '../identify';
+
+import { CLOSE_ANNOTATIONS } from '../../actions/annotations';
+import { testEpic, TEST_TIMEOUT, addTimeoutEpic } from './epicTestUtils';
+import { registerHook } from '../../utils/MapUtils';
+import { setControlProperties } from '../../actions/controls';
 
 const TEST_MAP_STATE = {
     present: {

@@ -6,13 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const GeoStoreApi = require('../api/GeoStoreDAO');
-const {updateCurrentMapPermissions, updateCurrentMapGroups} = require('./currentMap');
-const ConfigUtils = require('../utils/ConfigUtils');
-const {userGroupSecuritySelector, userSelector} = require('../selectors/security');
-const {currentMapDetailsChangedSelector} = require('../selectors/currentmap');
-const {resetCurrentMap} = require('./currentMap');
-const {findIndex, isNil} = require('lodash');
+import GeoStoreApi from '../api/GeoStoreDAO';
+
+import { updateCurrentMapPermissions, updateCurrentMapGroups } from './currentMap';
+import ConfigUtils from '../utils/ConfigUtils';
+import { userGroupSecuritySelector, userSelector } from '../selectors/security';
+import { currentMapDetailsChangedSelector } from '../selectors/currentmap';
+import { resetCurrentMap } from './currentMap';
+import { findIndex, isNil } from 'lodash';
 const MAPS_LIST_LOADED = 'MAPS_LIST_LOADED';
 const MAPS_LIST_LOADING = 'MAPS_LIST_LOADING';
 const MAPS_LIST_LOAD_ERROR = 'MAPS_LIST_LOAD_ERROR';

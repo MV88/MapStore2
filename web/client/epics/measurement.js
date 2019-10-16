@@ -6,22 +6,23 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const {ADD_MEASURE_AS_ANNOTATION} = require('../actions/measurement');
-const {getStartEndPointsForLinestring, DEFAULT_ANNOTATIONS_STYLES, STYLE_TEXT} = require('../utils/AnnotationsUtils');
-const {convertUom, getFormattedBearingValue, validateFeatureCoordinates} = require('../utils/MeasureUtils');
-const LocaleUtils = require('../utils/LocaleUtils');
-const {addLayer, updateNode} = require('../actions/layers');
-const {toggleControl, SET_CONTROL_PROPERTY} = require('../actions/controls');
-const {closeFeatureGrid} = require('../actions/featuregrid');
-const {purgeMapInfoResults, hideMapinfoMarker} = require('../actions/mapInfo');
-const {transformLineToArcs} = require('../utils/CoordinatesUtils');
-const uuidv1 = require('uuid/v1');
-const assign = require('object-assign');
-const {head, last, round} = require('lodash');
-const {annotationsLayerSelector} = require('../selectors/annotations');
-const {showCoordinateEditorSelector} = require('../selectors/controls');
-const {editAnnotation} = require('../actions/annotations');
+import Rx from 'rxjs';
+
+import { ADD_MEASURE_AS_ANNOTATION } from '../actions/measurement';
+import { getStartEndPointsForLinestring, DEFAULT_ANNOTATIONS_STYLES, STYLE_TEXT } from '../utils/AnnotationsUtils';
+import { convertUom, getFormattedBearingValue, validateFeatureCoordinates } from '../utils/MeasureUtils';
+import LocaleUtils from '../utils/LocaleUtils';
+import { addLayer, updateNode } from '../actions/layers';
+import { toggleControl, SET_CONTROL_PROPERTY } from '../actions/controls';
+import { closeFeatureGrid } from '../actions/featuregrid';
+import { purgeMapInfoResults, hideMapinfoMarker } from '../actions/mapInfo';
+import { transformLineToArcs } from '../utils/CoordinatesUtils';
+import uuidv1 from 'uuid/v1';
+import assign from 'object-assign';
+import { head, last, round } from 'lodash';
+import { annotationsLayerSelector } from '../selectors/annotations';
+import { showCoordinateEditorSelector } from '../selectors/controls';
+import { editAnnotation } from '../actions/annotations';
 
 const formattedValue = (uom, value) => ({
     "length": round(convertUom(value, "m", uom) || 0, 2) + " " + uom,

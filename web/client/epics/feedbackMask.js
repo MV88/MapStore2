@@ -7,17 +7,26 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const {split, get, isNil} = require('lodash');
-const {FEEDBACK_MASK_ENABLED, DETECTED_NEW_PAGE, feedbackMaskLoading, feedbackMaskLoaded, feedbackMaskEnabled, detectedNewPage} = require('../actions/feedbackMask');
-const {LOAD_DASHBOARD, DASHBOARD_LOADED, DASHBOARD_LOAD_ERROR} = require('../actions/dashboard');
-const { LOAD_GEOSTORY, GEOSTORY_LOADED, LOAD_GEOSTORY_ERROR } = require('../actions/geostory');
+import Rx from 'rxjs';
 
-const {INIT_MAP} = require('../actions/map');
-const {MAP_CONFIG_LOADED, MAP_CONFIG_LOAD_ERROR} = require('../actions/config');
-const {mapSelector} = require('../selectors/map');
-const {LOCATION_CHANGE} = require('connected-react-router');
-const {LOGIN_SUCCESS, LOGOUT} = require('../actions/security');
+import { split, get, isNil } from 'lodash';
+
+import {
+    FEEDBACK_MASK_ENABLED,
+    DETECTED_NEW_PAGE,
+    feedbackMaskLoading,
+    feedbackMaskLoaded,
+    feedbackMaskEnabled,
+    detectedNewPage,
+} from '../actions/feedbackMask';
+
+import { LOAD_DASHBOARD, DASHBOARD_LOADED, DASHBOARD_LOAD_ERROR } from '../actions/dashboard';
+import { LOAD_GEOSTORY, GEOSTORY_LOADED, LOAD_GEOSTORY_ERROR } from '../actions/geostory';
+import { INIT_MAP } from '../actions/map';
+import { MAP_CONFIG_LOADED, MAP_CONFIG_LOAD_ERROR } from '../actions/config';
+import { mapSelector } from '../selectors/map';
+import { LOCATION_CHANGE } from 'connected-react-router';
+import { LOGIN_SUCCESS, LOGOUT } from '../actions/security';
 
 /**
  * Enabled/disabled mask based on map load feedback, in case of error enable feedbackMask.

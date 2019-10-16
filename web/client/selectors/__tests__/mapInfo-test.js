@@ -7,9 +7,11 @@
 */
 
 
-const expect = require('expect');
-const { set } = require('../../utils/ImmutableUtils');
-const {
+import expect from 'expect';
+
+import { set } from '../../utils/ImmutableUtils';
+
+import {
     mapInfoRequestsSelector,
     generalInfoFormatSelector,
     stopGetFeatureInfoSelector,
@@ -21,8 +23,8 @@ const {
     highlightStyleSelector,
     itemIdSelector,
     filterNameListSelector,
-    overrideParamsSelector
-} = require('../mapInfo');
+    overrideParamsSelector,
+} from '../mapInfo';
 
 const QUERY_PARAMS = {
     service: 'WMS',

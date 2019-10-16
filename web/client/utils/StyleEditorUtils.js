@@ -6,10 +6,11 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const { head, get, isArray, isString } = require('lodash');
-const uuidv1 = require('uuid/v1');
-const url = require('url');
-const { baseTemplates, customTemplates } = require('./styleeditor/stylesTemplates');
+import { head, get, isArray, isString } from 'lodash';
+
+import uuidv1 from 'uuid/v1';
+import url from 'url';
+import { baseTemplates, customTemplates } from './styleeditor/stylesTemplates';
 
 const STYLE_ID_SEPARATOR = '___';
 const STYLE_OWNER_NAME = 'styleeditor';

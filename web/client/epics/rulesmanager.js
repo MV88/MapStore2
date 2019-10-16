@@ -1,11 +1,12 @@
-const Rx = require("rxjs");
+import Rx from 'rxjs';
+import { SAVE_RULE, setLoading, RULE_SAVED, DELETE_RULES, CACHE_CLEAN } from '../actions/rulesmanager';
+import { error, success } from '../actions/notifications';
+import { drawSupportReset } from '../actions/draw';
+import { updateRule, createRule, deleteRule, cleanCache } from '../observables/rulesmanager';
 
-const {SAVE_RULE, setLoading, RULE_SAVED, DELETE_RULES, CACHE_CLEAN} = require("../actions/rulesmanager");
-const {error, success} = require("../actions/notifications");
-const {drawSupportReset} = require("../actions/draw");
-const {updateRule, createRule, deleteRule, cleanCache } = require("../observables/rulesmanager");
 // To do add Error management
-const {get} = require("lodash");
+import { get } from 'lodash';
+
 const saveRule = stream$ => stream$
     .mapTo({type: RULE_SAVED})
     .concat(Rx.Observable.of(drawSupportReset()))

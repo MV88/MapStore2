@@ -17,7 +17,7 @@ const PRINT_ERROR = 'PRINT_ERROR';
 const PRINT_CREATED = 'PRINT_CREATED';
 const PRINT_CANCEL = 'PRINT_CANCEL';
 
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
 function printCapabilitiesLoaded(capabilities) {
     return {

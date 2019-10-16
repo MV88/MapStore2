@@ -5,32 +5,30 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {Provider} = require('react-redux');
-const PropTypes = require('prop-types');
-const dragDropContext = require('react-dnd').DragDropContext;
-const html5Backend = require('react-dnd-html5-backend');
-const proj4 = require('proj4').default;
 
-const {changeBrowserProperties} = require('../../actions/browser');
-const {loadLocale} = require('../../actions/locale');
-const {localConfigLoaded} = require('../../actions/localConfig');
-const {loadPrintCapabilities} = require('../../actions/print');
+import url from 'url';
 
-const ConfigUtils = require('../../utils/ConfigUtils');
-const LocaleUtils = require('../../utils/LocaleUtils');
-const PluginsUtils = require('../../utils/PluginsUtils');
+import {isArray, isObject} from 'lodash';
+import assign from 'object-assign';
+import proj4 from 'proj4';
+import PropTypes from 'prop-types';
+import React from 'react';
+import {DragDropContext as dragDropContext} from 'react-dnd';
+import html5Backend from 'react-dnd-html5-backend';
+import ErrorBoundary from 'react-error-boundary';
+import {Provider} from 'react-redux';
 
-const assign = require('object-assign');
-const url = require('url');
-const {isObject, isArray} = require('lodash');
+import {changeBrowserProperties} from '../../actions/browser';
+import {localConfigLoaded} from '../../actions/localConfig';
+import {loadLocale} from '../../actions/locale';
+import {loadPrintCapabilities} from '../../actions/print';
+import ConfigUtils from '../../utils/ConfigUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
 
 const urlQuery = url.parse(window.location.href, true).query;
 
-require('./appPolyfill');
-
-const ErrorBoundary = require('react-error-boundary').default;
-
+import('./appPolyfill');
 /**
  * Standard MapStore2 application component
  *

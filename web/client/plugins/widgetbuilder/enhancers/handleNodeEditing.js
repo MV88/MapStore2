@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const { changeEditorSetting } = require('../../../actions/widgets');
-const {getEditorSettings} = require('../../../selectors/widgets');
+import { connect } from 'react-redux';
+
+import { createSelector } from 'reselect';
+import { changeEditorSetting } from '../../../actions/widgets';
+import { getEditorSettings } from '../../../selectors/widgets';
 module.exports = connect( createSelector(
     getEditorSettings,
     ({ editNode } = {}) => ({

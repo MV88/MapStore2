@@ -5,8 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {compose, withPropsOnChange, withHandlers} = require('recompose');
-const { getStartEnd } = require('../../../utils/TimeUtils');
+import { compose, withPropsOnChange, withHandlers } from 'recompose';
+
+import { getStartEnd } from '../../../utils/TimeUtils';
 
 /**
  * Enhances timeline with cursors for playback and time range.

@@ -5,9 +5,18 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {logical, spatial, comparison, literal, propertyName, valueReference, distance} = require('./operators');
-const {filter, fidFilter} = require('./filter');
-const {processOGCGeometry} = require("../GML");
+import {
+    logical,
+    spatial,
+    comparison,
+    literal,
+    propertyName,
+    valueReference,
+    distance,
+} from './operators';
+
+import { filter, fidFilter } from './filter';
+import { processOGCGeometry } from '../GML';
 // const isValidXML = (value, {filterNS, gmlNS}) => value.indexOf(`<${filterNS}:` === 0) || value.indexOf(`<${gmlNS}:`) === 0;
 /**
  * Returns OGC Filter Builder. The FilterBuilder returns the method to compose the filter.
