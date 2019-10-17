@@ -6,34 +6,61 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
+import expect from 'expect';
 
-const configureMockStore = require('redux-mock-store').default;
-const {createEpicMiddleware, combineEpics } = require('redux-observable');
-const {
-    saveDetails, SET_DETAILS_CHANGED, MAPS_LIST_LOADING, MAPS_LIST_LOADED,
-    CLOSE_DETAILS_PANEL, closeDetailsPanel, loadMaps, MAPS_GET_MAP_RESOURCES_BY_CATEGORY,
-    openDetailsPanel, UPDATE_DETAILS, DETAILS_LOADED, getMapResourcesByCategory,
-    MAP_DELETING, MAP_DELETED, deleteMap, mapDeleted, TOGGLE_DETAILS_SHEET,
-    saveMapResource, MAP_CREATED, DISPLAY_METADATA_EDIT, SAVING_MAP, MAP_UPDATING, MAPS_LOAD_MAP
-} = require('../../actions/maps');
-const { mapInfoLoaded } = require('../../actions/config');
-const {SHOW_NOTIFICATION} = require('../../actions/notifications');
-const {TOGGLE_CONTROL} = require('../../actions/controls');
-const {RESET_CURRENT_MAP, editMap} = require('../../actions/currentMap');
-const {CLOSE_FEATURE_GRID} = require('../../actions/featuregrid');
+import configureMockStore from 'redux-mock-store';
+import {createEpicMiddleware, combineEpics} from 'redux-observable';
 
-const {
-    setDetailsChangedEpic, loadMapsEpic, getMapsResourcesByCategoryEpic,
-    closeDetailsPanelEpic, fetchDataForDetailsPanel,
-    fetchDetailsFromResourceEpic, deleteMapAndAssociatedResourcesEpic,
-    storeDetailsInfoEpic, mapSaveMapResourceEpic, reloadMapsEpic} = require('../maps');
+import {
+    saveDetails,
+    SET_DETAILS_CHANGED,
+    MAPS_LIST_LOADING,
+    MAPS_LIST_LOADED,
+    CLOSE_DETAILS_PANEL,
+    closeDetailsPanel,
+    loadMaps,
+    MAPS_GET_MAP_RESOURCES_BY_CATEGORY,
+    openDetailsPanel,
+    UPDATE_DETAILS,
+    DETAILS_LOADED,
+    getMapResourcesByCategory,
+    MAP_DELETING,
+    MAP_DELETED,
+    deleteMap,
+    mapDeleted,
+    TOGGLE_DETAILS_SHEET,
+    saveMapResource,
+    MAP_CREATED,
+    DISPLAY_METADATA_EDIT,
+    SAVING_MAP,
+    MAP_UPDATING,
+    MAPS_LOAD_MAP,
+} from '../../actions/maps';
+
+import {mapInfoLoaded} from '../../actions/config';
+import {SHOW_NOTIFICATION} from '../../actions/notifications';
+import {TOGGLE_CONTROL} from '../../actions/controls';
+import {RESET_CURRENT_MAP, editMap} from '../../actions/currentMap';
+import {CLOSE_FEATURE_GRID} from '../../actions/featuregrid';
+
+import {
+    setDetailsChangedEpic,
+    loadMapsEpic,
+    getMapsResourcesByCategoryEpic,
+    closeDetailsPanelEpic,
+    fetchDataForDetailsPanel,
+    fetchDetailsFromResourceEpic,
+    deleteMapAndAssociatedResourcesEpic,
+    storeDetailsInfoEpic,
+    mapSaveMapResourceEpic,
+    reloadMapsEpic,
+} from '../maps';
+
 const rootEpic = combineEpics(setDetailsChangedEpic, closeDetailsPanelEpic);
 const epicMiddleware = createEpicMiddleware(rootEpic);
 const mockStore = configureMockStore([epicMiddleware]);
-const {testEpic, addTimeoutEpic, TEST_TIMEOUT} = require('./epicTestUtils');
-
-const ConfigUtils = require('../../utils/ConfigUtils');
+import {testEpic, addTimeoutEpic, TEST_TIMEOUT} from './epicTestUtils';
+import ConfigUtils from '../../utils/ConfigUtils';
 const params = {start: 0, limit: 12 };
 const baseUrl = "base/web/client/test-resources/geostore/";
 
@@ -535,8 +562,8 @@ describe('Get Map Resource By Category Epic', () => {
         });
     });
 });
-const Persistence = require("../../api/persistence");
-const Rx = require("rxjs");
+import Persistence from "../../api/persistence";
+import Rx from "rxjs";
 const api = {
     createResource: () => Rx.Observable.of(10),
     updateResource: () => Rx.Observable.of(10)

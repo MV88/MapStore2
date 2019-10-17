@@ -11,13 +11,14 @@
  * @type {Object}
  *
 */
-const Rx = require('rxjs');
-const axios = require('../libs/ajax');
-const {getWpsPayload} = require('../utils/ogc/WPS/autocomplete');
-const assign = require('object-assign');
-const {API} = require('../api/searchText');
-const {endsWith, head, isNil} = require('lodash');
-const url = require('url');
+import Rx from 'rxjs';
+
+import axios from '../libs/ajax';
+import {getWpsPayload} from '../utils/ogc/WPS/autocomplete';
+import assign from 'object-assign';
+import {API} from '../api/searchText';
+import {endsWith, head, isNil} from 'lodash';
+import url from 'url';
 
 const singleAttributeFilter = ({searchText = "", queriableAttributes = [], predicate = "ILIKE"} ) => {
     const attribute = head(queriableAttributes);
@@ -103,7 +104,8 @@ const createWFSFetchStream = (props$) =>
             }
             return Rx.Observable.of({fetchedData: {values: [], size: 0, features: []}, busy: false});
         }).startWith({});
-module.exports = {
+
+export default {
     createPagedUniqueAutompleteStream,
     createWFSFetchStream,
     singleAttributeFilter

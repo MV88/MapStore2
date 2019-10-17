@@ -5,42 +5,66 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const moment = require('moment');
-const { get } = require('lodash');
-const {
-    PLAY, PAUSE, STOP, STATUS, SET_FRAMES, SET_CURRENT_FRAME, TOGGLE_ANIMATION_MODE, ANIMATION_STEP_MOVE,
-    stop, setFrames, appendFrames, setCurrentFrame,
-    framesLoading, updateMetadata
-} = require('../actions/playback');
-const {
-    moveTime, SET_CURRENT_TIME, MOVE_TIME
-} = require('../actions/dimension');
-const {
-    selectLayer,
-    onRangeChanged,
-    timeDataLoading,
-    SELECT_LAYER,
-    SET_MAP_SYNC
-} = require('../actions/timeline');
+import moment from 'moment';
 
-const { changeLayerProperties, REMOVE_NODE } = require('../actions/layers');
+import {get} from 'lodash';
 
-const { error } = require('../actions/notifications');
+import {
+    PLAY,
+    PAUSE,
+    STOP,
+    STATUS,
+    SET_FRAMES,
+    SET_CURRENT_FRAME,
+    TOGGLE_ANIMATION_MODE,
+    ANIMATION_STEP_MOVE,
+    stop,
+    setFrames,
+    appendFrames,
+    setCurrentFrame,
+    framesLoading,
+    updateMetadata,
+} from '../actions/playback';
 
-const { currentTimeSelector, layersWithTimeDataSelector, layerTimeSequenceSelectorCreator } = require('../selectors/dimension');
+import {moveTime, SET_CURRENT_TIME, MOVE_TIME} from '../actions/dimension';
+import {selectLayer, onRangeChanged, timeDataLoading, SELECT_LAYER, SET_MAP_SYNC} from '../actions/timeline';
+import {changeLayerProperties, REMOVE_NODE} from '../actions/layers';
+import {error} from '../actions/notifications';
 
-const { LOCATION_CHANGE } = require('connected-react-router');
+import {
+    currentTimeSelector,
+    layersWithTimeDataSelector,
+    layerTimeSequenceSelectorCreator,
+} from '../selectors/dimension';
 
-const { currentFrameSelector, currentFrameValueSelector, lastFrameSelector, playbackRangeSelector, playbackSettingsSelector, frameDurationSelector, statusSelector, playbackMetadataSelector } = require('../selectors/playback');
+import {LOCATION_CHANGE} from 'connected-react-router';
 
-const { selectedLayerSelector, selectedLayerName, selectedLayerUrl, selectedLayerData, selectedLayerTimeDimensionConfiguration, rangeSelector, timelineLayersSelector, multidimOptionsSelectorCreator } = require('../selectors/timeline');
+import {
+    currentFrameSelector,
+    currentFrameValueSelector,
+    lastFrameSelector,
+    playbackRangeSelector,
+    playbackSettingsSelector,
+    frameDurationSelector,
+    statusSelector,
+    playbackMetadataSelector,
+} from '../selectors/playback';
 
-const pausable = require('../observables/pausable');
-const { wrapStartStop } = require('../observables/epics');
+import {
+    selectedLayerSelector,
+    selectedLayerName,
+    selectedLayerUrl,
+    selectedLayerData,
+    selectedLayerTimeDimensionConfiguration,
+    rangeSelector,
+    timelineLayersSelector,
+    multidimOptionsSelectorCreator,
+} from '../selectors/timeline';
 
-const { getDomainValues } = require('../api/MultiDim');
-
-const Rx = require('rxjs');
+import pausable from '../observables/pausable';
+import {wrapStartStop} from '../observables/epics';
+import {getDomainValues} from '../api/MultiDim';
+import Rx from 'rxjs';
 
 const BUFFER_SIZE = 20;
 const PRELOAD_BEFORE = 10;
@@ -160,7 +184,7 @@ const isOutOfRange = (time, { start, end } = {}) =>
     start && end && ( moment(time).isBefore(start) || moment(time).isAfter(end));
 
 
-module.exports = {
+export default {
     /**
      * When animation start, triggers the flow to retrieve the frames, buffering them:
      * The first setFrames will trigger the animation.

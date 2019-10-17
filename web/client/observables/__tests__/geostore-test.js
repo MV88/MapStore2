@@ -5,8 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
-const {createResource, deleteResource} = require('../geostore');
+import expect from 'expect';
+
+import {createResource, deleteResource} from '../geostore';
 const testAndResolve = (test = () => {}, value) => (...args) => {
     test(...args);
     return new Promise(resolve => resolve(value));

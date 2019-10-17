@@ -6,13 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const L = require('leaflet');
-const {isFunction} = require('lodash');
+import L from 'leaflet';
+
+import {isFunction} from 'lodash';
 
 require('leaflet-extra-markers');
 require('leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css');
 
-module.exports = {
+export default {
     extra: {
         getIcon: (style) => {
             const prefix = style.iconPrefix || 'fa';

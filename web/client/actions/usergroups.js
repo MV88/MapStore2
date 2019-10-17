@@ -28,9 +28,10 @@ const USERGROUPMANAGER_UPDATE_GROUP = 'USERMANAGER_UPDATE_GROUP';
 const USERGROUPMANAGER_DELETE_GROUP = 'USERMANAGER_DELETE_GROUP';
 const USERGROUPMANAGER_SEARCH_TEXT_CHANGED = 'USERGROUPMANAGER_SEARCH_TEXT_CHANGED';
 */
-const API = require('../api/GeoStoreDAO');
-const {get/* , assign*/} = require('lodash');
-const assign = require('object-assign');
+import API from '../api/GeoStoreDAO';
+
+import {get} from 'lodash';
+import assign from 'object-assign';
 
 function getUserGroupsLoading(text, start, limit) {
     return {
@@ -323,7 +324,7 @@ function searchUsers(text = "*", start = 0, limit = 5, options = {}, jollyChar =
     };
 }
 
-module.exports = {
+export default {
     getUserGroups, GETGROUPS,
     editGroup, EDITGROUP,
     changeGroupMetadata, EDITGROUPDATA,

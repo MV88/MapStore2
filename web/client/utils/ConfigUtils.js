@@ -5,14 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var Proj4js = require('proj4').default;
-const PropTypes = require('prop-types');
-var url = require('url');
+import Proj4js from 'proj4';
 
-var axios = require('axios');
-const {isArray, isObject, endsWith, isNil} = require('lodash');
-const assign = require('object-assign');
-const {Promise} = require('es6-promise');
+import PropTypes from 'prop-types';
+import url from 'url';
+import axios from 'axios';
+import {isArray, isObject, endsWith, isNil} from 'lodash';
+import assign from 'object-assign';
+import {Promise} from 'es6-promise';
 
 const epsg4326 = Proj4js ? new Proj4js.Proj('EPSG:4326') : null;
 const centerPropType = PropTypes.shape({
@@ -23,7 +23,7 @@ const centerPropType = PropTypes.shape({
 
 const urlQuery = url.parse(window.location.href, true).query;
 
-const isMobile = require('ismobilejs');
+import isMobile from 'ismobilejs';
 
 let localConfigFile = 'localConfig.json';
 
@@ -457,4 +457,4 @@ var ConfigUtils = {
     }
 };
 
-module.exports = ConfigUtils;
+export default ConfigUtils;

@@ -352,7 +352,7 @@ const setTimeSync = value => ({
     value
 });
 
-module.exports = {
+export default {
     SELECT_FEATURES,
     DESELECT_FEATURES,
     CLEAR_SELECTION,

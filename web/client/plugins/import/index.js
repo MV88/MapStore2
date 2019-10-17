@@ -5,10 +5,10 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
-const {onShapeError} = require('../../actions/mapimport');
-const {setStyleParameter} = require('../../actions/style');
+import {onShapeError} from '../../actions/mapimport';
+import {setStyleParameter} from '../../actions/style';
 
 const ShapeFileUploadAndStyle = connect((state) => (
     {
@@ -44,7 +44,7 @@ const StylePolyline = connect((state) => (
     setStyleParameter: setStyleParameter
 })(require('../../components/style/StylePolyline'));
 
-module.exports = {
+export default {
     ShapeFileUploadAndStyle,
     StylePolygon,
     StylePolyline,

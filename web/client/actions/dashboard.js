@@ -13,7 +13,7 @@ const DASHBOARD_LOADED = "DASHBOARD:DASHBOARD_LOADED";
 const DASHBOARD_LOADING = "DASHBOARD:DASHBOARD_LOADING";
 const DASHBOARD_LOAD_ERROR = "DASHBOARD:DASHBOARD_LOAD_ERROR";
 
-module.exports = {
+export default {
     SET_EDITING,
     setEditing: (editing) => ({type: SET_EDITING, editing }),
     SET_EDITOR_AVAILABLE,

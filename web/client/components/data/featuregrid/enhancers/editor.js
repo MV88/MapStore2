@@ -1,15 +1,22 @@
-const {featureTypeToGridColumns, getToolColumns, getRow, getRowVirtual, getGridEvents, applyAllChanges, createNewAndEditingFilter} = require('../../../../utils/FeatureGridUtils');
-const EditorRegistry = require('../../../../utils/featuregrid/EditorRegistry');
-const {compose, withPropsOnChange, withHandlers, defaultProps, createEventHandler} = require('recompose');
-const {isNil} = require('lodash');
-const {getFilterRenderer} = require('../filterRenderers');
-const {getFormatter} = require('../formatters');
-const {manageFilterRendererState} = require('../enhancers/filterRenderers');
+import {
+    featureTypeToGridColumns,
+    getToolColumns,
+    getRow,
+    getRowVirtual,
+    getGridEvents,
+    applyAllChanges,
+    createNewAndEditingFilter,
+} from '../../../../utils/FeatureGridUtils';
 
-const propsStreamFactory = require('../../../misc/enhancers/propsStreamFactory');
-
-const editors = require('../editors');
-const {getRowIdx} = require('../../../../utils/FeatureGridUtils');
+import EditorRegistry from '../../../../utils/featuregrid/EditorRegistry';
+import {compose, withPropsOnChange, withHandlers, defaultProps, createEventHandler} from 'recompose';
+import {isNil} from 'lodash';
+import {getFilterRenderer} from '../filterRenderers';
+import {getFormatter} from '../formatters';
+import {manageFilterRendererState} from '../enhancers/filterRenderers';
+import propsStreamFactory from '../../../misc/enhancers/propsStreamFactory';
+import editors from '../editors';
+import {getRowIdx} from '../../../../utils/FeatureGridUtils';
 const loadMoreFeaturesStream = $props => {
     return $props
         .distinctUntilChanged(({features: oF, pages: oPages, isFocused: oFocused}, {features: nF, pages: nPages, isFocused: nFocused}) => oF === nF && oFocused === nFocused && oPages === nPages)
@@ -191,6 +198,7 @@ const featuresToGrid = compose(
     ),
     propsStreamFactory
 );
-module.exports = {
+
+export default {
     featuresToGrid
 };

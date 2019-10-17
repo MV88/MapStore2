@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-var {
+import expect from 'expect';
+
+import {
     TOGGLE_NODE,
     SORT_NODE,
     REMOVE_NODE,
@@ -57,9 +58,10 @@ var {
     showLayerMetadata,
     hideLayerMetadata,
     updateSettingsParams,
-    addGroup
-} = require('../layers');
-var {getLayerCapabilities} = require('../layerCapabilities');
+    addGroup,
+} from '../layers';
+
+import {getLayerCapabilities} from '../layerCapabilities';
 
 describe('Test correctness of the layers actions', () => {
     it('test layer properties change action', (done) => {

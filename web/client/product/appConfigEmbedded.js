@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const {updateMapLayoutEpic} = require('../epics/maplayout');
-const {readQueryParamsOnMapEpic} = require('../epics/queryparams');
+import {updateMapLayoutEpic} from '../epics/maplayout';
 
-module.exports = {
+import {readQueryParamsOnMapEpic} from '../epics/queryparams';
+
+export default {
     mode: "embedded",
     pages: [{
         name: "mapviewer",

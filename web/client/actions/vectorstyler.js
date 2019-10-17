@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const uuid = require('uuid');
+import uuid from 'uuid';
 
 const SET_VECTOR_RULE_PARAMETER = 'SET_VECTOR_RULE_PARAMETER';
 const NEW_VECTOR_RULE = 'NEW_VECTOR_RULE';
@@ -53,7 +53,8 @@ function selectVectorRule(id) {
         id
     };
 }
-module.exports = {
+
+export default {
     NEW_VECTOR_RULE,
     REMOVE_VECTOR_RULE,
     SELECT_VECTOR_RULE,

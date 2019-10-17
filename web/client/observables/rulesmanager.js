@@ -1,12 +1,11 @@
-const Rx = require('rxjs');
-
-const GeoFence = require('../api/geoserver/GeoFence');
-const ConfigUtils = require('../utils/ConfigUtils');
-const { trim} = require("lodash");
-const WMS = require('../api/WMS');
-const {getLayerCapabilities, describeLayer} = require("./wms");
-const {describeFeatureType} = require("./wfs");
-const {RULE_SAVED} = require("../actions/rulesmanager");
+import Rx from 'rxjs';
+import GeoFence from '../api/geoserver/GeoFence';
+import ConfigUtils from '../utils/ConfigUtils';
+import {trim} from "lodash";
+import WMS from '../api/WMS';
+import {getLayerCapabilities, describeLayer} from "./wms";
+import {describeFeatureType} from "./wfs";
+import {RULE_SAVED} from "../actions/rulesmanager";
 
 const fixUrl = (url) => {
     const u = trim(url, "/");
@@ -77,7 +76,8 @@ const grantUpdate = (update$) => update$.filter(({rule: r, origRule: oR}) => get
 // if priority and grant are the same we just need to update new rule
 const justUpdate = (update$) => update$.filter(({rule: r, origRule: oR}) => getUpdateType(oR, r) === 'simple')
     .switchMap(({rule}) => Rx.Observable.defer(() => GeoFence.updateRule(rule)));
-module.exports = {
+
+export default {
     loadRules: (pages = [], filters = {}, size) =>
         Rx.Observable.combineLatest(pages.map(p => loadSinglePage(p, filters, size)))
             .map(results => results.reduce( (acc, {page, rules}) => ({...acc, [page]: rules}), {}))

@@ -222,7 +222,7 @@ function setDefaultStyle() {
 * Actions for styleeditor
 * @name actions.styleeditor
 */
-module.exports = {
+export default {
     UPDATE_TEMPORARY_STYLE,
     UPDATE_STATUS,
     TOGGLE_STYLE_EDITOR,

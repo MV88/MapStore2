@@ -110,7 +110,7 @@ function init(defaultOptions = {}) {
     };
 }
 
-module.exports = {
+export default {
     CHANGE_MEASUREMENT_TOOL,
     CHANGE_MEASUREMENT_STATE,
     changeUom, CHANGE_UOM,

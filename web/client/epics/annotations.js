@@ -6,38 +6,70 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const {saveAs} = require('file-saver');
-const {MAP_CONFIG_LOADED} = require('../actions/config');
-const {TOGGLE_CONTROL, toggleControl, setControlProperty} = require('../actions/controls');
-const {addLayer, updateNode, changeLayerProperties, removeLayer} = require('../actions/layers');
-const {set} = require('../utils/ImmutableUtils');
-const {reprojectGeoJson} = require('../utils/CoordinatesUtils');
-const {error} = require('../actions/notifications');
-const {closeFeatureGrid} = require('../actions/featuregrid');
-const {isFeatureGridOpen} = require('../selectors/featuregrid');
-const {queryPanelSelector, measureSelector} = require('../selectors/controls');
-const { hideMapinfoMarker, purgeMapInfoResults, closeIdentify} = require('../actions/mapInfo');
+import Rx from 'rxjs';
 
-const {updateAnnotationGeometry, setStyle, toggleStyle, cleanHighlight, toggleAdd,
-    showAnnotation, editAnnotation,
-    CONFIRM_REMOVE_ANNOTATION, SAVE_ANNOTATION, EDIT_ANNOTATION, CANCEL_EDIT_ANNOTATION,
-    SET_STYLE, RESTORE_STYLE, HIGHLIGHT, CLEAN_HIGHLIGHT, CONFIRM_CLOSE_ANNOTATIONS, START_DRAWING,
-    CANCEL_CLOSE_TEXT, SAVE_TEXT, DOWNLOAD, LOAD_ANNOTATIONS, CHANGED_SELECTED, RESET_COORD_EDITOR, CHANGE_RADIUS,
-    ADD_NEW_FEATURE, CHANGE_TEXT, NEW_ANNOTATION, TOGGLE_STYLE, CONFIRM_DELETE_FEATURE, OPEN_EDITOR
-} = require('../actions/annotations');
+import {saveAs} from 'file-saver';
+import {MAP_CONFIG_LOADED} from '../actions/config';
+import {TOGGLE_CONTROL, toggleControl, setControlProperty} from '../actions/controls';
+import {addLayer, updateNode, changeLayerProperties, removeLayer} from '../actions/layers';
+import {set} from '../utils/ImmutableUtils';
+import {reprojectGeoJson} from '../utils/CoordinatesUtils';
+import {error} from '../actions/notifications';
+import {closeFeatureGrid} from '../actions/featuregrid';
+import {isFeatureGridOpen} from '../selectors/featuregrid';
+import {queryPanelSelector, measureSelector} from '../selectors/controls';
+import {hideMapinfoMarker, purgeMapInfoResults, closeIdentify} from '../actions/mapInfo';
 
-const uuidv1 = require('uuid/v1');
-const {FEATURES_SELECTED, GEOMETRY_CHANGED, DRAWING_FEATURE} = require('../actions/draw');
-const {PURGE_MAPINFO_RESULTS} = require('../actions/mapInfo');
+import {
+    updateAnnotationGeometry,
+    setStyle,
+    toggleStyle,
+    cleanHighlight,
+    toggleAdd,
+    showAnnotation,
+    editAnnotation,
+    CONFIRM_REMOVE_ANNOTATION,
+    SAVE_ANNOTATION,
+    EDIT_ANNOTATION,
+    CANCEL_EDIT_ANNOTATION,
+    SET_STYLE,
+    RESTORE_STYLE,
+    HIGHLIGHT,
+    CLEAN_HIGHLIGHT,
+    CONFIRM_CLOSE_ANNOTATIONS,
+    START_DRAWING,
+    CANCEL_CLOSE_TEXT,
+    SAVE_TEXT,
+    DOWNLOAD,
+    LOAD_ANNOTATIONS,
+    CHANGED_SELECTED,
+    RESET_COORD_EDITOR,
+    CHANGE_RADIUS,
+    ADD_NEW_FEATURE,
+    CHANGE_TEXT,
+    NEW_ANNOTATION,
+    TOGGLE_STYLE,
+    CONFIRM_DELETE_FEATURE,
+    OPEN_EDITOR,
+} from '../actions/annotations';
 
-const {head, findIndex, castArray, isArray, find} = require('lodash');
-const assign = require('object-assign');
-const {annotationsLayerSelector, multiGeometrySelector} = require('../selectors/annotations');
-const {normalizeAnnotation, removeDuplicate, validateCoordsArray, getStartEndPointsForLinestring, DEFAULT_ANNOTATIONS_STYLES} = require('../utils/AnnotationsUtils');
+import uuidv1 from 'uuid/v1';
+import {FEATURES_SELECTED, GEOMETRY_CHANGED, DRAWING_FEATURE} from '../actions/draw';
+import {PURGE_MAPINFO_RESULTS} from '../actions/mapInfo';
+import {head, findIndex, castArray, isArray, find} from 'lodash';
+import assign from 'object-assign';
+import {annotationsLayerSelector, multiGeometrySelector} from '../selectors/annotations';
 
-const {mapNameSelector} = require('../selectors/map');
-const {changeDrawingStatus} = require('../actions/draw');
+import {
+    normalizeAnnotation,
+    removeDuplicate,
+    validateCoordsArray,
+    getStartEndPointsForLinestring,
+    DEFAULT_ANNOTATIONS_STYLES,
+} from '../utils/AnnotationsUtils';
+
+import {mapNameSelector} from '../selectors/map';
+import {changeDrawingStatus} from '../actions/draw';
 
 /**
     * Epics for annotations
@@ -153,7 +185,7 @@ const createNewFeature = (action) => {
 };
 
 
-module.exports = (viewer) => ({
+export default (viewer) => ({
     addAnnotationsLayerEpic: (action$, store) => action$.ofType(MAP_CONFIG_LOADED)
         .switchMap(() => {
             const annotationsLayer = annotationsLayerSelector(store.getState());

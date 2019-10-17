@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const {castArray} = require('lodash');
+import Rx from 'rxjs';
+
+import {castArray} from 'lodash';
 const start = (stream$, actions = []) => stream$
     .startWith(...actions);
 /**
@@ -33,6 +34,6 @@ const wrapStartStop = (startAction, endAction, exceptionStream$) => stream$ =>
  * @module observables.epics
  */
 
-module.exports = {
+export default {
     wrapStartStop
 };

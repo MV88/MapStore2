@@ -294,7 +294,7 @@ function updateSettingsParams(newParams, update) {
     };
 }
 
-module.exports = {
+export default {
     changeLayerProperties, changeLayerParams, changeGroupProperties, toggleNode, sortNode, removeNode, contextNode,
     updateNode, moveNode, layerLoading, layerLoad, layerError, addLayer, removeLayer, showSettings, hideSettings, updateSettings, refreshLayers,
     layersRefreshed, layersRefreshError, refreshLayerVersion, updateLayerDimension, browseData, clearLayers, selectNode, filterLayers, showLayerMetadata,

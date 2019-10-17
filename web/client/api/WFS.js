@@ -5,10 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
-const urlUtil = require('url');
-const assign = require('object-assign');
+import urlUtil from 'url';
+import assign from 'object-assign';
 
 const Api = {
     /**
@@ -49,4 +49,4 @@ const Api = {
     }
 };
 
-module.exports = Api;
+export default Api;

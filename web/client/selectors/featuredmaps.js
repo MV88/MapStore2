@@ -12,8 +12,9 @@
  * @memberof selectors
  * @static
  */
-const { get } = require('lodash');
-module.exports = {
+import {get} from 'lodash';
+
+export default {
     /**
      * selects latestResource from featuredmaps, it's the latest resource updated
      * it's needed to update the current featured maps list

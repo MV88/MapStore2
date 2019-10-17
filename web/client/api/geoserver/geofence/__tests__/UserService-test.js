@@ -17,12 +17,11 @@ const ServiceSpecificUserService = require('../UserService')({
     addBaseUrlGS: (options) => ({ baseURL: BASE_URL, ...options }),
     getUserService: () => "geostore"
 });
-const USERS = require('../../../../test-resources/geoserver/rest/users.json');
-const ROLES = require('../../../../test-resources/geoserver/rest/roles.json');
-const expect = require('expect');
-
-const axios = require('../../../../libs/ajax');
-const MockAdapter = require('axios-mock-adapter');
+import USERS from '../../../../test-resources/geoserver/rest/users.json';
+import ROLES from '../../../../test-resources/geoserver/rest/roles.json';
+import expect from 'expect';
+import axios from '../../../../libs/ajax';
+import MockAdapter from 'axios-mock-adapter';
 
 let mockAxios;
 

@@ -5,15 +5,25 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const Rx = require('rxjs');
-const {updateMapLayout} = require('../actions/maplayout');
-const {TOGGLE_CONTROL, SET_CONTROL_PROPERTY, SET_CONTROL_PROPERTIES} = require('../actions/controls');
-const {MAP_CONFIG_LOADED} = require('../actions/config');
-const {SIZE_CHANGE, CLOSE_FEATURE_GRID, OPEN_FEATURE_GRID} = require('../actions/featuregrid');
-const {CLOSE_IDENTIFY, ERROR_FEATURE_INFO, TOGGLE_MAPINFO_STATE, LOAD_FEATURE_INFO, EXCEPTIONS_FEATURE_INFO, NO_QUERYABLE_LAYERS} = require('../actions/mapInfo');
-const {SHOW_SETTINGS, HIDE_SETTINGS} = require('../actions/layers');
-const {isMapInfoOpen} = require('../selectors/mapInfo');
-const {showCoordinateEditorSelector} = require('../selectors/controls');
+import Rx from 'rxjs';
+
+import {updateMapLayout} from '../actions/maplayout';
+import {TOGGLE_CONTROL, SET_CONTROL_PROPERTY, SET_CONTROL_PROPERTIES} from '../actions/controls';
+import {MAP_CONFIG_LOADED} from '../actions/config';
+import {SIZE_CHANGE, CLOSE_FEATURE_GRID, OPEN_FEATURE_GRID} from '../actions/featuregrid';
+
+import {
+    CLOSE_IDENTIFY,
+    ERROR_FEATURE_INFO,
+    TOGGLE_MAPINFO_STATE,
+    LOAD_FEATURE_INFO,
+    EXCEPTIONS_FEATURE_INFO,
+    NO_QUERYABLE_LAYERS,
+} from '../actions/mapInfo';
+
+import {SHOW_SETTINGS, HIDE_SETTINGS} from '../actions/layers';
+import {isMapInfoOpen} from '../selectors/mapInfo';
+import {showCoordinateEditorSelector} from '../selectors/controls';
 
 /**
  * Epìcs for feature grid
@@ -21,8 +31,9 @@ const {showCoordinateEditorSelector} = require('../selectors/controls');
  * @name mapLayout
  */
 
-const {head, get} = require('lodash');
-const {isFeatureGridOpen, getDockSize} = require('../selectors/featuregrid');
+import {head, get} from 'lodash';
+
+import {isFeatureGridOpen, getDockSize} from '../selectors/featuregrid';
 
 /**
  * Capture that cause layout change to update the proper object.
@@ -102,6 +113,6 @@ const updateMapLayoutEpic = (action$, store) =>
             }));
         });
 
-module.exports = {
+export default {
     updateMapLayoutEpic
 };

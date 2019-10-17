@@ -6,9 +6,10 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const CoordinatesUtils = require('../utils/CoordinatesUtils');
-const {createSelector} = require('reselect');
-const {get} = require('lodash');
+import CoordinatesUtils from '../utils/CoordinatesUtils';
+
+import {createSelector} from 'reselect';
+import {get} from 'lodash';
 
 /**
  * selects map state
@@ -83,7 +84,7 @@ const mapVersionSelector = (state) => state.map && state.map.present && state.ma
  */
 const mapNameSelector = (state) => state.map && state.map.present && state.map.present.info && state.map.present.info.name || '';
 
-module.exports = {
+export default {
     mapInfoDetailsUriFromIdSelector,
     mapSelector,
     scalesSelector,

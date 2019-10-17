@@ -1,6 +1,6 @@
-const {get} = require('lodash');
-const {createSelector} = require('reselect');
-const {reprojectGeoJson} = require('../utils/CoordinatesUtils');
+import {get} from 'lodash';
+import {createSelector} from 'reselect';
+import {reprojectGeoJson} from '../utils/CoordinatesUtils';
 
 const selectedFeatures = (state) => get(state, state && state.highlight && state.highlight.featuresPath || "highlight.emptyFeatures") || [];
 const filteredspatialObject = (state) => get(state, state && state.featuregrid && state.featuregrid.open && state.featuregrid.showFilteredObject && "query.filterObj.spatialField" || "emptyObject");
@@ -48,7 +48,7 @@ const highlighedFeatures = createSelector(
     (featuresFiltered, featuresSelected) => [ ...featuresSelected, ...featuresFiltered]
 );
 
-module.exports = {
+export default {
     selectedFeatures, filteredFeatures, filteredSpatialObjectId, filteredSpatialObjectCrs, filteredspatialObjectCoord,
     filteredspatialObjectType, filteredGeometry, filteredspatialObject, highlighedFeatures
 };

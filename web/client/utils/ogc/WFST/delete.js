@@ -7,7 +7,8 @@
  */
 
 
-const {fidFilter} = require('../Filter/base');
+import {fidFilter} from '../Filter/base';
+
 /**
  * Generate WFS delete features
  * @function
@@ -19,7 +20,8 @@ const deleteFeaturesByFilter = (ns, content, typeName) =>
     `<${ns}:Delete typeName="${typeName}">${content}</${ns}:Delete>`;
 const deleteById = (ns, fid, typeName) => deleteFeaturesByFilter(ns, fidFilter("ogc", fid), typeName);
 const deleteFeature = (ns, feature, typeName) => deleteById(ns, feature.features && feature.features.length === 1 ? feature.features[0].id : feature.id, typeName);
-module.exports = {
+
+export default {
     deleteFeaturesByFilter,
     deleteById,
     deleteFeature

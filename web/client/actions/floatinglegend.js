@@ -32,11 +32,12 @@ function expandLegend(expanded) {
         expanded
     };
 }
+
 /**
  * Actions for floatinglegend.
  * @name actions.floatinglegend
  */
-module.exports = {
+export default {
     RESIZE_LEGEND,
     EXPAND_LEGEND,
     resizeLegend,

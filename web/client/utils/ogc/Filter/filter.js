@@ -9,7 +9,7 @@ const filter = (ns = "ogc", content) => `<${ns}:Filter>${Array.isArray(content) 
 const fidFilter = (ns = "ogc", fid ) =>
     filter(ns, `<${ns}:FeatureId fid="${fid}"/>`);
 
-module.exports = {
+export default {
     fidFilter,
     filter
 };

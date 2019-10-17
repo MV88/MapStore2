@@ -6,11 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-var {
-    THEME_SELECTED,
-    selectTheme
-} = require('../theme');
+import expect from 'expect';
+
+import {THEME_SELECTED, selectTheme} from '../theme';
 
 describe('Test theme related actions', () => {
     it('test theme selection action', () => {

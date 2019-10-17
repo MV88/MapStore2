@@ -32,7 +32,7 @@ const isCesium = state => mapTypeSelector(state) === "cesium";
 const isLeaflet = state => mapTypeSelector(state) === "leaflet";
 const isOpenlayers = state => mapTypeSelector(state) === "openlayers";
 
-module.exports = {
+export default {
     mapTypeSelector,
     isCesium,
     isLeaflet,

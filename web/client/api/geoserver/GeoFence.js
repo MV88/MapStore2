@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../../libs/ajax');
-const assign = require('object-assign');
-const {castArray, get} = require('lodash');
-const CatalogAPI = require('../CSW');
+import axios from '../../libs/ajax';
 
-const ConfigUtils = require('../../utils/ConfigUtils');
+import assign from 'object-assign';
+import {castArray, get} from 'lodash';
+import CatalogAPI from '../CSW';
+import ConfigUtils from '../../utils/ConfigUtils';
 
 /**
  * Services to retrieve users and groups (roles)
@@ -167,4 +167,4 @@ var Api = {
     }
 };
 
-module.exports = Api;
+export default Api;

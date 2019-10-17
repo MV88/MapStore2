@@ -6,14 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const csstree = require('css-tree');
-const assign = require('object-assign');
+import csstree from 'css-tree';
+
+import assign from 'object-assign';
 
 const css = {
     fontawesome: require('raw-loader!./font-awesome.txt')
 };
-const baseImageUrl = require('../components/mapcontrols/annotations/img/markers_default.png');
-const shadowImageUrl = require('../components/mapcontrols/annotations/img/markers_shadow.png');
+import baseImageUrl from '../components/mapcontrols/annotations/img/markers_default.png';
+import shadowImageUrl from '../components/mapcontrols/annotations/img/markers_shadow.png';
 
 const baseImage = new Image();
 const shadowImage = new Image();
@@ -140,4 +141,4 @@ MarkerUtils.markers = {
     'extra': MarkerUtils.extraMarkers
 };
 
-module.exports = MarkerUtils;
+export default MarkerUtils;

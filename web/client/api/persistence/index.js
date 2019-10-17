@@ -5,7 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const ConfigUtils = require("../../utils/ConfigUtils");
+import ConfigUtils from "../../utils/ConfigUtils";
+
 const ApiProviders = {
     geostore: require("../../observables/geostore")
 };
@@ -106,4 +107,4 @@ const Persistence = {
     deleteResource: (...args) => Persistence.getApi().deleteResource(...args)
 };
 
-module.exports = Persistence;
+export default Persistence;

@@ -43,7 +43,7 @@ function updateService(service, idx = -1) {
 * Actions for search
 * @name actions.searchconfig
 */
-module.exports = {
+export default {
     SET_SEARCH_CONFIG_PROP,
     RESET_SEARCH_CONFIG,
     UPDATE_SERVICE,

@@ -1,11 +1,11 @@
-const Rx = require('rxjs');
-const {get} = require('lodash');
-const {parseString} = require('xml2js');
-const {stripPrefix} = require('xml2js/lib/processors');
-const GeoStoreApi = require('../api/GeoStoreDAO');
-const {updatePermissions, updateAttribute, doNothing} = require('../actions/maps');
-const ConfigUtils = require('../utils/ConfigUtils');
-const {basicSuccess, basicError} = require('../utils/NotificationUtils');
+import Rx from 'rxjs';
+import {get} from 'lodash';
+import {parseString} from 'xml2js';
+import {stripPrefix} from 'xml2js/lib/processors';
+import GeoStoreApi from '../api/GeoStoreDAO';
+import {updatePermissions, updateAttribute, doNothing} from '../actions/maps';
+import ConfigUtils from '../utils/ConfigUtils';
+import {basicSuccess, basicError} from '../utils/NotificationUtils';
 
 class OGCError extends Error {
     constructor(message, code) {
@@ -93,7 +93,7 @@ const deleteResourceById = (resId, options) => resId ?
         .catch((e) => {return {error: e, resType: "error"}; }) :
     Rx.Observable.of({resType: "success"});
 
-module.exports = {
+export default {
     parseXML,
     deleteResourceById,
     createAssociatedResource,

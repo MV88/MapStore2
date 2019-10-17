@@ -5,9 +5,10 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const {head} = require('lodash');
-const {mapSelector} = require('./map');
-const {parseLayoutValue} = require('../utils/MapUtils');
+import {head} from 'lodash';
+
+import {mapSelector} from './map';
+import {parseLayoutValue} from '../utils/MapUtils';
 
 /**
  * selects map layout state
@@ -109,7 +110,7 @@ const mapPaddingSelector = state => {
     };
 };
 
-module.exports = {
+export default {
     mapLayoutSelector,
     mapLayoutValuesSelector,
     checkConditionsSelector,

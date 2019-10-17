@@ -1,7 +1,6 @@
-const {error, success} = require('../actions/notifications');
+import {error, success} from '../actions/notifications';
 
-
-module.exports = {
+export default {
 
     basicError: ({ title = "notification.warning", autoDismiss = 6, position = "tc", message = "Error" } = {}) =>
         error({ title, autoDismiss, position, message }),

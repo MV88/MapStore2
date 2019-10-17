@@ -805,4 +805,4 @@ const CONFIGPROVIDER = {
         }
     }
 };
-module.exports = CONFIGPROVIDER;
+export default CONFIGPROVIDER;

@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {get, findIndex} = require('lodash');
-const set = require('lodash/fp/set');
-const unset = require('lodash/fp/unset');
-const compose = require('lodash/fp/compose');
+import {get, findIndex} from 'lodash';
+
+import set from 'lodash/fp/set';
+import unset from 'lodash/fp/unset';
+import compose from 'lodash/fp/compose';
 
 /**
  * Utility functions for reducers and immutable objects in general
@@ -77,7 +78,8 @@ const arrayDelete = (path, condition, object) => {
     }
     return object;
 };
-module.exports = {
+
+export default {
     /**
      * Set of lodash fp. **NOTE:** This function is curried, so partial applications will return a function that takes the missing parameters
      * @param {string} path the path

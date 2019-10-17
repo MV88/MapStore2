@@ -6,10 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require("expect");
-const axios = require("axios");
-const {isObject} = require("lodash");
-const {
+import expect from "expect";
+
+import axios from "axios";
+import {isObject} from "lodash";
+
+import {
     isAttrPresent,
     isStrokeStyle,
     isFillStyle,
@@ -30,8 +32,8 @@ const {
     createStylesAsync,
     setSymbolsStyles,
     getSymbolsStyles,
-    getStyleParser
-} = require("../VectorStyleUtils");
+    getStyleParser,
+} from "../VectorStyleUtils";
 
 const LENGTH_OF_OBJECT_DATA_URL = "blob:http://localhost:9876/87844744-f879-4f5b-90bc-2cc6e70ba3cd".length;
 

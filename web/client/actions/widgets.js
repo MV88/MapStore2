@@ -5,7 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const uuid = require('uuid/v1');
+import uuid from 'uuid/v1';
+
 const INSERT = "WIDGETS:INSERT";
 const NEW = "WIDGETS:NEW";
 const EDIT = "WIDGETS:EDIT";
@@ -285,7 +286,7 @@ const toggleCollapseAll = (target = DEFAULT_TARGET) => ({
  */
 const toggleTray = value => ({ type: TOGGLE_TRAY, value});
 
-module.exports = {
+export default {
     NEW,
     INSERT,
     UPDATE,

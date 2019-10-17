@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
 const CHANGE_VERSION = 'CHANGE_VERSION';
 const LOAD_VERSION_ERROR = 'LOAD_VERSION_ERROR';
@@ -53,5 +53,5 @@ function loadVersion(config = 'version.txt') {
  * Actions for version
  * @name actions.version
  */
-module.exports = {CHANGE_VERSION, LOAD_VERSION_ERROR,
+export default {CHANGE_VERSION, LOAD_VERSION_ERROR,
     loadVersion, loadVersionError, changeVersion};

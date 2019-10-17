@@ -6,26 +6,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const Message = require('../../components/I18N/Message');
-const {defaultProps} = require('recompose');
-const {Glyphicon} = require('react-bootstrap');
+import React from 'react';
 
-const assign = require('object-assign');
-const HTMLViewer = require('../../components/data/identify/viewers/HTMLViewer');
-const TextViewer = require('../../components/data/identify/viewers/TextViewer');
-const JSONViewer = require('../../components/data/identify/viewers/JSONViewer');
-const HtmlRenderer = require('../../components/misc/HtmlRenderer');
-
-const MapInfoUtils = require('../../utils/MapInfoUtils');
-const PluginsUtils = require('../../utils/PluginsUtils');
-
-const General = require('../../components/TOC/fragments/settings/General');
-const Display = require('../../components/TOC/fragments/settings/Display');
-
-const Elevation = require('../../components/TOC/fragments/settings/Elevation');
-const FeatureInfoEditor = require('../../components/TOC/fragments/settings/FeatureInfoEditor');
-const LoadingView = require('../../components/misc/LoadingView');
+import Message from '../../components/I18N/Message';
+import {defaultProps} from 'recompose';
+import {Glyphicon} from 'react-bootstrap';
+import assign from 'object-assign';
+import HTMLViewer from '../../components/data/identify/viewers/HTMLViewer';
+import TextViewer from '../../components/data/identify/viewers/TextViewer';
+import JSONViewer from '../../components/data/identify/viewers/JSONViewer';
+import HtmlRenderer from '../../components/misc/HtmlRenderer';
+import MapInfoUtils from '../../utils/MapInfoUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
+import General from '../../components/TOC/fragments/settings/General';
+import Display from '../../components/TOC/fragments/settings/Display';
+import Elevation from '../../components/TOC/fragments/settings/Elevation';
+import FeatureInfoEditor from '../../components/TOC/fragments/settings/FeatureInfoEditor';
+import LoadingView from '../../components/misc/LoadingView';
 
 const responses = {
     html: require('raw-loader!./featureInfoPreviews/responseHTML.txt'),
@@ -33,7 +30,7 @@ const responses = {
     text: require('raw-loader!./featureInfoPreviews/responseText.txt')
 };
 
-const { StyleSelector } = require('../styleeditor/index');
+import {StyleSelector} from '../styleeditor/index';
 const StyleList = defaultProps({ readOnly: true })(StyleSelector);
 
 const formatCards = {
@@ -122,7 +119,7 @@ const getConfiguredPlugin = (plugin, loaded, loadingComp) => {
 
 let settingsPlugins;
 
-module.exports = ({showFeatureInfoTab = true, ...props}, {plugins, pluginsConfig, loadedPlugins}) => {
+export default ({showFeatureInfoTab = true, ...props}, {plugins, pluginsConfig, loadedPlugins}) => {
     if (!settingsPlugins) {
         settingsPlugins = assign({}, (PluginsUtils.getPluginItems({}, plugins, pluginsConfig, "TOC", props.id, true, loadedPlugins, (p) => p.container === 'TOCItemSettings') || [])
             .reduce((previous, p) => ({...previous, [p.name]: p}), {}));

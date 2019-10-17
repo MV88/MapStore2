@@ -6,7 +6,8 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const {error} = require('./notifications');
+import {error} from './notifications';
+
 const CHANGE_MAP_VIEW = 'CHANGE_MAP_VIEW';
 const CLICK_ON_MAP = 'CLICK_ON_MAP';
 const CHANGE_MOUSE_POINTER = 'CHANGE_MOUSE_POINTER';
@@ -184,7 +185,7 @@ function setMapResolutions(resolutions) {
  * Actions for map
  * @name actions.map
  */
-module.exports = {
+export default {
     CHANGE_MAP_VIEW,
     CLICK_ON_MAP,
     CHANGE_MOUSE_POINTER,

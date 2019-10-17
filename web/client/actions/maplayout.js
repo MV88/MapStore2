@@ -25,7 +25,7 @@ function updateMapLayout(layout) {
  * Actions for map layout.
  * @name actions.mapLayout
  */
-module.exports = {
+export default {
     UPDATE_MAP_LAYOUT,
     updateMapLayout
 };

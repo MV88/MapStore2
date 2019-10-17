@@ -15,4 +15,4 @@ const FeatureGridEditorUtils = {
     }
 };
 
-module.exports = FeatureGridEditorUtils;
+export default FeatureGridEditorUtils;

@@ -6,7 +6,7 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const {get} = require('lodash');
+import {get} from 'lodash';
 
 /**
  * selects additionallayers state
@@ -23,6 +23,6 @@ const {get} = require('lodash');
  */
 const additionalLayersSelector = state => get(state, 'additionallayers') || [];
 
-module.exports = {
+export default {
     additionalLayersSelector
 };

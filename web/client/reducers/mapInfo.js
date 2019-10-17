@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {
+import {
     ERROR_FEATURE_INFO,
     EXCEPTIONS_FEATURE_INFO,
     LOAD_FEATURE_INFO,
@@ -28,15 +28,13 @@ const {
     UPDATE_CENTER_TO_MARKER,
     TOGGLE_EMPTY_MESSAGE_GFI,
     CHANGE_FORMAT,
-    TOGGLE_SHOW_COORD_EDITOR
-} = require('../actions/mapInfo');
-const {
-    MAP_CONFIG_LOADED
-} = require('../actions/config');
-const {RESET_CONTROLS} = require('../actions/controls');
+    TOGGLE_SHOW_COORD_EDITOR,
+} from '../actions/mapInfo';
 
-const assign = require('object-assign');
-const {head} = require('lodash');
+import {MAP_CONFIG_LOADED} from '../actions/config';
+import {RESET_CONTROLS} from '../actions/controls';
+import assign from 'object-assign';
+import {head} from 'lodash';
 
 function receiveResponse(state, action, type) {
     const request = head((state.requests || []).filter((req) => req.reqId === action.reqId));
@@ -362,4 +360,4 @@ function mapInfo(state = initState, action) {
     }
 }
 
-module.exports = mapInfo;
+export default mapInfo;

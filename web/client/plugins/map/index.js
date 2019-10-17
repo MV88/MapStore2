@@ -6,25 +6,35 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
+import React from 'react';
 
-const {creationError, changeMapView, clickOnMap} = require('../../actions/map');
-const {layerLoading, layerLoad, layerError} = require('../../actions/layers');
-const {changeMousePosition} = require('../../actions/mousePosition');
-const {changeMeasurementState, changeGeometry, resetGeometry, updateMeasures} = require('../../actions/measurement');
-const {measurementSelector} = require('../../selectors/measurement');
-const {changeSelectionState} = require('../../actions/selection');
-const {changeLocateState, onLocateError} = require('../../actions/locate');
-const {changeDrawingStatus, endDrawing, setCurrentStyle, geometryChanged, drawStopped, selectFeatures, drawingFeatures} = require('../../actions/draw');
-const {updateHighlighted} = require('../../actions/highlight');
-const {warning} = require('../../actions/notifications');
-const {connect} = require('react-redux');
-const assign = require('object-assign');
-const {projectionDefsSelector} = require('../../selectors/map');
+import {creationError, changeMapView, clickOnMap} from '../../actions/map';
+import {layerLoading, layerLoad, layerError} from '../../actions/layers';
+import {changeMousePosition} from '../../actions/mousePosition';
+import {changeMeasurementState, changeGeometry, resetGeometry, updateMeasures} from '../../actions/measurement';
+import {measurementSelector} from '../../selectors/measurement';
+import {changeSelectionState} from '../../actions/selection';
+import {changeLocateState, onLocateError} from '../../actions/locate';
+
+import {
+    changeDrawingStatus,
+    endDrawing,
+    setCurrentStyle,
+    geometryChanged,
+    drawStopped,
+    selectFeatures,
+    drawingFeatures,
+} from '../../actions/draw';
+
+import {updateHighlighted} from '../../actions/highlight';
+import {warning} from '../../actions/notifications';
+import {connect} from 'react-redux';
+import assign from 'object-assign';
+import {projectionDefsSelector} from '../../selectors/map';
 
 const Empty = () => { return <span/>; };
 
-module.exports = (mapType, actions) => {
+export default (mapType, actions) => {
 
     const components = require('./' + mapType + '/index');
 

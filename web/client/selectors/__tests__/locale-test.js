@@ -6,8 +6,9 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {currentLocaleSelector, currentMessagesSelector } = require('../locale');
+import expect from 'expect';
+
+import {currentLocaleSelector, currentMessagesSelector} from '../locale';
 
 const state = {
     locale: {

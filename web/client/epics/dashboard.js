@@ -5,12 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const {
-    NEW, INSERT, EDIT, OPEN_FILTER_EDITOR,
-    editNewWidget, onEditorChange
-} = require('../actions/widgets');
-const {
+import Rx from 'rxjs';
+
+import {NEW, INSERT, EDIT, OPEN_FILTER_EDITOR, editNewWidget, onEditorChange} from '../actions/widgets';
+
+import {
     setEditing,
     dashboardSaved,
     dashboardLoaded,
@@ -20,49 +19,24 @@ const {
     dashboardSaveError,
     SAVE_DASHBOARD,
     LOAD_DASHBOARD,
-    dashboardLoadError
-} = require('../actions/dashboard');
-const {
-    setControlProperty,
-    TOGGLE_CONTROL
-} = require('../actions/controls');
-const {
-    featureTypeSelected
-} = require('../actions/wfsquery');
-const {
-    show,
-    error
-} = require('../actions/notifications');
-const {
-    loadFilter,
-    QUERY_FORM_SEARCH
-} = require('../actions/queryform');
-const {
-    LOGIN_SUCCESS,
-    LOGOUT
-} = require('../actions/security');
+    dashboardLoadError,
+} from '../actions/dashboard';
+
+import {setControlProperty, TOGGLE_CONTROL} from '../actions/controls';
+import {featureTypeSelected} from '../actions/wfsquery';
+import {show, error} from '../actions/notifications';
+import {loadFilter, QUERY_FORM_SEARCH} from '../actions/queryform';
+import {LOGIN_SUCCESS, LOGOUT} from '../actions/security';
 const {
     isDashboardEditing,
     isDashboardAvailable = () => true
 } = require('../selectors/dashboard');
 
-const {
-    isLoggedIn
-} = require('../selectors/security');
-const {
-    getEditingWidgetLayer,
-    getEditingWidgetFilter
-} = require('../selectors/widgets');
-
-const {
-    createResource,
-    updateResource,
-    getResource
-} = require('../api/persistence');
-const {
-    wrapStartStop
-} = require('../observables/epics');
-const { LOCATION_CHANGE, push} = require('connected-react-router');
+import {isLoggedIn} from '../selectors/security';
+import {getEditingWidgetLayer, getEditingWidgetFilter} from '../selectors/widgets';
+import {createResource, updateResource, getResource} from '../api/persistence';
+import {wrapStartStop} from '../observables/epics';
+import {LOCATION_CHANGE, push} from 'connected-react-router';
 const getFTSelectedArgs = (state) => {
     let layer = getEditingWidgetLayer(state);
     let url = layer.search && layer.search.url;
@@ -70,7 +44,7 @@ const getFTSelectedArgs = (state) => {
     return [url, typeName];
 };
 
-module.exports = {
+export default {
 
     // Basic interactions with dashboard editor
     openDashboardWidgetEditor: (action$, {getState = () => {}} = {}) => action$.ofType(NEW, EDIT)

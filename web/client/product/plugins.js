@@ -9,7 +9,7 @@
 /**
   * Please, keep them sorted alphabetically
  */
-module.exports = {
+export default {
     plugins: {
         // product plugins
         AboutPlugin: require('./plugins/About'),

@@ -15,7 +15,7 @@ function changeShareState(enabled) {
     };
 }
 
-module.exports = {
+export default {
     CHANGE_SHARE_STATE,
     changeShareState
 };

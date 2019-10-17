@@ -6,17 +6,16 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const {createSelector} = require('reselect');
+import {createSelector} from 'reselect';
 
-const MapInfoUtils = require('../utils/MapInfoUtils');
-const LayersUtils = require('../utils/LayersUtils');
-const {defaultIconStyle} = require('../utils/SearchUtils');
-const {getNormalizedLatLon} = require('../utils/CoordinatesUtils');
-const { clickedPointWithFeaturesSelector} = require('./mapInfo');
-const { defaultQueryableFilter } = require('../utils/MapInfoUtils');
-
-const {get, head, isEmpty, find, isObject, isArray, castArray} = require('lodash');
-const {flattenGroups} = require('../utils/TOCUtils');
+import MapInfoUtils from '../utils/MapInfoUtils';
+import LayersUtils from '../utils/LayersUtils';
+import {defaultIconStyle} from '../utils/SearchUtils';
+import {getNormalizedLatLon} from '../utils/CoordinatesUtils';
+import {clickedPointWithFeaturesSelector} from './mapInfo';
+import {defaultQueryableFilter} from '../utils/MapInfoUtils';
+import {get, head, isEmpty, find, isObject, isArray, castArray} from 'lodash';
+import {flattenGroups} from '../utils/TOCUtils';
 
 const layersSelector = ({layers, config} = {}) => layers && isArray(layers) ? layers : layers && layers.flat || config && config.layers || [];
 const currentBackgroundLayerSelector = state => head(layersSelector(state).filter(l => l && l.visibility && l.group === "background"));
@@ -141,7 +140,7 @@ const queryableLayersSelector = state => layersSelector(state).filter(defaultQue
  */
 const selectedLayerLoadingErrorSelector = state => (getSelectedLayer(state) || {}).loadingError === 'Error';
 
-module.exports = {
+export default {
     getLayerFromName,
     layersSelector,
     layerSelectorWithMarkers,

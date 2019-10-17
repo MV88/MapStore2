@@ -61,7 +61,8 @@ function initLayerFilter(filter) {
         filter
     };
 }
-module.exports = {
+
+export default {
     OPEN_QUERY_BUILDER,
     openQueryBuilder,
     INIT_LAYER_FILTER,

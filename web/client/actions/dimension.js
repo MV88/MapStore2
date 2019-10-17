@@ -34,7 +34,7 @@ const setCurrentOffset = offsetTime => ({ type: SET_OFFSET_TIME, offsetTime });
 const moveTime = time => ({ type: MOVE_TIME, time});
 
 
-module.exports = {
+export default {
     updateLayerDimensionData,
     UPDATE_LAYER_DIMENSION_DATA,
     setCurrentTime,

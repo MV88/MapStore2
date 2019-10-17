@@ -1,11 +1,26 @@
-const { get, head } = require('lodash');
-const {createSelector} = require('reselect');
-const { createShallowSelector } = require('../utils/ReselectUtils');
-const { reprojectBbox } = require('../utils/CoordinatesUtils');
-const { timeIntervalToSequence, timeIntervalToIntervalSequence, analyzeIntervalInRange, isTimeDomainInterval } = require('../utils/TimeUtils');
-const { timeDataSelector, currentTimeSelector, offsetTimeSelector, layerDimensionRangeSelector, layersWithTimeDataSelector, layerDimensionDataSelectorCreator } = require('../selectors/dimension');
-const { mapSelector, projectionSelector } = require('../selectors/map');
-const {getLayerFromId} = require('../selectors/layers');
+import {get, head} from 'lodash';
+import {createSelector} from 'reselect';
+import {createShallowSelector} from '../utils/ReselectUtils';
+import {reprojectBbox} from '../utils/CoordinatesUtils';
+
+import {
+    timeIntervalToSequence,
+    timeIntervalToIntervalSequence,
+    analyzeIntervalInRange,
+    isTimeDomainInterval,
+} from '../utils/TimeUtils';
+
+import {
+    timeDataSelector,
+    currentTimeSelector,
+    offsetTimeSelector,
+    layerDimensionRangeSelector,
+    layersWithTimeDataSelector,
+    layerDimensionDataSelectorCreator,
+} from '../selectors/dimension';
+
+import {mapSelector, projectionSelector} from '../selectors/map';
+import {getLayerFromId} from '../selectors/layers';
 const rangeSelector = state => get(state, 'timeline.range');
 const rangeDataSelector = state => get(state, 'timeline.rangeData');
 
@@ -206,7 +221,7 @@ const multidimOptionsSelectorCreator = layerId => state => {
 
 };
 
-module.exports = {
+export default {
     isVisible,
     isCollapsed,
     currentTimeRangeSelector,

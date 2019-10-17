@@ -6,11 +6,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const mapInfo = require('../mapInfo');
-const { featureInfoClick, toggleEmptyMessageGFI, toggleShowCoordinateEditor, changeFormat, changePage, toggleHighlightFeature} = require('../../actions/mapInfo');
-const { MAP_CONFIG_LOADED } = require('../../actions/config');
-const assign = require('object-assign');
+import expect from 'expect';
+
+import mapInfo from '../mapInfo';
+
+import {
+    featureInfoClick,
+    toggleEmptyMessageGFI,
+    toggleShowCoordinateEditor,
+    changeFormat,
+    changePage,
+    toggleHighlightFeature,
+} from '../../actions/mapInfo';
+
+import {MAP_CONFIG_LOADED} from '../../actions/config';
+import assign from 'object-assign';
 
 require('babel-polyfill');
 

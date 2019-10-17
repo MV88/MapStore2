@@ -5,16 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {Observable} = require('rxjs');
-const axios = require('../libs/ajax');
-const WMS = require('../api/WMS');
-const LayersUtils = require('../utils/LayersUtils');
-const SecurityUtils = require('../utils/SecurityUtils');
-const CoordinatesUtils = require("../utils/CoordinatesUtils");
-const urlUtil = require('url');
-const {interceptOGCError} = require('../utils/ObservableUtils');
-const {head} = require('lodash');
-const Proj4js = require('proj4').default;
+import {Observable} from 'rxjs';
+
+import axios from '../libs/ajax';
+import WMS from '../api/WMS';
+import LayersUtils from '../utils/LayersUtils';
+import SecurityUtils from '../utils/SecurityUtils';
+import CoordinatesUtils from "../utils/CoordinatesUtils";
+import urlUtil from 'url';
+import {interceptOGCError} from '../utils/ObservableUtils';
+import {head} from 'lodash';
+import Proj4js from 'proj4';
 const proj4 = Proj4js;
 
 const toDescribeLayerURL = ({name, search = {}, url} = {}) => {
@@ -39,7 +40,7 @@ const getLayerCapabilities = l => Observable.defer(() => WMS.getCapabilities(Lay
     .let(interceptOGCError)
     .map(c => WMS.parseLayerCapabilities(c, l));
 
-module.exports = {
+export default {
     getLayerCapabilities,
     describeLayer,
     addSearch: l =>

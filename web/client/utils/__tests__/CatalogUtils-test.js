@@ -5,10 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
-const {map, clone} = require('lodash');
+import expect from 'expect';
 
-const CatalogUtils = require('../CatalogUtils');
+import {map, clone} from 'lodash';
+import CatalogUtils from '../CatalogUtils';
 const wmsRecords = [{
     references: [{
         type: "OGC:WMS",

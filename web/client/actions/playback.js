@@ -72,7 +72,7 @@ const updateMetadata = ({next, previous, forTime}) => ({
     previous
 });
 
-module.exports = {
+export default {
     play,
     stop,
     pause,

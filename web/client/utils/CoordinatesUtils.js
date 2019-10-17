@@ -6,19 +6,20 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const geo = require('node-geo-distance');
-const Proj4js = require('proj4').default;
+import geo from 'node-geo-distance';
+
+import Proj4js from 'proj4';
 const proj4 = Proj4js;
-const axios = require('../libs/ajax');
-const assign = require('object-assign');
-const {isArray, flattenDeep, chunk, cloneDeep, isNumber, slice, head, last} = require('lodash');
-const lineIntersect = require('@turf/line-intersect');
-const polygonToLinestring = require('@turf/polygon-to-linestring');
-const greatCircle = require('@turf/great-circle').default;
-const toPoint = require('turf-point');
-const bboxPolygon = require('@turf/bbox-polygon').default;
-const overlap = require('@turf/boolean-overlap').default;
-const contains = require('@turf/boolean-contains').default;
+import axios from '../libs/ajax';
+import assign from 'object-assign';
+import {isArray, flattenDeep, chunk, cloneDeep, isNumber, slice, head, last} from 'lodash';
+import lineIntersect from '@turf/line-intersect';
+import polygonToLinestring from '@turf/polygon-to-linestring';
+import greatCircle from '@turf/great-circle';
+import toPoint from 'turf-point';
+import bboxPolygon from '@turf/bbox-polygon';
+import overlap from '@turf/boolean-overlap';
+import contains from '@turf/boolean-contains';
 
 const FORMULAS = {
     /**
@@ -863,4 +864,4 @@ const CoordinatesUtils = {
 
 };
 
-module.exports = CoordinatesUtils;
+export default CoordinatesUtils;

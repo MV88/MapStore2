@@ -33,7 +33,7 @@ function toggleLayerFilter() {
         type: TOGGLE_LAYER_FILTER
     };
 }
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
 function layerSelectedForSearch(id) {
     return {
@@ -154,7 +154,7 @@ function resetQuery() {
     };
 }
 
-module.exports = {
+export default {
     LAYER_SELECTED_FOR_SEARCH, layerSelectedForSearch,
     FEATURE_TYPE_SELECTED, featureTypeSelected,
     FEATURE_TYPE_LOADED, featureTypeLoaded,

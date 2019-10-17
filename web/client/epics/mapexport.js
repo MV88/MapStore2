@@ -5,15 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const MapUtils = require('../utils/MapUtils');
-const {download} = require('../utils/FileUtils');
-const {EXPORT_MAP} = require('../actions/mapexport');
-const { setControlProperty } = require('../actions/controls');
+import Rx from 'rxjs';
 
-const { mapSelector } = require('../selectors/map');
-const { layersSelector, groupsSelector } = require('../selectors/layers');
-const { mapOptionsToSaveSelector } = require('../selectors/mapsave');
+import MapUtils from '../utils/MapUtils';
+import {download} from '../utils/FileUtils';
+import {EXPORT_MAP} from '../actions/mapexport';
+import {setControlProperty} from '../actions/controls';
+import {mapSelector} from '../selectors/map';
+import {layersSelector, groupsSelector} from '../selectors/layers';
+import {mapOptionsToSaveSelector} from '../selectors/mapsave';
 const textSearchConfigSelector = state => state.searchconfig && state.searchconfig.textSearchConfig;
 
 const PersistMap = {
@@ -21,7 +21,7 @@ const PersistMap = {
 };
 
 
-module.exports = {
+export default {
     exportMapContext: (action$, {getState = () => {}} = {} ) =>
         action$
             .ofType(EXPORT_MAP)

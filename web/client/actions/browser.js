@@ -14,4 +14,4 @@ function changeBrowserProperties(properties) {
         newProperties: properties
     };
 }
-module.exports = {CHANGE_BROWSER_PROPERTIES, changeBrowserProperties};
+export default {CHANGE_BROWSER_PROPERTIES, changeBrowserProperties};

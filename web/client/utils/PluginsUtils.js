@@ -6,14 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const assign = require('object-assign');
-const { omit, isObject, head, isArray, isString, memoize, get, endsWith } = require('lodash');
-const {combineReducers} = require('redux');
-const {connect} = require('react-redux');
-const url = require('url');
+import React from 'react';
+
+import assign from 'object-assign';
+import {omit, isObject, head, isArray, isString, memoize, get, endsWith} from 'lodash';
+import {combineReducers} from 'redux';
+import {connect} from 'react-redux';
+import url from 'url';
 const defaultMonitoredState = [{name: "mapType", path: 'maptype.mapType'}, {name: "user", path: 'security.user'}];
-const {combineEpics} = require('redux-observable');
+import {combineEpics} from 'redux-observable';
 
 /**
  * Gives a reduced version of the status to check.
@@ -459,4 +460,4 @@ const PluginsUtils = {
     getPluginConfiguration,
     isMapStorePlugin
 };
-module.exports = PluginsUtils;
+export default PluginsUtils;

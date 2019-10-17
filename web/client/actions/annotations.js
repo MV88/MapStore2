@@ -104,7 +104,7 @@ function download(annotation) {
     };
 }
 
-const {head} = require('lodash');
+import {head} from 'lodash';
 
 function editAnnotation(id) {
     return (dispatch, getState) => {
@@ -330,7 +330,8 @@ function changeText(text, components) {
         components
     };
 }
-module.exports = {
+
+export default {
     SHOW_ANNOTATION,
     EDIT_ANNOTATION,
     NEW_ANNOTATION,

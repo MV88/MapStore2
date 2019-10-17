@@ -5,11 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const Rx = require('rxjs');
-const {setCookieVisibility, setDetailsCookieHtml, SET_MORE_DETAILS_VISIBILITY} = require('../actions/cookie');
-const axios = require('../libs/ajax');
-const {CHANGE_LOCALE} = require('../actions/locale');
-const {LOCATION_CHANGE} = require('connected-react-router');
+import Rx from 'rxjs';
+
+import {setCookieVisibility, setDetailsCookieHtml, SET_MORE_DETAILS_VISIBILITY} from '../actions/cookie';
+import axios from '../libs/ajax';
+import {CHANGE_LOCALE} from '../actions/locale';
+import {LOCATION_CHANGE} from 'connected-react-router';
 
 
 /**
@@ -44,7 +45,7 @@ const loadCookieDetailsPage = (action$, store) =>
  * @name epics.cookies
  * @type {Object}
  */
-module.exports = {
+export default {
     cookiePolicyChecker,
     loadCookieDetailsPage
 };

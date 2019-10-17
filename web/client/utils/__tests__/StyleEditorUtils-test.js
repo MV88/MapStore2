@@ -13,9 +13,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const {
+import {
     generateTemporaryStyleId,
     STYLE_ID_SEPARATOR,
     generateStyleId,
@@ -24,8 +24,8 @@ const {
     isSameOrigin,
     getStyleTemplates,
     getNameParts,
-    stringifyNameParts
-} = require('../StyleEditorUtils');
+    stringifyNameParts,
+} from '../StyleEditorUtils';
 
 describe('StyleEditorUtils test', () => {
     it('test generateTemporaryStyleId', () => {

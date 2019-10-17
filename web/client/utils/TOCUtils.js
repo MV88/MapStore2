@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {isObject} = require('lodash');
+import {isObject} from 'lodash';
 
 const TOCUtils = {
     createFromSearch: function(options, search) {
@@ -99,4 +99,4 @@ const TOCUtils = {
 };
 
 
-module.exports = TOCUtils;
+export default TOCUtils;

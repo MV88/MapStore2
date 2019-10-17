@@ -5,10 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var url = require('url');
+import url from 'url';
 
-var {createStore, compose, applyMiddleware} = require('redux');
-var thunkMiddleware = require('redux-thunk');
+import {createStore, compose, applyMiddleware} from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
 
 const urlQuery = url.parse(window.location.href, true).query;
@@ -53,6 +53,7 @@ console.warn = function() {
         warn.apply(console, arguments);
     }
 };
+
 /* eslint-enable */
 
-module.exports = DebugUtils;
+export default DebugUtils;

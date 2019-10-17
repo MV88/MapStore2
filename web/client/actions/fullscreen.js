@@ -22,11 +22,12 @@ function toggleFullscreen(enable, elementSelector) {
         elementSelector
     };
 }
+
 /**
  * Actions for FullScreen Plugin.
  * @name actions.fullscreen
  */
-module.exports = {
+export default {
     toggleFullscreen,
     TOGGLE_FULLSCREEN
 };

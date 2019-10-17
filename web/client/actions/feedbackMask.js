@@ -39,7 +39,7 @@ function detectedNewPage(currentPage) {
     };
 }
 
-module.exports = {
+export default {
     FEEDBACK_MASK_LOADING,
     FEEDBACK_MASK_LOADED,
     FEEDBACK_MASK_ENABLED,

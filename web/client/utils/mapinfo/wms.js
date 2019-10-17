@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const MapUtils = require('../MapUtils');
-const CoordinatesUtils = require('../CoordinatesUtils');
-const {isArray, isObject, head} = require('lodash');
-const { optionsToVendorParams } = require('../VendorParamsUtils');
+import MapUtils from '../MapUtils';
 
-const SecurityUtils = require('../SecurityUtils');
-const assign = require('object-assign');
+import CoordinatesUtils from '../CoordinatesUtils';
+import {isArray, isObject, head} from 'lodash';
+import {optionsToVendorParams} from '../VendorParamsUtils';
+import SecurityUtils from '../SecurityUtils';
+import assign from 'object-assign';
 
-module.exports = {
+export default {
     /**
      * Creates the request object and it's metadata for WMS GetFeatureInfo.
      * @param {object} layer

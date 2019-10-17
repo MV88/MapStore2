@@ -7,18 +7,17 @@
   */
 
 
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
-const urlUtil = require('url');
-const Rx = require('rxjs');
-const {castArray, isNil} = require('lodash');
-const {parseString} = require('xml2js');
-const {stripPrefix} = require('xml2js/lib/processors');
-
-const {interceptOGCError} = require('../utils/ObservableUtils');
-const {getCapabilitiesUrl} = require('../utils/LayersUtils');
-const FilterUtils = require('../utils/FilterUtils');
-const requestBuilder = require('../utils/ogc/WFS/RequestBuilder');
+import urlUtil from 'url';
+import Rx from 'rxjs';
+import {castArray, isNil} from 'lodash';
+import {parseString} from 'xml2js';
+import {stripPrefix} from 'xml2js/lib/processors';
+import {interceptOGCError} from '../utils/ObservableUtils';
+import {getCapabilitiesUrl} from '../utils/LayersUtils';
+import FilterUtils from '../utils/FilterUtils';
+import requestBuilder from '../utils/ogc/WFS/RequestBuilder';
 const {getFeature, query, sortBy, propertyName} = requestBuilder({ wfsVersion: "1.1.0" });
 
 const toDescribeURL = ({ name, search = {}, url, describeFeatureTypeURL} = {}) => {
@@ -53,8 +52,8 @@ const toLayerCapabilitiesURL = ({name, search = {}, url} = {}) => {
             }
         });
 };
-const Url = require('url');
-const { isObject } = require('lodash');
+import Url from 'url';
+import {isObject} from 'lodash';
 
 // this is a workaround for https://osgeo-org.atlassian.net/browse/GEOS-7233. can be removed when fixed
 const workaroundGEOS7233 = ({ totalFeatures, features, ...rest } = {}, { startIndex } = {}, originalSize) => {
@@ -180,7 +179,7 @@ const getLayerJSONFeature = ({ search = {}, url, name } = {}, filter, {sortOptio
             throw error;
         });
 
-module.exports = {
+export default {
     getJSONFeature,
     getLayerJSONFeature,
     getJSONFeatureWA,

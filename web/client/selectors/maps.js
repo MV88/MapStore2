@@ -5,7 +5,7 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const {find, get} = require('lodash');
+import {find, get} from 'lodash';
 
 /**
  * selects maps state
@@ -35,7 +35,7 @@ const searchParamsSelector = state => ({start: get(state, 'maps.start'), limit: 
  */
 const showMapDetailsSelector = (state) => get(state, "maps.showMapDetails");
 
-module.exports = {
+export default {
     mapNameSelector,
     mapFromIdSelector,
     showMapDetailsSelector,

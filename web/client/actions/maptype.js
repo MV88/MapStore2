@@ -20,8 +20,9 @@ function changeMapType(mapType) {
         mapType
     };
 }
+
 /**
  * Actions for map type management.Allow to manage the default map type.
  * @name actions.maptype
  */
-module.exports = {MAP_TYPE_CHANGED, changeMapType};
+export default {MAP_TYPE_CHANGED, changeMapType};

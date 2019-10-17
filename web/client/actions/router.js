@@ -17,4 +17,4 @@ function goToPage(page, router) {
         page
     };
 }
-module.exports = {GO_TO_PAGE, goToPage};
+export default {GO_TO_PAGE, goToPage};

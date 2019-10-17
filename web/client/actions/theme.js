@@ -14,7 +14,8 @@ function selectTheme(theme) {
         theme
     };
 }
-module.exports = {
+
+export default {
     THEME_SELECTED,
     selectTheme
 };

@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
+import Rx from 'rxjs';
 
-module.exports = {
+export default {
     onEpic: (action$, store) =>
         action$.filter((action) => action.type.indexOf('IF:') === 0)
             .switchMap((action) => {

@@ -6,21 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { FORMAT_OPTIONS_FETCH, DOWNLOAD_FEATURES, onDownloadFinished, updateFormats, onDownloadOptionChange} = require('../actions/wfsdownload');
-const {cleanDuplicatedQuestionMarks} = require('../utils/ConfigUtils');
+import {
+    FORMAT_OPTIONS_FETCH,
+    DOWNLOAD_FEATURES,
+    onDownloadFinished,
+    updateFormats,
+    onDownloadOptionChange,
+} from '../actions/wfsdownload';
 
-const {TOGGLE_CONTROL, toggleControl} = require('../actions/controls');
-const {queryPanelSelector, wfsDownloadSelector} = require('../selectors/controls');
-const {DOWNLOAD} = require('../actions/layers');
-const {createQuery} = require('../actions/wfsquery');
-const {error} = require('../actions/notifications');
-const Rx = require('rxjs');
-const {get, find, pick, toPairs} = require('lodash');
-const {saveAs} = require('file-saver');
-const axios = require('axios');
-const FilterUtils = require('../utils/FilterUtils');
-const {getByOutputFormat} = require('../utils/FileFormatUtils');
-const {getLayerWFSCapabilities} = require('../observables/wfs');
+import {cleanDuplicatedQuestionMarks} from '../utils/ConfigUtils';
+import {TOGGLE_CONTROL, toggleControl} from '../actions/controls';
+import {queryPanelSelector, wfsDownloadSelector} from '../selectors/controls';
+import {DOWNLOAD} from '../actions/layers';
+import {createQuery} from '../actions/wfsquery';
+import {error} from '../actions/notifications';
+import Rx from 'rxjs';
+import {get, find, pick, toPairs} from 'lodash';
+import {saveAs} from 'file-saver';
+import axios from 'axios';
+import FilterUtils from '../utils/FilterUtils';
+import {getByOutputFormat} from '../utils/FileFormatUtils';
+import {getLayerWFSCapabilities} from '../observables/wfs';
 
 
 const DOWNLOAD_FORMATS_LOOKUP = {
@@ -72,6 +78,7 @@ const getDefaultSortOptions = (attribute) => {
 const getFirstAttribute = (state)=> {
     return state.query && state.query.featureTypes && state.query.featureTypes[state.query.typeName] && state.query.featureTypes[state.query.typeName].attributes && state.query.featureTypes[state.query.typeName].attributes[0] && state.query.featureTypes[state.query.typeName].attributes[0].attribute || null;
 };
+
 /*
 const str2bytes = (str) => {
     var bytes = new Uint8Array(str.length);
@@ -81,7 +88,7 @@ const str2bytes = (str) => {
     return bytes;
 };
 */
-module.exports = {
+export default {
     openDownloadTool: (action$) =>
         action$.ofType(DOWNLOAD)
             .switchMap((action) => {

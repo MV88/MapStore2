@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const {getActionsFromStepEpic, switchTutorialEpic} = require('../tutorial');
-const {SETUP_TUTORIAL, updateTutorial, initTutorial} = require('../../actions/tutorial');
-const {testEpic} = require('./epicTestUtils');
-const { onLocationChanged } = require('connected-react-router');
+import {getActionsFromStepEpic, switchTutorialEpic} from '../tutorial';
+import {SETUP_TUTORIAL, updateTutorial, initTutorial} from '../../actions/tutorial';
+import {testEpic} from './epicTestUtils';
+import {onLocationChanged} from 'connected-react-router';
 
 describe('tutorial Epics', () => {
     it('getActionsFromStepEpic with object action', (done) => {

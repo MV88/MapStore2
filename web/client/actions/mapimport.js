@@ -64,7 +64,7 @@ function onShapeError(message) {
     };
 }
 
-module.exports = {
+export default {
     SET_LAYERS,
     ON_ERROR,
     LOADING,

@@ -9,6 +9,6 @@
 const crsInputValueSelector = state => state && state.crsselector && state.crsselector.value;
 
 
-module.exports = {
+export default {
     crsInputValueSelector
 };

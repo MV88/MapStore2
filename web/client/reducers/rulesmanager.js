@@ -6,17 +6,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const assign = require('object-assign');
-const wk = require('wellknown');
-const {isEmpty} = require("lodash");
+import assign from 'object-assign';
 
-const { RULES_SELECTED, OPTIONS_LOADED, UPDATE_FILTERS_VALUES,
-    LOADING, EDIT_RULE, SET_FILTER, CLEAN_EDITING, RULE_SAVED} = require('../actions/rulesmanager');
-const {
-    CHANGE_DRAWING_STATUS
-} = require('../actions/draw');
+import wk from 'wellknown';
+import {isEmpty} from "lodash";
 
-const _ = require('lodash');
+import {
+    RULES_SELECTED,
+    OPTIONS_LOADED,
+    UPDATE_FILTERS_VALUES,
+    LOADING,
+    EDIT_RULE,
+    SET_FILTER,
+    CLEAN_EDITING,
+    RULE_SAVED,
+} from '../actions/rulesmanager';
+
+import {CHANGE_DRAWING_STATUS} from '../actions/draw';
+import _ from 'lodash';
 const defaultState = {
     services: {
         WFS: [
@@ -146,4 +153,4 @@ function rulesmanager(state = defaultState, action) {
     }
 }
 
-module.exports = rulesmanager;
+export default rulesmanager;

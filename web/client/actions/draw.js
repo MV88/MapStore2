@@ -75,7 +75,7 @@ function setCurrentStyle(style) {
 
 const drawSupportReset = (owner) => changeDrawingStatus("clean", "", owner, [], {});
 
-module.exports = {
+export default {
     CHANGE_DRAWING_STATUS, changeDrawingStatus, drawSupportReset,
     END_DRAWING, endDrawing,
     SET_CURRENT_STYLE, setCurrentStyle,

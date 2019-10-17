@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-const {
+import expect from 'expect';
+
+import {
     OPEN_QUERY_BUILDER,
     openQueryBuilder,
     INIT_LAYER_FILTER,
@@ -19,8 +20,8 @@ const {
     DISCARD_CURRENT_FILTER,
     discardCurrentFilter,
     applyFilter,
-    APPLY_FILTER
-} = require('../layerFilter');
+    APPLY_FILTER,
+} from '../layerFilter';
 
 
 describe('Test correctness of the layerFilter actions', () => {

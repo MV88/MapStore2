@@ -23,7 +23,8 @@ function setRasterLayer(layer) {
         layer
     };
 }
-module.exports = {
+
+export default {
     SET_RASTERSTYLE_PARAMETER,
     SET_RASTER_LAYER,
     setRasterStyleParameter,

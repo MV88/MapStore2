@@ -6,9 +6,17 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const { get, findIndex, isNil, fill, isArray} = require('lodash');
+import {get, findIndex, isNil, fill, isArray} from 'lodash';
 
-const {getFeatureTypeProperties, isGeometryType, isValid, isValidValueForPropertyName, findGeometryProperty, getPropertyDesciptor} = require('./ogc/WFS/base');
+import {
+    getFeatureTypeProperties,
+    isGeometryType,
+    isValid,
+    isValidValueForPropertyName,
+    findGeometryProperty,
+    getPropertyDesciptor,
+} from './ogc/WFS/base';
+
 const getGeometryName = (describe) => get(findGeometryProperty(describe), "name");
 const getPropertyName = (name, describe) => name === "geometry" ? getGeometryName(describe) : name;
 
@@ -105,7 +113,7 @@ const getCurrentPaginationOptions = ({ startPage, endPage }, oldPages, size) => 
     return { startIndex: nPs[0] * size, maxFeatures: needPages * size };
 };
 
-module.exports = {
+export default {
     getAttributeFields,
     featureTypeToGridColumns: (
         describe,

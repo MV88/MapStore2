@@ -327,7 +327,8 @@ const buildAst = (tokens) => {
 
     return result;
 };
-module.exports = {
+
+export default {
     /**
      * Parse a CQL filter. returns an object representation of the filter.
      * For the moment this parser doesn't support WKT parsing.

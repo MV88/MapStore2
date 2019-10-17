@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { layersSelector } = require('./layers');
-const { createSelector } = require('reselect');
-const {get, find} = require('lodash');
+import {layersSelector} from './layers';
+
+import {createSelector} from 'reselect';
+import {get, find} from 'lodash';
 
 const layerDimensionDataSelectorCreator = (layerId, dimension) => (state) => get(state, `dimension.data[${dimension}][${layerId}]`);
 
@@ -57,7 +58,7 @@ const timeSequenceSelector = createSelector(
         .reduce((acc, cur) =>
             [
                 ...acc,
-                ...data[cur] && data[cur].values || []
+                ...(data[cur] && data[cur].values || [])
             ],
         [])
         .sort() || []);
@@ -91,7 +92,7 @@ const layerDimensionRangeSelector = (state, layerId) => {
     return null;
 };
 
-module.exports = {
+export default {
     layerDimensionRangeSelector,
     layerDimensionSelectorCreator,
     layerDimensionDataSelectorCreator,

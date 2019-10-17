@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const assign = require('object-assign');
-const mapConfigHistory = require('./MapHistory');
-const undoable = require('redux-undo').default;
-const {isEqual} = require('lodash');
+import assign from 'object-assign';
+
+import mapConfigHistory from './MapHistory';
+import undoable from 'redux-undo';
+import {isEqual} from 'lodash';
 
 const createHistory = (mapState) => {
     if (mapState && mapState.map && mapState.map.center) {
@@ -23,7 +24,7 @@ const createHistory = (mapState) => {
     return mapState;
 };
 
-module.exports = {
+export default {
     mapConfigHistory: (reducer) => mapConfigHistory(undoable(reducer, {
         filter: (action, currentState, previousState) => {
             let bool = false;

@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const {isFunction} = require('lodash');
+import expect from 'expect';
 
-const {
+import {isFunction} from 'lodash';
+
+import {
     EDIT_ANNOTATION,
     REMOVE_ANNOTATION,
     CONFIRM_REMOVE_ANNOTATION,
@@ -32,14 +33,22 @@ const {
     HIGHLIGHT,
     CLEAN_HIGHLIGHT,
     FILTER_ANNOTATIONS,
-    addText, ADD_TEXT,
-    CHANGE_FORMAT, changeFormat,
-    changedProperties, CHANGED_PROPERTIES,
-    toggleUnsavedStyleModal, TOGGLE_STYLE_MODAL,
-    startDrawing, START_DRAWING,
-    toggleUnsavedChangesModal, TOGGLE_CHANGES_MODAL,
-    setUnsavedStyle, UNSAVED_STYLE,
-    setUnsavedChanges, UNSAVED_CHANGES,
+    addText,
+    ADD_TEXT,
+    CHANGE_FORMAT,
+    changeFormat,
+    changedProperties,
+    CHANGED_PROPERTIES,
+    toggleUnsavedStyleModal,
+    TOGGLE_STYLE_MODAL,
+    startDrawing,
+    START_DRAWING,
+    toggleUnsavedChangesModal,
+    TOGGLE_CHANGES_MODAL,
+    setUnsavedStyle,
+    UNSAVED_STYLE,
+    setUnsavedChanges,
+    UNSAVED_CHANGES,
     editAnnotation,
     removeAnnotation,
     confirmRemoveAnnotation,
@@ -62,20 +71,33 @@ const {
     closeAnnotations,
     confirmCloseAnnotations,
     cancelCloseAnnotations,
-    DOWNLOAD, download,
-    CHANGED_SELECTED, changeSelected,
-    SET_INVALID_SELECTED, setInvalidSelected,
-    TOGGLE_GEOMETRY_MODAL, toggleUnsavedGeometryModal,
-    RESET_COORD_EDITOR, resetCoordEditor,
-    CHANGE_RADIUS, changeRadius,
-    CHANGE_TEXT, changeText,
-    CONFIRM_DELETE_FEATURE, confirmDeleteFeature,
-    OPEN_EDITOR, openEditor,
-    TOGGLE_DELETE_FT_MODAL, toggleDeleteFtModal,
-    ADD_NEW_FEATURE, addNewFeature,
-    LOAD_ANNOTATIONS, loadAnnotations,
-    UPDATE_SYMBOLS, updateSymbols
-} = require('../annotations');
+    DOWNLOAD,
+    download,
+    CHANGED_SELECTED,
+    changeSelected,
+    SET_INVALID_SELECTED,
+    setInvalidSelected,
+    TOGGLE_GEOMETRY_MODAL,
+    toggleUnsavedGeometryModal,
+    RESET_COORD_EDITOR,
+    resetCoordEditor,
+    CHANGE_RADIUS,
+    changeRadius,
+    CHANGE_TEXT,
+    changeText,
+    CONFIRM_DELETE_FEATURE,
+    confirmDeleteFeature,
+    OPEN_EDITOR,
+    openEditor,
+    TOGGLE_DELETE_FT_MODAL,
+    toggleDeleteFtModal,
+    ADD_NEW_FEATURE,
+    addNewFeature,
+    LOAD_ANNOTATIONS,
+    loadAnnotations,
+    UPDATE_SYMBOLS,
+    updateSymbols,
+} from '../annotations';
 
 describe('Test correctness of the annotations actions', () => {
     it('edit annotation', (done) => {

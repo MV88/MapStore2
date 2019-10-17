@@ -11,7 +11,7 @@ const attribute = optNameSpaceTag;
 const feature = optNameSpaceTag;
 const insert = (ns, content) => `<${ns}:Insert>${Array.isArray(content) ? content.join("") : content}</${ns}:Insert>`;
 
-module.exports = {
+export default {
     insert,
     feature,
     attribute

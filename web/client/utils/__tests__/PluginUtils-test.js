@@ -5,15 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const {Provider} = require('react-redux');
-const expect = require('expect');
-const PluginsUtils = require('../PluginsUtils');
-const assign = require('object-assign');
-const MapSearchPlugin = require('../../plugins/MapSearch');
-const Rx = require('rxjs');
-const { ActionsObservable } = require('redux-observable');
+import React from 'react';
+
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import expect from 'expect';
+import PluginsUtils from '../PluginsUtils';
+import assign from 'object-assign';
+import MapSearchPlugin from '../../plugins/MapSearch';
+import Rx from 'rxjs';
+import {ActionsObservable} from 'redux-observable';
 
 const epicTest = (epic, count, action, callback, state = {}) => {
     const actions = new Rx.Subject();

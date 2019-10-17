@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../libs/ajax');
-const LRUCache = require('lrucache');
-const {Promise} = require('es6-promise');
+import axios from '../libs/ajax';
+
+import LRUCache from 'lrucache';
+import {Promise} from 'es6-promise';
 const DEFAULT_SIZE = 100;
 let elevationTiles = new LRUCache(DEFAULT_SIZE);
 
@@ -44,7 +45,7 @@ const getValueAtXY = (ncols, tile, x, y, nodata = -9999) => {
     return null;
 };
 
-module.exports = {
+export default {
     /**
      * Loads and stores an elevation tile in application/bil16 format from the given url.
      * The original (x, y ,z) coordinates and a tile key are stored together with the tile.

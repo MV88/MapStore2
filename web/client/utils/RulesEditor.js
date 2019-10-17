@@ -5,7 +5,8 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
-const {isEqual, isEmpty} = require("lodash");
+import {isEqual, isEmpty} from "lodash";
+
 const checkIp = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?(\/)(?:3[0-2]|[1-2]?[0-9]))\b/g;
 const RulesEditorUtils = {
     isSaveDisabled: (currentRule, initRule) => {
@@ -29,4 +30,4 @@ const RulesEditorUtils = {
     checkIp
 };
 
-module.exports = RulesEditorUtils;
+export default RulesEditorUtils;

@@ -1,4 +1,4 @@
-const {isNil, get, head} = require('lodash');
+import {isNil, get, head} from 'lodash';
 
 /**
  * Selects the featureType name of the query filterObject
@@ -26,7 +26,7 @@ const layerDescribeSelector = (state, featureTypeName) => get(featureTypeSelecto
  * @static
  */
 
-module.exports = {
+export default {
     wfsURL: state => state && state.query && state.query.searchUrl,
     wfsURLSelector: state => state && state.query && state.query.url,
     wfsFilter: state => state && state.query && state.query.filterObj,

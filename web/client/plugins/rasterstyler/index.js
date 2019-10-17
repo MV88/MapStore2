@@ -6,8 +6,9 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const {connect} = require('react-redux');
-const {setRasterStyleParameter} = require('../../actions/rasterstyler');
+import {connect} from 'react-redux';
+
+import {setRasterStyleParameter} from '../../actions/rasterstyler';
 
 const RedBandSelector = connect((state) => { return state.rasterstyler.redband || {}; },
     {
@@ -53,7 +54,7 @@ const PseudoColor = connect((state) => { return state.rasterstyler.pseudocolor |
         onChange: setRasterStyleParameter.bind(null, 'pseudocolor')
     })(require('../../components/style/PseudoColorSettings'));
 
-module.exports = {
+export default {
     RedBandSelector,
     BlueBandSelector,
     GreenBandSelector,

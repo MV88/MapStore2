@@ -1,16 +1,13 @@
-var {createStore, combineReducers, applyMiddleware} = require('redux');
-
-var thunkMiddleware = require('redux-thunk');
-var mapConfig = require('../../../reducers/config');
-var map = require('../../../reducers/map');
-var locale = require('../../../reducers/locale');
-var controls = require('../reducers/controls');
-var mousePosition = require('../../../reducers/mousePosition');
-var searchResults = require('../../../reducers/search');
-
-const {createEpicMiddleware, combineEpics } = require('redux-observable');
-
-const {searchEpic, searchItemSelected} = require('../../../epics/search');
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import mapConfig from '../../../reducers/config';
+import map from '../../../reducers/map';
+import locale from '../../../reducers/locale';
+import controls from '../reducers/controls';
+import mousePosition from '../../../reducers/mousePosition';
+import searchResults from '../../../reducers/search';
+import {createEpicMiddleware, combineEpics} from 'redux-observable';
+import {searchEpic, searchItemSelected} from '../../../epics/search';
 
 const rootEpic = combineEpics(searchEpic, searchItemSelected);
 const epicMiddleware = createEpicMiddleware(rootEpic);
@@ -29,4 +26,4 @@ const reducers = combineReducers({
 let finalCreateStore = applyMiddleware(thunkMiddleware, epicMiddleware)(createStore);
 
 // export the store with the given reducers (and middleware applied)
-module.exports = finalCreateStore(reducers, {});
+export default finalCreateStore(reducers, {});

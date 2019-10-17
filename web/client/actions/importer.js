@@ -5,12 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var API = require('../api/geoserver/Importer');
-const Workspaces = require('../api/geoserver/Workspaces');
-const {configureMap} = require('./config');
-const {isString} = require('lodash');
+import API from '../api/geoserver/Importer';
 
-const assign = require('object-assign');
+import Workspaces from '../api/geoserver/Workspaces';
+import {configureMap} from './config';
+import {isString} from 'lodash';
+import assign from 'object-assign';
 const IMPORTS_LOADING = 'IMPORTS_LOADING';
 const IMPORTS_CREATION_ERROR = 'IMPORTS_CREATION_ERROR';
 const IMPORT_CREATED = 'IMPORT_CREATED';
@@ -720,7 +720,7 @@ function loadStylerTool(geoserverRestURL, importId, taskId) {
     };
 }
 
-module.exports = {
+export default {
     loadImports, createImport, uploadImportFiles,
     loadImport, runImport, deleteImport,
     updateTask, deleteTask, loadTask,

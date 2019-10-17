@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const WFS = require('./WFS');
-const assign = require('object-assign');
-const GeoCodeUtils = require('../utils/GeoCodeUtils');
-const {generateTemplateString} = require('../utils/TemplateUtils');
+import WFS from './WFS';
+
+import assign from 'object-assign';
+import GeoCodeUtils from '../utils/GeoCodeUtils';
+import {generateTemplateString} from '../utils/TemplateUtils';
 
 const defaultFromTextToFilter = ({searchText, staticFilter, blacklist, item, queriableAttributes, predicate} ) => {
     // split into words and remove blacklisted words
@@ -62,4 +63,4 @@ const Utils = {
     }
 };
 
-module.exports = {API: {Services, Utils}};
+export default {API: {Services, Utils}};

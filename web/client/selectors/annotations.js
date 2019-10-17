@@ -6,12 +6,13 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const {createSelector} = require('reselect');
-const {layersSelector} = require('./layers');
-const {isOpenlayers} = require('./maptype');
-const {isMapInfoOpen} = require('./mapInfo');
-const {head, get} = require('lodash');
-const assign = require('object-assign');
+import {createSelector} from 'reselect';
+
+import {layersSelector} from './layers';
+import {isOpenlayers} from './maptype';
+import {isMapInfoOpen} from './mapInfo';
+import {head, get} from 'lodash';
+import assign from 'object-assign';
 
 const annotationsLayerSelector = createSelector([
     layersSelector
@@ -110,7 +111,7 @@ const annotationSelector = createSelector([annotationsListSelector], (annotation
     };
 });
 
-module.exports = {
+export default {
     multiGeometrySelector,
     symbolErrorsSelector,
     modeSelector,

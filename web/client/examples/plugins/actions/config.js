@@ -30,4 +30,4 @@ function resetError() {
     };
 }
 
-module.exports = {SAVE_PLUGIN_CONFIG, COMPILE_ERROR, savePluginConfig, compileError, resetError};
+export default {SAVE_PLUGIN_CONFIG, COMPILE_ERROR, savePluginConfig, compileError, resetError};

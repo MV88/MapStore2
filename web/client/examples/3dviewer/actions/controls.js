@@ -22,4 +22,4 @@ function updateMarker(point) {
     };
 }
 
-module.exports = {TOGGLE_GRATICULE, UPDATE_MARKER, toggleGraticule, updateMarker};
+export default {TOGGLE_GRATICULE, UPDATE_MARKER, toggleGraticule, updateMarker};

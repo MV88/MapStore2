@@ -5,13 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
-const {
-    getDateTimeFormat,
-    getUTCTimePart,
-    getUTCDatePart,
-    roundResolution
-} = require('../TimeUtils');
+import expect from 'expect';
+
+import {getDateTimeFormat, getUTCTimePart, getUTCDatePart, roundResolution} from '../TimeUtils';
 
 describe('TimeUtils', () => {
     it('roundResolution', () => {

@@ -6,17 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const { get, head, isArray, template } = require('lodash');
-const { success, error } = require('../actions/notifications');
-const { UPDATE_NODE, updateNode, updateSettingsParams } = require('../actions/layers');
-const { updateAdditionalLayer, removeAdditionalLayer, updateOptionsByOwner } = require('../actions/additionallayers');
-const { getDescribeLayer } = require('../actions/layerCapabilities');
-const { getLayerCapabilities } = require('../observables/wms');
-const { setControlProperty } = require('../actions/controls');
-const { findGeoServerName, formatCapabitiliesOptions } = require('../utils/LayersUtils');
+import Rx from 'rxjs';
 
-const {
+import {get, head, isArray, template} from 'lodash';
+import {success, error} from '../actions/notifications';
+import {UPDATE_NODE, updateNode, updateSettingsParams} from '../actions/layers';
+import {updateAdditionalLayer, removeAdditionalLayer, updateOptionsByOwner} from '../actions/additionallayers';
+import {getDescribeLayer} from '../actions/layerCapabilities';
+import {getLayerCapabilities} from '../observables/wms';
+import {setControlProperty} from '../actions/controls';
+import {findGeoServerName, formatCapabitiliesOptions} from '../utils/LayersUtils';
+
+import {
     SELECT_STYLE_TEMPLATE,
     updateTemporaryStyle,
     TOGGLE_STYLE_EDITOR,
@@ -34,13 +35,13 @@ const {
     DELETE_STYLE,
     setEditPermissionStyleEditor,
     SET_DEFAULT_STYLE,
-    initStyleService
-} = require('../actions/styleeditor');
+    initStyleService,
+} from '../actions/styleeditor';
 
-const StylesAPI = require('../api/geoserver/Styles').default;
-const LayersAPI = require('../api/geoserver/Layers');
+import StylesAPI from '../api/geoserver/Styles';
+import LayersAPI from '../api/geoserver/Layers';
 
-const {
+import {
     temporaryIdSelector,
     codeStyleSelector,
     formatStyleSelector,
@@ -50,12 +51,12 @@ const {
     enabledStyleEditorSelector,
     loadingStyleSelector,
     styleServiceSelector,
-    getUpdatedLayer
-} = require('../selectors/styleeditor');
+    getUpdatedLayer,
+} from '../selectors/styleeditor';
 
-const { getSelectedLayer, layerSettingSelector } = require('../selectors/layers');
-const { generateTemporaryStyleId, generateStyleId, STYLE_OWNER_NAME, getNameParts } = require('../utils/StyleEditorUtils');
-const { initialSettingsSelector, originalSettingsSelector } = require('../selectors/controls');
+import {getSelectedLayer, layerSettingSelector} from '../selectors/layers';
+import {generateTemporaryStyleId, generateStyleId, STYLE_OWNER_NAME, getNameParts} from '../utils/StyleEditorUtils';
+import {initialSettingsSelector, originalSettingsSelector} from '../selectors/controls';
 /*
  * Observable to get code of a style, it works only in edit status
  */
@@ -173,7 +174,7 @@ const updateLayerSettingsObservable = (action$, store, filter = () => true, star
  * @name epics.styleeditor
  * @type {object}
  */
-module.exports = {
+export default {
     /**
      * Gets every `TOGGLE_STYLE_EDITOR` event.
      * Initialize or reset style editor based on action.enabled.

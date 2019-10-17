@@ -5,28 +5,22 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
 
-const StandardApp = require('../components/app/StandardApp');
-const LocaleUtils = require('../utils/LocaleUtils');
-const ConfigUtils = require('../utils/ConfigUtils');
-const {connect} = require('react-redux');
-
-const {configureMap, loadMapConfig} = require('../actions/config');
-const { initMap } = require('../actions/map');
-const {generateActionTrigger} = require('../epics/jsapi');
-
-const url = require('url');
-
-const ThemeUtils = require('../utils/ThemeUtils');
-
-const assign = require('object-assign');
-const {partialRight, merge} = require('lodash');
-
-const defaultConfig = require('../config.json');
-
-const localConfig = require('../localConfig.json');
+import ReactDOM from 'react-dom';
+import StandardApp from '../components/app/StandardApp';
+import LocaleUtils from '../utils/LocaleUtils';
+import ConfigUtils from '../utils/ConfigUtils';
+import {connect} from 'react-redux';
+import {configureMap, loadMapConfig} from '../actions/config';
+import {initMap} from '../actions/map';
+import {generateActionTrigger} from '../epics/jsapi';
+import url from 'url';
+import ThemeUtils from '../utils/ThemeUtils';
+import assign from 'object-assign';
+import {partialRight, merge} from 'lodash';
+import defaultConfig from '../config.json';
+import localConfig from '../localConfig.json';
 
 const defaultPlugins = {
     "mobile": localConfig.plugins.embedded,
@@ -338,4 +332,4 @@ if (!global.Intl ) {
     LocaleUtils.ensureIntl();
 }
 
-module.exports = MapStore2;
+export default MapStore2;

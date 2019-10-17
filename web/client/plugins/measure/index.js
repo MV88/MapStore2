@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const MeasureComponent = require('../../components/mapcontrols/measure/MeasureComponent');
-const MeasureDialog = require('../../components/mapcontrols/measure/MeasureDialog');
+import MeasureComponent from '../../components/mapcontrols/measure/MeasureComponent';
 
-module.exports = {
+import MeasureDialog from '../../components/mapcontrols/measure/MeasureDialog';
+
+export default {
     MeasureComponent,
     MeasureDialog
 };

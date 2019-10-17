@@ -6,10 +6,11 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const url = require('url');
-const {endsWith} = require('lodash');
+import url from 'url';
 
-module.exports = {
+import {endsWith} from 'lodash';
+
+export default {
     getWPSURL: (urlToParse, options) => {
         if (urlToParse) {
             const parsed = url.parse(urlToParse, true);

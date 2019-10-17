@@ -5,18 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../libs/ajax');
-const ConfigUtils = require('../utils/ConfigUtils');
-const CoordinatesUtils = require('../utils/CoordinatesUtils');
+import axios from '../libs/ajax';
 
-const urlUtil = require('url');
-const assign = require('object-assign');
-
-const xml2js = require('xml2js');
+import ConfigUtils from '../utils/ConfigUtils';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
+import urlUtil from 'url';
+import assign from 'object-assign';
+import xml2js from 'xml2js';
 
 const capabilitiesCache = {};
 
-const {isArray, castArray, get} = require('lodash');
+import {isArray, castArray, get} from 'lodash';
 
 const parseUrl = (url) => {
     const parsed = urlUtil.parse(url, true);
@@ -62,7 +61,7 @@ const extractCredits = attribution => {
     };
 };
 
-const _ = require('lodash');
+import _ from 'lodash';
 
 const flatLayers = (root) => {
     return root.Layer ? (isArray(root.Layer) && root.Layer || [root.Layer]).reduce((previous, current) => {
@@ -192,10 +191,10 @@ const Api = {
             decriptions = Array.isArray(decriptions) ? decriptions : [decriptions];
             // make it compatible with json format of describe layer
             return decriptions.map(desc => ({
-                ...desc && desc.$ || {},
+                ...(desc && desc.$ || {}),
                 layerName: desc && desc.$ && desc.$.name,
                 query: {
-                    ...desc && desc.query && desc.query.$ || {}
+                    ...(desc && desc.query && desc.query.$ || {})
                 }
             }));
         });
@@ -265,4 +264,4 @@ const Api = {
     }
 };
 
-module.exports = Api;
+export default Api;

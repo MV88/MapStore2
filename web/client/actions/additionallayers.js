@@ -79,7 +79,7 @@ const removeAllAdditionalLayers = () => ({
  * @name actions.additionallayers
  */
 
-module.exports = {
+export default {
     UPDATE_ADDITIONAL_LAYER, updateAdditionalLayer,
     REMOVE_ADDITIONAL_LAYER, removeAdditionalLayer,
     REMOVE_ALL_ADDITIONAL_LAYERS, removeAllAdditionalLayers,

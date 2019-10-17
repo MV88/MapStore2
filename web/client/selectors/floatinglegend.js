@@ -13,7 +13,7 @@
  * @static
  */
 
-module.exports = {
+export default {
     /**
      * Get size of floatinglegend
      * @function

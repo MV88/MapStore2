@@ -1,5 +1,5 @@
-const {createSelector} = require('reselect');
-const {pathnameSelector} = require('../selectors/router');
+import {createSelector} from 'reselect';
+import {pathnameSelector} from '../selectors/router';
 
 const isDashboardAvailable = state => state && state.dashboard && state.dashboard.editor && state.dashboard.editor.available;
 const isShowSaveOpen = state => state && state.dashboard && state.dashboard.showSaveModal;
@@ -11,7 +11,7 @@ const getDashboardSaveErrors = state => state && state.dashboard && state.dashbo
 const buttonCanEdit = createSelector(pathnameSelector, dashboardResource,
     (path, resource) => resource && resource.canEdit || isNaN(path.substr(-4)));
 
-module.exports = {
+export default {
     isDashboardAvailable,
     isShowSaveOpen,
     isDashboardEditing,

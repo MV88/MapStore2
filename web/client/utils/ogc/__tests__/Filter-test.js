@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const {Filter, marshaller, unmarshaller} = require('../Filter');
+import expect from 'expect';
+
+import {Filter, marshaller, unmarshaller} from '../Filter';
 /**
  * Validates CSW tag trying to unmarshal that
  */

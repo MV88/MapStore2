@@ -16,7 +16,7 @@ function setStyleParameter(name, value) {
     };
 }
 
-module.exports = {
+export default {
     SET_STYLE_PARAMETER,
     setStyleParameter
 };

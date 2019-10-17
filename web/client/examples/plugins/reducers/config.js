@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {SAVE_PLUGIN_CONFIG, COMPILE_ERROR} = require('../actions/config');
-const assign = require('object-assign');
+import {SAVE_PLUGIN_CONFIG, COMPILE_ERROR} from '../actions/config';
+
+import assign from 'object-assign';
 
 function my(state = {}, action) {
     switch (action.type) {
@@ -22,4 +23,4 @@ function my(state = {}, action) {
     }
 }
 
-module.exports = my;
+export default my;

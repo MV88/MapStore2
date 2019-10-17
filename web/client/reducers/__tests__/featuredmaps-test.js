@@ -5,11 +5,21 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
-const {attributeUpdated, mapDeleted, mapMetadataUpdated, permissionsUpdated, mapsLoading, setFeaturedMapsEnabled, setFeaturedMapsLatestResource} = require('../../actions/maps');
-const {dashboardDeleted} = require('../../actions/dashboards');
-const { isFeaturedMapsEnabled } = require('../../selectors/featuredmaps');
-const featuredmaps = require('../featuredmaps');
+import expect from 'expect';
+
+import {
+    attributeUpdated,
+    mapDeleted,
+    mapMetadataUpdated,
+    permissionsUpdated,
+    mapsLoading,
+    setFeaturedMapsEnabled,
+    setFeaturedMapsLatestResource,
+} from '../../actions/maps';
+
+import {dashboardDeleted} from '../../actions/dashboards';
+import {isFeaturedMapsEnabled} from '../../selectors/featuredmaps';
+import featuredmaps from '../featuredmaps';
 
 describe('Test the featuredmaps reducer', () => {
 

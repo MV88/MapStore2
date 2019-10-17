@@ -29,7 +29,8 @@ function setDetailsCookieHtml(html, lang) {
         lang
     };
 }
-module.exports = {
+
+export default {
     SET_COOKIE_VISIBILITY, setCookieVisibility,
     SET_MORE_DETAILS_VISIBILITY, setMoreDetailsVisibility,
     SET_DETAILS_COOKIE_HTML, setDetailsCookieHtml

@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const {processOGCGeometry} = require('../GML');
+import expect from 'expect';
+
+import {processOGCGeometry} from '../GML';
 const V1_1_0 = "1.1.0";
 const point = {"type": "Point", "coordinates": [100.0, 0.0] };
 const lineString = { "type": "LineString",

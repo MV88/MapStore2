@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const FeatureInfoUtils = require("./FeatureInfoUtils");
+import FeatureInfoUtils from "./FeatureInfoUtils";
+
 const INFO_FORMATS = FeatureInfoUtils.INFO_FORMATS;
 const INFO_FORMATS_BY_MIME_TYPE = FeatureInfoUtils.INFO_FORMATS_BY_MIME_TYPE;
-const pointOnSurface = require('turf-point-on-surface');
-const {findIndex} = require('lodash');
+import pointOnSurface from 'turf-point-on-surface';
+import {findIndex} from 'lodash';
 
 const MapInfoUtils = {
     /**
@@ -236,4 +237,4 @@ const MapInfoUtils = {
     }
 };
 
-module.exports = MapInfoUtils;
+export default MapInfoUtils;

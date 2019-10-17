@@ -10,7 +10,7 @@ const SET_CONTROL_PROPERTY = 'SET_CONTROL_PROPERTY';
 const SET_CONTROL_PROPERTIES = 'SET_CONTROL_PROPERTIES';
 const RESET_CONTROLS = 'RESET_CONTROLS';
 
-const { fromPairs, chunk } = require('lodash');
+import {fromPairs, chunk} from 'lodash';
 
 /**
  * Toggle a control property
@@ -85,11 +85,12 @@ function resetControls(skip = []) {
         skip
     };
 }
+
 /**
  * Actions for controls. Provide a simple generic functionality to toggle a generic
  * control property.
  * @name actions.controls
  */
-module.exports = {
+export default {
     TOGGLE_CONTROL, SET_CONTROL_PROPERTY, SET_CONTROL_PROPERTIES, RESET_CONTROLS,
     toggleControl, on, setControlProperty, setControlProperties, resetControls};

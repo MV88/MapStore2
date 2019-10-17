@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
-const PrintUtils = require('../PrintUtils');
-const ConfigUtils = require('../ConfigUtils');
+import expect from 'expect';
+
+import PrintUtils from '../PrintUtils';
+import ConfigUtils from '../ConfigUtils';
 
 const layer = {
     url: "http://mygeoserver",

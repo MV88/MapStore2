@@ -1,5 +1,5 @@
-const { isEqualWith, isObject } = require('lodash');
-const { defaultMemoize, createSelectorCreator } = require('reselect');
+import {isEqualWith, isObject} from 'lodash';
+import {defaultMemoize, createSelectorCreator} from 'reselect';
 
 const defaultCompare = (a, b) => a === b;
 
@@ -37,7 +37,8 @@ const createShallowSelectorCreator = (compare) => createSelectorCreator(
     defaultMemoize,
     (a, b) => isEqualWith(a, b, isShallowEqualBy(compare))
 );
-module.exports = {
+
+export default {
     createShallowSelector,
     createShallowSelectorCreator
 };

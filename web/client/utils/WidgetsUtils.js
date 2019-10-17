@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { get, find, isNumber, round} = require('lodash');
-const {WIDGETS_REGEX} = require('../actions/widgets');
-const { findGroups } = require('./GraphUtils');
-const { sameToneRangeColors } = require('./ColorUtils');
+import {get, find, isNumber, round} from 'lodash';
+
+import {WIDGETS_REGEX} from '../actions/widgets';
+import {findGroups} from './GraphUtils';
+import {sameToneRangeColors} from './ColorUtils';
 
 const getDependentWidget = (k, widgets) => {
     const [match, id] = WIDGETS_REGEX.exec(k);
@@ -88,7 +89,7 @@ const shortenLabel = (label, threshold = 1000, decimals = 1) => {
     return number;
 };
 
-module.exports = {
+export default {
     shortenLabel,
     getWidgetDependency,
     getConnectionList,

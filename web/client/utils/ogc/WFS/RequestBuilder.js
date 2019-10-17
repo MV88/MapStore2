@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const filterBuilder = require('../Filter/FilterBuilder');
-const {castArray} = require('lodash');
-const {wfsToGmlVersion} = require("./base");
+import filterBuilder from '../Filter/FilterBuilder';
+
+import {castArray} from 'lodash';
+import {wfsToGmlVersion} from "./base";
 const getStaticAttributesWFS1 = (ver) => 'service="WFS" version="' + ver + '" ' +
     (ver === "1.0.0" ? 'outputFormat="GML2" ' : "") +
     'xmlns:gml="http://www.opengis.net/gml" ' +
@@ -65,7 +66,7 @@ const getStaticAttributesWFS2 = (ver) => 'service="WFS" version="' + ver + '" ' 
  * query("layerName", filter..., {options})
  * ```
  */
-module.exports = function({wfsVersion = "1.1.0", gmlVersion, filterNS, wfsNS = "wfs"} = {}) {
+export default function({wfsVersion = "1.1.0", gmlVersion, filterNS, wfsNS = "wfs"} = {}) {
     let gmlV = gmlVersion;
     if (!gmlV && wfsVersion) {
         gmlV = wfsToGmlVersion(wfsVersion);

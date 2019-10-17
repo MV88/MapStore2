@@ -17,7 +17,7 @@ const PRINT_ERROR = 'PRINT_ERROR';
 const PRINT_CREATED = 'PRINT_CREATED';
 const PRINT_CANCEL = 'PRINT_CANCEL';
 
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
 function printCapabilitiesLoaded(capabilities) {
     return {
@@ -138,7 +138,7 @@ function changeMapPrintPreview(center, zoom, bbox, size, mapStateSource, project
     };
 }
 
-module.exports = {
+export default {
     PRINT_CAPABILITIES_LOADED,
     PRINT_CAPABILITIES_ERROR,
     SET_PRINT_PARAMETER,

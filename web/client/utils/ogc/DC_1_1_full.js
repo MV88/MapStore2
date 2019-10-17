@@ -9,7 +9,7 @@
  * This definition of DC add the dc:URI to the possible Dublin core elements
  * originally available in the ogc-schemas mappings.
  */
-module.exports = {
+export default {
     n: 'DC_1_1',
     dens: 'http:\/\/purl.org\/dc\/elements\/1.1\/',
     tis: [{

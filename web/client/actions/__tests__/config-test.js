@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const {loadMapConfig, loadMapInfo, MAP_CONFIG_LOAD_ERROR, MAP_CONFIG_LOADED} = require('../config');
+import expect from 'expect';
+
+import {loadMapConfig, loadMapInfo, MAP_CONFIG_LOAD_ERROR, MAP_CONFIG_LOADED} from '../config';
 
 const loggedGetState = () => ({
     security: {

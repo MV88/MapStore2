@@ -46,4 +46,4 @@ function startTask(task, taskPayload, name, actionPayload) {
 }
 
 
-module.exports = {TASK_STARTED, TASK_SUCCESS, TASK_ERROR, startTask, taskSuccess, taskError, taskStarted};
+export default {TASK_STARTED, TASK_SUCCESS, TASK_ERROR, startTask, taskSuccess, taskError, taskStarted};

@@ -27,7 +27,7 @@ const getIdxFarthestEl = (avgIdx, pages = [], firstIdx, lastIdx) => {
 };
 
 
-module.exports = {
+export default {
     getPageIdx,
     getRow,
     getPagesToLoad: (startPage, endPage, pages) => {

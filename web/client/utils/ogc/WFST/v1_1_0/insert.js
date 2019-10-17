@@ -7,7 +7,7 @@
  */
 
 const getAttributeName = (k, d) => d.targetPrefix ? d.targetPrefix + ":" + k : k;
-const {getValue, getTypeName, getPropertyDesciptor, findGeometryProperty} = require("../../WFS/base");
+import {getValue, getTypeName, getPropertyDesciptor, findGeometryProperty} from "../../WFS/base";
 
 const attribute = (key, value) => `<${key}>${value}</${key}>`;
 const attributes = (f, describeFeatureType) =>
@@ -28,7 +28,7 @@ const insert = (fs, describeFeatureType) => '<wfs:Insert>'
     + `${features(fs.features || fs, describeFeatureType)}`
     + '</wfs:Insert>';
 
-module.exports = {
+export default {
     insert,
     feature
 };

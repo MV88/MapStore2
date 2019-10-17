@@ -107,7 +107,7 @@ function resetInvalidInput(input) {
     };
 }
 
-module.exports = {
+export default {
     FIELDS_LOADED,
     FIELDS_ERROR,
     LOAD_FIELDS,

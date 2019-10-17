@@ -6,13 +6,14 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const { head, get, isObject} = require('lodash');
-const { getLayerFromId} = require('./layers');
-const {findGeometryProperty} = require('../utils/ogc/WFS/base');
-const {currentLocaleSelector} = require('../selectors/locale');
-const {isSimpleGeomType} = require('../utils/MapUtils');
-const {toChangesMap} = require('../utils/FeatureGridUtils');
-const { layerDimensionSelectorCreator } = require('./dimension');
+import {head, get, isObject} from 'lodash';
+
+import {getLayerFromId} from './layers';
+import {findGeometryProperty} from '../utils/ogc/WFS/base';
+import {currentLocaleSelector} from '../selectors/locale';
+import {isSimpleGeomType} from '../utils/MapUtils';
+import {toChangesMap} from '../utils/FeatureGridUtils';
+import {layerDimensionSelectorCreator} from './dimension';
 
 
 const getLayerById = getLayerFromId;
@@ -20,7 +21,7 @@ const getTitle = (layer = {}) => layer.title || layer.name;
 const selectedLayerIdSelector = state => get(state, "featuregrid.selectedLayer");
 const chartDisabledSelector = state => get(state, "featuregrid.chartDisabled", false);
 const getCustomAttributeSettings = (state, att) => get(state, `featuregrid.attributes[${att.name || att.attribute}]`);
-const { attributesSelector, describeSelector } = require('./query');
+import {attributesSelector, describeSelector} from './query';
 const selectedFeaturesSelector = state => state && state.featuregrid && state.featuregrid.select;
 const changesSelector = state => state && state.featuregrid && state.featuregrid.changes;
 const newFeaturesSelector = state => state && state.featuregrid && state.featuregrid.newFeatures;
@@ -67,13 +68,14 @@ const hasChangesSelector = state => changesSelector(state) && changesSelector(st
 const hasNewFeaturesSelector = state => newFeaturesSelector(state) && newFeaturesSelector(state).length > 0;
 const getAttributeFilters = state => state && state.featuregrid && state.featuregrid.filters;
 const selectedLayerParamsSelector = state => get(getLayerById(state, selectedLayerIdSelector(state)), "params");
+
 /**
  * selects featuregrid state
  * @name featuregrid
  * @memberof selectors
  * @static
  */
-module.exports = {
+export default {
     /**
    * selects the state of featuregrid open
    * @memberof selectors.featuregrid

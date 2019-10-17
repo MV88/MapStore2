@@ -1,4 +1,4 @@
-const {get} = require('lodash');
+import {get} from 'lodash';
 const createControlVariableSelector = (name, attribute) => state => get(state, `controls[${name}][${attribute}]`);
 const createControlEnabledSelector = name => createControlVariableSelector(name, 'enabled');
 
@@ -11,7 +11,7 @@ const createControlEnabledSelector = name => createControlVariableSelector(name,
  */
 const showCoordinateEditorSelector = (state) => get(state, "controls.measure.showCoordinateEditor");
 
-module.exports = {
+export default {
     createControlEnabledSelector,
     createControlVariableSelector,
     showCoordinateEditorSelector,

@@ -6,9 +6,10 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const assign = require('object-assign');
-const _ = require('lodash');
-const {createSelector} = require('reselect');
+import assign from 'object-assign';
+
+import _ from 'lodash';
+import {createSelector} from 'reselect';
 
 const rulesSelector = (state) => {
     if (!state.rulesmanager || !state.rulesmanager.rules) {
@@ -66,7 +67,8 @@ const isEditorActive = state => state.rulesmanager && !!state.rulesmanager.activ
 const triggerLoadSel = state => state.rulesmanager && state.rulesmanager.triggerLoad;
 const isLoading = state => state.rulesmanager && state.rulesmanager.loading;
 const geometryStateSel = state => state.rulesmanager && state.rulesmanager.geometryState;
-module.exports = {
+
+export default {
     rulesSelector,
     optionsSelector,
     selectedRules,
