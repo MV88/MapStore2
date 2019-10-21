@@ -6,38 +6,40 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const {castArray, findIndex, find, isNil, filter} = require('lodash');
-const {Grid} = require('react-bootstrap');
-const assign = require('object-assign');
-const uuidv1 = require('uuid/v1');
-const tinycolor = require("tinycolor2");
-const axios = require("axios");
+import PropTypes from 'prop-types';
 
-const SwitchPanel = require('../../misc/switch/SwitchPanel');
-const {arrayUpdate} = require('../../../utils/ImmutableUtils');
-const StyleCanvas = require('../StyleCanvas');
-const Stroke = require('./Stroke');
-const Fill = require('./Fill');
-const MarkerGlyph = require('./marker/MarkerGlyph');
-const MarkerType = require('./marker/MarkerType');
-const SymbolLayout = require('./marker/SymbolLayout');
-const Text = require('./Text');
+import React from 'react';
+import { castArray, findIndex, find, isNil, filter } from 'lodash';
+import { Grid } from 'react-bootstrap';
+import assign from 'object-assign';
+import uuidv1 from 'uuid/v1';
+import tinycolor from 'tinycolor2';
+import axios from 'axios';
+import SwitchPanel from '../../misc/switch/SwitchPanel';
+import { arrayUpdate } from '../../../utils/ImmutableUtils';
+import StyleCanvas from '../StyleCanvas';
+import Stroke from './Stroke';
+import Fill from './Fill';
+import MarkerGlyph from './marker/MarkerGlyph';
+import MarkerType from './marker/MarkerType';
+import SymbolLayout from './marker/SymbolLayout';
+import Text from './Text';
 
-const {
-    createSvgUrl, registerStyle,
-    hashAndStringify, fetchStyle,
-    getStylerTitle, isSymbolStyle,
-    isMarkerStyle, isStrokeStyle,
-    isFillStyle, addOpacityToColor,
-    isTextStyle
-} = require('../../../utils/VectorStyleUtils');
+import {
+    createSvgUrl,
+    registerStyle,
+    hashAndStringify,
+    fetchStyle,
+    getStylerTitle,
+    isSymbolStyle,
+    isMarkerStyle,
+    isStrokeStyle,
+    isFillStyle,
+    addOpacityToColor,
+    isTextStyle,
+} from '../../../utils/VectorStyleUtils';
 
-const {
-    DEFAULT_SHAPE, DEFAULT_PATH,
-    checkSymbolsError
-} = require('../../../utils/AnnotationsUtils');
+import { DEFAULT_SHAPE, DEFAULT_PATH, checkSymbolsError } from '../../../utils/AnnotationsUtils';
 
 class Manager extends React.Component {
     static propTypes = {

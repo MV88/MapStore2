@@ -64,6 +64,6 @@ const extendColorBrewer = {
     }
 };
 
-const assign = require('object-assign');
+import assign from 'object-assign';
 
 export default assign({}, require("colorbrewer"), extendColorBrewer);

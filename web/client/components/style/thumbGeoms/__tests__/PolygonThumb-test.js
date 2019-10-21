@@ -1,9 +1,9 @@
-const expect = require('expect');
-const React = require('react');
-const ReactDOM = require('react-dom');
-const TestUtils = require('react-dom/test-utils');
-const PolygonThumb = require('../PolygonThumb');
-const {DEFAULT_ANNOTATIONS_STYLES} = require('../../../../utils/AnnotationsUtils');
+import expect from 'expect';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-dom/test-utils';
+import PolygonThumb from '../PolygonThumb';
+import { DEFAULT_ANNOTATIONS_STYLES } from '../../../../utils/AnnotationsUtils';
 
 describe("Test the PolygonThumb component", () => {
     beforeEach((done) => {

@@ -1,9 +1,9 @@
-const expect = require('expect');
-const React = require('react');
-const ReactDOM = require('react-dom');
-const TestUtils = require('react-dom/test-utils');
-const LineThumb = require('../LineThumb');
-const {DEFAULT_ANNOTATIONS_STYLES} = require('../../../../utils/AnnotationsUtils');
+import expect from 'expect';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-dom/test-utils';
+import LineThumb from '../LineThumb';
+import { DEFAULT_ANNOTATIONS_STYLES } from '../../../../utils/AnnotationsUtils';
 
 describe("Test the LineThumb component", () => {
     beforeEach((done) => {

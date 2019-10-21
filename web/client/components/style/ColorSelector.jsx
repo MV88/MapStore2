@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const ColorPicker = require('./ColorPicker');
-const {Glyphicon} = require('react-bootstrap');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import ColorPicker from './ColorPicker';
+import { Glyphicon } from 'react-bootstrap';
 
 class ColorSelector extends React.Component {
 

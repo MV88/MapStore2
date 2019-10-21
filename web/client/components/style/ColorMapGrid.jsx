@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,18 +8,17 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {isEqual} = require('lodash');
-const {AgGridReact} = require('ag-grid-react');
-const reactCellRendererFactory = require('./ColorMapGridComponents/ReactCellRendererFactoryParams');
-const ColorPickerRenderer = require('./ColorMapGridComponents/ColorPickerRenderer');
-const assign = require('object-assign');
-const NumberRenderer = require('./ColorMapGridComponents/NumberRenderer');
+import React from 'react';
 
-const LocaleUtils = require('../../utils/LocaleUtils');
-
-require("ag-grid-community/dist/styles/ag-grid.css");
-require("ag-grid-community/dist/styles/ag-theme-blue.css");
+import { isEqual } from 'lodash';
+import { AgGridReact } from 'ag-grid-react';
+import reactCellRendererFactory from './ColorMapGridComponents/ReactCellRendererFactoryParams';
+import ColorPickerRenderer from './ColorMapGridComponents/ColorPickerRenderer';
+import assign from 'object-assign';
+import NumberRenderer from './ColorMapGridComponents/NumberRenderer';
+import LocaleUtils from '../../utils/LocaleUtils';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-blue.css';
 
 class ColorMapGrid extends React.Component {
     static propTypes = {

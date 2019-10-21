@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const {Row, Col} = require('react-bootstrap');
-const Select = require('react-select');
+import PropTypes from 'prop-types';
 
-const Message = require('../../../I18N/Message');
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
+import Select from 'react-select';
+import Message from '../../../I18N/Message';
 
 /**
  * Styler for the gliph, color and shape

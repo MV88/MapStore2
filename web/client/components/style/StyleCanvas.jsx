@@ -6,11 +6,11 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const defaultIcon = require('../map/openlayers/img/marker-icon.png');
+import React from 'react';
 
-const {createSvgUrl, isSymbolStyle} = require('../../utils/VectorStyleUtils');
+import PropTypes from 'prop-types';
+import defaultIcon from '../map/openlayers/img/marker-icon.png';
+import { createSvgUrl, isSymbolStyle } from '../../utils/VectorStyleUtils';
 
 class StyleCanvas extends React.Component {
     static propTypes = {

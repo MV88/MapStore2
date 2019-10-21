@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const markerIcon = require('../../map/openlayers/img/marker-icon.png');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import markerIcon from '../../map/openlayers/img/marker-icon.png';
 
 class MultiGeomThumb extends React.Component {
 

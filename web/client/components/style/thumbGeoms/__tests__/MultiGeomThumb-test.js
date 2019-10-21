@@ -1,9 +1,9 @@
-const expect = require('expect');
-const React = require('react');
-const ReactDOM = require('react-dom');
-const TestUtils = require('react-dom/test-utils');
-const MultiGeomThumb = require('../MultiGeomThumb');
-const {DEFAULT_ANNOTATIONS_STYLES} = require('../../../../utils/AnnotationsUtils');
+import expect from 'expect';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-dom/test-utils';
+import MultiGeomThumb from '../MultiGeomThumb';
+import { DEFAULT_ANNOTATIONS_STYLES } from '../../../../utils/AnnotationsUtils';
 
 describe("Test the MultiGeomThumb component", () => {
     beforeEach((done) => {

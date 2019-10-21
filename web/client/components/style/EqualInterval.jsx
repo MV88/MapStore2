@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,20 +9,18 @@ const PropTypes = require('prop-types');
  */
 
 
-const React = require('react');
-const {findDOMNode} = require('react-dom');
-const {Grid, Row, Col, Button, Popover, Label, Overlay} = require('react-bootstrap');
+import React from 'react';
 
-const Combobox = require('react-widgets').Combobox;
-const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
+import { findDOMNode } from 'react-dom';
+import { Grid, Row, Col, Button, Popover, Label, Overlay } from 'react-bootstrap';
+import { Combobox } from 'react-widgets';
+import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
 numberLocalizer();
-const {NumberPicker} = require('react-widgets');
-
-const ColorRampItem = require('./EqualIntervalComponents/ColorRampItem');
-const colorsSchema = require("./EqualIntervalComponents/ColorRamp");
-const colors = require("./EqualIntervalComponents/ExtendColorBrewer");
-
-const Message = require('../I18N/Message');
+import { NumberPicker } from 'react-widgets';
+import ColorRampItem from './EqualIntervalComponents/ColorRampItem';
+import colorsSchema from './EqualIntervalComponents/ColorRamp';
+import colors from './EqualIntervalComponents/ExtendColorBrewer';
+import Message from '../I18N/Message';
 
 class EqualInterval extends React.Component {
     static propTypes = {

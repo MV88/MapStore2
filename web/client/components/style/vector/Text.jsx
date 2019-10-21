@@ -6,18 +6,18 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const {Row, Col, FormControl} = require('react-bootstrap');
-const Combobox = require('react-widgets').Combobox;
+import PropTypes from 'prop-types';
 
-const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
+import React from 'react';
+import { Row, Col, FormControl } from 'react-bootstrap';
+import { Combobox } from 'react-widgets';
+import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
 // not sure this is needed, TODO check!
 numberLocalizer();
 
-const Message = require('../../I18N/Message');
-const LocaleUtils = require('../../../utils/LocaleUtils');
-const {createFont} = require('../../../utils/AnnotationsUtils');
+import Message from '../../I18N/Message';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import { createFont } from '../../../utils/AnnotationsUtils';
 
 /**
  * Styler for the stroke properties of a vector style

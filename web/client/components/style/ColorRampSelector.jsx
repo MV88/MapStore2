@@ -1,9 +1,9 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const colorsSchema = require("./EqualIntervalComponents/ColorRamp");
-const ColorRampItem = require('./EqualIntervalComponents/ColorRampItem');
-const colors = require("./EqualIntervalComponents/ExtendColorBrewer");
-const Combobox = require('react-widgets').Combobox;
+import React from 'react';
+import PropTypes from 'prop-types';
+import colorsSchema from './EqualIntervalComponents/ColorRamp';
+import ColorRampItem from './EqualIntervalComponents/ColorRampItem';
+import colors from './EqualIntervalComponents/ExtendColorBrewer';
+import { Combobox } from 'react-widgets';
 
 class ColorRampSelector extends React.Component {
 
