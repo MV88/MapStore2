@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {connect} = require('react-redux');
-const {setCookieVisibility, setMoreDetailsVisibility} = require('../actions/cookie');
+import { connect } from 'react-redux';
+
+import { setCookieVisibility, setMoreDetailsVisibility } from '../actions/cookie';
 
 const Cookie = connect((state) => ({
     show: state.cookie && state.cookie.showCookiePanel,

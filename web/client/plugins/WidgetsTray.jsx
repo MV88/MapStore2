@@ -7,8 +7,9 @@
  */
 
 
-const WidgetsTray = require('./widgets/WidgetsTray');
-const autoDisableWidgets = require('./widgets/autoDisableWidgets');
+import WidgetsTray from './widgets/WidgetsTray';
+
+import autoDisableWidgets from './widgets/autoDisableWidgets';
 
 /**
  * Plugin that allow to collapse widgets. Shows a small tray where to see the collapsed plugins list.

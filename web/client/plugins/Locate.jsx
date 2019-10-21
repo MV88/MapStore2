@@ -5,16 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const {changeLocateState} = require('../actions/locate');
-
-const Message = require('./locale/Message');
-
-const {Glyphicon} = require('react-bootstrap');
-
-const assign = require('object-assign');
+import { connect } from 'react-redux';
+import { changeLocateState } from '../actions/locate';
+import Message from './locale/Message';
+import { Glyphicon } from 'react-bootstrap';
+import assign from 'object-assign';
 
 /**
   * Locate Plugin. Provides button to locate the user's position on the map.
@@ -35,7 +32,7 @@ const LocatePlugin = connect((state) => ({
     onClick: changeLocateState
 })(require('../components/mapcontrols/locate/LocateBtn'));
 
-require('./locate/locate.css');
+import './locate/locate.css';
 
 export default {
     LocatePlugin: assign(LocatePlugin, {

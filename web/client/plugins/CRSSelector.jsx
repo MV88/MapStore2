@@ -5,31 +5,31 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {createSelector} = require('reselect');
-const PropTypes = require('prop-types');
-const assign = require('object-assign');
-const { Glyphicon, Dropdown, Button: ButtonRB, ListGroupItem } = require('react-bootstrap');
-const tooltip = require('../components/misc/enhancers/tooltip');
-const Button = tooltip(ButtonRB);
-const {changeMapCrs} = require('../actions/map');
-const {setInputValue} = require('../actions/crsselector');
-const CoordinatesUtils = require('../utils/CoordinatesUtils');
-const {isCesium} = require('../selectors/maptype');
-const {connect} = require('react-redux');
-const CrsSelectorMenu = require('../components/mapcontrols/crsselectormenu/CrsSelectorMenu');
-const {projectionDefsSelector, projectionSelector} = require('../selectors/map');
-const {bottomPanelOpenSelector} = require('../selectors/maplayout');
-const {printSelector, measureSelector} = require('../selectors/controls');
-const {editingSelector} = require('../selectors/annotations');
-const {crsInputValueSelector} = require('../selectors/crsselector');
-const {currentBackgroundSelector} = require('../selectors/layers');
-const {queryPanelSelector} = require('../selectors/controls');
-const {modeSelector} = require('../selectors/featuregrid');
-const {error} = require('../actions/notifications');
-const {userRoleSelector} = require('../selectors/security');
+import React from 'react';
 
-const {indexOf, has, includes} = require('lodash');
+import { createSelector } from 'reselect';
+import PropTypes from 'prop-types';
+import assign from 'object-assign';
+import { Glyphicon, Dropdown, Button as ButtonRB, ListGroupItem } from 'react-bootstrap';
+import tooltip from '../components/misc/enhancers/tooltip';
+const Button = tooltip(ButtonRB);
+import { changeMapCrs } from '../actions/map';
+import { setInputValue } from '../actions/crsselector';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
+import { isCesium } from '../selectors/maptype';
+import { connect } from 'react-redux';
+import CrsSelectorMenu from '../components/mapcontrols/crsselectormenu/CrsSelectorMenu';
+import { projectionDefsSelector, projectionSelector } from '../selectors/map';
+import { bottomPanelOpenSelector } from '../selectors/maplayout';
+import { printSelector, measureSelector } from '../selectors/controls';
+import { editingSelector } from '../selectors/annotations';
+import { crsInputValueSelector } from '../selectors/crsselector';
+import { currentBackgroundSelector } from '../selectors/layers';
+import { queryPanelSelector } from '../selectors/controls';
+import { modeSelector } from '../selectors/featuregrid';
+import { error } from '../actions/notifications';
+import { userRoleSelector } from '../selectors/security';
+import { indexOf, has, includes } from 'lodash';
 
 class Selector extends React.Component {
     static propTypes = {

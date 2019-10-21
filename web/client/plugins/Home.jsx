@@ -6,17 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const assign = require('object-assign');
-
-const {goToPage} = require('../actions/router');
-
-const Message = require('./locale/Message');
-
-const {Glyphicon} = require('react-bootstrap');
-
-const Home = require('../components/home/Home');
+import assign from 'object-assign';
+import { goToPage } from '../actions/router';
+import Message from './locale/Message';
+import { Glyphicon } from 'react-bootstrap';
+import Home from '../components/home/Home';
 
 export default {
     HomePlugin: assign(Home, {

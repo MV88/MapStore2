@@ -6,20 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
+import React from 'react';
 
-require('./toolbar/assets/css/toolbar.css');
-
-const {CSSTransitionGroup} = require('react-transition-group');
-const {isFeatureGridOpen} = require('../selectors/featuregrid');
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-const {createSelector} = require('reselect');
-
-const assign = require('object-assign');
-
-const ToolsContainer = require('./containers/ToolsContainer');
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import './toolbar/assets/css/toolbar.css';
+import { CSSTransitionGroup } from 'react-transition-group';
+import { isFeatureGridOpen } from '../selectors/featuregrid';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import { createSelector } from 'reselect';
+import assign from 'object-assign';
+import ToolsContainer from './containers/ToolsContainer';
 
 class AnimatedContainer extends React.Component {
     render() {

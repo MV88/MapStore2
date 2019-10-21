@@ -5,16 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {connect} = require('react-redux');
+import { connect } from 'react-redux';
 
-
-const assign = require('object-assign');
-const globeswitcher = require('../reducers/globeswitcher');
-const epics = require('../epics/globeswitcher');
-const {toggle3d} = require('../actions/globeswitcher');
-const {mapTypeSelector, isCesium} = require('../selectors/maptype');
-const {createSelector} = require('reselect');
-const GlobeViewSwitcherButton = require('../components/buttons/GlobeViewSwitcherButton');
+import assign from 'object-assign';
+import globeswitcher from '../reducers/globeswitcher';
+import epics from '../epics/globeswitcher';
+import { toggle3d } from '../actions/globeswitcher';
+import { mapTypeSelector, isCesium } from '../selectors/maptype';
+import { createSelector } from 'reselect';
+import GlobeViewSwitcherButton from '../components/buttons/GlobeViewSwitcherButton';
 
 /**
   * GlobeViewSwitcher Plugin. A button that toggles to 3d mode

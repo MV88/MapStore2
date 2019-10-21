@@ -6,30 +6,67 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const {connect} = require('../utils/PluginsUtils');
-const assign = require('object-assign');
-const Message = require('../components/I18N/Message');
-const PropTypes = require('prop-types');
+import React from 'react';
 
-const {Glyphicon} = require('react-bootstrap');
-const {on, toggleControl} = require('../actions/controls');
-const {createSelector} = require('reselect');
+import { connect } from '../utils/PluginsUtils';
+import assign from 'object-assign';
+import Message from '../components/I18N/Message';
+import PropTypes from 'prop-types';
+import { Glyphicon } from 'react-bootstrap';
+import { on, toggleControl } from '../actions/controls';
+import { createSelector } from 'reselect';
 
-const {cancelRemoveAnnotation, confirmRemoveAnnotation, editAnnotation, newAnnotation, removeAnnotation, cancelEditAnnotation,
-    saveAnnotation, toggleAdd, validationError, removeAnnotationGeometry, toggleStyle, setStyle, restoreStyle,
-    highlight, cleanHighlight, showAnnotation, cancelShowAnnotation, filterAnnotations, closeAnnotations,
-    cancelCloseAnnotations, confirmCloseAnnotations, startDrawing, setUnsavedChanges, toggleUnsavedChangesModal,
-    changedProperties, setUnsavedStyle, toggleUnsavedStyleModal, addText, download, loadAnnotations,
-    changeSelected, resetCoordEditor, changeRadius, changeText, toggleUnsavedGeometryModal, addNewFeature, setInvalidSelected,
-    highlightPoint, confirmDeleteFeature, toggleDeleteFtModal, changeFormat, openEditor, updateSymbols, changePointType,
-    setErrorSymbol
-} = require('../actions/annotations');
+import {
+    cancelRemoveAnnotation,
+    confirmRemoveAnnotation,
+    editAnnotation,
+    newAnnotation,
+    removeAnnotation,
+    cancelEditAnnotation,
+    saveAnnotation,
+    toggleAdd,
+    validationError,
+    removeAnnotationGeometry,
+    toggleStyle,
+    setStyle,
+    restoreStyle,
+    highlight,
+    cleanHighlight,
+    showAnnotation,
+    cancelShowAnnotation,
+    filterAnnotations,
+    closeAnnotations,
+    cancelCloseAnnotations,
+    confirmCloseAnnotations,
+    startDrawing,
+    setUnsavedChanges,
+    toggleUnsavedChangesModal,
+    changedProperties,
+    setUnsavedStyle,
+    toggleUnsavedStyleModal,
+    addText,
+    download,
+    loadAnnotations,
+    changeSelected,
+    resetCoordEditor,
+    changeRadius,
+    changeText,
+    toggleUnsavedGeometryModal,
+    addNewFeature,
+    setInvalidSelected,
+    highlightPoint,
+    confirmDeleteFeature,
+    toggleDeleteFtModal,
+    changeFormat,
+    openEditor,
+    updateSymbols,
+    changePointType,
+    setErrorSymbol,
+} from '../actions/annotations';
 
-const { zoomToExtent } = require('../actions/map');
-
-const { annotationsInfoSelector, annotationsListSelector } = require('../selectors/annotations');
-const { mapLayoutValuesSelector } = require('../selectors/maplayout');
+import { zoomToExtent } from '../actions/map';
+import { annotationsInfoSelector, annotationsListSelector } from '../selectors/annotations';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
 const commonEditorActions = {
     onUpdateSymbols: updateSymbols,
     onSetErrorSymbol: setErrorSymbol,
@@ -108,8 +145,8 @@ const Annotations = connect(panelSelector, {
     onLoadAnnotations: loadAnnotations
 })(require('../components/mapcontrols/annotations/Annotations'));
 
-const ContainerDimensions = require('react-container-dimensions').default;
-const Dock = require('react-dock').default;
+import ContainerDimensions from 'react-container-dimensions';
+import Dock from 'react-dock';
 
 class AnnotationsPanel extends React.Component {
     static propTypes = {

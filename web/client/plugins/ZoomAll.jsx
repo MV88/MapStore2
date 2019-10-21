@@ -5,23 +5,23 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const {mapSelector} = require('../selectors/map');
-const {Glyphicon} = require('react-bootstrap');
+import React from 'react';
+
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { mapSelector } from '../selectors/map';
+import { Glyphicon } from 'react-bootstrap';
 
 const selector = createSelector([mapSelector, state => state.mapInitialConfig], (map, mapInitialConfig) => ({mapConfig: map, mapInitialConfig: mapInitialConfig}));
 
-const {changeMapView} = require('../actions/map');
+import { changeMapView } from '../actions/map';
 
 const ZoomToMaxExtentButton = connect(selector, {
     changeMapView
 })(require('../components/buttons/ZoomToMaxExtentButton'));
 
-const Message = require('../components/I18N/Message');
-
-require('./zoomall/zoomall.css');
+import Message from '../components/I18N/Message';
+import './zoomall/zoomall.css';
 
 class ZoomAllPlugin extends React.Component {
     render() {
@@ -31,7 +31,7 @@ class ZoomAllPlugin extends React.Component {
     }
 }
 
-const assign = require('object-assign');
+import assign from 'object-assign';
 
 export default {
     ZoomAllPlugin: assign(ZoomAllPlugin, {

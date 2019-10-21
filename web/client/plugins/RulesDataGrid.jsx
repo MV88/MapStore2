@@ -6,17 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {compose} = require("recompose");
+import React from 'react';
 
-const {createSelector} = require('reselect');
-const {selectedRules, filterSelector, isEditorActive, triggerLoadSel} = require('../selectors/rulesmanager');
-
-const ContainerDimensions = require('react-container-dimensions').default;
-const PropTypes = require('prop-types');
-const {rulesSelected, setLoading, setFilter} = require("../actions/rulesmanager");
-const {error} = require('../actions/notifications');
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { createSelector } from 'reselect';
+import { selectedRules, filterSelector, isEditorActive, triggerLoadSel } from '../selectors/rulesmanager';
+import ContainerDimensions from 'react-container-dimensions';
+import PropTypes from 'prop-types';
+import { rulesSelected, setLoading, setFilter } from '../actions/rulesmanager';
+import { error } from '../actions/notifications';
 
 const ruelsSelector = createSelector([selectedRules, filterSelector, triggerLoadSel], (rules, filters, triggerLoad) => {
     return {

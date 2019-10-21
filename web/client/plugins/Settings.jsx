@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,12 +7,11 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const {loadLocale} = require('../actions/locale');
-
-const {toggleControl} = require('../actions/controls');
+import { connect } from 'react-redux';
+import { loadLocale } from '../actions/locale';
+import { toggleControl } from '../actions/controls';
 
 const LangBar = connect((state) => ({
     currentLocale: state.locale && state.locale.current
@@ -19,22 +19,18 @@ const LangBar = connect((state) => ({
     onLanguageChange: loadLocale.bind(null, null)
 })(require('../components/I18N/LangBar'));
 
-require('./settings/css/settings.css');
-
-const HistoryBar = require('../components/mapcontrols/navigationhistory/HistoryBar');
-const { ActionCreators } = require('redux-undo');
+import './settings/css/settings.css';
+import HistoryBar from '../components/mapcontrols/navigationhistory/HistoryBar';
+import { ActionCreators } from 'redux-undo';
 const {undo, redo} = ActionCreators;
 
-const Message = require('./locale/Message');
-
-const {Glyphicon, FormGroup, Row, Col} = require('react-bootstrap');
-
-const assign = require('object-assign');
-
-const SettingsPanel = require('./settings/SettingsPanel');
-const LocaleUtils = require('../utils/LocaleUtils');
-const {Panel} = require('react-bootstrap');
-const Dialog = require('../components/misc/Dialog');
+import Message from './locale/Message';
+import { Glyphicon, FormGroup, Row, Col } from 'react-bootstrap';
+import assign from 'object-assign';
+import SettingsPanel from './settings/SettingsPanel';
+import LocaleUtils from '../utils/LocaleUtils';
+import { Panel } from 'react-bootstrap';
+import Dialog from '../components/misc/Dialog';
 
 class SettingsButton extends React.Component {
     static propTypes = {

@@ -6,16 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const assign = require('object-assign');
-
-const Message = require('./locale/Message');
-
-const {Glyphicon} = require('react-bootstrap');
-
-const { ActionCreators } = require('redux-undo');
+import { connect } from 'react-redux';
+import assign from 'object-assign';
+import Message from './locale/Message';
+import { Glyphicon } from 'react-bootstrap';
+import { ActionCreators } from 'redux-undo';
 const {undo, redo} = ActionCreators;
 
 const UndoButton = connect((state) => {

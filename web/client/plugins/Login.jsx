@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /*
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,11 +8,11 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const assign = require('object-assign');
-const {UserDetails, PasswordReset, UserMenu, Login, LoginNav } = require('./login/index');
+import React from 'react';
 
-require('./login/login.css');
+import assign from 'object-assign';
+import { UserDetails, PasswordReset, UserMenu, Login, LoginNav } from './login/index';
+import './login/login.css';
 
 /**
   * Login Plugin. Allow to login/logout or show user info and reset password tools

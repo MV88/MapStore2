@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,9 +8,10 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const assign = require('object-assign');
-const {connect} = require('react-redux');
+import React from 'react';
+
+import assign from 'object-assign';
+import { connect } from 'react-redux';
 
 class RedirectComponent extends React.Component {
     static propTypes = {

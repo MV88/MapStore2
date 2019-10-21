@@ -5,13 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const assign = require('object-assign');
-
-const {DropdownButton, Glyphicon, MenuItem} = require('react-bootstrap');
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import assign from 'object-assign';
+import { DropdownButton, Glyphicon, MenuItem } from 'react-bootstrap';
 
 const Container = connect(() => ({
     noCaret: true,
@@ -20,12 +19,10 @@ const Container = connect(() => ({
     title: <Glyphicon glyph="menu-hamburger"/>
 }))(DropdownButton);
 
-const ToolsContainer = require('./containers/ToolsContainer');
-const Message = require('./locale/Message');
-
-const { createPlugin } = require('../utils/PluginsUtils');
-
-require('./burgermenu/burgermenu.css');
+import ToolsContainer from './containers/ToolsContainer';
+import Message from './locale/Message';
+import { createPlugin } from '../utils/PluginsUtils';
+import './burgermenu/burgermenu.css';
 
 class BurgerMenu extends React.Component {
     static propTypes = {

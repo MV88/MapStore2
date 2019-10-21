@@ -6,33 +6,68 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
-const assign = require('object-assign');
-const {createSelector} = require("reselect");
-const {Glyphicon, Panel} = require('react-bootstrap');
-const ContainerDimensions = require('react-container-dimensions').default;
+import React from 'react';
 
-const {addService, deleteService, textSearch, changeCatalogFormat, changeCatalogMode,
-    changeUrl, changeTitle, changeAutoload, changeType, changeSelectedService,
-    addLayer, addLayerError, resetCatalog, focusServicesList, changeText,
-    changeMetadataTemplate, toggleAdvancedSettings, toggleThumbnail, toggleTemplate} = require("../actions/catalog");
-const {zoomToExtent} = require("../actions/map");
-const {currentLocaleSelector, currentMessagesSelector} = require("../selectors/locale");
-const {setControlProperty, setControlProperties} = require("../actions/controls");
-const {resultSelector, serviceListOpenSelector, newServiceSelector,
-    newServiceTypeSelector, selectedServiceTypeSelector, searchOptionsSelector,
-    servicesSelector, formatsSelector, loadingErrorSelector, selectedServiceSelector,
-    modeSelector, layerErrorSelector, activeSelector, savingSelector, authkeyParamNameSelector,
-    searchTextSelector, groupSelector, pageSizeSelector, loadingSelector
-} = require("../selectors/catalog");
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import assign from 'object-assign';
+import { createSelector } from 'reselect';
+import { Glyphicon, Panel } from 'react-bootstrap';
+import ContainerDimensions from 'react-container-dimensions';
 
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-const Message = require("../components/I18N/Message");
-const DockPanel = require("../components/misc/panels/DockPanel");
-require('./metadataexplorer/css/style.css');
-const CatalogUtils = require('../utils/CatalogUtils');
+import {
+    addService,
+    deleteService,
+    textSearch,
+    changeCatalogFormat,
+    changeCatalogMode,
+    changeUrl,
+    changeTitle,
+    changeAutoload,
+    changeType,
+    changeSelectedService,
+    addLayer,
+    addLayerError,
+    resetCatalog,
+    focusServicesList,
+    changeText,
+    changeMetadataTemplate,
+    toggleAdvancedSettings,
+    toggleThumbnail,
+    toggleTemplate,
+} from '../actions/catalog';
+
+import { zoomToExtent } from '../actions/map';
+import { currentLocaleSelector, currentMessagesSelector } from '../selectors/locale';
+import { setControlProperty, setControlProperties } from '../actions/controls';
+
+import {
+    resultSelector,
+    serviceListOpenSelector,
+    newServiceSelector,
+    newServiceTypeSelector,
+    selectedServiceTypeSelector,
+    searchOptionsSelector,
+    servicesSelector,
+    formatsSelector,
+    loadingErrorSelector,
+    selectedServiceSelector,
+    modeSelector,
+    layerErrorSelector,
+    activeSelector,
+    savingSelector,
+    authkeyParamNameSelector,
+    searchTextSelector,
+    groupSelector,
+    pageSizeSelector,
+    loadingSelector,
+} from '../selectors/catalog';
+
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import Message from '../components/I18N/Message';
+import DockPanel from '../components/misc/panels/DockPanel';
+import './metadataexplorer/css/style.css';
+import CatalogUtils from '../utils/CatalogUtils';
 
 const catalogSelector = createSelector([
     (state) => authkeyParamNameSelector(state),
@@ -204,10 +239,14 @@ const MetadataExplorerPlugin = connect(metadataExplorerSelector, {
     onError: addLayerError
 })(MetadataExplorerComponent);
 
+import csw from '../api/CSW';
+import wms from '../api/WMS';
+import wmts from '../api/WMTS';
+
 const API = {
-    csw: require('../api/CSW'),
-    wms: require('../api/WMS'),
-    wmts: require('../api/WMTS')
+    csw,
+    wms,
+    wmts
 };
 /**
  * MetadataExplorer (Catalog) plugin. Shows the catalogs results (CSW, WMS and WMTS).

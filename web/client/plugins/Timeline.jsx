@@ -6,31 +6,47 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { connect } = require('react-redux');
-const { createSelector } = require('reselect');
-const Timeline = require('./timeline/Timeline');
-const InlineDateTimeSelector = require('../components/time/InlineDateTimeSelector');
-const Toolbar = require('../components/misc/toolbar/Toolbar');
-const { offsetEnabledSelector, currentTimeSelector } = require('../selectors/dimension');
-const { currentTimeRangeSelector, isVisible, rangeSelector, timelineLayersSelector, isMapSync } = require('../selectors/timeline');
-const { mapLayoutValuesSelector } = require('../selectors/maplayout');
+import React from 'react';
 
-const { withState, compose, branch, renderNothing, withStateHandlers, withProps, defaultProps } = require('recompose');
-const withResizeSpy = require('../components/misc/enhancers/withResizeSpy');
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import Timeline from './timeline/Timeline';
+import InlineDateTimeSelector from '../components/time/InlineDateTimeSelector';
+import Toolbar from '../components/misc/toolbar/Toolbar';
+import { offsetEnabledSelector, currentTimeSelector } from '../selectors/dimension';
 
-const { selectTime, enableOffset, onRangeChanged, setMapSync } = require('../actions/timeline');
-const { setCurrentOffset } = require('../actions/dimension');
-const Message = require('../components/I18N/Message');
-const { selectPlaybackRange } = require('../actions/playback');
-const { playbackRangeSelector, statusSelector } = require('../selectors/playback');
+import {
+    currentTimeRangeSelector,
+    isVisible,
+    rangeSelector,
+    timelineLayersSelector,
+    isMapSync,
+} from '../selectors/timeline';
 
-const { Button: ButtonRB, Glyphicon } = require('react-bootstrap');
-const tooltip = require('../components/misc/enhancers/tooltip');
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+
+import {
+    withState,
+    compose,
+    branch,
+    renderNothing,
+    withStateHandlers,
+    withProps,
+    defaultProps,
+} from 'recompose';
+
+import withResizeSpy from '../components/misc/enhancers/withResizeSpy';
+import { selectTime, enableOffset, onRangeChanged, setMapSync } from '../actions/timeline';
+import { setCurrentOffset } from '../actions/dimension';
+import Message from '../components/I18N/Message';
+import { selectPlaybackRange } from '../actions/playback';
+import { playbackRangeSelector, statusSelector } from '../selectors/playback';
+import { Button as ButtonRB, Glyphicon } from 'react-bootstrap';
+import tooltip from '../components/misc/enhancers/tooltip';
 const Button = tooltip(ButtonRB);
 
-const { head, isString} = require('lodash');
-const moment = require('moment');
+import { head, isString } from 'lodash';
+import moment from 'moment';
 const isPercent = (val) => isString(val) && val.indexOf("%") !== -1;
 const getPercent = (val) => parseInt(val, 10) / 100;
 const isValidOffset = (start, end) => moment(end).diff(start) > 0;
@@ -291,8 +307,8 @@ const TimelinePlugin = compose(
     }
 );
 
-const assign = require('object-assign');
-const TimelineToggle = require('./timeline/TimelineToggle');
+import assign from 'object-assign';
+import TimelineToggle from './timeline/TimelineToggle';
 export default {
     TimelinePlugin: assign(TimelinePlugin, {
         disablePluginIf: "{state('mapType') === 'cesium'}",

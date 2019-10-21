@@ -6,41 +6,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const { connect } = require('react-redux');
-const { createSelector } = require('reselect');
-const { compose, branch, toClass } = require('recompose');
-const assign = require('object-assign');
-const { isArray, isString } = require('lodash');
+import React from 'react';
 
-const Loader = require('../components/misc/Loader');
-const BorderLayout = require('../components/layout/BorderLayout');
-const loadingState = require('../components/misc/enhancers/loadingState');
-const emptyState = require('../components/misc/enhancers/emptyState');
-const HTML = require('../components/I18N/HTML');
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { compose, branch, toClass } from 'recompose';
+import assign from 'object-assign';
+import { isArray, isString } from 'lodash';
+import Loader from '../components/misc/Loader';
+import BorderLayout from '../components/layout/BorderLayout';
+import loadingState from '../components/misc/enhancers/loadingState';
+import emptyState from '../components/misc/enhancers/emptyState';
+import HTML from '../components/I18N/HTML';
 
-const {
+import {
     statusStyleSelector,
     loadingStyleSelector,
     getUpdatedLayer,
     errorStyleSelector,
     canEditStyleSelector,
-    styleServiceSelector
-} = require('../selectors/styleeditor');
+    styleServiceSelector,
+} from '../selectors/styleeditor';
 
-const { userRoleSelector } = require('../selectors/security');
-
-const { initStyleService } = require('../actions/styleeditor');
-const { updateSettingsParams } = require('../actions/layers');
-
-const {
-    StyleSelector,
-    StyleToolbar,
-    StyleCodeEditor
-} = require('./styleeditor/index');
-
-const { isSameOrigin } = require('../utils/StyleEditorUtils');
+import { userRoleSelector } from '../selectors/security';
+import { initStyleService } from '../actions/styleeditor';
+import { updateSettingsParams } from '../actions/layers';
+import { StyleSelector, StyleToolbar, StyleCodeEditor } from './styleeditor/index';
+import { isSameOrigin } from '../utils/StyleEditorUtils';
 
 class StyleEditorPanel extends React.Component {
     static propTypes = {

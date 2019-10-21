@@ -6,29 +6,28 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const assign = require('object-assign');
-const {defaultProps, compose, mapPropsStream} = require('recompose');
-const {createSelector} = require('reselect');
-const {connect} = require('react-redux');
-const {isEqual} = require('lodash');
-const {NavItem, Glyphicon} = require('react-bootstrap');
-const { setFeaturedMapsEnabled} = require('../actions/maps');
+import React from 'react';
 
-const Message = require("../components/I18N/Message");
-const maptypeEpics = require('../epics/maptype');
-const mapsEpics = require('../epics/maps');
-const {userRoleSelector} = require('../selectors/security');
-const {mapTypeSelector} = require('../selectors/maptype');
-const {resourceSelector, searchTextSelector, isFeaturedMapsEnabled} = require('../selectors/featuredmaps');
-const {loadPage, updateItemsLifecycle} = require('../components/maps/enhancers/featuredMaps');
-const gridPagination = require('../components/misc/enhancers/gridPagination');
-const tooltip = require('../components/misc/enhancers/tooltip');
-
-const MapsGrid = require('./maps/MapsGrid');
-const MetadataModal = require('./maps/MetadataModal');
-const {scrollIntoViewId} = require('../utils/DOMUtil');
+import PropTypes from 'prop-types';
+import assign from 'object-assign';
+import { defaultProps, compose, mapPropsStream } from 'recompose';
+import { createSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { isEqual } from 'lodash';
+import { NavItem, Glyphicon } from 'react-bootstrap';
+import { setFeaturedMapsEnabled } from '../actions/maps';
+import Message from '../components/I18N/Message';
+import maptypeEpics from '../epics/maptype';
+import mapsEpics from '../epics/maps';
+import { userRoleSelector } from '../selectors/security';
+import { mapTypeSelector } from '../selectors/maptype';
+import { resourceSelector, searchTextSelector, isFeaturedMapsEnabled } from '../selectors/featuredmaps';
+import { loadPage, updateItemsLifecycle } from '../components/maps/enhancers/featuredMaps';
+import gridPagination from '../components/misc/enhancers/gridPagination';
+import tooltip from '../components/misc/enhancers/tooltip';
+import MapsGrid from './maps/MapsGrid';
+import MetadataModal from './maps/MetadataModal';
+import { scrollIntoViewId } from '../utils/DOMUtil';
 
 const ToolTipedNavItem = tooltip(NavItem);
 

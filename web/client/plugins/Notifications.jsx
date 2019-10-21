@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {hide, dispatchAction} = require('../actions/notifications');
-const {clearNotificationOnLocationChange} = require('../epics/notifications');
+import { hide, dispatchAction } from '../actions/notifications';
 
-const {connect} = require('react-redux');
+import { clearNotificationOnLocationChange } from '../epics/notifications';
+import { connect } from 'react-redux';
 
 
 /**

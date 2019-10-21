@@ -5,14 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const {ButtonToolbar, Button: ButtonB, Grid, Col, Glyphicon} = require('react-bootstrap');
-const tooltip = require('../components/misc/enhancers/tooltip');
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { ButtonToolbar, Button as ButtonB, Grid, Col, Glyphicon } from 'react-bootstrap';
+import tooltip from '../components/misc/enhancers/tooltip';
 const Button = tooltip(ButtonB);
-const {mapTypeSelector} = require('../selectors/maptype');
+import { mapTypeSelector } from '../selectors/maptype';
 
 
 class CreateNewMap extends React.Component {

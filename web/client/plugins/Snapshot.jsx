@@ -6,21 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
+import React from 'react';
 
-const {onCreateSnapshot, changeSnapshotState, saveImage, onRemoveSnapshot, onSnapshotError} = require('../actions/snapshot');
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 
-const {mapSelector} = require('../selectors/map');
-const {layersSelector} = require('../selectors/layers');
-const {mapTypeSelector} = require('../selectors/maptype');
+import {
+    onCreateSnapshot,
+    changeSnapshotState,
+    saveImage,
+    onRemoveSnapshot,
+    onSnapshotError,
+} from '../actions/snapshot';
 
-const {toggleControl} = require('../actions/controls');
-
-const assign = require('object-assign');
-const Message = require('./locale/Message');
-const {Glyphicon} = require('react-bootstrap');
+import { mapSelector } from '../selectors/map';
+import { layersSelector } from '../selectors/layers';
+import { mapTypeSelector } from '../selectors/maptype';
+import { toggleControl } from '../actions/controls';
+import assign from 'object-assign';
+import Message from './locale/Message';
+import { Glyphicon } from 'react-bootstrap';
 
 const snapshotSelector = createSelector([
     mapSelector,

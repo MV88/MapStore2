@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const {connect} = require('react-redux');
-const {selectTheme} = require('../actions/theme');
-const assign = require('object-assign');
-const themes = require('../themes');
+import { connect } from 'react-redux';
+
+import { selectTheme } from '../actions/theme';
+import assign from 'object-assign';
+import themes from '../themes';
 
 const ThemeSwitcherPlugin = connect((s) => ({
     selectedTheme: s && s.theme && s.theme.selectedTheme || themes[0],

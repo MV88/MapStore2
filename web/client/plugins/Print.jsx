@@ -6,37 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
 
-const {connect} = require('react-redux');
-
-const LocaleUtils = require('../utils/LocaleUtils');
-const CoordinatesUtils = require('../utils/CoordinatesUtils');
-const MapUtils = require('../utils/MapUtils');
-const Dialog = require('../components/misc/Dialog');
-
-const {Grid, Row, Col, Panel, Accordion, Glyphicon} = require('react-bootstrap');
-
-const {toggleControl, setControlProperty} = require('../actions/controls');
-const {printSubmit, printSubmitting, configurePrintMap} = require('../actions/print');
-
-const {mapSelector} = require('../selectors/map');
-const {layersSelector} = require('../selectors/layers');
-
-const {createSelector} = require('reselect');
-
-const assign = require('object-assign');
-
-const {head} = require('lodash');
-
-const {scalesSelector} = require('../selectors/map');
-const {currentLocaleSelector} = require('../selectors/locale');
-const {mapTypeSelector} = require('../selectors/maptype');
-
-const Message = require('../components/I18N/Message');
-
-require('./print/print.css');
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import LocaleUtils from '../utils/LocaleUtils';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
+import MapUtils from '../utils/MapUtils';
+import Dialog from '../components/misc/Dialog';
+import { Grid, Row, Col, Panel, Accordion, Glyphicon } from 'react-bootstrap';
+import { toggleControl, setControlProperty } from '../actions/controls';
+import { printSubmit, printSubmitting, configurePrintMap } from '../actions/print';
+import { mapSelector } from '../selectors/map';
+import { layersSelector } from '../selectors/layers';
+import { createSelector } from 'reselect';
+import assign from 'object-assign';
+import { head } from 'lodash';
+import { scalesSelector } from '../selectors/map';
+import { currentLocaleSelector } from '../selectors/locale';
+import { mapTypeSelector } from '../selectors/maptype';
+import Message from '../components/I18N/Message';
+import './print/print.css';
 
 /**
  * Print plugin. This plugin allows to print current map view.

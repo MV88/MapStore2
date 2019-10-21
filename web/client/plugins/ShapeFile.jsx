@@ -6,20 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const Message = require('./locale/Message');
+import { connect } from 'react-redux';
+import Message from './locale/Message';
 
-const {onShapeError, shapeLoading, onShapeChoosen, onSelectLayer, onLayerAdded, updateShapeBBox, onShapeSuccess} = require('../actions/shapefile');
-const {zoomToExtent} = require('../actions/map');
-const {addLayer} = require('../actions/layers');
-const {toggleControl} = require('../actions/controls');
+import {
+    onShapeError,
+    shapeLoading,
+    onShapeChoosen,
+    onSelectLayer,
+    onLayerAdded,
+    updateShapeBBox,
+    onShapeSuccess,
+} from '../actions/shapefile';
 
-const {Glyphicon} = require('react-bootstrap');
-
-const {createPlugin} = require('../utils/PluginsUtils');
-const {Promise} = require('es6-promise');
+import { zoomToExtent } from '../actions/map';
+import { addLayer } from '../actions/layers';
+import { toggleControl } from '../actions/controls';
+import { Glyphicon } from 'react-bootstrap';
+import { createPlugin } from '../utils/PluginsUtils';
+import { Promise } from 'es6-promise';
 
 const loader = () => new Promise((resolve) => {
     require.ensure(['./shapefile/ShapeFile'], () => {

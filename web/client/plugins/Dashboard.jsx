@@ -6,17 +6,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { get } = require('lodash');
-const { connect } = require('react-redux');
-const { compose, withProps, withHandlers } = require('recompose');
-const { createSelector } = require('reselect');
-const { getDashboardWidgets, dependenciesSelector, getDashboardWidgetsLayout, isWidgetSelectionActive, getEditingWidget, getWidgetsDependenciesGroups } = require('../selectors/widgets');
-const { editWidget, updateWidgetProperty, deleteWidget, changeLayout, exportCSV, exportImage, selectWidget } = require('../actions/widgets');
-const { showConnectionsSelector, dashboardResource, isDashboardLoading } = require('../selectors/dashboard');
-const ContainerDimensions = require('react-container-dimensions').default;
+import React from 'react';
 
-const PropTypes = require('prop-types');
+import { get } from 'lodash';
+import { connect } from 'react-redux';
+import { compose, withProps, withHandlers } from 'recompose';
+import { createSelector } from 'reselect';
+
+import {
+    getDashboardWidgets,
+    dependenciesSelector,
+    getDashboardWidgetsLayout,
+    isWidgetSelectionActive,
+    getEditingWidget,
+    getWidgetsDependenciesGroups,
+} from '../selectors/widgets';
+
+import {
+    editWidget,
+    updateWidgetProperty,
+    deleteWidget,
+    changeLayout,
+    exportCSV,
+    exportImage,
+    selectWidget,
+} from '../actions/widgets';
+
+import { showConnectionsSelector, dashboardResource, isDashboardLoading } from '../selectors/dashboard';
+import ContainerDimensions from 'react-container-dimensions';
+import PropTypes from 'prop-types';
 const WidgetsView = compose(
     connect(
         createSelector(

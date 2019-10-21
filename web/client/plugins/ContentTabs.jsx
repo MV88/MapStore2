@@ -5,16 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const { Row, Col, Grid, Nav, NavItem} = require('react-bootstrap');
-const ToolsContainer = require('./containers/ToolsContainer');
-const Message = require('../components/I18N/Message');
+import React from 'react';
 
-const {connect} = require('react-redux');
-const assign = require('object-assign');
-const {createSelector} = require('reselect');
-const {onTabSelected} = require('../actions/contenttabs');
+import PropTypes from 'prop-types';
+import { Row, Col, Grid, Nav, NavItem } from 'react-bootstrap';
+import ToolsContainer from './containers/ToolsContainer';
+import Message from '../components/I18N/Message';
+import { connect } from 'react-redux';
+import assign from 'object-assign';
+import { createSelector } from 'reselect';
+import { onTabSelected } from '../actions/contenttabs';
 
 const selectedSelector = createSelector(
     state => state && state.contenttabs && state.contenttabs.selected,

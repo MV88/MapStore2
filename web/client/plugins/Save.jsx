@@ -5,25 +5,23 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
-const Message = require('../components/I18N/Message');
-const {toggleControl} = require('../actions/controls');
-const {loadMapInfo} = require('../actions/config');
-const {saveMapResource} = require('../actions/maps');
-
-const ConfirmModal = require('../components/maps/modals/ConfirmModal');
-const ConfigUtils = require('../utils/ConfigUtils');
-
-const {mapSelector} = require('../selectors/map');
-const {layersSelector, groupsSelector} = require('../selectors/layers');
-const {mapOptionsToSaveSelector} = require('../selectors/mapsave');
-const MapUtils = require('../utils/MapUtils');
+import React from 'react';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import assign from 'object-assign';
+import { Glyphicon } from 'react-bootstrap';
+import Message from '../components/I18N/Message';
+import { toggleControl } from '../actions/controls';
+import { loadMapInfo } from '../actions/config';
+import { saveMapResource } from '../actions/maps';
+import ConfirmModal from '../components/maps/modals/ConfirmModal';
+import ConfigUtils from '../utils/ConfigUtils';
+import { mapSelector } from '../selectors/map';
+import { layersSelector, groupsSelector } from '../selectors/layers';
+import { mapOptionsToSaveSelector } from '../selectors/mapsave';
+import MapUtils from '../utils/MapUtils';
 const showSelector = state => state.controls && state.controls.save && state.controls.save.enabled;
 const textSearchConfigSelector = state => state.searchconfig && state.searchconfig.textSearchConfig;
 

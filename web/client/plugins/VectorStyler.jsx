@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,40 +8,31 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const {Grid, Row, Col, Panel, PanelGroup, Button, Glyphicon, FormControl} = require('react-bootstrap');
+import { connect } from 'react-redux';
+import { Grid, Row, Col, Panel, PanelGroup, Button, Glyphicon, FormControl } from 'react-bootstrap';
+import { Combobox } from 'react-widgets';
+import { getWindowSize } from '../utils/AgentUtils';
 
-const Combobox = require('react-widgets').Combobox;
-
-const {getWindowSize} = require('../utils/AgentUtils');
-const {
+import {
     setVectorStyleParameter,
     setVectorLayer,
     newVectorRule,
     selectVectorRule,
     removeVectorRule,
-    setVectorRuleParameter} = require('../actions/vectorstyler');
-const {changeLayerProperties} = require('../actions/layers');
-const {
-    StylePolygon,
-    StylePolyline,
-    StylePoint,
-    ScaleDenominator} = require('./vectorstyler/index');
+    setVectorRuleParameter,
+} from '../actions/vectorstyler';
 
-const {layersSelector} = require('../selectors/layers');
-const {ruleselctor} = require('../selectors/vectorstyler');
-
-const {createSelector} = require('reselect');
-
-const assign = require('object-assign');
-
-require('./vectorstyler/vectorstyler.css');
-
-const Message = require('./locale/Message');
-
-const {vecStyleToSLD} = require("../utils/SLDUtils");
+import { changeLayerProperties } from '../actions/layers';
+import { StylePolygon, StylePolyline, StylePoint, ScaleDenominator } from './vectorstyler/index';
+import { layersSelector } from '../selectors/layers';
+import { ruleselctor } from '../selectors/vectorstyler';
+import { createSelector } from 'reselect';
+import assign from 'object-assign';
+import './vectorstyler/vectorstyler.css';
+import Message from './locale/Message';
+import { vecStyleToSLD } from '../utils/SLDUtils';
 
 class VectorStyler extends React.Component {
     static propTypes = {

@@ -5,18 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
 
-const {connect} = require('react-redux');
-const {mapSelector, projectionDefsSelector} = require('../selectors/map');
-const Message = require('../components/I18N/Message');
-const {Tooltip} = require('react-bootstrap');
-const {createSelector} = require('reselect');
-
-const assign = require('object-assign');
-const PropTypes = require('prop-types');
-
-const {changeMousePositionCrs, changeMousePositionState} = require('../actions/mousePosition');
+import { connect } from 'react-redux';
+import { mapSelector, projectionDefsSelector } from '../selectors/map';
+import Message from '../components/I18N/Message';
+import { Tooltip } from 'react-bootstrap';
+import { createSelector } from 'reselect';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import { changeMousePositionCrs, changeMousePositionState } from '../actions/mousePosition';
 
 const getDesiredPosition = (map, mousePosition, mapInfo) => {
     if (mousePosition.showCenter && map) {
@@ -63,7 +61,7 @@ const MousePositionButton = connect((state) => ({
     onClick: changeMousePositionState
 })(require('../components/buttons/ToggleButton'));
 
-const MousePositionComponent = require('../components/mapcontrols/mouseposition/MousePosition');
+import MousePositionComponent from '../components/mapcontrols/mouseposition/MousePosition';
 
 
 class MousePosition extends React.Component {

@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const assign = require('object-assign');
-const { defaultProps, compose } = require('recompose');
-const {createSelector} = require('reselect');
-const { play, pause, stop, STATUS } = require('../actions/playback');
-const {currentTimeSelector} = require('../selectors/dimension');
-const { statusSelector, loadingSelector } = require('../selectors/playback');
+import React from 'react';
 
-const { connect } = require('react-redux');
+import assign from 'object-assign';
+import { defaultProps, compose } from 'recompose';
+import { createSelector } from 'reselect';
+import { play, pause, stop, STATUS } from '../actions/playback';
+import { currentTimeSelector } from '../selectors/dimension';
+import { statusSelector, loadingSelector } from '../selectors/playback';
+import { connect } from 'react-redux';
 
 const Playback = compose(
     defaultProps({

@@ -6,21 +6,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const { compose, defaultProps, withProps, withPropsOnChange} = require('recompose');
-const {mapIdSelector} = require('../selectors/map');
-const { getVisibleFloatingWidgets, dependenciesSelector, getFloatingWidgetsLayout, isTrayEnabled} = require('../selectors/widgets');
-const { editWidget, updateWidgetProperty, deleteWidget, changeLayout, exportCSV, exportImage, toggleCollapse} = require('../actions/widgets');
-const editOptions = require('./widgets/editOptions');
-const autoDisableWidgets = require('./widgets/autoDisableWidgets');
+import React from 'react';
+
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { compose, defaultProps, withProps, withPropsOnChange } from 'recompose';
+import { mapIdSelector } from '../selectors/map';
+
+import {
+    getVisibleFloatingWidgets,
+    dependenciesSelector,
+    getFloatingWidgetsLayout,
+    isTrayEnabled,
+} from '../selectors/widgets';
+
+import {
+    editWidget,
+    updateWidgetProperty,
+    deleteWidget,
+    changeLayout,
+    exportCSV,
+    exportImage,
+    toggleCollapse,
+} from '../actions/widgets';
+
+import editOptions from './widgets/editOptions';
+import autoDisableWidgets from './widgets/autoDisableWidgets';
 
 const RIGHT_MARGIN = 70;
-const {heightProvider} = require('../components/layout/enhancers/gridLayout');
-const ContainerDimensions = require('react-container-dimensions').default;
-
-const PropTypes = require('prop-types');
+import { heightProvider } from '../components/layout/enhancers/gridLayout';
+import ContainerDimensions from 'react-container-dimensions';
+import PropTypes from 'prop-types';
 const WidgetsView =
 compose(
     connect(

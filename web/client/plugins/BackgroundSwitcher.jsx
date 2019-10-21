@@ -7,14 +7,13 @@
  */
 
 
-const React = require('react');
-const {connect} = require('react-redux');
-const Message = require('./locale/Message');
-const {Glyphicon} = require('react-bootstrap');
+import React from 'react';
 
-const assign = require('object-assign');
-
-const {changeLayerProperties} = require('../actions/layers');
+import { connect } from 'react-redux';
+import Message from './locale/Message';
+import { Glyphicon } from 'react-bootstrap';
+import assign from 'object-assign';
+import { changeLayerProperties } from '../actions/layers';
 
 const BackgroundSwitcherPlugin = connect((state) => ({
     layers: state.layers && state.layers.flat && state.layers.flat.filter((layer) => layer.group === "background") || []
@@ -22,7 +21,7 @@ const BackgroundSwitcherPlugin = connect((state) => ({
     propertiesChangeHandler: changeLayerProperties
 })(require('../components/TOC/background/BackgroundSwitcher'));
 
-require('./background/background.css');
+import './background/background.css';
 /**
   * BackgroundSwitcher Plugin
   * @class BackgroundSwitcher

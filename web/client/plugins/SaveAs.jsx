@@ -6,24 +6,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const {connect} = require('react-redux');
-const {createSelector, createStructuredSelector} = require('reselect');
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
-const Message = require('../components/I18N/Message');
-const MetadataModal = require('../components/maps/modals/MetadataModal');
-const {saveMapResource, createThumbnail, onDisplayMetadataEdit, metadataChanged} = require('../actions/maps');
-const {editMap, updateCurrentMap, errorCurrentMap, resetCurrentMap} = require('../actions/currentMap');
-const {mapSelector} = require('../selectors/map');
-const {layersSelector, groupsSelector} = require('../selectors/layers');
-const {mapOptionsToSaveSelector} = require('../selectors/mapsave');
-const {mapTypeSelector} = require('../selectors/maptype');
-const {indexOf} = require('lodash');
-const uuid = require('uuid/v1');
+import PropTypes from 'prop-types';
 
-const MapUtils = require('../utils/MapUtils');
+import React from 'react';
+import { connect } from 'react-redux';
+import { createSelector, createStructuredSelector } from 'reselect';
+import assign from 'object-assign';
+import { Glyphicon } from 'react-bootstrap';
+import Message from '../components/I18N/Message';
+import MetadataModal from '../components/maps/modals/MetadataModal';
+import { saveMapResource, createThumbnail, onDisplayMetadataEdit, metadataChanged } from '../actions/maps';
+import { editMap, updateCurrentMap, errorCurrentMap, resetCurrentMap } from '../actions/currentMap';
+import { mapSelector } from '../selectors/map';
+import { layersSelector, groupsSelector } from '../selectors/layers';
+import { mapOptionsToSaveSelector } from '../selectors/mapsave';
+import { mapTypeSelector } from '../selectors/maptype';
+import { indexOf } from 'lodash';
+import uuid from 'uuid/v1';
+import MapUtils from '../utils/MapUtils';
 
 const saveAsStateSelector = createStructuredSelector({
     show: state => state.controls && state.controls.saveAs && state.controls.saveAs.enabled,

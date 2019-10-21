@@ -6,23 +6,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const assign = require('object-assign');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const {reverse, head, get} = require('lodash');
-const {updateNode} = require('../actions/layers');
-const {resizeLegend, expandLegend} = require('../actions/floatinglegend');
-const {layersSelector} = require('../selectors/layers');
-const {currentLocaleSelector} = require('../selectors/locale');
-const {mapSelector} = require('../selectors/map');
-const {boundingMapRectSelector} = require('../selectors/maplayout');
-const {isFeatureGridOpen} = require('../selectors/featuregrid');
-const {legendSizeSelector, legendExpandedSelector} = require('../selectors/floatinglegend');
-const FloatingLegend = require('../components/TOC/FloatingLegend');
-const {parseLayoutValue, getScales} = require('../utils/MapUtils');
-const {getLocalizedProp} = require('../utils/LocaleUtils');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import assign from 'object-assign';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { reverse, head, get } from 'lodash';
+import { updateNode } from '../actions/layers';
+import { resizeLegend, expandLegend } from '../actions/floatinglegend';
+import { layersSelector } from '../selectors/layers';
+import { currentLocaleSelector } from '../selectors/locale';
+import { mapSelector } from '../selectors/map';
+import { boundingMapRectSelector } from '../selectors/maplayout';
+import { isFeatureGridOpen } from '../selectors/featuregrid';
+import { legendSizeSelector, legendExpandedSelector } from '../selectors/floatinglegend';
+import FloatingLegend from '../components/TOC/FloatingLegend';
+import { parseLayoutValue, getScales } from '../utils/MapUtils';
+import { getLocalizedProp } from '../utils/LocaleUtils';
 
 /**
  * FloatingLegend plugin.

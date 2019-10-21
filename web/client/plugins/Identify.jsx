@@ -5,37 +5,58 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {Glyphicon} = require('react-bootstrap');
-const {connect} = require('react-redux');
-const { createSelector, createStructuredSelector} = require('reselect');
-const assign = require('object-assign');
+import React from 'react';
 
-const {mapSelector} = require('../selectors/map');
-const {layersSelector} = require('../selectors/layers');
-const { mapTypeSelector } = require('../selectors/maptype');
+import { Glyphicon } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { createSelector, createStructuredSelector } from 'reselect';
+import assign from 'object-assign';
+import { mapSelector } from '../selectors/map';
+import { layersSelector } from '../selectors/layers';
+import { mapTypeSelector } from '../selectors/maptype';
 
-const { generalInfoFormatSelector, clickPointSelector, indexSelector, responsesSelector, validResponsesSelector, showEmptyMessageGFISelector, isHighlightEnabledSelector, currentFeatureSelector, currentFeatureCrsSelector } = require('../selectors/mapInfo');
+import {
+    generalInfoFormatSelector,
+    clickPointSelector,
+    indexSelector,
+    responsesSelector,
+    validResponsesSelector,
+    showEmptyMessageGFISelector,
+    isHighlightEnabledSelector,
+    currentFeatureSelector,
+    currentFeatureCrsSelector,
+} from '../selectors/mapInfo';
 
+import {
+    hideMapinfoMarker,
+    showMapinfoRevGeocode,
+    hideMapinfoRevGeocode,
+    clearWarning,
+    toggleMapInfoState,
+    changeMapInfoFormat,
+    updateCenterToMarker,
+    closeIdentify,
+    purgeMapInfoResults,
+    featureInfoClick,
+    changeFormat,
+    toggleShowCoordinateEditor,
+    changePage,
+    toggleHighlightFeature,
+} from '../actions/mapInfo';
 
-const { hideMapinfoMarker, showMapinfoRevGeocode, hideMapinfoRevGeocode, clearWarning, toggleMapInfoState, changeMapInfoFormat, updateCenterToMarker, closeIdentify, purgeMapInfoResults, featureInfoClick, changeFormat, toggleShowCoordinateEditor, changePage, toggleHighlightFeature} = require('../actions/mapInfo');
-const { changeMousePointer, zoomToExtent} = require('../actions/map');
-
-
-const {currentLocaleSelector} = require('../selectors/locale');
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-
-const { compose, defaultProps } = require('recompose');
-const MapInfoUtils = require('../utils/MapInfoUtils');
-const loadingState = require('../components/misc/enhancers/loadingState');
-const {defaultViewerHandlers, defaultViewerDefaultProps} = require('../components/data/identify/enhancers/defaultViewer');
-const {identifyLifecycle} = require('../components/data/identify/enhancers/identify');
-const zoomToFeatureHandler = require('..//components/data/identify/enhancers/zoomToFeatureHandler');
-const getToolButtons = require('./identify/toolButtons');
-const getNavigationButtons = require('./identify/navigationButtons');
-const Message = require('./locale/Message');
-
-require('./identify/identify.css');
+import { changeMousePointer, zoomToExtent } from '../actions/map';
+import { currentLocaleSelector } from '../selectors/locale';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import { compose, defaultProps } from 'recompose';
+import MapInfoUtils from '../utils/MapInfoUtils';
+import loadingState from '../components/misc/enhancers/loadingState';
+import { defaultViewerHandlers, defaultViewerDefaultProps } from '../components/data/identify/enhancers/defaultViewer';
+import { identifyLifecycle } from '../components/data/identify/enhancers/identify';
+import zoomToFeatureHandler from '..//components/data/identify/enhancers/zoomToFeatureHandler';
+import getToolButtons from './identify/toolButtons';
+import getNavigationButtons from './identify/navigationButtons';
+import Message from './locale/Message';
+import './identify/identify.css';
 
 const selector = createStructuredSelector({
     enabled: (state) => state.mapInfo && state.mapInfo.enabled || state.controls && state.controls.info && state.controls.info.enabled || false,

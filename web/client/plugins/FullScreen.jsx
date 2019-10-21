@@ -5,15 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {connect} = require('react-redux');
+import { connect } from 'react-redux';
 
-const {toggleFullscreen} = require('../actions/fullscreen');
-const {toggleFullscreenEpic} = require('../epics/fullscreen');
-
-const assign = require('object-assign');
-
-
-const FullScreenButton = require('../components/buttons/FullScreenButton');
+import { toggleFullscreen } from '../actions/fullscreen';
+import { toggleFullscreenEpic } from '../epics/fullscreen';
+import assign from 'object-assign';
+import FullScreenButton from '../components/buttons/FullScreenButton';
 
 /**
   * FullScreen Plugin. A button that toggles to fullscreen mode

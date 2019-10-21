@@ -6,28 +6,70 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {Glyphicon} = require('react-bootstrap');
-const assign = require('object-assign');
-const {createSelector} = require('reselect');
-const Message = require('./locale/Message');
-const {changeMeasurement, changeUom, changeFormatMeasurement, changeCoordinates, addAnnotation, init} = require('../actions/measurement');
-const {toggleControl, setControlProperty} = require('../actions/controls');
-const {MeasureDialog} = require('./measure/index');
+import React from 'react';
 
-const {cancelRemoveAnnotation, confirmRemoveAnnotation, openEditor, removeAnnotation, cancelEditAnnotation,
-    saveAnnotation, toggleAdd, validationError, removeAnnotationGeometry, toggleStyle, setStyle, restoreStyle,
-    cleanHighlight, cancelCloseAnnotations, confirmCloseAnnotations, startDrawing, changeStyler, setUnsavedChanges,
-    toggleUnsavedChangesModal, changedProperties, setUnsavedStyle, toggleUnsavedStyleModal, addText, download,
-    changeSelected, resetCoordEditor, changeRadius, changeText, toggleUnsavedGeometryModal, addNewFeature, setInvalidSelected, highlight,
-    highlightPoint, confirmDeleteFeature, toggleDeleteFtModal, changeFormat
-} = require('../actions/annotations');
-const { zoomToExtent } = require('../actions/map');
-const { annotationsInfoSelector } = require('../selectors/annotations');
-const { isOpenlayers } = require('../selectors/maptype');
-const { isCoordinateEditorEnabledSelector, showAddAsAnnotationSelector } = require('../selectors/measurement');
-const { showCoordinateEditorSelector, measureSelector } = require('../selectors/controls');
+import { connect } from 'react-redux';
+import { Glyphicon } from 'react-bootstrap';
+import assign from 'object-assign';
+import { createSelector } from 'reselect';
+import Message from './locale/Message';
+
+import {
+    changeMeasurement,
+    changeUom,
+    changeFormatMeasurement,
+    changeCoordinates,
+    addAnnotation,
+    init,
+} from '../actions/measurement';
+
+import { toggleControl, setControlProperty } from '../actions/controls';
+import { MeasureDialog } from './measure/index';
+
+import {
+    cancelRemoveAnnotation,
+    confirmRemoveAnnotation,
+    openEditor,
+    removeAnnotation,
+    cancelEditAnnotation,
+    saveAnnotation,
+    toggleAdd,
+    validationError,
+    removeAnnotationGeometry,
+    toggleStyle,
+    setStyle,
+    restoreStyle,
+    cleanHighlight,
+    cancelCloseAnnotations,
+    confirmCloseAnnotations,
+    startDrawing,
+    changeStyler,
+    setUnsavedChanges,
+    toggleUnsavedChangesModal,
+    changedProperties,
+    setUnsavedStyle,
+    toggleUnsavedStyleModal,
+    addText,
+    download,
+    changeSelected,
+    resetCoordEditor,
+    changeRadius,
+    changeText,
+    toggleUnsavedGeometryModal,
+    addNewFeature,
+    setInvalidSelected,
+    highlight,
+    highlightPoint,
+    confirmDeleteFeature,
+    toggleDeleteFtModal,
+    changeFormat,
+} from '../actions/annotations';
+
+import { zoomToExtent } from '../actions/map';
+import { annotationsInfoSelector } from '../selectors/annotations';
+import { isOpenlayers } from '../selectors/maptype';
+import { isCoordinateEditorEnabledSelector, showAddAsAnnotationSelector } from '../selectors/measurement';
+import { showCoordinateEditorSelector, measureSelector } from '../selectors/controls';
 
 const commonEditorActions = {
     onEdit: openEditor,

@@ -5,11 +5,12 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const {connect} = require('../../utils/PluginsUtils');
-const {login, loginFail, logoutWithReload, changePassword, resetError} = require('../../actions/security');
-const {setControlProperty} = require('../../actions/controls');
-const {Glyphicon} = require('react-bootstrap');
+import React from 'react';
+
+import { connect } from '../../utils/PluginsUtils';
+import { login, loginFail, logoutWithReload, changePassword, resetError } from '../../actions/security';
+import { setControlProperty } from '../../actions/controls';
+import { Glyphicon } from 'react-bootstrap';
 
 const closeLogin = () => {
     return (dispatch) => {

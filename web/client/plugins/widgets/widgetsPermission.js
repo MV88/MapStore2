@@ -7,8 +7,9 @@
  */
 
 
-const {compose, withProps, defaultProps} = require('recompose');
-const editOptions = require('./editOptions');
+import { compose, withProps, defaultProps } from 'recompose';
+
+import editOptions from './editOptions';
 
 /**
  * enhancers to manage widgets permissions.

@@ -6,22 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
 
-const DockPanel = require("../components/misc/panels/DockPanel");
-
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const { compose } = require('recompose');
-
-const {setControlProperty} = require('../actions/controls');
-
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-const {widgetBuilderSelector} = require('../selectors/controls');
-const { dependenciesSelector, availableDependenciesSelector} = require('../selectors/widgets');
-const { toggleConnection } = require('../actions/widgets');
-const withMapExitButton = require('./widgetbuilder/enhancers/withMapExitButton');
+import PropTypes from 'prop-types';
+import DockPanel from '../components/misc/panels/DockPanel';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { compose } from 'recompose';
+import { setControlProperty } from '../actions/controls';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import { widgetBuilderSelector } from '../selectors/controls';
+import { dependenciesSelector, availableDependenciesSelector } from '../selectors/widgets';
+import { toggleConnection } from '../actions/widgets';
+import withMapExitButton from './widgetbuilder/enhancers/withMapExitButton';
 const Builder = compose(
     connect(
         createSelector(

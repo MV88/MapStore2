@@ -6,17 +6,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {bindActionCreators} = require('redux');
-const {initTutorial, startTutorial, updateTutorial, disableTutorial, resetTutorial, closeTutorial, toggleTutorial} = require('../actions/tutorial');
-const presetList = require('./tutorial/preset');
-const assign = require('object-assign');
-const I18N = require('../components/I18N/I18N');
-const {Glyphicon} = require('react-bootstrap');
-const {createSelector} = require('reselect');
-const {tutorialSelector} = require('../selectors/tutorial');
-const {closeTutorialEpic, switchTutorialEpic, getActionsFromStepEpic} = require('../epics/tutorial');
+import React from 'react';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import {
+    initTutorial,
+    startTutorial,
+    updateTutorial,
+    disableTutorial,
+    resetTutorial,
+    closeTutorial,
+    toggleTutorial,
+} from '../actions/tutorial';
+
+import presetList from './tutorial/preset';
+import assign from 'object-assign';
+import I18N from '../components/I18N/I18N';
+import { Glyphicon } from 'react-bootstrap';
+import { createSelector } from 'reselect';
+import { tutorialSelector } from '../selectors/tutorial';
+import { closeTutorialEpic, switchTutorialEpic, getActionsFromStepEpic } from '../epics/tutorial';
 
 /**
  * Tutorial plugin. Enables the steps of tutorial.

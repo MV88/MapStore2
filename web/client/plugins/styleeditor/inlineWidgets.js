@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { SketchPicker } = require('react-color');
-const tinycolor = require('tinycolor2');
+import React from 'react';
+
+import { SketchPicker } from 'react-color';
+import tinycolor from 'tinycolor2';
 
 /**
  * Inline widget structure for Style Editor (Editor)

@@ -6,19 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const Message = require('./locale/Message');
+import { connect } from 'react-redux';
+import Message from './locale/Message';
 
-const { onError, setLoading, setLayers, onSelectLayer, onLayerAdded, updateBBox, onSuccess} = require('../actions/mapimport');
-const {zoomToExtent} = require('../actions/map');
-const {addLayer} = require('../actions/layers');
-const {toggleControl} = require('../actions/controls');
+import {
+    onError,
+    setLoading,
+    setLayers,
+    onSelectLayer,
+    onLayerAdded,
+    updateBBox,
+    onSuccess,
+} from '../actions/mapimport';
 
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
-const {mapTypeSelector} = require('../selectors/maptype');
+import { zoomToExtent } from '../actions/map';
+import { addLayer } from '../actions/layers';
+import { toggleControl } from '../actions/controls';
+import assign from 'object-assign';
+import { Glyphicon } from 'react-bootstrap';
+import { mapTypeSelector } from '../selectors/maptype';
 
 export default {
     MapImportPlugin: assign({loadPlugin: (resolve) => {

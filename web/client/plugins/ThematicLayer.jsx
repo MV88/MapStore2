@@ -5,17 +5,24 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const {connect} = require('../utils/PluginsUtils');
-const assign = require('object-assign');
+import { connect } from '../utils/PluginsUtils';
 
-const { changeLayerParams } = require('../actions/layers');
-const { loadFields, loadClassification, changeConfiguration, cancelDirty, setDirty,
-    setInvalidInput, resetInvalidInput } = require('../actions/thematic');
-const { getSelectedLayer } = require('../selectors/layers');
+import assign from 'object-assign';
+import { changeLayerParams } from '../actions/layers';
 
-const API = require('../api/SLDService');
+import {
+    loadFields,
+    loadClassification,
+    changeConfiguration,
+    cancelDirty,
+    setDirty,
+    setInvalidInput,
+    resetInvalidInput,
+} from '../actions/thematic';
 
-const { isAdminUserSelector } = require('../selectors/security');
+import { getSelectedLayer } from '../selectors/layers';
+import API from '../api/SLDService';
+import { isAdminUserSelector } from '../selectors/security';
 
 /**
  * Plugin that adds thematic styles for wms layers, through attribute classification.

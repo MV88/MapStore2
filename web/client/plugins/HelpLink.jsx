@@ -6,12 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
-
-const Message = require('../components/I18N/Message');
+import assign from 'object-assign';
+import { Glyphicon } from 'react-bootstrap';
+import Message from '../components/I18N/Message';
 
 export default {
     HelpLinkPlugin: assign(class extends React.Component {

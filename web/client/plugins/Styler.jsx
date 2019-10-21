@@ -1,39 +1,28 @@
 
 
-const PropTypes = require('prop-types');
-
-const React = require('react');
-const {connect} = require('react-redux');
-
-const {Grid, Row, Glyphicon, Alert, Button} = require('react-bootstrap');
-const Spinner = require('react-spinkit');
-const Dialog = require('../components/misc/Dialog');
-
-const Combobox = require('react-widgets').Combobox;
-const {head} = require('lodash');
-
-const {getWindowSize} = require('../utils/AgentUtils');
-const {setVectorLayer} = require('../actions/vectorstyler');
-const {setRasterLayer} = require('../actions/rasterstyler');
-const {toggleControl} = require('../actions/controls');
-const {changeLayerProperties} = require('../actions/layers');
-const {getDescribeLayer, getLayerCapabilities} = require('../actions/layerCapabilities');
-const {saveLayerDefaultStyle, reset} = require('../actions/styler');
-
-const {layersSelector} = require('../selectors/layers');
-
-const {zoomToExtent} = require('../actions/map');
-
-const Vector = require("./VectorStyler").VectorStylerPlugin;
-const Raster = require("./RasterStyler").RasterStylerPlugin;
-
-const {createSelector} = require('reselect');
-
-const assign = require('object-assign');
-
-require('./styler/styler.css');
-
-const Message = require('./locale/Message');
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Grid, Row, Glyphicon, Alert, Button } from 'react-bootstrap';
+import Spinner from 'react-spinkit';
+import Dialog from '../components/misc/Dialog';
+import { Combobox } from 'react-widgets';
+import { head } from 'lodash';
+import { getWindowSize } from '../utils/AgentUtils';
+import { setVectorLayer } from '../actions/vectorstyler';
+import { setRasterLayer } from '../actions/rasterstyler';
+import { toggleControl } from '../actions/controls';
+import { changeLayerProperties } from '../actions/layers';
+import { getDescribeLayer, getLayerCapabilities } from '../actions/layerCapabilities';
+import { saveLayerDefaultStyle, reset } from '../actions/styler';
+import { layersSelector } from '../selectors/layers';
+import { zoomToExtent } from '../actions/map';
+import { VectorStylerPlugin as Vector } from './VectorStyler';
+import { RasterStylerPlugin as Raster } from './RasterStyler';
+import { createSelector } from 'reselect';
+import assign from 'object-assign';
+import './styler/styler.css';
+import Message from './locale/Message';
 
 class Styler extends React.Component {
     /** @constructor */

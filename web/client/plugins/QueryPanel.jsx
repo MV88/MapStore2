@@ -5,53 +5,64 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const PropTypes = require('prop-types');
-const React = require('react');
-const {connect} = require('react-redux');
+import PropTypes from 'prop-types';
 
-const Sidebar = require('react-sidebar').default;
-const {createSelector} = require('reselect');
-const {changeLayerProperties, changeGroupProperties, toggleNode,
-    sortNode, showSettings, hideSettings, updateSettings, updateNode, removeNode} = require('../actions/layers');
-const Message = require('./locale/Message');
+import React from 'react';
+import { connect } from 'react-redux';
+import Sidebar from 'react-sidebar';
+import { createSelector } from 'reselect';
 
+import {
+    changeLayerProperties,
+    changeGroupProperties,
+    toggleNode,
+    sortNode,
+    showSettings,
+    hideSettings,
+    updateSettings,
+    updateNode,
+    removeNode,
+} from '../actions/layers';
 
-const {getLayerCapabilities} = require('../actions/layerCapabilities');
+import Message from './locale/Message';
+import { getLayerCapabilities } from '../actions/layerCapabilities';
+import { storeCurrentFilter, discardCurrentFilter, applyFilter } from '../actions/layerFilter';
+import { zoomToExtent } from '../actions/map';
+import { toggleControl } from '../actions/controls';
+import { groupsSelector, selectedLayerLoadingErrorSelector } from '../selectors/layers';
+import { mapSelector } from '../selectors/map';
+import { isDashboardAvailable } from '../selectors/dashboard';
 
-const {storeCurrentFilter, discardCurrentFilter, applyFilter} = require('../actions/layerFilter');
-
-
-const {zoomToExtent} = require('../actions/map');
-const {toggleControl} = require('../actions/controls');
-
-const {groupsSelector, selectedLayerLoadingErrorSelector} = require('../selectors/layers');
-const {mapSelector} = require('../selectors/map');
-const {isDashboardAvailable} = require('../selectors/dashboard');
-const {
+import {
     crossLayerFilterSelector,
     availableCrossLayerFilterLayersSelector,
     storedFilterSelector,
-    appliedFilterSelector
-} = require('../selectors/queryform');
+    appliedFilterSelector,
+} from '../selectors/queryform';
 
-const {isEqual} = require('lodash');
-const LayersUtils = require('../utils/LayersUtils');
+import { isEqual } from 'lodash';
+import LayersUtils from '../utils/LayersUtils';
 
 // include application component
-const QueryBuilder = require('../components/data/query/QueryBuilder');
-const QueryPanelHeader = require('../components/data/query/QueryPanelHeader');
-const {featureTypeSelectedEpic, wfsQueryEpic, viewportSelectedEpic, redrawSpatialFilterEpic} = require('../epics/wfsquery');
-const autocompleteEpics = require('../epics/autocomplete');
-const {bindActionCreators} = require('redux');
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-const layerFilterEpics = require('../epics/layerfilter');
+import QueryBuilder from '../components/data/query/QueryBuilder';
 
-const ResizableModal = require('../components/misc/ResizableModal');
-const Portal = require('../components/misc/Portal');
+import QueryPanelHeader from '../components/data/query/QueryPanelHeader';
 
+import {
+    featureTypeSelectedEpic,
+    wfsQueryEpic,
+    viewportSelectedEpic,
+    redrawSpatialFilterEpic,
+} from '../epics/wfsquery';
 
-const {
-    // QueryBuilder action functions
+import autocompleteEpics from '../epics/autocomplete';
+import { bindActionCreators } from 'redux';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import layerFilterEpics from '../epics/layerfilter';
+import ResizableModal from '../components/misc/ResizableModal';
+import Portal from '../components/misc/Portal';
+
+import {
     addGroupField,
     addFilterField,
     removeFilterField,
@@ -80,12 +91,11 @@ const {
     zoneGetValues,
     zoneSearch,
     zoneChange,
-    toggleMenu
-} = require('../actions/queryform');
+    toggleMenu,
+} from '../actions/queryform';
 
-const {initQueryPanel} = require('../actions/wfsquery');
-
-const {changeDrawingStatus} = require('../actions/draw');
+import { initQueryPanel } from '../actions/wfsquery';
+import { changeDrawingStatus } from '../actions/draw';
 const onReset = reset.bind(null, "query");
 // connecting a Dumb component to the store
 // makes it a smart component

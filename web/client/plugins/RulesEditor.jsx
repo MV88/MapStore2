@@ -6,20 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
 
-const {createSelector} = require('reselect');
-const { compose } = require('recompose');
-const {connect} = require('react-redux');
-
-const { cleanEditing, saveRule, setLoading } = require("../actions/rulesmanager");
-const { activeRuleSelector, geometryStateSel } = require("../selectors/rulesmanager");
-const { isEditorActive, isLoading} = require('../selectors/rulesmanager');
-
-const RulesEditor = require('./manager/RulesEditor');
-const Toolbar = require('./manager/RulesToolbar');
-const enhancer = require("./manager/EditorEnhancer");
+import PropTypes from 'prop-types';
+import { createSelector } from 'reselect';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import { cleanEditing, saveRule, setLoading } from '../actions/rulesmanager';
+import { activeRuleSelector, geometryStateSel } from '../selectors/rulesmanager';
+import { isEditorActive, isLoading } from '../selectors/rulesmanager';
+import RulesEditor from './manager/RulesEditor';
+import Toolbar from './manager/RulesToolbar';
+import enhancer from './manager/EditorEnhancer';
 
 
 const Editor = compose(

@@ -5,11 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {connect} = require('react-redux');
-const {selectFeatures, dockSizeFeatures} = require('../actions/featuregrid');
-const {query, queryClose} = require('../actions/wfsquery');
-const {changeMapView} = require('../actions/map');
-const {toggleControl} = require('../actions/controls');
+import { connect } from 'react-redux';
+
+import { selectFeatures, dockSizeFeatures } from '../actions/featuregrid';
+import { query, queryClose } from '../actions/wfsquery';
+import { changeMapView } from '../actions/map';
+import { toggleControl } from '../actions/controls';
 
 export default {
     FeatureGridPlugin: connect((state) => ({
