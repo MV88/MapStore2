@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,32 +7,23 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
 
-var DebugUtils = require('../../utils/DebugUtils');
-
-var {connect} = require('react-redux');
-var {bindActionCreators, combineReducers} = require('redux');
-
-var {Provider} = require('react-redux');
-
-var {changeBrowserProperties} = require('../../actions/browser');
-
-var ConfigUtils = require('../../utils/ConfigUtils');
-
-var Debug = require('../../components/development/Debug');
-var mapConfig = require('../../reducers/map');
-var browser = require('../../reducers/browser');
-
-var LMap = require('../../components/map/leaflet/Map');
-var LLayer = require('../../components/map/leaflet/Layer');
-
-var {changeMapView, changeZoomLevel} = require('../../actions/map');
-
-var ScaleBox = require("../../components/mapcontrols/scale/ScaleBox");
-
-var BootstrapReact = require('react-bootstrap');
+import ReactDOM from 'react-dom';
+import DebugUtils from '../../utils/DebugUtils';
+import { connect } from 'react-redux';
+import { bindActionCreators, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import { changeBrowserProperties } from '../../actions/browser';
+import ConfigUtils from '../../utils/ConfigUtils';
+import Debug from '../../components/development/Debug';
+import mapConfig from '../../reducers/map';
+import browser from '../../reducers/browser';
+import LMap from '../../components/map/leaflet/Map';
+import LLayer from '../../components/map/leaflet/Layer';
+import { changeMapView, changeZoomLevel } from '../../actions/map';
+import ScaleBox from '../../components/mapcontrols/scale/ScaleBox';
+import BootstrapReact from 'react-bootstrap';
 var Grid = BootstrapReact.Grid;
 var Row = BootstrapReact.Row;
 var Col = BootstrapReact.Col;
@@ -49,7 +41,7 @@ var store = DebugUtils.createDebugStore(combineReducers({browser, mapConfig}),
         projection: "EPSG:900913"
     }, browser: {}});
 
-require('../../components/map/leaflet/plugins/TileProviderLayer');
+import '../../components/map/leaflet/plugins/TileProviderLayer';
 
 /**
 * Detect Browser's properties and save in app state.

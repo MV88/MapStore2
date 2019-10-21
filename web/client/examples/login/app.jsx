@@ -5,21 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
 
-const {Provider} = require('react-redux');
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 // initializes Redux store
-var store = require('./stores/store');
+import store from './stores/store';
 
-const {loadMapConfig} = require('../../actions/config');
-const {changeBrowserProperties} = require('../../actions/browser');
-const {loadLocale} = require('../../actions/locale');
-
-const ConfigUtils = require('../../utils/ConfigUtils');
-const LocaleUtils = require('../../utils/LocaleUtils');
-const url = require('url');
+import { loadMapConfig } from '../../actions/config';
+import { changeBrowserProperties } from '../../actions/browser';
+import { loadLocale } from '../../actions/locale';
+import ConfigUtils from '../../utils/ConfigUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+import url from 'url';
 
 // reads parameter(s) from the url
 const urlQuery = url.parse(window.location.href, true).query;
@@ -32,7 +31,7 @@ store.dispatch(loadMapConfig(configUrl, legacy));
 
 store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
 
-const Login = require('./containers/Login');
+import Login from './containers/Login';
 
 // we spread the store to the all application
 // wrapping it with a Provider component

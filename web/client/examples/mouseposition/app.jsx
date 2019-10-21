@@ -1,4 +1,5 @@
-var PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,22 +7,23 @@ var PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React = require('react');
-var ReactDOM = require('react-dom');
-var { createStore, combineReducers } = require('redux');
-var { changeBrowserProperties} = require('../../actions/browser');
-var ConfigUtils = require('../../utils/ConfigUtils');
-var Localized = require('../../components/I18N/Localized');
-var browser = require('../../reducers/browser');
-var {Modal, Grid, Row, Col, Button} = require('react-bootstrap');
-var LMap = require('../../components/map/leaflet/Map');
-var LLayer = require('../../components/map/leaflet/Layer');
-var mouseposition = require('../../reducers/mousePosition');
-var {changeMousePosition} = require('../../actions/mousePosition');
+import React from 'react';
+
+import ReactDOM from 'react-dom';
+import { createStore, combineReducers } from 'redux';
+import { changeBrowserProperties } from '../../actions/browser';
+import ConfigUtils from '../../utils/ConfigUtils';
+import Localized from '../../components/I18N/Localized';
+import browser from '../../reducers/browser';
+import { Modal, Grid, Row, Col, Button } from 'react-bootstrap';
+import LMap from '../../components/map/leaflet/Map';
+import LLayer from '../../components/map/leaflet/Layer';
+import mouseposition from '../../reducers/mousePosition';
+import { changeMousePosition } from '../../actions/mousePosition';
 var store = createStore(combineReducers({browser, mouseposition}));
 
-require('../../components/map/leaflet/plugins/OSMLayer');
-require("./components/mouseposition.css");
+import '../../components/map/leaflet/plugins/OSMLayer';
+import './components/mouseposition.css';
 
 function startApp() {
     let MousePosition = require("../../components/mapcontrols/mouseposition/MousePosition");

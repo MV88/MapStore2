@@ -5,20 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
 
-const {Provider} = require('react-redux');
-
-const {changeBrowserProperties} = require('../../actions/browser');
-const {loadLocale} = require('../../actions/locale');
-
-const ConfigUtils = require('../../utils/ConfigUtils');
-const LocaleUtils = require('../../utils/LocaleUtils');
-const PluginsUtils = require('../../utils/PluginsUtils');
-
-
-const assign = require('object-assign');
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { changeBrowserProperties } from '../../actions/browser';
+import { loadLocale } from '../../actions/locale';
+import ConfigUtils from '../../utils/ConfigUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
+import assign from 'object-assign';
 
 function startApp() {
     const {plugins, requires} = require('./plugins.js');

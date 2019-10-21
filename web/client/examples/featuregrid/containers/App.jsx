@@ -5,11 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
-const Debug = require('../../../components/development/Debug');
+import React from 'react';
 
-const Localized = require('../../../components/I18N/Localized');
+import { connect } from 'react-redux';
+import Debug from '../../../components/development/Debug';
+import Localized from '../../../components/I18N/Localized';
 
 const App = (props) => {
     const MapViewer = connect(() => ({

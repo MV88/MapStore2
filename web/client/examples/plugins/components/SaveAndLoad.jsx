@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,8 +7,9 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {FormControl, FormGroup, Button} = require('react-bootstrap');
+import React from 'react';
+
+import { FormControl, FormGroup, Button } from 'react-bootstrap';
 
 
 class SaveButton extends React.Component {

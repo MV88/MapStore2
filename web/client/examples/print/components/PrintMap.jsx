@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,19 +6,19 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {bindActionCreators} = require('redux');
+import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-const assign = require('object-assign');
+import assign from 'object-assign';
 
-const {changeMapView} = require('../../../actions/map');
+import {changeMapView} from '../../../actions/map';
 
-const mapType = "leaflet";
-const WMap = require('../../../components/map/' + mapType + '/Map');
-const Layer = require('../../../components/map/' + mapType + '/Layer');
-const Feature = require('../../../components/map/' + mapType + '/Feature');
-require('../../../components/map/' + mapType + '/plugins/index');
+import PropTypes from 'prop-types';
+import WMap from '../../../components/map/leaflet/Map';
+import Layer from '../../../components/map/leaflet/Layer';
+import Feature from '../../../components/map/leaflet/Feature';
+require('../../../components/map/leaflet/plugins/index');
 
 const PrintMap = (props) => {
     let features = props.features;

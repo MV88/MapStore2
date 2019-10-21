@@ -1,5 +1,5 @@
-var path = require("path");
-var LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
+import path from 'path';
+import LoaderOptionsPlugin from 'webpack/lib/LoaderOptionsPlugin';
 
 export default {
     entry: {

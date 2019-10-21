@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var {TOGGLE_GRATICULE, UPDATE_MARKER} = require('../actions/controls');
-var assign = require('object-assign');
+import { TOGGLE_GRATICULE, UPDATE_MARKER } from '../actions/controls';
+
+import assign from 'object-assign';
 
 const initialState = {
     graticule: false,

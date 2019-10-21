@@ -1,20 +1,17 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const connect = require('react-redux').connect;
-const LMap = require('../../../components/map/cesium/Map');
-const LLayer = require('../../../components/map/cesium/Layer');
-
-const SearchBar = require("../../../components/mapcontrols/search/SearchBar");
-const SearchResultList = require("../../../components/mapcontrols/search/SearchResultList");
-const MousePosition = require("../../../components/mapcontrols/mouseposition/MousePosition");
-const pointOnSurface = require('turf-point-on-surface');
-
-const {changeMapView} = require('../../../actions/map');
-const {changeMousePosition} = require('../../../actions/mousePosition');
-const {textSearch, resultsPurge, searchTextChanged, selectSearchItem} = require("../../../actions/search");
-const {toggleGraticule} = require('../actions/controls');
-
-const Localized = require('../../../components/I18N/Localized');
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import LMap from '../../../components/map/cesium/Map';
+import LLayer from '../../../components/map/cesium/Layer';
+import SearchBar from '../../../components/mapcontrols/search/SearchBar';
+import SearchResultList from '../../../components/mapcontrols/search/SearchResultList';
+import MousePosition from '../../../components/mapcontrols/mouseposition/MousePosition';
+import pointOnSurface from 'turf-point-on-surface';
+import { changeMapView } from '../../../actions/map';
+import { changeMousePosition } from '../../../actions/mousePosition';
+import { textSearch, resultsPurge, searchTextChanged, selectSearchItem } from '../../../actions/search';
+import { toggleGraticule } from '../actions/controls';
+import Localized from '../../../components/I18N/Localized';
 
 class Viewer extends React.Component {
     static propTypes = {
@@ -129,7 +126,7 @@ class Viewer extends React.Component {
 }
 
 
-require('../../../components/map/cesium/plugins/index');
+import '../../../components/map/cesium/plugins/index';
 
 // connect Redux store slice with map configuration
 export default connect((state) => {

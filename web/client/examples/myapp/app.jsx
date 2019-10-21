@@ -1,17 +1,16 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-
-var Provider = require('react-redux').Provider;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 // include application component
-var MyApp = require('./containers/myapp');
-var url = require('url');
+import MyApp from './containers/myapp';
 
-var loadMapConfig = require('../../actions/config').loadMapConfig;
-var ConfigUtils = require('../../utils/ConfigUtils');
+import url from 'url';
+import { loadMapConfig } from '../../actions/config';
+import ConfigUtils from '../../utils/ConfigUtils';
 
 // initializes Redux store
-var store = require('./stores/myappstore');
+import store from './stores/myappstore';
 
 // reads parameter(s) from the url
 const urlQuery = url.parse(window.location.href, true).query;
