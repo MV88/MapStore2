@@ -5,28 +5,31 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const { compose } = require('recompose');
+import React from 'react';
+
+import { compose } from 'recompose';
 
 // enhancers for base menus and functionalities
-const chartWidget = require('../enhancers/chartWidget');
-const counterWidget = require('../enhancers/counterWidget');
-const tableWidget = require('../enhancers/tableWidget');
-const legendWidget = require('../enhancers/legendWidget');
-const textWidget = require('../enhancers/textWidget');
-const mapWidget = require('../enhancers/mapWidget');
+import chartWidget from '../enhancers/chartWidget';
+
+import counterWidget from '../enhancers/counterWidget';
+import tableWidget from '../enhancers/tableWidget';
+import legendWidget from '../enhancers/legendWidget';
+import textWidget from '../enhancers/textWidget';
+import mapWidget from '../enhancers/mapWidget';
 
 // Enhancers for ajax support
-const wpsChart = require('../enhancers/wpsChart');
-const wpsCounter = require('../enhancers/wpsCounter');
-const wfsTable = require('../enhancers/wfsTable');
+import wpsChart from '../enhancers/wpsChart';
 
+import wpsCounter from '../enhancers/wpsCounter';
+import wfsTable from '../enhancers/wfsTable';
 
 // enhancers for dependencies management
-const dependenciesToFilter = require('../enhancers/dependenciesToFilter');
-const dependenciesToOptions = require('../enhancers/dependenciesToOptions');
-const dependenciesToWidget = require('../enhancers/dependenciesToWidget');
-const dependenciesToMapProp = require('../enhancers/dependenciesToMapProp');
+import dependenciesToFilter from '../enhancers/dependenciesToFilter';
+
+import dependenciesToOptions from '../enhancers/dependenciesToOptions';
+import dependenciesToWidget from '../enhancers/dependenciesToWidget';
+import dependenciesToMapProp from '../enhancers/dependenciesToMapProp';
 //
 // connect widgets to dependencies, remote services and add base icons/tools
 //

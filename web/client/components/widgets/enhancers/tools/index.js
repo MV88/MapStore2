@@ -5,16 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {compose} = require('recompose');
-const withTools = require('./withTools');
-const pinnableWidget = require('./pinnableWidget');
-const hidableWidget = require('./hidableWidget');
-const withInfo = require('./withInfo');
-const withMenu = require('./withMenu');
-const withIcons = require('./withIcons');
-const editableWidget = require('./editableWidget');
-const exportableWidget = require('./exportableWidget');
-const collapsibleWidget = require('./collapsibleWidget');
+import { compose } from 'recompose';
+
+import withTools from './withTools';
+import pinnableWidget from './pinnableWidget';
+import hidableWidget from './hidableWidget';
+import withInfo from './withInfo';
+import withMenu from './withMenu';
+import withIcons from './withIcons';
+import editableWidget from './editableWidget';
+import exportableWidget from './exportableWidget';
+import collapsibleWidget from './collapsibleWidget';
 
 
 export default {

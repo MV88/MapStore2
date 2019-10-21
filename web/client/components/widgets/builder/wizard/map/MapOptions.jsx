@@ -12,12 +12,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {compose, withProps} = require('recompose');
-const StepHeader = require('../../../../misc/wizard/StepHeader');
-const emptyState = require('../../../../misc/enhancers/emptyState');
-const localizeStringMap = require('../../../../misc/enhancers/localizeStringMap');
-const Message = require('../../../../I18N/Message');
+import React from 'react';
+
+import { compose, withProps } from 'recompose';
+import StepHeader from '../../../../misc/wizard/StepHeader';
+import emptyState from '../../../../misc/enhancers/emptyState';
+import localizeStringMap from '../../../../misc/enhancers/localizeStringMap';
+import Message from '../../../../I18N/Message';
 const TOC = emptyState(
     ({ map = {} } = {}) => !map.layers || (map.layers || []).filter(l => l.group !== 'background').length === 0,
     () => ({
@@ -26,7 +27,7 @@ const TOC = emptyState(
         description: <Message msgId="widgets.selectMap.TOC.noLayerDescription" />
     })
 )(require('./TOC'));
-const nodeEditor = require('./enhancers/nodeEditor');
+import nodeEditor from './enhancers/nodeEditor';
 const Editor = nodeEditor(require('./NodeEditor'));
 const EditorTitle = compose(
     nodeEditor,

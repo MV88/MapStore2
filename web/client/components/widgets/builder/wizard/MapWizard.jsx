@@ -5,13 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const WidgetOptions = require('./common/WidgetOptions');
-const {wizardHandlers} = require('../../../misc/wizard/enhancers');
+import React from 'react';
+
+import WidgetOptions from './common/WidgetOptions';
+import { wizardHandlers } from '../../../misc/wizard/enhancers';
 const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
 
-const MapOptions = require('./map/MapOptions');
-const Preview = require('./map/PreviewMap');
+import MapOptions from './map/MapOptions';
+import Preview from './map/PreviewMap';
 
 
 export default ({

@@ -6,11 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const Message = require('../../../../I18N/Message');
-const tooltip = require('../../../../misc/enhancers/tooltip');
+import React from 'react';
 
-const { Row, Col, Nav, NavItem: BSNavItem, Glyphicon } = require('react-bootstrap');
+import Message from '../../../../I18N/Message';
+import tooltip from '../../../../misc/enhancers/tooltip';
+import { Row, Col, Nav, NavItem as BSNavItem, Glyphicon } from 'react-bootstrap';
 const NavItem = tooltip(BSNavItem);
 /**
  * Provides a node (layer or group) property editor for the TOC

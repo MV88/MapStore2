@@ -5,20 +5,18 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {compose} = require('recompose');
-const emptyState = require('../../../misc/enhancers/emptyState');
+import React from 'react';
 
-
-const {wizardHandlers} = require('../../../misc/wizard/enhancers');
-const {Row, Col} = require('react-bootstrap');
-const legendWidget = require('../../enhancers/legendWidget');
-
-const WidgetOptions = require('./common/WidgetOptions');
+import { compose } from 'recompose';
+import emptyState from '../../../misc/enhancers/emptyState';
+import { wizardHandlers } from '../../../misc/wizard/enhancers';
+import { Row, Col } from 'react-bootstrap';
+import legendWidget from '../../enhancers/legendWidget';
+import WidgetOptions from './common/WidgetOptions';
 const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
-const StepHeader = require('../../../misc/wizard/StepHeader');
-const Message = require('../../../I18N/Message');
-const emptyLegendState = require('../../enhancers/emptyLegendState');
+import StepHeader from '../../../misc/wizard/StepHeader';
+import Message from '../../../I18N/Message';
+import emptyLegendState from '../../enhancers/emptyLegendState';
 
 const enhancePreview = compose(
     legendWidget,

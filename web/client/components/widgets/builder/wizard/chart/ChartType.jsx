@@ -7,13 +7,14 @@
  */
 
 
-const React = require('react');
-const { shouldUpdate } = require('recompose');
-const SideGrid = require('../../../../misc/cardgrids/SideGrid');
-const Message = require('../../../../I18N/Message');
-const sampleData = require('../../../enhancers/sampleChartData');
+import React from 'react';
+
+import { shouldUpdate } from 'recompose';
+import SideGrid from '../../../../misc/cardgrids/SideGrid';
+import Message from '../../../../I18N/Message';
+import sampleData from '../../../enhancers/sampleChartData';
 const SimpleChart = sampleData(require('../../../../charts/SimpleChart'));
-const {Row} = require('react-bootstrap');
+import { Row } from 'react-bootstrap';
 const sampleProps = {
     legend: false,
     tooltip: false,
@@ -22,7 +23,7 @@ const sampleProps = {
     height: 100,
     popup: false
 };
-const StepHeader = require('../../../../misc/wizard/StepHeader');
+import StepHeader from '../../../../misc/wizard/StepHeader';
 
 const ITEMS = [{
     type: "bar"

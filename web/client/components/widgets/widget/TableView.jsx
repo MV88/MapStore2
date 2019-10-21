@@ -7,10 +7,9 @@
   */
 
 
-const React = require('react');
-const {
-    Table
-} = require('react-bootstrap');
+import React from 'react';
+
+import { Table } from 'react-bootstrap';
 export default ({data = [], ...props} = {}) => {
     const cols = Object.keys(data.reduce((a, c) => ({...a, ...c}), {}));
     return (<div className="mapstore-widget-table">

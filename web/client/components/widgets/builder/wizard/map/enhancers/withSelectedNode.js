@@ -8,8 +8,9 @@
 /**
  * Works with handleNodeSelection and mapToNode to retrieve node in `nodes` with the `editNode` id.
  */
-const { isMatch } = require('lodash');
-const { withProps } = require('recompose');
+import { isMatch } from 'lodash';
+
+import { withProps } from 'recompose';
 const traverse = (branch = [], filter) => {
     for (let i = 0; i < branch.length; i++) {
         if (isMatch(branch[i], filter)) {

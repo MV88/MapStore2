@@ -5,12 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const dragDropContext = require('react-dnd').DragDropContext;
-const testBackend = require('react-dnd-test-backend');
+import React from 'react';
 
-const expect = require('expect');
+import ReactDOM from 'react-dom';
+import { DragDropContext as dragDropContext } from 'react-dnd';
+import testBackend from 'react-dnd-test-backend';
+import expect from 'expect';
 const MapOptions = dragDropContext(testBackend)(require('../MapOptions'));
 
 describe('MapOptions component', () => {

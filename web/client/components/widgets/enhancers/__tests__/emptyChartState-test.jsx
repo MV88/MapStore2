@@ -6,11 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
 
-const expect = require('expect');
-const emptyChartState = require('../emptyChartState');
+import ReactDOM from 'react-dom';
+import expect from 'expect';
+import emptyChartState from '../emptyChartState';
 
 describe('widgets emptyChartState enhancer', () => {
     beforeEach((done) => {

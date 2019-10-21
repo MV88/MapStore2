@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const { Button, Row, Col, Glyphicon } = require('react-bootstrap');
-const Message = require('../../I18N/Message');
+import React from 'react';
+
+import { Button, Row, Col, Glyphicon } from 'react-bootstrap';
+import Message from '../../I18N/Message';
 
 /**
  * Common header component for builder content. With close button and icon

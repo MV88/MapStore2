@@ -7,12 +7,14 @@
   */
 
 
-const loadingState = require('../../misc/enhancers/loadingState')();
-const errorChartState = require('../enhancers/errorChartState');
-const emptyChartState = require('../enhancers/emptyChartState');
+import loadingStateFactory from '../../misc/enhancers/loadingState';
+
+const loadingState = loadingStateFactory();
+import errorChartState from '../enhancers/errorChartState';
+import emptyChartState from '../enhancers/emptyChartState';
 const SimpleChart = loadingState(errorChartState(emptyChartState((require('../../charts/SimpleChart')))));
-const ContainerDimensions = require('react-container-dimensions').default;
-const React = require('react');
+import ContainerDimensions from 'react-container-dimensions';
+import React from 'react';
 export default (props) => (<div className="mapstore-widget-chart">
     <ContainerDimensions>
         <SimpleChart {...props}/>

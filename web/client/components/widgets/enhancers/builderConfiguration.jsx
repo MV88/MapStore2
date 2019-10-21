@@ -1,15 +1,15 @@
-const React = require('react');
-const loadingState = require('../../misc/enhancers/loadingState');
-const emptyState = require('../../misc/enhancers/emptyState');
-const propsStreamFactory = require('../../misc/enhancers/propsStreamFactory');
-const {compose, defaultProps} = require('recompose');
-const {get} = require('lodash');
-const {Observable} = require('rxjs');
-const {describeFeatureType} = require('../../../observables/wfs');
-const {describeProcess} = require('../../../observables/wps/describe');
-const {Message, HTML} = require("../../I18N/I18N");
+import React from 'react';
+import loadingState from '../../misc/enhancers/loadingState';
+import emptyState from '../../misc/enhancers/emptyState';
+import propsStreamFactory from '../../misc/enhancers/propsStreamFactory';
+import { compose, defaultProps } from 'recompose';
+import { get } from 'lodash';
+import { Observable } from 'rxjs';
+import { describeFeatureType } from '../../../observables/wfs';
+import { describeProcess } from '../../../observables/wps/describe';
+import { Message, HTML } from '../../I18N/I18N';
 const TYPES = "ALL";
-const {findGeometryProperty} = require('../../../utils/ogc/WFS/base');
+import { findGeometryProperty } from '../../../utils/ogc/WFS/base';
 
 /**
  * Enhancer that retrieves information about the featuretype attributes and the aggregate process

@@ -1,4 +1,4 @@
-const { compose, withHandlers } = require('recompose');
+import { compose, withHandlers } from 'recompose';
 
 export default compose(
     withHandlers({

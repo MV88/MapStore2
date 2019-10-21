@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { createEventHandler, mapPropsStream } = require('recompose');
-const { getLayerCapabilities } = require('../../../../../../observables/wms');
-const Rx = require('rxjs');
+import { createEventHandler, mapPropsStream } from 'recompose';
+
+import { getLayerCapabilities } from '../../../../../../observables/wms';
+import Rx from 'rxjs';
 export default mapPropsStream(props$ => {
     const { stream: retrieveLayerData$, handler: retrieveLayerData} = createEventHandler();
     return props$

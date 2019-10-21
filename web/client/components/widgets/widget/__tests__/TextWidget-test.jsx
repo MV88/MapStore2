@@ -6,13 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const ReactTestUtils = require('react-dom/test-utils');
+import React from 'react';
 
-const expect = require('expect');
-const {compose, defaultProps} = require('recompose');
-const textWidget = require('../../enhancers/textWidget');
+import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
+import expect from 'expect';
+import { compose, defaultProps } from 'recompose';
+import textWidget from '../../enhancers/textWidget';
 
 const TextWidget = compose(
     defaultProps({canEdit: true}),

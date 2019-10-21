@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const emptyState = require('../../../../misc/enhancers/emptyState');
-const Message = require('../../../../I18N/Message');
+import React from 'react';
+
+import emptyState from '../../../../misc/enhancers/emptyState';
+import Message from '../../../../I18N/Message';
 
 /**
  * Enhances a component to show the empty view in case of no attributes.

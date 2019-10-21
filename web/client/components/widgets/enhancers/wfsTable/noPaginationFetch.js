@@ -10,8 +10,9 @@
  * Get data all in one request.
  * @param {Observable} props$ stream of props
  */
-const Rx = require('rxjs');
-const { getLayerJSONFeature } = require('../../../../observables/wfs');
+import Rx from 'rxjs';
+
+import { getLayerJSONFeature } from '../../../../observables/wfs';
 export default props$ => props$.switchMap(
     ({
         layer = {},

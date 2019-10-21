@@ -5,21 +5,22 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { compose, withProps, withState, withHandlers } = require('recompose');
-const { get } = require('lodash');
+import { compose, withProps, withState, withHandlers } from 'recompose';
 
-const withControllableState = require('../../../../../misc/enhancers/withControllableState');
-const {splitMapAndLayers} = require('../../../../../../utils/LayersUtils');
-const mapToNodes = require('./mapToNodes');
-const withSelectedNode = require('./withSelectedNode');
-const withCapabilitiesRetrieval = require('./withCapabilitiesRetrieval');
+import { get } from 'lodash';
+import withControllableState from '../../../../../misc/enhancers/withControllableState';
+import { splitMapAndLayers } from '../../../../../../utils/LayersUtils';
+import mapToNodes from './mapToNodes';
+import withSelectedNode from './withSelectedNode';
+import withCapabilitiesRetrieval from './withCapabilitiesRetrieval';
 
 /* TABS definitions */
-const General = require('../../../../../TOC/fragments/settings/General');
-const Display = require('../../../../../TOC/fragments/settings/Display');
+import General from '../../../../../TOC/fragments/settings/General';
+
+import Display from '../../../../../TOC/fragments/settings/Display';
 const WMSStyle = withCapabilitiesRetrieval(require('../../../../../TOC/fragments/settings/WMSStyle'));
-const handleNodePropertyChanges = require('./handleNodePropertyChanges');
-const { settingsLifecycle } = require('../../../../../TOC/enhancers/tocItemsSettings');
+import handleNodePropertyChanges from './handleNodePropertyChanges';
+import { settingsLifecycle } from '../../../../../TOC/enhancers/tocItemsSettings';
 
 const withDefaultTabs = withProps((props) => ({
     tabs: props.tabs || [{

@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 // handle property changes
-const { withHandlers } = require('recompose');
-const {belongsToGroup} = require('../../../../../../utils/LayersUtils');
-const { findIndex } = require('lodash');
+import { withHandlers } from 'recompose';
+
+import { belongsToGroup } from '../../../../../../utils/LayersUtils';
+import { findIndex } from 'lodash';
 /**
  * Add to the TOC or the Node editor some handlers for TOC nodes
  * add to the wrapped component the following methods:

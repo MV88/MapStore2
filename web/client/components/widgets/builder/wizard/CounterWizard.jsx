@@ -5,24 +5,24 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
-const React = require('react');
-const {isNil} = require('lodash');
-const { compose, lifecycle } = require('recompose');
+import React from 'react';
 
-const {wizardHandlers} = require('../../../misc/wizard/enhancers');
-const loadingState = require('../../../misc/enhancers/loadingState')(({loading, data}) => loading || !data, {width: 500, height: 200});
-const wfsChartOptions = require('./common/wfsChartOptions');
-const noAttributes = require('./common/noAttributesEmptyView');
+import { isNil } from 'lodash';
+import { compose, lifecycle } from 'recompose';
+import { wizardHandlers } from '../../../misc/wizard/enhancers';
+import loadingStateFactory from '../../../misc/enhancers/loadingState';
+const loadingState = loadingStateFactory(({loading, data}) => loading || !data, {width: 500, height: 200});
+import wfsChartOptions from './common/wfsChartOptions';
+import noAttributes from './common/noAttributesEmptyView';
 
 const CounterOptions = wfsChartOptions(noAttributes(({options = []}) => options.length === 0)(require('./common/WPSWidgetOptions')));
-const WidgetOptions = require('./common/WidgetOptions');
-
-const wpsCounter = require('../../enhancers/wpsCounter');
-const dependenciesToFilter = require('../../enhancers/dependenciesToFilter');
-const dependenciesToOptions = require('../../enhancers/dependenciesToOptions');
-const dependenciesToWidget = require('../../enhancers/dependenciesToWidget');
-const emptyChartState = require('../../enhancers/emptyChartState');
-const errorChartState = require('../../enhancers/errorChartState');
+import WidgetOptions from './common/WidgetOptions';
+import wpsCounter from '../../enhancers/wpsCounter';
+import dependenciesToFilter from '../../enhancers/dependenciesToFilter';
+import dependenciesToOptions from '../../enhancers/dependenciesToOptions';
+import dependenciesToWidget from '../../enhancers/dependenciesToWidget';
+import emptyChartState from '../../enhancers/emptyChartState';
+import errorChartState from '../../enhancers/errorChartState';
 
 const isCounterOptionsValid = (options = {}) => options.aggregateFunction && options.aggregationAttribute;
 const triggerSetValid = compose(
@@ -56,7 +56,7 @@ const sampleProps = {
 const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
 
 
-const Counter = require('../../widget/CounterView');
+import Counter from '../../widget/CounterView';
 const Preview = enhancePreview(Counter);
 const CounterPreview = ({ data = {}, layer, dependencies = {}, valid, setValid = () => { } }) =>
     !isCounterOptionsValid(data.options)

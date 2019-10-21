@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { Col, Form, FormGroup, FormControl } = require('react-bootstrap');
-const localizedProps = require('../../../../misc/enhancers/localizedProps');
+import React from 'react';
+
+import { Col, Form, FormGroup, FormControl } from 'react-bootstrap';
+import localizedProps from '../../../../misc/enhancers/localizedProps';
 const TitleInput = localizedProps("placeholder")(FormControl);
 
-const ReactQuill = require('react-quill');
+import ReactQuill from 'react-quill';
 const Editor = localizedProps("placeholder")(ReactQuill);
 
 export default ({ data = {}, onChange = () => { }}) => (

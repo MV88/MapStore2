@@ -5,14 +5,15 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
-const React = require('react');
-const { isGeometryType } = require('../../../../../utils/ogc/WFS/base');
-const { uniq, castArray, includes } = require('lodash');
-const { Row, Col, Form, Button } = require('react-bootstrap');
-const Message = require('../../../../I18N/Message');
-const StepHeader = require('../../../../misc/wizard/StepHeader');
-const noAttributes = require('../common/noAttributesEmptyView');
-const {withProps, withHandlers, compose} = require('recompose');
+import React from 'react';
+
+import { isGeometryType } from '../../../../../utils/ogc/WFS/base';
+import { uniq, castArray, includes } from 'lodash';
+import { Row, Col, Form, Button } from 'react-bootstrap';
+import Message from '../../../../I18N/Message';
+import StepHeader from '../../../../misc/wizard/StepHeader';
+import noAttributes from '../common/noAttributesEmptyView';
+import { withProps, withHandlers, compose } from 'recompose';
 const updatePropertyName = (arr, name, hide) => {
     const names = castArray(name);
     if (hide) {

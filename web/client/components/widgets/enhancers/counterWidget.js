@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {compose} = require('recompose');
-const { editableWidget, defaultIcons, withHeaderTools } = require('./tools');
+import { compose } from 'recompose';
+
+import { editableWidget, defaultIcons, withHeaderTools } from './tools';
 
 export default compose(
     require("./deleteWidget"),

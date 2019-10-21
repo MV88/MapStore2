@@ -14,7 +14,7 @@ const data = [
 const series = [{dataKey: "variable", color: `#078aa3`}];
 const xAxis = {dataKey: "name", show: false};
 
-const {defaultProps} = require('recompose');
+import { defaultProps } from 'recompose';
 export default defaultProps({
     data,
     series,

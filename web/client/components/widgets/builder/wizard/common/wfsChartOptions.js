@@ -6,9 +6,9 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const {compose, withProps} = require('recompose');
+import { compose, withProps } from 'recompose';
 
-const {find} = require('lodash');
+import { find } from 'lodash';
 
 const propsToOptions = props => props.filter(({type} = {}) => type.indexOf("gml:") !== 0)
     .map( ({name} = {}) => ({label: name, value: name}));

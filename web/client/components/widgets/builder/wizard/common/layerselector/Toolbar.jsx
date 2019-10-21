@@ -5,10 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
 
-
-const Toolbar = require('../../../../../misc/toolbar/Toolbar');
+import Toolbar from '../../../../../misc/toolbar/Toolbar';
 
 export default ({ canProceed, selected, stepButtons = [], onProceed = () => {}} = {}) => (<Toolbar btnDefaultProps={{
     className: "square-button-md",

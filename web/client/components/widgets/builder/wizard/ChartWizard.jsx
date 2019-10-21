@@ -5,26 +5,27 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
 
-const { wizardHandlers } = require('../../../misc/wizard/enhancers');
-const loadingState = require('../../../misc/enhancers/loadingState')(({ loading, data }) => loading || !data, { width: 500, height: 200 });
-const noAttribute = require('./common/noAttributesEmptyView');
+import { wizardHandlers } from '../../../misc/wizard/enhancers';
+import loadingStateFactory from '../../../misc/enhancers/loadingState';
+const loadingState = loadingStateFactory(({ loading, data }) => loading || !data, { width: 500, height: 200 });
+import noAttribute from './common/noAttributesEmptyView';
 const hasNoAttributes = ({ featureTypeProperties = [] }) => featureTypeProperties.filter(({ type = ""} = {}) => type.indexOf("gml:") !== 0).length === 0;
 const ChartType = noAttribute(
     hasNoAttributes
 )(require('./chart/ChartType'));
-const wfsChartOptions = require('./common/wfsChartOptions');
+import wfsChartOptions from './common/wfsChartOptions';
 const ChartOptions = wfsChartOptions(require('./common/WPSWidgetOptions'));
-const WidgetOptions = require('./common/WidgetOptions');
-const sampleData = require('../../enhancers/sampleChartData');
-const wpsChart = require('../../enhancers/wpsChart');
-const dependenciesToWidget = require('../../enhancers/dependenciesToWidget');
-const dependenciesToFilter = require('../../enhancers/dependenciesToFilter');
-const dependenciesToOptions = require('../../enhancers/dependenciesToOptions');
-const emptyChartState = require('../../enhancers/emptyChartState');
-const errorChartState = require('../../enhancers/errorChartState');
-const { compose, lifecycle } = require('recompose');
+import WidgetOptions from './common/WidgetOptions';
+import sampleData from '../../enhancers/sampleChartData';
+import wpsChart from '../../enhancers/wpsChart';
+import dependenciesToWidget from '../../enhancers/dependenciesToWidget';
+import dependenciesToFilter from '../../enhancers/dependenciesToFilter';
+import dependenciesToOptions from '../../enhancers/dependenciesToOptions';
+import emptyChartState from '../../enhancers/emptyChartState';
+import errorChartState from '../../enhancers/errorChartState';
+import { compose, lifecycle } from 'recompose';
 const enhancePreview = compose(
     dependenciesToWidget,
     dependenciesToFilter,

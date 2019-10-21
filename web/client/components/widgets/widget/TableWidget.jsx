@@ -5,17 +5,18 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Message = require('../../I18N/Message');
-const BorderLayout = require('../../layout/BorderLayout');
-const LoadingSpinner = require('../../misc/LoadingSpinner');
-const EmptyRowsView = require('../../data/featuregrid/EmptyRowsView');
-const loadingState = require('../../misc/enhancers/loadingState');
-const errorChartState = require('../enhancers/errorChartState');
+import React from 'react';
+
+import Message from '../../I18N/Message';
+import BorderLayout from '../../layout/BorderLayout';
+import LoadingSpinner from '../../misc/LoadingSpinner';
+import EmptyRowsView from '../../data/featuregrid/EmptyRowsView';
+import loadingState from '../../misc/enhancers/loadingState';
+import errorChartState from '../enhancers/errorChartState';
 
 const FeatureGrid = errorChartState(loadingState(({ describeFeatureType }) => !describeFeatureType)(require('../../data/featuregrid/FeatureGrid')));
 
-const WidgetContainer = require('./WidgetContainer');
+import WidgetContainer from './WidgetContainer';
 
 export default ({
     id,
