@@ -7,7 +7,8 @@
  */
 
 
-const {compose, withState, withPropsOnChange, withHandlers} = require('recompose');
+import { compose, withState, withPropsOnChange, withHandlers } from 'recompose';
+
 const wizardHandlers = compose(
     withPropsOnChange(["step"], ({skipButtonsOnSteps = [], step, hideButtons} = {}) => {
         if (skipButtonsOnSteps && skipButtonsOnSteps.indexOf(step) >= 0) {

@@ -1,4 +1,4 @@
-const {compose, withHandlers} = require('recompose');
+import { compose, withHandlers } from 'recompose';
 
 /**
  * This workaround issues with annotations at 90 degrees lat.

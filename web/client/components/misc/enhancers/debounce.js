@@ -5,8 +5,9 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const {withHandlers} = require('recompose');
-const {debounce} = require("lodash");
+import { withHandlers } from 'recompose';
+
+import { debounce } from 'lodash';
 const emptyFunc = () => {};
 /**
  * This enhancer de-bounce a method passed as prop of the given time.

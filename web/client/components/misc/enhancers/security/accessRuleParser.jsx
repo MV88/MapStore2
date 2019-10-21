@@ -5,8 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { withPropsOnChange } = require('recompose');
-const { get, castArray, mapValues, isString, isArray } = require('lodash');
+import { withPropsOnChange } from 'recompose';
+
+import { get, castArray, mapValues, isString, isArray } from 'lodash';
 
 const parseRules = ({accessInfo, postProcessValue, reduceFun}) => rawRules => {
     let rules = castArray(rawRules);

@@ -6,19 +6,21 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {compose} = require('recompose');
-const { FormGroup, FormControl } = require('react-bootstrap');
-const {isNil} = require('lodash');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import { FormGroup, FormControl } from 'react-bootstrap';
+import { isNil } from 'lodash';
 
 /**
  * This component renders a coordiante inpout for aetronautical degrees
 */
 
-const decimalToAeronautical = require('../enhancers/decimalToAeronautical');
-const coordinateTypePreset = require('../enhancers/coordinateTypePreset');
-const tempAeronauticalValue = require('../enhancers/tempAeronauticalValue');
+import decimalToAeronautical from '../enhancers/decimalToAeronautical';
+
+import coordinateTypePreset from '../enhancers/coordinateTypePreset';
+import tempAeronauticalValue from '../enhancers/tempAeronauticalValue';
 
 class AeronauticalCoordinateEditor extends React.Component {
 

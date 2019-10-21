@@ -7,10 +7,11 @@
 */
 
 
-const React = require('react');
-const {compose, branch} = require('recompose');
-const {DragSource: dragSource} = require('react-dnd');
-const {DropTarget: dropTarget} = require('react-dnd');
+import React from 'react';
+
+import { compose, branch } from 'recompose';
+import { DragSource as dragSource } from 'react-dnd';
+import { DropTarget as dropTarget } from 'react-dnd';
 
 
 const itemSource = {

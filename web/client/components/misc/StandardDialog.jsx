@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Dialog = require('./Dialog');
-const { Glyphicon } = require('react-bootstrap');
+import React from 'react';
+
+import Dialog from './Dialog';
+import { Glyphicon } from 'react-bootstrap';
 /**
  * StandardDialog implements standard options you want from a Dialog.
  * @prop {boolean} show display the dialog

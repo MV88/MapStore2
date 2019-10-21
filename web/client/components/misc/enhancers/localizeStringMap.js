@@ -7,10 +7,11 @@
  */
 
 
-const PropTypes = require('prop-types');
-const {castArray} = require('lodash');
-const {getContext, mapProps, compose} = require('recompose');
-const {getLocalizedProp} = require('../../../utils/LocaleUtils');
+import PropTypes from 'prop-types';
+
+import { castArray } from 'lodash';
+import { getContext, mapProps, compose } from 'recompose';
+import { getLocalizedProp } from '../../../utils/LocaleUtils';
 
 const accumulate = (props, locale) => (acc = {}, propName) => ({
     ...acc,

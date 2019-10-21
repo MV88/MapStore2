@@ -7,10 +7,11 @@
  */
 
 
-const {getMessageById} = require('../../../utils/LocaleUtils');
-const PropTypes = require('prop-types');
-const {castArray, isNil} = require('lodash');
-const {getContext, mapProps, compose} = require('recompose');
+import { getMessageById } from '../../../utils/LocaleUtils';
+
+import PropTypes from 'prop-types';
+import { castArray, isNil } from 'lodash';
+import { getContext, mapProps, compose } from 'recompose';
 
 const getMessage = (messages, path) => {
     const msg = getMessageById(messages, path);

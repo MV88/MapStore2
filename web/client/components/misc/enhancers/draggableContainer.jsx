@@ -1,6 +1,6 @@
 
-const React = require('react');
-const {compose, branch} = require('recompose');
+import React from 'react';
+import { compose, branch } from 'recompose';
 
 export default compose(
     branch(

@@ -1,6 +1,6 @@
 
-const {compose, withHandlers, withProps} = require('recompose');
-const {round, isNaN} = require('lodash');
+import { compose, withHandlers, withProps } from 'recompose';
+import { round, isNaN } from 'lodash';
 
 const convertDDToDMS = (D, lng, {seconds} = {seconds: {decimals: 4}}) => {
 

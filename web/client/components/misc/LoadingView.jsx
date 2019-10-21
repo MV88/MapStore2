@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const ContainerDimensions = require('react-container-dimensions').default;
-const Loader = require('./Loader');
+import ContainerDimensions from 'react-container-dimensions';
+import Loader from './Loader';
 
 /**
  * Default Loading View component

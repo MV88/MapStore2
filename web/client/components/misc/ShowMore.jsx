@@ -6,10 +6,11 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const {Row, Col, Button} = require('react-bootstrap');
-const Loader = require('./Loader');
-const Message = require("../I18N/Message");
+import React from 'react';
+
+import { Row, Col, Button } from 'react-bootstrap';
+import Loader from './Loader';
+import Message from '../I18N/Message';
 
 /**
  * A component to display a show more button with counting of results

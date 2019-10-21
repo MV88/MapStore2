@@ -5,11 +5,11 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const {branch} = require('recompose');
-const {omit} = require('lodash');
+import React from 'react';
 
-const tooltip = require('./tooltip');
+import { branch } from 'recompose';
+import { omit } from 'lodash';
+import tooltip from './tooltip';
 /**
  * Button Tooltip enhancer. Enhances an object adding a tooltip (with i18n support).
  * It is applied only if props contains `tooltip` or `tooltipId` and if noTooltipWhenDisabled === true

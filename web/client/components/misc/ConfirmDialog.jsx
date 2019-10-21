@@ -5,13 +5,13 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const PropTypes = require('prop-types');
-const React = require('react');
-const { Button, ButtonGroup, Glyphicon } = require('react-bootstrap');
+import PropTypes from 'prop-types';
 
-const Dialog = require('./Dialog');
-const assign = require('object-assign');
-const Message = require('../I18N/Message');
+import React from 'react';
+import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
+import Dialog from './Dialog';
+import assign from 'object-assign';
+import Message from '../I18N/Message';
 
 /**
  * A Modal window to show password reset form

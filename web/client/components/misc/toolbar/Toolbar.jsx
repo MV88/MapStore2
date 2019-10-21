@@ -5,11 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const { ButtonGroup} = require('react-bootstrap');
-const ToolbarButton = require('./ToolbarButton');
+import React from 'react';
 
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+import { ButtonGroup } from 'react-bootstrap';
+import ToolbarButton from './ToolbarButton';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 /**
 * A Generic Reusable Toolbar. Build in animations.
 * @class Toolbar

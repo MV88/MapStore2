@@ -5,16 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {branch, toClass} = require('recompose');
-const PropTypes = require('prop-types');
-const { omit } = require('lodash');
+import React from 'react';
 
-const {
-    Popover
-} = require('react-bootstrap');
-
-const OverlayTrigger = require('../../misc/OverlayTrigger');
+import { branch, toClass } from 'recompose';
+import PropTypes from 'prop-types';
+import { omit } from 'lodash';
+import { Popover } from 'react-bootstrap';
+import OverlayTrigger from '../../misc/OverlayTrigger';
 
 /**
  * Enhancer to add a popover to a component that triggers on mouse hover.
@@ -30,7 +27,7 @@ const OverlayTrigger = require('../../misc/OverlayTrigger');
 export default branch(
     ({popover}) => popover,
     (Wrapped) =>
-        class InfoPopover extends React.Component {
+        (class InfoPopover extends React.Component {
 
             static propTypes = {
                 popover: PropTypes.object
@@ -65,5 +62,5 @@ export default branch(
                     </span>
                 );
             }
-        }
+        })
 );

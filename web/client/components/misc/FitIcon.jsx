@@ -7,10 +7,11 @@
   */
 
 
-const React = require('react');
-const {Glyphicon} = require('react-bootstrap');
-const ContainerDimensions = require('react-container-dimensions').default;
-const enhanceTooltip = require('./enhancers/tooltip');
+import React from 'react';
+
+import { Glyphicon } from 'react-bootstrap';
+import ContainerDimensions from 'react-container-dimensions';
+import enhanceTooltip from './enhancers/tooltip';
 const Glyph = enhanceTooltip(Glyphicon);
 /**
  * An icon that fits to the width of the container

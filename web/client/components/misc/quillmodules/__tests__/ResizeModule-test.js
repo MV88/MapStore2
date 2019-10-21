@@ -6,12 +6,14 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const React = require('react');
-const ReactDOM = require('react-dom');
-const ReactQuill = require('react-quill');
+import expect from 'expect';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactQuill from 'react-quill';
 const {Quill} = ReactQuill;
-const {ResizeModule, IFrame, toolbarConfig, Toolbar, DisplaySize, Resize} = require('../../../misc/quillmodules/ResizeModule')(Quill);
+import ResizeModuleIFrametoolbarConfigToolbarDisplaySizeResizeFactory from '../../../misc/quillmodules/ResizeModule';
+const {ResizeModule, IFrame, toolbarConfig, Toolbar, DisplaySize, Resize} = ResizeModuleIFrametoolbarConfigToolbarDisplaySizeResizeFactory(Quill);
 
 Quill.register({
     'formats/video': IFrame,

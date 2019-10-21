@@ -7,6 +7,6 @@
  ectory of this source tree.
  */
 
-const withContainer = require('./WithContainer');
+import withContainer from './WithContainer';
 
 export default withContainer(require('react-overlays').Portal);

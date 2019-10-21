@@ -6,13 +6,14 @@
     - exported as function to use current Quill (not window.Quill)
 */
 
-const { defaultsDeep, isObject, isString } = require('lodash');
+import { defaultsDeep, isObject, isString } from 'lodash';
+
 const IconAlignLeft = '<span class="glyphicon glyphicon-align-left" style="display: inline-block; margin-top: 4px;"></span>';
 const IconAlignCenter = '<span class="glyphicon glyphicon-align-center" style="display: inline-block; margin-top: 4px;"></span>';
 const IconAlignRight = '<span class="glyphicon glyphicon-align-right" style="display: inline-block; margin-top: 4px;"></span>';
 const IconAlignClear = '<span class="glyphicon glyphicon-remove" style="display: inline-block; margin-top: 4px;"></span>';
 const iframeHeight = 200;
-require('./assets/css/resizemodule.css');
+import './assets/css/resizemodule.css';
 
 export default Quill => {
 

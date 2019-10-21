@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const Sidebar = require('react-sidebar').default;
+import React from 'react';
+
+import Sidebar from 'react-sidebar';
 /**
  * MapStore generic sidebar component with good defaults
  * @class Sidebar

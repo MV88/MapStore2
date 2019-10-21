@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {Button, Glyphicon, Grid, Row, Col} = require('react-bootstrap');
+import React from 'react';
+
+import { Button, Glyphicon, Grid, Row, Col } from 'react-bootstrap';
 
 /* eslint-disable */
 const fullscreenGlyph = {

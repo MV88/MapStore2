@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,9 +7,10 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Spinner = require('react-spinkit');
-require('./css/GlobalSpinner.css');
+import React from 'react';
+
+import Spinner from 'react-spinkit';
+import './css/GlobalSpinner.css';
 
 class GlobalSpinner extends React.Component {
     static propTypes = {

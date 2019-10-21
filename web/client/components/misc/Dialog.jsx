@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const Draggable = require('react-draggable');
-const Spinner = require('react-spinkit');
-const assign = require('object-assign');
-const Message = require('../I18N/Message');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import Draggable from 'react-draggable';
+import Spinner from 'react-spinkit';
+import assign from 'object-assign';
+import Message from '../I18N/Message';
 
 class Dialog extends React.Component {
     static propTypes = {

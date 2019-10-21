@@ -7,9 +7,9 @@
  ectory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const ConfigUtils = require('../../utils/ConfigUtils');
+import ConfigUtils from '../../utils/ConfigUtils';
 
 export default (Component) => {
     return (props) => {

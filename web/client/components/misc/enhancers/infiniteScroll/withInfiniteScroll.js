@@ -7,10 +7,10 @@
  */
 
 
-const loadMore = require('./loadMore');
+import loadMore from './loadMore';
 
-const { compose, defaultProps } = require('recompose');
-const withScrollSpy = require('./withScrollSpy');
+import { compose, defaultProps } from 'recompose';
+import withScrollSpy from './withScrollSpy';
 
 /**
  * Add infinite scroll functionality to a component.

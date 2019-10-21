@@ -5,15 +5,15 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
-const React = require('react');
-const {compose} = require('recompose');
-const Message = require('../../I18N/Message');
-const { omit } = require('lodash');
+import React from 'react';
 
-const {Button, Glyphicon} = require('react-bootstrap');
-const Loader = require('../Loader');
-const tooltip = require('../enhancers/buttonTooltip');
-const popover = require('../enhancers/popover');
+import { compose } from 'recompose';
+import Message from '../../I18N/Message';
+import { omit } from 'lodash';
+import { Button, Glyphicon } from 'react-bootstrap';
+import Loader from '../Loader';
+import tooltip from '../enhancers/buttonTooltip';
+import popover from '../enhancers/popover';
 /**
  * Button for @see components.misc.toolbar.Toolbar. Exposes all the props of a react-bootstrap button, plus glyph and text
  * Has tooltip and popover HOCs, so you can add properties like `popover`, `tooltip`, `tooltipId` and so on...

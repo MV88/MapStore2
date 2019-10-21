@@ -6,13 +6,14 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const {Glyphicon} = require('react-bootstrap');
-const Dialog = require('./Dialog');
-const Toolbar = require('./toolbar/Toolbar');
-const {withState} = require('recompose');
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-const LoadingSpinner = require('./LoadingSpinner');
+import React from 'react';
+
+import { Glyphicon } from 'react-bootstrap';
+import Dialog from './Dialog';
+import Toolbar from './toolbar/Toolbar';
+import { withState } from 'recompose';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import LoadingSpinner from './LoadingSpinner';
 
 
 const sizes = {

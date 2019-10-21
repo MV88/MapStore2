@@ -1,4 +1,4 @@
-const {compose, withHandlers, withState, withProps} = require('recompose');
+import { compose, withHandlers, withState, withProps } from 'recompose';
 
 export default compose(
     withProps(({ value }) => ({

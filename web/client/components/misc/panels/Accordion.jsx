@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {Panel, Accordion} = require('react-bootstrap');
-const SideCard = require('../cardgrids/SideCard');
+import React from 'react';
+
+import { Panel, Accordion } from 'react-bootstrap';
+import SideCard from '../cardgrids/SideCard';
 
 /**
  * Component for rendering an Accordion with Side Card as header.

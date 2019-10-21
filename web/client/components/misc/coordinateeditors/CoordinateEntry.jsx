@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const DecimalCoordinateEditor = require('./editors/DecimalCoordinateEditor');
-const AeronauticalCoordinateEditor = require('./editors/AeronauticalCoordinateEditor');
-const {isNil} = require('lodash');
-const no90Lat = require('./enhancers/no90Lat');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import DecimalCoordinateEditor from './editors/DecimalCoordinateEditor';
+import AeronauticalCoordinateEditor from './editors/AeronauticalCoordinateEditor';
+import { isNil } from 'lodash';
+import no90Lat from './enhancers/no90Lat';
 
 /**
  This component can render an input field in two different formats: 'decimal' or 'aeronautical'
