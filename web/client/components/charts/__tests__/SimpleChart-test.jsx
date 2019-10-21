@@ -7,11 +7,11 @@
  */
 
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
 
-const expect = require('expect');
-const SimpleChart = require('../SimpleChart');
+import ReactDOM from 'react-dom';
+import expect from 'expect';
+import SimpleChart from '../SimpleChart';
 
 const data = [
     {name: 'Page A', uv: 0, pv: 0, amt: 0},

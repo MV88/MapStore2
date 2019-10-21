@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { Sector, Cell, PieChart, Pie, Tooltip} = require('recharts');
-const {convertToNameValue} = require('./polar');
+import React from 'react';
+
+import { Sector, Cell, PieChart, Pie, Tooltip } from 'recharts';
+import { convertToNameValue } from './polar';
 const calculateCellHeight = ({customCellHeight, height, rows}) => customCellHeight || ( height - 20 ) / rows;
 const calculateCellWidth = ({width, cols}) => width / cols;
 const calculateRows = ({data, cols}) => Math.ceil((data.length) / cols);

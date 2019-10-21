@@ -6,8 +6,8 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const React = require('react');
-const SimpleChart = require('./SimpleChart');
+import React from 'react';
 
-const streamEnhancer = require('../misc/enhancers/propsStreamFactory');
+import SimpleChart from './SimpleChart';
+import streamEnhancer from '../misc/enhancers/propsStreamFactory';
 export default streamEnhancer((props) => <SimpleChart {...props} />);
