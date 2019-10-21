@@ -5,23 +5,24 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const PropTypes = require('prop-types');
-const React = require('react');
-const Metadata = require('../forms/Metadata');
-const Thumbnail = require('../forms/Thumbnail');
-const PermissionEditor = require('../../security/PermissionEditor');
-const ReactQuill = require('react-quill');
-const Portal = require('../../misc/Portal');
-const ResizableModal = require('../../misc/ResizableModal');
-require('react-quill/dist/quill.snow.css');
-require('./css/modals.css');
-const Spinner = require('react-spinkit');
-const { Grid, Row, Col } = require('react-bootstrap');
-const { get, isNil } = require('lodash');
-const Message = require('../../I18N/Message');
-const Toolbar = require('../../misc/toolbar/Toolbar');
-const { NO_DETAILS_AVAILABLE } = require('../../../actions/maps');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import PropTypes from 'prop-types';
+
+import React from 'react';
+import Metadata from '../forms/Metadata';
+import Thumbnail from '../forms/Thumbnail';
+import PermissionEditor from '../../security/PermissionEditor';
+import ReactQuill from 'react-quill';
+import Portal from '../../misc/Portal';
+import ResizableModal from '../../misc/ResizableModal';
+import 'react-quill/dist/quill.snow.css';
+import './css/modals.css';
+import Spinner from 'react-spinkit';
+import { Grid, Row, Col } from 'react-bootstrap';
+import { get, isNil } from 'lodash';
+import Message from '../../I18N/Message';
+import Toolbar from '../../misc/toolbar/Toolbar';
+import { NO_DETAILS_AVAILABLE } from '../../../actions/maps';
+import LocaleUtils from '../../../utils/LocaleUtils';
 
 
 /**

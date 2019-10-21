@@ -5,16 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Rx = require('rxjs');
-const { compose, withProps, mapPropsStream } = require('recompose');
-const { castArray } = require('lodash');
-const Message = require('../../I18N/Message');
-const {getResources} = require('../../../api/persistence');
-const Icon = require('../../misc/FitIcon');
+import React from 'react';
 
-const withControllableState = require('../../misc/enhancers/withControllableState');
-const withVirtualScroll = require('../../misc/enhancers/infiniteScroll/withInfiniteScroll');
+import Rx from 'rxjs';
+import { compose, withProps, mapPropsStream } from 'recompose';
+import { castArray } from 'lodash';
+import Message from '../../I18N/Message';
+import { getResources } from '../../../api/persistence';
+import Icon from '../../misc/FitIcon';
+import withControllableState from '../../misc/enhancers/withControllableState';
+import withVirtualScroll from '../../misc/enhancers/infiniteScroll/withInfiniteScroll';
 
 const defaultPreview = <Icon glyph="geoserver" padding={20} />;
 

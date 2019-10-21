@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,15 +8,16 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var BootstrapReact = require('react-bootstrap');
-var I18N = require('../I18N/I18N');
+import React from 'react';
+
+import BootstrapReact from 'react-bootstrap';
+import I18N from '../I18N/I18N';
 var ListGroupItem = BootstrapReact.ListGroupItem;
 var Button = BootstrapReact.Button;
 var Glyphicon = BootstrapReact.Glyphicon;
 var Tooltip = BootstrapReact.Tooltip;
-const OverlayTrigger = require('../misc/OverlayTrigger');
-var {isFunction} = require('lodash');
+import OverlayTrigger from '../misc/OverlayTrigger';
+import { isFunction } from 'lodash';
 
 class MapItem extends React.Component {
     static propTypes = {

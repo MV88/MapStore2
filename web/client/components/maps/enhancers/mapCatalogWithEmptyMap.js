@@ -1,6 +1,6 @@
 
-const {compose} = require('recompose');
-const { withSearchTextState, withEmptyMapVirtualScroll, searchOnTextChange} = require('./enhancers');
+import { compose } from 'recompose';
+import { withSearchTextState, withEmptyMapVirtualScroll, searchOnTextChange } from './enhancers';
 export default compose(
     withSearchTextState,
     withEmptyMapVirtualScroll,
