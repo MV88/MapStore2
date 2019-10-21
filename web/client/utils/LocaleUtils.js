@@ -5,20 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const url = require('url');
-const {isObject} = require('lodash');
-const {addLocaleData} = require('react-intl');
+import url from 'url';
 
-const en = require('react-intl/locale-data/en');
-const it = require('react-intl/locale-data/it');
-const fr = require('react-intl/locale-data/fr');
-const de = require('react-intl/locale-data/de');
-const es = require('react-intl/locale-data/es');
-const nl = require('react-intl/locale-data/nl');
-const zh = require('react-intl/locale-data/zh');
-const hr = require('react-intl/locale-data/hr');
-const pt = require('react-intl/locale-data/pt');
-const vi = require('react-intl/locale-data/vi');
+import { isObject } from 'lodash';
+import { addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import it from 'react-intl/locale-data/it';
+import fr from 'react-intl/locale-data/fr';
+import de from 'react-intl/locale-data/de';
+import es from 'react-intl/locale-data/es';
+import nl from 'react-intl/locale-data/nl';
+import zh from 'react-intl/locale-data/zh';
+import hr from 'react-intl/locale-data/hr';
+import pt from 'react-intl/locale-data/pt';
+import vi from 'react-intl/locale-data/vi';
 addLocaleData([...en, ...it, ...fr, ...de, ...es, ...nl, ...zh, ...hr, ...pt, ...vi]);
 
 /*

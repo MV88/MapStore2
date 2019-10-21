@@ -6,15 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const FileSaver = require('file-saver');
-const toBlob = require('canvas-to-blob');
-const shp = require('shpjs');
-const tj = require('@mapbox/togeojson');
-const JSZip = require('jszip');
-const {Promise} = require('es6-promise');
+import FileSaver from 'file-saver';
+
+import toBlob from 'canvas-to-blob';
+import shp from 'shpjs';
+import tj from '@mapbox/togeojson';
+import JSZip from 'jszip';
+import { Promise } from 'es6-promise';
 const parser = new DOMParser();
-const assign = require('object-assign');
-const {hint: geojsonhint} = require('@mapbox/geojsonhint/lib/object');
+import assign from 'object-assign';
+import { hint as geojsonhint } from '@mapbox/geojsonhint/lib/object';
 
 const cleanStyleFromKml = (xml) => {
 

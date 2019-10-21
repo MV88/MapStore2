@@ -6,9 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-var expect = require('expect');
-var {
+import React from 'react';
+
+import expect from 'expect';
+
+import {
     getAvailableInfoFormat,
     getAvailableInfoFormatLabels,
     getAvailableInfoFormatValues,
@@ -20,10 +22,10 @@ var {
     getLabelFromValue,
     getDefaultInfoFormatValueFromLayer,
     getLayerFeatureInfo,
-    filterRequestParams
-} = require('../MapInfoUtils');
+    filterRequestParams,
+} from '../MapInfoUtils';
 
-const CoordinatesUtils = require('../CoordinatesUtils');
+import CoordinatesUtils from '../CoordinatesUtils';
 
 class App extends React.Component {
     render() {

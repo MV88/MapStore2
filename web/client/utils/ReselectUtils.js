@@ -1,5 +1,5 @@
-const { isEqualWith, isObject } = require('lodash');
-const { defaultMemoize, createSelectorCreator } = require('reselect');
+import { isEqualWith, isObject } from 'lodash';
+import { defaultMemoize, createSelectorCreator } from 'reselect';
 
 const defaultCompare = (a, b) => a === b;
 

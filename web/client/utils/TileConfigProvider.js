@@ -1,6 +1,6 @@
-var assign = require('object-assign');
-var CONFIGPROVIDER = require('./ConfigProvider');
-var CoordinatesUtils = require('./ConfigUtils');
+import assign from 'object-assign';
+import CONFIGPROVIDER from './ConfigProvider';
+import CoordinatesUtils from './ConfigUtils';
 
 let TileConfigProvider = {
     getLayerConfig: function(layer, options) {

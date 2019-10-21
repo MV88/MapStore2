@@ -6,7 +6,8 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const {isArray, head, isNaN} = require('lodash');
+import { isArray, head, isNaN } from 'lodash';
+
 function degToDms(deg) {
     // convert decimal deg to minutes and seconds
     var d = Math.floor(deg);

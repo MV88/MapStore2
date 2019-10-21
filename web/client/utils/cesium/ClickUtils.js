@@ -5,7 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var Cesium = require('../../libs/cesium');
+import Cesium from '../../libs/cesium';
+
 const getCartesian = function(viewer, event) {
     if (event.position !== null) {
         const scene = viewer.scene;

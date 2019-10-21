@@ -1,4 +1,4 @@
-const { isArray } = require('lodash');
+import { isArray } from 'lodash';
 
 function template(str = "", data = {}) {
     return str.replace(/(?!(\{?[zyx]?\}))\{*([\w_]+)*\}/g, function() {

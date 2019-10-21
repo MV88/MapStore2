@@ -6,10 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const assign = require('object-assign');
-const toBbox = require('turf-bbox');
-const uuidv1 = require('uuid/v1');
-const { isString, isObject, isArray, head, castArray, isEmpty, findIndex, pick, isNil} = require('lodash');
+import assign from 'object-assign';
+
+import toBbox from 'turf-bbox';
+import uuidv1 from 'uuid/v1';
+
+import {
+    isString,
+    isObject,
+    isArray,
+    head,
+    castArray,
+    isEmpty,
+    findIndex,
+    pick,
+    isNil,
+} from 'lodash';
 
 let regGeoServerRule = /\/[\w- ]*geoserver[\w- ]*\//;
 
@@ -238,7 +250,7 @@ const getURLs = (urls, queryParametersString = '') => {
     return urls.map((url) => url.split("\?")[0] + queryParametersString);
 };
 
-const SecurityUtils = require('./SecurityUtils');
+import SecurityUtils from './SecurityUtils';
 
 const LayerCustomUtils = {};
 

@@ -7,8 +7,9 @@
  */
 
 
-const {fidFilter} = require('../../Filter/base');
-const {getTypeName} = require('../../WFS/base');
+import { fidFilter } from '../../Filter/base';
+
+import { getTypeName } from '../../WFS/base';
 /**
  * Generate WFS delete features
  * @function

@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var objectAssign = require('object-assign');
+import objectAssign from 'object-assign';
 
 var WMSUtils = {
     PARAM_OPTIONS: ["layers", "styles", "format", "transparent", "version", "tiled", "zindex", "_v_", "cql_filter", "sld"],

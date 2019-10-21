@@ -6,20 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const CoordinatesUtils = require('./CoordinatesUtils');
-const SecurityUtils = require('./SecurityUtils');
-const MapUtils = require('./MapUtils');
-const {optionsToVendorParams} = require('./VendorParamsUtils');
-const AnnotationsUtils = require("./AnnotationsUtils");
-const {colorToHexStr} = require("./ColorUtils");
+import CoordinatesUtils from './CoordinatesUtils';
 
-const {isArray} = require('lodash');
-
-const url = require('url');
+import SecurityUtils from './SecurityUtils';
+import MapUtils from './MapUtils';
+import { optionsToVendorParams } from './VendorParamsUtils';
+import AnnotationsUtils from './AnnotationsUtils';
+import { colorToHexStr } from './ColorUtils';
+import { isArray } from 'lodash';
+import url from 'url';
 
 const defaultScales = MapUtils.getGoogleMercatorScales(0, 21);
 
-const assign = require('object-assign');
+import assign from 'object-assign';
 
 // Non è detto che sia uniforme!!
 const getGeomType = function(layer) {

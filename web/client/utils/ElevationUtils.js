@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../libs/ajax');
-const LRUCache = require('lrucache');
-const {Promise} = require('es6-promise');
+import axios from '../libs/ajax';
+
+import LRUCache from 'lrucache';
+import { Promise } from 'es6-promise';
 const DEFAULT_SIZE = 100;
 let elevationTiles = new LRUCache(DEFAULT_SIZE);
 

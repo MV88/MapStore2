@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const uuidv1 = require('uuid/v1');
-const SVGPreview = require('../../components/styleeditor/SVGPreview');
-const randomDots = require('./img/randomdots.png');
+import React from 'react';
+
+import uuidv1 from 'uuid/v1';
+import SVGPreview from '../../components/styleeditor/SVGPreview';
+import randomDots from './img/randomdots.png';
 
 /**
  * Template object structure
