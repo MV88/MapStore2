@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { isNil, isEqual, isArray, isFunction } = require('lodash');
-const { withState, withHandlers, compose, lifecycle } = require('recompose');
+import { isNil, isEqual, isArray, isFunction } from 'lodash';
+
+import { withState, withHandlers, compose, lifecycle } from 'recompose';
 
 /**
  * Enhancer for settings state needed in TOCItemsSettings plugin

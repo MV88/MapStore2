@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {DropdownList} = require('react-widgets');
-const MapInfoUtils = require('../../../../utils/MapInfoUtils');
-const {Grid} = require('react-bootstrap');
-const Message = require('../../../I18N/Message');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { DropdownList } from 'react-widgets';
+import MapInfoUtils from '../../../../utils/MapInfoUtils';
+import { Grid } from 'react-bootstrap';
+import Message from '../../../I18N/Message';
 /**
  * FeatureInfoFormat shows the infoformat selected for that layer or the default one taken
  * from the general settings.
@@ -74,4 +75,4 @@ export default class extends React.Component {
             </Grid>
         );
     }
-};
+}

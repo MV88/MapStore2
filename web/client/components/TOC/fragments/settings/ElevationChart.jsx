@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,9 +8,10 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip} = require('recharts');
-const ElevationChartTooltip = require('./ElevationChartTooltip');
+import React from 'react';
+
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import ElevationChartTooltip from './ElevationChartTooltip';
 
 export default class extends React.Component {
     static propTypes = {
@@ -75,4 +77,4 @@ export default class extends React.Component {
         }, this);
         return data;
     };
-};
+}

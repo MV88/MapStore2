@@ -6,16 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {ButtonGroup, Button, Glyphicon, Tooltip} = require('react-bootstrap');
-const OverlayTrigger = require('../misc/OverlayTrigger');
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-const {head} = require('lodash');
-const ConfirmModal = require('../maps/modals/ConfirmModal');
-const LayerMetadataModal = require('./fragments/LayerMetadataModal');
-const Proj4js = require('proj4').default;
-const Message = require('../I18N/Message');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { ButtonGroup, Button, Glyphicon, Tooltip } from 'react-bootstrap';
+import OverlayTrigger from '../misc/OverlayTrigger';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { head } from 'lodash';
+import ConfirmModal from '../maps/modals/ConfirmModal';
+import LayerMetadataModal from './fragments/LayerMetadataModal';
+import Proj4js from 'proj4';
+import Message from '../I18N/Message';
 
 class Toolbar extends React.Component {
 

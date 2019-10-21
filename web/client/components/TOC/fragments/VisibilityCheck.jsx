@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {isFunction} = require('lodash');
-const LayersTool = require('./LayersTool');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { isFunction } from 'lodash';
+import LayersTool from './LayersTool';
 
 class VisibilityCheck extends React.Component {
     static propTypes = {

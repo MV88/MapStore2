@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {DropdownList} = require('react-widgets');
-const Message = require('../../../I18N/Message');
-const {Grid, Row, Col, FormGroup, ControlLabel, FormControl, Checkbox} = require('react-bootstrap');
-const {clamp, isNil} = require('lodash');
+import React from 'react';
 
-require('react-widgets/lib/less/react-widgets.less');
+import PropTypes from 'prop-types';
+import { DropdownList } from 'react-widgets';
+import Message from '../../../I18N/Message';
+import { Grid, Row, Col, FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
+import { clamp, isNil } from 'lodash';
+import 'react-widgets/lib/less/react-widgets.less';
 
 export default class extends React.Component {
     static propTypes = {
@@ -103,4 +103,4 @@ export default class extends React.Component {
             </Grid>
         );
     }
-};
+}

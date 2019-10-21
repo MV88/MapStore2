@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const Slider = require('../../misc/Slider');
-const {isNil, isArray} = require('lodash');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import Slider from '../../misc/Slider';
+import { isNil, isArray } from 'lodash';
 
 class OpacitySlider extends React.Component {
     static propTypes = {

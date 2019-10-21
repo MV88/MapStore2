@@ -6,18 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const Spinner = require('react-spinkit');
-const { FormControl, FormGroup, ControlLabel, InputGroup, Col } = require('react-bootstrap');
-const Message = require('../../../I18N/Message');
-const { SimpleSelect } = require('react-selectize');
-const { isString, isObject, find } = require('lodash');
-const LocaleUtils = require('../../../../utils/LocaleUtils');
-const assign = require('object-assign');
-require('react-selectize/themes/index.css');
-const { Grid } = require('react-bootstrap');
-const { createFromSearch, flattenGroups } = require('../../../../utils/TOCUtils');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import Spinner from 'react-spinkit';
+import { FormControl, FormGroup, ControlLabel, InputGroup, Col } from 'react-bootstrap';
+import Message from '../../../I18N/Message';
+import { SimpleSelect } from 'react-selectize';
+import { isString, isObject, find } from 'lodash';
+import LocaleUtils from '../../../../utils/LocaleUtils';
+import assign from 'object-assign';
+import 'react-selectize/themes/index.css';
+import { Grid } from 'react-bootstrap';
+import { createFromSearch, flattenGroups } from '../../../../utils/TOCUtils';
 
 /**
  * General Settings form for layer

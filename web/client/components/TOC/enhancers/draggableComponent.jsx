@@ -1,6 +1,6 @@
-const ReactDOM = require('react-dom');
-const {DragSource: dragSource, DropTarget: dropTarget} = require('react-dnd');
-const {compose, branch} = require('recompose');
+import ReactDOM from 'react-dom';
+import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
+import { compose, branch } from 'recompose';
 
 const dragSpec = {
     beginDrag: (props) => {

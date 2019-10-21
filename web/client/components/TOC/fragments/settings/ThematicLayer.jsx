@@ -6,27 +6,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const { ControlLabel, FormGroup, Row, Col, Grid, Alert, Checkbox} = require('react-bootstrap');
-const { isObject, isEqual} = require('lodash');
-const Combobox = require('react-widgets').Combobox;
-const assign = require('object-assign');
-const Message = require('../../../I18N/Message');
-const SwitchPanel = require('../../../misc/switch/SwitchPanel');
-const ColorRangeSelector = require('../../../style/ColorRangeSelector');
+import PropTypes from 'prop-types';
 
-const {Controlled: Codemirror} = require('react-codemirror2');
-const {NumberPicker} = require('react-widgets');
-require('codemirror/lib/codemirror.css');
-
-require('codemirror/mode/javascript/javascript');
-
-const { getMessageById } = require('../../../../utils/LocaleUtils');
-const tinycolor = require('tinycolor2');
-const ColorPicker = require('../../../style/ColorPicker');
-const LoadingView = require('../../../misc/LoadingView');
-const ThemaClassesEditor = require('../../../style/ThemaClassesEditor');
+import React from 'react';
+import { ControlLabel, FormGroup, Row, Col, Grid, Alert, Checkbox } from 'react-bootstrap';
+import { isObject, isEqual } from 'lodash';
+import { Combobox } from 'react-widgets';
+import assign from 'object-assign';
+import Message from '../../../I18N/Message';
+import SwitchPanel from '../../../misc/switch/SwitchPanel';
+import ColorRangeSelector from '../../../style/ColorRangeSelector';
+import { Controlled as Codemirror } from 'react-codemirror2';
+import { NumberPicker } from 'react-widgets';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/mode/javascript/javascript';
+import { getMessageById } from '../../../../utils/LocaleUtils';
+import tinycolor from 'tinycolor2';
+import ColorPicker from '../../../style/ColorPicker';
+import LoadingView from '../../../misc/LoadingView';
+import ThemaClassesEditor from '../../../style/ThemaClassesEditor';
 
 const internalProperties = { current: undefined, unconfigured: undefined, applied: undefined };
 

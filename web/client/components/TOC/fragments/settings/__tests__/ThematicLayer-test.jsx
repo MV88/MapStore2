@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const ThematicLayer = require('../ThematicLayer');
+import React from 'react';
 
-const expect = require('expect');
-const TestUtils = require('react-dom/test-utils');
+import ReactDOM from 'react-dom';
+import ThematicLayer from '../ThematicLayer';
+import expect from 'expect';
+import TestUtils from 'react-dom/test-utils';
 
 const layer = {
     name: 'layer00',
