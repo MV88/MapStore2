@@ -45,6 +45,6 @@ const trayWidgets = createSelector(
             })
 );
 
-module.exports = {
+export default {
     trayWidgets
 };

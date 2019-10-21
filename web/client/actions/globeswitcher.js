@@ -50,7 +50,7 @@ function updateLast2dMapType(mapType) {
  * Actions for Globe Switcher Plugin.
  * @name actions.globeswitcher
  */
-module.exports = {
+export default {
     toggle3d,
     updateLast2dMapType,
     UPDATE_LAST_2D_MAPTYPE,

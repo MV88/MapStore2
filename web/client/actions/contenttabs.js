@@ -23,4 +23,4 @@ const onTabSelected = (id) => {
     };
 };
 
-module.exports = {onTabSelected, ON_TAB_SELECTED};
+export default {onTabSelected, ON_TAB_SELECTED};

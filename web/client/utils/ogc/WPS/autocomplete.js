@@ -76,6 +76,6 @@ const getWpsPayload = ({layerName, layerFilter, attribute, maxFeatures, startInd
     return requestBody;
 };
 
-module.exports = {
+export default {
     getWpsPayload
 };

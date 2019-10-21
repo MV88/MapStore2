@@ -64,7 +64,7 @@ const comparison = {
     isNull: (ns, ...args) => multiop(ns, ogcComparisonOperators.isNull, args)
 };
 
-module.exports = {
+export default {
     ogcComparisonOperators,
     ogcLogicalOperators,
     ogcSpatialOperators,

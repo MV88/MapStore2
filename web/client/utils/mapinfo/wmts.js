@@ -15,7 +15,7 @@ const {isArray, isObject} = require('lodash');
 
 const assign = require('object-assign');
 
-module.exports = {
+export default {
     buildRequest: (layer, props) => {
         const resolution = MapUtils.getCurrentResolution(Math.round(props.map.zoom), 0, 21, 96);
         const resolutions = layer.resolutions || MapUtils.getResolutions();

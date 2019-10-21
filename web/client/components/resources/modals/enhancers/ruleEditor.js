@@ -9,7 +9,7 @@
 const {compose, withState} = require('recompose');
 
 
-module.exports = compose(
+export default compose(
     withState('newGroup', 'onNewGroupChoose'),
     withState('newPermission', 'onNewPermissionChoose')
 );

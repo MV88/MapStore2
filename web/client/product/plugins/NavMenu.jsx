@@ -125,7 +125,7 @@ class NavMenu extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     NavMenuPlugin: assign(NavMenu, {
         OmniBar: {
             position: 5,

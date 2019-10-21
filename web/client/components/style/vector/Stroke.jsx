@@ -127,4 +127,4 @@ class Stroke extends React.Component {
     }
 }
 
-module.exports = Stroke;
+export default Stroke;

@@ -50,4 +50,4 @@ class CircleThumb extends React.Component {
     }
 }
 
-module.exports = CircleThumb;
+export default CircleThumb;

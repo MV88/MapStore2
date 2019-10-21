@@ -12,7 +12,7 @@ const Rx = require('rxjs');
 const axios = require('../libs/ajax');
 const {head} = require('lodash');
 
-module.exports = (config) => ({
+export default (config) => ({
     loadFieldsEpic: (action$) =>
         action$.ofType(LOAD_FIELDS)
             .switchMap((action) => {

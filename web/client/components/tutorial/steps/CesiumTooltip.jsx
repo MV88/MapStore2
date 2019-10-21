@@ -114,4 +114,4 @@ class CesiumTooltip extends React.Component {
     }
 }
 
-module.exports = CesiumTooltip;
+export default CesiumTooltip;

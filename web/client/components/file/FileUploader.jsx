@@ -147,4 +147,4 @@ class FileUploader extends React.Component {
     };
 }
 
-module.exports = FileUploader;
+export default FileUploader;

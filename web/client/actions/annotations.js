@@ -330,7 +330,7 @@ function changeText(text, components) {
         components
     };
 }
-module.exports = {
+export default {
     SHOW_ANNOTATION,
     EDIT_ANNOTATION,
     NEW_ANNOTATION,

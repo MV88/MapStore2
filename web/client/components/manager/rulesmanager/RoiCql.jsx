@@ -60,4 +60,4 @@ class RoiCql extends React.Component {
     }
 }
 
-module.exports = RoiCql;
+export default RoiCql;

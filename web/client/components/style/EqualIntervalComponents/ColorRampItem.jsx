@@ -33,4 +33,4 @@ ColorRampItem.propTypes = {
     item: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 };
 
-module.exports = ColorRampItem;
+export default ColorRampItem;

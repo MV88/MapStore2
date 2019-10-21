@@ -146,4 +146,4 @@ class NumberField extends React.Component {
     };
 }
 
-module.exports = NumberField;
+export default NumberField;

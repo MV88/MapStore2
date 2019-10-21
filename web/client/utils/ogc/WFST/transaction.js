@@ -18,6 +18,6 @@ const transaction = (operations, schemaLocation, {wfsNS = "wfs", wfsVersion = "1
     + `${schemaLocation}>`
     + `${Array.isArray(operations) ? operations.join("") : operations}`
     + `</${wfsNS}:Transaction>`;
-module.exports = {
+export default {
     transaction
 };

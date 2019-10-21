@@ -56,4 +56,4 @@ class StylePolyline extends React.Component {
     }
 }
 
-module.exports = StylePolyline;
+export default StylePolyline;

@@ -67,4 +67,4 @@ class Filter extends React.Component {
     }
 }
 
-module.exports = Filter;
+export default Filter;

@@ -100,4 +100,4 @@ class StandardRouter extends React.Component {
     }
 }
 
-module.exports = StandardRouter;
+export default StandardRouter;

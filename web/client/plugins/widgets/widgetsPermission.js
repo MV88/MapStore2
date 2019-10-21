@@ -13,7 +13,7 @@ const editOptions = require('./editOptions');
 /**
  * enhancers to manage widgets permissions.
  */
-module.exports = {
+export default {
     /*
     * Hide hidden widgets (Widgets with property `hide=true`) in tray for users has not access to them.
     * Uses `toolsOptions` property. See `editOptions` enhancer

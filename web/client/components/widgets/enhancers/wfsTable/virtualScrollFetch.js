@@ -15,7 +15,7 @@ const { getCurrentPaginationOptions, updatePages } = require('../../../../utils/
  * @returns a function that can be merged with stream of
  * props to retrieve data using virtual scroll.
  */
-module.exports = pages$ => props$ => props$.switchMap(({
+export default pages$ => props$ => props$.switchMap(({
     layer = {},
     size = 20,
     maxStoredPages = 5,

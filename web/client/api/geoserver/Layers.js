@@ -122,4 +122,4 @@ const Api = {
             .then(layerObj => axios.put(url, layerObj).then(() => layerObj));
     }
 };
-module.exports = Api;
+export default Api;

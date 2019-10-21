@@ -30,4 +30,4 @@ class SwitchButton extends React.Component {
     }
 }
 
-module.exports = SwitchButton;
+export default SwitchButton;

@@ -18,7 +18,7 @@ const Glyph = enhanceTooltip(Glyphicon);
  * @prop {tooltip} [tooltip] tooltip
  * @prop {iconfit} [iconfit] if true, the icon will fit min height or width.
  */
-module.exports = ({glyph = "info-sign", tooltip, tooltipId, iconFit, padding = 0, margin = 0}) => (<ContainerDimensions>
+export default ({glyph = "info-sign", tooltip, tooltipId, iconFit, padding = 0, margin = 0}) => (<ContainerDimensions>
     { ({ width, height }) =>
         (<Glyph
             glyph={glyph}

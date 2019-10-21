@@ -8,7 +8,7 @@ const Message = require('../../../I18N/Message');
 const { NO_DETAILS_AVAILABLE } = require('../../../../actions/maps');
 
 
-module.exports = ({
+export default ({
     saving,
     hideGroupProperties,
     editDetailsDisabled,

@@ -21,6 +21,6 @@
  */
 const tutorialSelector = (state) => state && state.tutorial;
 
-module.exports = {
+export default {
     tutorialSelector
 };

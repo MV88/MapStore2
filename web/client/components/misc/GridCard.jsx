@@ -53,4 +53,4 @@ class GridCard extends React.Component {
     }
 }
 
-module.exports = GridCard;
+export default GridCard;

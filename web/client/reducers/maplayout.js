@@ -20,4 +20,4 @@ function mapLayout(state = { layout: {}, boundingMapRect: {} }, action) {
     }
 }
 
-module.exports = mapLayout;
+export default mapLayout;

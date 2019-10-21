@@ -12,7 +12,7 @@ const emptyState = require('../misc/enhancers/emptyState');
 const withSelection = require('../widgets/view/enhancers/withSelection');
 const {widthProvider} = require('../layout/enhancers/gridLayout');
 
-module.exports =
+export default
     compose(
         pure,
         defaultProps({

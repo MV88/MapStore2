@@ -146,4 +146,4 @@ class MapGrid extends React.Component {
     }
 }
 
-module.exports = MapGrid;
+export default MapGrid;

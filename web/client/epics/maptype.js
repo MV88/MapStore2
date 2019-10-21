@@ -35,6 +35,6 @@ const syncMapType = (action$, store) =>
  * @name epics.maptype
  * @type {Object}
  */
-module.exports = {
+export default {
     syncMapType
 };

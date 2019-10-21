@@ -153,7 +153,7 @@ const createNewFeature = (action) => {
 };
 
 
-module.exports = (viewer) => ({
+export default (viewer) => ({
     addAnnotationsLayerEpic: (action$, store) => action$.ofType(MAP_CONFIG_LOADED)
         .switchMap(() => {
             const annotationsLayer = annotationsLayerSelector(store.getState());

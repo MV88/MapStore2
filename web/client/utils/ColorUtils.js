@@ -188,4 +188,4 @@ const ColorUtils = {
     }
 
 };
-module.exports = ColorUtils;
+export default ColorUtils;

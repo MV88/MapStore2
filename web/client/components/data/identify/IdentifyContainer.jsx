@@ -26,7 +26,7 @@ const Coordinate = require('./coordinates/Coordinate');
  * @prop {function} getToolButtons must return an array of object representing the toolbar buttons, eg (props) => [{ glyph: 'info-sign', tooltip: 'hello!'}]
  * @prop {function} getNavigationButtons must return an array of navigation buttons, eg (props) => [{ glyph: 'info-sign', tooltip: 'hello!'}]
  */
-module.exports = props => {
+export default props => {
     const {
         enabled,
         requests = [],

@@ -14,7 +14,7 @@ const MapOptions = require('./map/MapOptions');
 const Preview = require('./map/PreviewMap');
 
 
-module.exports = ({
+export default ({
     onChange = () => {}, onFinish = () => {}, setPage = () => {},
     step = 0,
     selectedNodes = [],

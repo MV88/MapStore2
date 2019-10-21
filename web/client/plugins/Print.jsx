@@ -80,7 +80,7 @@ require('./print/print.css');
  * }
  */
 
-module.exports = {
+export default {
     PrintPlugin: assign({
         loadPlugin: (resolve) => {
             require.ensure('./print/index', () => {

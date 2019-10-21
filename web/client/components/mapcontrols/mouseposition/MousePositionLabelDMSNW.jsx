@@ -53,4 +53,4 @@ class MousePositionLabelDMSNW extends React.Component {
     }
 }
 
-module.exports = MousePositionLabelDMSNW;
+export default MousePositionLabelDMSNW;

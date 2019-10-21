@@ -78,7 +78,7 @@ const ToggleButton = (props) => (<Button
  * Toggle button for timeline hide (collapse)/show functionality for timeline.
  * Visible in the WidgetsTray, when present
  */
-module.exports = compose(
+export default compose(
     connect(
         createSelector(
             isCollapsed,

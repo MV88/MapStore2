@@ -26,4 +26,4 @@ function locate(state = {state: "DISABLED"}, action) {
 
 }
 
-module.exports = locate;
+export default locate;

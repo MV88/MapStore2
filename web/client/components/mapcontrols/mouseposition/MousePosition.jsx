@@ -140,4 +140,4 @@ class MousePosition extends React.Component {
     }
 }
 
-module.exports = MousePosition;
+export default MousePosition;

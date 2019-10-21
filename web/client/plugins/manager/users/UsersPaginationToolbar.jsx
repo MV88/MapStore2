@@ -37,4 +37,4 @@ const PaginationToolbar = connect((state) => {
         }
     };
 })(require('../../../components/misc/PaginationToolbar'));
-module.exports = PaginationToolbar;
+export default PaginationToolbar;

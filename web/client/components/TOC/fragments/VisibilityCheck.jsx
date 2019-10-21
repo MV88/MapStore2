@@ -53,4 +53,4 @@ class VisibilityCheck extends React.Component {
     };
 }
 
-module.exports = VisibilityCheck;
+export default VisibilityCheck;

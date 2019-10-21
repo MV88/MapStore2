@@ -121,4 +121,4 @@ function usergroups(state = {
         return state;
     }
 }
-module.exports = usergroups;
+export default usergroups;

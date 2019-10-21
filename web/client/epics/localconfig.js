@@ -38,6 +38,6 @@ const setSupportedLocales = (action$) =>
         });
 
 
-module.exports = {
+export default {
     setSupportedLocales
 };

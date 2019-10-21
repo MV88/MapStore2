@@ -29,7 +29,7 @@ const RequestSelector = (props) => (
         </Col>
     </Row>);
 
-module.exports = compose(
+export default compose(
     connect(selector),
     defaultProps({
         size: 5,

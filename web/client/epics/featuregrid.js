@@ -181,7 +181,7 @@ const removeFilterFromWMSLayer = ({featuregrid: f} = {}) => {
  * @memberof epics
  * @name featuregrid
  */
-module.exports = {
+export default {
     featureGridBrowseData: (action$, store) =>
         action$.ofType(BROWSE_DATA).switchMap( ({layer}) => {
             const currentTypeName = get(store.getState(), "query.typeName");

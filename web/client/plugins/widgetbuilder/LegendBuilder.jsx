@@ -97,7 +97,7 @@ const builderEnhancer = compose(
     )
 );
 
-module.exports = builderEnhancer(({ enabled, onClose = () => { }, editorData = {}, exitButton, toggleConnection, availableDependencies = [], dependencies, ...props } = {}) =>
+export default builderEnhancer(({ enabled, onClose = () => { }, editorData = {}, exitButton, toggleConnection, availableDependencies = [], dependencies, ...props } = {}) =>
 
     (<BorderLayout
         header={

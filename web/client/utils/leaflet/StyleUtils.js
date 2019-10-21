@@ -31,4 +31,4 @@ const toVectorStyle = function(layer, style) {
     return newLayer;
 };
 
-module.exports = toVectorStyle;
+export default toVectorStyle;

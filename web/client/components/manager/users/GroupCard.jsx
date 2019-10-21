@@ -96,4 +96,4 @@ class GroupCard extends React.Component {
     }
 }
 
-module.exports = GroupCard;
+export default GroupCard;

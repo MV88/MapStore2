@@ -11,7 +11,7 @@ const Message = require('../../I18N/Message');
 const Portal = require('../../misc/Portal');
 const ResizableModal = require('../../misc/ResizableModal');
 
-module.exports = ({title = "", showDialog = false, buttons = [], closeAction = () => {}, msg = "Missing message"}) => {
+export default ({title = "", showDialog = false, buttons = [], closeAction = () => {}, msg = "Missing message"}) => {
     return (
         <Portal>
             <ResizableModal

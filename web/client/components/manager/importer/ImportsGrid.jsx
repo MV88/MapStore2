@@ -121,4 +121,4 @@ class ImportsGrid extends React.Component {
     };
 }
 
-module.exports = ImportsGrid;
+export default ImportsGrid;

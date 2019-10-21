@@ -36,4 +36,4 @@ const Editor = (props) => (
         removeVisible={false}
     />);
 
-module.exports = Editor;
+export default Editor;

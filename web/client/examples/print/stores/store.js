@@ -31,7 +31,7 @@ const rootReducer = (state, action) => {
 };
 
 // export the store with the given reducers
-module.exports = DebugUtils.createDebugStore(rootReducer, {
+export default DebugUtils.createDebugStore(rootReducer, {
     controls: {
         print: {
             enabled: true

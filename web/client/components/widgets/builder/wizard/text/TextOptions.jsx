@@ -14,7 +14,7 @@ const TitleInput = localizedProps("placeholder")(FormControl);
 const ReactQuill = require('react-quill');
 const Editor = localizedProps("placeholder")(ReactQuill);
 
-module.exports = ({ data = {}, onChange = () => { }}) => (
+export default ({ data = {}, onChange = () => { }}) => (
     <div>
         <Col key="form" xs={12}>
             <Form>

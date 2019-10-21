@@ -14,7 +14,7 @@ const GEOSTORY_DELETED = "GEOSTORIES:GEOSTORY_DELETED";
 const RELOAD = "GEOSTORIES:RELOAD_GEOSTORIES";
 const LOADING = "GEOSTORIES:LOADING";
 
-module.exports = {
+export default {
     SET_GEOSTORIES_AVAILABLE,
     setGeostoriesAvailable: (available) => ({ type: SET_GEOSTORIES_AVAILABLE, available }),
     SEARCH_GEOSTORIES,

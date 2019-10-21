@@ -56,7 +56,7 @@ const withDefaultTabs = withProps((props) => ({
  * // `path` can be something like `map.layers[idx].prop` (path definition of lodash get, set)
  * <EnhancedNodeEditor editNode={"LAYER_1"} map={map} onChange={(path, value) => set(map, path, value)} /> // set could be immutable version of lodash set
  */
-module.exports = compose(
+export default compose(
     // select selected node
     mapToNodes,
     withSelectedNode,

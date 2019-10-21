@@ -18,7 +18,7 @@ const LangBar = connect((state) => ({
     onLanguageChange: loadLocale.bind(null, null)
 })(require('../components/I18N/LangBar'));
 
-module.exports = {
+export default {
     LanguagePlugin: assign(LangBar, {
         OmniBar: {
             name: 'language',

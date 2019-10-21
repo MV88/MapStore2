@@ -1,6 +1,6 @@
 const {changePage, moreFeatures} = require('../../actions/featuregrid');
 
-module.exports = {
+export default {
     onPageChange: (page, size) => changePage(page, size),
     moreFeatures
 };

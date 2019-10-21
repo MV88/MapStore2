@@ -22,7 +22,7 @@ const GoFullPlugin = connect(() => ({}))(require('../components/buttons/GoFullBu
 const assign = require('object-assign');
 
 
-module.exports = {
+export default {
     GoFullPlugin: assign(GoFullPlugin, {
         Toolbar: {
             name: 'gofull',

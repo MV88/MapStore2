@@ -12,7 +12,7 @@ const {withHandlers} = require('recompose');
  *
  * @param {object} mappings argument for the toggleConnection options
  */
-module.exports = (mappings) => withHandlers({
+export default (mappings) => withHandlers({
     toggleConnection: ({ toggleConnection = () => { }, editorData = {}}) =>
         (available = []) => toggleConnection(!editorData.mapSync, available, {
             dependenciesMap: editorData.dependenciesMap,

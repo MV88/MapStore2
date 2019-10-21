@@ -16,7 +16,7 @@ const LayersUtils = require('../../../../utils/LayersUtils');
 require('react-widgets/lib/less/react-widgets.less');
 require("./css/elevation.css");
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
     static propTypes = {
         elevationText: PropTypes.node,
         element: PropTypes.object,

@@ -64,4 +64,4 @@ class ColorPicker extends React.Component {
     }
 }
 
-module.exports = ColorPicker;
+export default ColorPicker;

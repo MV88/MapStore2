@@ -34,7 +34,7 @@ const mapPropsStream = mapPropsStreamWithConfig(rxjsConfig);
  * // later in the render method
  * return <AutoCount dataStreamFactory={$props => $props.scan( (acc) => acc + 1, 0).map(count => ({count}))} />;
  */
-module.exports = compose(
+export default compose(
     defaultProps({
         dataStreamFactory: () => Rx.Observable.of({})
     }),

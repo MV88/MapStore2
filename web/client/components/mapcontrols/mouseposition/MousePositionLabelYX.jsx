@@ -32,4 +32,4 @@ class MousePositionLabelYX extends React.Component {
     }
 }
 
-module.exports = MousePositionLabelYX;
+export default MousePositionLabelYX;

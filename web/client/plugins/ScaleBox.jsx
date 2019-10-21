@@ -56,7 +56,7 @@ class ScaleBoxTool extends React.Component {
 const ScaleBoxPlugin = connect(selector, {
     onChange: changeZoomLevel
 })(ScaleBoxTool);
-module.exports = {
+export default {
     ScaleBoxPlugin: assign(ScaleBoxPlugin, {
         disablePluginIf: "{state('mapType') === 'cesium'}"
     }, {

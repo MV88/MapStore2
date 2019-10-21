@@ -30,7 +30,7 @@ function changeMousePositionState(enabled) {
     };
 }
 
-module.exports = {
+export default {
     CHANGE_MOUSE_POSITION,
     CHANGE_MOUSE_POSITION_CRS,
     CHANGE_MOUSE_POSITION_STATE,

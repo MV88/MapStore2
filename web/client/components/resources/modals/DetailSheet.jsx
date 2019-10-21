@@ -16,7 +16,7 @@ const ResizableModal = require('../../misc/ResizableModal');
 require('react-quill/dist/quill.snow.css');
 
 // NOTE: partial porting of details sheet from map, still to be tested and added to the save form
-module.exports = ({
+export default ({
     readOnly,
     showDetailEditor,
     modules = {

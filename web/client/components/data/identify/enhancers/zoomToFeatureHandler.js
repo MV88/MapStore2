@@ -13,7 +13,7 @@ const {withHandlers} = require('recompose');
  * `zoomToExtent` (action) with the calculated extent and crs found in `currentFeatureCrs`.
  * Used for the identify zoomToFeature functionality.
  */
-module.exports = withHandlers({
+export default withHandlers({
     zoomToFeature: ({ zoomToExtent = () => {}, currentFeature = [], currentFeatureCrs: crs }) => () => {
         // zoom only to features that has some geometry (featureInfo returns features with no geometry for raster data).
         // layer groups may have both features with no geometry and with geometry.

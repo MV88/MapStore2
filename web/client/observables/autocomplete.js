@@ -103,7 +103,7 @@ const createWFSFetchStream = (props$) =>
             }
             return Rx.Observable.of({fetchedData: {values: [], size: 0, features: []}, busy: false});
         }).startWith({});
-module.exports = {
+export default {
     createPagedUniqueAutompleteStream,
     createWFSFetchStream,
     singleAttributeFilter

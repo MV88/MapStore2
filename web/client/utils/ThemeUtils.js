@@ -28,7 +28,7 @@ LessNodeResolve.prototype = {
 
 const less = require('less');
 
-module.exports = {
+export default {
     renderFromLess: (theme, container, path, callback) => {
         less.render(theme, {
             plugins: [new LessNodeResolve({path: path})],

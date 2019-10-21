@@ -13,7 +13,7 @@ function supportedLanguagesRegistered(locales) {
         locales
     };
 }
-module.exports = {
+export default {
     LOCAL_CONFIG_LOADED, localConfigLoaded,
     SUPPORTED_LOCALES_REGISTERED, supportedLanguagesRegistered
 

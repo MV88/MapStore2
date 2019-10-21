@@ -8,7 +8,7 @@ const ListItem = ({ item } = {}) => (
         {item && item.name ? <Message msgId={item.name} /> : null}
     </span>
 );
-module.exports = ({spatialOperations = [], onChange = () => {}, value} = {}) =>
+export default ({spatialOperations = [], onChange = () => {}, value} = {}) =>
     (<DropdownList
         valueField="id"
         className="geometry-operation-selector"

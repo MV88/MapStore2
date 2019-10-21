@@ -212,7 +212,7 @@ const AnnotationsPlugin = connect(annotationsSelector, {
     toggleControl: conditionalToggle
 })(AnnotationsPanel);
 
-module.exports = {
+export default {
     AnnotationsPlugin: assign(AnnotationsPlugin, {
         disablePluginIf: "{state('mapType') === 'cesium' || state('mapType') === 'leaflet' }"
     }, {

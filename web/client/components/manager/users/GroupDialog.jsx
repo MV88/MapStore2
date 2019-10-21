@@ -267,4 +267,4 @@ class GroupDialog extends React.Component {
     };
 }
 
-module.exports = GroupDialog;
+export default GroupDialog;

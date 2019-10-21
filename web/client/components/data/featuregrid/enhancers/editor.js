@@ -191,6 +191,6 @@ const featuresToGrid = compose(
     ),
     propsStreamFactory
 );
-module.exports = {
+export default {
     featuresToGrid
 };

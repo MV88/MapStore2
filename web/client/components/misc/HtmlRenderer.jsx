@@ -32,4 +32,4 @@ class HtmlRenderer extends React.Component {
     }
 }
 
-module.exports = HtmlRenderer;
+export default HtmlRenderer;

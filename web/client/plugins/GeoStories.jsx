@@ -107,7 +107,7 @@ const GeoStoriesPlugin = compose(
     )
 )(Geostories);
 
-module.exports = {
+export default {
     GeoStoriesPlugin: assign(GeoStoriesPlugin, {
         NavMenu: {
             position: 3,

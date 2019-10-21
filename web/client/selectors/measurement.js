@@ -48,7 +48,7 @@ const measurementSelector = (state) => {
     } || {};
 };
 
-module.exports = {
+export default {
     measurementSelector,
     getValidFeatureSelector,
     isCoordinateEditorEnabledSelector,

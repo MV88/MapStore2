@@ -37,7 +37,7 @@ const DESCRIBE_DOMAIN_OPTIONS = {
 
 
 const getTimeMultidimURL = (l = {}) => get(find(l.dimensions || [], d => d && d.source && d.source.type === "multidim-extension"), "source.url");
-module.exports = {
+export default {
     /**
      * Sync current time param of the layer with the current time element
      */

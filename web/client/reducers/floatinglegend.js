@@ -31,4 +31,4 @@ function floatinglegend(state = {}, action) {
         return state;
     }
 }
-module.exports = floatinglegend;
+export default floatinglegend;

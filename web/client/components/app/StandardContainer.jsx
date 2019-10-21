@@ -87,4 +87,4 @@ class StandardContainer extends React.Component {
     }
 }
 
-module.exports = StandardContainer;
+export default StandardContainer;

@@ -8,7 +8,7 @@
 const {compose, withStateHandlers, defaultProps} = require("recompose");
 const withLocal = require("../../../misc/enhancers/localizedProps");
 
-module.exports = compose(
+export default compose(
     defaultProps({
         filterPlaceholder: "rulesmanager.placeholders.filter"
     }),

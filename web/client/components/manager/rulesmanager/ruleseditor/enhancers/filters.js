@@ -10,7 +10,7 @@ const {connect} = require("react-redux");
 const {changeDrawingStatus} = require("../../../../../actions/draw");
 const {geometryStateSel} = require("../../../../../selectors/rulesmanager");
 const {error} = require("../../../../../actions/notifications");
-module.exports = compose(
+export default compose(
     connect(state => ({geometryState: geometryStateSel(state)}), {onChangeDrawingStatus: changeDrawingStatus, onError: error}),
     withStateHandlers(({constraints = {}}) => {
         const {restrictedAreaWkt: wkt} = constraints;

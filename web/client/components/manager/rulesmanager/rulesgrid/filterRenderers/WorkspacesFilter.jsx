@@ -20,7 +20,7 @@ const selector = createSelector(filterSelector, (filter) => ({
 }));
 
 
-module.exports = compose(
+export default compose(
     connect(selector, {onError: error}),
     defaultProps({
         paginated: false,

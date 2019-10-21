@@ -54,7 +54,7 @@ PrintMap.defaultProps = {
     features: []
 };
 
-module.exports = connect((state) => {
+export default connect((state) => {
     return {
         map: state.map && state.map || state.config && state.config.map,
         layers: state.config && state.config.layers || [],

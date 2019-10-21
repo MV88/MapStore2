@@ -12,7 +12,7 @@ const {editableWidget, hidableWidget, defaultIcons, withHeaderTools} = require('
 /**
  * enhancers for the text widget
  */
-module.exports = compose(
+export default compose(
     deleteWidget,
     editableWidget(),
     hidableWidget(),

@@ -27,4 +27,4 @@ class CellRenderer extends React.Component {
     }
 }
 
-module.exports = CellRenderer;
+export default CellRenderer;

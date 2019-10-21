@@ -77,7 +77,7 @@ const loadMoreStream = (initialStream$, loadMore$, loadPage, {dataProp = "items"
  * @param {function} loadPage the function that returns the stream. It must accept 2 params: `searchParams`, `page`.
  */
 
-module.exports = (loadPage = () => Rx.Observable.empty()) => mapPropsStream((props$) => {
+export default (loadPage = () => Rx.Observable.empty()) => mapPropsStream((props$) => {
     const { handler: onLoadMore, stream: loadMore$ } = createEventHandler();
     const { handler: loadFirst, stream: initialStream$ } = createEventHandler();
     return props$.combineLatest(loadMoreStream(

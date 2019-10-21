@@ -24,7 +24,7 @@ const StylePolyline = connect(symbolselector, {
 
 const ScaleDenominator = require("../../components/style/ScaleDenominator");
 
-module.exports = {
+export default {
     StylePolygon,
     StylePolyline,
     StylePoint,

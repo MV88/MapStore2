@@ -13,7 +13,7 @@ const useFiles = require('./dragZone/enhancers/useFiles');
 const dropZoneHandlers = require('./dragZone/enhancers/dropZoneHandlers');
 
 const { compose } = require('recompose');
-module.exports = compose(
+export default compose(
     processFiles,
     useFiles,
     dropZoneHandlers

@@ -24,4 +24,4 @@ class NumberFormat extends React.Component {
     }
 }
 
-module.exports = NumberFormat;
+export default NumberFormat;

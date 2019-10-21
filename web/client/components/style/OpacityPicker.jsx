@@ -47,4 +47,4 @@ class OpacityPicker extends React.Component {
     }
 }
 
-module.exports = OpacityPicker;
+export default OpacityPicker;

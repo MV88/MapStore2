@@ -85,4 +85,4 @@ class LineChartWrapper extends React.Component {
     }
 }
 
-module.exports = LineChartWrapper;
+export default LineChartWrapper;

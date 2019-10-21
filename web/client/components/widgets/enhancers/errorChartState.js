@@ -9,7 +9,7 @@ const getErrorMessage = (error = {}) => {
     return <Message msgId="widgets.errors.genericError" />;
 };
 
-module.exports = emptyState(
+export default emptyState(
     ({error}) => error,
     ({error, iconFit} = {}) => ({
         glyph: "warning-sign",

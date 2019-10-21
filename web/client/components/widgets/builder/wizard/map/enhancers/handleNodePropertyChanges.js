@@ -19,7 +19,7 @@ const { findIndex } = require('lodash');
  * These method will call the method `onChange` from props mapping accordingly
  * @prop {function} onChange callback with arguments : (path, value) -> path will be something like: `map.layers[2].title` or `map.groups[1].title`, `map[somethingElse]`
  */
-module.exports = withHandlers({
+export default withHandlers({
     /**
      * Changes the layer property
      */

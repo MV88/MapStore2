@@ -342,7 +342,7 @@ const StylerPlugin = connect(selector, {
     reset
 })(Styler);
 
-module.exports = {
+export default {
     StylerPlugin: assign( StylerPlugin,
         {
             Toolbar: {

@@ -85,7 +85,7 @@ class UserManager extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     UserManagerPlugin: assign(
         connect((state) => {
             let searchState = state && state.users;

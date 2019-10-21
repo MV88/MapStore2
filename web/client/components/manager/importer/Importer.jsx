@@ -258,4 +258,4 @@ class Importer extends React.Component {
     };
 }
 
-module.exports = Importer;
+export default Importer;

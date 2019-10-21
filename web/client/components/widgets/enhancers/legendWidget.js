@@ -17,7 +17,7 @@ const {getScales} = require('../../../utils/MapUtils');
  * map dependencies to layers, scales and current zoom level to show legend items for current zoom.
  * Add also base tools and menu to the widget
  */
-module.exports = compose(
+export default compose(
     withProps(({ dependencies = {}, dependenciesMap = {} }) => ({
         layers: dependencies[dependenciesMap.layers] || dependencies.layers || [],
         scales: getScales(

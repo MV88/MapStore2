@@ -194,4 +194,4 @@ class SymbolLayout extends React.Component {
     }
 }
 
-module.exports = SymbolLayout;
+export default SymbolLayout;

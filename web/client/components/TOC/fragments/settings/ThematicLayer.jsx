@@ -600,4 +600,4 @@ class ThematicLayer extends React.Component {
     };
 }
 
-module.exports = ThematicLayer;
+export default ThematicLayer;

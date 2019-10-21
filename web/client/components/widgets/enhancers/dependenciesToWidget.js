@@ -26,7 +26,7 @@ const buildDependencies = (map, deps) => map
  * return <EnhancedCmp dependenciesMap={dependenciesMap} dependencies={dependencies} />
  * // the enhancer will pass to the component dependencies={x: "b"}
  */
-module.exports = withProps(
+export default withProps(
     ({ dependencies, dependenciesMap }) => ({
         dependencies: dependenciesMap
             ? buildDependencies(dependenciesMap, dependencies)

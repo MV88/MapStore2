@@ -198,4 +198,4 @@ class Text extends React.Component {
     }
 }
 
-module.exports = Text;
+export default Text;

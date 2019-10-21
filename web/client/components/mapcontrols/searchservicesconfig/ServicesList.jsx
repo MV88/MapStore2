@@ -89,4 +89,4 @@ class ServicesList extends React.Component {
     };
 }
 
-module.exports = {Element: ServicesList, validate};
+export default {Element: ServicesList, validate};

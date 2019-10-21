@@ -9,7 +9,7 @@
 const Sidebar = require('./Sidebar');
 const SidebarHeader = require('./SidebarHeader');
 
-module.exports = {
+export default {
     Sidebar,
     SidebarHeader
 };

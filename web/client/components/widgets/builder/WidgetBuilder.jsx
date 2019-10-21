@@ -8,7 +8,7 @@
 const React = require('react');
 
 const ChartWizard = require('./wizard/ChartWizard');
-module.exports = ({
+export default ({
     step = 0,
     valid,
     onFinish = () => {},

@@ -39,7 +39,7 @@ const Builder = connect(
     },
     wizardStateToProps
 )(require('../../components/widgets/builder/wizard/TextWizard'));
-module.exports = ({ enabled, onClose = () => {}} = {}) =>
+export default ({ enabled, onClose = () => {}} = {}) =>
     (<BorderLayout
         header={<BuilderHeader onClose={onClose}><Toolbar /></BuilderHeader>}
     >

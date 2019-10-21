@@ -9,7 +9,7 @@ const {get, find} = require('lodash');
 /**
  * Utility function to get the original layer from "layers" dependency, then, get the "params" object.
  */
-module.exports = {
+export default {
     getDependencyLayerParams: (layer, dependencies) =>
         layer
             && layer.id

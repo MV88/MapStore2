@@ -71,6 +71,6 @@ const manageAutoMapUpdate = (action$, store) =>
  * @type {Object}
  */
 
-module.exports = {
+export default {
     manageAutoMapUpdate
 };

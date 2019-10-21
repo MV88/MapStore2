@@ -77,4 +77,4 @@ class DropDownEditor extends AttributeEditor {
     }
 }
 
-module.exports = DropDownEditor;
+export default DropDownEditor;

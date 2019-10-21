@@ -87,4 +87,4 @@ class Legend extends React.Component {
     }
 }
 
-module.exports = Legend;
+export default Legend;

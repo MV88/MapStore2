@@ -27,4 +27,4 @@ function cookie(state = {
     }
 }
 
-module.exports = cookie;
+export default cookie;

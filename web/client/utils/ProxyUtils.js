@@ -51,4 +51,4 @@ var ProxyUtils = {
         return proxyUrl;
     }
 };
-module.exports = ProxyUtils;
+export default ProxyUtils;

@@ -473,4 +473,4 @@ function layers(state = { flat: [] }, action) {
     }
 }
 
-module.exports = layers;
+export default layers;

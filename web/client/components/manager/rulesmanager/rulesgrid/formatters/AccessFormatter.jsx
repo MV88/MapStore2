@@ -15,7 +15,7 @@ const accessField = {
     }
 };
 
-module.exports = ({value = 'DENY', msClasses = accessField}) => (
+export default ({value = 'DENY', msClasses = accessField}) => (
     <div className={(msClasses[value] || {}).className || ''}>
         <div>
             {value.toUpperCase()}

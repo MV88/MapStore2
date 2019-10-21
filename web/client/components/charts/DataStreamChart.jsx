@@ -10,4 +10,4 @@ const React = require('react');
 const SimpleChart = require('./SimpleChart');
 
 const streamEnhancer = require('../misc/enhancers/propsStreamFactory');
-module.exports = streamEnhancer((props) => <SimpleChart {...props} />);
+export default streamEnhancer((props) => <SimpleChart {...props} />);

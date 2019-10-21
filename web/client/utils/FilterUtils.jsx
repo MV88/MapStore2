@@ -1002,4 +1002,4 @@ const FilterUtils = {
     isCrossLayerFilterValid
 };
 
-module.exports = FilterUtils;
+export default FilterUtils;

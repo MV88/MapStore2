@@ -72,7 +72,7 @@ const FeedbackMaskPlugin = compose(
         })
 )(() => null);
 
-module.exports = {
+export default {
     FeedbackMaskPlugin,
     reducers: {
         feedbackMask: require('../reducers/feedbackMask')

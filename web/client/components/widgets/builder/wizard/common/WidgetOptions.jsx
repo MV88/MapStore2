@@ -10,7 +10,7 @@ const {Row, Col, Form, FormGroup, ControlLabel, FormControl} = require('react-bo
 const Message = require('../../../../I18N/Message');
 const StepHeader = require('../../../../misc/wizard/StepHeader');
 
-module.exports = ({data = {}, onChange = () => {}, sampleChart}) => (<Row>
+export default ({data = {}, onChange = () => {}, sampleChart}) => (<Row>
     <StepHeader title={<Message msgId={`widgets.widgetOptionsTitle`} />} />
     <Col key="sample" xs={12}>
         <div style={{marginBottom: "30px"}}>

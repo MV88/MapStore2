@@ -1,6 +1,6 @@
 const {compose, withHandlers, withState, withProps} = require('recompose');
 
-module.exports = compose(
+export default compose(
     withProps(({ value }) => ({
         isValid: value !== ""
     })),

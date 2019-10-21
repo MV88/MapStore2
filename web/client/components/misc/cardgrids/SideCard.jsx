@@ -30,7 +30,7 @@ const React = require('react');
  * @prop {node}         tools           add a node to the right of card
  */
 
-module.exports = ({
+export default ({
     body,
     caption,
     className = '',

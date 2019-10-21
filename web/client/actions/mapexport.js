@@ -7,7 +7,7 @@
  */
 const EXPORT_MAP = "EXPORT::EXPORT_MAP";
 
-module.exports = {
+export default {
     EXPORT_MAP,
     exportMap: (format = "mapstore2") => ({ type: EXPORT_MAP, format})
 };

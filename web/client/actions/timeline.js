@@ -71,7 +71,7 @@ const setMapSync = mapSync => ({type: SET_MAP_SYNC, mapSync});
  * Actions for timeline
  * @module actions.timeline
  */
-module.exports = {
+export default {
     RANGE_CHANGED,
     onRangeChanged,
     SELECT_TIME,

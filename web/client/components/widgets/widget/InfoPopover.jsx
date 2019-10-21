@@ -91,4 +91,4 @@ class InfoPopover extends React.Component {
     }
 }
 
-module.exports = InfoPopover;
+export default InfoPopover;

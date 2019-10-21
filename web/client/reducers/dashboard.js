@@ -48,4 +48,4 @@ function dashboard(state = {}, action) {
         return state;
     }
 }
-module.exports = dashboard;
+export default dashboard;

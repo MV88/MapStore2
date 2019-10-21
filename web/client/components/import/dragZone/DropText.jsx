@@ -10,7 +10,7 @@ const {Button} = require('react-bootstrap');
 const Message = require('../../I18N/Message');
 const HTML = require('../../I18N/HTML');
 
-module.exports = ({
+export default ({
     openFileDialog
 }) => (<div>
     <HTML msgId="mapImport.dropZone.heading" />

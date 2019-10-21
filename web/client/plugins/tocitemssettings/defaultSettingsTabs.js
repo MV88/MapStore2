@@ -122,7 +122,7 @@ const getConfiguredPlugin = (plugin, loaded, loadingComp) => {
 
 let settingsPlugins;
 
-module.exports = ({showFeatureInfoTab = true, ...props}, {plugins, pluginsConfig, loadedPlugins}) => {
+export default ({showFeatureInfoTab = true, ...props}, {plugins, pluginsConfig, loadedPlugins}) => {
     if (!settingsPlugins) {
         settingsPlugins = assign({}, (PluginsUtils.getPluginItems({}, plugins, pluginsConfig, "TOC", props.id, true, loadedPlugins, (p) => p.container === 'TOCItemSettings') || [])
             .reduce((previous, p) => ({...previous, [p.name]: p}), {}));

@@ -25,4 +25,4 @@ class EmptyRowsView extends React.PureComponent {
     }
 }
 
-module.exports = EmptyRowsView;
+export default EmptyRowsView;

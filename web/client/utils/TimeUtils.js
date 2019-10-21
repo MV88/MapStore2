@@ -253,7 +253,7 @@ const domainsToDimensionsObject = ({ Domains = {} } = {}, url) => {
     }));
 };
 
-module.exports = {
+export default {
     getDateTimeFormat,
     getTimezoneOffsetMillis,
     domainsToDimensionsObject,

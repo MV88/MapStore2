@@ -47,7 +47,7 @@ const getMouseTile = (viewer, event) => {
     return viewer.scene.globe.pickTile(ray, scene);
 };
 
-module.exports = {
+export default {
     getMouseXYZ,
     getMouseTile
 };

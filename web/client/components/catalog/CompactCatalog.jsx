@@ -74,7 +74,7 @@ const scrollSpyOptions = {querySelector: ".ms2-border-layout-body", pageSize: PA
  * @prop {string} [searchText] the search text (if you want to control it)
  * @prop {function} [setSearchText] handler to get search text changes (if not defined, the component will control the text by it's own)
  */
-module.exports = compose(
+export default compose(
     withControllableState('searchText', "setSearchText", ""),
     withVirtualScroll({loadPage, scrollSpyOptions}),
     mapPropsStream( props$ =>

@@ -19,7 +19,7 @@ const propertyChange = (ns, propName, value) => `<${ns}:Property>`
  * @return {string}                     the XML for the update
  */
 const update = (wfsNs, typeName, content) => `<${wfsNs}:Update typeName="${typeName}">${Array.isArray(content) ? content.join("") : content}</wfs:Update>`;
-module.exports = {
+export default {
     update,
     propertyChange
 };

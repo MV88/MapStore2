@@ -73,4 +73,4 @@ class DashArray extends React.Component {
     }
 }
 
-module.exports = DashArray;
+export default DashArray;

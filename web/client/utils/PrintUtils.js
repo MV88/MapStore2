@@ -441,4 +441,4 @@ const PrintUtils = {
     }
 };
 
-module.exports = PrintUtils;
+export default PrintUtils;

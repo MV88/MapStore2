@@ -73,7 +73,7 @@ const LegendWidget = compose(
 /**
  * Renders proper widget by widgetType, binding props and methods
  */
-module.exports = ({
+export default ({
     dependencies,
     toggleCollapse = () => {},
     exportCSV = () => {},

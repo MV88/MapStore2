@@ -8,7 +8,7 @@
 const { createEventHandler, mapPropsStream } = require('recompose');
 const { getLayerCapabilities } = require('../../../../../../observables/wms');
 const Rx = require('rxjs');
-module.exports = mapPropsStream(props$ => {
+export default mapPropsStream(props$ => {
     const { stream: retrieveLayerData$, handler: retrieveLayerData} = createEventHandler();
     return props$
         .pluck('element')

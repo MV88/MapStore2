@@ -49,7 +49,7 @@ const getPlaybackRange = ({ startPlaybackTime, endPlaybackTime }) => {
 /**
  * Form div for settings of the playback
  */
-module.exports = ({
+export default ({
     following,
     frameDuration,
     timeStep,

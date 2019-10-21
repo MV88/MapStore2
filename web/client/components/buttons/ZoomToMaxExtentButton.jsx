@@ -124,4 +124,4 @@ class ZoomToMaxExtentButton extends React.Component {
     };
 }
 
-module.exports = ZoomToMaxExtentButton;
+export default ZoomToMaxExtentButton;

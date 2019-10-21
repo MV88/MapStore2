@@ -132,7 +132,7 @@ class Viewer extends React.Component {
 require('../../../components/map/cesium/plugins/index');
 
 // connect Redux store slice with map configuration
-module.exports = connect((state) => {
+export default connect((state) => {
     return {
         map: state.map || state.mapConfig && state.mapConfig.map,
         mapStateSource: state.map && state.map.mapStateSource,

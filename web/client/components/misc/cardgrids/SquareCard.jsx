@@ -31,4 +31,4 @@ const SquareCard = ({ disabled, selected, title, preview, previewSrc, onClick = 
     </div>
 );
 
-module.exports = SquareCard;
+export default SquareCard;

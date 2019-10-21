@@ -105,7 +105,7 @@ const getCurrentPaginationOptions = ({ startPage, endPage }, oldPages, size) => 
     return { startIndex: nPs[0] * size, maxFeatures: needPages * size };
 };
 
-module.exports = {
+export default {
     getAttributeFields,
     featureTypeToGridColumns: (
         describe,

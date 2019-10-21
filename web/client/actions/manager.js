@@ -15,6 +15,6 @@ function itemSelected(toolId) {
     };
 }
 
-module.exports = {
+export default {
     MANAGER_ITEM_SELECTED, itemSelected
 };

@@ -459,4 +459,4 @@ const PluginsUtils = {
     getPluginConfiguration,
     isMapStorePlugin
 };
-module.exports = PluginsUtils;
+export default PluginsUtils;

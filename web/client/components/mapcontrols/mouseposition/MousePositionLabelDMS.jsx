@@ -59,4 +59,4 @@ class MousePositionLabelDMS extends React.Component {
     }
 }
 
-module.exports = MousePositionLabelDMS;
+export default MousePositionLabelDMS;

@@ -28,7 +28,7 @@ const enhanceCounter = compose(
     emptyChartState
 );
 const React = require('react');
-module.exports = enhanceCounter(({ series = [], data = [], options = {}, style = {
+export default enhanceCounter(({ series = [], data = [], options = {}, style = {
     width: "100%",
     height: "100%",
     transform: "translate(-50%, -50%)",

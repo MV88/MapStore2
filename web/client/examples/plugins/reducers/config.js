@@ -22,4 +22,4 @@ function my(state = {}, action) {
     }
 }
 
-module.exports = my;
+export default my;

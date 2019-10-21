@@ -23,7 +23,7 @@ const HelpTextPanel = connect((state) => ({
     onClose: toggleControl.bind(null, 'help', null)
 })(require('../components/help/HelpTextPanel'));
 
-module.exports = {
+export default {
     HelpPlugin: assign(HelpTextPanel, {
         Toolbar: {
             name: 'help',

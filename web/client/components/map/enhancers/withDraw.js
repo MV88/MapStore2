@@ -24,7 +24,7 @@ const defaultDrawConnect = connect((state) =>
  * It's possible to pass a connect function to override default connection to state and action
  * @param {function} connectFunction connect function to override default connection of the draw tool.
  */
-module.exports = (connectFunction = defaultDrawConnect) => withPropsOnChange(
+export default (connectFunction = defaultDrawConnect) => withPropsOnChange(
     ['plugins'],
     ({plugins} = {}) => {
         const {DrawSupport, tools = {}, ...rest} = plugins;

@@ -14,7 +14,7 @@ const MapView = withHandlers({
 })(require('./MapView'));
 
 
-module.exports = ({
+export default ({
     updateProperty = () => { },
     toggleDeleteConfirm = () => { },
     id, title,

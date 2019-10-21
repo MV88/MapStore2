@@ -49,7 +49,7 @@ const updateLast2dMapTypeOnChangeEvents = (action$, store) => action$
  * @name epics.globeswitcher
  * @type {Object}
  */
-module.exports = {
+export default {
     updateRouteOn3dSwitch,
     updateLast2dMapTypeOnChangeEvents
 };

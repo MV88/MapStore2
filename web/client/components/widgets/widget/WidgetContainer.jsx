@@ -22,7 +22,7 @@ const ConfirmModal = require('../../maps/modals/ConfirmModal');
  * @prop {function} toggleDeleteConfirm method triggered on delete confirm
  * @prop {function} onDelete function to call when user confirms delete
  */
-module.exports = ({
+export default ({
     id,
     title,
     confirmDelete = false,

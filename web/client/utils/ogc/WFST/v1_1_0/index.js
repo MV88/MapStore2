@@ -9,7 +9,7 @@ const {transaction} = require('./transaction');
 const {insert} = require('./insert');
 const {update, property} = require('./update');
 const {deleteFeature, deleteFeaturesByFilter, deleteById} = require('./delete');
-module.exports = {
+export default {
     insert,
     update,
     property,

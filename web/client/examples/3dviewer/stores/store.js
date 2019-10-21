@@ -29,4 +29,4 @@ const reducers = combineReducers({
 let finalCreateStore = applyMiddleware(thunkMiddleware, epicMiddleware)(createStore);
 
 // export the store with the given reducers (and middleware applied)
-module.exports = finalCreateStore(reducers, {});
+export default finalCreateStore(reducers, {});

@@ -6,4 +6,4 @@
   * LICENSE file in the root directory of this source tree.
   */
 const React = require('react');
-module.exports = ({title} = {}) => <div className="sidebar-title"><h3 className="sidebar-title ">{title}</h3></div>;
+export default ({title} = {}) => <div className="sidebar-title"><h3 className="sidebar-title ">{title}</h3></div>;

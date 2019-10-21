@@ -184,7 +184,7 @@ function setMapResolutions(resolutions) {
  * Actions for map
  * @name actions.map
  */
-module.exports = {
+export default {
     CHANGE_MAP_VIEW,
     CLICK_ON_MAP,
     CHANGE_MOUSE_POINTER,

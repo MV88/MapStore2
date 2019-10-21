@@ -135,4 +135,4 @@ function search(state = null, action) {
     }
 }
 
-module.exports = search;
+export default search;

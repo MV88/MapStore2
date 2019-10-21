@@ -35,7 +35,7 @@ const standardEpics = {
     ...timeManagerEpics
 };
 
-module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, appEpics = {}, plugins = {}, storeOpts = {}) => {
+export default (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, appEpics = {}, plugins = {}, storeOpts = {}) => {
     const history = storeOpts.noRouter ? null : require('./History').default;
     const allReducers = combineReducers(plugins, {
         ...appReducers,

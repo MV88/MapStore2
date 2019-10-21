@@ -606,4 +606,4 @@ function annotations(state = { validationErrors: {} }, action) {
     }
 }
 
-module.exports = annotations;
+export default annotations;

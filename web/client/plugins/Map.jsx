@@ -76,11 +76,11 @@ let plugins;
  *            return null;
  *        }
  *    });
- *    module.exports = TestSupport;
+ *    export default TestSupport;
  * ```
  *  - include the tool(s) in the requires section of plugins.js amd give it a name:
  * ```
- *    module.exports = {
+ *    export default {
  *        plugins: {
  *            MapPlugin: require('../plugins/Map'),
  *            ...
@@ -421,7 +421,7 @@ const selector = createSelector(
         shouldLoadFont
     })
 );
-module.exports = {
+export default {
     MapPlugin: connect(selector, {
         onFontError: errorLoadingFont,
         onResolutionsChange: setMapResolutions

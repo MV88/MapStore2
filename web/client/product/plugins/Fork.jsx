@@ -17,6 +17,6 @@ class ForkPlugin extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     ForkPlugin
 };

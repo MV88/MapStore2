@@ -24,7 +24,7 @@ const {branch, withState} = require('recompose');
  * @param  {[type]} initialValue [description]
  * @return {[type]}              [description]
  */
-module.exports = (propName, handlerName, initialValue) =>
+export default (propName, handlerName, initialValue) =>
     branch(
         (props = {}) => !props[handlerName],
         withState(propName, handlerName, initialValue)

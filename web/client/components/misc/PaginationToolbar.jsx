@@ -71,4 +71,4 @@ class PaginationToolbar extends React.Component {
     }
 }
 
-module.exports = PaginationToolbar;
+export default PaginationToolbar;

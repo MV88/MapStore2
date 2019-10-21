@@ -85,4 +85,4 @@ class TextField extends React.Component {
     };
 }
 
-module.exports = TextField;
+export default TextField;

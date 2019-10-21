@@ -265,4 +265,4 @@ const Api = {
     }
 };
 
-module.exports = Api;
+export default Api;

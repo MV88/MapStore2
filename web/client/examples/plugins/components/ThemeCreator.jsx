@@ -94,4 +94,4 @@ class ThemeCreator extends React.Component {
     };
 }
 
-module.exports = ThemeCreator;
+export default ThemeCreator;

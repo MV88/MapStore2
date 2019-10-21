@@ -220,4 +220,4 @@ var Api = {
     reset: () => {}
 };
 
-module.exports = Api;
+export default Api;

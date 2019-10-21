@@ -56,4 +56,4 @@ function dashboards(state = {
     }
 }
 
-module.exports = dashboards;
+export default dashboards;

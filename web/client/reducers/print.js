@@ -132,4 +132,4 @@ function print(state = {spec: initialSpec, capabilities: null, map: null, isLoad
     }
 }
 
-module.exports = print;
+export default print;

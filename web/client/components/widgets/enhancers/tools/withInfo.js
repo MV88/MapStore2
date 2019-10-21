@@ -11,7 +11,7 @@ const { compose, withProps } = require('recompose');
  * Add widget info tool to show widget description.
  * Does not apply to text widgets, that already contains description
  */
-module.exports = () =>
+export default () =>
     compose(
         withProps(({ widgetTools = [], title, description, widgetType}) => ({
             widgetTools: !!description && widgetType !== "text"

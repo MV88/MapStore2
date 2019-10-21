@@ -176,4 +176,4 @@ const LocaleUtils = {
     getLocalizedProp: (locale, prop) => isObject(prop) ? prop[locale] || prop.default : prop || ''
 };
 
-module.exports = LocaleUtils;
+export default LocaleUtils;

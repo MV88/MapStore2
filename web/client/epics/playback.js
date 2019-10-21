@@ -160,7 +160,7 @@ const isOutOfRange = (time, { start, end } = {}) =>
     start && end && ( moment(time).isBefore(start) || moment(time).isAfter(end));
 
 
-module.exports = {
+export default {
     /**
      * When animation start, triggers the flow to retrieve the frames, buffering them:
      * The first setFrames will trigger the animation.

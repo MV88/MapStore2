@@ -23,6 +23,6 @@ const {get} = require('lodash');
  */
 const additionalLayersSelector = state => get(state, 'additionallayers') || [];
 
-module.exports = {
+export default {
     additionalLayersSelector
 };

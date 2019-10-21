@@ -39,7 +39,7 @@ require('./zoom/zoom.css');
 
 const assign = require('object-assign');
 
-module.exports = {
+export default {
     ZoomOutPlugin: assign(ZoomOutButton, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
         Toolbar: {

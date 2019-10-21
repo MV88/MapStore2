@@ -91,4 +91,4 @@ class StylePoint extends React.Component {
     }
 }
 
-module.exports = StylePoint;
+export default StylePoint;

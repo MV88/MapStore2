@@ -84,7 +84,7 @@ const { isAdminUserSelector } = require('../selectors/security');
  */
 
 
-module.exports = {
+export default {
     ThematicLayerPlugin: assign({
         loadPlugin: (resolve)=> {
             require.ensure(['../components/TOC/fragments/settings/ThematicLayer'], () => {

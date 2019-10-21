@@ -37,7 +37,7 @@ require('./zoom/zoom.css');
 const assign = require('object-assign');
 
 
-module.exports = {
+export default {
     ZoomInPlugin: assign(ZoomInButton, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
         Toolbar: {

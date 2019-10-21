@@ -88,4 +88,4 @@ class StringSelector extends React.Component {
     };
 }
 
-module.exports = StringSelector;
+export default StringSelector;

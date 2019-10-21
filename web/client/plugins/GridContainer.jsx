@@ -66,7 +66,7 @@ class GridContainer extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     GridContainerPlugin: GridContainer,
     reducers: {}
 };

@@ -83,4 +83,4 @@ class WizardComponent extends React.Component {
        );
    }
 }
-module.exports = WizardComponent;
+export default WizardComponent;

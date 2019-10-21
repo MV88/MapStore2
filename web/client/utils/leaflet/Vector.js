@@ -220,4 +220,4 @@ const VectorUtils = {
     }
 };
 
-module.exports = VectorUtils;
+export default VectorUtils;

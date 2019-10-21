@@ -112,7 +112,7 @@ const Plugin = connect(
     }
 
 )(SideBarComponent);
-module.exports = {
+export default {
     WidgetsBuilderPlugin: Plugin,
     epics: require('../epics/widgetsbuilder')
 };

@@ -69,4 +69,4 @@ class ColorRampSelector extends React.Component {
     }
 }
 
-module.exports = ColorRampSelector;
+export default ColorRampSelector;

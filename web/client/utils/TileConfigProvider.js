@@ -75,4 +75,4 @@ let TileConfigProvider = {
 };
 
 
-module.exports = TileConfigProvider;
+export default TileConfigProvider;

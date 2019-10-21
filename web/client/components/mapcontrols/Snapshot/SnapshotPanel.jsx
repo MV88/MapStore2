@@ -285,4 +285,4 @@ class SnapshotPanel extends React.Component {
     };
 }
 
-module.exports = SnapshotPanel;
+export default SnapshotPanel;

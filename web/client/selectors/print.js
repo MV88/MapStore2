@@ -6,7 +6,7 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-module.exports = {
+export default {
     currentLayouts: (state) => state.print && state.print.capabilities &&
         state.print.capabilities.layouts.filter((layout) => layout.name.indexOf(state.print.spec.sheet) === 0) || [],
     twoPageEnabled: (state) => state.print && state.print.spec && state.print.spec.includeLegend

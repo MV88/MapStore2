@@ -37,7 +37,7 @@ const EditorTitle = compose(
 )(StepHeader);
 
 
-module.exports = ({ preview, map = {}, onChange = () => { }, selectedNodes = [], onNodeSelect = () => { }, editNode, closeNodeEditor = () => { } }) => (<div>
+export default ({ preview, map = {}, onChange = () => { }, selectedNodes = [], onNodeSelect = () => { }, editNode, closeNodeEditor = () => { } }) => (<div>
     <StepHeader title={<Message msgId={`widgets.builder.wizard.configureMapOptions`} />} />
     <div key="sample" style={{marginTop: 10}}>
         <StepHeader title={<Message msgId={`widgets.builder.wizard.preview`} />} />

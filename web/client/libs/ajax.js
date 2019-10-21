@@ -154,4 +154,4 @@ axios.interceptors.response.use(response => response, (error) => {
     return Promise.reject(error.response ? {...error.response, originalError: error} : error);
 });
 
-module.exports = axios;
+export default axios;

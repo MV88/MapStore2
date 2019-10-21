@@ -119,4 +119,4 @@ class SaveModal extends React.Component {
     isValidForm = () => get(this.props.resource, "metadata.name");
 }
 
-module.exports = SaveModal;
+export default SaveModal;

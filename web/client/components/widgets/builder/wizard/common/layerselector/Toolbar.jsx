@@ -10,7 +10,7 @@ const React = require('react');
 
 const Toolbar = require('../../../../../misc/toolbar/Toolbar');
 
-module.exports = ({ canProceed, selected, stepButtons = [], onProceed = () => {}} = {}) => (<Toolbar btnDefaultProps={{
+export default ({ canProceed, selected, stepButtons = [], onProceed = () => {}} = {}) => (<Toolbar btnDefaultProps={{
     className: "square-button-md",
     bsStyle: "primary",
     bsSize: "sm"

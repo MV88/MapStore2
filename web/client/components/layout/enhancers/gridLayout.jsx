@@ -13,7 +13,7 @@ const ContainerDimensions = require('react-container-dimensions').default;
 /**
  * Width and height providers for react-grid-layout. Replace default.
  */
-module.exports = {
+export default {
     /**
      * widthProvider that checks the container size
      * Useful in widgets container for dashboard and map context.

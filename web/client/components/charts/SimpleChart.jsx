@@ -68,4 +68,4 @@ const SimpleChart = ({type = "line", tooltip = {}, legend = {}, autoColorOptions
     );
 };
 
-module.exports = SimpleChart;
+export default SimpleChart;

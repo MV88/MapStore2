@@ -155,4 +155,4 @@ const StyleTemplates = ({
     </BorderLayout>
 );
 
-module.exports = StyleTemplates;
+export default StyleTemplates;

@@ -84,7 +84,7 @@ const getActionsFromStepEpic = (action$) =>
  * @type {Object}
  */
 
-module.exports = {
+export default {
     closeTutorialEpic,
     switchTutorialEpic,
     getActionsFromStepEpic

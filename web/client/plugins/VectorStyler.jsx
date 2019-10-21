@@ -282,7 +282,7 @@ const VectorStylerPlugin = connect(selector, {
     setRuleParameter: setVectorRuleParameter
 })(VectorStyler);
 
-module.exports = {
+export default {
     VectorStylerPlugin: assign( VectorStylerPlugin,
         {
             Toolbar: {

@@ -166,4 +166,4 @@ const StyleToolbar = ({
     </div>
 );
 
-module.exports = StyleToolbar;
+export default StyleToolbar;

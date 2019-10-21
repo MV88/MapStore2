@@ -24,7 +24,7 @@ const {get} = require("lodash");
  * @memberof plugins
  */
 
-module.exports = {
+export default {
     DetailsPlugin: connect((state) => ({
         active: get(state, "controls.details.enabled"),
         map: mapFromIdSelector(state, mapIdSelector(state)),

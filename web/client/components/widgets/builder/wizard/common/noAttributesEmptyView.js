@@ -22,4 +22,4 @@ const noAttributes = (func) => emptyState(
         glyph: 'warning-sign'
     }
 );
-module.exports = noAttributes;
+export default noAttributes;

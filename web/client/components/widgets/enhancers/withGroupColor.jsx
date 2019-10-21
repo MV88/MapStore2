@@ -11,7 +11,7 @@ const getGroupColor = groups => get(head(groups, ({ color }) => color), 'color')
 /**
  * get the first color found in widget groups array.
  */
-module.exports = withProps(({ groups, showGroupColor, headerStyle = {borderTop: "3px solid rgba(0,0,0,0)", transition: "border-color .5s ease-out"} }) => ({
+export default withProps(({ groups, showGroupColor, headerStyle = {borderTop: "3px solid rgba(0,0,0,0)", transition: "border-color .5s ease-out"} }) => ({
     headerStyle: showGroupColor && groups && getGroupColor(groups)
         ? { ...headerStyle, borderTop: `3px solid ${getGroupColor(groups)}` }
         : headerStyle

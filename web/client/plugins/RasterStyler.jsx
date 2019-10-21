@@ -267,7 +267,7 @@ const RasterStylerPlugin = connect(selector, {
     changeLayerProperties: changeLayerProperties
 })(RasterStyler);
 
-module.exports = {
+export default {
     RasterStylerPlugin: assign( RasterStylerPlugin,
         {
             Toolbar: {

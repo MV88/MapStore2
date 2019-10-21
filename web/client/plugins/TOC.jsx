@@ -613,7 +613,7 @@ const API = {
     wmts: require('../api/WMTS')
 };
 
-module.exports = {
+export default {
     TOCPlugin: assign(TOCPlugin, {
         Toolbar: {
             name: 'toc',

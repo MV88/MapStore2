@@ -120,4 +120,4 @@ class ResizableGrid extends React.Component {
     };
 }
 
-module.exports = ResizableGrid;
+export default ResizableGrid;

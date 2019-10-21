@@ -9,7 +9,7 @@
 const MeasureComponent = require('../../components/mapcontrols/measure/MeasureComponent');
 const MeasureDialog = require('../../components/mapcontrols/measure/MeasureDialog');
 
-module.exports = {
+export default {
     MeasureComponent,
     MeasureDialog
 };

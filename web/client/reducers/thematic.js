@@ -102,4 +102,4 @@ function thematic(state = initialState, action) {
     }
 }
 
-module.exports = thematic;
+export default thematic;

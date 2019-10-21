@@ -99,4 +99,4 @@ const TOCUtils = {
 };
 
 
-module.exports = TOCUtils;
+export default TOCUtils;

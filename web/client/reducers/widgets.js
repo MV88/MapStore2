@@ -244,4 +244,4 @@ function widgetsReducer(state = emptyState, action) {
     }
 }
 
-module.exports = widgetsReducer;
+export default widgetsReducer;

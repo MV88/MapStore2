@@ -10,7 +10,7 @@ const Modal = require('../../misc/Modal');
 const Message = require('../../I18N/Message');
 const { Button } = require('react-bootstrap');
 
-module.exports = ({
+export default ({
     title = <Message msgId="warning" />,
     cancelText = <Message msgId="no" />,
     confirmText = <Message msgId="yes" />,

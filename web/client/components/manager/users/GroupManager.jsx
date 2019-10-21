@@ -51,4 +51,4 @@ class GroupManager extends React.Component {
 
 */
 
-module.exports = GroupManager;
+export default GroupManager;

@@ -14,7 +14,7 @@ const { optionsToVendorParams } = require('../VendorParamsUtils');
 const SecurityUtils = require('../SecurityUtils');
 const assign = require('object-assign');
 
-module.exports = {
+export default {
     /**
      * Creates the request object and it's metadata for WMS GetFeatureInfo.
      * @param {object} layer

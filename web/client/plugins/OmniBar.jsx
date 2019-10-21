@@ -62,7 +62,7 @@ class OmniBar extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     OmniBarPlugin: assign(OmniBar, {disablePluginIf: "{state('featuregridmode') === 'EDIT'}"}),
 
     reducers: {}

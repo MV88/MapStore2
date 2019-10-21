@@ -12,7 +12,7 @@ const {editableWidget, withHeaderTools, defaultIcons} = require('./tools');
  * enhancer that updates widget column size on resize. and add base icons and menus
  * Moreover enhances it to allow delete.
 */
-module.exports = compose(
+export default compose(
     withPropsOnChange(["gridEvents"], ({ gridEvents = {}, updateProperty = () => { } } = {}) => ({
         gridEvents: {
             ...gridEvents,

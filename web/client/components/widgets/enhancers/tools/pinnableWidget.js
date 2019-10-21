@@ -10,7 +10,7 @@ const {compose, withProps} = require('recompose');
 /**
  * Support widget locking. When locked, a widget becomes "static".
  */
-module.exports = () =>
+export default () =>
     compose(
         withProps(({ widgetTools = [], toolsOptions = {}, updateProperty = () => { }, dataGrid = {}}) => ({
             widgetTools: !!toolsOptions.showPin ? [

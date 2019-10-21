@@ -1,7 +1,7 @@
 const React = require('react');
 const {Button, Grid, Row, Col, Glyphicon} = require('react-bootstrap');
 
-module.exports = (props = {
+export default (props = {
     onDownloadToggle: () => {}
 }) => {
     return (<Grid className="bg-body data-grid-top-toolbar" fluid style={{width: "100%"}}>

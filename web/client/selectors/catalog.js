@@ -1,6 +1,6 @@
 const {get} = require('lodash');
 
-module.exports = {
+export default {
     groupSelector: (state) => get(state, "controls.metadataexplorer.group"),
     savingSelector: (state) => get(state, "catalog.saving"),
     resultSelector: (state) => get(state, "catalog.result"),

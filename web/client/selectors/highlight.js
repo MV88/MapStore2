@@ -48,7 +48,7 @@ const highlighedFeatures = createSelector(
     (featuresFiltered, featuresSelected) => [ ...featuresSelected, ...featuresFiltered]
 );
 
-module.exports = {
+export default {
     selectedFeatures, filteredFeatures, filteredSpatialObjectId, filteredSpatialObjectCrs, filteredspatialObjectCoord,
     filteredspatialObjectType, filteredGeometry, filteredspatialObject, highlighedFeatures
 };

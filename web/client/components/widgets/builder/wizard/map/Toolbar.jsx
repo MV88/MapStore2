@@ -17,7 +17,7 @@ const getSaveTooltipId = (step, { id } = {}) => {
     return "widgets.builder.wizard.addTheWidget";
 };
 
-module.exports = ({ step = 0, buttons, tocButtons = [], stepButtons = [], editorData = {}, setPage = () => { }, onFinish = () => { }, toggleLayerSelector = () => { } } = {}) => (<Toolbar btnDefaultProps={{
+export default ({ step = 0, buttons, tocButtons = [], stepButtons = [], editorData = {}, setPage = () => { }, onFinish = () => { }, toggleLayerSelector = () => { } } = {}) => (<Toolbar btnDefaultProps={{
     bsStyle: "primary",
     bsSize: "sm"
 }}

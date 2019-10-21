@@ -81,7 +81,7 @@ class Manager extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     ManagerPlugin: connect((state, ownProps) => ({
         selectedTool: ownProps.tool
     }),

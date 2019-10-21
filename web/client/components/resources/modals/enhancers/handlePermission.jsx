@@ -68,7 +68,7 @@ const manageLocalPermissionChanges = withStateHandlers(
     }
 );
 
-module.exports = ( API = GeoStoreDAO ) => compose(
+export default ( API = GeoStoreDAO ) => compose(
     retrieveGroups(API),
     retrievePermission(API),
     manageLocalPermissionChanges

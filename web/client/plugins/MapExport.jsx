@@ -68,7 +68,7 @@ const MapExport = enhanceExport(
     </Dialog>
 );
 
-module.exports = {
+export default {
     MapExportPlugin: assign(MapExport, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
         BurgerMenu: {

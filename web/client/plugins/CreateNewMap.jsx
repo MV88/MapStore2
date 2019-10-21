@@ -80,7 +80,7 @@ class CreateNewMap extends React.Component {
  * @prop {boolean} cfg.showNewGeostory show/hide th create new geostory button.
  * @prop {string[]} cfg.allowedRoles array of users roles allowed to create maps and/or dashboards. default: `["ADMIN", "USER"]`. Users that don't have these roles will never see the buttons.
  */
-module.exports = {
+export default {
     CreateNewMapPlugin: connect((state) => ({
         mapType: mapTypeSelector(state),
         isLoggedIn: state && state.security && state.security.user && state.security.user.enabled && !(state.browser && state.browser.mobile) && true || false,

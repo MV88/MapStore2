@@ -26,4 +26,4 @@ Loader.propTypes = {
     style: PropTypes.object
 };
 
-module.exports = Loader;
+export default Loader;

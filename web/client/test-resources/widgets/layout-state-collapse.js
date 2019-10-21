@@ -163,7 +163,7 @@ const changeLayoutAction = {
     target: 'floating'
 };
 
-module.exports = {
+export default {
     initialState,
     changeLayoutAction
 };

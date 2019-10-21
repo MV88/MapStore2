@@ -76,4 +76,4 @@ class Fill extends React.Component {
     }
 }
 
-module.exports = Fill;
+export default Fill;

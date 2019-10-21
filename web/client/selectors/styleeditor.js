@@ -188,7 +188,7 @@ const getAllStyles = (state) => {
     };
 };
 
-module.exports = {
+export default {
     temporaryIdSelector,
     templateIdSelector,
     statusStyleSelector,

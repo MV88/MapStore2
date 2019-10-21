@@ -46,7 +46,7 @@ const targetCollect = (connect, monitor) => ({
 });
 
 
-module.exports = branch(
+export default branch(
     ({isDraggable} = {}) => isDraggable,
     compose(
         dragSource('row', itemSource, sourceCollect),

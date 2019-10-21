@@ -35,4 +35,4 @@ function help(state = null, action) {
     }
 }
 
-module.exports = help;
+export default help;

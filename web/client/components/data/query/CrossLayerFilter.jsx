@@ -24,7 +24,7 @@ const isSameOGCServiceRoot = (origSearchUrl, {search, url} = {}) => isSameUrl(or
 // bbox make not sense with cross layer filter
 const getAllowedSpatialOperations = (spatialOperations) => (spatialOperations || []).filter( ({id} = {}) => id !== "BBOX");
 
-module.exports = ({
+export default ({
     crossLayerExpanded = true,
     spatialOperations,
     expandCrossLayerFilterPanel = () => {},

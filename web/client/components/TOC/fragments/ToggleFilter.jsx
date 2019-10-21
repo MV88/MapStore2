@@ -41,4 +41,4 @@ class ToggleFilter extends React.Component {
     }
 }
 
-module.exports = ToggleFilter;
+export default ToggleFilter;

@@ -18,7 +18,7 @@ const Cookie = connect((state) => ({
     onMoreDetails: setMoreDetailsVisibility
 })(require('../components/cookie/Cookie'));
 
-module.exports = {
+export default {
     CookiePlugin: Cookie,
     reducers: {cookie: require('../reducers/cookie')},
     epics: require('../epics/cookies')

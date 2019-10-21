@@ -63,7 +63,7 @@ const dataStreamFactory = ($props) =>
                     }).do(onLoadError)
                     ).startWith({loading: true})
         );
-module.exports = compose(
+export default compose(
     withProps( () => ({
         dataStreamFactory
     })),

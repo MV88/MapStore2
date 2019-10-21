@@ -56,4 +56,4 @@ function additionallayers(state = [], action) {
     }
 }
 
-module.exports = additionallayers;
+export default additionallayers;

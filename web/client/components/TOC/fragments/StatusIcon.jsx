@@ -37,4 +37,4 @@ class StatusIcon extends React.Component {
     }
 }
 
-module.exports = StatusIcon;
+export default StatusIcon;

@@ -321,4 +321,4 @@ class SimpleFilterField extends React.Component {
     };
 }
 
-module.exports = SimpleFilterField;
+export default SimpleFilterField;

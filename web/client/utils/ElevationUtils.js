@@ -44,7 +44,7 @@ const getValueAtXY = (ncols, tile, x, y, nodata = -9999) => {
     return null;
 };
 
-module.exports = {
+export default {
     /**
      * Loads and stores an elevation tile in application/bil16 format from the given url.
      * The original (x, y ,z) coordinates and a tile key are stored together with the tile.

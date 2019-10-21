@@ -70,7 +70,7 @@ const getFTSelectedArgs = (state) => {
     return [url, typeName];
 };
 
-module.exports = {
+export default {
 
     // Basic interactions with dashboard editor
     openDashboardWidgetEditor: (action$, {getState = () => {}} = {}) => action$.ofType(NEW, EDIT)

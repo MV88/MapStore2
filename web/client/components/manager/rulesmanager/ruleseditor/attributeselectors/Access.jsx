@@ -23,7 +23,7 @@ const AccessSelector = (props) => (
         </Col>
     </Row>);
 
-module.exports = compose(
+export default compose(
     defaultProps({
         size: 5,
         textField: "label",

@@ -95,4 +95,4 @@ class StyleDialog extends React.Component {
     }
 }
 
-module.exports = StyleDialog;
+export default StyleDialog;

@@ -67,7 +67,7 @@ const playbackEnhancer = compose(
     playbackButtons
 );
 
-module.exports = playbackEnhancer(({
+export default playbackEnhancer(({
     status,
     statusMap,
     play = () => {},

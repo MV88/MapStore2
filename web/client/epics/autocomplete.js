@@ -24,7 +24,7 @@ const {authkeyParamNameSelector} = require('../selectors/catalog');
     * @type {Object}
     */
 
-module.exports = {
+export default {
 
     isAutoCompleteEnabled: (action$, store) =>
         action$.ofType(FEATURE_TYPE_SELECTED)

@@ -65,4 +65,4 @@ class FeatureInfoFormatSelector extends React.Component {
     };
 }
 
-module.exports = FeatureInfoFormatSelector;
+export default FeatureInfoFormatSelector;

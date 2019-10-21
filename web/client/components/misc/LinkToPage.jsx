@@ -41,4 +41,4 @@ class LinkToPage extends React.Component {
     };
 }
 
-module.exports = LinkToPage;
+export default LinkToPage;

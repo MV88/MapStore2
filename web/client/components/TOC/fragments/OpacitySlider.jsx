@@ -58,4 +58,4 @@ class OpacitySlider extends React.Component {
 
 }
 
-module.exports = OpacitySlider;
+export default OpacitySlider;

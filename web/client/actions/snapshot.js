@@ -79,7 +79,7 @@ function saveImage(dataURL) {
     };
 }
 
-module.exports = {
+export default {
     CHANGE_SNAPSHOT_STATE,
     SNAPSHOT_ERROR,
     SNAPSHOT_READY,

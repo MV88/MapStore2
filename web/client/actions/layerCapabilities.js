@@ -80,6 +80,6 @@ function getLayerCapabilities(layer, options) {
     };
 }
 
-module.exports = {
+export default {
     getDescribeLayer, getLayerCapabilities
 };

@@ -104,4 +104,4 @@ class DownloadDialog extends React.Component {
     }
 }
 
-module.exports = DownloadDialog;
+export default DownloadDialog;

@@ -138,7 +138,7 @@ function changeMapPrintPreview(center, zoom, bbox, size, mapStateSource, project
     };
 }
 
-module.exports = {
+export default {
     PRINT_CAPABILITIES_LOADED,
     PRINT_CAPABILITIES_ERROR,
     SET_PRINT_PARAMETER,

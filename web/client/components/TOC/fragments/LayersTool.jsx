@@ -39,4 +39,4 @@ class LayersTool extends React.Component {
     }
 }
 
-module.exports = LayersTool;
+export default LayersTool;

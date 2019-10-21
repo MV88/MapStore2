@@ -40,7 +40,7 @@ const userParamsSelector = (state) => {
     };
 };
 
-module.exports = {
+export default {
     rulesSelector,
     userSelector,
     userParamsSelector,

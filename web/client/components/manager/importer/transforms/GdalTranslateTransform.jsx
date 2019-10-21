@@ -52,4 +52,4 @@ class GdalTranslateTransform extends React.Component {
     };
 }
 
-module.exports = GdalTranslateTransform;
+export default GdalTranslateTransform;

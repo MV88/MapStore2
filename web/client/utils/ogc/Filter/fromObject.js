@@ -33,4 +33,4 @@ const fromObject = (filterBuilder = {}) => ({type, filters = [], value, property
     return filterBuilder.property(property)[operators[type]](value);
 };
 
-module.exports = fromObject;
+export default fromObject;

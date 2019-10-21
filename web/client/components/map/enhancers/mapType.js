@@ -9,7 +9,7 @@ const { withPropsOnChange } = require("recompose");
  */
 
 
-module.exports = withPropsOnChange(
+export default withPropsOnChange(
     ['mapType', 'plugins'],
     ({mapType, plugins} = {}) => ({
         plugins: {...require('../plugins/' + mapType + '.js')(), ...plugins}

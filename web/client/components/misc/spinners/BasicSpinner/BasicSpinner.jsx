@@ -34,4 +34,4 @@ class BasicSpinner extends React.Component {
     }
 }
 
-module.exports = BasicSpinner;
+export default BasicSpinner;

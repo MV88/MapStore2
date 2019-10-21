@@ -57,4 +57,4 @@ class OverlayProgressBar extends React.Component {
     }
 }
 
-module.exports = OverlayProgressBar;
+export default OverlayProgressBar;

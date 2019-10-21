@@ -45,7 +45,7 @@ class Manager extends React.Component {
     }
 }
 
-module.exports = connect((state) => {
+export default connect((state) => {
     return {
         mode: 'desktop',
         messages: state.locale && state.locale.messages || {}

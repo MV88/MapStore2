@@ -17,7 +17,7 @@ const autoDisableWidgets = require('./widgets/autoDisableWidgets');
  * @prop {boolean|string|array} [toolsOptions.seeHidden] hides the widgets under particular conditions. **Must** be the same of rule of the Widget plugin. @see plugins.Widgets.
  * @class
  */
-module.exports = {
+export default {
     WidgetsTrayPlugin: autoDisableWidgets(WidgetsTray),
     epics: require('../epics/widgetsTray')
 };

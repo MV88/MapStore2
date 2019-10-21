@@ -27,7 +27,7 @@ const OverlayTrigger = require('../../misc/OverlayTrigger');
  * @memberof components.misc.enhancers
  *
 */
-module.exports = branch(
+export default branch(
     ({popover}) => popover,
     (Wrapped) =>
         class InfoPopover extends React.Component {

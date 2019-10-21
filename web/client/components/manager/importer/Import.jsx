@@ -168,4 +168,4 @@ class Task extends React.Component {
     };
 }
 
-module.exports = Task;
+export default Task;

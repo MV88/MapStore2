@@ -34,7 +34,7 @@ const AeronauticalCoordinate = decimalToAeronautical(({
  * Display coordinates in "decimal" or "aeronautical" formats.
  * TODO: maybe is better move formatting components in some common place.
  */
-module.exports = ({
+export default ({
     integerFormat = {style: "decimal", minimumIntegerDigits: 2, maximumFractionDigits: 0},
     decimalFormat = {style: "decimal", minimumIntegerDigits: 2, maximumFractionDigits: 4, minimumFractionDigits: 4},
     coordinate = {},

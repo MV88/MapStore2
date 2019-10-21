@@ -43,7 +43,7 @@ const dashboardSelector = createSelector(
         ...dependencyConnectProps
     }));
 
-module.exports = {
+export default {
     getWidgetLayer,
     availableDependenciesSelector,
     dashboardSelector,

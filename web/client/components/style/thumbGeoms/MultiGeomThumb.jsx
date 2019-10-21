@@ -97,4 +97,4 @@ class MultiGeomThumb extends React.Component {
     }
 }
 
-module.exports = MultiGeomThumb;
+export default MultiGeomThumb;

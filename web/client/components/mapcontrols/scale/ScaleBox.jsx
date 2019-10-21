@@ -87,4 +87,4 @@ class ScaleBox extends React.Component {
     }
 }
 
-module.exports = ScaleBox;
+export default ScaleBox;

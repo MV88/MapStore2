@@ -76,4 +76,4 @@ class ZoomButton extends React.Component {
     };
 }
 
-module.exports = ZoomButton;
+export default ZoomButton;

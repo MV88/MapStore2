@@ -19,7 +19,7 @@ const emptyFunc = () => {};
  * compose(debounce("onChangeDrawingStatus", 800));
  * the onChangeDrawingStatus action is debounced by 800 ms
  */
-module.exports = (action = "", debounceTime = 1000) => withHandlers((initProp = {}) => {
+export default (action = "", debounceTime = 1000) => withHandlers((initProp = {}) => {
     const debounced = debounce(initProp[action] || emptyFunc, debounceTime);
     return {
         [action]: () => debounced

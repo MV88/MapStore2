@@ -93,4 +93,4 @@ class ColorPickerRenderer extends React.Component {
     };
 }
 
-module.exports = ColorPickerRenderer;
+export default ColorPickerRenderer;

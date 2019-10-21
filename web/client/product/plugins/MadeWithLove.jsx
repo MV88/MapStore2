@@ -8,7 +8,7 @@
 
 const MadeWithLove = require('../components/viewer/MadeWithLove');
 
-module.exports = {
+export default {
     MadeWithLovePlugin: MadeWithLove,
     reducers: {}
 };

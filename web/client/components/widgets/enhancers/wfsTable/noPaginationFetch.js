@@ -12,7 +12,7 @@
  */
 const Rx = require('rxjs');
 const { getLayerJSONFeature } = require('../../../../observables/wfs');
-module.exports = props$ => props$.switchMap(
+export default props$ => props$.switchMap(
     ({
         layer = {},
         options = {},

@@ -269,4 +269,4 @@ class QueryToolbar extends React.Component {
     }
 }
 
-module.exports = QueryToolbar;
+export default QueryToolbar;

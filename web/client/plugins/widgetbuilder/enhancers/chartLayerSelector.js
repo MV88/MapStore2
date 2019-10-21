@@ -10,7 +10,7 @@ const { compose, defaultProps, withProps, setDisplayName } = require('recompose'
 const layerSelector = require('./layerSelector');
 const { onEditorChange } = require('../../../actions/widgets');
 const canGenerateCharts = require('../../../observables/widgets/canGenerateCharts');
-module.exports = compose(
+export default compose(
     setDisplayName('ChartLayerSelector'),
     connect(() => ({}), {
         onLayerChoice: (l) => onEditorChange("layer", l),

@@ -13,7 +13,7 @@ const {changeDrawingStatus} = require('../actions/draw');
 const {zoomToExtent} = require('../actions/map');
 const {CHANGE_SPATIAL_FILTER_VALUE} = require('../actions/queryform');
 
-module.exports = {
+export default {
     updateSpatialFilterValue: action$ =>
         action$.ofType(CHANGE_SPATIAL_FILTER_VALUE)
             .switchMap( ({feature, srsName, style, options}) => Observable.of(

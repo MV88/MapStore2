@@ -21,4 +21,4 @@ class RowRenderer extends React.Component {
 
 }
 
-module.exports = RowRenderer;
+export default RowRenderer;

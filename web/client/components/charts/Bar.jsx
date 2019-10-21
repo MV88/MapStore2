@@ -84,4 +84,4 @@ class BarChartWrapper extends React.Component {
         );
     }
 }
-module.exports = BarChartWrapper;
+export default BarChartWrapper;

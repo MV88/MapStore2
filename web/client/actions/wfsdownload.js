@@ -18,7 +18,7 @@ const FORMAT_OPTIONS_UPDATE = "WFSDOWNLOAD::FORMAT_UPDATE";
  * @name wfsdownload
  * @type {Object}
  */
-module.exports = {
+export default {
     DOWNLOAD_FEATURES,
     DOWNLOAD_OPTIONS_CHANGE,
     DOWNLOAD_FINISHED,

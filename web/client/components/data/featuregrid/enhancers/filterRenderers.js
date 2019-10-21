@@ -7,7 +7,7 @@
  */
 
 const {withState} = require('recompose');
-module.exports = {
+export default {
     manageFilterRendererState: withState("value", "onValueChange", event => {
         return event.value;
     })

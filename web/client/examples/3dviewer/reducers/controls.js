@@ -35,4 +35,4 @@ function controls(state = initialState, action) {
     }
 }
 
-module.exports = controls;
+export default controls;

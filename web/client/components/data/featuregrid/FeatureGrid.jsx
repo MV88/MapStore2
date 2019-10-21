@@ -96,4 +96,4 @@ class FeatureGrid extends React.PureComponent {
         />);
     }
 }
-module.exports = featuresToGrid(FeatureGrid);
+export default featuresToGrid(FeatureGrid);

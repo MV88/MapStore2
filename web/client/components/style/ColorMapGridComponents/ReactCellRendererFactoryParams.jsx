@@ -21,4 +21,4 @@ function reactCellRendererFactoryParams(ReactComponent, compParams) {
         return null;
     };
 }
-module.exports = reactCellRendererFactoryParams;
+export default reactCellRendererFactoryParams;

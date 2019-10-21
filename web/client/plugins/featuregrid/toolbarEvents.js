@@ -19,7 +19,7 @@ const {
 } = require('../../actions/widgets');
 const {toggleSyncWms} = require('../../actions/wfsquery');
 
-module.exports = {
+export default {
     createFeature: () => createNewFeatures([{}]),
     saveChanges: () => saveChanges(),
     clearFeatureEditing: () => toggleTool("clearConfirm", true),

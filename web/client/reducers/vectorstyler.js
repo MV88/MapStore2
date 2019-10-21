@@ -132,4 +132,4 @@ function vectorstyler(state = initialSpec, action) {
     }
 }
 
-module.exports = vectorstyler;
+export default vectorstyler;

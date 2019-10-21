@@ -63,4 +63,4 @@ class MarkerType extends React.Component {
 
 }
 
-module.exports = MarkerType;
+export default MarkerType;

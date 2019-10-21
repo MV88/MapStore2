@@ -35,4 +35,4 @@ class GlobalSpinner extends React.Component {
     }
 }
 
-module.exports = GlobalSpinner;
+export default GlobalSpinner;

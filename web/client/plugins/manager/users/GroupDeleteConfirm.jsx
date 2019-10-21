@@ -62,7 +62,7 @@ class GroupDeleteConfirm extends React.Component {
     }
 }
 
-module.exports = connect((state) => {
+export default connect((state) => {
     let groupsstate = state && state.usergroups;
     if (!groupsstate) return {};
     let groups = groupsstate && groupsstate.groups;

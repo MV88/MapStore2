@@ -13,7 +13,7 @@ const Portal = require("../../misc/Portal");
 const ResizableModal = require("../../misc/ResizableModal");
 const BorderLayout = require("../../layout/BorderLayout");
 
-module.exports = ({styles = [], selectedStyles = [], onSelectionChange = () => {}, show = false, stylesFilter = '', filterPlaceholder = "", onFilter = () => {}, onClose = () => {}}) => {
+export default ({styles = [], selectedStyles = [], onSelectionChange = () => {}, show = false, stylesFilter = '', filterPlaceholder = "", onFilter = () => {}, onClose = () => {}}) => {
     const filteredStyle = stylesFilter && stylesFilter.length > 0 && styles.filter(st => st.title.toLowerCase().match(stylesFilter && stylesFilter.toLowerCase())) || styles;
     return (
         <Portal>

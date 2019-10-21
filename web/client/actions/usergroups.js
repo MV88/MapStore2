@@ -323,7 +323,7 @@ function searchUsers(text = "*", start = 0, limit = 5, options = {}, jollyChar =
     };
 }
 
-module.exports = {
+export default {
     getUserGroups, GETGROUPS,
     editGroup, EDITGROUP,
     changeGroupMetadata, EDITGROUPDATA,

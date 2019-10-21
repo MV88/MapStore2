@@ -8,4 +8,4 @@
 
 const withContainer = require('./WithContainer');
 
-module.exports = withContainer(require('react-bootstrap').Overlay);
+export default withContainer(require('react-bootstrap').Overlay);

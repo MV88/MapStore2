@@ -94,7 +94,7 @@ const dataStreamFactory = prop$ => {
  * @return {HOC}         An HOC that replaces the prop string with localized string.
  */
 
-module.exports = compose(
+export default compose(
     defaultProps({
         clearable: true,
         emptySearch: "%",

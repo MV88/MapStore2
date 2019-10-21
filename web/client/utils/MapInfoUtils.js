@@ -236,4 +236,4 @@ const MapInfoUtils = {
     }
 };
 
-module.exports = MapInfoUtils;
+export default MapInfoUtils;

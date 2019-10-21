@@ -23,7 +23,7 @@ const {Glyphicon} = require('react-bootstrap');
  * @prop {node} revGeocodeDisplayName text/info displayed on modal
  */
 
-module.exports = ({latlng, enableRevGeocode, hideRevGeocode = () => {}, showModalReverse, revGeocodeDisplayName}) => {
+export default ({latlng, enableRevGeocode, hideRevGeocode = () => {}, showModalReverse, revGeocodeDisplayName}) => {
     return enableRevGeocode && latlng ? (
         <Portal>
             <ResizableModal

@@ -28,7 +28,7 @@ const insert = (fs, describeFeatureType) => '<wfs:Insert>'
     + `${features(fs.features || fs, describeFeatureType)}`
     + '</wfs:Insert>';
 
-module.exports = {
+export default {
     insert,
     feature
 };

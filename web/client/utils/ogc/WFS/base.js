@@ -68,7 +68,7 @@ const isValidProperty = ({geom, properties} = {}, pd) => isValidValue(isGeometry
  * @name WFS
  * @memberof utils.ogc
  */
-module.exports = {
+export default {
     schemaLocation,
     isGeometryType,
     /**

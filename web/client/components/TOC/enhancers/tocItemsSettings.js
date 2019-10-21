@@ -117,7 +117,7 @@ const settingsLifecycle = compose(
     })
 );
 
-module.exports = {
+export default {
     settingsState,
     settingsLifecycle,
     /**

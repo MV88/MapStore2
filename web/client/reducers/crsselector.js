@@ -12,4 +12,4 @@ function crsselector(state = {projections: []}, action) {
     }
 }
 
-module.exports = crsselector;
+export default crsselector;

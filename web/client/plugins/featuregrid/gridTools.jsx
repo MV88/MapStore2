@@ -5,7 +5,7 @@ const Message = require('../../components/I18N/Message');
 const {Glyphicon, Tooltip} = require('react-bootstrap');
 const OverlayTrigger = require('../../components/misc/OverlayTrigger');
 
-module.exports = [{
+export default [{
     name: '',
     key: "geometry",
     width: 35,

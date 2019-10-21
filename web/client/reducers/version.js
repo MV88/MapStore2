@@ -40,4 +40,4 @@ function version(state = null, action) {
     }
 }
 
-module.exports = version;
+export default version;

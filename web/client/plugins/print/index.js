@@ -149,7 +149,7 @@ const PrintPreview = connect((state) => ({
     setScale: setControlProperty.bind(null, 'print', 'viewScale')
 })(require('../../components/print/PrintPreview'));
 
-module.exports = {
+export default {
     Name,
     Description,
     Resolution,

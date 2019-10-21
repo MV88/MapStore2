@@ -32,4 +32,4 @@ class CustomTooltip extends React.Component {
     }
 }
 
-module.exports = CustomTooltip;
+export default CustomTooltip;

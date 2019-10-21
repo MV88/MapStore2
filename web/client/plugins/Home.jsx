@@ -18,7 +18,7 @@ const {Glyphicon} = require('react-bootstrap');
 
 const Home = require('../components/home/Home');
 
-module.exports = {
+export default {
     HomePlugin: assign(Home, {
         Toolbar: {
             name: 'home',

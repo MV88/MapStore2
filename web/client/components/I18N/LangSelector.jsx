@@ -50,4 +50,4 @@ class LangSelector extends React.Component {
     };
 }
 
-module.exports = LangSelector;
+export default LangSelector;

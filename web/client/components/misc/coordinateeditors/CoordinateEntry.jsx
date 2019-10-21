@@ -51,4 +51,4 @@ class CoordinateEntry extends React.Component {
     }
 }
 
-module.exports = no90Lat(CoordinateEntry); // TODO: remove no90Lat this when issue with coordinate 90 is fixed in annotations
+export default no90Lat(CoordinateEntry); // TODO: remove no90Lat this when issue with coordinate 90 is fixed in annotations

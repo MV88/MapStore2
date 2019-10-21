@@ -104,4 +104,4 @@ class FeatureInfoEditor extends React.Component {
     };
 }
 
-module.exports = FeatureInfoEditor;
+export default FeatureInfoEditor;

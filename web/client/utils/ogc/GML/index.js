@@ -159,7 +159,7 @@ const processOGCGeometry = (version, geometry) => {
     return ogc;
 };
 
-module.exports = {
+export default {
     closePolygon,
     pointElement,
     polygonElement,

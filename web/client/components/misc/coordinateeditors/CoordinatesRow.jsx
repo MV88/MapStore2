@@ -160,4 +160,4 @@ class CoordinatesRow extends React.Component {
     }
 }
 
-module.exports = draggableComponent(CoordinatesRow);
+export default draggableComponent(CoordinatesRow);

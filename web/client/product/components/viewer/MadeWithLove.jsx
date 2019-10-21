@@ -13,4 +13,4 @@ class MadeWithLove extends React.Component {
     }
 }
 
-module.exports = MadeWithLove;
+export default MadeWithLove;

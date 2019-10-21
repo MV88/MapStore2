@@ -46,4 +46,4 @@ const ResourceUnavailable = emptyState(
     })
 )(() => null);
 
-module.exports = ResourceUnavailable;
+export default ResourceUnavailable;

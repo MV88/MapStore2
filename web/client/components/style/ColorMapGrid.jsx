@@ -120,4 +120,4 @@ class ColorMapGrid extends React.Component {
     };
 }
 
-module.exports = ColorMapGrid;
+export default ColorMapGrid;

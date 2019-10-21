@@ -33,7 +33,7 @@ require('./background/background.css');
   * @prop {boolean} cfg.fluid container should be fluid, see {@link http://getbootstrap.com/css/#grid}
   *
   */
-module.exports = {
+export default {
     BackgroundSwitcherPlugin: assign(BackgroundSwitcherPlugin, {
         Toolbar: {
             name: 'backgroundswitcher',

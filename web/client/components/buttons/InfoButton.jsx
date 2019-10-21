@@ -114,4 +114,4 @@ class InfoButton extends React.Component {
     };
 }
 
-module.exports = InfoButton;
+export default InfoButton;

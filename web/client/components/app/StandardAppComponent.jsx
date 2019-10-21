@@ -79,4 +79,4 @@ class StandardAppComponent extends React.Component {
     }
 }
 
-module.exports = StandardAppComponent;
+export default StandardAppComponent;

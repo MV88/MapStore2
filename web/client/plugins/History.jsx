@@ -36,7 +36,7 @@ const RedoButton = connect((state) => {
     onClick: redo
 })(require('../components/mapcontrols/navigationhistory/RedoButton'));
 
-module.exports = {
+export default {
     UndoPlugin: assign(UndoButton, {
         Toolbar: {
             name: 'undo',

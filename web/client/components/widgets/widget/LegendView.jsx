@@ -12,7 +12,7 @@ const { Glyphicon, Grid, Row, Col} = require('react-bootstrap');
 const Slider = require('../../misc/Slider');
 const WMSLegend = require('../../TOC/fragments/WMSLegend');
 
-module.exports = ({
+export default ({
     layers = [],
     onChange = () => {},
     legendProps = {},

@@ -15,7 +15,7 @@ function setInputValue(value) {
     };
 }
 
-module.exports = {
+export default {
     CHANGE_CRS_INPUT_VALUE,
     setInputValue
 };

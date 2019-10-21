@@ -111,4 +111,4 @@ const WMTSUtils = {
 };
 
 
-module.exports = WMTSUtils;
+export default WMTSUtils;

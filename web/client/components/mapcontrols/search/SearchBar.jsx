@@ -529,4 +529,4 @@ class SearchBar extends React.Component {
     areValidCoordinates = () => (isNumber(this.props.coordinate.lon) && isNumber(this.props.coordinate.lat))
 }
 
-module.exports = SearchBar;
+export default SearchBar;

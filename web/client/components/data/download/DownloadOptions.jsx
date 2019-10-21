@@ -22,7 +22,7 @@ const Message = require('../../I18N/Message');
  * @prop {array} formats the selectable format options.
  * @prop {function} onChange the function to trigger when some option changes
  */
-module.exports = class extends React.Component {
+export default class extends React.Component {
     static propTypes = {
         downloadOptions: PropTypes.object,
         formatOptionsFetch: PropTypes.func,

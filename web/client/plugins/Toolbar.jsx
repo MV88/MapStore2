@@ -130,7 +130,7 @@ const toolbarSelector = stateSelector => createSelector([
     style
 }));
 
-module.exports = {
+export default {
     ToolbarPlugin: (stateSelector = 'toolbar') => connect(toolbarSelector(stateSelector))(Toolbar),
     reducers: {controls: require('../reducers/controls')}
 };

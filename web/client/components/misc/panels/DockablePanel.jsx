@@ -37,7 +37,7 @@ const Modal = renameProps({
     );
 });
 
-module.exports = branch(
+export default branch(
     ({dock}) => !dock,
     () => props => <Modal {...props}/>
 )(DockPanel);

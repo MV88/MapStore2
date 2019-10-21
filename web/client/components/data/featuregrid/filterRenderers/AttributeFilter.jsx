@@ -65,4 +65,4 @@ class AttributeFilter extends React.PureComponent {
     }
 }
 
-module.exports = AttributeFilter;
+export default AttributeFilter;

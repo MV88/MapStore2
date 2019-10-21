@@ -140,7 +140,7 @@ function verifySession() {
     };
 }
 
-module.exports = {
+export default {
     LOGIN_SUBMIT,
     CHANGE_PASSWORD,
     CHANGE_PASSWORD_SUCCESS,

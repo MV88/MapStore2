@@ -42,4 +42,4 @@ class ColorSelector extends React.Component {
     }
 }
 
-module.exports = ColorSelector;
+export default ColorSelector;

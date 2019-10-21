@@ -37,7 +37,7 @@ const LocatePlugin = connect((state) => ({
 
 require('./locate/locate.css');
 
-module.exports = {
+export default {
     LocatePlugin: assign(LocatePlugin, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
         Toolbar: {

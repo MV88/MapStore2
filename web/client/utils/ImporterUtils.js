@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     getbsStyleForState: function(state) {
         switch (state) {
         case "NO_FORMAT":

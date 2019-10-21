@@ -246,7 +246,7 @@ const toggleShowCoordinateEditor = (showCoordinateEditor) => ({
     showCoordinateEditor
 });
 
-module.exports = {
+export default {
     ERROR_FEATURE_INFO,
     EXCEPTIONS_FEATURE_INFO,
     LOAD_FEATURE_INFO,

@@ -43,4 +43,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         }
     });
 };
-module.exports = connect(mapStateToProps, mapDispatchToProps, mergeProps, {pure: false})(require('../../../components/manager/users/GroupGrid'));
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps, {pure: false})(require('../../../components/manager/users/GroupGrid'));

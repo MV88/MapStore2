@@ -205,7 +205,7 @@ const redrawSpatialFilterEpic = (action$, store) =>
   */
 
 
-module.exports = {
+export default {
     featureTypeSelectedEpic,
     wfsQueryEpic,
     redrawSpatialFilterEpic,

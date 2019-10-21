@@ -79,4 +79,4 @@ class RedoBtn extends React.Component {
     }
 }
 
-module.exports = RedoBtn;
+export default RedoBtn;

@@ -17,7 +17,7 @@ const exportableWidget = require('./exportableWidget');
 const collapsibleWidget = require('./collapsibleWidget');
 
 
-module.exports = {
+export default {
     withTools,
     pinnableWidget,
     hidableWidget,

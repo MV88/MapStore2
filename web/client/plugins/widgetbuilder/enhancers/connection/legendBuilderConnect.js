@@ -11,7 +11,7 @@ const { withProps, compose } = require('recompose');
  * Enhancer for MapBuilder to allow connection configuration.
  *
  */
-module.exports = compose(
+export default compose(
     withProps(({ availableDependencies = [], editorData = {}} = {}) => ({
         availableDependencies: availableDependencies.filter(d => !(editorData.id && d.indexOf(editorData.id) >= 0))
     })),

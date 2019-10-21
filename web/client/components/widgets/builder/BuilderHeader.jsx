@@ -15,7 +15,7 @@ const Message = require('../../I18N/Message');
  * @memberof components.widgets.builder
  * @prop {function} onClose
  */
-module.exports = ({onClose = () => {}, children} = {}) =>
+export default ({onClose = () => {}, children} = {}) =>
     (<div className="mapstore-flex-container">
         <div className="m-header bg-body widgets-builder-header">
             <Row>

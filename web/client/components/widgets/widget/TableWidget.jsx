@@ -17,7 +17,7 @@ const FeatureGrid = errorChartState(loadingState(({ describeFeatureType }) => !d
 
 const WidgetContainer = require('./WidgetContainer');
 
-module.exports = ({
+export default ({
     id,
     title,
     loading,

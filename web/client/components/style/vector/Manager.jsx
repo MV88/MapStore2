@@ -300,4 +300,4 @@ class Manager extends React.Component {
     }
 }
 
-module.exports = Manager;
+export default Manager;

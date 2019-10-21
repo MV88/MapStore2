@@ -69,7 +69,7 @@ const getDashboardWidgets = state => get(state, `widgets.containers[${DEFAULT_TA
 
 const isTrayEnabled = state => get(state, "widgets.tray");
 
-module.exports = {
+export default {
     getFloatingWidgets,
     getVisibleFloatingWidgets,
     getCollapsedState,

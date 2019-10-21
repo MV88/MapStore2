@@ -117,7 +117,7 @@ const panelDefaultProperties = {
     }
 };
 
-module.exports = {
+export default {
     getPanels: (tools = {}) =>
         Object.keys(tools)
             .filter(t => tools[t] && panels[t])

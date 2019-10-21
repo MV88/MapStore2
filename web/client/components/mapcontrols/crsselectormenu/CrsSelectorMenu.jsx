@@ -59,4 +59,4 @@ class CrsSelectorMenu extends React.Component {
 
 }
 
-module.exports = CrsSelectorMenu;
+export default CrsSelectorMenu;

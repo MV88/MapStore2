@@ -87,4 +87,4 @@ class RecordGrid extends React.Component {
     }
 }
 
-module.exports = RecordGrid;
+export default RecordGrid;

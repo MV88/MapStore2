@@ -9,7 +9,7 @@
 const {updateMapLayoutEpic} = require('../epics/maplayout');
 const {readQueryParamsOnMapEpic} = require('../epics/queryparams');
 
-module.exports = {
+export default {
     mode: "embedded",
     pages: [{
         name: "mapviewer",

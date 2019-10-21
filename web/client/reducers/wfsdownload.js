@@ -58,4 +58,4 @@ function wfsdownload( state = {downloadOptions: {singlePage: true}}, action) {
     }
 }
 
-module.exports = wfsdownload;
+export default wfsdownload;

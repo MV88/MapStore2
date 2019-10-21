@@ -68,7 +68,7 @@ const formats = [{
 }
 ];
 
-module.exports = {
+export default {
     formats,
     getByOutputFormat: (outF) => head(formats.filter(format => format.outputFormat === outF)) || getFormatByName(outF)
 };

@@ -380,4 +380,4 @@ class CesiumMap extends React.Component {
     };
 }
 
-module.exports = CesiumMap;
+export default CesiumMap;

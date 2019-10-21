@@ -140,4 +140,4 @@ MarkerUtils.markers = {
     'extra': MarkerUtils.extraMarkers
 };
 
-module.exports = MarkerUtils;
+export default MarkerUtils;

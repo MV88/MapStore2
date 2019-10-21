@@ -105,6 +105,6 @@ const identifyLifecycle = compose(
     })
 );
 
-module.exports = {
+export default {
     identifyLifecycle
 };

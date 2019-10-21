@@ -73,7 +73,7 @@ const selectedLayerParamsSelector = state => get(getLayerById(state, selectedLay
  * @memberof selectors
  * @static
  */
-module.exports = {
+export default {
     /**
    * selects the state of featuregrid open
    * @memberof selectors.featuregrid

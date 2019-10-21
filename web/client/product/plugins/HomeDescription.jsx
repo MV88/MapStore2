@@ -41,6 +41,6 @@ class HomeDescription extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     HomeDescriptionPlugin: HomeDescription
 };

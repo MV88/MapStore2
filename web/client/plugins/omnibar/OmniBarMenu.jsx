@@ -51,4 +51,4 @@ class OmniBarMenu extends React.Component {
     }
 }
 
-module.exports = connect()(OmniBarMenu);
+export default connect()(OmniBarMenu);

@@ -206,7 +206,7 @@ const multidimOptionsSelectorCreator = layerId => state => {
 
 };
 
-module.exports = {
+export default {
     isVisible,
     isCollapsed,
     currentTimeRangeSelector,

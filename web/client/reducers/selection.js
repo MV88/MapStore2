@@ -28,4 +28,4 @@ function selection(state = {
     }
 }
 
-module.exports = selection;
+export default selection;

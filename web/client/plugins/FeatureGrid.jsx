@@ -11,7 +11,7 @@ const {query, queryClose} = require('../actions/wfsquery');
 const {changeMapView} = require('../actions/map');
 const {toggleControl} = require('../actions/controls');
 
-module.exports = {
+export default {
     FeatureGridPlugin: connect((state) => ({
         open: state.query && state.query.open,
         exportEnabled: state && state.controls && state.controls.wfsdownload && state.controls.wfsdownload.available,

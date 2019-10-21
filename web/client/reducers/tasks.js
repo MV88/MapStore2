@@ -45,4 +45,4 @@ function tasks(state = {}, action) {
     }
 }
 
-module.exports = tasks;
+export default tasks;

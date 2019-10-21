@@ -104,4 +104,4 @@ class UserDetails extends React.Component {
     }
 }
 
-module.exports = UserDetails;
+export default UserDetails;

@@ -57,4 +57,4 @@ const SVGPreview = ({ type, patterns, paths, texts, backgroundColor = '#ffffff' 
         {texts && texts.map(({text, ...props}) => <text x="100" y="100" textAnchor="middle" alignmentBaseline="middle" {...props}>{text}</text>)}
     </svg>;
 
-module.exports = SVGPreview;
+export default SVGPreview;

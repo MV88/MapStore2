@@ -28,4 +28,4 @@ class DateFormat extends React.Component {
     }
 }
 
-module.exports = DateFormat;
+export default DateFormat;

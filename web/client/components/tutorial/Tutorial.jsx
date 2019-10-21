@@ -276,4 +276,4 @@ class Tutorial extends React.Component {
     }
 }
 
-module.exports = Tutorial;
+export default Tutorial;

@@ -7,7 +7,7 @@
  */
 const {connect} = require('react-redux');
 
-module.exports = connect((state) => ({
+export default connect((state) => ({
     locale: state.locale && state.locale.currentLocale,
     messages: state.locale && state.locale.messages || []
 }))(require('../../components/I18N/Message'));

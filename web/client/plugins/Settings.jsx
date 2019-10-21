@@ -176,7 +176,7 @@ const SettingsPlugin = connect((state) => ({
     toggleControl: toggleControl.bind(null, 'settings', null)
 })(SettingsButton);
 
-module.exports = {
+export default {
     SettingsPlugin: assign(SettingsPlugin, {
         Toolbar: {
             name: 'settings',

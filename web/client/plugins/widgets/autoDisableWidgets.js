@@ -25,4 +25,4 @@ const autoDisableWidgets = connect(
         })
     )
 );
-module.exports = autoDisableWidgets;
+export default autoDisableWidgets;

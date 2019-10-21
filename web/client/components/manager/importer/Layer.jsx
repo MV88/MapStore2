@@ -92,4 +92,4 @@ class Layer extends React.Component {
     };
 }
 
-module.exports = Layer;
+export default Layer;

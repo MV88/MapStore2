@@ -493,4 +493,4 @@ const CatalogUtils = {
 
     }
 };
-module.exports = CatalogUtils;
+export default CatalogUtils;

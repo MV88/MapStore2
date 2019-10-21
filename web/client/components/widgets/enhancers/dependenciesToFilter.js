@@ -23,7 +23,7 @@ const getLayerFilter = ({layerFilter} = {}) => layerFilter;
 /**
  * Merges filter object and dependencies map into an ogc filter
  */
-module.exports = compose(
+export default compose(
     withPropsOnChange(
         ({mapSync, geomProp, dependencies = {}, layer} = {}, nextProps = {}, filter) =>
             mapSync !== nextProps.mapSync

@@ -15,7 +15,7 @@ const hasTools = (tt = []) => tt.filter(isTool).length > 0;
 /**
  * Transforms widgetTools into leftItems for the widget.
  */
-module.exports = () =>
+export default () =>
     compose(
         withPropsOnChange(
             ['topLeftItems', 'widgetTools'],

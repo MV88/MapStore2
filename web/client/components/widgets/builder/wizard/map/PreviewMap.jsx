@@ -7,4 +7,4 @@
  */
 
 const previewMap = require('./enhancers/previewMap');
-module.exports = previewMap(require('../../../widget/MapView'));
+export default previewMap(require('../../../widget/MapView'));

@@ -72,7 +72,7 @@ const RulesDataGridPlugin = connect(
         // onUnmount: () => setEditorAvailable(false)
     }
 )(RulesDataGrid);
-module.exports = {
+export default {
     RulesDataGridPlugin,
     reducers: {rulesmanager: require('../reducers/rulesmanager')}
 };

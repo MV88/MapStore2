@@ -130,4 +130,4 @@ class Cookie extends React.Component {
         this.props.onSetCookieVisibility(false);
     }
 }
-module.exports = Cookie;
+export default Cookie;

@@ -28,4 +28,4 @@ const MetadataModal = connect(
         onNewPermissionChoose: setControlProperty.bind(null, 'permissionEditor', 'newPermission')
     }, null)(require('../../components/maps/modals/MetadataModal'));
 
-module.exports = MetadataModal;
+export default MetadataModal;

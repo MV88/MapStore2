@@ -13,7 +13,7 @@ const dataStreamFactory = prop$ => {
     return resetStream(prop$).startWith({busy: false});
 };
 
-module.exports = compose(
+export default compose(
     defaultProps({
         clearable: true,
         stopPropagation: true,

@@ -11,7 +11,7 @@ const drawSupportActiveSelector = (state) => {
     const drawStatus = get(state, "draw.drawStatus", false);
     return drawStatus && drawStatus !== 'clean' && drawStatus !== 'stop';
 };
-module.exports = {
+export default {
     drawSupportActiveSelector,
     changedGeometriesSelector
 };

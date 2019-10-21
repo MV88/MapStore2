@@ -36,7 +36,7 @@ const defaultViewerDefaultProps = defaultProps({
     validator: MapInfoUtils.getValidator
 });
 
-module.exports = {
+export default {
     defaultViewerHandlers,
     defaultViewerDefaultProps
 };

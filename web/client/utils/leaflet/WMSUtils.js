@@ -38,4 +38,4 @@ var WMSUtils = {
     }
 };
 
-module.exports = WMSUtils;
+export default WMSUtils;

@@ -163,4 +163,4 @@ class ConfirmButton extends React.Component {
     };
 }
 
-module.exports = ConfirmButton;
+export default ConfirmButton;

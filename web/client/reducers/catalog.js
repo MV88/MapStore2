@@ -214,4 +214,4 @@ function catalog(state = {
     }
 }
 
-module.exports = catalog;
+export default catalog;

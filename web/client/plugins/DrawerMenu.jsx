@@ -179,7 +179,7 @@ const DrawerMenuPlugin = connect((state) => ({
     toggleMenu: toggleControl.bind(null, 'drawer', null)
 })(DrawerMenu);
 
-module.exports = {
+export default {
     DrawerMenuPlugin: assign(DrawerMenuPlugin, {
         disablePluginIf: "{state('featuregridmode') === 'EDIT'}",
         FloatingLegend: {

@@ -620,4 +620,4 @@ const LayersUtils = {
     }
 };
 
-module.exports = LayersUtils;
+export default LayersUtils;

@@ -83,4 +83,4 @@ class SelectShape extends React.Component {
     };
 }
 
-module.exports = SelectShape;
+export default SelectShape;

@@ -11,7 +11,7 @@ const React = require('react');
 
 const ConfigUtils = require('../../utils/ConfigUtils');
 
-module.exports = (Component) => {
+export default (Component) => {
     return (props) => {
         return <Component {...props} container={document.querySelector('.' + (ConfigUtils.getConfigProp('themePrefix') || 'ms2') + " > div") || document.body}/>;
     };

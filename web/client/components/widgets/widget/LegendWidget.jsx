@@ -11,7 +11,7 @@ const emptyLegendState = require('../enhancers/emptyLegendState');
 
 const LegendView = emptyLegendState()(require('./LegendView'));
 
-module.exports = ({
+export default ({
     toggleDeleteConfirm = () => {},
     id, title,
     icons,

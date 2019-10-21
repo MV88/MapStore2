@@ -53,4 +53,4 @@ class MapViewer extends React.Component {
     }
 }
 
-module.exports = MapViewer;
+export default MapViewer;

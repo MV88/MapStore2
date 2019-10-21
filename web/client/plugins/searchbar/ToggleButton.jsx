@@ -28,7 +28,7 @@ class ToggleButton extends React.Component {
     }
 }
 
-module.exports = connect((state) => ({
+export default connect((state) => ({
     pressed: state.controls && state.controls.search && state.controls.search.enabled || false
 }), {
     onToggle: toggleControl.bind(null, 'search', null)

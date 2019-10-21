@@ -78,7 +78,7 @@ function toggleTutorial() {
     };
 }
 
-module.exports = {
+export default {
     START_TUTORIAL,
     INIT_TUTORIAL,
     SETUP_TUTORIAL,

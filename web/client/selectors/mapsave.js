@@ -24,4 +24,4 @@ const mapOptionsToSaveSelector = createStructuredSelector({
     }),
     mapInfoConfiguration: mapInfoConfigurationSelector
 });
-module.exports = {mapOptionsToSaveSelector};
+export default {mapOptionsToSaveSelector};

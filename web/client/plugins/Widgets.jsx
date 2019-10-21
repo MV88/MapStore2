@@ -139,7 +139,7 @@ class Widgets extends React.Component {
  */
 const WidgetsPlugin = autoDisableWidgets(Widgets);
 
-module.exports = {
+export default {
     WidgetsPlugin,
     reducers: {
         widgets: require('../reducers/widgets')

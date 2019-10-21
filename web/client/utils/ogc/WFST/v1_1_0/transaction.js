@@ -18,6 +18,6 @@ const transaction = (operations, schemaLocation) => '<wfs:Transaction '
     + `${schemaLocation}>`
     + `${operations.join("")}`
     + '</wfs:Transaction>';
-module.exports = {
+export default {
     transaction
 };

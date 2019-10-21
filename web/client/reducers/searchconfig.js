@@ -42,4 +42,4 @@ function searchconfig(state = null, action) {
     }
 }
 
-module.exports = searchconfig;
+export default searchconfig;

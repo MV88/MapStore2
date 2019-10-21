@@ -408,4 +408,4 @@ function importer(state = {}, action) {
     }
 }
 
-module.exports = importer;
+export default importer;

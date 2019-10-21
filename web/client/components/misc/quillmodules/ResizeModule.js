@@ -14,7 +14,7 @@ const IconAlignClear = '<span class="glyphicon glyphicon-remove" style="display:
 const iframeHeight = 200;
 require('./assets/css/resizemodule.css');
 
-module.exports = Quill => {
+export default Quill => {
 
     const Embed = Quill.import('blots/embed');
     const Link = Quill.import('formats/link');

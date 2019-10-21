@@ -71,7 +71,7 @@ const SearchBar = connect((state) => ({
     };
 })(require("../components/mapcontrols/search/SearchBar"));
 
-module.exports = {
+export default {
     MapSearchPlugin: SearchBar,
     reducers: {maps: require('../reducers/maps')}
 };

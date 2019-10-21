@@ -24,4 +24,4 @@ const mapConfigHistory = (reducer) => {
     };
 };
 
-module.exports = mapConfigHistory;
+export default mapConfigHistory;

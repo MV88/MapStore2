@@ -52,7 +52,7 @@ const loader = () => new Promise((resolve) => {
     });
 });
 
-module.exports = createPlugin(
+export default createPlugin(
     'ShapeFile',
     {
         lazy: true,

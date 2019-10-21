@@ -8,7 +8,7 @@
 const FilterUtils = require('./FilterUtils');
 
 
-module.exports = {
+export default {
     /**
      * Check layer options to manipulate and manage vendor params in case of GeoServer usage.
      * If you have a filterObj in options, this should be converted into a CQL_FILTER and joined with the existing cql filter, if any.

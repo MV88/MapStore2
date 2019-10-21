@@ -124,4 +124,4 @@ class GroupSettingsModal extends React.Component {
     };
 }
 
-module.exports = GroupSettingsModal;
+export default GroupSettingsModal;

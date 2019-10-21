@@ -26,7 +26,7 @@ const LayerSelector = (props) => (
         </Col>
     </Row>);
 
-module.exports = compose(
+export default compose(
     connect(() => ({}), {onError: error}),
     defaultProps({
         paginated: true,

@@ -39,7 +39,7 @@ require('../../../components/map/leaflet/plugins/OSMLayer');
 require('../../../components/map/leaflet/plugins/WMSLayer');
 
 // connect Redux store slice with map configuration
-module.exports = connect((state) => {
+export default connect((state) => {
     return {
         mapConfig: state.mapConfig
     };

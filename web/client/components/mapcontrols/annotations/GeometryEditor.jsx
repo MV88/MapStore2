@@ -65,4 +65,4 @@ class GeometryEditor extends React.Component {
 
 }
 
-module.exports = GeometryEditor;
+export default GeometryEditor;

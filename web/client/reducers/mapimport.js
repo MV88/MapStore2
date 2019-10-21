@@ -79,4 +79,4 @@ function mapimport(state = initialState, action) {
     }
 }
 
-module.exports = mapimport;
+export default mapimport;

@@ -48,4 +48,4 @@ class HelpToggleBtn extends React.Component {
     }
 }
 
-module.exports = HelpToggleBtn;
+export default HelpToggleBtn;

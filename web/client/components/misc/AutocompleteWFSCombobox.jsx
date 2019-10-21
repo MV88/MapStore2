@@ -145,6 +145,6 @@ const addStateHandlers = compose(
 
 const AutocompleteWFSCombobox = addStateHandlers(PagedWFSComboboxEnhanced);
 
-module.exports = {
+export default {
     AutocompleteWFSCombobox
 };

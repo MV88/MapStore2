@@ -333,7 +333,7 @@ function usersSearchTextChanged(text) {
     };
 }
 
-module.exports = {
+export default {
     getUsers, USERMANAGER_GETUSERS,
     editUser, USERMANAGER_EDIT_USER,
     changeUserMetadata, USERMANAGER_EDIT_USER_DATA,

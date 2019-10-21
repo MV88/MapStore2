@@ -71,4 +71,4 @@ class ConfirmDialog extends React.Component {
     }
 }
 
-module.exports = ConfirmDialog;
+export default ConfirmDialog;

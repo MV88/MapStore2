@@ -90,4 +90,4 @@ class Examples extends React.Component {
     }
 }
 
-module.exports = Examples;
+export default Examples;

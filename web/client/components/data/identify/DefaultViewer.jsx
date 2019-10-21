@@ -166,4 +166,4 @@ class DefaultViewer extends React.Component {
     }
 }
 
-module.exports = DefaultViewer;
+export default DefaultViewer;

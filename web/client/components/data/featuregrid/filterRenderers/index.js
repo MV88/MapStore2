@@ -21,7 +21,7 @@ const types = {
     "time": () => withProps(() =>({type: "time"}))(DateTimeFilter),
     "date-time": () => withProps(() =>({type: "date-time"}))(DateTimeFilter)
 };
-module.exports = {
+export default {
     getFilterRenderer: (type, props) => types[type] ? types[type](type, props) : types.defaultFilter(type, props),
     DefaultFilter,
     StringFilter,

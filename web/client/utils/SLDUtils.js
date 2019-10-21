@@ -241,7 +241,7 @@ const vecStyleToSLD = function({rules = [], layer = {}} = {}) {
     );
 };
 
-module.exports = {
+export default {
     jsonToSLD: jsonToSLD,
     vecStyleToSLD: vecStyleToSLD
 };

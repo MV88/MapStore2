@@ -8,6 +8,6 @@
 
 const {get} = require('lodash');
 
-module.exports = {
+export default {
     feedbackMaskSelector: state => get(state, 'feedbackMask', {})
 };

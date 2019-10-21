@@ -58,4 +58,4 @@ class GroupChildren extends React.Component {
     }
 }
 
-module.exports = GroupChildren;
+export default GroupChildren;

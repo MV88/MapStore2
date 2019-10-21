@@ -31,7 +31,7 @@ class EmptyGeostories extends React.Component {
             : null}</div>);
     }
 }
-module.exports = connect(
+export default connect(
     createSelector(isLoggedIn, (loggedIn) => ({
         loggedIn: !!loggedIn
     })),

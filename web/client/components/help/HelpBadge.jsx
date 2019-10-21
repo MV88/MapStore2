@@ -58,4 +58,4 @@ class HelpBadge extends React.Component {
     }
 }
 
-module.exports = HelpBadge;
+export default HelpBadge;

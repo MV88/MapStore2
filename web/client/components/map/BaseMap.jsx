@@ -146,4 +146,4 @@ class BaseMap extends React.Component {
         return null;
     }
 }
-module.exports = BaseMap;
+export default BaseMap;

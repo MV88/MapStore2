@@ -223,7 +223,7 @@ const API = {
  * @prop {number} cfg.zoomToLayer enable/disable zoom to layer when added
  * @prop {number} [delayAutoSearch] time in ms passed after a search is triggered by filter changes, default 1000
  */
-module.exports = {
+export default {
     MetadataExplorerPlugin: assign(MetadataExplorerPlugin, {
         Toolbar: {
             name: 'metadataexplorer',

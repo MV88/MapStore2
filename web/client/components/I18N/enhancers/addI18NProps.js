@@ -36,7 +36,7 @@ const defaults = {
  * @example
  * addI18NProps(['formatNumber'])(MyCmp); // MyCmp will receive `formatNumber` from current locale Intl object as a property
  */
-module.exports = (propsToAdd = []) => compose(
+export default (propsToAdd = []) => compose(
     // check intl and inject (or add default dummy object)
     getContext({intl: PropTypes.object}),
     branch(

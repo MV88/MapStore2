@@ -77,7 +77,7 @@ const grantUpdate = (update$) => update$.filter(({rule: r, origRule: oR}) => get
 // if priority and grant are the same we just need to update new rule
 const justUpdate = (update$) => update$.filter(({rule: r, origRule: oR}) => getUpdateType(oR, r) === 'simple')
     .switchMap(({rule}) => Rx.Observable.defer(() => GeoFence.updateRule(rule)));
-module.exports = {
+export default {
     loadRules: (pages = [], filters = {}, size) =>
         Rx.Observable.combineLatest(pages.map(p => loadSinglePage(p, filters, size)))
             .map(results => results.reduce( (acc, {page, rules}) => ({...acc, [page]: rules}), {}))

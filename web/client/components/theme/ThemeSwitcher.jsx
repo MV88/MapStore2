@@ -43,4 +43,4 @@ class ThemeSwitcher extends React.Component {
     }
 }
 
-module.exports = ThemeSwitcher;
+export default ThemeSwitcher;

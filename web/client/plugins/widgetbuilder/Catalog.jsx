@@ -8,7 +8,7 @@
 const React = require('react');
 const Message = require('../../components/I18N/Message');
 const {defaultProps} = require('recompose');
-module.exports =
+export default
     defaultProps({
         title: <Message msgId="widgets.builder.wizard.selectALayer" />
     })(require('../../components/catalog/CompactCatalog'));

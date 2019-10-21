@@ -19,7 +19,7 @@ const React = require('react');
  *  /></BorderLayout>
  *
  */
-module.exports = ({id, children, header, footer, columns, height, style = {}, className, bodyClassName = "ms2-border-layout-body"}) =>
+export default ({id, children, header, footer, columns, height, style = {}, className, bodyClassName = "ms2-border-layout-body"}) =>
     (<div id={id} className={className} style={{
         display: "flex",
         flexDirection: "column",

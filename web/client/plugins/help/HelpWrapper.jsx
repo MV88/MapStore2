@@ -9,7 +9,7 @@ const {connect} = require('react-redux');
 
 const {changeHelpwinVisibility, changeHelpText} = require('../../actions/help');
 
-module.exports = connect((state) => ({
+export default connect((state) => ({
     helpEnabled: state.controls && state.controls.help && state.controls.help.enabled
 }), {
     changeHelpText,

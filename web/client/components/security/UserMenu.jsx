@@ -117,4 +117,4 @@ class UserMenu extends React.Component {
     }
 }
 
-module.exports = UserMenu;
+export default UserMenu;

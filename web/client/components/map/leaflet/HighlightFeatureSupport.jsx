@@ -145,4 +145,4 @@ class HighlightFeatureSupport extends React.Component {
     };
 }
 
-module.exports = HighlightFeatureSupport;
+export default HighlightFeatureSupport;

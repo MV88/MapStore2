@@ -17,7 +17,7 @@ const {trayWidgets} = require('../../selectors/widgetsTray');
  * Button bar with the list of all the widgets to minimize/expand.
  * note: hides some widgets to user that do not have access too, using `filterHiddenWidgets` enhancer.
  */
-module.exports = compose(
+export default compose(
     connect(
         createSelector(
             trayWidgets,

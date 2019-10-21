@@ -57,4 +57,4 @@ class GroupTitle extends React.Component {
     }
 }
 
-module.exports = GroupTitle;
+export default GroupTitle;

@@ -19,7 +19,7 @@ const selector = createSelector(filterSelector, servicesSelector, (filter, servi
     services
 }));
 
-module.exports = compose(
+export default compose(
     connect(selector),
     defaultProps({
         size: 5,

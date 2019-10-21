@@ -10,4 +10,4 @@ const WMSUtils = {
     PARAM_OPTIONS: ["layers", "styles", "style", "format", "transparent", "version", "tiled", "opacity", "zindex", "srs", "singletile", "_v_", "filterobj" ]
 };
 
-module.exports = WMSUtils;
+export default WMSUtils;

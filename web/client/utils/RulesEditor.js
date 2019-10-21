@@ -29,4 +29,4 @@ const RulesEditorUtils = {
     checkIp
 };
 
-module.exports = RulesEditorUtils;
+export default RulesEditorUtils;

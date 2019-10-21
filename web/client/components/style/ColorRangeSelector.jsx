@@ -76,4 +76,4 @@ class ColorRangeSelector extends React.Component {
     }
 }
 
-module.exports = ColorRangeSelector;
+export default ColorRangeSelector;

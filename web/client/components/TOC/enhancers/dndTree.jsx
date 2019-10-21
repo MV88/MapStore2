@@ -59,4 +59,4 @@ const dndTree = branch(
     )
 );
 
-module.exports = dndTree;
+export default dndTree;

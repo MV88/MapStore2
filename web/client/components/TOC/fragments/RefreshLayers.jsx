@@ -102,4 +102,4 @@ class RefreshLayers extends React.Component {
     };
 }
 
-module.exports = RefreshLayers;
+export default RefreshLayers;

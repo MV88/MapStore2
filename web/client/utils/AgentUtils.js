@@ -348,4 +348,4 @@ const AgentUtils = {
 };
 
 
-module.exports = AgentUtils;
+export default AgentUtils;

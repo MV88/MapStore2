@@ -56,7 +56,7 @@ const getPropertyName = (name, describe) => name === "geometry" || name === getG
  * propertyChange("p", 2) // <Property><Name>p</Name><Value>2</Value></Property>
  * ```
  */
-module.exports = function(describe, {wfsVersion = "1.1.0", wfsNS = "wfs", ...other} = {}) {
+export default function(describe, {wfsVersion = "1.1.0", wfsNS = "wfs", ...other} = {}) {
     if (wfsVersion !== "1.1.0") {
         throw new WFSVersionNotSupportedException(wfsVersion);
     }

@@ -33,6 +33,6 @@ const wrapStartStop = (startAction, endAction, exceptionStream$) => stream$ =>
  * @module observables.epics
  */
 
-module.exports = {
+export default {
     wrapStartStop
 };

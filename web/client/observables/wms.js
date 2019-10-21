@@ -39,7 +39,7 @@ const getLayerCapabilities = l => Observable.defer(() => WMS.getCapabilities(Lay
     .let(interceptOGCError)
     .map(c => WMS.parseLayerCapabilities(c, l));
 
-module.exports = {
+export default {
     getLayerCapabilities,
     describeLayer,
     addSearch: l =>

@@ -29,4 +29,4 @@ const ControlledCombobox = addState(({ toggle, select, focus, change, value, bus
     />);
 });
 
-module.exports = ControlledCombobox;
+export default ControlledCombobox;

@@ -62,7 +62,7 @@ class UserDeleteConfirm extends React.Component {
     }
 }
 
-module.exports = connect((state) => {
+export default connect((state) => {
     let usersState = state && state.users;
     if (!usersState) return {};
     let users = usersState && usersState.users;

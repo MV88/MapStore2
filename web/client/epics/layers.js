@@ -148,7 +148,7 @@ const updateSettingsParamsEpic = (action$, store) =>
             );
         });
 
-module.exports = {
+export default {
     refresh,
     updateDimension,
     updateSettingsParamsEpic

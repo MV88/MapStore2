@@ -54,7 +54,7 @@ const SnapshotPlugin = connect((state) => ({
 })(require("../components/mapcontrols/Snapshot/SnapshotQueue"));
 
 
-module.exports = {
+export default {
     SnapshotPlugin: assign(SnapshotPlugin, {
         Toolbar: {
             name: 'snapshot',

@@ -88,7 +88,7 @@ const shortenLabel = (label, threshold = 1000, decimals = 1) => {
     return number;
 };
 
-module.exports = {
+export default {
     shortenLabel,
     getWidgetDependency,
     getConnectionList,

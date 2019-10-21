@@ -23,7 +23,7 @@ const autoMapUpdateSelector = createSelector([
     count: (layers.length - refreshing.length) + 1 || 0
 }));
 
-module.exports = {
+export default {
     getWMSLayers,
     refreshingLayers,
     autoMapUpdateSelector,

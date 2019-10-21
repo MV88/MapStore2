@@ -56,4 +56,4 @@ class LangBar extends React.Component {
     };
 }
 
-module.exports = LangBar;
+export default LangBar;

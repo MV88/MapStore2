@@ -128,4 +128,4 @@ class Feature extends React.Component {
     }
 }
 
-module.exports = Feature;
+export default Feature;

@@ -10,7 +10,7 @@ const {connect} = require('react-redux');
 const { onEditorChange } = require('../../actions/widgets');
 const { normalizeMap } = require('../../utils/LayersUtils');
 const MapSelector = require('../../components/widgets/builder/wizard/map/MapSelector').default;
-module.exports = compose(
+export default compose(
     connect(
         () => ({}), {
             onMapSelected: ({ map }) => onEditorChange("map", normalizeMap(map)),

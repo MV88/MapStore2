@@ -115,4 +115,4 @@ function styleeditor(state = {}, action) {
     }
 }
 
-module.exports = styleeditor;
+export default styleeditor;

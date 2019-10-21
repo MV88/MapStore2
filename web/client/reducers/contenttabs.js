@@ -20,4 +20,4 @@ function contenttabs(state = {selected: "maps"}, action) {
     }
 }
 
-module.exports = contenttabs;
+export default contenttabs;

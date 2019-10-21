@@ -61,4 +61,4 @@ class PreviewList extends React.Component {
     }
 }
 
-module.exports = PreviewList;
+export default PreviewList;

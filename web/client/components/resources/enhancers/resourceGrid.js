@@ -86,4 +86,4 @@ const resourceGrid = compose(
     })
 );
 
-module.exports = resourceGrid;
+export default resourceGrid;

@@ -91,7 +91,7 @@ const initCatalogOnLoginOutEpic = (action$) =>
  * @name epics.login
  * @type {Object}
  */
-module.exports = {
+export default {
     refreshTokenEpic,
     reloadMapConfig,
     promptLoginOnMapError,

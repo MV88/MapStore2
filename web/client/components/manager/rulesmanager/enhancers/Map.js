@@ -22,7 +22,7 @@ const defaultBaseLayer = {
 };
 
 
-module.exports = compose(
+export default compose(
     defaultProps({
         onMapReady: () => {},
         baseLayer: defaultBaseLayer

@@ -23,7 +23,7 @@ const Message = require("../I18N/Message");
  * @param  {number} [pageSize] size of page
  * @param  {function} [onLoadMore] return next page
  */
-module.exports = ({items = [], total = 0, loading, skip = 0, pageSize = 4, onLoadMore = () => {}}) => (
+export default ({items = [], total = 0, loading, skip = 0, pageSize = 4, onLoadMore = () => {}}) => (
     <Row className="ms-show-more">
         <Col
             xs={12}

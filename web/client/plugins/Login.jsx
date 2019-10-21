@@ -52,7 +52,7 @@ class LoginTool extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     LoginPlugin: assign(LoginTool, {
         OmniBar: {
             name: "login",

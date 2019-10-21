@@ -27,4 +27,4 @@ function maptype(state = {mapType: "leaflet"}, action) {
     }
 }
 
-module.exports = maptype;
+export default maptype;

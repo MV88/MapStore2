@@ -20,7 +20,7 @@ const getType = ({localPart, prefix}) => {
     || parseLocalPart[localPart] || localPart || '';
 };
 
-module.exports = function(CodeMirror) {
+export default function(CodeMirror) {
     const {Pos: codeMirrorPos} = CodeMirror;
 
     CodeMirror.registerHelper('hint', 'geocss', function(cm) {

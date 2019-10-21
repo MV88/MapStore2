@@ -127,4 +127,4 @@ class BandSelector extends React.Component {
     }
 }
 
-module.exports = BandSelector;
+export default BandSelector;

@@ -22,7 +22,7 @@ const ContainerDimensions = require('react-container-dimensions').default;
  * @param  {props} props The props to pass to the ResizableGrid
  * @return {[type]}       [description]
  */
-module.exports = (props) => (<ContainerDimensions>
+export default (props) => (<ContainerDimensions>
     { ({ width, height }) =>
         <div className={props.className}>
             <Grid

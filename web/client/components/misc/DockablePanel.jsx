@@ -110,4 +110,4 @@ class DockablePanel extends React.Component {
     };
 }
 
-module.exports = DockablePanel;
+export default DockablePanel;

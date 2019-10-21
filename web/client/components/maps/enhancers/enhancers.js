@@ -104,7 +104,7 @@ const withEmptyMapVirtualScroll = compose(
     withVirtualScroll(withEmptyMapVirtualScrollProperties({ loadPage: loadPage, scrollSpyOptions, hasMore: ({ total, items = [] } = {}) => total > items.length })),
     withProps(({ items }) => ({ skip: items && items[0] && items[0].id === "EMPTY_MAP" ? 1 : 0}))
 );
-module.exports = {
+export default {
     // manage local search text
     withSearchTextState: withControllableState('searchText', "setSearchText", ""),
     // add virtual virtual scroll running loadPage stream to get data

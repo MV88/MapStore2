@@ -19,7 +19,7 @@ const errorMessage = error => {
     return <Message msgId={DEFAULT_MESSAGES[code] || ("Error:" + errorString(error))} msgParams={errorData(error)} />;
 };
 
-module.exports = ({ errors = []}) => {
+export default ({ errors = []}) => {
     return (<Row>
         {errors.length > 0 ?
             <div className="dropzone-errorBox alert-danger">

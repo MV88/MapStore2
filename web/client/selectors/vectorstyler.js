@@ -16,7 +16,7 @@ const symbolselector = createSelector([ruleselctor],
         shapeStyle: rule && rule.symbol || {}
     }));
 
-module.exports = {
+export default {
     ruleselctor,
     symbolselector
 };

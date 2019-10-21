@@ -10,7 +10,7 @@ const {compose, withProps} = require('recompose');
 /**
  * Support widget collapse function, adding the collapse button to the tools. @see withIcons
  */
-module.exports = () =>
+export default () =>
     compose(
         withProps(({ widgetTools = [], dataGrid = {}, toggleCollapse = () => {}, toolsOptions = {}}) => ({
             widgetTools: !!toolsOptions.showCollapse ? [

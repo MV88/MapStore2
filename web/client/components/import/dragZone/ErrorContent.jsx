@@ -20,7 +20,7 @@ const toErrorMessage = error =>
         || <span><Message msgId="mapImport.errors.unknownError" />:<Alert bsStyle="warning">{error.message}</Alert></span>
         : <Message msgId="mapImport.errors.unknownError" />;
 
-module.exports = ({ error, ...props }) => (<div style={{
+export default ({ error, ...props }) => (<div style={{
     margin: 'auto',
     maxWidth: 550
 }}>

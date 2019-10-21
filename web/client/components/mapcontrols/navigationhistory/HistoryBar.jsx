@@ -73,4 +73,4 @@ class HistoryBar extends React.Component {
     };
 }
 
-module.exports = HistoryBar;
+export default HistoryBar;

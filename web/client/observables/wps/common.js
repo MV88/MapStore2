@@ -9,7 +9,7 @@
 const url = require('url');
 const {endsWith} = require('lodash');
 
-module.exports = {
+export default {
     getWPSURL: (urlToParse, options) => {
         if (urlToParse) {
             const parsed = url.parse(urlToParse, true);

@@ -44,4 +44,4 @@ class HelpWrapper extends React.Component {
     }
 }
 
-module.exports = HelpWrapper;
+export default HelpWrapper;

@@ -15,7 +15,7 @@ const NavItem = tooltip(BSNavItem);
 /**
  * Provides a node (layer or group) property editor for the TOC
  */
-module.exports = ({
+export default ({
     settings, element = {}, tabs = [], activeTab, width, groups,
     setActiveTab = () => { }, onUpdateParams = () => { }, onRetrieveLayerData = () => { }, realtimeUpdate, ...props} = {}) =>
     (<Row key="ms-toc-settings-navbar" className="ms-row-tab">

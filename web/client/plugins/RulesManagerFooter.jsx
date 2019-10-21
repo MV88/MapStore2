@@ -41,7 +41,7 @@ class RulesManagerFooter extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     RulesManagerFooterPlugin: connect(({rulesmanager}) => ({loading: rulesmanager.loading}))(RulesManagerFooter),
     reducers: {}
 };

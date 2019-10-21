@@ -211,4 +211,4 @@ class QueryBuilder extends React.Component {
     }
 }
 
-module.exports = QueryBuilder;
+export default QueryBuilder;

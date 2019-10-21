@@ -11,4 +11,4 @@ const {withState} = require('recompose');
  * manage state confirm delete.
  * Can be applied to a widget inside `WidgetContainer` to allow toggle delete confirmation.
  */
-module.exports = withState('confirmDelete', 'toggleDeleteConfirm', false);
+export default withState('confirmDelete', 'toggleDeleteConfirm', false);

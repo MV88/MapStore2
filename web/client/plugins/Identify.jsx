@@ -219,7 +219,7 @@ const FeatureInfoFormatSelector = connect((state) => ({
     onInfoFormatChange: changeMapInfoFormat
 })(require("../components/misc/FeatureInfoFormatSelector"));
 
-module.exports = {
+export default {
     IdentifyPlugin: assign(IdentifyPlugin, {
         Toolbar: {
             name: 'info',

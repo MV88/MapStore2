@@ -23,4 +23,4 @@ class TextViewer extends React.Component {
     }
 }
 
-module.exports = TextViewer;
+export default TextViewer;

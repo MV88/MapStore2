@@ -17,7 +17,7 @@ function changeSelectionState(selectionState) {
     };
 }
 
-module.exports = {
+export default {
     CHANGE_SELECTION_STATE,
     changeSelectionState
 };

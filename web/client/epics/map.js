@@ -214,7 +214,7 @@ const checkMapPermissions = (action$, {getState = () => {} }) =>
             return loadMapInfo(ConfigUtils.getConfigProp("geoStoreUrl") + "extjs/resource/" + mapId, mapId);
         });
 
-module.exports = {
+export default {
     checkMapPermissions,
     handleCreationLayerError,
     handleCreationBackgroundError,

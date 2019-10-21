@@ -80,4 +80,4 @@ class DataGrid extends Grid {
     }
 }
 
-module.exports = DataGrid;
+export default DataGrid;

@@ -103,4 +103,4 @@ class PropertiesViewer extends React.Component {
     };
 }
 
-module.exports = PropertiesViewer;
+export default PropertiesViewer;

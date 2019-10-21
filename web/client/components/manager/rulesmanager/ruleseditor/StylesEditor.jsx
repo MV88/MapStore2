@@ -21,7 +21,7 @@ const getAvailables = (styles, {allowedStyles = {}}) => {
     return styles.filter(s => allow.indexOf(s.name) !== -1);
 };
 
-module.exports = enhancer(({styles = [], constraints = {}, setOption = () => {}, active = false, toggleModal = () => {}, modal}) => {
+export default enhancer(({styles = [], constraints = {}, setOption = () => {}, active = false, toggleModal = () => {}, modal}) => {
     return (
         <div style={{position: "relative"}}>
             <Grid className="ms-rule-editor" fluid style={{top: 0, bottom: 60, position: "absolute", width: '100%', display: active ? 'block' : 'none'}}>

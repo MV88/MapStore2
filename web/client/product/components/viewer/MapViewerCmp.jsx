@@ -75,4 +75,4 @@ class MapViewerComponent extends React.Component {
     }
 }
 
-module.exports = MapViewerComponent;
+export default MapViewerComponent;

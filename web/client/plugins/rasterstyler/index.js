@@ -53,7 +53,7 @@ const PseudoColor = connect((state) => { return state.rasterstyler.pseudocolor |
         onChange: setRasterStyleParameter.bind(null, 'pseudocolor')
     })(require('../../components/style/PseudoColorSettings'));
 
-module.exports = {
+export default {
     RedBandSelector,
     BlueBandSelector,
     GreenBandSelector,

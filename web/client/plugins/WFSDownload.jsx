@@ -42,7 +42,7 @@ const DownloadDialog = require('../components/data/download/DownloadDialog');
  *  }
  * }
  */
-module.exports = {
+export default {
     WFSDownloadPlugin: connect(createSelector(
         wfsURL,
         wfsFilter,

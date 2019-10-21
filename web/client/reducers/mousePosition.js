@@ -33,4 +33,4 @@ function mousePosition(state = {enabled: true, position: null, crs: null}, actio
     }
 }
 
-module.exports = mousePosition;
+export default mousePosition;

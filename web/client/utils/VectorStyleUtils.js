@@ -334,7 +334,7 @@ const getStyleParser = (format = 'sld') => {
     return StyleParsers[format];
 };
 
-module.exports = {
+export default {
     getGeometryFunction,
     SymbolsStyles,
     registerStyle,

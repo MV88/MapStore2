@@ -24,7 +24,7 @@ const ResizeObserver = require('resize-observer-polyfill').default;
  * <Cmp onResize={() => console.log("Resized")} />;
  *
  */
-module.exports = ({
+export default ({
     debounceTime,
     querySelector,
     closest = false

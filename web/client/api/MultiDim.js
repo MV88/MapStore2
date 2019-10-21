@@ -123,7 +123,7 @@ const getDomainValues = (url, layer, domain, {
  *
  * @memberof api
  */
-module.exports = {
+export default {
     describeDomains,
     getHistogram,
     getDomainValues

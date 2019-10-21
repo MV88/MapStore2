@@ -30,7 +30,7 @@ const maskEnhancer = (showMask, maskContent, { maskContainerStyle, maskStyle, cl
  *    This will cause a complete remount and re-render of the wrapped component, that may be a problem if you're using lifecycle methods, so by default is false
  *  - white: makes the mask background white, false by default
  */
-module.exports = (
+export default (
     showMask = () => {},
     maskContent = () => {},
     {

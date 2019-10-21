@@ -25,7 +25,7 @@ const SideGrid = compose(
         })
 
 )(require('../misc/cardgrids/SideGrid'));
-module.exports = ({ setSearchText = () => { }, selected, skip = 0, onSelected, loading, searchText, items = [], total, title = <Message msgId={"maps.title"} /> }) => {
+export default ({ setSearchText = () => { }, selected, skip = 0, onSelected, loading, searchText, items = [], total, title = <Message msgId={"maps.title"} /> }) => {
     return (<BorderLayout
         className="map-catalog"
         header={<MapCatalogForm title={title} searchText={searchText} onSearchTextChange={setSearchText} />}

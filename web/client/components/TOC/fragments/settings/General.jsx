@@ -198,4 +198,4 @@ class General extends React.Component {
     };
 }
 
-module.exports = General;
+export default General;

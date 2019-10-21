@@ -40,7 +40,7 @@ const AttributeSelector = compose(
 )(require('../../../../data/featuregrid/AttributeTable'));
 
 
-module.exports = ({ data = { options: {} }, onChange = () => { }, featureTypeProperties, sampleChart}) => (<Row>
+export default ({ data = { options: {} }, onChange = () => { }, featureTypeProperties, sampleChart}) => (<Row>
     <StepHeader title={<Message msgId={`widgets.builder.wizard.configureTableOptions`} />} />
     <Col xs={12}>
         <div >

@@ -13,4 +13,4 @@ const types = {
         <Editor dataType="string" {...props}/>,
     "boolean": (props) => <DropDownEditor dataType="string" {...props} value={props.value && props.value.toString()} filter={false} values={["true", "false"]}/>
 };
-module.exports = (type, props) => types[type] ? types[type](props) : types.defaultEditor(props);
+export default (type, props) => types[type] ? types[type](props) : types.defaultEditor(props);

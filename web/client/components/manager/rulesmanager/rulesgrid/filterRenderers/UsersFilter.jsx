@@ -18,7 +18,7 @@ const selector = createSelector(filterSelector, (filter) => ({
     selected: filter.username
 }));
 
-module.exports = compose(
+export default compose(
     connect(selector, {onError: error}),
     defaultProps({
         size: 5,

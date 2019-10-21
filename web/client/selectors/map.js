@@ -83,7 +83,7 @@ const mapVersionSelector = (state) => state.map && state.map.present && state.ma
  */
 const mapNameSelector = (state) => state.map && state.map.present && state.map.present.info && state.map.present.info.name || '';
 
-module.exports = {
+export default {
     mapInfoDetailsUriFromIdSelector,
     mapSelector,
     scalesSelector,

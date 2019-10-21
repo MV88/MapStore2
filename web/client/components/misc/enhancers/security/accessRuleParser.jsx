@@ -78,7 +78,7 @@ const parseRules = ({accessInfo, postProcessValue, reduceFun}) => rawRules => {
  * @param {function} [options.reduceFun = AND]. An Array.reduce function to accumulate the rules, useful if you want to transform the variable in a different thing that a flag, or you want to use OR condition.
  * @param {object} [options.accessInfo="accessInfo"]: the property name of the property to use to retrieve data
  */
-module.exports = (name, { asObject = false, postProcessValue = v => v, reduceFun, accessInfo = "accessInfo" } = {}) =>
+export default (name, { asObject = false, postProcessValue = v => v, reduceFun, accessInfo = "accessInfo" } = {}) =>
     withPropsOnChange(
         [name, accessInfo],
         (props = {}) => (

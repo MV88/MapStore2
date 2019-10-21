@@ -17,4 +17,4 @@ class Fork extends React.Component {
     }
 }
 
-module.exports = Fork;
+export default Fork;

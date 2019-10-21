@@ -212,4 +212,4 @@ class DefaultLayer extends React.Component {
     };
 }
 
-module.exports = draggableComponent('LayerOrGroup', DefaultLayer);
+export default draggableComponent('LayerOrGroup', DefaultLayer);

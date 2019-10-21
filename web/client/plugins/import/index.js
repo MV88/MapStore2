@@ -44,7 +44,7 @@ const StylePolyline = connect((state) => (
     setStyleParameter: setStyleParameter
 })(require('../../components/style/StylePolyline'));
 
-module.exports = {
+export default {
     ShapeFileUploadAndStyle,
     StylePolygon,
     StylePolyline,

@@ -54,4 +54,4 @@ class Embedded extends React.Component {
     }
 }
 
-module.exports = Embedded;
+export default Embedded;

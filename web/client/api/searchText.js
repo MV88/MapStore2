@@ -62,4 +62,4 @@ const Utils = {
     }
 };
 
-module.exports = {API: {Services, Utils}};
+export default {API: {Services, Utils}};

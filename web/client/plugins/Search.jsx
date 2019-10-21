@@ -290,7 +290,7 @@ const SearchPlugin = connect((state) => ({
     }
     });
 
-module.exports = {
+export default {
     SearchPlugin: assign(SearchPlugin, {
         OmniBar: {
             name: 'search',

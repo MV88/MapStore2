@@ -24,4 +24,4 @@ class Language extends React.Component {
     }
 }
 
-module.exports = Language;
+export default Language;

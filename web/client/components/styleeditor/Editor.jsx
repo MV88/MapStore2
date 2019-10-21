@@ -263,4 +263,4 @@ class Editor extends React.Component {
     }
 }
 
-module.exports = Editor;
+export default Editor;

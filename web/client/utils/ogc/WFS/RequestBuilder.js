@@ -65,7 +65,7 @@ const getStaticAttributesWFS2 = (ver) => 'service="WFS" version="' + ver + '" ' 
  * query("layerName", filter..., {options})
  * ```
  */
-module.exports = function({wfsVersion = "1.1.0", gmlVersion, filterNS, wfsNS = "wfs"} = {}) {
+export default function({wfsVersion = "1.1.0", gmlVersion, filterNS, wfsNS = "wfs"} = {}) {
     let gmlV = gmlVersion;
     if (!gmlV && wfsVersion) {
         gmlV = wfsToGmlVersion(wfsVersion);

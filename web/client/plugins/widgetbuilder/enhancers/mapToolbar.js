@@ -16,7 +16,7 @@ const { wizardSelector, wizardStateToProps } = require('../commons');
 const mapBuilderConnect = require('./connection/mapBuilderConnect');
 const withConnectButton = require('./connection/withConnectButton');
 const withExitButton = require('./withExitButton');
-module.exports = compose(
+export default compose(
     connect(wizardSelector, {
         setPage,
         onChange: onEditorChange,

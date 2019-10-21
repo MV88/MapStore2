@@ -18,7 +18,7 @@ const saveRule = stream$ => stream$
     })
     .startWith(setLoading(true))
     .concat(Rx.Observable.of(setLoading(false)));
-module.exports = {
+export default {
     onSave: (action$, {getState}) => action$.ofType(SAVE_RULE)
         .exhaustMap(({rule}) =>
             rule.id ? updateRule(rule, get(getState(), "rulesmanager.activeRule", {})).let(saveRule) : createRule(rule).let(saveRule)

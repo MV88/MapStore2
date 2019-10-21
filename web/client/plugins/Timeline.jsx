@@ -293,7 +293,7 @@ const TimelinePlugin = compose(
 
 const assign = require('object-assign');
 const TimelineToggle = require('./timeline/TimelineToggle');
-module.exports = {
+export default {
     TimelinePlugin: assign(TimelinePlugin, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
         WidgetsTray: {

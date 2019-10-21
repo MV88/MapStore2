@@ -22,7 +22,7 @@ const enhanceTOC = compose(
     handleNodePropertyChanges,
 );
 
-module.exports = enhanceTOC(({
+export default enhanceTOC(({
     changeLayerPropertyByGroup = () => {},
     changeLayerProperty = () => {},
     changeGroupProperty = () => {},

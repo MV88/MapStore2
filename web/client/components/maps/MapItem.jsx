@@ -46,4 +46,4 @@ class MapItem extends React.Component {
     }
 }
 
-module.exports = MapItem;
+export default MapItem;

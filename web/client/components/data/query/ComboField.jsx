@@ -156,4 +156,4 @@ class ComboField extends React.Component {
     }
 }
 
-module.exports = ComboField;
+export default ComboField;

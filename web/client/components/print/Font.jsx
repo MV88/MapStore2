@@ -80,4 +80,4 @@ class Font extends React.Component {
     };
 }
 
-module.exports = Font;
+export default Font;

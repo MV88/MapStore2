@@ -31,7 +31,7 @@ const getFTSelectedArgs = (state) => {
     let typeName = layer.name;
     return [url, typeName];
 };
-module.exports = {
+export default {
     openWidgetEditor: (action$, {getState = () => {}} = {}) => action$.ofType(NEW, EDIT, NEW_CHART)
         .filter(() => widgetBuilderAvailable(getState()))
         .switchMap(() => Rx.Observable.of(

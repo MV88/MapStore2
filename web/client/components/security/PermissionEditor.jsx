@@ -263,4 +263,4 @@ class PermissionEditor extends React.Component {
     };
 }
 
-module.exports = PermissionEditor;
+export default PermissionEditor;

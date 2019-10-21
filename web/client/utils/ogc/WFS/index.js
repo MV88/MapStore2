@@ -43,4 +43,4 @@ const WFS = {
 };
 
 
-module.exports = {WFS, marshaller, unmarshaller};
+export default {WFS, marshaller, unmarshaller};

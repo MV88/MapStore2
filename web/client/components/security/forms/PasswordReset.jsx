@@ -140,4 +140,4 @@ class PasswordReset extends React.Component {
     };
 }
 
-module.exports = PasswordReset;
+export default PasswordReset;

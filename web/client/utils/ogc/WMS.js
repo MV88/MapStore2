@@ -41,4 +41,4 @@ const unmarshaller = context.createUnmarshaller();
 const WMS = {};
 
 
-module.exports = {WMS, marshaller, unmarshaller};
+export default {WMS, marshaller, unmarshaller};

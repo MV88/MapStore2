@@ -13,7 +13,7 @@ const emptyChartState = require('../enhancers/emptyChartState');
 const SimpleChart = loadingState(errorChartState(emptyChartState((require('../../charts/SimpleChart')))));
 const ContainerDimensions = require('react-container-dimensions').default;
 const React = require('react');
-module.exports = (props) => (<div className="mapstore-widget-chart">
+export default (props) => (<div className="mapstore-widget-chart">
     <ContainerDimensions>
         <SimpleChart {...props}/>
     </ContainerDimensions>

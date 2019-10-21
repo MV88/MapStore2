@@ -26,7 +26,7 @@ const triggerValidationReset = compose(lifecycle({
 })
 );
 
-module.exports = triggerValidationReset(({ onChange = () => { }, onFinish = () => { }, setPage = () => { }, data = {}, layer = {}, step = 0, types, featureTypeProperties, dependencies }) =>
+export default triggerValidationReset(({ onChange = () => { }, onFinish = () => { }, setPage = () => { }, data = {}, layer = {}, step = 0, types, featureTypeProperties, dependencies }) =>
     (<Wizard
         step={step}
         setPage={setPage}

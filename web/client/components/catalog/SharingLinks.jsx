@@ -46,4 +46,4 @@ class SharingLinks extends React.Component {
     }
 }
 
-module.exports = SharingLinks;
+export default SharingLinks;

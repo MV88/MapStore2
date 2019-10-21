@@ -33,4 +33,4 @@ class SettingsPanel extends React.Component {
     }
 }
 
-module.exports = SettingsPanel;
+export default SettingsPanel;

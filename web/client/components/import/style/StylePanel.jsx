@@ -196,4 +196,4 @@ class StylePanel extends React.Component {
 }
 
 
-module.exports = StylePanel;
+export default StylePanel;

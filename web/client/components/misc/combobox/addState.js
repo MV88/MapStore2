@@ -51,4 +51,4 @@ const addState = compose(
 );
 
 
-module.exports = addState;
+export default addState;

@@ -11,7 +11,7 @@ const getDashboardSaveErrors = state => state && state.dashboard && state.dashbo
 const buttonCanEdit = createSelector(pathnameSelector, dashboardResource,
     (path, resource) => resource && resource.canEdit || isNaN(path.substr(-4)));
 
-module.exports = {
+export default {
     isDashboardAvailable,
     isShowSaveOpen,
     isDashboardEditing,

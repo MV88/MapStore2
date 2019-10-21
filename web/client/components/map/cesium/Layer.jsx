@@ -194,4 +194,4 @@ class CesiumLayer extends React.Component {
     };
 }
 
-module.exports = CesiumLayer;
+export default CesiumLayer;

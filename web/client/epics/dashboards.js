@@ -32,7 +32,7 @@ const calculateNewParams = state => {
     };
 };
 
-module.exports = {
+export default {
     searchDashboardsOnMapSearch: action$ =>
         action$.ofType(MAPS_LIST_LOADING)
             .switchMap(({ searchText }) => Rx.Observable.of(searchDashboards(searchText))),

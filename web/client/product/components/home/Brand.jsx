@@ -19,4 +19,4 @@ class Brand extends React.Component {
     }
 }
 
-module.exports = Brand;
+export default Brand;

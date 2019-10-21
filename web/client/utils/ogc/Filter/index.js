@@ -113,4 +113,4 @@ const Filter = {
 };
 
 
-module.exports = {Filter, marshaller, unmarshaller};
+export default {Filter, marshaller, unmarshaller};

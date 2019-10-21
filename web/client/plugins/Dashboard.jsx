@@ -79,7 +79,7 @@ class Widgets extends React.Component {
 
 const DashboardPlugin = Widgets;
 
-module.exports = {
+export default {
     DashboardPlugin,
     reducers: {
         widgets: require('../reducers/widgets')

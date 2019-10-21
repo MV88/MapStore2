@@ -214,4 +214,4 @@ class Thumbnail extends React.Component {
     }
 }
 
-module.exports = Thumbnail;
+export default Thumbnail;

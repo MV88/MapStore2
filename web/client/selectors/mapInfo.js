@@ -171,7 +171,7 @@ const clickedPointWithFeaturesSelector = createSelector(
 );
 
 
-module.exports = {
+export default {
     isMapInfoOpen,
     indexSelector,
     responsesSelector,

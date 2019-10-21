@@ -107,7 +107,7 @@ const DashboardsPlugin = compose(
     )
 )(Dashboards);
 
-module.exports = {
+export default {
     DashboardsPlugin: assign(DashboardsPlugin, {
         NavMenu: {
             position: 2,

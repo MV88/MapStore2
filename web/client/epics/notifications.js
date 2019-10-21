@@ -25,6 +25,6 @@ const clearNotificationOnLocationChange = action$ =>
  * @type {Object}
  */
 
-module.exports = {
+export default {
     clearNotificationOnLocationChange
 };

@@ -99,4 +99,4 @@ class WFSServiceProps extends React.Component {
     };
 }
 
-module.exports = { Element: WFSServiceProps, validate};
+export default { Element: WFSServiceProps, validate};

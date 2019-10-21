@@ -89,4 +89,4 @@ class MarkerGlyph extends React.Component {
     };
 }
 
-module.exports = MarkerGlyph;
+export default MarkerGlyph;

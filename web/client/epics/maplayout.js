@@ -102,6 +102,6 @@ const updateMapLayoutEpic = (action$, store) =>
             }));
         });
 
-module.exports = {
+export default {
     updateMapLayoutEpic
 };

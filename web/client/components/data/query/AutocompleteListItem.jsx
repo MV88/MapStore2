@@ -24,4 +24,4 @@ class AutocompleteListItem extends React.Component {
     }
 }
 
-module.exports = AutocompleteListItem;
+export default AutocompleteListItem;

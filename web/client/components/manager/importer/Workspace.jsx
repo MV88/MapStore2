@@ -14,7 +14,7 @@ const LocaleUtils = require('../../../utils/LocaleUtils');
 
 require('react-select/dist/react-select.css');
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
     static propTypes = {
         enabled: PropTypes.bool,
         status: PropTypes.object,

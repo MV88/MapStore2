@@ -9,7 +9,7 @@ const handleResourceData = require('./handleResourceData');
 const handlePermission = require('./handlePermission');
 const handleErrors = require('./handleErrors');
 const { compose, branch, renderNothing} = require('recompose');
-module.exports = compose(
+export default compose(
     branch(
         ({ show }) => !show,
         renderNothing

@@ -8,4 +8,4 @@ const Editors = {
 };
 
 
-module.exports = Editors;
+export default Editors;

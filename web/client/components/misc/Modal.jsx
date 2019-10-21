@@ -29,7 +29,7 @@ class FixedModal extends Modal {
 
 const assign = require('object-assign');
 
-module.exports = assign(withContainer(FixedModal), {
+export default assign(withContainer(FixedModal), {
     Body: Modal.Body,
     Dialog: Modal.Dialog,
     Footer: Modal.Footer,

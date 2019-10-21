@@ -59,4 +59,4 @@ class ImageButton extends React.Component {
     }
 }
 
-module.exports = ImageButton;
+export default ImageButton;

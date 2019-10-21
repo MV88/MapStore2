@@ -13,7 +13,7 @@ const withResizeSpy = require('../../misc/enhancers/withResizeSpy');
  * Makes the map adaptive to the container and allow auto-resize on dimension's change.
  * @param {number} debounceTime debounce time on resize event
  */
-module.exports = (debounceTime = 0) => compose(
+export default (debounceTime = 0) => compose(
     withStateHandlers(
         () => ({
             resize: 0

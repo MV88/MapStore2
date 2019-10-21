@@ -1,7 +1,7 @@
 
 const {compose, mapPropsStream, withHandlers} = require('recompose');
 
-module.exports = compose(
+export default compose(
     withHandlers({
         useFiles: ({ loadMap = () => { }, onClose = () => { }, setLayers = () => { } }) =>
             ({ layers = [], maps = [] }, warnings) => {

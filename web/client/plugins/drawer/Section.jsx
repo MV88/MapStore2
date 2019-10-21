@@ -65,4 +65,4 @@ class Section extends React.Component {
     }
 }
 
-module.exports = Section;
+export default Section;

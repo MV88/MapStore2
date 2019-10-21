@@ -49,7 +49,7 @@ const DEFAULT_TYPES = [{
     className: "ms-widget-selector-legend"
 }];
 
-module.exports = ({widgetTypes = DEFAULT_TYPES, typeFilter = () => true, onSelect = () => {}}) =>
+export default ({widgetTypes = DEFAULT_TYPES, typeFilter = () => true, onSelect = () => {}}) =>
     (
         <SideGrid
             key="content"

@@ -31,4 +31,4 @@ function feedbackMask(state = {}, action) {
     }
 }
 
-module.exports = feedbackMask;
+export default feedbackMask;

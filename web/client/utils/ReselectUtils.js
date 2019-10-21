@@ -37,7 +37,7 @@ const createShallowSelectorCreator = (compare) => createSelectorCreator(
     defaultMemoize,
     (a, b) => isEqualWith(a, b, isShallowEqualBy(compare))
 );
-module.exports = {
+export default {
     createShallowSelector,
     createShallowSelectorCreator
 };

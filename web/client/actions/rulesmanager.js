@@ -88,7 +88,7 @@ function updateFiltersValues(filtersValues) {
 
 const saveRule = (rule) => ({type: SAVE_RULE, rule});
 
-module.exports = {
+export default {
     RULES_SELECTED,
     UPDATE_FILTERS_VALUES,
     OPTIONS_LOADED,

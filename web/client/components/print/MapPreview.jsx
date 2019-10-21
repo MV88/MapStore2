@@ -153,4 +153,4 @@ class MapPreview extends React.Component {
     }
 }
 
-module.exports = MapPreview;
+export default MapPreview;

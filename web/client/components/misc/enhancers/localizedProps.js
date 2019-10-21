@@ -33,7 +33,7 @@ const accumulate = (props, messages) => (acc = {}, propName) => ({
  * //...
  * <Input placeholder="path.to.placeholder.message" />
  */
-module.exports = (propNames) => compose(
+export default (propNames) => compose(
     getContext({
         messages: PropTypes.object
     }),

@@ -11,7 +11,7 @@ const React = require('react');
 const {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip} = require('recharts');
 const ElevationChartTooltip = require('./ElevationChartTooltip');
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
     static propTypes = {
         elevations: PropTypes.object,
         chartStyle: PropTypes.object,

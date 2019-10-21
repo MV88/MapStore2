@@ -35,7 +35,7 @@ const MeasurePanelPlugin = connect(selector, {
     toggleMeasure: changeMeasurement
 }, null, {pure: false})(MeasureComponent);
 
-module.exports = {
+export default {
     MeasurePanelPlugin: assign(MeasurePanelPlugin, {
         Toolbar: {
             name: 'measurement',

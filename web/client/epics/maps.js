@@ -356,7 +356,7 @@ const mapSaveMapResourceEpic = (action$) =>
     action$.ofType(SAVE_MAP_RESOURCE)
         .exhaustMap(({resource}) => (!resource.id ? createMapResource(resource) : updateMapResource(resource))
         );
-module.exports = {
+export default {
     loadMapsEpic,
     resetCurrentMapEpic,
     storeDetailsInfoEpic,

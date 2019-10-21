@@ -63,4 +63,4 @@ class BreadCrumb extends React.Component {
     }
 }
 
-module.exports = BreadCrumb;
+export default BreadCrumb;

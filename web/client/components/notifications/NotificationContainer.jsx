@@ -116,4 +116,4 @@ class NotificationContainer extends React.Component {
     };
 }
 
-module.exports = injectIntl(NotificationContainer);
+export default injectIntl(NotificationContainer);

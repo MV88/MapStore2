@@ -54,4 +54,4 @@ class TOC extends React.Component {
     }
 }
 
-module.exports = dndTree(TOC);
+export default dndTree(TOC);

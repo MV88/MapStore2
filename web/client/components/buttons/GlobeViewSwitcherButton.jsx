@@ -89,4 +89,4 @@ class GlobeViewSwitcherButton extends React.Component {
     }
 }
 
-module.exports = GlobeViewSwitcherButton;
+export default GlobeViewSwitcherButton;

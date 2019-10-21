@@ -245,7 +245,7 @@ const ReadOnlyStyleList = compose(
         </BorderLayout>
 );
 
-module.exports = {
+export default {
     StyleSelector: branch(
         ({ readOnly }) => readOnly,
         () => ReadOnlyStyleList

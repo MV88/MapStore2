@@ -55,4 +55,4 @@ console.warn = function() {
 };
 /* eslint-enable */
 
-module.exports = DebugUtils;
+export default DebugUtils;

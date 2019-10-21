@@ -29,7 +29,7 @@ const tooltip = require('./tooltip');
  * }
  *
  */
-module.exports = branch(
+export default branch(
     ({disabled, noTooltipWhenDisabled = false} = {}) => !(noTooltipWhenDisabled && disabled),
     tooltip,
     (Wrapped) => (props) => <Wrapped {...(omit(props, ["tooltipId", "tooltip", "noTooltipWhenDisabled"]))}>{props.children}</Wrapped>

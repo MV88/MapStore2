@@ -89,4 +89,4 @@ class MeasureDialog extends React.Component {
     }
 }
 
-module.exports = MeasureDialog;
+export default MeasureDialog;

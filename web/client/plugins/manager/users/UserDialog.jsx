@@ -28,4 +28,4 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch);
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(require('../../../components/manager/users/UserDialog'));
+export default connect(mapStateToProps, mapDispatchToProps)(require('../../../components/manager/users/UserDialog'));

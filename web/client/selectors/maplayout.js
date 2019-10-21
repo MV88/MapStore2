@@ -109,7 +109,7 @@ const mapPaddingSelector = state => {
     };
 };
 
-module.exports = {
+export default {
     mapLayoutSelector,
     mapLayoutValuesSelector,
     checkConditionsSelector,

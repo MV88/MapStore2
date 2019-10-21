@@ -86,7 +86,7 @@ const enhanceWizard = compose(lifecycle({
         }
     }})
 );
-module.exports = enhanceWizard(({ onChange = () => { }, onFinish = () => { }, setPage = () => { }, setValid = () => { }, valid, formOptions, data = {}, layer = {}, step = 0, types, featureTypeProperties, dependencies}) =>
+export default enhanceWizard(({ onChange = () => { }, onFinish = () => { }, setPage = () => { }, setValid = () => { }, valid, formOptions, data = {}, layer = {}, step = 0, types, featureTypeProperties, dependencies}) =>
     (<Wizard
         step={step}
         setPage={setPage}

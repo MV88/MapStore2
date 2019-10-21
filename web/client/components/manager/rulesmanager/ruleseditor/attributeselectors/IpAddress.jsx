@@ -55,7 +55,7 @@ class IpAddress extends React.Component {
     }
 }
 
-module.exports = compose(
+export default compose(
     defaultProps({
         placeholder: "rulesmanager.placeholders.ip"
     }),

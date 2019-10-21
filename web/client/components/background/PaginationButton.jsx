@@ -48,4 +48,4 @@ class PaginationButton extends React.Component {
     }
 }
 
-module.exports = PaginationButton;
+export default PaginationButton;

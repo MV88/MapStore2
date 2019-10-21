@@ -63,4 +63,4 @@ var ShareUtils = {
     }
 };
 
-module.exports = ShareUtils;
+export default ShareUtils;

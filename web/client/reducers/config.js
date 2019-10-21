@@ -114,4 +114,4 @@ function mapConfig(state = null, action) {
     }
 }
 
-module.exports = mapConfig;
+export default mapConfig;

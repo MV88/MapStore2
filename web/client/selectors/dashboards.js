@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = {
+export default {
     searchTextSelector: state => state && state.dashboards && state.dashboards.searchText,
     searchParamsSelector: state => state && state.dashboards && state.dashboards.options && state.dashboards.options.params,
     resultsSelector: state => state && state.dashboards && state.dashboards.results,

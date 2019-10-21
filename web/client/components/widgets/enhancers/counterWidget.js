@@ -9,7 +9,7 @@
 const {compose} = require('recompose');
 const { editableWidget, defaultIcons, withHeaderTools } = require('./tools');
 
-module.exports = compose(
+export default compose(
     require("./deleteWidget"),
     editableWidget(),
     defaultIcons(),

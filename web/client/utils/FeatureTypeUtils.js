@@ -58,7 +58,7 @@ const types = {
     // 'xsd:NOTATION': 'string',
     'xsd:float': 'number'
 };
-module.exports = {
+export default {
     describeFeatureTypeToAttributes: (data) => get(data, "featureTypes[0].properties")
         .filter((attribute) => attribute.type.indexOf('gml:') !== 0 && types[attribute.type])
         .map((attribute) => {

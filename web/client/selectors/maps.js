@@ -35,7 +35,7 @@ const searchParamsSelector = state => ({start: get(state, 'maps.start'), limit: 
  */
 const showMapDetailsSelector = (state) => get(state, "maps.showMapDetails");
 
-module.exports = {
+export default {
     mapNameSelector,
     mapFromIdSelector,
     showMapDetailsSelector,

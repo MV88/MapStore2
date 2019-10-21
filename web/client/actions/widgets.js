@@ -285,7 +285,7 @@ const toggleCollapseAll = (target = DEFAULT_TARGET) => ({
  */
 const toggleTray = value => ({ type: TOGGLE_TRAY, value});
 
-module.exports = {
+export default {
     NEW,
     INSERT,
     UPDATE,

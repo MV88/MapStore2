@@ -26,7 +26,7 @@ const layerDescribeSelector = (state, featureTypeName) => get(featureTypeSelecto
  * @static
  */
 
-module.exports = {
+export default {
     wfsURL: state => state && state.query && state.query.searchUrl,
     wfsURLSelector: state => state && state.query && state.query.url,
     wfsFilter: state => state && state.query && state.query.filterObj,

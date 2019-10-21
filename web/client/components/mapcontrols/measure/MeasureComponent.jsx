@@ -355,4 +355,4 @@ class MeasureComponent extends React.Component {
     };
 }
 
-module.exports = MeasureComponent;
+export default MeasureComponent;

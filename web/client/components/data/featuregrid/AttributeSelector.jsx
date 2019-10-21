@@ -2,7 +2,7 @@ const React = require('react');
 const {Checkbox} = require('react-bootstrap');
 const Message = require('../../I18N/Message');
 
-module.exports = ({
+export default ({
     style = {},
     titleMsg = "featuregrid.columns",
     onChange = () => {},

@@ -13,7 +13,7 @@ const {layerSelectedForSearch, LAYER_SELECTED_FOR_SEARCH, CLOSE_FEATURE_GRID} = 
 const {browseData} = require('../../../actions/layers');
 const {clearChanges, setPermission, toggleTool} = require('../../../actions/featuregrid');
 const {hasChangesSelector, hasNewFeaturesSelector} = require('../../../selectors/featuregrid');
-module.exports = (plugins) => {
+export default (plugins) => {
     var reducers = {
         map: require('../../../reducers/map'),
         mapConfig: require('../../../reducers/config'),

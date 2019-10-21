@@ -120,7 +120,7 @@ const FloatingLegendPlugin = connect(floatingLegendSelector, {
     onExpand: expandLegend
 })(FloatingLegendComponent);
 
-module.exports = {
+export default {
     FloatingLegendPlugin: assign(FloatingLegendPlugin, {
         disablePluginIf: "{state('featuregridmode') === 'EDIT'}"
     }),

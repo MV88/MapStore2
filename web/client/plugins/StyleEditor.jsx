@@ -184,7 +184,7 @@ const StyleEditorPlugin = compose(
     )
 )(StyleEditorPanel);
 
-module.exports = {
+export default {
     StyleEditorPlugin: assign(StyleEditorPlugin, {
         TOC: {
             priority: 1,

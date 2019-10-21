@@ -18,7 +18,7 @@ const ThemeSwitcherPlugin = connect((s) => ({
     onThemeSelected: selectTheme
 })(require('../components/theme/ThemeSwitcher'));
 
-module.exports = {
+export default {
     ThemeSwitcherPlugin: assign(ThemeSwitcherPlugin, {
         GridContainer: {
             id: 'themeSwitcher',

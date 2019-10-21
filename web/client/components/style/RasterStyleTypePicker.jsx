@@ -48,4 +48,4 @@ class RasterStyleTypePicker extends React.Component {
     }
 }
 
-module.exports = RasterStyleTypePicker;
+export default RasterStyleTypePicker;

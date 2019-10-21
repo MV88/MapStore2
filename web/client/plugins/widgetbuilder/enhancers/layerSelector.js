@@ -16,7 +16,7 @@ const { recordToLayer } = require('../../../utils/CatalogUtils');
  * canProceed = false and error as props.
  * TODO: this can become a more general validate enhancer
  */
-module.exports = compose(
+export default compose(
     withState('selected', "setSelected", null),
     withState('layer', "setLayer", null),
     mapPropsStream(props$ =>

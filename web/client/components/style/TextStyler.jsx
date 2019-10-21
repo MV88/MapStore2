@@ -240,4 +240,4 @@ class TextStyler extends React.Component {
     }
 }
 
-module.exports = TextStyler;
+export default TextStyler;

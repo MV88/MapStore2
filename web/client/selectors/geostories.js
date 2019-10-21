@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = {
+export default {
     searchTextSelector: state => state && state.geostories && state.geostories.searchText,
     searchParamsSelector: state => state && state.geostories && state.geostories.options && state.geostories.options.params,
     resultsSelector: state => state && state.geostories && state.geostories.results,

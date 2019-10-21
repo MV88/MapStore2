@@ -56,4 +56,4 @@ const MapsGrid = connect((state) => {
     };
 })(require('../../components/maps/MapGrid'));
 
-module.exports = MapsGrid;
+export default MapsGrid;

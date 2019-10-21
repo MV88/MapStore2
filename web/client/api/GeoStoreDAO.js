@@ -487,4 +487,4 @@ const Api = {
     errorParser
 };
 
-module.exports = Api;
+export default Api;

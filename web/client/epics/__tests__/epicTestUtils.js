@@ -3,7 +3,7 @@ const Rx = require('rxjs');
 const { isFunction } = require('lodash');
 const { ActionsObservable, combineEpics } = require('redux-observable');
 const TEST_TIMEOUT = "EPICTEST:TIMEOUT";
-module.exports = {
+export default {
     /**
      * Utility to test an epic
      * @param  {function}   epic       the epic to test

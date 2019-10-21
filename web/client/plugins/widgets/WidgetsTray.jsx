@@ -104,7 +104,7 @@ class WidgetsTray extends React.Component {
             : null;
     }
 }
-module.exports = compose(
+export default compose(
     withState("expanded", "setExpanded", false),
     connect(createSelector(
         trayWidgets,

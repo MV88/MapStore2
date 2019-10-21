@@ -39,7 +39,7 @@ const notifyCollapsedTimeline = (messageProps) => stream$ =>
  * @name widgetsTray
  * @memberof epics
  */
-module.exports = {
+export default {
     /**
      * Manages mutual exclusion of visibility between timeline and widgets.
      * This collapse timeline when one widget is expanded or added to the map

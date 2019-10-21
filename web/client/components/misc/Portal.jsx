@@ -9,4 +9,4 @@
 
 const withContainer = require('./WithContainer');
 
-module.exports = withContainer(require('react-overlays').Portal);
+export default withContainer(require('react-overlays').Portal);

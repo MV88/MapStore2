@@ -21,7 +21,7 @@ const {connect} = require('react-redux');
   * {name: "Notifications"}
   *
   */
-module.exports = {
+export default {
     NotificationsPlugin: connect(
         (state) => ({ notifications: state && state.notifications}),
         {

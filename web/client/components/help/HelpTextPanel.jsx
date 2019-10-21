@@ -66,4 +66,4 @@ class HelpTextPanel extends React.Component {
     }
 }
 
-module.exports = HelpTextPanel;
+export default HelpTextPanel;

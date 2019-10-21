@@ -6,6 +6,6 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-module.exports = {
+export default {
     convertToNameValue: ({name, value}, data = []) => data.map(d => ({name: d[name], value: d[value]}))
 };

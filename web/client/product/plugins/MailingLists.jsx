@@ -22,6 +22,6 @@ class MailingListsPlugin extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     MailingListsPlugin
 };

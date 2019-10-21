@@ -155,7 +155,7 @@ const Plugin = connect(
         onUnmount: () => setEditorAvailable(false)
     }
 )(DashboardEditorComponent);
-module.exports = {
+export default {
     DashboardEditorPlugin: Plugin,
     reducers: {
         dashboard: require('../reducers/dashboard')

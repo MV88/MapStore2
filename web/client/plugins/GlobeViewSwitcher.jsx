@@ -36,7 +36,7 @@ const GlobeViewSwitcher = connect(globeSelector, {
     onClick: (pressed, options) => toggle3d(pressed, options.originalMapType)
 })(GlobeViewSwitcherButton);
 
-module.exports = {
+export default {
     GlobeViewSwitcherPlugin: assign(GlobeViewSwitcher, {
         disablePluginIf: "{state('featuregridmode') === 'EDIT'}",
         Toolbar: {

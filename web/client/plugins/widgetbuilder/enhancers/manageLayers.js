@@ -14,7 +14,7 @@ const { onEditorChange } = require('../../../actions/widgets');
 /**
  * Gets the editor's data and allow to do basic operations on layers
  */
-module.exports = compose(
+export default compose(
     withProps(({ editorData = {} }) => ({
         layers: editorData.map && editorData.map.layers
     })),

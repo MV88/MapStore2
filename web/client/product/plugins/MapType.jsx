@@ -54,7 +54,7 @@ const MapTypePlugin = connect((state) => ({
     onChangeMapType: compose(changeMapType, (event) => event.target.value)
 })(MapType);
 
-module.exports = {
+export default {
     MapTypePlugin: assign(MapTypePlugin, {
         GridContainer: {
             name: 'MapType',

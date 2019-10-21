@@ -9,7 +9,7 @@ const { createSink } = require('recompose');
 /**
  * Dummy implementation of mapType for tests
  */
-module.exports = () => {
+export default () => {
     return {
         Map: createSink(() => {}),
         Layer: createSink(() => {}),

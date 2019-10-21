@@ -39,7 +39,7 @@ const getSaveTooltipId = (step, {id} = {}) => {
     }
     return "widgets.builder.wizard.addTheWidget";
 };
-module.exports = ({
+export default ({
     step = 0, editorData = {}, valid, setPage = () => {}, onFinish = () => {},
     stepButtons = [],
     openFilterEditor = () => {}

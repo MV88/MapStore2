@@ -41,4 +41,4 @@ function highlight(state = initialState, action) {
     }
 }
 
-module.exports = highlight;
+export default highlight;

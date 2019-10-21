@@ -123,4 +123,4 @@ class PluginConfigurator extends React.Component {
     };
 }
 
-module.exports = PluginConfigurator;
+export default PluginConfigurator;

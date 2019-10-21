@@ -4,7 +4,7 @@ const {Button, Glyphicon, Grid, Row, Col} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const {toPage} = require('../../../utils/FeatureGridUtils');
 
-module.exports = (props = {
+export default (props = {
     loading: false,
     onPageChange: () => {}
 }) => {

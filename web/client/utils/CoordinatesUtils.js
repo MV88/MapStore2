@@ -863,4 +863,4 @@ const CoordinatesUtils = {
 
 };
 
-module.exports = CoordinatesUtils;
+export default CoordinatesUtils;

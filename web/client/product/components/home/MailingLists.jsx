@@ -99,4 +99,4 @@ class MailingLists extends React.Component {
     }
 }
 
-module.exports = MailingLists;
+export default MailingLists;

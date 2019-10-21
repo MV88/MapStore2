@@ -9,7 +9,7 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
     static propTypes = {
         format: PropTypes.string,
         viewers: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

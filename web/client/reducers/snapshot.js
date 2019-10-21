@@ -59,4 +59,4 @@ function snapshot(state = null, action) {
 
 }
 
-module.exports = snapshot;
+export default snapshot;

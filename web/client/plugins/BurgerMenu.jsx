@@ -99,7 +99,7 @@ class BurgerMenu extends React.Component {
     }
 }
 
-module.exports = createPlugin(
+export default createPlugin(
     'BurgerMenu',
     {
         component: connect((state) =>({

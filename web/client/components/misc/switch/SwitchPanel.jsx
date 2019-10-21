@@ -68,4 +68,4 @@ class SwitchPanel extends React.Component {
     }
 }
 
-module.exports = SwitchPanel;
+export default SwitchPanel;

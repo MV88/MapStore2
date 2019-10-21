@@ -887,7 +887,7 @@ const setFeaturedMapsLatestResource = (resource) => ({
  * Actions for maps
  * @name actions.maps
  */
-module.exports = {
+export default {
     MAPS_LIST_LOADED,
     MAPS_LIST_LOADING,
     MAPS_LIST_LOAD_ERROR,

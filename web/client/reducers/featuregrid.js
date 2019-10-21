@@ -398,4 +398,4 @@ function featuregrid(state = emptyResultsState, action) {
     }
 }
 
-module.exports = featuregrid;
+export default featuregrid;

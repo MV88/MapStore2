@@ -457,4 +457,4 @@ var ConfigUtils = {
     }
 };
 
-module.exports = ConfigUtils;
+export default ConfigUtils;

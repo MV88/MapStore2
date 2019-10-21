@@ -149,7 +149,7 @@ const Tutorial = connect(tutorialPluginSelector, (dispatch) => {
     }
 }))(require('../components/tutorial/Tutorial'));
 
-module.exports = {
+export default {
     TutorialPlugin: assign(Tutorial, {
         BurgerMenu: {
             name: 'tutorial',

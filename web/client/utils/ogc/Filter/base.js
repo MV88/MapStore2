@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const {filter, fidFilter} = require('./filter');
-module.exports = {
+export default {
     fidFilter,
     filter
 };

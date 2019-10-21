@@ -132,4 +132,4 @@ const ResizableModal = ({
         </ReactCSSTransitionGroup>) : dialog;
 };
 
-module.exports = withState('fullscreenState', 'onFullscreen', 'collapsed')(ResizableModal);
+export default withState('fullscreenState', 'onFullscreen', 'collapsed')(ResizableModal);

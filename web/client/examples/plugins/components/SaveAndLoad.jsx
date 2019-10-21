@@ -66,4 +66,4 @@ class SaveButton extends React.Component {
     };
 }
 
-module.exports = SaveButton;
+export default SaveButton;

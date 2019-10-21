@@ -117,4 +117,4 @@ class LoginModal extends React.Component {
     };
 }
 
-module.exports = LoginModal;
+export default LoginModal;

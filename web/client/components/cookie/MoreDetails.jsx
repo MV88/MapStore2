@@ -26,4 +26,4 @@ class MoreDetails extends React.Component {
         return <div className="cookie-seeMore" dangerouslySetInnerHTML={{__html: this.props.html} } />;
     }
 }
-module.exports = MoreDetails;
+export default MoreDetails;

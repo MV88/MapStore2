@@ -62,4 +62,4 @@ class Localized extends React.Component {
     };
 }
 
-module.exports = Localized;
+export default Localized;

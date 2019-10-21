@@ -142,4 +142,4 @@ const StyleEditorUtils = {
     stringifyNameParts: ({name, workspace}) => `${workspace && workspace.name && `${workspace.name}:` || ''}${name}`
 };
 
-module.exports = StyleEditorUtils;
+export default StyleEditorUtils;

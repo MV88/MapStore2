@@ -8,7 +8,7 @@
 
 const Rx = require('rxjs');
 
-module.exports = {
+export default {
     onEpic: (action$, store) =>
         action$.filter((action) => action.type.indexOf('IF:') === 0)
             .switchMap((action) => {

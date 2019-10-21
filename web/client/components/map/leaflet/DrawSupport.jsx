@@ -700,4 +700,4 @@ class DrawSupport extends React.Component {
 }
 
 
-module.exports = DrawSupport;
+export default DrawSupport;

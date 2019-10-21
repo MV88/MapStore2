@@ -93,4 +93,4 @@ class DetailsPanel extends React.Component {
 }
 
 
-module.exports = DetailsPanel;
+export default DetailsPanel;

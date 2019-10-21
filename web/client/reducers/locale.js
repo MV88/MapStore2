@@ -25,4 +25,4 @@ function locale(state = null, action) {
     }
 }
 
-module.exports = locale;
+export default locale;

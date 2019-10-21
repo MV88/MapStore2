@@ -173,7 +173,7 @@ const updateLayerSettingsObservable = (action$, store, filter = () => true, star
  * @name epics.styleeditor
  * @type {object}
  */
-module.exports = {
+export default {
     /**
      * Gets every `TOGGLE_STYLE_EDITOR` event.
      * Initialize or reset style editor based on action.enabled.

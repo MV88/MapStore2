@@ -141,7 +141,7 @@ const queryableLayersSelector = state => layersSelector(state).filter(defaultQue
  */
 const selectedLayerLoadingErrorSelector = state => (getSelectedLayer(state) || {}).loadingError === 'Error';
 
-module.exports = {
+export default {
     getLayerFromName,
     layersSelector,
     layerSelectorWithMarkers,

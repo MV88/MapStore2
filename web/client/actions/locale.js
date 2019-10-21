@@ -70,4 +70,4 @@ function loadLocale(translationFolder, language) {
     };
 }
 
-module.exports = {CHANGE_LOCALE, LOCALE_LOAD_ERROR, loadLocale};
+export default {CHANGE_LOCALE, LOCALE_LOAD_ERROR, loadLocale};

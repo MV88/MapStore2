@@ -24,7 +24,7 @@ const renderMetadataModal = ({ Component, edit, resource, setEdit, onSaveSuccess
     return null;
 };
 
-module.exports = ({
+export default ({
     fluid,
     className,
     colProps,

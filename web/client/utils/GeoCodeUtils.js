@@ -61,4 +61,4 @@ const GeoCodeUtils = {
     }
 };
 
-module.exports = GeoCodeUtils;
+export default GeoCodeUtils;

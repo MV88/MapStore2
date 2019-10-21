@@ -12,7 +12,7 @@ const { connect } = require('react-redux');
 const StyleDialog = require('./StyleDialog');
 const { configureMap } = require('../../actions/config');
 
-module.exports = compose(
+export default compose(
     mapPropsStream(
         props$ => props$.merge(
             props$

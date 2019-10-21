@@ -85,4 +85,4 @@ const DropdownFeatureType = ({
     </DropdownButtonT>
 );
 
-module.exports = DropdownFeatureType;
+export default DropdownFeatureType;

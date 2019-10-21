@@ -132,7 +132,7 @@ const BackgroundSelectorPlugin = connect(backgroundSelector, {
 })
 )(require('../components/background/BackgroundSelector'));
 
-module.exports = {
+export default {
     BackgroundSelectorPlugin,
     reducers: {
         controls: require('../reducers/controls')

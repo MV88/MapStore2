@@ -167,4 +167,4 @@ class AutocompleteField extends React.Component {
     };
 }
 
-module.exports = AutocompleteField;
+export default AutocompleteField;

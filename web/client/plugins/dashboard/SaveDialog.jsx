@@ -19,7 +19,7 @@ const handleSaveModal = require('../../components/resources/modals/enhancers/han
  * Save dialog component enhanced for dashboard
  *
  */
-module.exports = compose(
+export default compose(
     connect(createSelector(
         isShowSaveOpen,
         dashboardResource,

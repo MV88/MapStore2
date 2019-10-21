@@ -173,4 +173,4 @@ class ResourceCard extends React.Component {
     };
 }
 
-module.exports = ResourceCard;
+export default ResourceCard;

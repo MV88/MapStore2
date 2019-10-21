@@ -3,7 +3,7 @@ const {Observable} = require('rxjs');
 var axios = require('../../libs/ajax');
 const {interceptOGCError} = require('../../utils/ObservableUtils');
 
-module.exports = {
+export default {
     describeProcess: (url, identifier) =>
         Observable.defer( () => axios.get(getWPSURL(url, {
             "version": "1.0.0",

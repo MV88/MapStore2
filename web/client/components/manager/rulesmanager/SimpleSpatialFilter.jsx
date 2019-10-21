@@ -207,4 +207,4 @@ class SpatialFilter extends React.Component {
     }
 }
 
-module.exports = SpatialFilter;
+export default SpatialFilter;

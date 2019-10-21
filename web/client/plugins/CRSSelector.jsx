@@ -178,7 +178,7 @@ const crsSelector = connect(
   *   }
   * }
 */
-module.exports = {
+export default {
     CRSSelectorPlugin: assign(crsSelector, {
         disablePluginIf: "{state('mapType') === 'leaflet'}",
         MapFooter: {

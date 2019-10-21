@@ -32,7 +32,7 @@ const getSaveTooltipId = (step, {id} = {}) => {
     return "widgets.builder.wizard.addTheWidget";
 };
 
-module.exports = ({ step = 0, editorData = {}, valid, stepButtons = [], onFinish = () => { }, setPage = () => { }} = {}) => (<Toolbar btnDefaultProps={{
+export default ({ step = 0, editorData = {}, valid, stepButtons = [], onFinish = () => { }, setPage = () => { }} = {}) => (<Toolbar btnDefaultProps={{
     bsStyle: "primary",
     bsSize: "sm"
 }}

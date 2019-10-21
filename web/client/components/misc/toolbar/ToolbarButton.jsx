@@ -28,7 +28,7 @@ const popover = require('../enhancers/popover');
  * @prop {string} [tooltipId] @see components.misc.enhancers.tooltip
  */
 
-module.exports = compose(tooltip, popover)(({ glyph, loading, text = "", textId, glyphClassName = "", loaderProps = {}, children, ...props} = {}) =>
+export default compose(tooltip, popover)(({ glyph, loading, text = "", textId, glyphClassName = "", loaderProps = {}, children, ...props} = {}) =>
     <Button {...omit(props, ["pullRight"])}>
         {glyph && !loading ? <Glyphicon glyph={glyph} className={glyphClassName}/> : null}
         {textId ? <Message msgId={textId} /> : text}

@@ -14,7 +14,7 @@ const Message = require('../components/I18N/Message');
 
 const ExpanderPlugin = require('../components/buttons/ToggleButton');
 
-module.exports = {
+export default {
     ExpanderPlugin: assign(ExpanderPlugin, {
         Toolbar: {
             name: 'expand',

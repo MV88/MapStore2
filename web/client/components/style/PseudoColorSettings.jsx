@@ -105,4 +105,4 @@ class PseudoColorSettings extends React.Component {
     };
 }
 
-module.exports = PseudoColorSettings;
+export default PseudoColorSettings;

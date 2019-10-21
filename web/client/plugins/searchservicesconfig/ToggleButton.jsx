@@ -34,7 +34,7 @@ class ToggleServicesConfig extends React.Component {
     }
 }
 
-module.exports = connect((state) => ({
+export default connect((state) => ({
     enabled: state.controls && state.controls.searchservicesconfig && state.controls.searchservicesconfig.enabled || false,
     pressedStyle: "default",
     defaultStyle: "primary",

@@ -105,4 +105,4 @@ class GroupsGrid extends React.Component {
     }
 }
 
-module.exports = GroupsGrid;
+export default GroupsGrid;

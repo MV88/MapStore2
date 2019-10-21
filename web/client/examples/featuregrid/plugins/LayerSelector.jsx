@@ -26,6 +26,6 @@ const LayerSelectorPlugin = connect((state) => ({
 })(LayerSelector);
 
 
-module.exports = {
+export default {
     LayerSelectorPlugin
 };

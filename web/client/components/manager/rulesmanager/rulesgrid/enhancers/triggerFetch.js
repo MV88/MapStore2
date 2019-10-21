@@ -16,7 +16,7 @@ const { getCount } = require('../../../../../observables/rulesmanager');
  * @param {Observable} Stream of props.
  * @return {Observable} Stream of props to trigger the data fetch
  */
-module.exports = ($props) => {
+export default ($props) => {
     return $props.distinctUntilChanged(
         ({filters, version}, newProps) => sameVersion(version, newProps) && sameFilter(filters, newProps))
         .switchMap(({filters, setLoading, onLoad, onLoadError = () => { }}) => {

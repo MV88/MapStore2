@@ -87,7 +87,7 @@ class GroupManager extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     GroupManagerPlugin: assign(
         connect((state) => {
             let searchState = state && state.usergroups;

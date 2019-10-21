@@ -128,4 +128,4 @@ class Locate extends React.Component {
     };
 }
 
-module.exports = Locate;
+export default Locate;

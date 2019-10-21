@@ -6,7 +6,7 @@
 * LICENSE file in the root directory of this source tree.
 */
 const {createSink} = require('recompose');
-module.exports = () => {
+export default () => {
     require('../cesium/plugins/index');
     return {
         Map: require('../cesium/Map'),

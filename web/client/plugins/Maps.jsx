@@ -138,7 +138,7 @@ const MapsPlugin = compose(
     )
 )(Maps);
 
-module.exports = {
+export default {
     MapsPlugin: assign(MapsPlugin, {
         NavMenu: {
             position: 2,

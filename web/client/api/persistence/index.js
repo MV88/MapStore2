@@ -106,4 +106,4 @@ const Persistence = {
     deleteResource: (...args) => Persistence.getApi().deleteResource(...args)
 };
 
-module.exports = Persistence;
+export default Persistence;

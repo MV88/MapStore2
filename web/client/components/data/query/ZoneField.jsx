@@ -243,4 +243,4 @@ class ZoneField extends React.Component {
     };
 }
 
-module.exports = ZoneField;
+export default ZoneField;

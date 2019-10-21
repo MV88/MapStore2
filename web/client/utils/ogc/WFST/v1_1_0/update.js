@@ -20,7 +20,7 @@ const property = (propName, value) => '<wfs:Property>'
  * @return {string}                     the XML for the update
  */
 const update = (content, describeFeatureType) => `<wfs:Update typeName="${getTypeName(describeFeatureType)}">${Array.isArray(content) ? content.join("") : content}</wfs:Update>`;
-module.exports = {
+export default {
     update,
     property
 };

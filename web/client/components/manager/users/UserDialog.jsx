@@ -291,4 +291,4 @@ class UserDialog extends React.Component {
     };
 }
 
-module.exports = UserDialog;
+export default UserDialog;

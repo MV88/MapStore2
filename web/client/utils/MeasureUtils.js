@@ -177,7 +177,7 @@ const isValidGeometry = ({coordinates, type} = {}) => {
     return validatedCoords.length > 0;
 };
 
-module.exports = {
+export default {
     validateFeatureCoordinates,
     isValidGeometry,
     convertUom,

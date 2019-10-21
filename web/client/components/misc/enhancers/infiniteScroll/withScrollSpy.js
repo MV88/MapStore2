@@ -30,7 +30,7 @@ require('rxjs');
  * // ... or with pagination
  * <Cmp onLoadMore={() => console.log("NEED MORE DATA")} items={[]}/>;
  */
-module.exports = ({
+export default ({
     dataProp = "items",
     querySelector,
     closest = false,

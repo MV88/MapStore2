@@ -19,4 +19,4 @@ class DefaultHeader extends React.Component {
     }
 }
 
-module.exports = DefaultHeader;
+export default DefaultHeader;

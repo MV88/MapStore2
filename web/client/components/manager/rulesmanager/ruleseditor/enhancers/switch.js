@@ -8,7 +8,7 @@
 const {compose, withStateHandlers} = require("recompose");
 
 
-module.exports = compose(
+export default compose(
     withStateHandlers(({initExpanded}) => {
         return {
             expanded: !!initExpanded

@@ -105,4 +105,4 @@ class SearchResultList extends React.Component {
     };
 }
 
-module.exports = SearchResultList;
+export default SearchResultList;

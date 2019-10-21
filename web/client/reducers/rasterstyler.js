@@ -66,4 +66,4 @@ function rasterstyler(state = initialSpec, action) {
     }
 }
 
-module.exports = rasterstyler;
+export default rasterstyler;

@@ -83,7 +83,7 @@ const mapBuilder = compose(
 );
 
 
-module.exports = mapBuilder(({
+export default mapBuilder(({
     enabled, onClose = () => {},
     toggleLayerSelector = () => {},
     editorData = {},

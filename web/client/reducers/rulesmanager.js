@@ -146,4 +146,4 @@ function rulesmanager(state = defaultState, action) {
     }
 }
 
-module.exports = rulesmanager;
+export default rulesmanager;

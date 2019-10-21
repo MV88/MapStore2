@@ -115,4 +115,4 @@ class BackgroundSwitcher extends React.Component {
     };
 }
 
-module.exports = BackgroundSwitcher;
+export default BackgroundSwitcher;

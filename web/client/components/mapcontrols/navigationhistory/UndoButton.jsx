@@ -79,4 +79,4 @@ class UndoBtn extends React.Component {
     }
 }
 
-module.exports = UndoBtn;
+export default UndoBtn;

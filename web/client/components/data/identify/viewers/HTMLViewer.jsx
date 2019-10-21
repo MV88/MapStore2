@@ -34,4 +34,4 @@ class HTMLViewer extends React.Component {
     }
 }
 
-module.exports = HTMLViewer;
+export default HTMLViewer;

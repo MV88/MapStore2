@@ -15,7 +15,7 @@ const {clamp, isNil} = require('lodash');
 
 require('react-widgets/lib/less/react-widgets.less');
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
     static propTypes = {
         opacityText: PropTypes.node,
         element: PropTypes.object,

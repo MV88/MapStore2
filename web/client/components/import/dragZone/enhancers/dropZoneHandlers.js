@@ -13,7 +13,7 @@ const {compose, withHandlers} = require('recompose');
  * @function
  *
  */
-module.exports = compose(
+export default compose(
     withHandlers( () => {
         let dropZone = null;
         return {

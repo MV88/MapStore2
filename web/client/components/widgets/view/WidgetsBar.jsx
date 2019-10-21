@@ -31,7 +31,7 @@ const getWidgetIcon = ({widgetType, type} = {}) => {
 /**
  * Bar that can be used to display the list of widgets
  */
-module.exports = compose(
+export default compose(
     // add widgets-bar base class and other default btnGroupProps
     withPropsOnChange(["btnGroupProps"], ({btnGroupProps}) => ({
         btnGroupProps: {

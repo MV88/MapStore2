@@ -76,4 +76,4 @@ class Transform extends React.Component {
     };
 }
 
-module.exports = Transform;
+export default Transform;

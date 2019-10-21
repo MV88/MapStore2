@@ -105,4 +105,4 @@ class DecimalCoordinateEditor extends React.Component {
     }
 }
 
-module.exports = DecimalCoordinateEditor;
+export default DecimalCoordinateEditor;

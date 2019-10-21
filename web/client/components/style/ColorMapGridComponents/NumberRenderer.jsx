@@ -108,4 +108,4 @@ class NumberRenderer extends React.Component {
     };
 }
 
-module.exports = NumberRenderer;
+export default NumberRenderer;

@@ -124,4 +124,4 @@ class RulesGrid extends React.Component {
     };
 }
 
-module.exports = RulesGrid;
+export default RulesGrid;

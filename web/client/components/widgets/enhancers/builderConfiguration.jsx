@@ -15,7 +15,7 @@ const {findGeometryProperty} = require('../../../utils/ogc/WFS/base');
  * Enhancer that retrieves information about the featuretype attributes and the aggregate process
  * to find out proper information
  */
-module.exports = compose(
+export default compose(
     defaultProps({
         dataStreamFactory: ($props, {onEditorChange = () => {}, onConfigurationError = () => {}} = {}) =>
             $props

@@ -71,4 +71,4 @@ class Page extends React.Component {
     }
 }
 
-module.exports = Page;
+export default Page;

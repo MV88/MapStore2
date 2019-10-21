@@ -24,7 +24,7 @@ require('react-grid-layout/css/styles.css');
 const WIDGET_MOBILE_RIGHT_SPACE = 34;
 const getResponsiveWidgetWidth = width => width < 480 ? width - WIDGET_MOBILE_RIGHT_SPACE : width;
 
-module.exports = pure(({
+export default pure(({
     id,
     style,
     className = "",

@@ -305,4 +305,4 @@ class GroupField extends React.Component {
     };
 }
 
-module.exports = GroupField;
+export default GroupField;

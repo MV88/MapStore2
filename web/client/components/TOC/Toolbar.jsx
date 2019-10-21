@@ -413,4 +413,4 @@ class Toolbar extends React.Component {
 
 }
 
-module.exports = Toolbar;
+export default Toolbar;

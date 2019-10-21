@@ -97,4 +97,4 @@ class WMSStyle extends React.Component {
     };
 }
 
-module.exports = WMSStyle;
+export default WMSStyle;

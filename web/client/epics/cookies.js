@@ -44,7 +44,7 @@ const loadCookieDetailsPage = (action$, store) =>
  * @name epics.cookies
  * @type {Object}
  */
-module.exports = {
+export default {
     cookiePolicyChecker,
     loadCookieDetailsPage
 };

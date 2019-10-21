@@ -34,7 +34,7 @@ const PanelHeader = require('./PanelHeader');
  * @prop {bool} hideHeader hide header
  */
 
-module.exports = withState('fullscreen', 'onFullscreen', false)(
+export default withState('fullscreen', 'onFullscreen', false)(
     ({
         fluid,
         className = '',

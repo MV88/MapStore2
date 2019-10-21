@@ -150,4 +150,4 @@ function users(state = {
         return state;
     }
 }
-module.exports = users;
+export default users;

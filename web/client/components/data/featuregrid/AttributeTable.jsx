@@ -10,7 +10,7 @@ const React = require('react');
 const ReactDataGrid = require('react-data-grid');
 const Message = require('../../I18N/Message');
 
-module.exports = ({
+export default ({
     style = {},
     titleMsg = "featuregrid.columns",
     onChange = () => { },

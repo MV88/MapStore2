@@ -173,7 +173,7 @@ const IconNavItem = connect(featuredMapsPluginSelector)(({ isFeaturedEnabled }) 
         <Glyphicon glyph="star" />
     </ToolTipedNavItem>) : null);
 
-module.exports = {
+export default {
     FeaturedMapsPlugin: assign(FeaturedMapsPlugin, {
         NavMenu: {
             position: 1,

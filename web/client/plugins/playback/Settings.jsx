@@ -18,7 +18,7 @@ const { onRangeChanged } = require('../../actions/timeline');
 /**
  * Playback settings component connected to the state
  */
-module.exports = compose(
+export default compose(
     connect(createSelector(
         playbackSettingsSelector,
         selectedLayerSelector,

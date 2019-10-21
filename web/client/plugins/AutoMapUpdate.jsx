@@ -74,7 +74,7 @@ const AutoMapUpdatePlugin = connect(autoMapUpdateSelector, {
     onUpdateOptions: setControlProperty.bind(null, 'mapUpdate', 'options')
 })(AutoMapUpdate);
 
-module.exports = {
+export default {
     AutoMapUpdatePlugin,
     reducers: {},
     epics: {manageAutoMapUpdate}

@@ -107,4 +107,4 @@ class ToggleButton extends React.Component {
     }
 }
 
-module.exports = ToggleButton;
+export default ToggleButton;

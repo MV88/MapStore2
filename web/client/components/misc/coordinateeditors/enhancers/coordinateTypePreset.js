@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const { withProps } = require('recompose');
-module.exports = withProps(({
+export default withProps(({
     coordinate = "lat"
 }) => ({
     maxDegrees: coordinate === "lat" ? 90 : 180,

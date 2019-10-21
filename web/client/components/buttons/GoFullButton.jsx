@@ -78,4 +78,4 @@ class GoFullButton extends React.Component {
     };
 }
 
-module.exports = GoFullButton;
+export default GoFullButton;

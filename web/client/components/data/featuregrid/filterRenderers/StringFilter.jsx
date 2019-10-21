@@ -1,7 +1,7 @@
 const AttributeFilter = require('./AttributeFilter');
 const {compose, withHandlers, defaultProps} = require('recompose');
 const {trim} = require('lodash');
-module.exports = compose(
+export default compose(
     defaultProps({
         onValueChange: () => {},
         placeholderMsgId: "featuregrid.filter.placeholders.string"

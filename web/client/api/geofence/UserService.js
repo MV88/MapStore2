@@ -12,7 +12,7 @@ const { toJSONPromise } = require('./common');
  * Implementation for GeoFence API of UserService that uses GeoFence REST API
  * This implementation interacts with the Stand-Alone version of GeoFence.
  */
-module.exports = ({ addBaseUrl }) => ({
+export default ({ addBaseUrl }) => ({
     getRolesCount: (filter = " ") => {
         const encodedFilter = encodeURIComponent(`%${filter}%`);
         return axios.get(`/groups/count/${encodedFilter}`, addBaseUrl({

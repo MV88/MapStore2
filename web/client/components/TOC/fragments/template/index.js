@@ -18,4 +18,4 @@ const RenderTemplate = function(comp, props) {
 };
 /* eslint-enable */
 
-module.exports = RenderTemplate;
+export default RenderTemplate;

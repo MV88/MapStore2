@@ -219,4 +219,4 @@ function currentMap(state = {}, action) {
     }
 }
 
-module.exports = currentMap;
+export default currentMap;

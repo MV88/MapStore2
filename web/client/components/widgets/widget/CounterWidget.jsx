@@ -19,7 +19,7 @@ const renderHeaderLeftTopItem = ({showTable, toggleTableView = () => {}} = {}) =
 };
 
 
-module.exports = ({
+export default ({
     id,
     title,
     description,

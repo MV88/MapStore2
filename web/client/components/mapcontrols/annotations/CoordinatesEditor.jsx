@@ -355,4 +355,4 @@ class CoordinatesEditor extends React.Component {
     }
 }
 
-module.exports = draggableContainer(CoordinatesEditor);
+export default draggableContainer(CoordinatesEditor);

@@ -10,7 +10,7 @@ const LoadingContent = require('./LoadingContent');
 const ErrorContent = require('./ErrorContent');
 const NormalContent = require('./NormalContent');
 
-module.exports = compose(
+export default compose(
     branch(
         ({loading}) => loading,
         renderComponent(LoadingContent),

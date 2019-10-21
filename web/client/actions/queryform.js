@@ -417,7 +417,7 @@ function updateFilterFieldOptions(filterField, options, valuesCount) {
     };
 }
 
-module.exports = {
+export default {
     ADD_FILTER_FIELD,
     REMOVE_FILTER_FIELD,
     UPDATE_FILTER_FIELD,

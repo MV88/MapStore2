@@ -77,7 +77,7 @@ const arrayDelete = (path, condition, object) => {
     }
     return object;
 };
-module.exports = {
+export default {
     /**
      * Set of lodash fp. **NOTE:** This function is curried, so partial applications will return a function that takes the missing parameters
      * @param {string} path the path

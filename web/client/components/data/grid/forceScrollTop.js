@@ -16,7 +16,7 @@ const Rx = require('rxjs');
  * The forced refresh is implemented by updating the `scrollToTopCounter` property every time
  * a sort or a filter event is triggered.
  */
-module.exports = branch(
+export default branch(
     ({ virtualScroll }) => virtualScroll,
     compose(
         mapPropsStream( props$ => {

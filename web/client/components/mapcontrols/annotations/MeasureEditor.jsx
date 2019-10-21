@@ -23,7 +23,7 @@ const toLocalValue = (value, uom, valueUom) =>
 const { compose, withHandlers, withPropsOnChange, withState, withStateHandlers, defaultProps} = require('recompose');
 
 
-module.exports = compose(
+export default compose(
     defaultProps({
         valueUom: 'm',
         displayUom: 'm',

@@ -31,7 +31,7 @@ function changeHelpwinVisibility(helpwinViz) {
     };
 }
 
-module.exports = {
+export default {
     CHANGE_HELP_STATE,
     CHANGE_HELP_TEXT,
     CHANGE_HELPWIN_VIZ,

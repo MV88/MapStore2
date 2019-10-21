@@ -47,6 +47,6 @@ const addNodeFilters = ({ nodes, filterText, currentLocale }) => addFilteredAttr
     }
 ]);
 
-module.exports = withProps((props) => ({
+export default withProps((props) => ({
     nodes: addNodeFilters(props)
 }));

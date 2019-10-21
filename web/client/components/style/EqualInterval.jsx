@@ -201,4 +201,4 @@ class EqualInterval extends React.Component {
     };
 }
 
-module.exports = EqualInterval;
+export default EqualInterval;

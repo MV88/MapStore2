@@ -22,7 +22,7 @@ const {Row, Col} = require('react-bootstrap');
  * @param {object} [scrollSpyOptions]  Options for the `withScrollSpy` enhancer
  * @return {HOC} The HOC to apply
  */
-module.exports = ({loadPage, pageSize, scrollSpyOptions = {querySelector: ".ms-grid"}}) => compose(
+export default ({loadPage, pageSize, scrollSpyOptions = {querySelector: ".ms-grid"}}) => compose(
     branch(
         ({pagination} = {}) => pagination === 'show-more',
         Component => loadMore(loadPage)(props => <Component {...props} bottom={<ShowMore {...props}/>}/>)

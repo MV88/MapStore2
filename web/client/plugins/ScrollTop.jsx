@@ -53,6 +53,6 @@ class ScrollTop extends React.Component {
 }
 
 
-module.exports = {
+export default {
     ScrollTopPlugin: ScrollTop
 };

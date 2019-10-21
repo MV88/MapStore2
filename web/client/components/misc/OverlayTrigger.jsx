@@ -9,4 +9,4 @@
 
 const withContainer = require('./WithContainer');
 
-module.exports = withContainer(require('react-bootstrap').OverlayTrigger);
+export default withContainer(require('react-bootstrap').OverlayTrigger);

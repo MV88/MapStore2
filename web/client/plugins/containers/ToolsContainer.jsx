@@ -201,4 +201,4 @@ class ToolsContainer extends React.Component {
     };
 }
 
-module.exports = ToolsContainer;
+export default ToolsContainer;

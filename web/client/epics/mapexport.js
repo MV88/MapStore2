@@ -21,7 +21,7 @@ const PersistMap = {
 };
 
 
-module.exports = {
+export default {
     exportMapContext: (action$, {getState = () => {}} = {} ) =>
         action$
             .ofType(EXPORT_MAP)

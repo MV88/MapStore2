@@ -160,4 +160,4 @@ function tutorial(state = initialState, action) {
     }
 }
 
-module.exports = tutorial;
+export default tutorial;

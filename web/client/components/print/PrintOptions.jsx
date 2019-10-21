@@ -62,4 +62,4 @@ class PrintOptions extends React.Component {
     };
 }
 
-module.exports = PrintOptions;
+export default PrintOptions;

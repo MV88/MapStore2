@@ -1,7 +1,7 @@
 
 const {compose} = require('recompose');
 const { withSearchTextState, withVirtualScroll, searchOnTextChange} = require('./enhancers');
-module.exports = compose(
+export default compose(
     withSearchTextState,
     withVirtualScroll,
     searchOnTextChange

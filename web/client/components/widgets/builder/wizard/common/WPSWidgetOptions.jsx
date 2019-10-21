@@ -64,7 +64,7 @@ const renderHeader = (data) => {
     );
 };
 
-module.exports = ({
+export default ({
     data = { options: {} },
     onChange = () => { },
     options = [],

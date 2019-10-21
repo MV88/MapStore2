@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = {
+export default {
     default_tutorial: require('./preset/default_tutorial'),
     default_mobile_tutorial: require('./preset/default_mobile_tutorial'),
     home_tutorial: require('./preset/home_tutorial'),

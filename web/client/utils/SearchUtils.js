@@ -14,6 +14,6 @@ const defaultIconStyle = {
     shadowSize: [41, 41]
 };
 
-module.exports = {
+export default {
     defaultIconStyle
 };

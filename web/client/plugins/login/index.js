@@ -69,7 +69,7 @@ const LoginNav = connect((state) => ({
     onLogout: logoutWithReload
 })(require('../../components/security/UserMenu'));
 
-module.exports = {
+export default {
     UserDetails,
     UserMenu,
     PasswordReset,

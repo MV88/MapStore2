@@ -21,7 +21,7 @@ const mapPropsStream = mapPropsStreamWithConfig(rxjsConfig);
  * @param {function} propStreamFactory a function that gets the stream of props and returns the stream of props to add to the enhanced component
  */
 
-module.exports = propStreamFactory => mapPropsStream(props$ => {
+export default propStreamFactory => mapPropsStream(props$ => {
     const newProps$ = propStreamFactory(props$) || Rx.Observable.empty();
     return newProps$.startWith({}).combineLatest(props$, (overrides = {}, props = {}) => ({
         ...props,

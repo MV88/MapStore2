@@ -18,7 +18,7 @@ const tinycolor = require('tinycolor2');
  * @prop {function} Widget the component selector (triggered by clicking on widget button), props {token = {}, value = '', onChange = () => {}}
  */
 
-module.exports = [
+export default [
     {
         type: 'color',
         active: token => token.type === 'atom' && tinycolor(token.string).isValid(),

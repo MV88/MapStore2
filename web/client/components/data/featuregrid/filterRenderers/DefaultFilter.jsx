@@ -9,7 +9,7 @@
 const AttributeFilter = require('./AttributeFilter');
 const {compose, withHandlers, defaultProps} = require('recompose');
 
-module.exports = compose(
+export default compose(
     defaultProps({
         onValueChange: () => {}
     }),

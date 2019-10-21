@@ -24,7 +24,7 @@ const defaultTest = ({loading, isLoading}) => loading || isLoading && ((typeof i
 * loadingState(({isloading}) => isloading)(ComponentToEnhance);
 *
 */
-module.exports = (isLoading = defaultTest, loaderProps = {}, LoadingComponent = DefaultLoadingComponent) => branch(
+export default (isLoading = defaultTest, loaderProps = {}, LoadingComponent = DefaultLoadingComponent) => branch(
     isLoading,
     // TODO return proper HOC
     () => () => <LoadingComponent {...loaderProps} />);

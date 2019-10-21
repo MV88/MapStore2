@@ -58,4 +58,4 @@ class PolygonThumb extends React.Component {
     }
 }
 
-module.exports = PolygonThumb;
+export default PolygonThumb;

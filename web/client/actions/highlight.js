@@ -30,7 +30,7 @@ function updateHighlighted(features, status) {
     };
 }
 
-module.exports = {
+export default {
     HIGHLIGHT_STATUS, highlightStatus,
     UPDATE_HIGHLIGHTED, updateHighlighted,
     SET_HIGHLIGHT_FEATURES_PATH, setHighlightFeaturesPath

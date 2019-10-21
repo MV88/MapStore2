@@ -10,7 +10,7 @@ const deleteWidget = require('./deleteWidget');
 const { editableWidget, exportableWidget, defaultIcons, withHeaderTools} = require('./tools');
 
 
-module.exports = compose(
+export default compose(
 
     deleteWidget,
     // table / chart visualization

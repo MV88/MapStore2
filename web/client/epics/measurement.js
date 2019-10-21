@@ -87,7 +87,7 @@ const convertMeasureToGeoJSON = (measureGeometry, value, uom, id, measureTool, s
     });
 };
 
-module.exports = (viewer) => ({
+export default (viewer) => ({
     addAnnotationFromMeasureEpic: (action$, store) =>
         action$.ofType(ADD_MEASURE_AS_ANNOTATION)
             .switchMap((a) => {

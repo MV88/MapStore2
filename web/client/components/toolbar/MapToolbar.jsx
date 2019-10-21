@@ -121,4 +121,4 @@ class MapToolbar extends React.Component {
     };
 }
 
-module.exports = MapToolbar;
+export default MapToolbar;

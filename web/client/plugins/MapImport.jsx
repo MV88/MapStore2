@@ -20,7 +20,7 @@ const assign = require('object-assign');
 const {Glyphicon} = require('react-bootstrap');
 const {mapTypeSelector} = require('../selectors/maptype');
 
-module.exports = {
+export default {
     MapImportPlugin: assign({loadPlugin: (resolve) => {
         require.ensure(['./import/Import'], () => {
             const Import = require('./import/Import');

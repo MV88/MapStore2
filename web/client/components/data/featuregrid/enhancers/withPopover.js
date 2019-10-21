@@ -10,7 +10,7 @@ const ReactDOM = require('react-dom');
  * component because it misses the refs property
  * you can customize popover props, content and placement
 */
-module.exports = (Wrapped) => class WithPopover extends React.Component {
+export default (Wrapped) => class WithPopover extends React.Component {
     render() {
         let target = null;
         const {popoverOptions, keyProp, ...props} = this.props;

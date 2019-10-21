@@ -243,7 +243,7 @@ const EditorPlugin = compose(
 )(FeatureDock);
 
 
-module.exports = {
+export default {
     FeatureEditorPlugin: EditorPlugin,
     epics: require('../epics/featuregrid'),
     reducers: {

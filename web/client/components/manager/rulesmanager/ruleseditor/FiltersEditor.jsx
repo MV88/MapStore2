@@ -29,7 +29,7 @@ const spatialMethodOptions = [
 ];
 
 
-module.exports = filtersEnhancer(({onMapReady, geometryState = {}, spatialField = {}, layer = {}, constraints = {}, active = false, setOption = () => {}, mapActive = false, actions = {}}) => {
+export default filtersEnhancer(({onMapReady, geometryState = {}, spatialField = {}, layer = {}, constraints = {}, active = false, setOption = () => {}, mapActive = false, actions = {}}) => {
     const enabled = !isEmpty(layer);
     return enabled && (
         <Grid className="ms-rule-editor" fluid style={{ width: '100%', display: active ? 'block' : 'none'}}>

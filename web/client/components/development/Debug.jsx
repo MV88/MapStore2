@@ -26,4 +26,4 @@ class Debug extends React.Component {
     }
 }
 
-module.exports = Debug;
+export default Debug;

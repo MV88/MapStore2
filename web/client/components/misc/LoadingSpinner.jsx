@@ -6,4 +6,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 const React = require('react');
-module.exports = ({ style = {display: 'inline-block'} } = {}) => <div style={style} className="mapstore-inline-loader" />;
+export default ({ style = {display: 'inline-block'} } = {}) => <div style={style} className="mapstore-inline-loader" />;

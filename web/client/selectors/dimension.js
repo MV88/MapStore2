@@ -91,7 +91,7 @@ const layerDimensionRangeSelector = (state, layerId) => {
     return null;
 };
 
-module.exports = {
+export default {
     layerDimensionRangeSelector,
     layerDimensionSelectorCreator,
     layerDimensionDataSelectorCreator,

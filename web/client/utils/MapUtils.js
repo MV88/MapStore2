@@ -411,7 +411,7 @@ const parseLayoutValue = (value, size = 0) => {
     return isNumber(value) ? value : 0;
 };
 
-module.exports = {
+export default {
     EXTENT_TO_ZOOM_HOOK,
     RESOLUTIONS_HOOK,
     RESOLUTION_HOOK,

@@ -12,7 +12,7 @@ const TemplateUtils = require('../../../../utils/TemplateUtils');
 const HtmlRenderer = require('../../../misc/HtmlRenderer');
 const {Row, Col, Grid} = require('react-bootstrap');
 
-module.exports = ({layer = {}, response}) => (
+export default ({layer = {}, response}) => (
     <Grid fluid>
         {response.features.map((feature, i) =>
             <Row key={i}>

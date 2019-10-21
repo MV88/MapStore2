@@ -147,4 +147,4 @@ const FileUtils = {
         });
     }
 };
-module.exports = FileUtils;
+export default FileUtils;

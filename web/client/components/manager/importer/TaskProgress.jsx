@@ -51,4 +51,4 @@ class TaskProgress extends React.Component {
     };
 }
 
-module.exports = TaskProgress;
+export default TaskProgress;

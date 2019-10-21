@@ -23,7 +23,7 @@ const withScrollSpy = require('./withScrollSpy');
  * @param {function} [isScrolled]  Function to check if trigger load new data eg. (div, offset) => div.scrollTop + div.clientHeight >= div.scrollHeight - offset
  * @return {HOC}                  The HOC to apply
  */
-module.exports = ({
+export default ({
     loadPage,
     scrollSpyOptions,
     loadStreamOptions,

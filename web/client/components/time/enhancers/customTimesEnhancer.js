@@ -13,7 +13,7 @@ const { getStartEnd } = require('../../../utils/TimeUtils');
  * Also draws backgrounds for the 2 ranges and add needed options to make time range draggable.
  *
  */
-module.exports = compose(
+export default compose(
     // Playback range background
     withPropsOnChange(
         ['rangeItems', 'playbackRange', 'playbackEnabled', 'selectedLayer'],

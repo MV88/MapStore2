@@ -99,7 +99,7 @@ class ContentTabs extends React.Component {
     handleSelect = () => {}
 }
 
-module.exports = {
+export default {
     ContentTabsPlugin: assign(connect(selectedSelector, {
         onSelect: onTabSelected
     })(ContentTabs), {

@@ -36,7 +36,7 @@ const hasPrevNextAnimationSteps = createSelector(
     })
 );
 
-module.exports = {
+export default {
     playbackSettingsSelector,
     frameDurationSelector,
     statusSelector,

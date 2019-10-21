@@ -268,4 +268,4 @@ class ShapeFileUploadAndStyle extends React.Component {
 }
 
 
-module.exports = ShapeFileUploadAndStyle;
+export default ShapeFileUploadAndStyle;

@@ -24,7 +24,7 @@ const {projectionDefsSelector} = require('../../selectors/map');
 
 const Empty = () => { return <span/>; };
 
-module.exports = (mapType, actions) => {
+export default (mapType, actions) => {
 
     const components = require('./' + mapType + '/index');
 

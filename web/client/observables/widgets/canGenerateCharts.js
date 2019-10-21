@@ -6,4 +6,4 @@ const {describeProcess} = require('../wps/describe');
  * @param  {Object} layer The layer object
  * @return {Observable} a stream that throws an error if the layer can not be used for charts
  */
-module.exports = layer => Observable.forkJoin(describeFeatureType({layer}), describeProcess(layer.url, "gs:Aggregate"));
+export default layer => Observable.forkJoin(describeFeatureType({layer}), describeProcess(layer.url, "gs:Aggregate"));

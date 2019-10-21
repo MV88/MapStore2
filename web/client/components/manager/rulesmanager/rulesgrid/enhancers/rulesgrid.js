@@ -36,7 +36,7 @@ const dataStreamFactory = $props => {
 
 };
 
-module.exports = compose(
+export default compose(
     defaultProps({
         sortable: false,
         size: 20,

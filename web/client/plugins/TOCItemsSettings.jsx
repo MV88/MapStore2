@@ -89,6 +89,6 @@ const TOCItemsSettingsPlugin = compose(
     })
 )(TOCItemsSettings);
 
-module.exports = {
+export default {
     TOCItemsSettingsPlugin
 };

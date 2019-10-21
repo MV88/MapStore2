@@ -32,4 +32,4 @@ function globeswitcher(state = {last2dMapType: "leaflet"}, action) {
     }
 }
 
-module.exports = globeswitcher;
+export default globeswitcher;

@@ -79,7 +79,7 @@ const retrieveCrossLayerAttributes = ($props, setQueryCollectionParameter) => $p
             featureTypeProperties: []
         });
     }).startWith({});
-module.exports = compose(
+export default compose(
     withPropsOnChange(
         ['crossLayerFilter'],
         ({crossLayerFilter = {}} = {}) => ({

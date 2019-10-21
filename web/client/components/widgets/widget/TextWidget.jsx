@@ -10,7 +10,7 @@ const WidgetContainer = require('./WidgetContainer');
 const emptyTextState = require('../enhancers/emptyTextState');
 const TextView = emptyTextState(({ text } = {}) => <div className="mapstore-widget-default-content ql-editor" dangerouslySetInnerHTML={{__html: text}}></div>);
 
-module.exports = ({
+export default ({
     toggleDeleteConfirm = () => {},
     icons,
     topLeftItems,

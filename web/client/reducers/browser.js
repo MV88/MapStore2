@@ -21,4 +21,4 @@ function browser(state = null, action) {
     }
 }
 
-module.exports = browser;
+export default browser;

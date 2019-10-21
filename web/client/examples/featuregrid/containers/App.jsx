@@ -25,6 +25,6 @@ const App = (props) => {
     );
 };
 
-module.exports = connect((state) => {
+export default connect((state) => {
     return state.locale && {...state.locale} || {};
 })(App);

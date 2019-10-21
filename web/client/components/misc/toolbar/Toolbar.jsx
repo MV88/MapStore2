@@ -24,7 +24,7 @@ const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 * @param  {object} [btnGroupProps] Props to add to the react-bootstrap `ButtonGroup` component
 * @param  {object|boolean} [transitionProps] properties of ReactCSSTransitionGroup. If false transition are  disabled. (for vertical toolbar)
 */
-module.exports = ({
+export default ({
     buttons = [],
     btnGroupProps = {},
     btnDefaultProps = {},

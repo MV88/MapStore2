@@ -62,4 +62,4 @@ const rowIndexSource = {
     }
 };
 
-module.exports = dragSource('Row', rowIndexSource, collect)(PriorityActionsCell);
+export default dragSource('Row', rowIndexSource, collect)(PriorityActionsCell);

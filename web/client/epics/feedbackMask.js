@@ -129,7 +129,7 @@ const detectNewPage = (action$, store) =>
  * @name epics.feedbackMask
  * @type {Object}
  */
-module.exports = {
+export default {
     updateMapVisibility,
     updateDashboardVisibility,
     updateGeoStoryFeedbackMaskVisibility,

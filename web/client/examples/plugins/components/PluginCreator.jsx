@@ -94,4 +94,4 @@ class PluginCreator extends React.Component {
     };
 }
 
-module.exports = PluginCreator;
+export default PluginCreator;

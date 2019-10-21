@@ -20,7 +20,7 @@ const getGroupLayerIds = (id, map) =>
  *  - selectedNodes: array of id of the selected nodes
  *  - selectedLayers, selectedGroups: same as selectedNodes, but only with selected groups or layers ids
  */
-module.exports = compose(
+export default compose(
     withStateHandlers(
         () => ({ selectedLayers: [], selectedGroups: [] }),
         {

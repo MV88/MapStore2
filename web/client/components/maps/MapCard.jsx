@@ -195,4 +195,4 @@ class MapCard extends React.Component {
     };
 }
 
-module.exports = MapCard;
+export default MapCard;

@@ -138,4 +138,4 @@ const Api = ({addBaseUrl, addBaseUrlGS, getGeoServerInstance}) => ({
     }
 });
 
-module.exports = Api;
+export default Api;

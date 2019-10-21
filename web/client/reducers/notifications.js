@@ -41,4 +41,4 @@ function notifications(state = [], action = {}) {
         return state;
     }
 }
-module.exports = notifications;
+export default notifications;

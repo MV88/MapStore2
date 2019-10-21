@@ -9,7 +9,7 @@
 const React = require('react');
 const PropertiesViewer = require('./row/PropertiesViewer');
 
-module.exports = ({response, layer, rowViewer}) => {
+export default ({response, layer, rowViewer}) => {
     const RowViewer = (layer && layer.rowViewer) || rowViewer || PropertiesViewer;
     return (
         <div className="mapstore-json-viewer">

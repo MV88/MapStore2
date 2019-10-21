@@ -17,7 +17,7 @@ const Comp = connect((state) => ({
   }
 );
 
-module.exports = {
+export default {
     Plugin: <Comp/>,
     reducers: {
         comp: (state = {msg: '', counter: 0}, action)  => {

@@ -198,4 +198,4 @@ const enhance = compose(
 );
 const Timeline = require('../../components/time/TimelineComponent');
 
-module.exports = enhance(Timeline);
+export default enhance(Timeline);

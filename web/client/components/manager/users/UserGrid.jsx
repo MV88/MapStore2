@@ -108,4 +108,4 @@ class UsersGrid extends React.Component {
     }
 }
 
-module.exports = UsersGrid;
+export default UsersGrid;

@@ -18,4 +18,4 @@ const mapToNodes = ({ map }) => ({
         ({ layers = {} }) => (LayersUtils.denormalizeGroups(layers.flat || [], layers.groups || []).groups)
     )(LayersUtils.splitMapAndLayers(map))
 });
-module.exports = withProps(mapToNodes);
+export default withProps(mapToNodes);

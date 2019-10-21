@@ -43,4 +43,4 @@ class RuleRenderer extends React.Component {
     }
 }
 
-module.exports = RuleRenderer;
+export default RuleRenderer;

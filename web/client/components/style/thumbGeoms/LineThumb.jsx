@@ -47,4 +47,4 @@ class LineThumb extends React.Component {
     }
 }
 
-module.exports = LineThumb;
+export default LineThumb;

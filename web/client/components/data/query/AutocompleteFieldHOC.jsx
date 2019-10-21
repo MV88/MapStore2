@@ -151,4 +151,4 @@ class AutocompleteFieldHOC extends React.Component {
     };
 }
 
-module.exports = AutocompleteFieldHOC;
+export default AutocompleteFieldHOC;

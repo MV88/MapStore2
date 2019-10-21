@@ -50,4 +50,4 @@ class SwipeHeader extends React.Component {
     }
 }
 
-module.exports = SwipeHeader;
+export default SwipeHeader;

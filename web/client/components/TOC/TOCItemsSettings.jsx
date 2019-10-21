@@ -169,4 +169,4 @@ TOCItemSettings.contextTypes = {
     loadedPlugins: PropTypes.object
 };
 
-module.exports = TOCItemSettings;
+export default TOCItemSettings;

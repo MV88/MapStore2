@@ -15,7 +15,7 @@ const ConfirmDialog = require('../ConfirmModal');
  * Enhancer to manage resource data for a Save dialog.
  * Stores the original data to handle changes.
  */
-module.exports = compose(
+export default compose(
     withStateHandlers(
         ({resource = {}}) => ({
             originalData: resource,

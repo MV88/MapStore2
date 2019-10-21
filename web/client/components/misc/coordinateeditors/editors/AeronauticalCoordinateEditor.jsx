@@ -223,7 +223,7 @@ class AeronauticalCoordinateEditor extends React.Component {
     }
 }
 
-module.exports = compose(
+export default compose(
     coordinateTypePreset,
     decimalToAeronautical,
     tempAeronauticalValue

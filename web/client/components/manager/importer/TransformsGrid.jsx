@@ -72,4 +72,4 @@ class TransformsGrid extends React.Component {
     }
 }
 
-module.exports = TransformsGrid;
+export default TransformsGrid;

@@ -466,4 +466,4 @@ class LeafletMap extends React.Component {
     };
 }
 
-module.exports = LeafletMap;
+export default LeafletMap;

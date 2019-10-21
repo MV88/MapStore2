@@ -33,4 +33,4 @@ function styler(state = {}, action) {
     }
 }
 
-module.exports = styler;
+export default styler;

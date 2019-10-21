@@ -14,7 +14,7 @@ const {Col, Button, ButtonGroup} = require("react-bootstrap");
 const ResizableModal = require("../../misc/ResizableModal");
 const BorderLayout = require("../../layout/BorderLayout");
 
-module.exports = ({styles = [], selectedStyles = [], onSelectionChange = () => {}, show = false, stylesFilter = '', filterPlaceholder = "Filter styles...", clearAll = () => {}, selectAll = () => {}, onFilter = () => {}, onClose = () => {}}) => {
+export default ({styles = [], selectedStyles = [], onSelectionChange = () => {}, show = false, stylesFilter = '', filterPlaceholder = "Filter styles...", clearAll = () => {}, selectAll = () => {}, onFilter = () => {}, onClose = () => {}}) => {
     const filteredStyle = stylesFilter && stylesFilter.length > 0 && styles.filter(st => st.title.toLowerCase().match(stylesFilter && stylesFilter.toLowerCase())) || styles;
     return (
         <Portal>

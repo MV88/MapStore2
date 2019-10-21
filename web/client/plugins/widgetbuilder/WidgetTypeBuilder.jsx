@@ -34,7 +34,7 @@ const Builders = {
 /**
  * Allows the selection of a widget type to start the related wizard
  */
-module.exports = compose(
+export default compose(
     connect(mapStateToProps),
     withProps(({ typeFilter = () => true, availableDependencies = []}) => ({
         typeFilter: (w = {}) => typeFilter(w) && !(w.type === 'legend' && availableDependencies.length === 0)

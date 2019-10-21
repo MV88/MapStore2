@@ -46,7 +46,7 @@ const fullscreenGlyph = {
  * @prop {function} onFullscreen return state of fullscreen
  */
 
-module.exports = ({
+export default ({
     position = 'right',
     onClose,
     bsStyle = 'default',

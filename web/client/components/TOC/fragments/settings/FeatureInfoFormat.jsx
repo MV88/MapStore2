@@ -23,7 +23,7 @@ const Message = require('../../../I18N/Message');
  * @prop {string} [generalInfoFormat] the infoFormat value set in the general settings
  * @prop {function} [onInfoFormatChange] it updates the infoFormat and/or viewer for the given layer
  */
-module.exports = class extends React.Component {
+export default class extends React.Component {
     static propTypes = {
         element: PropTypes.object,
         label: PropTypes.object,

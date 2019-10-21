@@ -168,4 +168,4 @@ class StandardApp extends React.Component {
     };
 }
 
-module.exports = StandardApp;
+export default StandardApp;

@@ -8,7 +8,7 @@ const hideStyle = {
 const normalStyle = {};
 const getStyle = (visible) => visible ? normalStyle : hideStyle;
 
-module.exports = class SimpleTButton extends React.Component {
+export default class SimpleTButton extends React.Component {
     render() {
         const {disabled, id, visible, onClick, glyph, active, className = "square-button", ...props} = this.props;
         return (<Button {...props} bsStyle={active ? "success" : "primary"} disabled={disabled} id={`fg-${id}`}

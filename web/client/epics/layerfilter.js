@@ -42,7 +42,7 @@ const addFilterToLayer = (layer, filter) => {
 };
 
 
-module.exports = {
+export default {
 /**
  * It manages the initialization of the query builder used to build the layerFilter
  * and the update of layerFilter in layer state

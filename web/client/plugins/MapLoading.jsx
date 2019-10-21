@@ -19,7 +19,7 @@ require('./maploading/maploading.css');
 
 const MapLoadingPlugin = connect(selector)(require('../components/misc/spinners/GlobalSpinner/GlobalSpinner'));
 
-module.exports = {
+export default {
     MapLoadingPlugin: assign(MapLoadingPlugin, {
         Toolbar: {
             name: 'maploading',

@@ -36,4 +36,4 @@ const Grid = compose(
     resourceGrid
 )(require('../../components/resources/ResourceGrid'));
 
-module.exports = Grid;
+export default Grid;

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const {compose, withState, withHandlers} = require('recompose');
-module.exports = compose(
+export default compose(
     // table / chart visualization
     withState('data', 'setData', {}),
     withHandlers({

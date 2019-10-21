@@ -123,4 +123,4 @@ class PasswordResetModal extends React.Component {
     }
 }
 
-module.exports = PasswordResetModal;
+export default PasswordResetModal;

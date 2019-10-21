@@ -22,7 +22,7 @@ const SideCard = require('../cardgrids/SideCard');
  * @prop {array} panels array of objects head contains data of sidecard and body is an High-Order Component, e.g. {id: 'panel:000', head: { }, body: () => null }
  */
 
-module.exports = ({
+export default ({
     activePanel,
     fillContainer,
     className,

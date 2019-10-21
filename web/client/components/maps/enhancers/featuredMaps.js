@@ -129,7 +129,7 @@ const updateItemsLifecycle = compose(
     })
 );
 
-module.exports = {
+export default {
     loadPage,
     updateItemsLifecycle
 };

@@ -13,7 +13,7 @@ const {Glyphicon} = require('react-bootstrap');
 
 const Message = require('../components/I18N/Message');
 
-module.exports = {
+export default {
     HelpLinkPlugin: assign(class extends React.Component {
         render() {
             return null;

@@ -43,4 +43,4 @@ class PrintSubmit extends React.Component {
     }
 }
 
-module.exports = PrintSubmit;
+export default PrintSubmit;

@@ -19,7 +19,7 @@ const virtualPagingFilter = (page, size) => (r, i) => i >= page * size && i < (p
  * Implementation of GeoFence API of UserService that uses GeoServer REST API
  * This implementation interacts with the GeoServer integrated version of GeoFence.
  */
-module.exports = ({ addBaseUrlGS, getUserService = () => {} }) => {
+export default ({ addBaseUrlGS, getUserService = () => {} }) => {
     // retrieves roles from rest API
     // TODO: cache
     const getRoles = () => axios.get(`/rest/security/roles.json`, addBaseUrlGS({

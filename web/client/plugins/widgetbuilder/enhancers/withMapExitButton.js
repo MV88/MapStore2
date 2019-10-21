@@ -15,7 +15,7 @@ const {returnToFeatureGridSelector} = require('../../../selectors/widgets');
 /**
  * Reset widgets
  */
-module.exports = compose(
+export default compose(
     connect((state) => ({
         returnToFeatureGrid: returnToFeatureGridSelector(state)}),
     {

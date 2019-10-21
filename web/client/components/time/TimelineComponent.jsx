@@ -305,4 +305,4 @@ class Timeline extends React.Component {
     }
 }
 
-module.exports = Timeline;
+export default Timeline;

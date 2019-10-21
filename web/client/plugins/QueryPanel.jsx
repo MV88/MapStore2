@@ -450,7 +450,7 @@ const QueryPanelPlugin = connect(tocSelector, {
 })(QueryPanel);
 
 
-module.exports = {
+export default {
     QueryPanelPlugin,
     reducers: {
         queryform: require('../reducers/queryform'),

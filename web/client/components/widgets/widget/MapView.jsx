@@ -10,7 +10,7 @@ const mapType = require('../../map/enhancers/mapType');
 const autoResize = require('../../map/enhancers/autoResize');
 const onMapViewChanges = require('../../map/enhancers/onMapViewChanges');
 const {compose} = require('recompose');
-module.exports = compose(
+export default compose(
     onMapViewChanges,
     autoResize(0),
     autoMapType,

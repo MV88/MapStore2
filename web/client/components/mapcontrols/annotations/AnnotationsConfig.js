@@ -46,7 +46,7 @@ const glyphPrefix = 'fa';
  * @memberof components.mapControls.annotations
  * @class AnnotationsConfig
  */
-module.exports = {
+export default {
     /**
      * Available annotation fields.
      * A list of object specifying:

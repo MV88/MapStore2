@@ -93,7 +93,7 @@ const deleteResourceById = (resId, options) => resId ?
         .catch((e) => {return {error: e, resType: "error"}; }) :
     Rx.Observable.of({resType: "success"});
 
-module.exports = {
+export default {
     parseXML,
     deleteResourceById,
     createAssociatedResource,

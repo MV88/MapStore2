@@ -11,7 +11,7 @@ const createControlEnabledSelector = name => createControlVariableSelector(name,
  */
 const showCoordinateEditorSelector = (state) => get(state, "controls.measure.showCoordinateEditor");
 
-module.exports = {
+export default {
     createControlEnabledSelector,
     createControlVariableSelector,
     showCoordinateEditorSelector,

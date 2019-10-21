@@ -31,7 +31,7 @@ class Attribution extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     AttributionPlugin: assign(Attribution, {
         NavMenu: {
             tool: (props) => ({

@@ -115,4 +115,4 @@ class ThemaClassesEditor extends React.Component {
     };
 }
 
-module.exports = ThemaClassesEditor;
+export default ThemaClassesEditor;

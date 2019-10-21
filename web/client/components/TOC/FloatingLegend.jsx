@@ -229,4 +229,4 @@ class FloatingLegend extends React.Component {
     };
 }
 
-module.exports = FloatingLegend;
+export default FloatingLegend;

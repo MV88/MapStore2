@@ -181,4 +181,4 @@ const GaugeChart = ({data, xAxis = {}, colorGenerator, series = [], width = 500,
     );
 };
 
-module.exports = GaugeChart;
+export default GaugeChart;

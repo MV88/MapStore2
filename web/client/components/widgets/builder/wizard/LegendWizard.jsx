@@ -32,7 +32,7 @@ const enhancePreview = compose(
     emptyLegendState(false)
 );
 const LegendPreview = enhancePreview(require('../../widget/LegendView'));
-module.exports = ({
+export default ({
     onChange = () => {}, onFinish = () => {}, setPage = () => {},
     step = 0,
     dependencies,

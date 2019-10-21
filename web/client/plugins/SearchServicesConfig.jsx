@@ -215,7 +215,7 @@ const SearchServicesPlugin = connect(({controls = {}, searchconfig = {}}) => ({
     restServiceConfig,
     updateService})(SearchServicesConfigPanel);
 
-module.exports = {
+export default {
     SearchServicesConfigPlugin: SearchServicesPlugin,
     reducers: {
         searchconfig: require('../reducers/searchconfig')

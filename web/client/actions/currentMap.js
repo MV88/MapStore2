@@ -79,7 +79,7 @@ function addCurrentMapPermission(rule) {
     };
 }
 
-module.exports = {
+export default {
     EDIT_MAP, editMap,
     UPDATE_CURRENT_MAP, updateCurrentMap,
     ERROR_CURRENT_MAP, errorCurrentMap,

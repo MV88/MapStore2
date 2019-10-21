@@ -94,4 +94,4 @@ class ScaleDenominator extends React.Component {
     }
 }
 
-module.exports = ScaleDenominator;
+export default ScaleDenominator;

@@ -89,4 +89,4 @@ class FullScreenButton extends React.Component {
     }
 }
 
-module.exports = FullScreenButton;
+export default FullScreenButton;

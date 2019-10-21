@@ -585,4 +585,4 @@ const AnnotationsUtils = {
     getDashArrayFromStyle
 };
 
-module.exports = AnnotationsUtils;
+export default AnnotationsUtils;

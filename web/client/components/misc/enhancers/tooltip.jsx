@@ -28,7 +28,7 @@ const {omit} = require('lodash');
  * }
  *
  */
-module.exports = branch(
+export default branch(
     ({tooltip, tooltipId} = {}) => tooltip || tooltipId,
     (Wrapped) => ({tooltip, tooltipId, tooltipPosition = "top", tooltipTrigger, keyProp, idDropDown, ...props} = {}) => (<OverlayTrigger
         trigger={tooltipTrigger}

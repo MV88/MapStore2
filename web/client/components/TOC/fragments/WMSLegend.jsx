@@ -38,4 +38,4 @@ class WMSLegend extends React.Component {
     };
 }
 
-module.exports = WMSLegend;
+export default WMSLegend;

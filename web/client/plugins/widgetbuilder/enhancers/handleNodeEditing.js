@@ -9,7 +9,7 @@ const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const { changeEditorSetting } = require('../../../actions/widgets');
 const {getEditorSettings} = require('../../../selectors/widgets');
-module.exports = connect( createSelector(
+export default connect( createSelector(
     getEditorSettings,
     ({ editNode } = {}) => ({
         editNode

@@ -127,4 +127,4 @@ class ResultsProps extends React.Component {
     };
 }
 
-module.exports = { Element: ResultsProps, validate};
+export default { Element: ResultsProps, validate};

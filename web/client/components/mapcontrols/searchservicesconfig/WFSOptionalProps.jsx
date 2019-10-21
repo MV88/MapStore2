@@ -69,4 +69,4 @@ class WFSOptionalProps extends React.Component {
     };
 }
 
-module.exports = {Element: WFSOptionalProps, validate};
+export default {Element: WFSOptionalProps, validate};

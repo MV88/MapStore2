@@ -32,7 +32,7 @@ const {mapValues, pickBy } = require('lodash');
  * @param {action} action
  * @example
  */
-module.exports = (state = {}, action) => {
+export default (state = {}, action) => {
     switch (action.type) {
     case UPDATE_LAYER_DIMENSION_DATA: {
         return set(`data[${action.dimension}][${action.layerId}]`, action.data, state);

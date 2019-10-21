@@ -47,4 +47,4 @@ class InlineSpinner extends React.Component {
     }
 }
 
-module.exports = InlineSpinner;
+export default InlineSpinner;

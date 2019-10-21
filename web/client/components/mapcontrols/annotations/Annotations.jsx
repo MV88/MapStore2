@@ -378,4 +378,4 @@ class Annotations extends React.Component {
     };
 }
 
-module.exports = Annotations;
+export default Annotations;

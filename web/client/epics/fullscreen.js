@@ -54,6 +54,6 @@ const toggleFullscreenEpic = action$ =>
  * @name epics.fullscreen
  * @type {Object}
  */
-module.exports = {
+export default {
     toggleFullscreenEpic
 };

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     LLayer: require('./Layer.jsx').default,
     Locate: require('./Locate.jsx').default,
     LMap: require('./Map.jsx').default,

@@ -37,7 +37,7 @@ function getUrls(opt = {}) {
     return ['a', 'b', 'c'].map( c => template(url.replace("{s}", c), opt));
 }
 
-module.exports = {
+export default {
     getUrls,
     template
 };

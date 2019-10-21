@@ -21,7 +21,7 @@ const About = connect((state) => ({
 const assign = require('object-assign');
 const {Glyphicon} = require('react-bootstrap');
 
-module.exports = {
+export default {
     AboutPlugin: assign(About,
         {
             BurgerMenu: {

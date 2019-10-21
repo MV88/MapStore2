@@ -249,4 +249,4 @@ class SettingsModal extends React.Component {
     };
 }
 
-module.exports = SettingsModal;
+export default SettingsModal;

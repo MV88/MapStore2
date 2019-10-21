@@ -47,7 +47,7 @@ const { assign, pickBy, has } = require('lodash');
  * @param {action} action
 
  */
-module.exports = (state = {
+export default (state = {
     settings: {
         autoSelect: true, // selects the first layer available as guide layer. This is a configuration only setting for now
         collapsed: false

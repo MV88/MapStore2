@@ -59,4 +59,4 @@ class SideGrid extends React.Component {
     }
 }
 
-module.exports = SideGrid;
+export default SideGrid;

@@ -33,7 +33,7 @@ const getEditor = (type, name, props) => {
     }
     return null;
 };
-module.exports = {
+export default {
     get: () => Editors,
     register: ({name, editors}) => {
         if (!!editors) {

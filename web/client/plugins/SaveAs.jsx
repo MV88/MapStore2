@@ -163,7 +163,7 @@ class SaveAs extends React.Component {
 }
 
 
-module.exports = {
+export default {
     SaveAsPlugin: connect(selector,
         {
             onClose: () => onDisplayMetadataEdit(false),

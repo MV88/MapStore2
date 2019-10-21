@@ -167,4 +167,4 @@ var WMTS = L.TileLayer.extend({
         return !this.ignoreErrors;
     }
 });
-module.exports = WMTS;
+export default WMTS;

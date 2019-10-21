@@ -9,7 +9,7 @@ const DEFAULT_SETTINGS = {
     following: true
 };
 
-module.exports = (state = { status: STATUS.STOP, currentFrame: -1, settings: DEFAULT_SETTINGS}, action) => {
+export default (state = { status: STATUS.STOP, currentFrame: -1, settings: DEFAULT_SETTINGS}, action) => {
     switch (action.type) {
     case PLAY: {
         return set(`status`, STATUS.PLAY, state);

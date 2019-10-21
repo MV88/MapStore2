@@ -53,5 +53,5 @@ function loadVersion(config = 'version.txt') {
  * Actions for version
  * @name actions.version
  */
-module.exports = {CHANGE_VERSION, LOAD_VERSION_ERROR,
+export default {CHANGE_VERSION, LOAD_VERSION_ERROR,
     loadVersion, loadVersionError, changeVersion};

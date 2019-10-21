@@ -339,4 +339,4 @@ class GeometryDetails extends React.Component {
     };
 }
 
-module.exports = GeometryDetails;
+export default GeometryDetails;

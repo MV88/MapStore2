@@ -66,7 +66,7 @@ const isEditorActive = state => state.rulesmanager && !!state.rulesmanager.activ
 const triggerLoadSel = state => state.rulesmanager && state.rulesmanager.triggerLoad;
 const isLoading = state => state.rulesmanager && state.rulesmanager.loading;
 const geometryStateSel = state => state.rulesmanager && state.rulesmanager.geometryState;
-module.exports = {
+export default {
     rulesSelector,
     optionsSelector,
     selectedRules,

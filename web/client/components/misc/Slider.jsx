@@ -17,7 +17,7 @@ const {shouldUpdate} = require('recompose');
  * @name Slider
  * @class
  */
-module.exports = shouldUpdate(
+export default shouldUpdate(
     (props, nexProps) =>
         !isEqual(props.start, nexProps.start)
         || props.disabled !== nexProps.disabled

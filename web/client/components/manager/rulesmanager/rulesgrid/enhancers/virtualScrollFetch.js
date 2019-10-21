@@ -17,7 +17,7 @@ const {updatePages, getPagesToLoad} = require('../../../../../utils/RulesGridUti
  * @returns a function that can be merged with stream of
  * props to retrieve data using virtual scroll. This stearm doesn't emit
  */
-module.exports = page$ => props$ => props$.distinctUntilChanged((oProps, nProps) => sameFilter(oProps, nProps))
+export default page$ => props$ => props$.distinctUntilChanged((oProps, nProps) => sameFilter(oProps, nProps))
     .switchMap(({size = 5, maxStoredPages = 5, filters = {},
         onLoad = () => { }, moreRules, setLoading, onLoadError = () => { }
     }) => page$.delay(1).exhaustMap((pagesRequest) => {

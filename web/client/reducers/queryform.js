@@ -510,4 +510,4 @@ function queryform(state = initialState, action) {
     }
 }
 
-module.exports = queryform;
+export default queryform;

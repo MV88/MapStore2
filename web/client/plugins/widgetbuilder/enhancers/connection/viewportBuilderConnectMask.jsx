@@ -12,7 +12,7 @@ const {createSelector} = require('reselect');
 const {compose} = require('recompose');
 const React = require('react');
 const Message = require('../../../../components/I18N/Message');
-module.exports = compose(
+export default compose(
     connect(createSelector(isWidgetSelectionActive, (widgetSelectionActive) => ({ widgetSelectionActive }))),
     withMask(
         ({ widgetSelectionActive }) => widgetSelectionActive,

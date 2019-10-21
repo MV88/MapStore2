@@ -30,4 +30,4 @@ function style(state = initialSpec, action) {
     }
 }
 
-module.exports = style;
+export default style;

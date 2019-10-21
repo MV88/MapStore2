@@ -11,7 +11,7 @@ const { Button: RButton, Glyphicon } = require('react-bootstrap');
 
 const tooltip = require('../../misc/enhancers/tooltip');
 const Button = tooltip(RButton);
-module.exports = ({
+export default ({
     accept,
     children,
     onRef = () => {},

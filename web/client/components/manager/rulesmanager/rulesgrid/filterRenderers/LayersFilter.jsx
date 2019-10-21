@@ -23,7 +23,7 @@ const selector = createSelector([filterSelector, parentFiltersSel], (filter, par
     parentsFilter
 }));
 
-module.exports = compose(
+export default compose(
     connect(selector, {onError: error}),
     defaultProps({
         size: 5,

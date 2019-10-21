@@ -48,4 +48,4 @@ class PreviewButton extends React.Component {
     }
 }
 
-module.exports = PreviewButton;
+export default PreviewButton;

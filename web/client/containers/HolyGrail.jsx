@@ -62,4 +62,4 @@ class HolyGrail extends React.Component {
     }
 }
 
-module.exports = HolyGrail;
+export default HolyGrail;

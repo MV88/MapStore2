@@ -104,4 +104,4 @@ const StyleList = ({
     </BorderLayout>
 );
 
-module.exports = StyleList;
+export default StyleList;

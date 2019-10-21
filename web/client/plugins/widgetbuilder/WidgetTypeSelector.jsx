@@ -21,7 +21,7 @@ const TypeSelector = connect(
 /**
  * Builder page that shows the type selector
  */
-module.exports = ({enabled, onClose = () => {}, typeFilter} = {}) =>
+export default ({enabled, onClose = () => {}, typeFilter} = {}) =>
 
     (<BorderLayout
         className="bg-body"

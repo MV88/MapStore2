@@ -47,4 +47,4 @@ class AutocompleteEditor extends AttributeEditor {
     }
 }
 
-module.exports = AutocompleteEditor;
+export default AutocompleteEditor;

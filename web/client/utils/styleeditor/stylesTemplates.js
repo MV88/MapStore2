@@ -1102,7 +1102,7 @@ const customTemplates = [
     }
 ].map(style => ({ ...style, styleId: uuidv1() }));
 
-module.exports = {
+export default {
     baseTemplates,
     customTemplates
 };

@@ -33,7 +33,7 @@ class ZoomAllPlugin extends React.Component {
 
 const assign = require('object-assign');
 
-module.exports = {
+export default {
     ZoomAllPlugin: assign(ZoomAllPlugin, {
         Toolbar: {
             name: "ZoomAll",

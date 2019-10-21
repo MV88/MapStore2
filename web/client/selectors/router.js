@@ -1,6 +1,6 @@
 
 const {get} = require('lodash');
 
-module.exports = {
+export default {
     pathnameSelector: (state) => get(state, "router.location.pathname") || "/"
 };

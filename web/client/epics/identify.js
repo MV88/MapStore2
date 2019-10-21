@@ -94,7 +94,7 @@ const getFeatureInfo = (basePath, requestParams, lMetaData, appParams = {}, atta
  * @name epics.identify
  * @type {Object}
  */
-module.exports = {
+export default {
     /**
      * Triggers data load on FEATURE_INFO_CLICK events
      */

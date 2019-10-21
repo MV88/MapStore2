@@ -215,4 +215,4 @@ function measurement(state = defaultState, action) {
     }
 }
 
-module.exports = measurement;
+export default measurement;

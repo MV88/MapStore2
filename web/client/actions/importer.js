@@ -720,7 +720,7 @@ function loadStylerTool(geoserverRestURL, importId, taskId) {
     };
 }
 
-module.exports = {
+export default {
     loadImports, createImport, uploadImportFiles,
     loadImport, runImport, deleteImport,
     updateTask, deleteTask, loadTask,

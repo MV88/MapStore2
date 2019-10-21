@@ -105,7 +105,7 @@ function dispatchAction(action) {
  * @name notifications
  * @memberof actions
  */
-module.exports = {
+export default {
     SHOW_NOTIFICATION,
     HIDE_NOTIFICATION,
     CLEAR_NOTIFICATIONS,

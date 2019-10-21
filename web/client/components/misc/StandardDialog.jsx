@@ -20,7 +20,7 @@ const { Glyphicon } = require('react-bootstrap');
  * @prop {children} the body of the modal
  *
  */
-module.exports = ({
+export default ({
     show,
     style = {},
     modal,

@@ -11,7 +11,7 @@ const TextOptions = require('./text/TextOptions');
 const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
 
 
-module.exports = ({
+export default ({
     onChange = () => {}, onFinish = () => {}, setPage = () => {},
     step = 0,
     editorData = {}

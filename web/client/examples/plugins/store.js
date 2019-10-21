@@ -16,7 +16,7 @@ const map = require('../../reducers/map');
 const layers = require('../../reducers/layers');
 const mapConfig = require('../../reducers/config');
 
-module.exports = (plugins, custom) => {
+export default (plugins, custom) => {
     const allReducers = combineReducers(plugins, {
         locale: require('../../reducers/locale'),
         browser: require('../../reducers/browser'),

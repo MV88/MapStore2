@@ -11,7 +11,7 @@ const {InputGroup, Glyphicon} = require('react-bootstrap');
 const localizedProps = require('../misc/enhancers/localizedProps');
 const Select = localizedProps(['placeholder', 'clearValueText', 'noResultsText'])(require('react-select'));
 
-module.exports = ({
+export default ({
     isValidServiceSelected,
     services,
     selectedService,

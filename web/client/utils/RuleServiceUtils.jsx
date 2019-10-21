@@ -12,7 +12,7 @@ const {castArray} = require('lodash');
  * @name RuleServiceUtils
  * @memberof utils
  */
-module.exports = {
+export default {
     /**
      * Convert from GeoServer REST format into GeoFence (internal) format
      * @param {object} rule in GeoServer format

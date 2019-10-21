@@ -13,7 +13,7 @@ const Metadata = require('../../forms/Metadata');
 const Thumbnail = require('../../forms/Thumbnail');
 const uuid = require('uuid/v1');
 
-module.exports = class MainForm extends React.Component {
+export default class MainForm extends React.Component {
     render() {
         const {
             resource,

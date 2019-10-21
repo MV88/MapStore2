@@ -49,4 +49,4 @@ class MetadataTemplate extends React.Component {
          </div >);
      }
 }
-module.exports = MetadataTemplate;
+export default MetadataTemplate;

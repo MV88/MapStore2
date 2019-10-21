@@ -14,7 +14,7 @@ const { moveRules } = require('../../../../../observables/rulesmanager');
  * @param {Observable} Stream of props.
  * @return {Observable} Stream of props to trigger the data fetch
  */
-module.exports = () => (prop$) =>
+export default () => (prop$) =>
     prop$.distinctUntilChanged((oP, nP) => samePages(oP, nP))
         .switchMap(({ orderRule$, setLoading, setData, onLoadError, pages}) =>
             orderRule$

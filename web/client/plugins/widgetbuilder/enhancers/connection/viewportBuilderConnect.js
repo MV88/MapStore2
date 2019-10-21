@@ -11,7 +11,7 @@ const withMapConnect = require('./withMapConnect');
  * Viewport connection configuration support (for widget builders of charts, table, counter)
  *
  */
-module.exports = compose(
+export default compose(
     withProps(({ editorData = {} }) => ({
         canConnect: editorData.geomProp,
         connected: editorData.mapSync

@@ -138,7 +138,7 @@ const MousePositionPlugin = connect(selector, {
     onCRSChange: changeMousePositionCrs
 })(MousePosition);
 
-module.exports = {
+export default {
     MousePositionPlugin: assign(MousePositionPlugin, {
         MapFooter: {
             name: 'mousePosition',

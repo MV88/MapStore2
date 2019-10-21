@@ -158,7 +158,7 @@ const loadRangeData = (id, timeData, getState) => {
 };
 
 
-module.exports = {
+export default {
     /**
      * when a time is selected from timeline, tries to snap to nearest value and set the current time
      */

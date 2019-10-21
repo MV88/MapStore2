@@ -129,6 +129,6 @@ const addStateHandlers = compose(
 
 const AutocompleteCombobox = addStateHandlers(PagedComboboxEnhanced);
 
-module.exports = {
+export default {
     AutocompleteCombobox
 };

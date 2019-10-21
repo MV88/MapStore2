@@ -81,4 +81,4 @@ class Metadata extends React.Component {
 }
 
 
-module.exports = Metadata;
+export default Metadata;

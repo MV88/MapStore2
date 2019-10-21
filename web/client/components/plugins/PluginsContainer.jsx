@@ -192,4 +192,4 @@ class PluginsContainer extends React.Component {
     };
 }
 
-module.exports = PluginsContainer;
+export default PluginsContainer;

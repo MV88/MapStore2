@@ -53,7 +53,7 @@ function selectVectorRule(id) {
         id
     };
 }
-module.exports = {
+export default {
     NEW_VECTOR_RULE,
     REMOVE_VECTOR_RULE,
     SELECT_VECTOR_RULE,

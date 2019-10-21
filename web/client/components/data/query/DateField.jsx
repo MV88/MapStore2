@@ -127,4 +127,4 @@ class DateField extends React.Component {
         this.props.onUpdateField(this.props.fieldRowId, this.props.fieldName, value, this.props.attType);
     };
 }
-module.exports = DateField;
+export default DateField;

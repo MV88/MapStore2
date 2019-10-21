@@ -139,4 +139,4 @@ class BackgroundSelector extends React.Component {
     }
 }
 
-module.exports = BackgroundSelector;
+export default BackgroundSelector;

@@ -25,7 +25,7 @@ const DefaultEmptyComponent = require("../EmptyView");
 * emptyState(({data=[]}) => data.length === 0)(ComponentToEnhance);
 *
 */
-module.exports = (isEmpty, emptyComponentProps, EmptyComponent = DefaultEmptyComponent) => branch(
+export default (isEmpty, emptyComponentProps, EmptyComponent = DefaultEmptyComponent) => branch(
     isEmpty,
     // TODO return proper HOC
     () => (componentProps) => <EmptyComponent {...(emptyComponentProps && isFunction(emptyComponentProps) ? emptyComponentProps(componentProps) : emptyComponentProps)} />);

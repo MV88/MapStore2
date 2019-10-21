@@ -66,7 +66,7 @@ const dataStreamFactory = ($props) => {
  *  - propertyName: an array of property name to optimize download.
  *  - columnSettings: will be merged with grid columnSettings to setup column width and so on
 */
-module.exports = compose(
+export default compose(
     defaultProps({
         virtualScroll: true,
         size: 20,

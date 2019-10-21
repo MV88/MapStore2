@@ -123,4 +123,4 @@ class FilterField extends React.Component {
     };
 }
 
-module.exports = FilterField;
+export default FilterField;

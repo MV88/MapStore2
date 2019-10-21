@@ -44,6 +44,6 @@ const Redirect = connect((state) => ({
 }))(RedirectComponent);
 
 
-module.exports = {
+export default {
     RedirectPlugin: assign(Redirect, {}
     )};

@@ -7,7 +7,7 @@
 
 const {startsWith, trim} = require('lodash');
 
-module.exports = (CodeMirror) => {
+export default (CodeMirror) => {
 
     CodeMirror.defineMode('geocss', function(config, parserConfig = {}) {
 

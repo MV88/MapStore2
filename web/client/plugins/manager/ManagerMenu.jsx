@@ -120,7 +120,7 @@ class ManagerMenu extends React.Component {
 const IMPORTER_ID = 'importer';
 const RULE_MANAGER_ID = 'rulesmanager';
 
-module.exports = {
+export default {
     ManagerMenuPlugin: assign(connect((state) => ({
         enableRulesManager: isPageConfigured(RULE_MANAGER_ID)(state),
         enableImporter: isPageConfigured(IMPORTER_ID)(state),

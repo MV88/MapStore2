@@ -85,7 +85,7 @@ const Plugin = connect(
     ), {
     }
 )(RulesEditorComponent);
-module.exports = {
+export default {
     RulesEditorPlugin: Plugin,
     reducers: {
         rulesmanager: require('../reducers/rulesmanager')

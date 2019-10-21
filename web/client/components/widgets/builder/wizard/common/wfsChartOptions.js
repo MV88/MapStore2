@@ -28,7 +28,7 @@ const getAllowedAggregationOptions = (propertyName, featureTypeProperties = []) 
     return [{value: "Count", label: "COUNT"}];
 };
 
-module.exports = compose(
+export default compose(
     withProps(({featureTypeProperties = [], data = {}} = {}) => ({
         options: propsToOptions(featureTypeProperties),
         aggregationOptions: getAllowedAggregationOptions(data.options && data.options.aggregationAttribute, featureTypeProperties)

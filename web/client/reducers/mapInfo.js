@@ -362,4 +362,4 @@ function mapInfo(state = initState, action) {
     }
 }
 
-module.exports = mapInfo;
+export default mapInfo;

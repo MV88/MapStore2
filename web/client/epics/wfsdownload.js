@@ -81,7 +81,7 @@ const str2bytes = (str) => {
     return bytes;
 };
 */
-module.exports = {
+export default {
     openDownloadTool: (action$) =>
         action$.ofType(DOWNLOAD)
             .switchMap((action) => {

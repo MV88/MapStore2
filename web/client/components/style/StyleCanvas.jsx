@@ -265,4 +265,4 @@ class StyleCanvas extends React.Component {
     };
 }
 
-module.exports = StyleCanvas;
+export default StyleCanvas;

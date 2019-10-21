@@ -24,4 +24,4 @@ class ComboFieldListItem extends React.Component {
     }
 }
 
-module.exports = ComboFieldListItem;
+export default ComboFieldListItem;

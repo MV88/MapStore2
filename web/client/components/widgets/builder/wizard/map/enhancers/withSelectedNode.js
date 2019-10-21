@@ -27,6 +27,6 @@ const traverse = (branch = [], filter) => {
     return null; // no match found
 
 };
-module.exports = withProps(({ nodes = {}, editNode }) => ({
+export default withProps(({ nodes = {}, editNode }) => ({
     selectedNode: editNode && traverse(nodes, { id: editNode })
 }));

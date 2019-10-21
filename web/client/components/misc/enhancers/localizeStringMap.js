@@ -34,7 +34,7 @@ const accumulate = (props, locale) => (acc = {}, propName) => ({
  * //...
  * <Input placeholder={{title}} />
  */
-module.exports = (propNames) => compose(
+export default (propNames) => compose(
     getContext({
         locale: PropTypes.string
     }),

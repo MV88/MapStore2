@@ -45,4 +45,4 @@ class MarkNameSelector extends React.Component {
     }
 }
 
-module.exports = MarkNameSelector;
+export default MarkNameSelector;

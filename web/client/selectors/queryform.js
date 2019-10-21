@@ -23,7 +23,7 @@ const queryFormUiStateSelector = createSelector(attributePanelExpandedSelector, 
 const storedFilterSelector = state => get(state, "layerFilter.persisted");
 const appliedFilterSelector = state => get(state, "layerFilter.applied");
 
-module.exports = {
+export default {
     spatialFieldSelector,
     spatialFieldMethodSelector: state => get(state, "queryform.spatialField.method"),
     spatialFieldGeomSelector,

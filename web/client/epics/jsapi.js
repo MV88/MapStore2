@@ -1,6 +1,6 @@
 const Rx = require('rxjs');
 
-module.exports = {
+export default {
     generateActionTrigger: (startAction) => {
         var eventStream = new Rx.Subject();
         let init = false;

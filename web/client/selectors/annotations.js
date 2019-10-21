@@ -110,7 +110,7 @@ const annotationSelector = createSelector([annotationsListSelector], (annotation
     };
 });
 
-module.exports = {
+export default {
     multiGeometrySelector,
     symbolErrorsSelector,
     modeSelector,

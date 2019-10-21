@@ -23,7 +23,7 @@ const createHistory = (mapState) => {
     return mapState;
 };
 
-module.exports = {
+export default {
     mapConfigHistory: (reducer) => mapConfigHistory(undoable(reducer, {
         filter: (action, currentState, previousState) => {
             let bool = false;

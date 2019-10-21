@@ -62,7 +62,7 @@ const configureDependency = (active, dependency, options) =>
             updateDependencyMap(active, dependency, options)
         )
     );
-module.exports = {
+export default {
     exportWidgetData: action$ =>
         action$.ofType(EXPORT_CSV)
             .do( ({data = [], title = "data"}) =>

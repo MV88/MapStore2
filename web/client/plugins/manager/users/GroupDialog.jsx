@@ -29,4 +29,4 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch);
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(require('../../../components/manager/users/GroupDialog'));
+export default connect(mapStateToProps, mapDispatchToProps)(require('../../../components/manager/users/GroupDialog'));

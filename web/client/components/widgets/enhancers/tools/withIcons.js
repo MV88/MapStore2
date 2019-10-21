@@ -15,7 +15,7 @@ const hasIcons = (tt = []) => tt.filter(isIcon).length > 0;
 /**
  * Transforms `widgetTools` with target `icons` into `icons` for the WidgetContainer
  */
-module.exports = () =>
+export default () =>
     compose(
         withPropsOnChange(
             ['icons', 'widgetTools'],

@@ -27,7 +27,7 @@ const RoleSelector = (props) => (
         </Col>
     </Row>);
 
-module.exports = compose(
+export default compose(
     connect(() => ({}), {onError: error}),
     defaultProps({
         size: 5,

@@ -65,7 +65,7 @@ class DashboardPage extends React.Component {
     }
 }
 
-module.exports = connect((state) => ({
+export default connect((state) => ({
     mode: urlQuery.mobile || state.browser && state.browser.mobile ? 'mobile' : 'desktop'
 }),
 {

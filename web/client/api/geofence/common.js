@@ -24,7 +24,7 @@ const xmlToJson = xml => {
 
 const toJSONPromise = xml => xmlToJson(xml).toPromise();
 
-module.exports = {
+export default {
     toJSONPromise
 };
 

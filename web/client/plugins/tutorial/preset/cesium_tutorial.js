@@ -10,7 +10,7 @@ const React = require('react');
 const I18N = require('../../../components/I18N/I18N');
 const CesiumTooltip = require('../../../components/tutorial/steps/CesiumTooltip');
 
-module.exports = [
+export default [
     {
         translation: 'introCesium',
         selector: '#intro-tutorial'

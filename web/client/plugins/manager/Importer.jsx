@@ -179,7 +179,7 @@ const ImporterPlugin = connect(
         });
     }
 )(require("../../components/manager/importer/Importer"));
-module.exports = {
+export default {
     ImporterPlugin: assign(ImporterPlugin, {
         hide: true,
         Manager: {

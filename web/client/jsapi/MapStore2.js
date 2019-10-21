@@ -338,4 +338,4 @@ if (!global.Intl ) {
     LocaleUtils.ensureIntl();
 }
 
-module.exports = MapStore2;
+export default MapStore2;

@@ -46,7 +46,7 @@ class Login extends React.Component {
     }
 }
 
-module.exports = connect((state) => {
+export default connect((state) => {
     return {
         locale: state.locale && state.locale.current,
         messages: state.locale && state.locale.messages || {},

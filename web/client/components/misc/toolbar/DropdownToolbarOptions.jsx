@@ -43,4 +43,4 @@ const DropdownFeatureType = ({
             </MenuItem>)) : null}
     </DropdownButtonT>
 );
-module.exports = DropdownFeatureType;
+export default DropdownFeatureType;

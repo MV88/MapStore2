@@ -15,4 +15,4 @@ const enhancer = withHandlers({
     }
 });
 
-module.exports = enhancer;
+export default enhancer;

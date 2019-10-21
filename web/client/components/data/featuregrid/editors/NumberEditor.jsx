@@ -58,4 +58,4 @@ class NumberEditor extends AttributeEditor {
     }
 }
 
-module.exports = NumberEditor;
+export default NumberEditor;

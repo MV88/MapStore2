@@ -90,4 +90,4 @@ class ConfirmModal extends React.Component {
     }
 }
 
-module.exports = ConfirmModal;
+export default ConfirmModal;

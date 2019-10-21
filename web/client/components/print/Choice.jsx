@@ -43,4 +43,4 @@ class Choice extends React.Component {
     }
 }
 
-module.exports = Choice;
+export default Choice;

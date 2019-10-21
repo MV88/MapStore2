@@ -9,7 +9,7 @@ const React = require('react');
 const {Glyphicon} = require('react-bootstrap');
 const SideCard = require('../../misc/cardgrids/SideCard');
 
-module.exports = ({styles = [], selectedStyles = [], onSelectionChange = () => {}, className = ""}) => {
+export default ({styles = [], selectedStyles = [], onSelectionChange = () => {}, className = ""}) => {
     return (<span>
         {styles.map((r, idx) => {
             const isSelected = selectedStyles.filter(st => st === r.name).length > 0;

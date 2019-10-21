@@ -43,4 +43,4 @@ function draw(state = initialState, action) {
     }
 }
 
-module.exports = draw;
+export default draw;

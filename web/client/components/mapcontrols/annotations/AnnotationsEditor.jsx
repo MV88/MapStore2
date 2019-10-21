@@ -692,4 +692,4 @@ class AnnotationsEditor extends React.Component {
     };
 }
 
-module.exports = AnnotationsEditor;
+export default AnnotationsEditor;

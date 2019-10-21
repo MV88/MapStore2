@@ -144,4 +144,4 @@ function query(state = initialState, action) {
     }
 }
 
-module.exports = query;
+export default query;

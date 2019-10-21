@@ -56,4 +56,4 @@ function geostories(state = {
     }
 }
 
-module.exports = geostories;
+export default geostories;

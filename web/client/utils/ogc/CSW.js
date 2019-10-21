@@ -125,4 +125,4 @@ const CSW = {
 };
 
 
-module.exports = {CSW, marshaller, unmarshaller};
+export default {CSW, marshaller, unmarshaller};

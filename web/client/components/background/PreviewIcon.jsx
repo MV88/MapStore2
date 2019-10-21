@@ -61,4 +61,4 @@ class PreviewIcon extends React.Component {
     }
 }
 
-module.exports = PreviewIcon;
+export default PreviewIcon;

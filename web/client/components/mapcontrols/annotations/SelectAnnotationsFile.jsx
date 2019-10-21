@@ -99,4 +99,4 @@ class SelectAnnotationsFile extends React.Component {
     };
 }
 
-module.exports = SelectAnnotationsFile;
+export default SelectAnnotationsFile;

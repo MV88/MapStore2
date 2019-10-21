@@ -33,4 +33,4 @@ function layerFilter(state = initialState, action) {
     }
 }
 
-module.exports = layerFilter;
+export default layerFilter;

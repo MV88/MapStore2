@@ -52,7 +52,7 @@ function saveLayerDefaultStyle(geoserverBaseUrl, layerName, style) {
 
     };
 }
-module.exports = {
+export default {
     STYLE_SAVED,
     STYLER_RESET,
     SET_STYLER_LAYER,

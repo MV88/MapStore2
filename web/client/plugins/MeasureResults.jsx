@@ -66,7 +66,7 @@ const MeasureResultsPlugin = connect((state) => {
     toggleMeasure: changeMeasurement
 })(MeasureComponent);
 
-module.exports = {
+export default {
     MeasureResultsPlugin,
     reducers: {measurement: require('../reducers/measurement')}
 };

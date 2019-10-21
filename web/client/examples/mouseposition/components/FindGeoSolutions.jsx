@@ -67,4 +67,4 @@ class SearchTarget extends React.Component {
     }
 }
 
-module.exports = SearchTarget;
+export default SearchTarget;

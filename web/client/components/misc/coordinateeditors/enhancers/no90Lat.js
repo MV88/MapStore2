@@ -5,7 +5,7 @@ const {compose, withHandlers} = require('recompose');
  * This avoid wrong input from user breaks the draw support
  * // TODO: remove this in favor of some more general enhancer or some check inside draw support
  */
-module.exports = compose(
+export default compose(
     withHandlers({
         onChange: ({ onChange = () => { }, maxLatitude = 89.9997222222, coordinate}) => v =>
             onChange(

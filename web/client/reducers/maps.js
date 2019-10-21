@@ -256,4 +256,4 @@ function maps(state = {
     }
 }
 
-module.exports = maps;
+export default maps;

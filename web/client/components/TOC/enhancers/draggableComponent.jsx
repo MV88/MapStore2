@@ -111,7 +111,7 @@ const dropCollect = (connect, monitor) => {
 * @memberof components.TOC.enhancers
 * @param {string} type Type of an item in dnd interactions. Dropping a source onto a target requires them to have identical types
 */
-module.exports = (type, ...args) => {
+export default (type, ...args) => {
     return branch(
         ({isDraggable} = {}) => isDraggable,
         compose(

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const {withStateHandlers, withProps, compose} = require('recompose');
-module.exports = compose(
+export default compose(
     withStateHandlers(
         () => ({}),
         {

@@ -96,4 +96,4 @@ function security(state = {user: null, errorCause: null}, action) {
     }
 }
 
-module.exports = security;
+export default security;

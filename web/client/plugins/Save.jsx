@@ -101,7 +101,7 @@ class Save extends React.Component {
     };
 }
 
-module.exports = {
+export default {
     SavePlugin: connect(selector,
         {
             onClose: toggleControl.bind(null, 'save', false),

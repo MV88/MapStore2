@@ -94,4 +94,4 @@ class LayerMetadataModal extends React.Component {
     }
 }
 
-module.exports = LayerMetadataModal;
+export default LayerMetadataModal;

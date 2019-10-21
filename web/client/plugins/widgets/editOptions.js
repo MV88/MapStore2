@@ -18,7 +18,7 @@ const accessRuleParser = require('../../components/misc/enhancers/security/acces
  * Transforms the rules into the real flags.
  * handle tools options and editing options
  */
-module.exports = (...args) => compose(
+export default (...args) => compose(
     connect(
         createSelector(
             mapIdSelector,

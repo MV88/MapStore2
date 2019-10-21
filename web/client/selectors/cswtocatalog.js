@@ -116,4 +116,4 @@ const cswToCatalogSelector = (catalog) => {
     }
     return null;
 };
-module.exports = {cswToCatalogSelector};
+export default {cswToCatalogSelector};

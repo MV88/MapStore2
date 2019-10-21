@@ -36,7 +36,7 @@ const ITEMS = [{
     description: <Message msgId={`widgets.chartType.${type}.description`} />,
     caption: <Message msgId={`widgets.chartType.${type}.caption`} />
 }));
-module.exports = shouldUpdate(
+export default shouldUpdate(
     ({ types, type }, { types: nextTypes, type: nextType}) => type !== nextType && types !== nextTypes
 )(({ onSelect = () => { }, onNextPage = () => { }, types = ITEMS, type} = {}) => (<Row>
     <StepHeader key="title" title={<Message msgId="widgets.selectChartType.title" />} />

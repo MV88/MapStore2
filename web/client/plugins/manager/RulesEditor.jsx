@@ -134,4 +134,4 @@ class RuleEditor extends React.Component {
 
     }
 }
-module.exports = RuleEditor;
+export default RuleEditor;

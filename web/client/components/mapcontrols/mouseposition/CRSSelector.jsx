@@ -89,4 +89,4 @@ class CRSSelector extends React.Component {
     };
 }
 
-module.exports = CRSSelector;
+export default CRSSelector;

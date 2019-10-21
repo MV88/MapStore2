@@ -68,7 +68,7 @@ const findGroups = (pairs) => {
  * @name GraphUtils
  * @memberof utils
  */
-module.exports = {
+export default {
     bfs,
     findGroups
 };

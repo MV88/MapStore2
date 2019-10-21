@@ -131,7 +131,7 @@ const Measure = connect(
         onMount: (showCoordinateEditor) => setControlProperty("measure", "showCoordinateEditor", showCoordinateEditor)
     }, null, {pure: false})(MeasureDialog);
 
-module.exports = {
+export default {
     MeasurePlugin: assign(Measure, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
         BurgerMenu: {

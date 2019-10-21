@@ -1,6 +1,6 @@
 const { compose, withHandlers } = require('recompose');
 
-module.exports = compose(
+export default compose(
     withHandlers({
         onMapViewChanges: ({ onChange = () => { } }) => map => {
             onChange('map', map);

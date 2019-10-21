@@ -11,7 +11,7 @@ const React = require('react');
 const Loader = require('../../misc/Loader');
 const Message = require('../../I18N/Message');
 
-module.exports = () => (<div style={{
+export default () => (<div style={{
     margin: 'auto',
     maxWidth: 550
 }}>

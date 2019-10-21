@@ -10,7 +10,7 @@ const AttributeFilter = require('./AttributeFilter');
 const {trim} = require('lodash');
 const {compose, withHandlers, withState, defaultProps} = require('recompose');
 const EXPRESSION_REGEX = /\s*(!==|!=|<>|<=|>=|===|==|=|<|>)?\s*(-?\d*\.?\d*)\s*/;
-module.exports = compose(
+export default compose(
     defaultProps({
         onValueChange: () => {}
     }),

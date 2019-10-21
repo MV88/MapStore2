@@ -65,4 +65,4 @@ class StylePolygon extends React.Component {
     }
 }
 
-module.exports = StylePolygon;
+export default StylePolygon;

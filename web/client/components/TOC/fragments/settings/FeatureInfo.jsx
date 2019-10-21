@@ -23,7 +23,7 @@ const Message = require('../../../I18N/Message');
  * @prop {function} onChange called when a format has been selected
  */
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
     static propTypes = {
         element: PropTypes.object,
         defaultInfoFormat: PropTypes.object,

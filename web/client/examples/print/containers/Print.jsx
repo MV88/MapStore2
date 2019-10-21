@@ -46,7 +46,7 @@ class Print extends React.Component {
     }
 }
 
-module.exports = connect((state) => {
+export default connect((state) => {
     return {
         enabled: state.map && state.print.capabilities && true || false,
         locale: state.locale && state.locale.current,

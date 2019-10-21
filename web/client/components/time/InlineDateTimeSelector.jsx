@@ -184,4 +184,4 @@ class InlineDateTimeSelector extends React.Component {
     }
 }
 
-module.exports = InlineDateTimeSelector;
+export default InlineDateTimeSelector;

@@ -22,4 +22,4 @@ class AttributeEditor extends editors.SimpleTextEditor {
         }
     }
 }
-module.exports = AttributeEditor;
+export default AttributeEditor;

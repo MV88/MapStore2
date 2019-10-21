@@ -7,6 +7,6 @@
 */
 const React = require('react');
 
-module.exports = {
+export default {
     getFormatter: (desc) => desc.localType === 'boolean' ? ({value} = {}) => value !== undefined ? <span>{value.toString()}</span> : undefined : undefined
 };

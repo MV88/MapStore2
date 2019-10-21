@@ -26,6 +26,6 @@ class ExamplesPlugin extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     ExamplesPlugin: ExamplesPlugin
 };

@@ -8,7 +8,7 @@
 
 const MapUtils = require('../MapUtils');
 
-module.exports = {
+export default {
     buildRequest: (layer, props) => {
         return {
             request: {

@@ -12,7 +12,7 @@ const {find} = require('lodash');
 /**
  * Merges options and original layer's data to get the final options (with viewParams added)
  */
-module.exports = compose(
+export default compose(
     withPropsOnChange(
         ['dependencies', 'options'],
         ({ dependencies = {}, options, layer = {}} = {}) => {

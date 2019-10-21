@@ -21,6 +21,6 @@ class Header extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     HeaderPlugin: Header
 };

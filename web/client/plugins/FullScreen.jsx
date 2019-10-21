@@ -34,7 +34,7 @@ const FullScreen = connect( ({controls = {}} = {}) => ({
 // removed because it is not supported yet
 // http://caniuse.com/#feat=fullscreen
 
-module.exports = {
+export default {
     FullScreenPlugin: assign(FullScreen, {
         disablePluginIf: "{state('browser') && state('browser').safari}",
         Toolbar: {

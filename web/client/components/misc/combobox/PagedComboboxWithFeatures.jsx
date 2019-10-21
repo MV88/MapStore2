@@ -197,4 +197,4 @@ class PagedCombobox extends React.Component {
     }
 }
 
-module.exports = PagedCombobox;
+export default PagedCombobox;

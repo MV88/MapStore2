@@ -82,4 +82,4 @@ class Theme extends React.Component {
     }
 }
 
-module.exports = withSideEffect(reducePropsToState, handleStateChangeOnClient)(Theme);
+export default withSideEffect(reducePropsToState, handleStateChangeOnClient)(Theme);

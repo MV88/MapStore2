@@ -66,4 +66,4 @@ var Node = createReactClass({
     }
 });
 
-module.exports = Node;
+export default Node;

@@ -24,4 +24,4 @@ class DefaultLayerOrGroup extends React.Component {
     }
 }
 
-module.exports = DefaultLayerOrGroup;
+export default DefaultLayerOrGroup;

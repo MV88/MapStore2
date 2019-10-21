@@ -60,7 +60,7 @@ class MapViewer extends React.Component {
     }
 }
 
-module.exports = connect((state) => ({
+export default connect((state) => ({
     mode: urlQuery.mobile || state.browser && state.browser.touch ? 'mobile' : 'desktop'
 }),
 {

@@ -35,4 +35,4 @@ class PrintPreview extends React.Component {
     }
 }
 
-module.exports = PrintPreview;
+export default PrintPreview;

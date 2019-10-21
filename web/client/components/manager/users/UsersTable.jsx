@@ -45,4 +45,4 @@ class UsersTable extends React.Component {
     }
 }
 
-module.exports = UsersTable;
+export default UsersTable;

@@ -17,7 +17,7 @@ const Viewer = require('./Viewer');
  * @prop {function} onChange handler to change the point coordinates. 2st argument is the key `lat` or `lon`, 2nd argument is the new numeric value.
  * @prop {function} onChangeFormat handler to change the formatCoord. 1st argument is the  formatCoord string.
  */
-module.exports = ({
+export default ({
     coordinate = {},
     formatCoord,
     edit,

@@ -46,4 +46,4 @@ class MapList extends React.Component {
     }
 }
 
-module.exports = MapList;
+export default MapList;

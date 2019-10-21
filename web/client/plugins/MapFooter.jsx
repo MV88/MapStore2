@@ -64,7 +64,7 @@ class MapFooter extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     MapFooterPlugin: MapFooter,
     reducers: {}
 };

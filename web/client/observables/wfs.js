@@ -180,7 +180,7 @@ const getLayerJSONFeature = ({ search = {}, url, name } = {}, filter, {sortOptio
             throw error;
         });
 
-module.exports = {
+export default {
     getJSONFeature,
     getLayerJSONFeature,
     getJSONFeatureWA,

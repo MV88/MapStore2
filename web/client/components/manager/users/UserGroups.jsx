@@ -81,4 +81,4 @@ class UserCard extends React.Component {
 
 */
 
-module.exports = UserCard;
+export default UserCard;

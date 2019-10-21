@@ -506,4 +506,4 @@ class MetadataModal extends React.Component {
     };
 }
 
-module.exports = MetadataModal;
+export default MetadataModal;
