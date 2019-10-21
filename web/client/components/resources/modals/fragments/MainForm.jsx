@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const Message = require('../../../I18N/Message');
-const {Row, Col} = require('react-bootstrap');
-const Metadata = require('../../forms/Metadata');
-const Thumbnail = require('../../forms/Thumbnail');
-const uuid = require('uuid/v1');
+import React from 'react';
+
+import Message from '../../../I18N/Message';
+import { Row, Col } from 'react-bootstrap';
+import Metadata from '../../forms/Metadata';
+import Thumbnail from '../../forms/Thumbnail';
+import uuid from 'uuid/v1';
 
 export default class MainForm extends React.Component {
     render() {
@@ -50,6 +51,6 @@ export default class MainForm extends React.Component {
             </Col>
         </Row>);
     }
-};
+}
 
 

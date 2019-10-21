@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {compose, withState} = require('recompose');
+import { compose, withState } from 'recompose';
 
 
 export default compose(

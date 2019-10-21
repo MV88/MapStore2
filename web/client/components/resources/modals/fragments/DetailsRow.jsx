@@ -1,11 +1,10 @@
-const React = require('react');
-const {Row, Col} = require('react-bootstrap');
-const Spinner = require('react-spinkit');
-const { isNil } = require('lodash');
-const Toolbar = require('../../../misc/toolbar/Toolbar');
-
-const Message = require('../../../I18N/Message');
-const { NO_DETAILS_AVAILABLE } = require('../../../../actions/maps');
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
+import Spinner from 'react-spinkit';
+import { isNil } from 'lodash';
+import Toolbar from '../../../misc/toolbar/Toolbar';
+import Message from '../../../I18N/Message';
+import { NO_DETAILS_AVAILABLE } from '../../../../actions/maps';
 
 
 export default ({

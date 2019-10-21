@@ -6,14 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {Grid, Row, Col, Alert, Glyphicon} = require('react-bootstrap');
-const ResizableModal = require('../../../components/misc/ResizableModal');
-const Portal = require('../../../components/misc/Portal');
-const SecurityUtils = require('../../../utils/SecurityUtils');
-const Message = require('../../../components/I18N/Message');
-const {isArray, isObject, isString} = require('lodash');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { Grid, Row, Col, Alert, Glyphicon } from 'react-bootstrap';
+import ResizableModal from '../../../components/misc/ResizableModal';
+import Portal from '../../../components/misc/Portal';
+import SecurityUtils from '../../../utils/SecurityUtils';
+import Message from '../../../components/I18N/Message';
+import { isArray, isObject, isString } from 'lodash';
 
 /**
  * A Modal window to show password reset form

@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const { mapPropsStream, compose, withStateHandlers } = require('recompose');
-const GeoStoreDAO = require('../../../../api/GeoStoreDAO');
+import Rx from 'rxjs';
+
+import { mapPropsStream, compose, withStateHandlers } from 'recompose';
+import GeoStoreDAO from '../../../../api/GeoStoreDAO';
 
 /**
  * retrieves groups for permission handling and returns as props

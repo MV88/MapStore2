@@ -5,13 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const PropTypes = require('prop-types');
-const React = require('react');
-const Message = require('../I18N/Message');
-const GridCard = require('../misc/GridCard');
-const thumbUrl = require('../maps/style/default.jpg');
-const assign = require('object-assign');
-const ConfirmModal = require('./modals/ConfirmModal');
+import PropTypes from 'prop-types';
+
+import React from 'react';
+import Message from '../I18N/Message';
+import GridCard from '../misc/GridCard';
+import thumbUrl from '../maps/style/default.jpg';
+import assign from 'object-assign';
+import ConfirmModal from './modals/ConfirmModal';
 
 class ResourceCard extends React.Component {
     static propTypes = {

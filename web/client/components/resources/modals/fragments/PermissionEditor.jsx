@@ -6,17 +6,17 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const assign = require('object-assign');
-const _ = require('lodash');
-const Select = require('react-select');
-const Spinner = require('react-spinkit');
-const { Table, Button, Glyphicon } = require('react-bootstrap');
-const Message = require('../../../I18N/Message');
-const LocaleUtils = require('../../../../utils/LocaleUtils');
+import React from 'react';
 
-require('react-select/dist/react-select.css');
+import PropTypes from 'prop-types';
+import assign from 'object-assign';
+import _ from 'lodash';
+import Select from 'react-select';
+import Spinner from 'react-spinkit';
+import { Table, Button, Glyphicon } from 'react-bootstrap';
+import Message from '../../../I18N/Message';
+import LocaleUtils from '../../../../utils/LocaleUtils';
+import 'react-select/dist/react-select.css';
 
 class PermissionEditor extends React.Component {
     static propTypes = {

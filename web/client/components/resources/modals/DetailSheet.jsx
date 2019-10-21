@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactQuill = require('react-quill');
-const Spinner = require('react-spinkit');
+import React from 'react';
 
-const Message = require('../../I18N/Message');
-const Portal = require('../../misc/Portal');
-const ResizableModal = require('../../misc/ResizableModal');
-require('react-quill/dist/quill.snow.css');
+import ReactQuill from 'react-quill';
+import Spinner from 'react-spinkit';
+import Message from '../../I18N/Message';
+import Portal from '../../misc/Portal';
+import ResizableModal from '../../misc/ResizableModal';
+import 'react-quill/dist/quill.snow.css';
 
 // NOTE: partial porting of details sheet from map, still to be tested and added to the save form
 export default ({
