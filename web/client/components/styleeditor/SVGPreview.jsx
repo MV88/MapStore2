@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
 /**
  * Component for rendering SVG previews for polygons, linestrings and points styles.

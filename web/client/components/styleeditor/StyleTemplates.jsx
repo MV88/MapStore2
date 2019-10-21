@@ -6,24 +6,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { head } = require('lodash');
-const { Form, FormGroup, FormControl: FormControlRB, ControlLabel, Alert } = require('react-bootstrap');
+import React from 'react';
 
-const BorderLayout = require('../layout/BorderLayout');
-const emptyState = require('../misc/enhancers/emptyState');
-const Loader = require('../misc/Loader');
-
-const SquareCard = require('../misc/cardgrids/SquareCard');
-const withLocal = require("../misc/enhancers/localizedProps");
+import { head } from 'lodash';
+import { Form, FormGroup, FormControl as FormControlRB, ControlLabel, Alert } from 'react-bootstrap';
+import BorderLayout from '../layout/BorderLayout';
+import emptyState from '../misc/enhancers/emptyState';
+import Loader from '../misc/Loader';
+import SquareCard from '../misc/cardgrids/SquareCard';
+import withLocal from '../misc/enhancers/localizedProps';
 
 const Filter = withLocal('filterPlaceholder')(require('../misc/Filter'));
 const FormControl = withLocal('placeholder')(FormControlRB);
 
-const ResizableModal = require('../misc/ResizableModal');
-const Portal = require('../misc/Portal');
-const Message = require('../I18N/Message');
-const HTML = require('../I18N/HTML');
+import ResizableModal from '../misc/ResizableModal';
+import Portal from '../misc/Portal';
+import Message from '../I18N/Message';
+import HTML from '../I18N/HTML';
 
 const SideGrid = emptyState(
     ({items}) => items.length === 0,

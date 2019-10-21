@@ -4,7 +4,7 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
-const { head } = require('lodash');
+import { head } from 'lodash';
 
 const parseLocalPart = {
     'short': 'number',
@@ -102,6 +102,6 @@ export default function(CodeMirror) {
         }
         return null;
     });
-};
+}
 
 

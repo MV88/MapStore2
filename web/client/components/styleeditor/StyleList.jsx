@@ -6,16 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const { Glyphicon: GlyphiconRB } = require('react-bootstrap');
-const BorderLayout = require('../layout/BorderLayout');
-const emptyState = require('../misc/enhancers/emptyState');
-const withLocal = require("../misc/enhancers/localizedProps");
+import { Glyphicon as GlyphiconRB } from 'react-bootstrap';
+import BorderLayout from '../layout/BorderLayout';
+import emptyState from '../misc/enhancers/emptyState';
+import withLocal from '../misc/enhancers/localizedProps';
 const Filter = withLocal('filterPlaceholder')(require('../misc/Filter'));
-const SVGPreview = require('./SVGPreview');
-const Message = require('../I18N/Message');
-const tooltip = require('../misc/enhancers/tooltip');
+import SVGPreview from './SVGPreview';
+import Message from '../I18N/Message';
+import tooltip from '../misc/enhancers/tooltip';
 const Glyphicon = tooltip(GlyphiconRB);
 
 const SideGrid = emptyState(
