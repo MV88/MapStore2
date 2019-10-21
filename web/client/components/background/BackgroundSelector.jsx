@@ -6,16 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const assign = require('object-assign');
+import React from 'react';
 
-const PreviewButton = require('./PreviewButton');
-const PreviewList = require('./PreviewList');
-const PreviewIcon = require('./PreviewIcon');
-
-const PropTypes = require('prop-types');
-
-require('./css/background.css');
+import assign from 'object-assign';
+import PreviewButton from './PreviewButton';
+import PreviewList from './PreviewList';
+import PreviewIcon from './PreviewIcon';
+import PropTypes from 'prop-types';
+import './css/background.css';
 
 class BackgroundSelector extends React.Component {
     static propTypes = {
