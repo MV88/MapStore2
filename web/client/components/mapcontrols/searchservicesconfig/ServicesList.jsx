@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {FormGroup, Checkbox, ControlLabel, Glyphicon} = require('react-bootstrap');
-const Message = require('../../I18N/Message');
-const ConfirmButton = require('../../buttons/ConfirmButton');
-const PropTypes = require('prop-types');
+import React from 'react';
+
+import { FormGroup, Checkbox, ControlLabel, Glyphicon } from 'react-bootstrap';
+import Message from '../../I18N/Message';
+import ConfirmButton from '../../buttons/ConfirmButton';
+import PropTypes from 'prop-types';
 
 function validate() {
     return true;

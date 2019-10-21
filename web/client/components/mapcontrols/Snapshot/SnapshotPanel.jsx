@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,21 +8,20 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {Button, Col, Grid, Row, Image, Glyphicon, Table, Panel, Alert} = require('react-bootstrap');
-const {DateFormat} = require('../../I18N/I18N');
-require("./css/snapshot.css");
+import React from 'react';
 
-const ConfigUtils = require('../../../utils/ConfigUtils');
-const shotingImg = require('./shoting.gif');
-const notAvailable = require('./not-available.png');
-const {isEqual} = require('lodash');
+import { Button, Col, Grid, Row, Image, Glyphicon, Table, Panel, Alert } from 'react-bootstrap';
+import { DateFormat } from '../../I18N/I18N';
+import './css/snapshot.css';
+import ConfigUtils from '../../../utils/ConfigUtils';
+import shotingImg from './shoting.gif';
+import notAvailable from './not-available.png';
+import { isEqual } from 'lodash';
 let SnapshotSupport;
-const BasicSpinner = require('../../misc/spinners/BasicSpinner/BasicSpinner');
-const Dialog = require('../../misc/Dialog');
-
-const Message = require('../../I18N/Message');
-const Portal = require('../../misc/Portal');
+import BasicSpinner from '../../misc/spinners/BasicSpinner/BasicSpinner';
+import Dialog from '../../misc/Dialog';
+import Message from '../../I18N/Message';
+import Portal from '../../misc/Portal';
 
 /**
  * SnapshotPanel allow to export a snapshot of the current map, showing a

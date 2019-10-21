@@ -1,4 +1,5 @@
-var PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,10 +7,11 @@ var PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React = require('react');
-var BootstrapReact = require('react-bootstrap');
+import React from 'react';
+
+import BootstrapReact from 'react-bootstrap';
 var Label = BootstrapReact.Label;
-var NumberFormat = require('../../I18N/Number');
+import NumberFormat from '../../I18N/Number';
 
 class MousePositionLabelDD extends React.Component {
     static propTypes = {

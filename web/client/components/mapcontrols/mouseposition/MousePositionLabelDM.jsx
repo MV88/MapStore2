@@ -5,13 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const BootstrapReact = require('react-bootstrap');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import BootstrapReact from 'react-bootstrap';
 const Label = BootstrapReact.Label;
-const NumberFormat = require('../../I18N/Number');
-const {isNil} = require('lodash');
-const {roundCoord} = require('../../../utils/CoordinatesUtils');
+import NumberFormat from '../../I18N/Number';
+import { isNil } from 'lodash';
+import { roundCoord } from '../../../utils/CoordinatesUtils';
 
 class MousePositionLabelDM extends React.Component {
     static propTypes = {

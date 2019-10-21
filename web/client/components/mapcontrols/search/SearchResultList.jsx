@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -7,10 +8,11 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var SearchResult = require('./SearchResult');
-const I18N = require('../../I18N/I18N');
-var assign = require('object-assign');
+import React from 'react';
+
+import SearchResult from './SearchResult';
+import I18N from '../../I18N/I18N';
+import assign from 'object-assign';
 
 
 class SearchResultList extends React.Component {

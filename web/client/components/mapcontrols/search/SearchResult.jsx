@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -7,10 +8,10 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {get} = require('lodash');
+import React from 'react';
 
-const {generateTemplateString} = require('../../../utils/TemplateUtils');
+import { get } from 'lodash';
+import { generateTemplateString } from '../../../utils/TemplateUtils';
 
 class SearchResult extends React.Component {
     static propTypes = {
