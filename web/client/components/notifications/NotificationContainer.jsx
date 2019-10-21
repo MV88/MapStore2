@@ -5,12 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const NotificationSystem = require('react-notification-system');
-const PropTypes = require('prop-types');
-const {injectIntl, intlShape, defineMessages} = require('react-intl');
+import React from 'react';
 
-var LocaleUtils = require('../../utils/LocaleUtils');
+import NotificationSystem from 'react-notification-system';
+import PropTypes from 'prop-types';
+import { injectIntl, intlShape, defineMessages } from 'react-intl';
+import LocaleUtils from '../../utils/LocaleUtils';
 
 /**
  * Container for Notifications. Allows to display notifications by passing
