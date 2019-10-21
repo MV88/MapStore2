@@ -5,18 +5,27 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const { MAPS_LIST_LOADING, ATTRIBUTE_UPDATED} = require('../actions/maps');
+import Rx from 'rxjs';
 
-const { SAVED: GEOSTORY_SAVED } = require('../actions/geostory');
+import { MAPS_LIST_LOADING, ATTRIBUTE_UPDATED } from '../actions/maps';
+import { SAVED as GEOSTORY_SAVED } from '../actions/geostory';
 
-const { SEARCH_GEOSTORIES, DELETE_GEOSTORY, GEOSTORY_DELETED, RELOAD, searchGeostories, geostoriesListLoaded, geostoryDeleted, geostoriesLoading } = require('../actions/geostories');
-const { searchParamsSelector, searchTextSelector, totalCountSelector} = require('../selectors/geostories');
-const GeoStoreApi = require('../api/GeoStoreDAO');
-const { wrapStartStop } = require('../observables/epics');
-const {error} = require('../actions/notifications');
+import {
+    SEARCH_GEOSTORIES,
+    DELETE_GEOSTORY,
+    GEOSTORY_DELETED,
+    RELOAD,
+    searchGeostories,
+    geostoriesListLoaded,
+    geostoryDeleted,
+    geostoriesLoading,
+} from '../actions/geostories';
 
-const {deleteResource} = require('../api/persistence');
+import { searchParamsSelector, searchTextSelector, totalCountSelector } from '../selectors/geostories';
+import GeoStoreApi from '../api/GeoStoreDAO';
+import { wrapStartStop } from '../observables/epics';
+import { error } from '../actions/notifications';
+import { deleteResource } from '../api/persistence';
 
 const calculateNewParams = state => {
     const totalCount = totalCountSelector(state);

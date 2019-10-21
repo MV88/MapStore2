@@ -6,14 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const { toggleControl, setControlProperty, setControlProperties } = require('../../actions/controls');
-const {UPDATE_MAP_LAYOUT} = require('../../actions/maplayout');
-const {closeIdentify, purgeMapInfoResults, noQueryableLayers} = require('../../actions/mapInfo');
-
-const {updateMapLayoutEpic} = require('../maplayout');
-const {testEpic, addTimeoutEpic, TEST_TIMEOUT} = require('./epicTestUtils');
+import { toggleControl, setControlProperty, setControlProperties } from '../../actions/controls';
+import { UPDATE_MAP_LAYOUT } from '../../actions/maplayout';
+import { closeIdentify, purgeMapInfoResults, noQueryableLayers } from '../../actions/mapInfo';
+import { updateMapLayoutEpic } from '../maplayout';
+import { testEpic, addTimeoutEpic, TEST_TIMEOUT } from './epicTestUtils';
 
 describe('map layout epics', () => {
     it('tests layout', (done) => {

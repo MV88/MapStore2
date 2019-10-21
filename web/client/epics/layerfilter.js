@@ -8,22 +8,26 @@
 
 
 // eslint-disable-next-line no-unused-vars
-const Rx = require('rxjs');
+import Rx from 'rxjs';
 
-const {get, head} = require("lodash");
-const { LOCATION_CHANGE} = require('connected-react-router');
+import { get, head } from 'lodash';
+import { LOCATION_CHANGE } from 'connected-react-router';
+import { TOGGLE_CONTROL, setControlProperty } from '../actions/controls';
+import { QUERY_FORM_SEARCH, loadFilter, reset, search } from '../actions/queryform';
+import { changeLayerProperties } from '../actions/layers';
 
-const {TOGGLE_CONTROL, setControlProperty} = require('../actions/controls');
-const {QUERY_FORM_SEARCH, loadFilter, reset, search} = require('../actions/queryform');
-const {changeLayerProperties} = require('../actions/layers');
+import {
+    OPEN_QUERY_BUILDER,
+    initLayerFilter,
+    DISCARD_CURRENT_FILTER,
+    APPLY_FILTER,
+    storeAppliedFilter,
+} from '../actions/layerFilter';
 
-
-const {OPEN_QUERY_BUILDER, initLayerFilter, DISCARD_CURRENT_FILTER, APPLY_FILTER, storeAppliedFilter} = require('../actions/layerFilter');
-const {featureTypeSelected, toggleLayerFilter, initQueryPanel} = require("../actions/wfsquery");
-const {getSelectedLayer} = require("../selectors/layers");
-
-const {changeDrawingStatus} = require('../actions/draw');
-const FilterUtils = require('../utils/FilterUtils');
+import { featureTypeSelected, toggleLayerFilter, initQueryPanel } from '../actions/wfsquery';
+import { getSelectedLayer } from '../selectors/layers';
+import { changeDrawingStatus } from '../actions/draw';
+import FilterUtils from '../utils/FilterUtils';
 
 
 const isNotEmptyFilter = ({crossLayerFilter, spatialField, filterFields} = {}) => {

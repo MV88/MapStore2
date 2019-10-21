@@ -5,11 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const screenfull = require('screenfull');
-const {setControlProperty} = require('../actions/controls');
-const {TOGGLE_FULLSCREEN} = require('../actions/fullscreen');
-const ConfigUtils = require('../utils/ConfigUtils');
-const Rx = require('rxjs');
+import screenfull from 'screenfull';
+
+import { setControlProperty } from '../actions/controls';
+import { TOGGLE_FULLSCREEN } from '../actions/fullscreen';
+import ConfigUtils from '../utils/ConfigUtils';
+import Rx from 'rxjs';
 
 const getFullScreenEvent = () => {
     let candidates = [

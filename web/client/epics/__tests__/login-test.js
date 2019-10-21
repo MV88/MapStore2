@@ -6,17 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const { INIT_CATALOG } = require('../../actions/catalog');
-const { SET_CONTROL_PROPERTY, setControlProperty } = require('../../actions/controls');
-const { loginSuccess, logout, logoutWithReload } = require('../../actions/security');
-const { initCatalogOnLoginOutEpic, promptLoginOnMapError, reloadMapConfig } = require('../login');
-const { configureError } = require('../../actions/config');
-const { dashboardLoadError } = require('../../actions/dashboard');
-const { loadGeostoryError } = require('../../actions/geostory');
-const { FEEDBACK_MASK_LOADING } = require('../../actions/feedbackMask');
+import expect from 'expect';
 
-const { testEpic } = require('./epicTestUtils');
+import { INIT_CATALOG } from '../../actions/catalog';
+import { SET_CONTROL_PROPERTY, setControlProperty } from '../../actions/controls';
+import { loginSuccess, logout, logoutWithReload } from '../../actions/security';
+import { initCatalogOnLoginOutEpic, promptLoginOnMapError, reloadMapConfig } from '../login';
+import { configureError } from '../../actions/config';
+import { dashboardLoadError } from '../../actions/dashboard';
+import { loadGeostoryError } from '../../actions/geostory';
+import { FEEDBACK_MASK_LOADING } from '../../actions/feedbackMask';
+import { testEpic } from './epicTestUtils';
 
 describe('login Epics', () => {
     it('init catalog on login', (done) => {

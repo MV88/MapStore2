@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
+import Rx from 'rxjs';
 
 export default {
     onEpic: (action$, store) =>
