@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var Layers = require('../../../../utils/cesium/Layers');
-var Cesium = require('../../../../libs/cesium');
-var assign = require('object-assign');
+import Layers from '../../../../utils/cesium/Layers';
+
+import Cesium from '../../../../libs/cesium';
+import assign from 'object-assign';
 
 /**
  * Created by thomas on 27/01/14.

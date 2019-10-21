@@ -6,19 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Layers = require('../../../../utils/cesium/Layers');
-const Cesium = require('../../../../libs/cesium');
-const BILTerrainProvider = require('../../../../utils/cesium/BILTerrainProvider')(Cesium);
-const ConfigUtils = require('../../../../utils/ConfigUtils');
-const ProxyUtils = require('../../../../utils/ProxyUtils');
-const assign = require('object-assign');
-const {isArray} = require('lodash');
-const WMSUtils = require('../../../../utils/cesium/WMSUtils');
-const {getAuthenticationParam, getURLs} = require('../../../../utils/LayersUtils');
-const { optionsToVendorParams } = require('../../../../utils/VendorParamsUtils');
-const SecurityUtils = require('../../../../utils/SecurityUtils');
+import Layers from '../../../../utils/cesium/Layers';
 
-const { isVectorFormat } = require('../../../../utils/VectorTileUtils');
+import Cesium from '../../../../libs/cesium';
+import BILTerrainProviderFactory from '../../../../utils/cesium/BILTerrainProvider';
+const BILTerrainProvider = BILTerrainProviderFactory(Cesium);
+import ConfigUtils from '../../../../utils/ConfigUtils';
+import ProxyUtils from '../../../../utils/ProxyUtils';
+import assign from 'object-assign';
+import { isArray } from 'lodash';
+import WMSUtils from '../../../../utils/cesium/WMSUtils';
+import { getAuthenticationParam, getURLs } from '../../../../utils/LayersUtils';
+import { optionsToVendorParams } from '../../../../utils/VendorParamsUtils';
+import SecurityUtils from '../../../../utils/SecurityUtils';
+import { isVectorFormat } from '../../../../utils/VectorTileUtils';
 
 function splitUrl(originalUrl) {
     let url = originalUrl;

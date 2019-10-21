@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 // var React = require('react');
-var L = require('leaflet');
+import L from 'leaflet';
+
 // let Locate = require('../Locate');
-let expect = require('expect');
+import expect from 'expect';
 
 
 describe('leaflet Locate component', () => {

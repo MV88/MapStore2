@@ -5,7 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const GrabMap = require("./GrabMap");
+import GrabMap from './GrabMap';
+
 /**
  * The Preview for Leaflet.
  * The preview can use the same React Class.

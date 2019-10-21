@@ -5,21 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const LeafletMap = require('../Map.jsx');
-const LeafLetLayer = require('../Layer.jsx');
-const expect = require('expect');
-const mapUtils = require('../../../../utils/MapUtils');
-const {isNumber} = require('lodash');
+import React from 'react';
 
-require('leaflet-draw');
-
-require('../../../../utils/leaflet/Layers');
-require('../plugins/OSMLayer');
+import ReactDOM from 'react-dom';
+import LeafletMap from '../Map.jsx';
+import LeafLetLayer from '../Layer.jsx';
+import expect from 'expect';
+import mapUtils from '../../../../utils/MapUtils';
+import { isNumber } from 'lodash';
+import 'leaflet-draw';
+import '../../../../utils/leaflet/Layers';
+import '../plugins/OSMLayer';
 
 // required for elevation tests
-require('../plugins/WMSLayer');
+import '../plugins/WMSLayer';
 
 describe('LeafletMap', () => {
 

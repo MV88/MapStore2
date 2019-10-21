@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Layers = require('../../../../utils/leaflet/Layers');
-const {isNil} = require('lodash');
-const L = require('leaflet');
+import Layers from '../../../../utils/leaflet/Layers';
+
+import { isNil } from 'lodash';
+import L from 'leaflet';
 
 const defaultStyle = {
     radius: 5,
@@ -18,7 +19,7 @@ const defaultStyle = {
     fillOpacity: 0
 };
 
-const assign = require('object-assign');
+import assign from 'object-assign';
 
 const setOpacity = (layer, opacity) => {
     if (layer.eachLayer) {

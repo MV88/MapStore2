@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { withStateHandlers, withProps, compose} = require("recompose");
-const withResizeSpy = require('../../misc/enhancers/withResizeSpy');
+import { withStateHandlers, withProps, compose } from 'recompose';
+
+import withResizeSpy from '../../misc/enhancers/withResizeSpy';
 
 /**
  * Makes the map adaptive to the container and allow auto-resize on dimension's change.

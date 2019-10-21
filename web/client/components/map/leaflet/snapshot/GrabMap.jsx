@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,16 +7,15 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ConfigUtils = require('../../../../utils/ConfigUtils');
-const ProxyUtils = require('../../../../utils/ProxyUtils');
-const {isEqual} = require('lodash');
-const html2canvas = require('html2canvas');
-const canvg = require('canvg-browser');
+import React from 'react';
 
-const {Promise} = require('es6-promise');
-
-require("./snapshotMapStyle.css");
+import ConfigUtils from '../../../../utils/ConfigUtils';
+import ProxyUtils from '../../../../utils/ProxyUtils';
+import { isEqual } from 'lodash';
+import html2canvas from 'html2canvas';
+import canvg from 'canvg-browser';
+import { Promise } from 'es6-promise';
+import './snapshotMapStyle.css';
 
 /**
  * GrabMap for Leaflet uses HTML2CANVAS to generate the image for the existing

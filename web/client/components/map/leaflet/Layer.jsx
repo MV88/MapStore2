@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,10 +7,11 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React = require('react');
-var Layers = require('../../../utils/leaflet/Layers');
-var assign = require('object-assign');
-var {isEqual} = require('lodash');
+import React from 'react';
+
+import Layers from '../../../utils/leaflet/Layers';
+import assign from 'object-assign';
+import { isEqual } from 'lodash';
 
 class LeafletLayer extends React.Component {
     static propTypes = {

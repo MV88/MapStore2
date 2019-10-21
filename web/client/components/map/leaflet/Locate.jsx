@@ -1,9 +1,9 @@
-var PropTypes = require('prop-types');
-var React = require('react');
-var L = require('leaflet');
-var assign = require('object-assign');
-require('leaflet.locatecontrol');
-require('leaflet.locatecontrol/dist/L.Control.Locate.css');
+import PropTypes from 'prop-types';
+import React from 'react';
+import L from 'leaflet';
+import assign from 'object-assign';
+import 'leaflet.locatecontrol';
+import 'leaflet.locatecontrol/dist/L.Control.Locate.css';
 
 const defaultOpt = { // For all configuration options refer to https://github.com/Norkart/Leaflet-MiniMap
     follow: true,  // follow with zoom and pan the user's location
