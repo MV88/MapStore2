@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,12 +7,13 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React = require('react');
-var BootstrapReact = require('react-bootstrap');
+import React from 'react';
+
+import BootstrapReact from 'react-bootstrap';
 var Badge = BootstrapReact.Badge;
 
-const {isString} = require('lodash');
-const LocaleUtils = require('../../utils/LocaleUtils');
+import { isString } from 'lodash';
+import LocaleUtils from '../../utils/LocaleUtils';
 
 /**
  * A badge to show that there is a help text available for the parent component.
