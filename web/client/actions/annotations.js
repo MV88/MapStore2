@@ -6,6 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { head } from 'lodash';
+
 const EDIT_ANNOTATION = 'ANNOTATIONS:EDIT';
 const OPEN_EDITOR = 'ANNOTATIONS:OPEN_EDITOR';
 const SHOW_ANNOTATION = 'ANNOTATIONS:SHOW';
@@ -104,7 +106,6 @@ function download(annotation) {
     };
 }
 
-const {head} = require('lodash');
 
 function editAnnotation(id) {
     return (dispatch, getState) => {

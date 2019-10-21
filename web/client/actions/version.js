@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
 const CHANGE_VERSION = 'CHANGE_VERSION';
 const LOAD_VERSION_ERROR = 'LOAD_VERSION_ERROR';

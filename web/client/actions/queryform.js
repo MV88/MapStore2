@@ -54,7 +54,7 @@ const SET_AUTOCOMPLETE_MODE = 'SET_AUTOCOMPLETE_MODE';
 const TOGGLE_AUTOCOMPLETE_MENU = 'TOGGLE_AUTOCOMPLETE_MENU';
 const LOAD_FILTER = 'QUERYFORM:LOAD_FILTER';
 
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
 function addFilterField(groupId) {
     return {

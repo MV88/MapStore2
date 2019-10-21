@@ -6,14 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {updateNode} = require('./layers');
-const WMS = require('../api/WMS');
-const WFS = require('../api/WFS');
-const WCS = require('../api/WCS');
+import { updateNode } from './layers';
 
-const LayersUtils = require('../utils/LayersUtils');
-
-const {get, head} = require('lodash');
+import WMS from '../api/WMS';
+import WFS from '../api/WFS';
+import WCS from '../api/WCS';
+import LayersUtils from '../utils/LayersUtils';
+import { get, head } from 'lodash';
 
 function getDescribeLayer(url, layer, options) {
     return (dispatch /* , getState */) => {

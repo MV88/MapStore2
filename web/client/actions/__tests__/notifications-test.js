@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-var {
+import expect from 'expect';
+
+import {
     SHOW_NOTIFICATION,
     HIDE_NOTIFICATION,
     CLEAR_NOTIFICATIONS,
@@ -18,8 +19,8 @@ var {
     info,
     hide,
     clear,
-    dispatchAction
-} = require('../notifications');
+    dispatchAction,
+} from '../notifications';
 
 describe('Test correctness of the notifications actions', () => {
 

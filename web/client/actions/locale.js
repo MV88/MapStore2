@@ -6,18 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
-var LocaleUtils = require('../utils/LocaleUtils');
-
-const ConfigUtils = require('../utils/ConfigUtils');
+import LocaleUtils from '../utils/LocaleUtils';
+import ConfigUtils from '../utils/ConfigUtils';
 
 const CHANGE_LOCALE = 'CHANGE_LOCALE';
 const LOCALE_LOAD_ERROR = 'LOCALE_LOAD_ERROR';
 
-const {castArray, merge} = require('lodash');
-const {Promise} = require('es6-promise');
-const {error} = require('./notifications');
+import { castArray, merge } from 'lodash';
+import { Promise } from 'es6-promise';
+import { error } from './notifications';
 
 function changeLocale(data) {
     return {

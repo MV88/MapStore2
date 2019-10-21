@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const GeoCodingApi = require('../api/Nominatim');
+import GeoCodingApi from '../api/Nominatim';
 
 const LOAD_FEATURE_INFO = 'LOAD_FEATURE_INFO';
 const ERROR_FEATURE_INFO = 'ERROR_FEATURE_INFO';

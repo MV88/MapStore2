@@ -14,8 +14,8 @@ const USERMANAGER_DELETE_USER = 'USERMANAGER_DELETE_USER';
 const USERMANAGER_GETGROUPS = 'USERMANAGER_GETGROUPS';
 const USERS_SEARCH_TEXT_CHANGED = 'USERS_SEARCH_TEXT_CHANGED';
 
-const API = require('../api/GeoStoreDAO');
-const {get, assign} = require('lodash');
+import API from '../api/GeoStoreDAO';
+import { get, assign } from 'lodash';
 function getUsersloading(text, start, limit) {
     return {
         type: USERMANAGER_GETUSERS,

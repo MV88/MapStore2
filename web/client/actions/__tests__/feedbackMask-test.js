@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const {
+import expect from 'expect';
+
+import {
     FEEDBACK_MASK_LOADING,
     FEEDBACK_MASK_LOADED,
     FEEDBACK_MASK_ENABLED,
@@ -15,8 +16,8 @@ const {
     feedbackMaskLoading,
     feedbackMaskLoaded,
     feedbackMaskEnabled,
-    detectedNewPage
-} = require('../feedbackMask');
+    detectedNewPage,
+} from '../feedbackMask';
 
 describe('Test correctness of the feedbackMask actions', () => {
 

@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-var {
+import expect from 'expect';
+
+import {
     DOWNLOAD_FEATURES,
     DOWNLOAD_OPTIONS_CHANGE,
     DOWNLOAD_FINISHED,
@@ -17,8 +18,8 @@ var {
     onDownloadOptionChange,
     onDownloadFinished,
     onFormatOptionsFetch,
-    updateFormats
-} = require('../wfsdownload');
+    updateFormats,
+} from '../wfsdownload';
 
 describe('Test correctness of the wfsdownload actions', () => {
     it('test downloadFeatures action', () => {

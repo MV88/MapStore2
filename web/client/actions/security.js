@@ -9,11 +9,11 @@
 /**
  * Here you can change the API to use for AuthenticationAPI
  */
-const AuthenticationAPI = require('../api/GeoStoreDAO');
-const SecurityUtils = require('../utils/SecurityUtils');
+import AuthenticationAPI from '../api/GeoStoreDAO';
 
-const {loadMaps} = require('./maps');
-const ConfigUtils = require('../utils/ConfigUtils');
+import SecurityUtils from '../utils/SecurityUtils';
+import { loadMaps } from './maps';
+import ConfigUtils from '../utils/ConfigUtils';
 
 const LOGIN_SUBMIT = 'LOGIN_SUBMIT';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
