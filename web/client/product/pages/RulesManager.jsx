@@ -5,22 +5,19 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
 
-const {connect} = require('react-redux');
-
-const url = require('url');
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import url from 'url';
 const urlQuery = url.parse(window.location.href, true).query;
 
-const ConfigUtils = require('../../utils/ConfigUtils');
-const Message = require("../../components/I18N/Message");
-
-const {loadMapConfig} = require('../../actions/config');
-const {resetControls} = require('../../actions/controls');
-
-const Page = require('../../containers/Page');
-const BorderLayout = require('../../components/layout/BorderLayout');
+import ConfigUtils from '../../utils/ConfigUtils';
+import Message from '../../components/I18N/Message';
+import { loadMapConfig } from '../../actions/config';
+import { resetControls } from '../../actions/controls';
+import Page from '../../containers/Page';
+import BorderLayout from '../../components/layout/BorderLayout';
 /**
   * @name RulesManager
   * @memberof pages

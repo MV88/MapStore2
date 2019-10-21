@@ -5,15 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const url = require('url');
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import url from 'url';
 const urlQuery = url.parse(window.location.href, true).query;
 
-const Page = require('../../containers/Page');
-const BorderLayout = require('../../components/layout/BorderLayout');
+import Page from '../../containers/Page';
+import BorderLayout from '../../components/layout/BorderLayout';
 /**
   * @name Importer
   * @memberof pages

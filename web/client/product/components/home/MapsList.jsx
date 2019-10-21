@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,12 +7,12 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React = require('react');
+import React from 'react';
 
-var I18N = require('../../../components/I18N/I18N');
-var {Label, FormControl, FormGroup} = require('react-bootstrap');
-const {connect} = require('react-redux');
-const {updateMapMetadata, deleteMap, createThumbnail} = require('../../../actions/maps');
+import I18N from '../../../components/I18N/I18N';
+import { Label, FormControl, FormGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { updateMapMetadata, deleteMap, createThumbnail } from '../../../actions/maps';
 const MapGrid = connect(() => ({}), {updateMapMetadata, deleteMap, createThumbnail})(require('../../../components/maps/MapGrid'));
 
 class MapsList extends React.Component {

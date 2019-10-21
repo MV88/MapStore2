@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const src = require("./attribution/geosolutions-brand-sm.png");
-const assign = require('object-assign');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import src from './attribution/geosolutions-brand-sm.png';
+import assign from 'object-assign';
 
 class Attribution extends React.Component {
     static propTypes = {
