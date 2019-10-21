@@ -5,30 +5,25 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const assign = require('object-assign');
+import assign from 'object-assign';
 
-const {mapConfigHistory, createHistory} = require('../utils/MapHistoryUtils');
+import { mapConfigHistory, createHistory } from '../utils/MapHistoryUtils';
 
 const map = mapConfigHistory(require('../reducers/map'));
 
-const layers = require('../reducers/layers');
-const mapConfig = require('../reducers/config');
-
-const DebugUtils = require('../utils/DebugUtils');
-const {combineReducers, combineEpics} = require('../utils/PluginsUtils');
-
-const LayersUtils = require('../utils/LayersUtils');
-const {CHANGE_BROWSER_PROPERTIES} = require('../actions/browser');
-const {createEpicMiddleware} = require('redux-observable');
-
-const SecurityUtils = require('../utils/SecurityUtils');
-const ListenerEnhancer = require('@carnesen/redux-add-action-listener-enhancer').default;
-
-const { routerMiddleware, connectRouter } = require('connected-react-router');
-
-const layersEpics = require('../epics/layers');
-const controlsEpics = require('../epics/controls');
-const timeManagerEpics = require('../epics/dimension');
+import layers from '../reducers/layers';
+import mapConfig from '../reducers/config';
+import DebugUtils from '../utils/DebugUtils';
+import { combineReducers, combineEpics } from '../utils/PluginsUtils';
+import LayersUtils from '../utils/LayersUtils';
+import { CHANGE_BROWSER_PROPERTIES } from '../actions/browser';
+import { createEpicMiddleware } from 'redux-observable';
+import SecurityUtils from '../utils/SecurityUtils';
+import ListenerEnhancer from '@carnesen/redux-add-action-listener-enhancer';
+import { routerMiddleware, connectRouter } from 'connected-react-router';
+import layersEpics from '../epics/layers';
+import controlsEpics from '../epics/controls';
+import timeManagerEpics from '../epics/dimension';
 const standardEpics = {
     ...layersEpics,
     ...controlsEpics,
