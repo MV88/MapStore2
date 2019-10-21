@@ -6,16 +6,26 @@
 * LICENSE file in the root directory of this source tree.
 */
 
+import DrawSupport from '../leaflet/DrawSupport';
+import Feature from '../leaflet/Feature';
+import Layer from '../leaflet/Layer';
+import Locate from '../leaflet/Locate';
+import Map from '../leaflet/Map';
+import MeasurementSupport from '../leaflet/MeasurementSupport';
+import Overview from '../leaflet/Overview';
+import ScaleBar from '../leaflet/ScaleBar';
+import * as leafletPlugins from '../leaflet/plugins/index';
+
 export default () => {
-    require('../leaflet/plugins/index');
     return {
-        Map: require('../leaflet/Map'),
-        Layer: require('../leaflet/Layer'),
-        Feature: require('../leaflet/Feature'),
-        Locate: require('../leaflet/Locate'),
-        MeasurementSupport: require('../leaflet/MeasurementSupport'),
-        Overview: require('../leaflet/Overview'),
-        ScaleBar: require('../leaflet/ScaleBar'),
-        DrawSupport: require('../leaflet/DrawSupport')
+        ...leafletPlugins,
+        Map,
+        Layer,
+        Feature,
+        Locate,
+        MeasurementSupport,
+        Overview,
+        ScaleBar,
+        DrawSupport
     };
 };

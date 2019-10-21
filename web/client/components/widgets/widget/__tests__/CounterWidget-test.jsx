@@ -6,19 +6,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import ReactDOM from 'react-dom';
-import { compose, defaultProps } from 'recompose';
-import ReactTestUtils from 'react-dom/test-utils';
 import expect from 'expect';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
+import { compose, defaultProps } from 'recompose';
+
 import counterWidget from '../../enhancers/counterWidget';
+import CounterWidgetComp from '../CounterWidget';
+
 const CounterWidget = compose(
     defaultProps({
         canEdit: true
     }),
     counterWidget
-)(require('../CounterWidget'));
+)(CounterWidgetComp);
 describe('CounterWidget component', () => {
     beforeEach((done) => {
         document.body.innerHTML = '<div id="container"></div>';

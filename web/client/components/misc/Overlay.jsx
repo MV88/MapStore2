@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import withContainer from './WithContainer';
+import {Overlay} from 'react-bootstrap';
 
-export default withContainer(require('react-bootstrap').Overlay);
+import withContainer from './WithContainer';
+export default withContainer(Overlay);

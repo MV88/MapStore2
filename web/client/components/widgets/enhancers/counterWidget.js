@@ -8,10 +8,11 @@
 
 import { compose } from 'recompose';
 
-import { editableWidget, defaultIcons, withHeaderTools } from './tools';
+import deleteWidget from './deleteWidget';
+import { defaultIcons, editableWidget, withHeaderTools } from './tools';
 
 export default compose(
-    require("./deleteWidget"),
+    deleteWidget,
     editableWidget(),
     defaultIcons(),
     withHeaderTools()

@@ -6,40 +6,39 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-import PropTypes from 'prop-types';
-
-import React from 'react';
-import { castArray, findIndex, find, isNil, filter } from 'lodash';
-import { Grid } from 'react-bootstrap';
-import assign from 'object-assign';
-import uuidv1 from 'uuid/v1';
-import tinycolor from 'tinycolor2';
 import axios from 'axios';
-import SwitchPanel from '../../misc/switch/SwitchPanel';
+import { castArray, filter, find, findIndex, isNil } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Grid } from 'react-bootstrap';
+import tinycolor from 'tinycolor2';
+import uuidv1 from 'uuid/v1';
+
+import symbolMissing from '../../../product/assets/symbols/symbolMissing.svg';
+import { DEFAULT_PATH, DEFAULT_SHAPE, checkSymbolsError } from '../../../utils/AnnotationsUtils';
 import { arrayUpdate } from '../../../utils/ImmutableUtils';
+import {
+    addOpacityToColor,
+    createSvgUrl,
+    fetchStyle,
+    getStylerTitle,
+    hashAndStringify,
+    isFillStyle,
+    isMarkerStyle,
+    isStrokeStyle,
+    isSymbolStyle,
+    isTextStyle,
+    registerStyle,
+} from '../../../utils/VectorStyleUtils';
+import SwitchPanel from '../../misc/switch/SwitchPanel';
 import StyleCanvas from '../StyleCanvas';
-import Stroke from './Stroke';
 import Fill from './Fill';
+import Stroke from './Stroke';
+import Text from './Text';
 import MarkerGlyph from './marker/MarkerGlyph';
 import MarkerType from './marker/MarkerType';
 import SymbolLayout from './marker/SymbolLayout';
-import Text from './Text';
-
-import {
-    createSvgUrl,
-    registerStyle,
-    hashAndStringify,
-    fetchStyle,
-    getStylerTitle,
-    isSymbolStyle,
-    isMarkerStyle,
-    isStrokeStyle,
-    isFillStyle,
-    addOpacityToColor,
-    isTextStyle,
-} from '../../../utils/VectorStyleUtils';
-
-import { DEFAULT_SHAPE, DEFAULT_PATH, checkSymbolsError } from '../../../utils/AnnotationsUtils';
 
 class Manager extends React.Component {
     static propTypes = {
@@ -245,7 +244,7 @@ class Manager extends React.Component {
                     this.props.onSetErrorSymbol(this.props.symbolErrors.concat(["loading_symbol" + this.props.defaultShape]));
                     defaultSymbolStyle = {
                         ...defaultSymbolStyle,
-                        symbolUrlCustomized: require('../../../product/assets/symbols/symbolMissing.svg'),
+                        symbolUrlCustomized: symbolMissing,
                         symbolUrl: this.props.symbolsPath + this.props.defaultShape + ".svg",
                         shape: this.props.defaultShape
                     };

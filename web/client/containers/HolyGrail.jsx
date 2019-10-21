@@ -1,25 +1,28 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
- */
-import React from 'react';
+*/
 
-import { connect } from 'react-redux';
 import url from 'url';
-const urlQuery = url.parse(window.location.href, true).query;
-import PluginsUtils from '../utils/PluginsUtils';
-import ConfigUtils from '../utils/ConfigUtils';
+
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+
 import BorderLayout from '../components/layout/BorderLayout';
+import PluginsContainerComp from '../components/plugins/PluginsContainer';
+import ConfigUtils from '../utils/ConfigUtils';
+import PluginsUtils from '../utils/PluginsUtils';
+
+const urlQuery = url.parse(window.location.href, true).query;
 
 const PluginsContainer = connect((state) => ({
     mode: urlQuery.mode || (urlQuery.mobile || state.browser && state.browser.mobile ? 'mobile' : 'desktop'),
     monitoredState: PluginsUtils.getMonitoredState(state, ConfigUtils.getConfigProp('monitorState'))
-}))(require('../components/plugins/PluginsContainer'));
+}))(PluginsContainerComp);
 
 class HolyGrail extends React.Component {
     static propTypes = {

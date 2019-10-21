@@ -6,44 +6,81 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import BackgroundSelectorPlugin from '../../plugins/BackgroundSelector';
+import BurgerMenuPlugin from '../../plugins/BurgerMenu';
+import DrawerMenuPlugin from '../../plugins/DrawerMenu';
+import ExpanderPlugin from '../../plugins/Expander';
+import HelpPlugin from '../../plugins/Help';
+import RedoPlugin from '../../plugins/History';
+import UndoPlugin from '../../plugins/History';
+import HomePlugin from '../../plugins/Home';
+import LanguagePlugin from '../../plugins/Language';
+import LocatePlugin from '../../plugins/Locate';
+import LoginPlugin from '../../plugins/Login';
+import MapPlugin from '../../plugins/Map';
+import MapLoadingPlugin from '../../plugins/MapLoading';
+import MapSearchPlugin from '../../plugins/MapSearch';
+import MapsPlugin from '../../plugins/Maps';
+import MeasurePlugin from '../../plugins/Measure';
+import MetadataExplorerPlugin from '../../plugins/MetadataExplorer';
+import OmniBarPlugin from '../../plugins/OmniBar';
+import SavePlugin from '../../plugins/Save';
+import SaveAsPlugin from '../../plugins/SaveAs';
+import ScaleBoxPlugin from '../../plugins/ScaleBox';
+import SearchPlugin from '../../plugins/Search';
+import SettingsPlugin from '../../plugins/Settings';
+import SharePlugin from '../../plugins/Share';
+import SnapshotPlugin from '../../plugins/Snapshot';
+import TOCPlugin from '../../plugins/TOC';
+import TOCItemsSettingsPlugin from '../../plugins/TOCItemsSettings';
+import ToolbarPlugin from '../../plugins/Toolbar';
+import ZoomAllPlugin from '../../plugins/ZoomAll';
+import ZoomInPlugin from '../../plugins/ZoomIn';
+import ZoomOutPlugin from '../../plugins/ZoomOut';
+import ManagerPlugin from '../../plugins/manager/Manager';
+import ManagerMenuPlugin from '../../plugins/manager/ManagerMenu';
+import ManagerMenuPlugin from '../../plugins/manager/ManagerMenu';
+import ReactSwipe from 'react-swipeable-views';
+import SwipeHeader from '../../components/data/identify/SwipeHeader';
+
 export default {
     plugins: {
-        MapPlugin: require('../../plugins/Map'),
-        ToolbarPlugin: require('../../plugins/Toolbar'),
-        DrawerMenuPlugin: require('../../plugins/DrawerMenu'),
-        SnapshotPlugin: require('../../plugins/Snapshot'),
-        SettingsPlugin: require('../../plugins/Settings'),
-        ExpanderPlugin: require('../../plugins/Expander'),
-        SearchPlugin: require('../../plugins/Search'),
-        ScaleBoxPlugin: require('../../plugins/ScaleBox'),
-        LocatePlugin: require('../../plugins/Locate'),
-        ZoomInPlugin: require('../../plugins/ZoomIn'),
-        ZoomOutPlugin: require('../../plugins/ZoomOut'),
-        ZoomAllPlugin: require('../../plugins/ZoomAll'),
-        MapLoadingPlugin: require('../../plugins/MapLoading'),
-        HelpPlugin: require('../../plugins/Help'),
-        HomePlugin: require('../../plugins/Home'),
-        MetadataExplorerPlugin: require('../../plugins/MetadataExplorer'),
-        LoginPlugin: require('../../plugins/Login'),
-        OmniBarPlugin: require('../../plugins/OmniBar'),
-        BurgerMenuPlugin: require('../../plugins/BurgerMenu'),
-        UndoPlugin: require('../../plugins/History'),
-        RedoPlugin: require('../../plugins/History'),
-        MapsPlugin: require('../../plugins/Maps'),
-        MapSearchPlugin: require('../../plugins/MapSearch'),
-        LanguagePlugin: require('../../plugins/Language'),
-        ManagerPlugin: require('../../plugins/manager/Manager'),
-        ManagerMenuPlugin: require('../../plugins/manager/ManagerMenu'),
-        SharePlugin: require('../../plugins/Share'),
-        SavePlugin: require('../../plugins/Save'),
-        SaveAsPlugin: require('../../plugins/SaveAs'),
-        TOCPlugin: require('../../plugins/TOC'),
-        BackgroundSelectorPlugin: require('../../plugins/BackgroundSelector'),
-        MeasurePlugin: require('../../plugins/Measure'),
-        TOCItemsSettingsPlugin: require('../../plugins/TOCItemsSettings')
+        BackgroundSelectorPlugin,
+        BurgerMenuPlugin,
+        DrawerMenuPlugin,
+        ExpanderPlugin,
+        HelpPlugin,
+        RedoPlugin,
+        UndoPlugin,
+        HomePlugin,
+        LanguagePlugin,
+        LocatePlugin,
+        LoginPlugin,
+        MapPlugin,
+        MapLoadingPlugin,
+        MapSearchPlugin,
+        MapsPlugin,
+        MeasurePlugin,
+        MetadataExplorerPlugin,
+        OmniBarPlugin,
+        SavePlugin,
+        SaveAsPlugin,
+        ScaleBoxPlugin,
+        SearchPlugin,
+        SettingsPlugin,
+        SharePlugin,
+        SnapshotPlugin,
+        TOCPlugin,
+        TOCItemsSettingsPlugin,
+        ToolbarPlugin,
+        ZoomAllPlugin,
+        ZoomInPlugin,
+        ZoomOutPlugin,
+        ManagerPlugin,
+        ManagerMenuPlugin
     },
     requires: {
-        ReactSwipe: require('react-swipeable-views').default,
-        SwipeHeader: require('../../components/data/identify/SwipeHeader')
+        ReactSwipe,
+        SwipeHeader
     }
 };

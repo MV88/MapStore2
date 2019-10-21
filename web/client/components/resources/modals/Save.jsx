@@ -5,21 +5,21 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-import PropTypes from 'prop-types';
 
-import React from 'react';
 import { get } from 'lodash';
-import Portal from '../../misc/Portal';
-import ResizableModal from '../../misc/ResizableModal';
-
-// require('./css/modals.css');
+import PropTypes from 'prop-types';
+import React from 'react';
 import { Grid } from 'react-bootstrap';
 
 import Message from '../../I18N/Message';
+import Portal from '../../misc/Portal';
+import ResizableModal from '../../misc/ResizableModal';
+import ruleEditor from './enhancers/ruleEditor';
 import ErrorBox from './fragments/ErrorBox';
 import MainForm from './fragments/MainForm';
-import ruleEditor from './enhancers/ruleEditor';
-const PermissionEditor = ruleEditor(require('./fragments/PermissionEditor'));
+import PermissionEditorComp from './fragments/PermissionEditor';
+
+const PermissionEditor = ruleEditor(PermissionEditorComp);
 
 /**
  * A Modal window to show map metadata form

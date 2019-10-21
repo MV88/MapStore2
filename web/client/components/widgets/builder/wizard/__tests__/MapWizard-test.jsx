@@ -5,15 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import ReactDOM from 'react-dom';
+import expect from 'expect';
+import React from 'react';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import testBackend from 'react-dnd-test-backend';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import expect from 'expect';
 
-const MapWizard = dragDropContext(testBackend)(require('../MapWizard'));
+import MapWizardComp from '../MapWizard';
+
+const MapWizard = dragDropContext(testBackend)(MapWizardComp);
 describe('MapWizard component', () => {
     beforeEach((done) => {
         document.body.innerHTML = '<div id="container"></div>';

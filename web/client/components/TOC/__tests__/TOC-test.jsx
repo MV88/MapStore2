@@ -12,10 +12,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import testBackend from 'react-dnd-test-backend';
-
-const TOC = dragDropContext(testBackend)(require('../TOC'));
+import TOC from '../TOC';
 import Group from '../DefaultGroup';
 import Layer from '../DefaultLayer';
+
+const TOC = dragDropContext(testBackend)(TOC);
 
 const testData = [
     {

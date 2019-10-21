@@ -6,28 +6,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import PropTypes from 'prop-types';
-import { Controlled as Codemirror } from 'react-codemirror2';
-import { debounce, isEqual, endsWith, isFunction } from 'lodash';
-import CM from 'codemirror/lib/codemirror';
-import BorderLayout from '../layout/BorderLayout';
-import Loader from '../misc/Loader';
-import InfoPopover from '../widgets/widget/InfoPopover';
-import Message from '../I18N/Message';
-import assign from 'object-assign';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/addon/search/searchcursor';
 import 'codemirror/addon/selection/mark-selection';
 import 'codemirror/addon/hint/show-hint.css';
 import 'codemirror/addon/hint/show-hint';
-
 /* SLD styling highlight */
 import 'codemirror/mode/xml/xml';
 
-require('./mode/geocss')(CM);
-require('./hint/geocss')(CM);
+import CM from 'codemirror/lib/codemirror';
+import { debounce, endsWith, isEqual, isFunction } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Controlled as Codemirror } from 'react-codemirror2';
+
+import Message from '../I18N/Message';
+import BorderLayout from '../layout/BorderLayout';
+import Loader from '../misc/Loader';
+import InfoPopover from '../widgets/widget/InfoPopover';
+import geocssHint from './hint/geocss';
+import geocssMode from './mode/geocss';
+
+geocssMode(CM);
+geocssHint(CM);
 
 /**
  * Component for rendering a grid of style templates.

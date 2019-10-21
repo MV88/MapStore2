@@ -7,15 +7,18 @@
  */
 
 import React from 'react';
-
 import { Glyphicon as GlyphiconRB } from 'react-bootstrap';
+
+import Message from '../I18N/Message';
 import BorderLayout from '../layout/BorderLayout';
+import FilterComp from '../misc/Filter';
+import SideGridComp from '../misc/cardgrids/SideGrid';
 import emptyState from '../misc/enhancers/emptyState';
 import withLocal from '../misc/enhancers/localizedProps';
-const Filter = withLocal('filterPlaceholder')(require('../misc/Filter'));
-import SVGPreview from './SVGPreview';
-import Message from '../I18N/Message';
 import tooltip from '../misc/enhancers/tooltip';
+import SVGPreview from './SVGPreview';
+
+const Filter = withLocal('filterPlaceholder')(FilterComp);
 const Glyphicon = tooltip(GlyphiconRB);
 
 const SideGrid = emptyState(
@@ -24,7 +27,7 @@ const SideGrid = emptyState(
         title: <Message msgId="styleeditor.filterMatchNotFound"/>,
         glyph: '1-stilo'
     }
-)(require('../misc/cardgrids/SideGrid'));
+)(SideGridComp);
 
 // get the text to use in the icon
 const getFormatText = (format) => {

@@ -6,17 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import expect from 'expect';
 import React from 'react';
-
-import ReactDOM from 'react-dom';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import testBackend from 'react-dnd-test-backend';
-const Layer = dragDropContext(testBackend)(require('../DefaultLayer'));
-
-// var ConfirmButton = require('../../buttons/ConfirmButton');
-import expect from 'expect';
-
+import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
+
+import DefaultLayer from '../DefaultLayer';
+
+const Layer = dragDropContext(testBackend)(DefaultLayer);
+
+
 
 describe('test DefaultLayer module component', () => {
     beforeEach((done) => {

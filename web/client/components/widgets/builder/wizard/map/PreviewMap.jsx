@@ -6,6 +6,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import MapView from '../../../widget/MapView'
 import previewMap from './enhancers/previewMap';
-
-export default previewMap(require('../../../widget/MapView'));
+export default previewMap(MapView);

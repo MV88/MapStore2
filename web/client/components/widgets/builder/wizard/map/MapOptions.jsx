@@ -13,12 +13,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
 import { compose, withProps } from 'recompose';
-import StepHeader from '../../../../misc/wizard/StepHeader';
+
+import Message from '../../../../I18N/Message';
 import emptyState from '../../../../misc/enhancers/emptyState';
 import localizeStringMap from '../../../../misc/enhancers/localizeStringMap';
-import Message from '../../../../I18N/Message';
+import StepHeader from '../../../../misc/wizard/StepHeader';
+import NodeEditor from './NodeEditor';
+import TOCComp from './TOC';
+import nodeEditor from './enhancers/nodeEditor';
+
 const TOC = emptyState(
     ({ map = {} } = {}) => !map.layers || (map.layers || []).filter(l => l.group !== 'background').length === 0,
     () => ({
@@ -26,9 +30,8 @@ const TOC = emptyState(
         title: <Message msgId="widgets.selectMap.TOC.noLayerTitle" />,
         description: <Message msgId="widgets.selectMap.TOC.noLayerDescription" />
     })
-)(require('./TOC'));
-import nodeEditor from './enhancers/nodeEditor';
-const Editor = nodeEditor(require('./NodeEditor'));
+)(TOCComp);
+const Editor = nodeEditor(NodeEditor);
 const EditorTitle = compose(
     nodeEditor,
     withProps(({selectedNode: layer}) => ({

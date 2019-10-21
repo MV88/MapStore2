@@ -6,17 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
+import { Col, Row } from 'react-bootstrap';
 import { compose } from 'recompose';
-import emptyState from '../../../misc/enhancers/emptyState';
-import { wizardHandlers } from '../../../misc/wizard/enhancers';
-import { Row, Col } from 'react-bootstrap';
-import legendWidget from '../../enhancers/legendWidget';
-import WidgetOptions from './common/WidgetOptions';
-const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
-import StepHeader from '../../../misc/wizard/StepHeader';
+
 import Message from '../../../I18N/Message';
+import emptyState from '../../../misc/enhancers/emptyState';
+import StepHeader from '../../../misc/wizard/StepHeader';
+import WizardContainer from '../../../misc/wizard/WizardContainer';
+import { wizardHandlers } from '../../../misc/wizard/enhancers';
 import emptyLegendState from '../../enhancers/emptyLegendState';
+import legendWidget from '../../enhancers/legendWidget';
+import LegendView from '../../widget/';
+import WidgetOptions from './common/WidgetOptions';
+
+const Wizard = wizardHandlers(WizardContainer);
 
 const enhancePreview = compose(
     legendWidget,
@@ -29,7 +32,7 @@ const enhancePreview = compose(
     ),
     emptyLegendState(false)
 );
-const LegendPreview = enhancePreview(require('../../widget/LegendView'));
+const LegendPreview = enhancePreview(LegendView);
 export default ({
     onChange = () => {}, onFinish = () => {}, setPage = () => {},
     step = 0,

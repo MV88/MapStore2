@@ -5,15 +5,18 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
+
+import { castArray, includes, uniq } from 'lodash';
 import React from 'react';
+import { Button, Col, Form, Row } from 'react-bootstrap';
+import { compose, withHandlers, withProps } from 'recompose';
 
 import { isGeometryType } from '../../../../../utils/ogc/WFS/base';
-import { uniq, castArray, includes } from 'lodash';
-import { Row, Col, Form, Button } from 'react-bootstrap';
 import Message from '../../../../I18N/Message';
+import AttributeTable from '../../../../data/featuregrid/AttributeTable';
 import StepHeader from '../../../../misc/wizard/StepHeader';
 import noAttributes from '../common/noAttributesEmptyView';
-import { withProps, withHandlers, compose } from 'recompose';
+
 const updatePropertyName = (arr, name, hide) => {
     const names = castArray(name);
     if (hide) {
@@ -38,7 +41,7 @@ const AttributeSelector = compose(
     withHandlers({
         onChange: ({ onChange = () => {}, options = {}}) => (name, hide) => onChange("options.propertyName", updatePropertyName(options && options.propertyName || [], name, hide))
     })
-)(require('../../../../data/featuregrid/AttributeTable'));
+)(AttributeTable);
 
 
 export default ({ data = { options: {} }, onChange = () => { }, featureTypeProperties, sampleChart}) => (<Row>

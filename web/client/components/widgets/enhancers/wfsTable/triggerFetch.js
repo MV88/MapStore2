@@ -8,7 +8,6 @@
 
 import 'rxjs';
 
-// const { getSearchUrl } = require('../../../../utils/LayersUtils');
 const sameFilter = (f1, f2) => f1 === f2;
 const sameOptions = (o1 = {}, o2 = {}) =>
     o1.propertyName === o2.propertyName

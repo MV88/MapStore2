@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -8,10 +6,12 @@ import PropTypes from 'prop-types';
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
 import './css/snapshot.css';
 
+import PropTypes from 'prop-types';
+import React from 'react';
+
+import getSnapshotSupport from './SnapshotSupport';
 
 let SnapshotSupport;
 
@@ -41,12 +41,12 @@ class SnapshotQueue extends React.Component {
     };
 
     UNSAFE_componentWillMount() {
-        SnapshotSupport = require('./SnapshotSupport')(this.props.mapType);
+        SnapshotSupport = getSnapshotSupport(this.props.mapType);
     }
 
     UNSAFE_componentWillReceiveProps(newProps) {
         if (newProps.mapType !== this.props.mapType) {
-            SnapshotSupport = require('./SnapshotSupport')(newProps.mapType);
+            SnapshotSupport = getSnapshotSupport(newProps.mapType);
         }
     }
 

@@ -5,22 +5,23 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { compose, withProps, withState, withHandlers } from 'recompose';
 
 import { get } from 'lodash';
-import withControllableState from '../../../../../misc/enhancers/withControllableState';
-import { splitMapAndLayers } from '../../../../../../utils/LayersUtils';
-import mapToNodes from './mapToNodes';
-import withSelectedNode from './withSelectedNode';
-import withCapabilitiesRetrieval from './withCapabilitiesRetrieval';
+import { compose, withHandlers, withProps, withState } from 'recompose';
 
+import { splitMapAndLayers } from '../../../../../../utils/LayersUtils';
+import { settingsLifecycle } from '../../../../../TOC/enhancers/tocItemsSettings';
+import Display from '../../../../../TOC/fragments/settings/Display';
 /* TABS definitions */
 import General from '../../../../../TOC/fragments/settings/General';
-
-import Display from '../../../../../TOC/fragments/settings/Display';
-const WMSStyle = withCapabilitiesRetrieval(require('../../../../../TOC/fragments/settings/WMSStyle'));
+import WMSStyleComp from '../../../../../TOC/fragments/settings/WMSStyle';
+import withControllableState from '../../../../../misc/enhancers/withControllableState';
 import handleNodePropertyChanges from './handleNodePropertyChanges';
-import { settingsLifecycle } from '../../../../../TOC/enhancers/tocItemsSettings';
+import mapToNodes from './mapToNodes';
+import withCapabilitiesRetrieval from './withCapabilitiesRetrieval';
+import withSelectedNode from './withSelectedNode';
+
+const WMSStyle = withCapabilitiesRetrieval(WMSStyleComp);
 
 const withDefaultTabs = withProps((props) => ({
     tabs: props.tabs || [{

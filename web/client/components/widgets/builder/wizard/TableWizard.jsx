@@ -6,15 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
+import { compose, lifecycle } from 'recompose';
 
+import WizardContainer from '../../../misc/wizard/WizardContainer';
 import { wizardHandlers } from '../../../misc/wizard/enhancers';
-import TableOptions from './table/TableOptions';
 import WidgetOptions from './common/WidgetOptions';
+import TableOptions from './table/TableOptions';
+
 const isChartOptionsValid = (options = {}) => options.aggregateFunction && options.aggregationAttribute && options.groupByAttributes;
 
-const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
+const Wizard = wizardHandlers(WizardContainer);
 
-import { compose, lifecycle } from 'recompose';
 
 const triggerValidationReset = compose(lifecycle({
     UNSAFE_componentWillReceiveProps: ({ data = {}, valid, setValid = () => { } } = {}) => {

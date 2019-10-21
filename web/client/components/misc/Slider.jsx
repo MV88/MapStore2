@@ -7,8 +7,9 @@
  */
 
 import { isEqual } from 'lodash';
-
+import nouislider from 'react-nouislider';
 import { shouldUpdate } from 'recompose';
+
 /**
  * Component for rendering react-nouislider.
  * It will update the component only when start and disabled props change,
@@ -22,4 +23,4 @@ export default shouldUpdate(
     (props, nexProps) =>
         !isEqual(props.start, nexProps.start)
         || props.disabled !== nexProps.disabled
-)(require('react-nouislider'));
+)(nouislider);

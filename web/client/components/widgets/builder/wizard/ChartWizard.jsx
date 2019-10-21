@@ -6,26 +6,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
+import { compose, lifecycle } from 'recompose';
 
-import { wizardHandlers } from '../../../misc/wizard/enhancers';
+import SimpleChartComp from '../../../charts/SimpleChart';
 import loadingStateFactory from '../../../misc/enhancers/loadingState';
-const loadingState = loadingStateFactory(({ loading, data }) => loading || !data, { width: 500, height: 200 });
+import WizardContainer from '../../../misc/wizard/WizardContainer';
+import { wizardHandlers } from '../../../misc/wizard/enhancers';
+import dependenciesToFilter from '../../enhancers/dependenciesToFilter';
+import dependenciesToOptions from '../../enhancers/dependenciesToOptions';
+import dependenciesToWidget from '../../enhancers/dependenciesToWidget';
+import emptyChartState from '../../enhancers/emptyChartState';
+import errorChartState from '../../enhancers/errorChartState';
+import sampleData from '../../enhancers/sampleChartData';
+import wpsChart from '../../enhancers/wpsChart';
+import ChartTypeComp from './chart/ChartType';
+import WPSWidgetOptionsComp from './common/WPSWidgetOptions';
+import WidgetOptions from './common/WidgetOptions';
 import noAttribute from './common/noAttributesEmptyView';
+import wfsChartOptions from './common/wfsChartOptions';
+
+const loadingState = loadingStateFactory(({ loading, data }) => loading || !data, { width: 500, height: 200 });
 const hasNoAttributes = ({ featureTypeProperties = [] }) => featureTypeProperties.filter(({ type = ""} = {}) => type.indexOf("gml:") !== 0).length === 0;
 const ChartType = noAttribute(
     hasNoAttributes
-)(require('./chart/ChartType'));
-import wfsChartOptions from './common/wfsChartOptions';
-const ChartOptions = wfsChartOptions(require('./common/WPSWidgetOptions'));
-import WidgetOptions from './common/WidgetOptions';
-import sampleData from '../../enhancers/sampleChartData';
-import wpsChart from '../../enhancers/wpsChart';
-import dependenciesToWidget from '../../enhancers/dependenciesToWidget';
-import dependenciesToFilter from '../../enhancers/dependenciesToFilter';
-import dependenciesToOptions from '../../enhancers/dependenciesToOptions';
-import emptyChartState from '../../enhancers/emptyChartState';
-import errorChartState from '../../enhancers/errorChartState';
-import { compose, lifecycle } from 'recompose';
+)(ChartTypeComp);
+const ChartOptions = wfsChartOptions(WPSWidgetOptionsComp);
 const enhancePreview = compose(
     dependenciesToWidget,
     dependenciesToFilter,
@@ -35,8 +40,8 @@ const enhancePreview = compose(
     errorChartState,
     emptyChartState
 );
-const PreviewChart = enhancePreview(require('../../../charts/SimpleChart'));
-const SampleChart = sampleData(require('../../../charts/SimpleChart'));
+const PreviewChart = enhancePreview(SimpleChartComp);
+const SampleChart = sampleData(SimpleChartComp);
 
 const sampleProps = {
     width: 430,
@@ -45,8 +50,7 @@ const sampleProps = {
 
 
 const isChartOptionsValid = (options = {}) => options.aggregateFunction && options.aggregationAttribute && options.groupByAttributes;
-
-const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
+const Wizard = wizardHandlers(WizardContainer);
 
 
 const renderPreview = ({ data = {}, layer, dependencies = {}, setValid = () => { }, shortenChartLabelThreshold }) => isChartOptionsValid(data.options)

@@ -8,15 +8,16 @@
 import React from 'react';
 
 import Message from '../../I18N/Message';
+import EmptyRowsView from '../../data/featuregrid/EmptyRowsView';
+import FeatureGridComp from '../../data/featuregrid/FeatureGrid';
 import BorderLayout from '../../layout/BorderLayout';
 import LoadingSpinner from '../../misc/LoadingSpinner';
-import EmptyRowsView from '../../data/featuregrid/EmptyRowsView';
 import loadingState from '../../misc/enhancers/loadingState';
 import errorChartState from '../enhancers/errorChartState';
-
-const FeatureGrid = errorChartState(loadingState(({ describeFeatureType }) => !describeFeatureType)(require('../../data/featuregrid/FeatureGrid')));
-
 import WidgetContainer from './WidgetContainer';
+
+const FeatureGrid = errorChartState(loadingState(({ describeFeatureType }) => !describeFeatureType)(FeatureGridComp));
+
 
 export default ({
     id,

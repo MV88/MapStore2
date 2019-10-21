@@ -6,51 +6,52 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
 import { compose } from 'recompose';
 
 // enhancers for base menus and functionalities
 import chartWidget from '../enhancers/chartWidget';
-
 import counterWidget from '../enhancers/counterWidget';
-import tableWidget from '../enhancers/tableWidget';
-import legendWidget from '../enhancers/legendWidget';
-import textWidget from '../enhancers/textWidget';
-import mapWidget from '../enhancers/mapWidget';
-
-// Enhancers for ajax support
-import wpsChart from '../enhancers/wpsChart';
-
-import wpsCounter from '../enhancers/wpsCounter';
-import wfsTable from '../enhancers/wfsTable';
-
 // enhancers for dependencies management
 import dependenciesToFilter from '../enhancers/dependenciesToFilter';
-
+import dependenciesToMapProp from '../enhancers/dependenciesToMapProp';
 import dependenciesToOptions from '../enhancers/dependenciesToOptions';
 import dependenciesToWidget from '../enhancers/dependenciesToWidget';
-import dependenciesToMapProp from '../enhancers/dependenciesToMapProp';
+import legendWidget from '../enhancers/legendWidget';
+import mapWidget from '../enhancers/mapWidget';
+import tableWidget from '../enhancers/tableWidget';
+import textWidget from '../enhancers/textWidget';
+import wfsTable from '../enhancers/wfsTable';
+// Enhancers for ajax support
+import wpsChart from '../enhancers/wpsChart';
+import wpsCounter from '../enhancers/wpsCounter';
 //
 // connect widgets to dependencies, remote services and add base icons/tools
 //
+import ChartWidgetComp from './ChartWidget';
+import CounterWidgetComp from './CounterWidget';
+import LegendWidgetComp from './LegendWidget';
+import MapWidgetComp from './MapWidget';
+import TableWidgetComp from './TableWidget';
+import TextWidgetComp from './TextWidget';
+
 const ChartWidget = compose(
     dependenciesToWidget,
     dependenciesToFilter,
     dependenciesToOptions,
     wpsChart,
     chartWidget
-)(require('./ChartWidget'));
+)(ChartWidgetComp);
 
 const TextWidget = compose(
     textWidget
-)(require('./TextWidget'));
+)(TextWidgetComp);
 
 const MapWidget = compose(
     dependenciesToWidget,
     dependenciesToMapProp('center'),
     dependenciesToMapProp('zoom'),
     mapWidget
-)(require('./MapWidget'));
+)(MapWidgetComp);
 
 const TableWidget = compose(
     dependenciesToWidget,
@@ -58,7 +59,7 @@ const TableWidget = compose(
     dependenciesToFilter,
     wfsTable,
     tableWidget,
-)(require('./TableWidget'));
+)(TableWidgetComp);
 
 const CounterWidget = compose(
     dependenciesToWidget,
@@ -66,12 +67,12 @@ const CounterWidget = compose(
     dependenciesToOptions,
     wpsCounter,
     counterWidget
-)(require("./CounterWidget"));
+)(CounterWidgetComp);
 
 const LegendWidget = compose(
     dependenciesToWidget,
     legendWidget
-)(require("./LegendWidget"));
+)(LegendWidgetComp);
 
 /**
  * Renders proper widget by widgetType, binding props and methods

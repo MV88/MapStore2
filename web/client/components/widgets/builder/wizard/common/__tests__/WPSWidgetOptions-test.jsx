@@ -6,15 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import ReactDOM from 'react-dom';
-import { get } from 'lodash';
-import describeStates from '../../../../../../test-resources/wfs/describe-states.json';
-import ReactTestUtils from 'react-dom/test-utils';
 import expect from 'expect';
+import { get } from 'lodash';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
+
+import describeStates from '../../../../../../test-resources/wfs/describe-states.json';
 import wfsChartOptions from '../wfsChartOptions';
-const WPSWidgetOptions = wfsChartOptions(require('../WPSWidgetOptions'));
+import WPSWidgetOptionsComp from '../wfsChartOptions';
+
+const WPSWidgetOptions = wfsChartOptions(WPSWidgetOptionsComp);
 describe('WPSWidgetOptions component', () => {
     beforeEach((done) => {
         document.body.innerHTML = '<div id="container"></div>';

@@ -6,15 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 import expect from 'expect';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { compose, createSink, withState } from 'recompose';
+
 import decimalToAeronautical from '../decimalToAeronautical';
-import { compose, withState, createSink } from 'recompose';
 
-// const TestUtils = require('react-dom/test-utils');
-
-describe("test the Annotations enahncers", () => {
+describe("test the Annotations enhancers", () => {
     beforeEach((done) => {
         document.body.innerHTML = '<div id="container"></div>';
         setTimeout(done);

@@ -5,13 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { wizardHandlers } from '../enhancers';
 
+import expect from 'expect';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
-import expect from 'expect';
-const WizardContainer = wizardHandlers(require('../WizardContainer'));
+
+import WizardContainerComp from '../WizardContainer';
+import { wizardHandlers } from '../enhancers';
+
+const WizardContainer = wizardHandlers(WizardContainerComp);
 
 describe('wizard enhancers ', () => {
     beforeEach((done) => {

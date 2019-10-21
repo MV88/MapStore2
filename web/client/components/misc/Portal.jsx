@@ -7,6 +7,8 @@
  ectory of this source tree.
  */
 
+import {Portal} from 'react-bootstrap';
+
 import withContainer from './WithContainer';
 
-export default withContainer(require('react-overlays').Portal);
+export default withContainer(Portal);

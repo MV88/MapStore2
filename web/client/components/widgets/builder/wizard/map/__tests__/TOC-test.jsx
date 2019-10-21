@@ -6,14 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import expect from 'expect';
 import React from 'react';
-
-import ReactDOM from 'react-dom';
-import ReactTestUtils from 'react-dom/test-utils';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import testBackend from 'react-dnd-test-backend';
-import expect from 'expect';
-const TOC = dragDropContext(testBackend)(require('../TOC'));
+import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
+
+import TOCComp from '../TOC';
+
+const TOC = dragDropContext(testBackend)(TOCComp);
 describe('TOC component', () => {
     beforeEach((done) => {
         document.body.innerHTML = '<div id="container"></div>';

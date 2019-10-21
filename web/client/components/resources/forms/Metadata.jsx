@@ -13,11 +13,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
 import PropTypes from 'prop-types';
-import { FormControl as BFormControl, FormGroup, ControlLabel } from 'react-bootstrap';
-const FormControl = require('../../misc/enhancers/localizedProps')('placeholder')(BFormControl);
+import React from 'react';
+import { FormControl as BFormControl, ControlLabel, FormGroup } from 'react-bootstrap';
+
+import localizedProps from '../../misc/enhancers/localizedProps';
+
+const FormControl = localizedProps('placeholder')(BFormControl);
 
 /**
  * A DropDown menu for user details:

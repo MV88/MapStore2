@@ -5,12 +5,23 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import 'vis/dist/vis-timeline-graph2d.min.css';
 
-import PropTypes from 'prop-types';
+import {
+    assign,
+    difference,
+    differenceBy,
+    each,
+    intersection,
+    intersectionBy,
+    keys,
+    omit,
+} from 'lodash';
 import moment from 'moment';
-
-// const vis = require('vis/index-timeline-graph2d'); // debug version. Doesn't work with uglify plugin, probably because of this issue: https://github.com/almende/vis/issues/3290
+import PropTypes from 'prop-types';
+import React from 'react';
+// import vis from 'vis/index-timeline-graph2d';
+// debug version. Doesn't work with uglify plugin, probably because of this issue: https://github.com/almende/vis/issues/3290
 import vis from 'vis/dist/vis-timeline-graph2d.min';
 
 /*
@@ -43,18 +54,7 @@ vis.timeline.components.items.BackgroundItem.prototype._createDomElement = funct
     }
 };
 
-import 'vis/dist/vis-timeline-graph2d.min.css';
 
-import {
-    difference,
-    differenceBy,
-    keys,
-    intersection,
-    intersectionBy,
-    each,
-    omit,
-    assign,
-} from 'lodash';
 
 const noop = () => { };
 

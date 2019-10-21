@@ -1,3 +1,5 @@
+import SideGridComp from 'SideGrid';
+import { isNil } from 'lodash';
 /*
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -6,15 +8,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
 import { compose } from 'recompose';
-import { isNil } from 'lodash';
+
 import Message from '../I18N/Message';
-import MapCatalogForm from './MapCatalogForm';
 import BorderLayout from '../layout/BorderLayout';
 import LoadingSpinner from '../misc/LoadingSpinner';
-import loadingState from '../misc/enhancers/loadingState';
 import emptyState from '../misc/enhancers/emptyState';
+import loadingState from '../misc/enhancers/loadingState';
+import MapCatalogForm from './MapCatalogForm';
 
 const SideGrid = compose(
     loadingState(({ loading, items = [] }) => items.length === 0 && loading),
@@ -25,7 +26,7 @@ const SideGrid = compose(
             style: { transform: "translateY(50%)" }
         })
 
-)(require('../misc/cardgrids/SideGrid'));
+)(SideGridComp);
 export default ({ setSearchText = () => { }, selected, skip = 0, onSelected, loading, searchText, items = [], total, title = <Message msgId={"maps.title"} /> }) => {
     return (<BorderLayout
         className="map-catalog"

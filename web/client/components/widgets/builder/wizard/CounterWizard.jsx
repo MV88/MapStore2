@@ -5,24 +5,29 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
-import React from 'react';
 
 import { isNil } from 'lodash';
+import React from 'react';
 import { compose, lifecycle } from 'recompose';
-import { wizardHandlers } from '../../../misc/wizard/enhancers';
-import loadingStateFactory from '../../../misc/enhancers/loadingState';
-const loadingState = loadingStateFactory(({loading, data}) => loading || !data, {width: 500, height: 200});
-import wfsChartOptions from './common/wfsChartOptions';
-import noAttributes from './common/noAttributesEmptyView';
 
-const CounterOptions = wfsChartOptions(noAttributes(({options = []}) => options.length === 0)(require('./common/WPSWidgetOptions')));
-import WidgetOptions from './common/WidgetOptions';
-import wpsCounter from '../../enhancers/wpsCounter';
+import loadingStateFactory from '../../../misc/enhancers/loadingState';
+import WizardContainer from '../../../misc/wizard/WizardContainer';
+import { wizardHandlers } from '../../../misc/wizard/enhancers';
 import dependenciesToFilter from '../../enhancers/dependenciesToFilter';
 import dependenciesToOptions from '../../enhancers/dependenciesToOptions';
 import dependenciesToWidget from '../../enhancers/dependenciesToWidget';
 import emptyChartState from '../../enhancers/emptyChartState';
 import errorChartState from '../../enhancers/errorChartState';
+import wpsCounter from '../../enhancers/wpsCounter';
+import Counter from '../../widget/CounterView';
+import WPSWidgetOptionsComp from './common/WPSWidgetOptions';
+import WidgetOptions from './common/WidgetOptions';
+import noAttributes from './common/noAttributesEmptyView';
+import wfsChartOptions from './common/wfsChartOptions';
+
+const loadingState = loadingStateFactory(({loading, data}) => loading || !data, {width: 500, height: 200});
+
+const CounterOptions = wfsChartOptions(noAttributes(({options = []}) => options.length === 0)(WPSWidgetOptionsComp));
 
 const isCounterOptionsValid = (options = {}) => options.aggregateFunction && options.aggregationAttribute;
 const triggerSetValid = compose(
@@ -52,11 +57,9 @@ const sampleProps = {
         height: 100
     }
 };
+const Wizard = wizardHandlers(WizardContainer);
 
-const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
 
-
-import Counter from '../../widget/CounterView';
 const Preview = enhancePreview(Counter);
 const CounterPreview = ({ data = {}, layer, dependencies = {}, valid, setValid = () => { } }) =>
     !isCounterOptionsValid(data.options)

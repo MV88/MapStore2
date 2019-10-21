@@ -6,15 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
 import React from 'react';
-
-import { shouldUpdate } from 'recompose';
-import SideGrid from '../../../../misc/cardgrids/SideGrid';
-import Message from '../../../../I18N/Message';
-import sampleData from '../../../enhancers/sampleChartData';
-const SimpleChart = sampleData(require('../../../../charts/SimpleChart'));
 import { Row } from 'react-bootstrap';
+import { shouldUpdate } from 'recompose';
+
+import Message from '../../../../I18N/Message';
+import SimpleChartComp from '../../../../charts/SimpleChart';
+import SideGrid from '../../../../misc/cardgrids/SideGrid';
+import StepHeader from '../../../../misc/wizard/StepHeader';
+import sampleData from '../../../enhancers/sampleChartData';
+
+const SimpleChart = sampleData(SimpleChartComp);
 const sampleProps = {
     legend: false,
     tooltip: false,
@@ -23,7 +25,6 @@ const sampleProps = {
     height: 100,
     popup: false
 };
-import StepHeader from '../../../../misc/wizard/StepHeader';
 
 const ITEMS = [{
     type: "bar"

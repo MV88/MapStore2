@@ -7,9 +7,11 @@
  */
 import React from 'react';
 
+import WizardContainer from '../../../misc/wizard/WizardContainer';
 import { wizardHandlers } from '../../../misc/wizard/enhancers';
 import TextOptions from './text/TextOptions';
-const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
+
+const Wizard = wizardHandlers(WizardContainer);
 
 
 export default ({

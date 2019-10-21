@@ -5,13 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import ReactDOM from 'react-dom';
+import expect from 'expect';
+import React from 'react';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import testBackend from 'react-dnd-test-backend';
-import expect from 'expect';
-const MapOptions = dragDropContext(testBackend)(require('../MapOptions'));
+import ReactDOM from 'react-dom';
+
+import MapOptionsComp from '../MapOptions';
+
+const MapOptions = dragDropContext(testBackend)(MapOptionsComp);
 
 describe('MapOptions component', () => {
     beforeEach((done) => {

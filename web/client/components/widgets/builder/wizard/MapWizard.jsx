@@ -7,13 +7,13 @@
  */
 import React from 'react';
 
-import WidgetOptions from './common/WidgetOptions';
+import WizardContainer from '../../../misc/wizard/WizardContainer';
 import { wizardHandlers } from '../../../misc/wizard/enhancers';
-const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
-
+import WidgetOptions from './common/WidgetOptions';
 import MapOptions from './map/MapOptions';
 import Preview from './map/PreviewMap';
 
+const Wizard = wizardHandlers(WizardContainer);
 
 export default ({
     onChange = () => {}, onFinish = () => {}, setPage = () => {},

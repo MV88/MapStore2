@@ -6,18 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import expect from 'expect';
 import React from 'react';
-
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
-import expect from 'expect';
 import { compose, defaultProps } from 'recompose';
+
 import legendWidget from '../../enhancers/legendWidget';
+import LegendWidgetComp from '../LegendWidget';
 
 const LegendWidget = compose(
     defaultProps({canEdit: true}),
     legendWidget
-)(require('../LegendWidget'));
+)(LegendWidgetComp);
 
 describe('LegendWidget component', () => {
     beforeEach((done) => {
