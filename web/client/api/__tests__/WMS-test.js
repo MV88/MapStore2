@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const API = require('../WMS');
+import expect from 'expect';
+
+import API from '../WMS';
 
 describe('Test correctness of the WMS APIs', () => {
     it('describeLayers', (done) => {

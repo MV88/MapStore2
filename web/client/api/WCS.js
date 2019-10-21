@@ -5,11 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
-const urlUtil = require('url');
-const assign = require('object-assign');
-const xml2js = require('xml2js');
+import urlUtil from 'url';
+import assign from 'object-assign';
+import xml2js from 'xml2js';
 
 const Api = {
     describeCoverage: function(url, typeName) {
