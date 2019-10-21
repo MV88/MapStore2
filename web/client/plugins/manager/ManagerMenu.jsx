@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,13 +7,13 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const { itemSelected } = require('../../actions/manager');
-const assign = require('object-assign');
-const { isPageConfigured } = require("../../selectors/plugins");
-const {DropdownButton, Glyphicon, MenuItem} = require('react-bootstrap');
+import { connect } from 'react-redux';
+import { itemSelected } from '../../actions/manager';
+import assign from 'object-assign';
+import { isPageConfigured } from '../../selectors/plugins';
+import { DropdownButton, Glyphicon, MenuItem } from 'react-bootstrap';
 
 const Container = connect(() => ({
     noCaret: true,
@@ -21,10 +22,9 @@ const Container = connect(() => ({
     title: <Glyphicon glyph="1-menu-manage"/>
 }))(DropdownButton);
 
-const ToolsContainer = require('../containers/ToolsContainer');
-const Message = require('../locale/Message');
-
-require('../burgermenu/burgermenu.css');
+import ToolsContainer from '../containers/ToolsContainer';
+import Message from '../locale/Message';
+import '../burgermenu/burgermenu.css';
 
 class ManagerMenu extends React.Component {
     static propTypes = {

@@ -11,7 +11,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import testBackend from 'react-dnd-test-backend';
-const MeasureComponent = dragDropContext(testBackend)(require('../MeasureComponent'));
+import MeasureComponentComp from '../MeasureComponent';
+const MeasureComponent = dragDropContext(testBackend)(MeasureComponentComp);
 import TestUtils from 'react-dom/test-utils';
 import assign from 'object-assign';
 

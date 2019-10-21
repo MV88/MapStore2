@@ -1,6 +1,5 @@
 
 
-// const b64toBlob = require('b64-to-blob');
 import Rx from 'rxjs';
 
 import axios from 'axios';

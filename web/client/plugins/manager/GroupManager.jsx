@@ -1,4 +1,4 @@
-const PropTypes = require('prop-types');
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,18 +6,19 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
-const {Button, Grid, Glyphicon} = require('react-bootstrap');
-const {editGroup} = require('../../actions/usergroups');
-const {getUserGroups, groupSearchTextChanged} = require('../../actions/usergroups');
-const SearchBar = require("../../components/mapcontrols/search/SearchBar");
-const GroupsGrid = require('./users/GroupGrid');
-const GroupDialog = require('./users/GroupDialog');
-const GroupDeleteConfirm = require('./users/GroupDeleteConfirm');
-const Message = require('../../components/I18N/Message');
-const assign = require('object-assign');
-const {trim} = require('lodash');
+import React from 'react';
+
+import { connect } from 'react-redux';
+import { Button, Grid, Glyphicon } from 'react-bootstrap';
+import { editGroup, getUserGroups, groupSearchTextChanged } from '../../actions/usergroups';
+import PropTypes from 'prop-types';
+import SearchBar from '../../components/mapcontrols/search/SearchBar';
+import GroupsGrid from './users/GroupGrid';
+import GroupDialog from './users/GroupDialog';
+import GroupDeleteConfirm from './users/GroupDeleteConfirm';
+import Message from '../../components/I18N/Message';
+import assign from 'object-assign';
+import { trim } from 'lodash';
 
 class GroupManager extends React.Component {
     static propTypes = {

@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-
+import styleUtilsFunc from '../../utils/StyleUtils';
 import PropTypes from 'prop-types';
 import Message from '../../components/I18N/Message';
 import LayersUtils from '../../utils/LayersUtils';
@@ -100,7 +100,7 @@ class ShapeFileUploadAndStyle extends React.Component {
     };
 
     UNSAFE_componentWillMount() {
-        StyleUtils = require('../../utils/StyleUtils')(this.props.mapType);
+        StyleUtils = styleUtilsFunc(this.props.mapType);
     }
 
     getGeometryType = (geometry) => {

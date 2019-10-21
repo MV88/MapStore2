@@ -5,12 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Message = require('../../components/I18N/Message');
-const {onEditorChange} = require('../../actions/widgets');
-const {connect} = require('react-redux');
-const BorderLayout = require('../../components/layout/BorderLayout');
-const BuilderHeader = require('./BuilderHeader');
+import React from 'react';
+
+import Message from '../../components/I18N/Message';
+import { onEditorChange } from '../../actions/widgets';
+import { connect } from 'react-redux';
+import BorderLayout from '../../components/layout/BorderLayout';
+import BuilderHeader from './BuilderHeader';
 const TypeSelector = connect(
     () => ({}),
     {

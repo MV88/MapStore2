@@ -6,27 +6,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { connect } = require('react-redux');
-const {get} = require('lodash');
-const { compose, renameProps, mapPropsStream, withProps } = require('recompose');
-const InfoPopover = require('../../components/widgets/widget/InfoPopover');
-const Message = require('../../components/I18N/Message');
-const BorderLayout = require('../../components/layout/BorderLayout');
+import React from 'react';
 
-const { insertWidget, onEditorChange, setPage, openFilterEditor } = require('../../actions/widgets');
-
-const legendBuilderConnect = require('./enhancers/connection/legendBuilderConnect');
-const viewportBuilderConnectMask = require('./enhancers/connection/viewportBuilderConnectMask');
-const withExitButton = require('./enhancers/withExitButton');
-const withConnectButton = require('./enhancers/connection/withConnectButton');
-const withMapConnect = require('./enhancers/connection/withMapConnect');
+import { connect } from 'react-redux';
+import { get } from 'lodash';
+import { compose, renameProps, mapPropsStream, withProps } from 'recompose';
+import InfoPopover from '../../components/widgets/widget/InfoPopover';
+import Message from '../../components/I18N/Message';
+import BorderLayout from '../../components/layout/BorderLayout';
+import { insertWidget, onEditorChange, setPage, openFilterEditor } from '../../actions/widgets';
+import legendBuilderConnect from './enhancers/connection/legendBuilderConnect';
+import viewportBuilderConnectMask from './enhancers/connection/viewportBuilderConnectMask';
+import withExitButton from './enhancers/withExitButton';
+import withConnectButton from './enhancers/connection/withConnectButton';
+import withMapConnect from './enhancers/connection/withMapConnect';
 const withValidMap = withProps(({ availableDependencies = [], editorData }) => ({ valid: availableDependencies.length > 0 && editorData.mapSync }));
 
-const {
-    wizardStateToProps,
-    wizardSelector
-} = require('./commons');
+import { wizardStateToProps, wizardSelector } from './commons';
 
 const Builder = compose(
     connect(
@@ -46,7 +42,7 @@ const Builder = compose(
 
 )(require('../../components/widgets/builder/wizard/LegendWizard'));
 
-const BuilderHeader = require('./BuilderHeader');
+import BuilderHeader from './BuilderHeader';
 const Toolbar = compose(
     connect(wizardSelector, {
         openFilterEditor,

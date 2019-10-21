@@ -7,11 +7,20 @@
  */
 
 
-const { connect } = require('react-redux');
-const { searchGeostories } = require('../../actions/geostories');
-const { withHandlers, renameProp, compose } = require('recompose');
-const { searchTextSelector, resultsSelector, searchParamsSelector, totalCountSelector, isLoadingSelector } = require('../../selectors/geostories');
-const { createSelector } = require('reselect');
+import { connect } from 'react-redux';
+
+import { searchGeostories } from '../../actions/geostories';
+import { withHandlers, renameProp, compose } from 'recompose';
+
+import {
+    searchTextSelector,
+    resultsSelector,
+    searchParamsSelector,
+    totalCountSelector,
+    isLoadingSelector,
+} from '../../selectors/geostories';
+
+import { createSelector } from 'reselect';
 const PaginationToolbar = compose(
     connect(
         createSelector(

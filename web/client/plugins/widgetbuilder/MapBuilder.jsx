@@ -5,23 +5,23 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
-const {onEditorChange} = require('../../actions/widgets');
-const { wizardSelector, wizardStateToProps} = require('./commons');
-const layerSelector = require('./enhancers/layerSelector');
-const manageLayers = require('./enhancers/manageLayers');
-const mapToolbar = require('./enhancers/mapToolbar');
-const handleNodeEditing = require('./enhancers/handleNodeEditing');
-const mapBuilderConnectMask = require('./enhancers/connection/mapBuilderConnectMask');
-const BorderLayout = require('../../components/layout/BorderLayout');
+import React from 'react';
 
-const BuilderHeader = require('./BuilderHeader');
-const { compose, branch, renderComponent, withState, withHandlers, withProps } = require('recompose');
-const handleNodeSelection = require('../../components/widgets/builder/wizard/map/enhancers/handleNodeSelection');
+import { connect } from 'react-redux';
+import { onEditorChange } from '../../actions/widgets';
+import { wizardSelector, wizardStateToProps } from './commons';
+import layerSelector from './enhancers/layerSelector';
+import manageLayers from './enhancers/manageLayers';
+import mapToolbar from './enhancers/mapToolbar';
+import handleNodeEditing from './enhancers/handleNodeEditing';
+import mapBuilderConnectMask from './enhancers/connection/mapBuilderConnectMask';
+import BorderLayout from '../../components/layout/BorderLayout';
+import BuilderHeader from './BuilderHeader';
+import { compose, branch, renderComponent, withState, withHandlers, withProps } from 'recompose';
+import handleNodeSelection from '../../components/widgets/builder/wizard/map/enhancers/handleNodeSelection';
 
 const Toolbar = mapToolbar(require('../../components/widgets/builder/wizard/map/Toolbar'));
-const MapSelector = require('./MapSelector');
+import MapSelector from './MapSelector';
 
 
 /*

@@ -6,27 +6,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { connect } = require('react-redux');
-const {get} = require('lodash');
-const { isGeometryType } = require('../../utils/ogc/WFS/base');
-const { compose, renameProps, branch, renderComponent, mapPropsStream } = require('recompose');
-const InfoPopover = require('../../components/widgets/widget/InfoPopover');
-const Message = require('../../components/I18N/Message');
-const BorderLayout = require('../../components/layout/BorderLayout');
+import React from 'react';
 
-const { insertWidget, onEditorChange, setPage, openFilterEditor, changeEditorSetting } = require('../../actions/widgets');
+import { connect } from 'react-redux';
+import { get } from 'lodash';
+import { isGeometryType } from '../../utils/ogc/WFS/base';
+import { compose, renameProps, branch, renderComponent, mapPropsStream } from 'recompose';
+import InfoPopover from '../../components/widgets/widget/InfoPopover';
+import Message from '../../components/I18N/Message';
+import BorderLayout from '../../components/layout/BorderLayout';
 
-const builderConfiguration = require('../../components/widgets/enhancers/builderConfiguration');
-const chartLayerSelector = require('./enhancers/chartLayerSelector');
-const viewportBuilderConnect = require('./enhancers/connection/viewportBuilderConnect');
-const viewportBuilderConnectMask = require('./enhancers/connection/viewportBuilderConnectMask');
-const withExitButton = require('./enhancers/withExitButton');
-const withConnectButton = require('./enhancers/connection/withConnectButton');
-const {
-    wizardStateToProps,
-    wizardSelector
-} = require('./commons');
+import {
+    insertWidget,
+    onEditorChange,
+    setPage,
+    openFilterEditor,
+    changeEditorSetting,
+} from '../../actions/widgets';
+
+import builderConfiguration from '../../components/widgets/enhancers/builderConfiguration';
+import chartLayerSelector from './enhancers/chartLayerSelector';
+import viewportBuilderConnect from './enhancers/connection/viewportBuilderConnect';
+import viewportBuilderConnectMask from './enhancers/connection/viewportBuilderConnectMask';
+import withExitButton from './enhancers/withExitButton';
+import withConnectButton from './enhancers/connection/withConnectButton';
+import { wizardStateToProps, wizardSelector } from './commons';
 
 const Builder = connect(
     wizardSelector,
@@ -56,7 +60,7 @@ const Builder = connect(
     ))
 )(require('../../components/widgets/builder/wizard/TableWizard')));
 
-const BuilderHeader = require('./BuilderHeader');
+import BuilderHeader from './BuilderHeader';
 const Toolbar = compose(
     connect(wizardSelector, {
         openFilterEditor,

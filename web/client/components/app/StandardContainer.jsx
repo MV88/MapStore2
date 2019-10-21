@@ -12,12 +12,12 @@ import PropTypes from 'prop-types';
 import Debug from '../development/Debug';
 import Localized from '../I18N/Localized';
 import assign from 'object-assign';
-
+import ThemeComp from '../theme/Theme';
 const Theme = connect((state) => ({
     theme: state.theme && state.theme.selectedTheme && state.theme.selectedTheme.id
 }), {}, (stateProps, dispatchProps, ownProps) => {
     return assign({}, stateProps, dispatchProps, ownProps);
-})(require('../theme/Theme'));
+})(ThemeComp);
 
 class StandardContainer extends React.Component {
     static propTypes = {

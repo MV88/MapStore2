@@ -22,7 +22,7 @@ import BasicSpinner from '../../misc/spinners/BasicSpinner/BasicSpinner';
 import Dialog from '../../misc/Dialog';
 import Message from '../../I18N/Message';
 import Portal from '../../misc/Portal';
-
+import snapshotSuppor from './SnapshotSupport';
 /**
  * SnapshotPanel allow to export a snapshot of the current map, showing a
  * preview of the snapshot, with some info about the map.
@@ -94,12 +94,12 @@ class SnapshotPanel extends React.Component {
     };
 
     UNSAFE_componentWillMount() {
-        SnapshotSupport = require('./SnapshotSupport')(this.props.mapType);
+        SnapshotSupport = snapshotSuppor(this.props.mapType);
     }
 
     UNSAFE_componentWillReceiveProps(newProps) {
         if (newProps.mapType !== this.props.mapType) {
-            SnapshotSupport = require('./SnapshotSupport')(newProps.mapType);
+            SnapshotSupport = snapshotSuppor(newProps.mapType);
         }
     }
 

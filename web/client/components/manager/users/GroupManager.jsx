@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 
-// const Message = require('../I18N/Message');
+
 import { ListGroup, ListGroupItem, Button, Glyphicon } from 'react-bootstrap';
 
 class GroupManager extends React.Component {

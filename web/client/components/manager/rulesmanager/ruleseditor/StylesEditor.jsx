@@ -9,8 +9,11 @@ import React from 'react';
 
 import { Grid, Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import filterEnhancer from '../enhancers/filterstyles';
-const DefaultStyle = filterEnhancer(require("../DefaultStyle"));
-const AvailableStyles = filterEnhancer(require("../AvailableStyles"));
+import DefaultStyleComp from '../DefaultStyle';
+import AvailableStylesComp from '../AvailableStyles';
+
+const DefaultStyle = filterEnhancer(DefaultStyleComp);
+const AvailableStyles = filterEnhancer(AvailableStylesComp);
 
 import StylesList from '../StylesList';
 import Message from '../../../I18N/Message';

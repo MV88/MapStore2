@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 /**
  * Copyright 2016, GeoSolutions Sas.
@@ -8,16 +7,18 @@ import PropTypes from 'prop-types';
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
+import Spinner from 'react-spinkit';
 
 import GroupField from './GroupField';
 import SpatialFilter from './SpatialFilter';
 import QueryToolbar from './QueryToolbar';
 import crossLayerFilterEnhancer from './enhancers/crossLayerFilter';
-const CrossLayerFilter = crossLayerFilterEnhancer(require('./CrossLayerFilter'));
+import CrossLayerFilterComp from './CrossLayerFilter';
 import BorderLayout from '../../layout/BorderLayout';
-import Spinner from 'react-spinkit';
 import './queryform.css';
 
+const CrossLayerFilter = crossLayerFilterEnhancer(CrossLayerFilterComp);
 class QueryBuilder extends React.Component {
     static propTypes = {
         params: PropTypes.object,

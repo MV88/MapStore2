@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 /**
  * Copyright 2016, GeoSolutions Sas.
@@ -10,15 +9,14 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 
-// const Message = require('../I18N/Message');
+
 import Select from 'react-select';
 
 import Message from '../../I18N/Message';
 import { findIndex } from 'lodash';
 import 'react-select/dist/react-select.css';
+import PropTypes from 'prop-types';
 
-// const ConfirmModal = require('./modals/ConfirmModal');
-// const GroupManager = require('./GroupManager');
 
 class UserCard extends React.Component {
     static propTypes = {

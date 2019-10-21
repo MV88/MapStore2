@@ -8,7 +8,6 @@
 
 import ajax from '../libs/ajax';
 
-// const {endsWith, replace} = require('lodash');
 import { Observable } from 'rxjs';
 
 import { parseXML, interceptOGCError } from '../utils/ObservableUtils';

@@ -6,22 +6,63 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {bindActionCreators} = require('redux');
-const {createSelector, createStructuredSelector} = require('reselect');
-const {widgetBuilderAvailable, wfsDownloadAvailable} = require('../../../selectors/controls');
-const {paginationInfo, featureLoadingSelector, resultsSelector, isSyncWmsActive, featureCollectionResultSelector} = require('../../../selectors/query');
-const { getTitleSelector, modeSelector, selectedFeaturesCount, hasChangesSelector, hasGeometrySelector, isSimpleGeomSelector, hasNewFeaturesSelector, isSavingSelector, isSavedSelector, isDrawingSelector, canEditSelector, getAttributeFilter, hasSupportedGeometry, editingAllowedRolesSelector, timeSyncActive, showTimeSync} = require('../../../selectors/featuregrid');
-const {userRoleSelector} = require('../../../selectors/security');
-const {isCesium} = require('../../../selectors/maptype');
-const {mapLayoutValuesSelector} = require('../../../selectors/maplayout');
-const {chartDisabledSelector, showAgainSelector, showPopoverSyncSelector, selectedLayerNameSelector} = require('../../../selectors/featuregrid');
-const {deleteFeatures, toggleTool, clearChangeConfirmed, closeFeatureGridConfirmed, closeFeatureGrid} = require('../../../actions/featuregrid');
-const {toolbarEvents, pageEvents} = require('../index');
-const {getAttributeFields} = require('../../../utils/FeatureGridUtils');
-const {getFilterRenderer} = require('../../../components/data/featuregrid/filterRenderers');
-const {isDescribeLoaded, isFilterActive} = require('../../../selectors/query');
+import React from 'react';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createSelector, createStructuredSelector } from 'reselect';
+import { widgetBuilderAvailable, wfsDownloadAvailable } from '../../../selectors/controls';
+
+import {
+    paginationInfo,
+    featureLoadingSelector,
+    resultsSelector,
+    isSyncWmsActive,
+    featureCollectionResultSelector,
+} from '../../../selectors/query';
+
+import {
+    getTitleSelector,
+    modeSelector,
+    selectedFeaturesCount,
+    hasChangesSelector,
+    hasGeometrySelector,
+    isSimpleGeomSelector,
+    hasNewFeaturesSelector,
+    isSavingSelector,
+    isSavedSelector,
+    isDrawingSelector,
+    canEditSelector,
+    getAttributeFilter,
+    hasSupportedGeometry,
+    editingAllowedRolesSelector,
+    timeSyncActive,
+    showTimeSync,
+} from '../../../selectors/featuregrid';
+
+import { userRoleSelector } from '../../../selectors/security';
+import { isCesium } from '../../../selectors/maptype';
+import { mapLayoutValuesSelector } from '../../../selectors/maplayout';
+
+import {
+    chartDisabledSelector,
+    showAgainSelector,
+    showPopoverSyncSelector,
+    selectedLayerNameSelector,
+} from '../../../selectors/featuregrid';
+
+import {
+    deleteFeatures,
+    toggleTool,
+    clearChangeConfirmed,
+    closeFeatureGridConfirmed,
+    closeFeatureGrid,
+} from '../../../actions/featuregrid';
+
+import { toolbarEvents, pageEvents } from '../index';
+import { getAttributeFields } from '../../../utils/FeatureGridUtils';
+import { getFilterRenderer } from '../../../components/data/featuregrid/filterRenderers';
+import { isDescribeLoaded, isFilterActive } from '../../../selectors/query';
 
 const filterEditingAllowedUser = (role, editingAllowedRoles = ["ADMIN"]) => {
     return editingAllowedRoles.indexOf(role) !== -1;
@@ -102,8 +143,10 @@ const FeatureCloseDialog = connect(() => {}
         onConfirm: () => closeFeatureGrid()
     })(require('../../../components/data/featuregrid/dialog/ConfirmFeatureClose'));
 
+import settings from './AttributeSelector';
+
 const panels = {
-    settings: require('./AttributeSelector')
+    settings
 };
 
 const dialogs = {

@@ -11,7 +11,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import html5Backend from 'react-dnd-html5-backend';
-const AnnotationsEditor = dragDropContext(html5Backend)(require('../AnnotationsEditor'));
+import AnnotationsEditorComp from '../AnnotationsEditor';
+const AnnotationsEditor = dragDropContext(html5Backend)(AnnotationsEditorComp);
 import TestUtils from 'react-dom/test-utils';
 
 const actions = {

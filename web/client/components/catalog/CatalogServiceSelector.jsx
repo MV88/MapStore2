@@ -9,7 +9,8 @@ import React from 'react';
 
 import { InputGroup, Glyphicon } from 'react-bootstrap';
 import localizedProps from '../misc/enhancers/localizedProps';
-const Select = localizedProps(['placeholder', 'clearValueText', 'noResultsText'])(require('react-select'));
+import SelectComp from 'react-select';
+const Select = localizedProps(['placeholder', 'clearValueText', 'noResultsText'])(SelectComp);
 
 export default ({
     isValidServiceSelected,

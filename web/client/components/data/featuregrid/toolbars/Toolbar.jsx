@@ -3,7 +3,8 @@ import { ButtonGroup, Glyphicon, Checkbox } from 'react-bootstrap';
 import './toolbar.css';
 import Message from '../../../I18N/Message';
 import withHint from '../enhancers/withHint';
-const TButton = withHint(require("./TButton"));
+import TButtonComp from './TButton';
+const TButton = withHint(TButtonComp);
 const getDrawFeatureTooltip = (isDrawing, isSimpleGeom) => {
     if (isDrawing) {
         return "featuregrid.toolbar.stopDrawGeom";

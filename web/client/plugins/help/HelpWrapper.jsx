@@ -5,9 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {connect} = require('react-redux');
+import { connect } from 'react-redux';
 
-const {changeHelpwinVisibility, changeHelpText} = require('../../actions/help');
+import { changeHelpwinVisibility, changeHelpText } from '../../actions/help';
 
 export default connect((state) => ({
     helpEnabled: state.controls && state.controls.help && state.controls.help.enabled

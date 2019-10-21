@@ -6,12 +6,13 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const {connect} = require('react-redux');
-const {metadataChanged} = require('../../actions/maps');
-const {loadPermissions, updatePermissions, loadAvailableGroups} = require('../../actions/maps');
-const {updateCurrentMapPermissions, addCurrentMapPermission} = require('../../actions/currentMap');
-const {setControlProperty} = require('../../actions/controls');
-const {showMapDetailsSelector} = require('../../selectors/maps.js');
+import { connect } from 'react-redux';
+
+import { metadataChanged } from '../../actions/maps';
+import { loadPermissions, updatePermissions, loadAvailableGroups } from '../../actions/maps';
+import { updateCurrentMapPermissions, addCurrentMapPermission } from '../../actions/currentMap';
+import { setControlProperty } from '../../actions/controls';
+import { showMapDetailsSelector } from '../../selectors/maps.js';
 
 const MetadataModal = connect(
     (state = {}) => ({

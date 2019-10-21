@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {bindActionCreators} = require('redux');
-const {connect} = require('react-redux');
-const {editUser, changeUserMetadata, saveUser} = require('../../../actions/users');
+import { bindActionCreators } from 'redux';
+
+import { connect } from 'react-redux';
+import { editUser, changeUserMetadata, saveUser } from '../../../actions/users';
 
 
 const mapStateToProps = (state) => {

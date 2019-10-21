@@ -6,12 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {shouldUpdate} = require('recompose');
+import React from 'react';
+
+import { shouldUpdate } from 'recompose';
+import TEMPLATE from './TemplateViewer';
+import PROPERTIES from './PropertiesViewer';
 
 const Viewers = {
-    TEMPLATE: require('./TemplateViewer'),
-    PROPERTIES: require('./PropertiesViewer')
+    TEMPLATE,
+    PROPERTIES
 };
 
 export default shouldUpdate((props, nextProps) => nextProps.response !== props.response)(

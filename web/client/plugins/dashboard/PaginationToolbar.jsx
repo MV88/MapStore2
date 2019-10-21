@@ -7,11 +7,20 @@
  */
 
 
-const { connect } = require('react-redux');
-const { searchDashboards } = require('../../actions/dashboards');
-const { withHandlers, renameProp, compose } = require('recompose');
-const { searchTextSelector, resultsSelector, searchParamsSelector, totalCountSelector, isLoadingSelector } = require('../../selectors/dashboards');
-const { createSelector } = require('reselect');
+import { connect } from 'react-redux';
+
+import { searchDashboards } from '../../actions/dashboards';
+import { withHandlers, renameProp, compose } from 'recompose';
+
+import {
+    searchTextSelector,
+    resultsSelector,
+    searchParamsSelector,
+    totalCountSelector,
+    isLoadingSelector,
+} from '../../selectors/dashboards';
+
+import { createSelector } from 'reselect';
 const PaginationToolbar = compose(
     connect(
         createSelector(

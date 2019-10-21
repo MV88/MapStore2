@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const { compose, branch, renderComponent, withProps} = require('recompose');
+import React from 'react';
 
-const {getEditingWidget} = require('../../selectors/widgets');
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { compose, branch, renderComponent, withProps } from 'recompose';
+import { getEditingWidget } from '../../selectors/widgets';
 
 
 const mapStateToProps = createSelector(
@@ -21,14 +21,20 @@ const mapStateToProps = createSelector(
     })
 );
 
-const WidgetTypeSelector = require('./WidgetTypeSelector');
+import WidgetTypeSelector from './WidgetTypeSelector';
+import chart from './ChartBuilder';
+import text from './TextBuilder';
+import table from './TableBuilder';
+import map from './MapBuilder';
+import counter from './CounterBuilder';
+import legend from './LegendBuilder';
 const Builders = {
-    chart: require('./ChartBuilder'),
-    text: require('./TextBuilder'),
-    table: require('./TableBuilder'),
-    map: require('./MapBuilder'),
-    counter: require('./CounterBuilder'),
-    legend: require('./LegendBuilder')
+    chart,
+    text,
+    table,
+    map,
+    counter,
+    legend
 };
 
 /**

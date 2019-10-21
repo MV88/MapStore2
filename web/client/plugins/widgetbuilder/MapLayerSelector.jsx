@@ -5,17 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
+import React from 'react';
 
-const BorderLayout = require('../../components/layout/BorderLayout');
-const {selectedCatalogSelector} = require('../../selectors/catalog');
-const Toolbar = require('../../components/misc/toolbar/Toolbar');
-const BuilderHeader = require('./BuilderHeader');
-const InfoPopover = require('../../components/widgets/widget/InfoPopover');
-const {Message, HTML} = require('../../components/I18N/I18N');
-const {compose, branch} = require('recompose');
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import BorderLayout from '../../components/layout/BorderLayout';
+import { selectedCatalogSelector } from '../../selectors/catalog';
+import Toolbar from '../../components/misc/toolbar/Toolbar';
+import BuilderHeader from './BuilderHeader';
+import InfoPopover from '../../components/widgets/widget/InfoPopover';
+import { Message, HTML } from '../../components/I18N/I18N';
+import { compose, branch } from 'recompose';
 
 const Catalog = compose(
     branch(

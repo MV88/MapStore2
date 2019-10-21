@@ -14,6 +14,7 @@ import PreviewList from './PreviewList';
 import PreviewIcon from './PreviewIcon';
 import PropTypes from 'prop-types';
 import './css/background.css';
+import defaultImg from './img/dafault.jpg';
 
 class BackgroundSelector extends React.Component {
     static propTypes = {
@@ -43,7 +44,7 @@ class BackgroundSelector extends React.Component {
         size: {width: 0, height: 0},
         dimensions: {},
         thumbs: {
-            unknown: require('./img/dafault.jpg')
+            unknown: defaultImg
         },
         onPropertiesChange: () => {},
         onToggle: () => {},

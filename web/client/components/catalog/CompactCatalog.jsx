@@ -11,16 +11,16 @@ import { compose, mapPropsStream } from 'recompose';
 import { isNil } from 'lodash';
 import Message from '../I18N/Message';
 import Rx from 'rxjs';
-import '../../api/CSW';
-import '../../api/WMS';
-import '../../api/WMTS';
+import CSW from '../../api/CSW';
+import WMS from '../../api/WMS';
+import WMTS from '../../api/WMTS';
 
 const API = {
-    "csw",
-    "wms",
-    "wmts"
+    "csw": CSW,
+    "wms": WMS,
+    "wmts": WMTS
 };
-
+import SideGridComp from '../misc/cardgrids/SideGrid';
 import BorderLayout from '../layout/BorderLayout';
 import LoadingSpinner from '../misc/LoadingSpinner';
 import withVirtualScroll from '../misc/enhancers/infiniteScroll/withInfiniteScroll';
@@ -40,7 +40,7 @@ const SideGrid = compose(
             style: { transform: "translateY(50%)"}
         })
 
-)(require('../misc/cardgrids/SideGrid'));
+)(SideGridComp);
 /*
  * converts record item into a item for SideGrid
  */

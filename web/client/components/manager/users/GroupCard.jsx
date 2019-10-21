@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 /**
  * Copyright 2016, GeoSolutions Sas.
@@ -9,14 +8,10 @@ import PropTypes from 'prop-types';
  */
 
 import React from 'react';
-
-// const Message = require('../I18N/Message');
+import PropTypes from 'prop-types';
 import GridCard from '../../misc/GridCard';
-
 import { Button, Glyphicon } from 'react-bootstrap';
 import Message from '../../../components/I18N/Message';
-
-// const ConfirmModal = require('./modals/ConfirmModal');
 
 import './style/usercard.css';
 

@@ -5,15 +5,22 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { connect } = require('react-redux');
-const { compose } = require('recompose');
-const { createSelector } = require('reselect');
+import { connect } from 'react-redux';
 
-const { userSelector } = require('../../selectors/security');
-const { widgetsConfig } = require('../../selectors/widgets');
-const { isShowSaveOpen, dashboardResource, isDashboardLoading, getDashboardSaveErrors } = require('../../selectors/dashboard');
-const { saveDashboard, triggerSave } = require('../../actions/dashboard');
-const handleSaveModal = require('../../components/resources/modals/enhancers/handleSaveModal');
+import { compose } from 'recompose';
+import { createSelector } from 'reselect';
+import { userSelector } from '../../selectors/security';
+import { widgetsConfig } from '../../selectors/widgets';
+
+import {
+    isShowSaveOpen,
+    dashboardResource,
+    isDashboardLoading,
+    getDashboardSaveErrors,
+} from '../../selectors/dashboard';
+
+import { saveDashboard, triggerSave } from '../../actions/dashboard';
+import handleSaveModal from '../../components/resources/modals/enhancers/handleSaveModal';
 
 /**
  * Save dialog component enhanced for dashboard

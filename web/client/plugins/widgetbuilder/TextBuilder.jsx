@@ -5,14 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
-const { compose, withProps } = require('recompose');
-const {onEditorChange, insertWidget, setPage} = require('../../actions/widgets');
-const {wizardSelector, wizardStateToProps} = require('./commons');
-const BorderLayout = require('../../components/layout/BorderLayout');
-const withExitButton = require('./enhancers/withExitButton');
-const BuilderHeader = require('./BuilderHeader');
+import React from 'react';
+
+import { connect } from 'react-redux';
+import { compose, withProps } from 'recompose';
+import { onEditorChange, insertWidget, setPage } from '../../actions/widgets';
+import { wizardSelector, wizardStateToProps } from './commons';
+import BorderLayout from '../../components/layout/BorderLayout';
+import withExitButton from './enhancers/withExitButton';
+import BuilderHeader from './BuilderHeader';
 
 const Toolbar = compose(
     connect(wizardSelector, {

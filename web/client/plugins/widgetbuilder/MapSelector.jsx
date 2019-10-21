@@ -5,11 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { compose, withProps } = require('recompose');
-const {connect} = require('react-redux');
-const { onEditorChange } = require('../../actions/widgets');
-const { normalizeMap } = require('../../utils/LayersUtils');
-const MapSelector = require('../../components/widgets/builder/wizard/map/MapSelector').default;
+import { compose, withProps } from 'recompose';
+
+import { connect } from 'react-redux';
+import { onEditorChange } from '../../actions/widgets';
+import { normalizeMap } from '../../utils/LayersUtils';
+import MapSelector from '../../components/widgets/builder/wizard/map/MapSelector';
 export default compose(
     connect(
         () => ({}), {

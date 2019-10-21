@@ -6,7 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports.Message = require('./Message');
-module.exports.HTML = require('./HTML');
-module.exports.DateFormat = require('./Date');
+import Message from './Message';
+import HTML from './HTML';
+import DateFormat from './Date';
 
+export default {
+    Message,
+    HTML,
+    DateFormat
+};

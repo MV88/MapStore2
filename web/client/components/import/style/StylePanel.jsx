@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 /**
  * Copyright 2016, GeoSolutions Sas.
@@ -9,7 +8,8 @@ import PropTypes from 'prop-types';
  */
 
 import React from 'react';
-
+import PropTypes from 'prop-types';
+import styleUtilsFunc from '../../../utils/StyleUtils';
 import Message from '../../I18N/Message';
 import LocaleUtils from '../../../utils/LocaleUtils';
 let StyleUtils;
@@ -62,7 +62,7 @@ class StylePanel extends React.Component {
     };
 
     UNSAFE_componentWillMount() {
-        StyleUtils = require('../../../utils/StyleUtils')(this.props.mapType);
+        StyleUtils = styleUtilsFunc(this.props.mapType);
     }
 
     getGeometryType = (geometry) => {

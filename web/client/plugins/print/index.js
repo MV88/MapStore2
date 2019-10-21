@@ -16,7 +16,7 @@ import {
     setPrintParameter,
     changePrintZoomLevel,
     changeMapPrintPreview,
-    printCancel,
+    printCancel
 } from '../../actions/print';
 
 import { setControlProperty } from '../../actions/controls';

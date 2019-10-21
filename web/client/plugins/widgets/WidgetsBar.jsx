@@ -5,12 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { compose, defaultProps, withProps} = require('recompose');
-const {createSelector} = require('reselect');
-const {connect} = require('react-redux');
-const {filterHiddenWidgets} = require('./widgetsPermission');
-const { toggleCollapse } = require('../../actions/widgets');
-const {trayWidgets} = require('../../selectors/widgetsTray');
+import { compose, defaultProps, withProps } from 'recompose';
+
+import { createSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { filterHiddenWidgets } from './widgetsPermission';
+import { toggleCollapse } from '../../actions/widgets';
+import { trayWidgets } from '../../selectors/widgetsTray';
 
 
 /**

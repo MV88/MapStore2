@@ -6,27 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { connect } = require('react-redux');
+import React from 'react';
 
-const { compose, renameProps, branch, renderComponent } = require('recompose');
+import { connect } from 'react-redux';
+import { compose, renameProps, branch, renderComponent } from 'recompose';
+import BorderLayout from '../../components/layout/BorderLayout';
 
-const BorderLayout = require('../../components/layout/BorderLayout');
+import {
+    insertWidget,
+    onEditorChange,
+    setPage,
+    openFilterEditor,
+    changeEditorSetting,
+} from '../../actions/widgets';
 
-const { insertWidget, onEditorChange, setPage, openFilterEditor, changeEditorSetting } = require('../../actions/widgets');
-
-const builderConfiguration = require('../../components/widgets/enhancers/builderConfiguration');
-const chartLayerSelector = require('./enhancers/chartLayerSelector');
-const viewportBuilderConnect = require('./enhancers/connection/viewportBuilderConnect');
-const viewportBuilderConnectMask = require('./enhancers/connection/viewportBuilderConnectMask');
-
-const withExitButton = require('./enhancers/withExitButton');
-const withConnectButton = require('./enhancers/connection/withConnectButton');
-
-const {
-    wizardStateToProps,
-    wizardSelector
-} = require('./commons');
+import builderConfiguration from '../../components/widgets/enhancers/builderConfiguration';
+import chartLayerSelector from './enhancers/chartLayerSelector';
+import viewportBuilderConnect from './enhancers/connection/viewportBuilderConnect';
+import viewportBuilderConnectMask from './enhancers/connection/viewportBuilderConnectMask';
+import withExitButton from './enhancers/withExitButton';
+import withConnectButton from './enhancers/connection/withConnectButton';
+import { wizardStateToProps, wizardSelector } from './commons';
 
 const Builder = connect(
     wizardSelector,
@@ -45,7 +45,7 @@ const Builder = connect(
     })
 )(require('../../components/widgets/builder/wizard/CounterWizard')));
 
-const BuilderHeader = require('./BuilderHeader');
+import BuilderHeader from './BuilderHeader';
 const Toolbar = compose(
     connect(
         wizardSelector, {

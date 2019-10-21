@@ -16,7 +16,6 @@ const RuleService = RuleServiceFactory({
 
 import RULES from 'raw-loader!../../../test-resources/geofence/rest/rules/rules_1.xml';
 
-// const RULES_JSON = require('../../../test-resources/geofence/rest/rules/rules_1.json');
 import GF_RULE from '../../../test-resources/geofence/rest/rules/full_rule1.json';
 
 import expect from 'expect';

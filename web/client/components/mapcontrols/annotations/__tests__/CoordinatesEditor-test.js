@@ -11,7 +11,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import testBackend from 'react-dnd-test-backend';
-const CoordinatesEditor = dragDropContext(testBackend)(require('../CoordinatesEditor'));
+import CoordinatesEditorComp from '../CoordinatesEditor';
+const CoordinatesEditor = dragDropContext(testBackend)(CoordinatesEditorComp);
 import TestUtils from 'react-dom/test-utils';
 
 const testHandlers = {

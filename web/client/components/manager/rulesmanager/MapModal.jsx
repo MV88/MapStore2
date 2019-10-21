@@ -14,7 +14,8 @@ import autoResize from '../../map/enhancers/autoResize';
 import onMapViewChanges from '../../map/enhancers/onMapViewChanges';
 import withDraw from '../../map/enhancers/withDraw';
 import { compose } from 'recompose';
-
+import BaseMap from '../../map/BaseMap';
+import { Portal } from 'react-overlays';
 const MapWitDraw = compose(
     enhancer,
     onMapViewChanges,
@@ -22,9 +23,8 @@ const MapWitDraw = compose(
     autoMapType,
     mapType,
     withDraw()
-)(require('../../map/BaseMap'));
+)(BaseMap);
 
-import { Portal } from 'react-overlays';
 
 export default ({layer, onMapReady = () => {}}) => {
     return (
@@ -38,4 +38,3 @@ export default ({layer, onMapReady = () => {}}) => {
             </div>
         </Portal>);
 };
-

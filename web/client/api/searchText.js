@@ -7,9 +7,10 @@
  */
 import WFS from './WFS';
 
-import assign from 'object-assign';
 import GeoCodeUtils from '../utils/GeoCodeUtils';
 import { generateTemplateString } from '../utils/TemplateUtils';
+import assign from 'object-assign';
+import Nominatim from './Nominatim';
 
 const defaultFromTextToFilter = ({searchText, staticFilter, blacklist, item, queriableAttributes, predicate} ) => {
     // split into words and remove blacklisted words
@@ -37,7 +38,7 @@ let Services = {
     nominatim: (searchText, options = {
         returnFullData: false
     }) =>
-        require('./Nominatim')
+        Nominatim
             .geocode(searchText, options)
             .then( res => {return options.returnFullData ? res : GeoCodeUtils.nominatimToGeoJson(res.data); }),
     wfs: (searchText, {url, typeName, queriableAttributes = [], outputFormat = "application/json", predicate = "ILIKE", staticFilter = "", blacklist = [], item, fromTextToFilter = defaultFromTextToFilter, returnFullData = false, ...params }) => {
