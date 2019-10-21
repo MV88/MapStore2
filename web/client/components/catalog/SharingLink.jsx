@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,12 +7,13 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Message = require('../I18N/Message');
-const {FormControl, FormGroup, Button, Glyphicon, Tooltip} = require('react-bootstrap');
-const OverlayTrigger = require('../misc/OverlayTrigger');
-const CopyToClipboard = require('react-copy-to-clipboard');
-const SecurityUtils = require('../../utils/SecurityUtils');
+import React from 'react';
+
+import Message from '../I18N/Message';
+import { FormControl, FormGroup, Button, Glyphicon, Tooltip } from 'react-bootstrap';
+import OverlayTrigger from '../misc/OverlayTrigger';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import SecurityUtils from '../../utils/SecurityUtils';
 
 class SharingLink extends React.Component {
     static propTypes = {

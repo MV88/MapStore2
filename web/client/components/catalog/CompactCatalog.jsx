@@ -5,27 +5,31 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {compose, mapPropsStream} = require('recompose');
-const {isNil} = require('lodash');
-const Message = require('../I18N/Message');
-const Rx = require('rxjs');
+import React from 'react';
+
+import { compose, mapPropsStream } from 'recompose';
+import { isNil } from 'lodash';
+import Message from '../I18N/Message';
+import Rx from 'rxjs';
+import '../../api/CSW';
+import '../../api/WMS';
+import '../../api/WMTS';
 
 const API = {
-    "csw": require('../../api/CSW'),
-    "wms": require('../../api/WMS'),
-    "wmts": require('../../api/WMTS')
+    "csw",
+    "wms",
+    "wmts"
 };
 
-const BorderLayout = require('../layout/BorderLayout');
-const LoadingSpinner = require('../misc/LoadingSpinner');
-const withVirtualScroll = require('../misc/enhancers/infiniteScroll/withInfiniteScroll');
-const loadingState = require('../misc/enhancers/loadingState');
-const emptyState = require('../misc/enhancers/emptyState');
-const withControllableState = require('../misc/enhancers/withControllableState');
-const CatalogForm = require('./CatalogForm');
-const {getCatalogRecords} = require('../../utils/CatalogUtils');
-const Icon = require('../misc/FitIcon');
+import BorderLayout from '../layout/BorderLayout';
+import LoadingSpinner from '../misc/LoadingSpinner';
+import withVirtualScroll from '../misc/enhancers/infiniteScroll/withInfiniteScroll';
+import loadingState from '../misc/enhancers/loadingState';
+import emptyState from '../misc/enhancers/emptyState';
+import withControllableState from '../misc/enhancers/withControllableState';
+import CatalogForm from './CatalogForm';
+import { getCatalogRecords } from '../../utils/CatalogUtils';
+import Icon from '../misc/FitIcon';
 const defaultPreview = <Icon glyph="geoserver" padding={20}/>;
 const SideGrid = compose(
     loadingState(({loading, items = []} ) => items.length === 0 && loading),

@@ -5,14 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const RecordItem = require('../RecordItem.jsx').default;
-const expect = require('expect');
-const assign = require('object-assign');
-const ReactTestUtils = require('react-dom/test-utils');
+import React from 'react';
 
-const TestUtils = require('react-dom/test-utils');
+import ReactDOM from 'react-dom';
+import RecordItem from '../RecordItem.jsx';
+import expect from 'expect';
+import assign from 'object-assign';
+import ReactTestUtils from 'react-dom/test-utils';
+import TestUtils from 'react-dom/test-utils';
 const SAMPLE_IMAGE = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 const sampleRecord = {
