@@ -6,11 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
+import Rx from 'rxjs';
 
 const sameFilter = (f1, {filters: f2}) => f1 === f2;
 const sameVersion = (f1, {version: f2}) => f1 === f2;
-const { getCount } = require('../../../../../observables/rulesmanager');
+import { getCount } from '../../../../../observables/rulesmanager';
 /**
  * Function that converts stream of a RulesGrid props to trigger data fetch events, It gets the rules count
  * @param {Observable} Stream of props.

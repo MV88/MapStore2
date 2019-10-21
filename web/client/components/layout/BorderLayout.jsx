@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 /**
  * A components that renders the content to fill 100% width and height, with possible header,footer, left and right.
  * Made using flex layout.

@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -14,18 +15,29 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {Alert, Tabs, Tab, Button, Glyphicon, Checkbox, FormControl, FormGroup, ControlLabel} = require('react-bootstrap');
-const tooltip = require('../../../components/misc/enhancers/tooltip');
+import React from 'react';
+
+import {
+    Alert,
+    Tabs,
+    Tab,
+    Button,
+    Glyphicon,
+    Checkbox,
+    FormControl,
+    FormGroup,
+    ControlLabel,
+} from 'react-bootstrap';
+
+import tooltip from '../../../components/misc/enhancers/tooltip';
 const GlyphiconTooltip = tooltip(Glyphicon);
-const Dialog = require('../../../components/misc/Dialog');
-const UserGroups = require('./UserGroups');
-const assign = require('object-assign');
-const Message = require('../../../components/I18N/Message');
-const Spinner = require('react-spinkit');
-const {findIndex} = require('lodash');
-
-require('./style/userdialog.css');
+import Dialog from '../../../components/misc/Dialog';
+import UserGroups from './UserGroups';
+import assign from 'object-assign';
+import Message from '../../../components/I18N/Message';
+import Spinner from 'react-spinkit';
+import { findIndex } from 'lodash';
+import './style/userdialog.css';
 
 /**
  * A Modal window to show password reset form

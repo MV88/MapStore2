@@ -1,7 +1,7 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const { DragSource: dragSource } = require('react-dnd');
-const { editors } = require('react-data-grid');
+import React from 'react';
+import PropTypes from 'prop-types';
+import { DragSource as dragSource } from 'react-dnd';
+import { editors } from 'react-data-grid';
 const { CheckboxEditor } = editors;
 
 class PriorityActionsCell extends React.Component {

@@ -5,11 +5,12 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const {Grid, Row, Col} = require('react-bootstrap');
-const Message = require("../../../I18N/Message");
-const Select = require("../AttributeAccessSelect");
-const {castArray} = require("lodash");
+import React from 'react';
+
+import { Grid, Row, Col } from 'react-bootstrap';
+import Message from '../../../I18N/Message';
+import Select from '../AttributeAccessSelect';
+import { castArray } from 'lodash';
 
 const getAttribute = (name, {attributes = {}}) => {
     return castArray((attributes.attribute || [])).filter(a => a.name === name)[0];

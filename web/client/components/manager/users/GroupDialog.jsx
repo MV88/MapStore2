@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -14,18 +15,17 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const UsersTable = require('./UsersTable');
-const {Alert, Tabs, Tab, Button, Glyphicon, FormControl, FormGroup, ControlLabel} = require('react-bootstrap');
+import React from 'react';
 
-const Dialog = require('../../../components/misc/Dialog');
-const assign = require('object-assign');
-const Message = require('../../../components/I18N/Message');
-const Spinner = require('react-spinkit');
-const Select = require("react-select");
-const {findIndex} = require('lodash');
-
-require('./style/userdialog.css');
+import UsersTable from './UsersTable';
+import { Alert, Tabs, Tab, Button, Glyphicon, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
+import Dialog from '../../../components/misc/Dialog';
+import assign from 'object-assign';
+import Message from '../../../components/I18N/Message';
+import Spinner from 'react-spinkit';
+import Select from 'react-select';
+import { findIndex } from 'lodash';
+import './style/userdialog.css';
 
 /**
  * A Modal window to show password reset form

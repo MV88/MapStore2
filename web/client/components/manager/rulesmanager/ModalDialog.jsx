@@ -5,11 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
 
-const Message = require('../../I18N/Message');
-const Portal = require('../../misc/Portal');
-const ResizableModal = require('../../misc/ResizableModal');
+import Message from '../../I18N/Message';
+import Portal from '../../misc/Portal';
+import ResizableModal from '../../misc/ResizableModal';
 
 export default ({title = "", showDialog = false, buttons = [], closeAction = () => {}, msg = "Missing message"}) => {
     return (

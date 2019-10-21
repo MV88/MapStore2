@@ -12,7 +12,7 @@
  * @return {Observable} Stream of props to trigger the data fetch
  */
 
-const {getPagesToLoad} = require('../../../../../utils/RulesGridUtils');
+import { getPagesToLoad } from '../../../../../utils/RulesGridUtils';
 
 const sameRowsCount = ({rowsCount: oR}, {rowsCount: nR}) => oR === nR;
 const samePages = ({pages: oP}, {pages: nP}) => oP === nP;

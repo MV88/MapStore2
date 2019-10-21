@@ -6,14 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const Button = require("../../misc/toolbar/ToolbarButton");
-const ContainerDimensions = require('react-container-dimensions').default;
-const {Controlled: Codemirror} = require('react-codemirror2');
-require('codemirror/lib/codemirror.css');
-require('codemirror/mode/sql/sql');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import Button from '../../misc/toolbar/ToolbarButton';
+import ContainerDimensions from 'react-container-dimensions';
+import { Controlled as Codemirror } from 'react-codemirror2';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/mode/sql/sql';
+import LocaleUtils from '../../../utils/LocaleUtils';
 
 
 class RoiCql extends React.Component {

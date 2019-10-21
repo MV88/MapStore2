@@ -5,15 +5,15 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
+import React from 'react';
 
-const enhancer = require("./enhancers/Map");
-const autoMapType = require('../../map/enhancers/autoMapType');
-const mapType = require('../../map/enhancers/mapType');
-const autoResize = require('../../map/enhancers/autoResize');
-const onMapViewChanges = require('../../map/enhancers/onMapViewChanges');
-const withDraw = require("../../map/enhancers/withDraw");
-const {compose} = require('recompose');
+import enhancer from './enhancers/Map';
+import autoMapType from '../../map/enhancers/autoMapType';
+import mapType from '../../map/enhancers/mapType';
+import autoResize from '../../map/enhancers/autoResize';
+import onMapViewChanges from '../../map/enhancers/onMapViewChanges';
+import withDraw from '../../map/enhancers/withDraw';
+import { compose } from 'recompose';
 
 const MapWitDraw = compose(
     enhancer,
@@ -24,7 +24,7 @@ const MapWitDraw = compose(
     withDraw()
 )(require('../../map/BaseMap'));
 
-const Portal = require('react-overlays').Portal;
+import { Portal } from 'react-overlays';
 
 export default ({layer, onMapReady = () => {}}) => {
     return (

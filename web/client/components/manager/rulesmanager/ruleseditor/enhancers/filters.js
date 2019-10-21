@@ -5,11 +5,12 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const {compose, withStateHandlers, withPropsOnChange} = require("recompose");
-const {connect} = require("react-redux");
-const {changeDrawingStatus} = require("../../../../../actions/draw");
-const {geometryStateSel} = require("../../../../../selectors/rulesmanager");
-const {error} = require("../../../../../actions/notifications");
+import { compose, withStateHandlers, withPropsOnChange } from 'recompose';
+
+import { connect } from 'react-redux';
+import { changeDrawingStatus } from '../../../../../actions/draw';
+import { geometryStateSel } from '../../../../../selectors/rulesmanager';
+import { error } from '../../../../../actions/notifications';
 export default compose(
     connect(state => ({geometryState: geometryStateSel(state)}), {onChangeDrawingStatus: changeDrawingStatus, onError: error}),
     withStateHandlers(({constraints = {}}) => {

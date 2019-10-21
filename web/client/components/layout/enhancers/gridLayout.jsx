@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const withResizeSpy = require('../../misc/enhancers/withResizeSpy');
-const { compose, defaultProps, withStateHandlers} = require('recompose');
-const ContainerDimensions = require('react-container-dimensions').default;
+import React from 'react';
+
+import withResizeSpy from '../../misc/enhancers/withResizeSpy';
+import { compose, defaultProps, withStateHandlers } from 'recompose';
+import ContainerDimensions from 'react-container-dimensions';
 
 /**
  * Width and height providers for react-grid-layout. Replace default.

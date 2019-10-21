@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,13 +7,14 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Spinner = require('react-spinkit');
-const Message = require('../../I18N/Message');
-const ImporterUtils = require('../../../utils/ImporterUtils');
-const {Table, Glyphicon, Button, Label, Tooltip} = require('react-bootstrap');
-const OverlayTrigger = require('../../misc/OverlayTrigger');
-const {findIndex} = require('lodash');
+import React from 'react';
+
+import Spinner from 'react-spinkit';
+import Message from '../../I18N/Message';
+import ImporterUtils from '../../../utils/ImporterUtils';
+import { Table, Glyphicon, Button, Label, Tooltip } from 'react-bootstrap';
+import OverlayTrigger from '../../misc/OverlayTrigger';
+import { findIndex } from 'lodash';
 
 class ImportsGrid extends React.Component {
     static propTypes = {

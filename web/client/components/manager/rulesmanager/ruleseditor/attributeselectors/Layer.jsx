@@ -5,16 +5,17 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require("react");
-const {Row, Col} = require('react-bootstrap');
-const PagedCombo = require('../../../../misc/combobox/PagedCombobox');
-const autoComplete = require("../../enhancers/autoComplete");
-const { compose, defaultProps, withHandlers, withPropsOnChange} = require('recompose');
-const {error} = require('../../../../../actions/notifications');
-const localizedProps = require("../../../../misc/enhancers/localizedProps");
-const {loadLayers} = require('../../../../../observables/rulesmanager');
-const {connect} = require("react-redux");
-const Message = require('../../../../I18N/Message');
+import React from 'react';
+
+import { Row, Col } from 'react-bootstrap';
+import PagedCombo from '../../../../misc/combobox/PagedCombobox';
+import autoComplete from '../../enhancers/autoComplete';
+import { compose, defaultProps, withHandlers, withPropsOnChange } from 'recompose';
+import { error } from '../../../../../actions/notifications';
+import localizedProps from '../../../../misc/enhancers/localizedProps';
+import { loadLayers } from '../../../../../observables/rulesmanager';
+import { connect } from 'react-redux';
+import Message from '../../../../I18N/Message';
 
 const LayerSelector = (props) => (
     <Row className={props.disabled ? 'ms-disabled' : ''}>
