@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015-2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,14 +8,12 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
+import React from 'react';
 
-const {Button, Glyphicon, Tooltip} = require('react-bootstrap');
-
-const OverlayTrigger = require('../misc/OverlayTrigger');
-
-const mapUtils = require('../../utils/MapUtils');
-const configUtils = require('../../utils/ConfigUtils');
+import { Button, Glyphicon, Tooltip } from 'react-bootstrap';
+import OverlayTrigger from '../misc/OverlayTrigger';
+import mapUtils from '../../utils/MapUtils';
+import configUtils from '../../utils/ConfigUtils';
 
 
 /**

@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,14 +7,15 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React = require('react');
-var BootstrapReact = require('react-bootstrap');
+import React from 'react';
+
+import BootstrapReact from 'react-bootstrap';
 var Button = BootstrapReact.Button;
 var Glyphicon = BootstrapReact.Glyphicon;
-var ImageButton = require('./ImageButton');
-const Dialog = require('../misc/Dialog');
-require('./css/infoButton.css');
-const assign = require('object-assign');
+import ImageButton from './ImageButton';
+import Dialog from '../misc/Dialog';
+import './css/infoButton.css';
+import assign from 'object-assign';
 
 /**
  * A button to show a simple information window.
