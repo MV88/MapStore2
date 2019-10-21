@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {compose, branch, renderComponent} = require('recompose');
-const LoadingContent = require('./LoadingContent');
-const ErrorContent = require('./ErrorContent');
-const NormalContent = require('./NormalContent');
+import { compose, branch, renderComponent } from 'recompose';
+
+import LoadingContent from './LoadingContent';
+import ErrorContent from './ErrorContent';
+import NormalContent from './NormalContent';
 
 export default compose(
     branch(

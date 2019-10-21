@@ -5,12 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const { compose, mapPropsStream, createEventHandler} = require('recompose');
-const FileUtils = require('../../../../utils/FileUtils');
-const LayersUtils = require('../../../../utils/LayersUtils');
+import Rx from 'rxjs';
 
-const JSZip = require('jszip');
+import { compose, mapPropsStream, createEventHandler } from 'recompose';
+import FileUtils from '../../../../utils/FileUtils';
+import LayersUtils from '../../../../utils/LayersUtils';
+import JSZip from 'jszip';
 
 const tryUnzip = (file) => {
     return FileUtils.readZip(file).then((buffer) => {

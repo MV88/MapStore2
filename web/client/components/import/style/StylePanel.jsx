@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,16 +8,14 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const Message = require('../../I18N/Message');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import Message from '../../I18N/Message';
+import LocaleUtils from '../../../utils/LocaleUtils';
 let StyleUtils;
-const { Grid, Row, Col, Button, Alert} = require('react-bootstrap');
-
-const Combo = require('react-widgets').DropdownList;
-
-const {Promise} = require('es6-promise');
+import { Grid, Row, Col, Button, Alert } from 'react-bootstrap';
+import { DropdownList as Combo } from 'react-widgets';
+import { Promise } from 'es6-promise';
 
 class StylePanel extends React.Component {
     static propTypes = {

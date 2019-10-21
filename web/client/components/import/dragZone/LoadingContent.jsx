@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const Loader = require('../../misc/Loader');
-const Message = require('../../I18N/Message');
+import Loader from '../../misc/Loader';
+import Message from '../../I18N/Message';
 
 export default () => (<div style={{
     margin: 'auto',

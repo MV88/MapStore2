@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,8 +7,9 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactIntl = require('react-intl');
+import React from 'react';
+
+import ReactIntl from 'react-intl';
 
 const FormattedMessage = ReactIntl.FormattedMessage;
 
