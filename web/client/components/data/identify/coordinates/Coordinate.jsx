@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Editor = require('./Editor');
-const Viewer = require('./Viewer');
+import React from 'react';
+
+import Editor from './Editor';
+import Viewer from './Viewer';
 
 /**
  * Visualize the coordinate editor or viewer for the point clicked

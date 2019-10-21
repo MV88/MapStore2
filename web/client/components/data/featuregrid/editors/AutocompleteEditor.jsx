@@ -5,12 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const PropTypes = require('prop-types');
-const AttributeEditor = require('./AttributeEditor');
-const {AutocompleteCombobox} = require('../../../misc/AutocompleteCombobox');
-const {getParsedUrl} = require('../../../../utils/ConfigUtils');
-const {createPagedUniqueAutompleteStream} = require('../../../../observables/autocomplete');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import AttributeEditor from './AttributeEditor';
+import { AutocompleteCombobox } from '../../../misc/AutocompleteCombobox';
+import { getParsedUrl } from '../../../../utils/ConfigUtils';
+import { createPagedUniqueAutompleteStream } from '../../../../observables/autocomplete';
 
 class AutocompleteEditor extends AttributeEditor {
     static propTypes = {

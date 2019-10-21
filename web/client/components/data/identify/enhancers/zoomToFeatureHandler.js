@@ -5,8 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const bbox = require('@turf/bbox');
-const {withHandlers} = require('recompose');
+import bbox from '@turf/bbox';
+
+import { withHandlers } from 'recompose';
 
 /**
  * Adds a zoomToFeature handler that transforms the `currentFeature` property (array of features) into an extent, cleaning up missing geometries, triggers the callback

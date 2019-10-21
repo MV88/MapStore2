@@ -5,23 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {find} = require('lodash');
-const PropTypes = require('prop-types');
-const {Row, Col, Panel, Glyphicon, FormControl} = require('react-bootstrap');
+import React from 'react';
 
-const ComboField = require('./ComboField');
-const GeometryDetails = require('./GeometryDetails');
-
-const {AutocompleteWFSCombobox} = require('../../misc/AutocompleteWFSCombobox');
-const ComboFieldListItem = require('./ComboFieldListItem');
-const {createWFSFetchStream} = require('../../../observables/autocomplete');
-
-const ZoneField = require('./ZoneField');
-
-const LocaleUtils = require('../../../utils/LocaleUtils');
-const SwitchPanel = require('../../misc/switch/SwitchPanel');
-const I18N = require('../../I18N/I18N');
+import { find } from 'lodash';
+import PropTypes from 'prop-types';
+import { Row, Col, Panel, Glyphicon, FormControl } from 'react-bootstrap';
+import ComboField from './ComboField';
+import GeometryDetails from './GeometryDetails';
+import { AutocompleteWFSCombobox } from '../../misc/AutocompleteWFSCombobox';
+import ComboFieldListItem from './ComboFieldListItem';
+import { createWFSFetchStream } from '../../../observables/autocomplete';
+import ZoneField from './ZoneField';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import SwitchPanel from '../../misc/switch/SwitchPanel';
+import I18N from '../../I18N/I18N';
 
 class SpatialFilter extends React.Component {
     static propTypes = {

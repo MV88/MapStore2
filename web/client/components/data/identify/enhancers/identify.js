@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {lifecycle, withHandlers, compose} = require('recompose');
-const {set} = require('../../../../utils/ImmutableUtils');
-const {isEqual, isNil} = require('lodash');
+import { lifecycle, withHandlers, compose } from 'recompose';
+
+import { set } from '../../../../utils/ImmutableUtils';
+import { isEqual, isNil } from 'lodash';
 
 /**
  * Enhancer to enable set index only if Component has header

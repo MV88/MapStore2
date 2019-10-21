@@ -5,13 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const PropTypes = require('prop-types');
-const AttributeEditor = require('./AttributeEditor');
-const ControlledCombobox = require('../../../misc/combobox/ControlledCombobox');
-const {forceSelection} = require('../../../../utils/FeatureGridEditorUtils');
-const {head} = require('lodash');
-const assign = require('object-assign');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import AttributeEditor from './AttributeEditor';
+import ControlledCombobox from '../../../misc/combobox/ControlledCombobox';
+import { forceSelection } from '../../../../utils/FeatureGridEditorUtils';
+import { head } from 'lodash';
+import assign from 'object-assign';
 
 class DropDownEditor extends AttributeEditor {
     static propTypes = {

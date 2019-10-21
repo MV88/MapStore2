@@ -1,5 +1,5 @@
-const React = require('react');
-const {Button, Glyphicon} = require('react-bootstrap');
+import React from 'react';
+import { Button, Glyphicon } from 'react-bootstrap';
 const hideStyle = {
     width: 0,
     padding: 0,
@@ -18,4 +18,4 @@ export default class SimpleTButton extends React.Component {
             <Glyphicon glyph={glyph}/>
         </Button>);
     }
-};
+}

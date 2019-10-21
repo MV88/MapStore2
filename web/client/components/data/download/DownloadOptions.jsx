@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /*
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -6,12 +7,13 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Select = require('react-select');
-require('react-select/dist/react-select.css');
-const {Checkbox} = require('react-bootstrap');
-const {get, head} = require('lodash');
-const Message = require('../../I18N/Message');
+import React from 'react';
+
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+import { Checkbox } from 'react-bootstrap';
+import { get, head } from 'lodash';
+import Message from '../../I18N/Message';
 
 /**
  * Download Options Form. Shows a selector of the options to perform a WFS download
@@ -89,4 +91,4 @@ export default class extends React.Component {
             </Checkbox>}
         </form>);
     }
-};
+}

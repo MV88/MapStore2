@@ -1,10 +1,10 @@
-const {get, find} = require('lodash');
-const {Observable} = require('rxjs');
-const {describeFeatureType, getLayerWFSCapabilities} = require('../../../../observables/wfs');
-const {findGeometryProperty} = require('../../../../utils/ogc/WFS/base');
-const {describeFeatureTypeToAttributes} = require('../../../../utils/FeatureTypeUtils');
-const {compose, withProps, withPropsOnChange, withHandlers, defaultProps} = require('recompose');
-const propsStreamFactory = require('../../../misc/enhancers/propsStreamFactory');
+import { get, find } from 'lodash';
+import { Observable } from 'rxjs';
+import { describeFeatureType, getLayerWFSCapabilities } from '../../../../observables/wfs';
+import { findGeometryProperty } from '../../../../utils/ogc/WFS/base';
+import { describeFeatureTypeToAttributes } from '../../../../utils/FeatureTypeUtils';
+import { compose, withProps, withPropsOnChange, withHandlers, defaultProps } from 'recompose';
+import propsStreamFactory from '../../../misc/enhancers/propsStreamFactory';
 const hasCrossLayerFunctionalities = (data) => {
     const functions = get(data, "WFS_Capabilities.Filter_Capabilities.Scalar_Capabilities.ArithmeticOperators.Functions.FunctionNames.FunctionName");
     return !!find(functions, ({_} = {}) => _ === "queryCollection");

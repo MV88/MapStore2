@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ResizableModal = require('../../misc/ResizableModal');
-const Portal = require('../../misc/Portal');
-const Message = require('../../I18N/Message');
-const {Glyphicon} = require('react-bootstrap');
+import React from 'react';
+
+import ResizableModal from '../../misc/ResizableModal';
+import Portal from '../../misc/Portal';
+import Message from '../../I18N/Message';
+import { Glyphicon } from 'react-bootstrap';
 
 /**
  * Component for rendering lat and lng of the current selected point

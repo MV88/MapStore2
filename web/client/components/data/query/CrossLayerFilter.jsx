@@ -6,18 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const Message = require('../../I18N/Message');
-
-const SwitchPanel = require('../../misc/switch/SwitchPanel');
-const {Row, Col} = require('react-bootstrap');
-const Select = require('react-select');
-
-
-const GeometricOperationSelector = require('./GeometricOperationSelector');
-const GroupField = require('./GroupField');
-const {isSameUrl} = require('../../../utils/URLUtils');
+import Message from '../../I18N/Message';
+import SwitchPanel from '../../misc/switch/SwitchPanel';
+import { Row, Col } from 'react-bootstrap';
+import Select from 'react-select';
+import GeometricOperationSelector from './GeometricOperationSelector';
+import GroupField from './GroupField';
+import { isSameUrl } from '../../../utils/URLUtils';
 
 
 const isSameOGCServiceRoot = (origSearchUrl, {search, url} = {}) => isSameUrl(origSearchUrl, url) || isSameUrl(origSearchUrl, (search && search.url));

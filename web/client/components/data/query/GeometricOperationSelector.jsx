@@ -1,7 +1,6 @@
-const React = require('react');
-
-const Message = require('../../I18N/Message');
-const {DropdownList} = require('react-widgets');
+import React from 'react';
+import Message from '../../I18N/Message';
+import { DropdownList } from 'react-widgets';
 
 const ListItem = ({ item } = {}) => (
     <span>

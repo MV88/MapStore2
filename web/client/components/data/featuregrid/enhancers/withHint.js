@@ -1,7 +1,7 @@
 
-const {compose, branch, withProps} = require('recompose');
-const tooltip = require('../../../misc/enhancers/tooltip');
-const withPopover = require('./withPopover');
+import { compose, branch, withProps } from 'recompose';
+import tooltip from '../../../misc/enhancers/tooltip';
+import withPopover from './withPopover';
 
 
 export default compose(

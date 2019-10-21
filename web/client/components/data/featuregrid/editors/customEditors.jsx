@@ -1,5 +1,5 @@
-const React = require('react');
-const DropDownEditor = require('./DropDownEditor');
+import React from 'react';
+import DropDownEditor from './DropDownEditor';
 
 const Editors = {
     "DropDownEditor": {

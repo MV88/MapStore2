@@ -6,11 +6,12 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const {withProps} = require('recompose');
-const DefaultFilter = require('./DefaultFilter');
-const StringFilter = require('./StringFilter');
-const NumberFilter = require('./NumberFilter');
-const DateTimeFilter = require('./DateTimeFilter').default;
+import { withProps } from 'recompose';
+
+import DefaultFilter from './DefaultFilter';
+import StringFilter from './StringFilter';
+import NumberFilter from './NumberFilter';
+import DateTimeFilter from './DateTimeFilter';
 
 const types = {
     "defaultFilter": (type) => withProps(() =>({type: type}))(DefaultFilter),

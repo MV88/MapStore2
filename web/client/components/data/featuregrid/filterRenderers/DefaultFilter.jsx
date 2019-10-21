@@ -6,8 +6,9 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const AttributeFilter = require('./AttributeFilter');
-const {compose, withHandlers, defaultProps} = require('recompose');
+import AttributeFilter from './AttributeFilter';
+
+import { compose, withHandlers, defaultProps } from 'recompose';
 
 export default compose(
     defaultProps({

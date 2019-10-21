@@ -5,8 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {getFormatter} = require('../index');
-var expect = require('expect');
+import { getFormatter } from '../index';
+
+import expect from 'expect';
 
 describe('Tests for the formatter functions', () => {
     it('test getFormatter for strings', () => {

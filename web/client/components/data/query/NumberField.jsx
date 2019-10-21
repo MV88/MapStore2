@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,13 +8,14 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {Tooltip, Row, Col} = require("react-bootstrap");
-const OverlayTrigger = require('../../misc/OverlayTrigger');
-const LocaleUtils = require('../../../utils/LocaleUtils');
-const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
+import React from 'react';
+
+import { Tooltip, Row, Col } from 'react-bootstrap';
+import OverlayTrigger from '../../misc/OverlayTrigger';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
 numberLocalizer();
-const {NumberPicker} = require('react-widgets');
+import { NumberPicker } from 'react-widgets';
 
 class NumberField extends React.Component {
     static propTypes = {

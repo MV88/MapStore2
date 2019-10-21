@@ -7,8 +7,9 @@
 */
 
 
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
+
+import PropTypes from 'prop-types';
 class ComboFieldListItem extends React.Component {
     static propTypes = {
         item: PropTypes.string,

@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const CoordinatesRow = require('../../../misc/coordinateeditors/CoordinatesRow');
+import React from 'react';
+
+import CoordinatesRow from '../../../misc/coordinateeditors/CoordinatesRow';
 
 const Editor = (props) => (
     <CoordinatesRow

@@ -6,15 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const MapInfoUtils = require('../../../utils/MapInfoUtils');
-const FeatureInfoUtils = require('../../../utils/FeatureInfoUtils');
-const HTML = require('../../../components/I18N/HTML');
-const Message = require('../../../components/I18N/Message');
-const {Alert, Panel, Accordion} = require('react-bootstrap');
-const ViewerPage = require('./viewers/ViewerPage');
-const {isEqual} = require('lodash');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import MapInfoUtils from '../../../utils/MapInfoUtils';
+import FeatureInfoUtils from '../../../utils/FeatureInfoUtils';
+import HTML from '../../../components/I18N/HTML';
+import Message from '../../../components/I18N/Message';
+import { Alert, Panel, Accordion } from 'react-bootstrap';
+import ViewerPage from './viewers/ViewerPage';
+import { isEqual } from 'lodash';
 
 class DefaultViewer extends React.Component {
     static propTypes = {

@@ -1,7 +1,7 @@
-const React = require('react');
-const Message = require('../../I18N/Message');
-const {Button, Glyphicon} = require('react-bootstrap');
-const popoverTooltip = require('../../misc/enhancers/popover');
+import React from 'react';
+import Message from '../../I18N/Message';
+import { Button, Glyphicon } from 'react-bootstrap';
+import popoverTooltip from '../../misc/enhancers/popover';
 const AlertIcon = popoverTooltip((props) => (<div className="square-button pull-right no-border" style={{display: 'flex'}} {...props}><Glyphicon glyph="exclamation-mark" className="text-danger"/></div>));
 
 export default ({loadingError, onToggleQuery = () => {}} = {}) => (<div className="mapstore-block-width">

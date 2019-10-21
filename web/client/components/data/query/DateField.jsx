@@ -5,16 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const moment = require('moment');
-const momentLocalizer = require('react-widgets/lib/localizers/moment');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import moment from 'moment';
+import momentLocalizer from 'react-widgets/lib/localizers/moment';
 momentLocalizer(moment);
-const utcDateWrapper = require('../../misc/enhancers/utcDateWrapper').default;
-const Message = require('../../I18N/Message');
-const {getDateTimeFormat} = require('../../../utils/TimeUtils');
-const {DateTimePicker} = require('react-widgets');
-const {Row, Col} = require('react-bootstrap');
+import utcDateWrapper from '../../misc/enhancers/utcDateWrapper';
+import Message from '../../I18N/Message';
+import { getDateTimeFormat } from '../../../utils/TimeUtils';
+import { DateTimePicker } from 'react-widgets';
+import { Row, Col } from 'react-bootstrap';
 /**
  * Date time picker enhanced with UTC and timezone offset
  * it takes the localized date in input and it translates to UTC
@@ -26,7 +27,7 @@ const UTCDateTimePicker = utcDateWrapper({
     setDateProp: "onChange"
 })(DateTimePicker);
 
-require('react-widgets/lib/less/react-widgets.less');
+import 'react-widgets/lib/less/react-widgets.less';
 
 /**
  * This enhanced Component is used for supporting "date", "time" or "date-time" attribute types

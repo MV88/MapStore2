@@ -1,5 +1,5 @@
-const React = require('react');
-const {Button, Grid, Row, Col, Glyphicon} = require('react-bootstrap');
+import React from 'react';
+import { Button, Grid, Row, Col, Glyphicon } from 'react-bootstrap';
 
 export default (props = {
     onDownloadToggle: () => {}

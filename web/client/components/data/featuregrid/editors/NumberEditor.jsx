@@ -1,6 +1,6 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const AttributeEditor = require('./AttributeEditor');
+import React from 'react';
+import PropTypes from 'prop-types';
+import AttributeEditor from './AttributeEditor';
 const nanToNull = v => isNaN(v) ? null : v;
 const processValue = (obj, func) => Object.keys(obj).reduce((acc, curr) => ({
     ...acc,
