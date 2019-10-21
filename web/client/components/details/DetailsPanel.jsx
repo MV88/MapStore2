@@ -5,16 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const Message = require('../I18N/Message');
-const {Glyphicon, Panel} = require('react-bootstrap');
-const ContainerDimensions = require('react-container-dimensions').default;
-const Dock = require('react-dock').default;
-const BorderLayout = require('../layout/BorderLayout');
-const {NO_DETAILS_AVAILABLE} = require('../../actions/maps');
-const LocaleUtils = require('../../utils/LocaleUtils');
-const Spinner = require('react-spinkit');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import Message from '../I18N/Message';
+import { Glyphicon, Panel } from 'react-bootstrap';
+import ContainerDimensions from 'react-container-dimensions';
+import Dock from 'react-dock';
+import BorderLayout from '../layout/BorderLayout';
+import { NO_DETAILS_AVAILABLE } from '../../actions/maps';
+import LocaleUtils from '../../utils/LocaleUtils';
+import Spinner from 'react-spinkit';
 
 class DetailsPanel extends React.Component {
     static propTypes = {
