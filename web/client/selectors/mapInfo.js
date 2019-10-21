@@ -6,13 +6,12 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const { get, omit, isArray } = require('lodash');
+import { get, omit, isArray } from 'lodash';
 
-const { createSelector, createStructuredSelector } = require('reselect');
-
-const {mapSelector} = require('./map');
-const { currentLocaleSelector } = require('./locale');
-const MapInfoUtils = require('../utils/MapInfoUtils');
+import { createSelector, createStructuredSelector } from 'reselect';
+import { mapSelector } from './map';
+import { currentLocaleSelector } from './locale';
+import MapInfoUtils from '../utils/MapInfoUtils';
 
 /**
  * selects mapinfo state

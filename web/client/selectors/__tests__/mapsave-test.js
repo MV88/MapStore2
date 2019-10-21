@@ -6,10 +6,9 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {
-    mapOptionsToSaveSelector
-} = require("../mapsave");
+import expect from 'expect';
+
+import { mapOptionsToSaveSelector } from '../mapsave';
 
 const state = {
     widgets: {

@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const { isOpenlayers } = require('../selectors/maptype');
-const { showCoordinateEditorSelector } = require('../selectors/controls');
-const { set } = require('../utils/ImmutableUtils');
-const { validateFeatureCoordinates } = require('../utils/MeasureUtils');
+import { isOpenlayers } from '../selectors/maptype';
+
+import { showCoordinateEditorSelector } from '../selectors/controls';
+import { set } from '../utils/ImmutableUtils';
+import { validateFeatureCoordinates } from '../utils/MeasureUtils';
 
 /**
  * selects measurement state

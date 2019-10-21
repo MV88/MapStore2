@@ -6,7 +6,7 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const {createSelector} = require('reselect');
+import { createSelector } from 'reselect';
 
 const getWMSLayers = (state) => state.layers && state.layers.flat && state.layers.flat.filter((l) => l.type === 'wms' && l.group !== 'background') || [];
 

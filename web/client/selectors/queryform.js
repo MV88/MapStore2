@@ -1,11 +1,8 @@
-const {get} = require('lodash');
-const {createSelector} = require('reselect');
-
-const {layersSelector} = require('./layers');
-
-const {currentLocaleSelector} = require('./locale');
-
-const {getLocalizedProp} = require('../utils/LocaleUtils');
+import { get } from 'lodash';
+import { createSelector } from 'reselect';
+import { layersSelector } from './layers';
+import { currentLocaleSelector } from './locale';
+import { getLocalizedProp } from '../utils/LocaleUtils';
 
 const crossLayerFilterSelector = state => get(state, "queryform.crossLayerFilter");
 // TODO we should also check if the layer are from the same source to allow cross layer filtering

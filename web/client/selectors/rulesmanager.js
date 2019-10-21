@@ -6,9 +6,10 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const assign = require('object-assign');
-const _ = require('lodash');
-const {createSelector} = require('reselect');
+import assign from 'object-assign';
+
+import _ from 'lodash';
+import { createSelector } from 'reselect';
 
 const rulesSelector = (state) => {
     if (!state.rulesmanager || !state.rulesmanager.rules) {

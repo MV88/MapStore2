@@ -6,9 +6,10 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const { get, head, uniqBy } = require('lodash');
-const { layerSettingSelector, getSelectedLayer } = require('./layers');
-const { STYLE_ID_SEPARATOR, extractFeatureProperties } = require('../utils/StyleEditorUtils');
+import { get, head, uniqBy } from 'lodash';
+
+import { layerSettingSelector, getSelectedLayer } from './layers';
+import { STYLE_ID_SEPARATOR, extractFeatureProperties } from '../utils/StyleEditorUtils';
 
 /**
  * selects styleeditor state

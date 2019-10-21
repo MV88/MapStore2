@@ -1,4 +1,4 @@
-const {get} = require('lodash');
+import { get } from 'lodash';
 
 export default {
     groupSelector: (state) => get(state, "controls.metadataexplorer.group"),

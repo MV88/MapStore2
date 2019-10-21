@@ -6,9 +6,11 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {isEmpty, isArray} = require('lodash');
-const {
+import expect from 'expect';
+
+import { isEmpty, isArray } from 'lodash';
+
+import {
     annotationsLayerSelector,
     multiGeometrySelector,
     removingSelector,
@@ -33,8 +35,8 @@ const {
     aeronauticalOptionsSelector,
     annotationSelector,
     annotationsListSelector,
-    symbolListSelector
-} = require("../annotations");
+    symbolListSelector,
+} from '../annotations';
 
 const state = {
     controls: {

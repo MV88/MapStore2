@@ -1,4 +1,4 @@
-const {get} = require('lodash');
+import { get } from 'lodash';
 const createControlVariableSelector = (name, attribute) => state => get(state, `controls[${name}][${attribute}]`);
 const createControlEnabledSelector = name => createControlVariableSelector(name, 'enabled');
 

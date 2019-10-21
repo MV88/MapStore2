@@ -6,8 +6,9 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {
+import expect from 'expect';
+
+import {
     availableCrossLayerFilterLayersSelector,
     spatialFieldSelector,
     spatialFieldGeomSelector,
@@ -17,8 +18,8 @@ const {
     spatialFieldMethodSelector,
     queryFormUiStateSelector,
     storedFilterSelector,
-    appliedFilterSelector
-} = require('../queryform');
+    appliedFilterSelector,
+} from '../queryform';
 
 const circle = "Circle";
 const attribute = "the_geom";

@@ -1,12 +1,11 @@
-const { get, castArray} = require('lodash');
-const {mapSelector} = require('./map');
-const {getSelectedLayer} = require('./layers');
-const {DEFAULT_TARGET, DEPENDENCY_SELECTOR_KEY, WIDGETS_REGEX} = require('../actions/widgets');
-const { getWidgetsGroups, getWidgetDependency} = require('../utils/WidgetsUtils');
-
-const {isDashboardAvailable, isDashboardEditing} = require('./dashboard');
-const { createSelector, createStructuredSelector} = require('reselect');
-const { createShallowSelector } = require('../utils/ReselectUtils');
+import { get, castArray } from 'lodash';
+import { mapSelector } from './map';
+import { getSelectedLayer } from './layers';
+import { DEFAULT_TARGET, DEPENDENCY_SELECTOR_KEY, WIDGETS_REGEX } from '../actions/widgets';
+import { getWidgetsGroups, getWidgetDependency } from '../utils/WidgetsUtils';
+import { isDashboardAvailable, isDashboardEditing } from './dashboard';
+import { createSelector, createStructuredSelector } from 'reselect';
+import { createShallowSelector } from '../utils/ReselectUtils';
 
 const getEditorSettings = state => get(state, "widgets.builder.settings");
 const getDependenciesMap = s => get(s, "widgets.dependencies") || {};
