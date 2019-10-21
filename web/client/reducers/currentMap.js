@@ -7,17 +7,17 @@
  */
 
 // const {isNil} = require('lodash');
-const {
+import {
     EDIT_MAP,
     UPDATE_CURRENT_MAP,
     ERROR_CURRENT_MAP,
     UPDATE_CURRENT_MAP_PERMISSIONS,
     UPDATE_CURRENT_MAP_GROUPS,
     RESET_CURRENT_MAP,
-    ADD_CURRENT_MAP_PERMISSION
-} = require('../actions/currentMap');
+    ADD_CURRENT_MAP_PERMISSION,
+} from '../actions/currentMap';
 
-const {
+import {
     THUMBNAIL_ERROR,
     MAP_UPDATING,
     SAVE_MAP,
@@ -39,11 +39,11 @@ const {
     SET_UNSAVED_CHANGES,
     METADATA_CHANGED,
     DETAILS_SAVING,
-    TOGGLE_DETAILS_EDITABILITY
-} = require('../actions/maps');
+    TOGGLE_DETAILS_EDITABILITY,
+} from '../actions/maps';
 
-const assign = require('object-assign');
-const {isArray} = require('lodash');
+import assign from 'object-assign';
+import { isArray } from 'lodash';
 
 function currentMap(state = {}, action) {
     switch (action.type) {

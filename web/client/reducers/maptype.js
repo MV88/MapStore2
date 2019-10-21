@@ -6,7 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var {MAP_TYPE_CHANGED} = require('../actions/maptype');
+import { MAP_TYPE_CHANGED } from '../actions/maptype';
+
 /**
  * stores state for the mapType to use (typically one of leaflet, openlayers, cesium... )
  * @memberof reducers

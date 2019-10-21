@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {
+import {
     ADD_FILTER_FIELD,
     REMOVE_FILTER_FIELD,
     UPDATE_FILTER_FIELD,
@@ -31,7 +31,6 @@ const {
     ZONE_FILTER,
     ZONE_SEARCH,
     UPDATE_GEOMETRY,
-    // OPEN_MENU,
     ZONE_CHANGE,
     ZONES_RESET,
     ZONE_SEARCH_ERROR,
@@ -47,20 +46,15 @@ const {
     RESET_CROSS_LAYER_FILTER,
     SET_AUTOCOMPLETE_MODE,
     TOGGLE_AUTOCOMPLETE_MENU,
-    LOAD_FILTER
-} = require('../actions/queryform');
+    LOAD_FILTER,
+} from '../actions/queryform';
 
-const {
-    END_DRAWING,
-    CHANGE_DRAWING_STATUS
-} = require('../actions/draw');
-
-const assign = require('object-assign');
-
-const union = require('turf-union');
-const bbox = require('turf-bbox');
-const {get} = require('lodash');
-const {set, arrayUpsert, arrayDelete} = require('../utils/ImmutableUtils');
+import { END_DRAWING, CHANGE_DRAWING_STATUS } from '../actions/draw';
+import assign from 'object-assign';
+import union from 'turf-union';
+import bbox from 'turf-bbox';
+import { get } from 'lodash';
+import { set, arrayUpsert, arrayDelete } from '../utils/ImmutableUtils';
 
 const initialState = {
     searchUrl: null,

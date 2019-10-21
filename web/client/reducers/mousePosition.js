@@ -6,13 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var {
+import {
     CHANGE_MOUSE_POSITION,
     CHANGE_MOUSE_POSITION_CRS,
-    CHANGE_MOUSE_POSITION_STATE
-} = require('../actions/mousePosition');
+    CHANGE_MOUSE_POSITION_STATE,
+} from '../actions/mousePosition';
 
-const assign = require('object-assign');
+import assign from 'object-assign';
 
 function mousePosition(state = {enabled: true, position: null, crs: null}, action) {
     switch (action.type) {

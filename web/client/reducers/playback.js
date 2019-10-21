@@ -1,6 +1,19 @@
-const { PLAY, PAUSE, STOP, STATUS, SET_FRAMES, APPEND_FRAMES, FRAMES_LOADING, SET_CURRENT_FRAME, SELECT_PLAYBACK_RANGE, CHANGE_SETTING, UPDATE_METADATA } = require('../actions/playback');
-const { RESET_CONTROLS } = require('../actions/controls');
-const { set } = require('../utils/ImmutableUtils');
+import {
+    PLAY,
+    PAUSE,
+    STOP,
+    STATUS,
+    SET_FRAMES,
+    APPEND_FRAMES,
+    FRAMES_LOADING,
+    SET_CURRENT_FRAME,
+    SELECT_PLAYBACK_RANGE,
+    CHANGE_SETTING,
+    UPDATE_METADATA,
+} from '../actions/playback';
+
+import { RESET_CONTROLS } from '../actions/controls';
+import { set } from '../utils/ImmutableUtils';
 
 const DEFAULT_SETTINGS = {
     timeStep: 1,

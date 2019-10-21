@@ -6,14 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {MAP_CONFIG_LOADED, MAP_INFO_LOAD_START, MAP_INFO_LOADED, MAP_INFO_LOAD_ERROR, MAP_CONFIG_LOAD_ERROR} = require('../actions/config');
-const {MAP_CREATED, DETAILS_LOADED} = require('../actions/maps');
+import {
+    MAP_CONFIG_LOADED,
+    MAP_INFO_LOAD_START,
+    MAP_INFO_LOADED,
+    MAP_INFO_LOAD_ERROR,
+    MAP_CONFIG_LOAD_ERROR,
+} from '../actions/config';
 
-const assign = require('object-assign');
-const ConfigUtils = require('../utils/ConfigUtils');
-const {set} = require('../utils/ImmutableUtils');
-const {transformLineToArcs} = require('../utils/CoordinatesUtils');
-const {findIndex} = require('lodash');
+import { MAP_CREATED, DETAILS_LOADED } from '../actions/maps';
+import assign from 'object-assign';
+import ConfigUtils from '../utils/ConfigUtils';
+import { set } from '../utils/ImmutableUtils';
+import { transformLineToArcs } from '../utils/CoordinatesUtils';
+import { findIndex } from 'lodash';
 
 function mapConfig(state = null, action) {
     let map;

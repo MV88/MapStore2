@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {
+import {
     FEATURE_TYPE_SELECTED,
     FEATURE_TYPE_LOADED,
     FEATURE_TYPE_ERROR,
@@ -19,13 +19,12 @@ const {
     RESET_QUERY,
     UPDATE_QUERY,
     TOGGLE_SYNC_WMS,
-    TOGGLE_LAYER_FILTER
-} = require('../actions/wfsquery');
+    TOGGLE_LAYER_FILTER,
+} from '../actions/wfsquery';
 
-const {QUERY_FORM_RESET} = require('../actions/queryform');
-const {RESET_CONTROLS} = require('../actions/controls');
-
-const assign = require('object-assign');
+import { QUERY_FORM_RESET } from '../actions/queryform';
+import { RESET_CONTROLS } from '../actions/controls';
+import assign from 'object-assign';
 
 const extractData = (feature) => {
     return ['STATE_NAME', 'STATE_ABBR', 'SUB_REGION', 'STATE_FIPS' ].map((attribute) => ({

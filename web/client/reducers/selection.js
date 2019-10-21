@@ -6,11 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var {
-    CHANGE_SELECTION_STATE
-} = require('../actions/selection');
+import { CHANGE_SELECTION_STATE } from '../actions/selection';
 
-const assign = require('object-assign');
+import assign from 'object-assign';
 
 function selection(state = {
     geomType: null

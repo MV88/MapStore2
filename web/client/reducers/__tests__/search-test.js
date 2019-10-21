@@ -5,9 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var expect = require('expect');
-var search = require('../search');
-const {
+import expect from 'expect';
+
+import search from '../search';
+
+import {
     TEXT_SEARCH_RESULTS_LOADED,
     TEXT_SEARCH_LOADING,
     TEXT_SEARCH_ERROR,
@@ -18,11 +20,10 @@ const {
     resetSearch,
     changeFormat,
     changeCoord,
-    changeActiveSearchTool
-} = require('../../actions/search');
-const {
-    resetControls
-} = require('../../actions/controls');
+    changeActiveSearchTool,
+} from '../../actions/search';
+
+import { resetControls } from '../../actions/controls';
 
 describe('Test the search reducer', () => {
     it('search results loading', () => {
