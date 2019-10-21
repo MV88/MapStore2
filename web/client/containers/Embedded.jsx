@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,15 +7,14 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
 
-const {connect} = require('react-redux');
-const assign = require('object-assign');
-
-const url = require('url');
+import { connect } from 'react-redux';
+import assign from 'object-assign';
+import url from 'url';
 const urlQuery = url.parse(window.location.href, true).query;
-const PluginsUtils = require('../utils/PluginsUtils');
-const ConfigUtils = require('../utils/ConfigUtils');
+import PluginsUtils from '../utils/PluginsUtils';
+import ConfigUtils from '../utils/ConfigUtils';
 
 const PluginsContainer = connect((state) => ({
     mode: urlQuery.mode || (state.browser && state.browser.mobile ? 'mobile' : 'desktop'),
