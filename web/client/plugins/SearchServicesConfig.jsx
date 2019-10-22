@@ -6,22 +6,23 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-import React from 'react';
-
-import { connect } from 'react-redux';
-import { Glyphicon, Button } from 'react-bootstrap';
-import ConfirmButton from '../components/buttons/ConfirmButton';
-import Dialog from '../components//misc/Dialog';
-import Portal from '../components/misc/Portal';
-import Message from './locale/Message';
 import { isEqual } from 'lodash';
-import { toggleControl } from '../actions/controls';
-import { setSearchConfigProp, updateService, restServiceConfig } from '../actions/searchconfig';
-import ServiceList from '../components/mapcontrols/searchservicesconfig/ServicesList.jsx';
-import WFSServiceProps from '../components/mapcontrols/searchservicesconfig/WFSServiceProps.jsx';
-import ResultsProps from '../components/mapcontrols/searchservicesconfig/ResultsProps.jsx';
-import WFSOptionalProps from '../components/mapcontrols/searchservicesconfig/WFSOptionalProps.jsx';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Button, Glyphicon } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
+import { toggleControl } from '../actions/controls';
+import { restServiceConfig, setSearchConfigProp, updateService } from '../actions/searchconfig';
+import Dialog from '../components//misc/Dialog';
+import ConfirmButton from '../components/buttons/ConfirmButton';
+import ResultsProps from '../components/mapcontrols/searchservicesconfig/ResultsProps.jsx';
+import ServiceList from '../components/mapcontrols/searchservicesconfig/ServicesList.jsx';
+import WFSOptionalProps from '../components/mapcontrols/searchservicesconfig/WFSOptionalProps.jsx';
+import WFSServiceProps from '../components/mapcontrols/searchservicesconfig/WFSServiceProps.jsx';
+import Portal from '../components/misc/Portal';
+import searchconfig from '../reducers/searchconfig';
+import Message from './locale/Message';
 
 /**
  * Text Search Services Editor Plugin. Allow to add and edit additional
@@ -218,6 +219,6 @@ const SearchServicesPlugin = connect(({controls = {}, searchconfig = {}}) => ({
 export default {
     SearchServicesConfigPlugin: SearchServicesPlugin,
     reducers: {
-        searchconfig: require('../reducers/searchconfig')
+        searchconfig
     }
 };

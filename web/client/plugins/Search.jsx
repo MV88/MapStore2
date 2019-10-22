@@ -1,3 +1,5 @@
+import { get, isArray } from 'lodash';
+import assign from 'object-assign';
 /*
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -6,34 +8,37 @@
  * LICENSE file in the root directory of this source tree.
 */
 import PropTypes from 'prop-types';
-
 import React from 'react';
 import { connect } from 'react-redux';
+import MediaQuery from 'react-responsive';
 import { createSelector } from 'reselect';
-import assign from 'object-assign';
-import HelpWrapper from './help/HelpWrapper';
-import Message from './locale/Message';
-import { get, isArray } from 'lodash';
-import { searchEpic, searchOnStartEpic, searchItemSelected, zoomAndAddPointEpic } from '../epics/search';
-import { defaultIconStyle } from '../utils/SearchUtils';
 
+import { removeAdditionalLayer } from '../actions/additionallayers';
+import { toggleControl } from '../actions/controls';
 import {
-    resultsPurge,
-    resetSearch,
     addMarker,
-    searchTextChanged,
-    textSearch,
-    selectSearchItem,
     cancelSelectedItem,
     changeActiveSearchTool,
-    zoomAndAddPoint,
-    changeFormat,
     changeCoord,
+    changeFormat,
+    resetSearch,
+    resultsPurge,
+    searchTextChanged,
+    selectSearchItem,
+    textSearch,
     updateResultsStyle,
+    zoomAndAddPoint,
 } from '../actions/search';
-
-import { toggleControl } from '../actions/controls';
-import { removeAdditionalLayer } from '../actions/additionallayers';
+import SearchBarComp from '../components/mapcontrols/search/SearchBar';
+import SearchResultListComp from '../components/mapcontrols/search/SearchResultList';
+import { searchEpic, searchItemSelected, searchOnStartEpic, zoomAndAddPointEpic } from '../epics/search';
+import mapInfo from '../reducers/mapInfo';
+import search from '../reducers/search';
+import { mapSelector } from '../selectors/map';
+import { defaultIconStyle } from '../utils/SearchUtils';
+import HelpWrapper from './help/HelpWrapper';
+import Message from './locale/Message';
+import ToggleButton from './searchbar/ToggleButton';
 
 const searchSelector = createSelector([
     state => state.search || null,
@@ -61,10 +66,8 @@ const SearchBar = connect(searchSelector, {
     onSearchReset: resetSearch,
     onSearchTextChange: searchTextChanged,
     onCancelSelectedItem: cancelSelectedItem
-})(require("../components/mapcontrols/search/SearchBar"));
+})(SearchBarComp);
 
-import { mapSelector } from '../selectors/map';
-import MediaQuery from 'react-responsive';
 
 const selector = createSelector([
     mapSelector,
@@ -77,9 +80,8 @@ const selector = createSelector([
 const SearchResultList = connect(selector, {
     onItemClick: selectSearchItem,
     addMarker: addMarker
-})(require('../components/mapcontrols/search/SearchResultList'));
+})(SearchResultListComp);
 
-import ToggleButton from './searchbar/ToggleButton';
 
 /**
  * Search plugin. Provides search functionalities for the map.
@@ -298,7 +300,7 @@ export default {
     }),
     epics: {searchEpic, searchOnStartEpic, searchItemSelected, zoomAndAddPointEpic},
     reducers: {
-        search: require('../reducers/search'),
-        mapInfo: require('../reducers/mapInfo')
+        search,
+        mapInfo
     }
 };

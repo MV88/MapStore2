@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,30 +5,34 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
+import './settings/css/settings.css';
+
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Col, FormGroup, Glyphicon, Row } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { loadLocale } from '../actions/locale';
+import { ActionCreators } from 'redux-undo';
+
 import { toggleControl } from '../actions/controls';
+import { loadLocale } from '../actions/locale';
+import LangBarComp from '../components/I18N/LangBar';
+import HistoryBar from '../components/mapcontrols/navigationhistory/HistoryBar';
+import Dialog from '../components/misc/Dialog';
+import LocaleUtils from '../utils/LocaleUtils';
+import Message from './locale/Message';
+import SettingsPanel from './settings/SettingsPanel';
 
 const LangBar = connect((state) => ({
     currentLocale: state.locale && state.locale.current
 }), {
     onLanguageChange: loadLocale.bind(null, null)
-})(require('../components/I18N/LangBar'));
+})(LangBarComp);
 
-import './settings/css/settings.css';
-import HistoryBar from '../components/mapcontrols/navigationhistory/HistoryBar';
-import { ActionCreators } from 'redux-undo';
 const {undo, redo} = ActionCreators;
 
-import Message from './locale/Message';
-import { Glyphicon, FormGroup, Row, Col } from 'react-bootstrap';
-import assign from 'object-assign';
-import SettingsPanel from './settings/SettingsPanel';
-import LocaleUtils from '../utils/LocaleUtils';
-import { Panel } from 'react-bootstrap';
-import Dialog from '../components/misc/Dialog';
 
 class SettingsButton extends React.Component {
     static propTypes = {

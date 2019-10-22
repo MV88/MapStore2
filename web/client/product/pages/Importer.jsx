@@ -5,15 +5,18 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+
+import url from 'url';
 
 import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import url from 'url';
+
+import BorderLayout from '../../components/layout/BorderLayout';
+import Page from '../../containers/Page';
+
 const urlQuery = url.parse(window.location.href, true).query;
 
-import Page from '../../containers/Page';
-import BorderLayout from '../../components/layout/BorderLayout';
 /**
   * @name Importer
   * @memberof pages
@@ -25,12 +28,13 @@ import BorderLayout from '../../components/layout/BorderLayout';
   *
   * - This page have to be configured in appConfig `pages`. this way
   * ```javascript
+  *    import Importer from 'path_to_/pages/Importer';
   *    pages: [
   *    //...
   *    {
   *      name: "importer",
   *      path: "/importer",
-  *      component: require('path_to_/pages/Importer')
+  *      component: Importer
   *    }]
   * ```
   * - `localConfig.json` must include an 'importer' entry in the plugins

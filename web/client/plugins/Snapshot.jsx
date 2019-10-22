@@ -6,26 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import assign from 'object-assign';
 import React from 'react';
-
+import { Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
+import { toggleControl } from '../actions/controls';
 import {
-    onCreateSnapshot,
     changeSnapshotState,
-    saveImage,
+    onCreateSnapshot,
     onRemoveSnapshot,
     onSnapshotError,
+    saveImage,
 } from '../actions/snapshot';
-
-import { mapSelector } from '../selectors/map';
+import SnapshotPanelComp from '../components/mapcontrols/Snapshot/SnapshotPanel';
+import SnapshotQueueComp from '../components/mapcontrols/Snapshot/SnapshotQueue';
+import snapshot from '../reducers/snapshot';
 import { layersSelector } from '../selectors/layers';
+import { mapSelector } from '../selectors/map';
 import { mapTypeSelector } from '../selectors/maptype';
-import { toggleControl } from '../actions/controls';
-import assign from 'object-assign';
 import Message from './locale/Message';
-import { Glyphicon } from 'react-bootstrap';
 
 const snapshotSelector = createSelector([
     mapSelector,
@@ -48,7 +49,7 @@ const SnapshotPanel = connect(snapshotSelector, {
     onStatusChange: changeSnapshotState,
     downloadImg: saveImage,
     toggleControl: toggleControl.bind(null, 'snapshot', null)
-})(require("../components/mapcontrols/Snapshot/SnapshotPanel"));
+})(SnapshotPanelComp);
 
 const SnapshotPlugin = connect((state) => ({
     queue: state.snapshot && state.snapshot.queue || []
@@ -56,7 +57,7 @@ const SnapshotPlugin = connect((state) => ({
     downloadImg: saveImage,
     onSnapshotError,
     onRemoveSnapshot
-})(require("../components/mapcontrols/Snapshot/SnapshotQueue"));
+})(SnapshotQueueComp);
 
 
 export default {
@@ -85,6 +86,6 @@ export default {
         }
     }),
     reducers: {
-        snapshot: require('../reducers/snapshot')
+        snapshot
     }
 };

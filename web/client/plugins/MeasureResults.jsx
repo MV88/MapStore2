@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /*
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,11 +5,14 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
+import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import Message from './locale/Message';
+
 import { changeMeasurement } from '../actions/measurement';
+import measurement from '../reducers/measurement';
+import Message from './locale/Message';
 import { MeasureDialog } from './measure/index';
 
 class MeasureComponent extends React.Component {
@@ -67,5 +68,5 @@ const MeasureResultsPlugin = connect((state) => {
 
 export default {
     MeasureResultsPlugin,
-    reducers: {measurement: require('../reducers/measurement')}
+    reducers: {measurement}
 };

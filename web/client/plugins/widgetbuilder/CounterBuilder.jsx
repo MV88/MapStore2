@@ -7,26 +7,28 @@
  */
 
 import React from 'react';
-
 import { connect } from 'react-redux';
-import { compose, renameProps, branch, renderComponent } from 'recompose';
-import BorderLayout from '../../components/layout/BorderLayout';
+import { branch, compose, renameProps, renderComponent } from 'recompose';
 
 import {
+    changeEditorSetting,
     insertWidget,
     onEditorChange,
-    setPage,
     openFilterEditor,
-    changeEditorSetting,
+    setPage,
 } from '../../actions/widgets';
-
+import BorderLayout from '../../components/layout/BorderLayout';
+import CounterWizardComp from '../../components/widgets/builder/wizard/CounterWizard';
+import ToolbarComp from '../../components/widgets/builder/wizard/counter/Toolbar';
 import builderConfiguration from '../../components/widgets/enhancers/builderConfiguration';
+import BuilderHeader from './BuilderHeader';
+import LayerSelectorComp from './LayerSelector';
+import { wizardSelector, wizardStateToProps } from './commons';
 import chartLayerSelector from './enhancers/chartLayerSelector';
 import viewportBuilderConnect from './enhancers/connection/viewportBuilderConnect';
 import viewportBuilderConnectMask from './enhancers/connection/viewportBuilderConnectMask';
-import withExitButton from './enhancers/withExitButton';
 import withConnectButton from './enhancers/connection/withConnectButton';
-import { wizardStateToProps, wizardSelector } from './commons';
+import withExitButton from './enhancers/withExitButton';
 
 const Builder = connect(
     wizardSelector,
@@ -43,9 +45,8 @@ const Builder = connect(
         editorData: "data",
         onEditorChange: "onChange"
     })
-)(require('../../components/widgets/builder/wizard/CounterWizard')));
+)(CounterWizardComp));
 
-import BuilderHeader from './BuilderHeader';
 const Toolbar = compose(
     connect(
         wizardSelector, {
@@ -59,7 +60,7 @@ const Toolbar = compose(
     viewportBuilderConnect,
     withExitButton(),
     withConnectButton(({ step }) => step === 0)
-)(require('../../components/widgets/builder/wizard/counter/Toolbar'));
+)(ToolbarComp);
 
 /*
  * in case you don't have a layer selected (e.g. dashboard) the chart builder
@@ -70,7 +71,7 @@ const chooseLayerEnhancer = compose(
     viewportBuilderConnectMask,
     branch(
         ({ layer } = {}) => !layer,
-        renderComponent(chartLayerSelector(require('./LayerSelector')))
+        renderComponent(chartLayerSelector(LayerSelector))
     )
 );
 

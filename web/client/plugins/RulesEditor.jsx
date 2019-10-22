@@ -6,19 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
 import PropTypes from 'prop-types';
-import { createSelector } from 'reselect';
-import { compose } from 'recompose';
+import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { createSelector } from 'reselect';
+
 import { cleanEditing, saveRule, setLoading } from '../actions/rulesmanager';
+import epics from '../epics/rulesmanagerepics';
+import rulesmanager from '../reducers/rulesmanager';
 import { activeRuleSelector, geometryStateSel } from '../selectors/rulesmanager';
 import { isEditorActive, isLoading } from '../selectors/rulesmanager';
+import enhancer from './manager/EditorEnhancer';
 import RulesEditor from './manager/RulesEditor';
 import Toolbar from './manager/RulesToolbar';
-import enhancer from './manager/EditorEnhancer';
-
 
 const Editor = compose(
     connect(createSelector([activeRuleSelector, geometryStateSel], (activeRule, geometryState) => ({ activeRule, geometryState })), {
@@ -86,7 +87,7 @@ const Plugin = connect(
 export default {
     RulesEditorPlugin: Plugin,
     reducers: {
-        rulesmanager: require('../reducers/rulesmanager')
+        rulesmanager
     },
-    epics: require("../epics/rulesmanager")
+    epics
 };

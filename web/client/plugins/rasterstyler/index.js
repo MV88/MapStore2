@@ -9,50 +9,55 @@
 import { connect } from 'react-redux';
 
 import { setRasterStyleParameter } from '../../actions/rasterstyler';
+import BandSelectorComp from '../../components/style/BandSelector';
+import EqualIntervalComp from '../../components/style/EqualInterval';
+import OpacityPickerComp from '../../components/style/OpacityPicker';
+import PseudoColorSettingsComp from '../../components/style/PseudoColorSettings';
+import RasterStyleTypePickerComp from '../../components/style/RasterStyleTypePicker';
 
 const RedBandSelector = connect((state) => { return state.rasterstyler.redband || {}; },
     {
         onChange: setRasterStyleParameter.bind(null, 'redband')
-    })(require('../../components/style/BandSelector'));
+    })(BandSelectorComp);
 
 const BlueBandSelector = connect((state) => { return state.rasterstyler.blueband || {}; },
     {
         onChange: setRasterStyleParameter.bind(null, 'blueband')
-    })(require('../../components/style/BandSelector'));
+    })(BandSelectorComp);
 
 const GreenBandSelector = connect((state) => { return state.rasterstyler.greenband || {}; },
     {
         onChange: setRasterStyleParameter.bind(null, 'greenband')
-    })(require('../../components/style/BandSelector'));
+    })(BandSelectorComp);
 
 const GrayBandSelector = connect((state) => { return state.rasterstyler.grayband || {}; },
     {
         onChange: setRasterStyleParameter.bind(null, 'grayband')
-    })(require('../../components/style/BandSelector'));
+    })(BandSelectorComp);
 const PseudoBandSelector = connect((state) => { return state.rasterstyler.pseudoband || {}; },
     {
         onChange: setRasterStyleParameter.bind(null, 'pseudoband')
-    })(require('../../components/style/BandSelector'));
+    })(BandSelectorComp);
 
 const RasterStyleTypePicker = connect((state) => { return state.rasterstyler.typepicker || {}; },
     {
         onChange: setRasterStyleParameter.bind(null, 'typepicker')
-    })(require('../../components/style/RasterStyleTypePicker'));
+    })(RasterStyleTypePickerComp);
 
 const OpacityPicker = connect((state) => { return state.rasterstyler.opacitypicker || {}; },
     {
         onChange: setRasterStyleParameter.bind(null, 'opacitypicker')
-    })(require('../../components/style/OpacityPicker'));
+    })(OpacityPickerComp);
 
 const EqualInterval = connect((state) => { return state.rasterstyler.equalinterval || {}; },
     {
         onChange: setRasterStyleParameter.bind(null, 'equalinterval')
-    })(require('../../components/style/EqualInterval'));
+    })(EqualIntervalComp);
 
 const PseudoColor = connect((state) => { return state.rasterstyler.pseudocolor || {}; },
     {
         onChange: setRasterStyleParameter.bind(null, 'pseudocolor')
-    })(require('../../components/style/PseudoColorSettings'));
+    })(PseudoColorSettingsComp);
 
 export default {
     RedBandSelector,

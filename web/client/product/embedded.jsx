@@ -7,10 +7,13 @@
 */
 
 import { loadVersion } from '../actions/version';
+import apiPlugins from './apiPlugins.js';
+import appConfigEmbedded from './appConfigEmbedded';
+import main from './main';
 
-require('./main')(
-    require('./appConfigEmbedded'),
-    require('./apiPlugins.js'),
+main(
+    appConfigEmbedded,
+    apiPlugins,
     (cfg) => ({
         ...cfg,
         initialActions: [loadVersion]

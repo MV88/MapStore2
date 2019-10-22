@@ -5,24 +5,26 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-import { connect } from '../utils/PluginsUtils';
-
 import assign from 'object-assign';
-import { changeLayerParams } from '../actions/layers';
 
+import { changeLayerParams } from '../actions/layers';
 import {
-    loadFields,
-    loadClassification,
-    changeConfiguration,
     cancelDirty,
+    changeConfiguration,
+    loadClassification,
+    loadFields,
+    resetInvalidInput,
     setDirty,
     setInvalidInput,
-    resetInvalidInput,
 } from '../actions/thematic';
-
-import { getSelectedLayer } from '../selectors/layers';
 import API from '../api/SLDService';
+import SLDService from '../api/SLDService';
+import ThematicLayerComp from '../components/TOC/fragments/settings/ThematicLayer';
+import epics from '../epics/thematic';
+import thematic from '../reducers/thematic';
+import { getSelectedLayer } from '../selectors/layers';
 import { isAdminUserSelector } from '../selectors/security';
+import { connect } from '../utils/PluginsUtils';
 
 /**
  * Plugin that adds thematic styles for wms layers, through attribute classification.
@@ -130,7 +132,7 @@ export default {
                     onDirtyStyle: setDirty,
                     onInvalidInput: setInvalidInput,
                     onValidInput: resetInvalidInput
-                })(require('../components/TOC/fragments/settings/ThematicLayer'));
+                })(ThematicLayerComp);
                 resolve(ThematicLayer);
             });
         }, enabler: (state) => state.layerSettings && state.layerSettings.expanded
@@ -141,7 +143,7 @@ export default {
         }
     }),
     reducers: {
-        thematic: require('../reducers/thematic')
+        thematic
     },
-    epics: require('../epics/thematic')(require('../api/SLDService'))
+    epics: epics(SLDService)
 };

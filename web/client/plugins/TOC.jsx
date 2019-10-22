@@ -5,62 +5,71 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import PropTypes from 'prop-types';
 
+import { head, isObject } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
 import React from 'react';
+import { Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { Glyphicon } from 'react-bootstrap';
 
-import {
-    changeLayerProperties,
-    changeGroupProperties,
-    toggleNode,
-    contextNode,
-    showSettings,
-    hideSettings,
-    updateSettings,
-    updateNode,
-    moveNode,
-    removeNode,
-    browseData,
-    selectNode,
-    filterLayers,
-    refreshLayerVersion,
-    hideLayerMetadata,
-    download,
-} from '../actions/layers';
-
-import { openQueryBuilder } from '../actions/layerFilter';
+import { getMetadataRecordById } from '../actions/catalog';
+import { setControlProperties } from '../actions/controls';
 import { getLayerCapabilities } from '../actions/layerCapabilities';
+import { openQueryBuilder } from '../actions/layerFilter';
+import {
+    browseData,
+    changeGroupProperties,
+    changeLayerProperties,
+    contextNode,
+    download,
+    filterLayers,
+    hideLayerMetadata,
+    hideSettings,
+    moveNode,
+    refreshLayerVersion,
+    removeNode,
+    selectNode,
+    showSettings,
+    toggleNode,
+    updateNode,
+    updateSettings,
+} from '../actions/layers';
 import { zoomToExtent } from '../actions/map';
-
+import { createWidget } from '../actions/widgets';
+import csw from '../api/CSW';
+import wms from '../api/WMS';
+import wmts from '../api/WMTS';
+import Message from '../components/I18N/Message';
+import DefaultGroup from '../components/TOC/DefaultGroup';
+import DefaultLayer from '../components/TOC/DefaultLayer';
+import DefaultLayerOrGroup from '../components/TOC/DefaultLayerOrGroup';
+import Header from '../components/TOC/Header';
+import TOC from '../components/TOC/TOC';
+import Toolbar from '../components/TOC/Toolbar';
+import epics from '../epics/catalog';
+import query from '../reducers/query';
+import queryform from '../reducers/queryform';
+import { activeSelector } from '../selectors/catalog';
+import { widgetBuilderAvailable } from '../selectors/controls';
 import {
     groupsSelector,
+    layerFilterSelector,
+    layerMetadataSelector,
+    layerSettingSelector,
     layersSelector,
     selectedNodesSelector,
-    layerFilterSelector,
-    layerSettingSelector,
-    layerMetadataSelector,
     wfsDownloadSelector,
 } from '../selectors/layers';
-
-import { mapSelector, mapNameSelector } from '../selectors/map';
 import { currentLocaleSelector } from '../selectors/locale';
-import { widgetBuilderAvailable } from '../selectors/controls';
+import { mapNameSelector, mapSelector } from '../selectors/map';
 import { generalInfoFormatSelector } from '../selectors/mapInfo';
-import LayersUtils from '../utils/LayersUtils';
-import mapUtils from '../utils/MapUtils';
-import LocaleUtils from '../utils/LocaleUtils';
-import Message from '../components/I18N/Message';
-import assign from 'object-assign';
-import layersIcon from './toolbar/assets/img/layers.png';
-import { isObject, head } from 'lodash';
-import { setControlProperties } from '../actions/controls';
-import { createWidget } from '../actions/widgets';
-import { getMetadataRecordById } from '../actions/catalog';
-import { activeSelector } from '../selectors/catalog';
 import { isCesium } from '../selectors/maptype';
+import LayersUtils from '../utils/LayersUtils';
+import LocaleUtils from '../utils/LocaleUtils';
+import mapUtils from '../utils/MapUtils';
+import layersIcon from './toolbar/assets/img/layers.png';
 
 const addFilteredAttributesGroups = (nodes, filters) => {
     return nodes.reduce((newNodes, currentNode) => {
@@ -149,12 +158,6 @@ const tocSelector = createSelector(
     })
 );
 
-import TOC from '../components/TOC/TOC';
-import Header from '../components/TOC/Header';
-import Toolbar from '../components/TOC/Toolbar';
-import DefaultGroup from '../components/TOC/DefaultGroup';
-import DefaultLayer from '../components/TOC/DefaultLayer';
-import DefaultLayerOrGroup from '../components/TOC/DefaultLayerOrGroup';
 
 class LayerTree extends React.Component {
     static propTypes = {
@@ -626,9 +629,6 @@ const TOCPlugin = connect(tocSelector, {
     refreshLayerVersion
 })(LayerTree);
 
-import csw from '../api/CSW';
-import wms from '../api/WMS';
-import wmts from '../api/WMTS';
 
 const API = {
     csw,
@@ -663,8 +663,8 @@ export default {
         }
     }),
     reducers: {
-        queryform: require('../reducers/queryform'),
-        query: require('../reducers/query')
+        queryform,
+        query
     },
-    epics: require("../epics/catalog").default(API)
+    epics: epics.default(API)
 };

@@ -6,33 +6,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import assign from 'object-assign';
+import html from 'raw-loader!./featureInfoPreviews/responseHTML.txt';
+import responseJSON from 'raw-loader!./featureInfoPreviews/responseJSON.txt';
+import text from 'raw-loader!./featureInfoPreviews/responseText.txt';
 import React from 'react';
+import { Glyphicon } from 'react-bootstrap';
+import { defaultProps } from 'recompose';
 
 import Message from '../../components/I18N/Message';
-import { defaultProps } from 'recompose';
-import { Glyphicon } from 'react-bootstrap';
-import assign from 'object-assign';
-import HTMLViewer from '../../components/data/identify/viewers/HTMLViewer';
-import TextViewer from '../../components/data/identify/viewers/TextViewer';
-import JSONViewer from '../../components/data/identify/viewers/JSONViewer';
-import HtmlRenderer from '../../components/misc/HtmlRenderer';
-import MapInfoUtils from '../../utils/MapInfoUtils';
-import PluginsUtils from '../../utils/PluginsUtils';
-import General from '../../components/TOC/fragments/settings/General';
 import Display from '../../components/TOC/fragments/settings/Display';
 import Elevation from '../../components/TOC/fragments/settings/Elevation';
+import FeatureInfoComp from '../../components/TOC/fragments/settings/FeatureInfo';
 import FeatureInfoEditor from '../../components/TOC/fragments/settings/FeatureInfoEditor';
+import General from '../../components/TOC/fragments/settings/General';
+import HTMLViewer from '../../components/data/identify/viewers/HTMLViewer';
+import JSONViewer from '../../components/data/identify/viewers/JSONViewer';
+import TextViewer from '../../components/data/identify/viewers/TextViewer';
+import HtmlRenderer from '../../components/misc/HtmlRenderer';
 import LoadingView from '../../components/misc/LoadingView';
-import html from 'raw-loader!./featureInfoPreviews/responseHTML.txt';
-import text from 'raw-loader!./featureInfoPreviews/responseText.txt';
+import MapInfoUtils from '../../utils/MapInfoUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
+import { StyleSelector } from '../styleeditor/index';
 
 const responses = {
     html,
-    json: JSON.parse(require('raw-loader!./featureInfoPreviews/responseJSON.txt')),
+    json: JSON.parse(responseJSON),
     text
 };
 
-import { StyleSelector } from '../styleeditor/index';
 const StyleList = defaultProps({ readOnly: true })(StyleSelector);
 
 const formatCards = {
@@ -101,7 +103,7 @@ const formatCards = {
 const FeatureInfo = defaultProps({
     formatCards,
     defaultInfoFormat: MapInfoUtils.getAvailableInfoFormat()
-})(require('../../components/TOC/fragments/settings/FeatureInfo'));
+})(FeatureInfoComp);
 
 const configuredPlugins = {};
 

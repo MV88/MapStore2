@@ -6,14 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
 import { connect } from 'react-redux';
 import { compose, withProps } from 'recompose';
-import { onEditorChange, insertWidget, setPage } from '../../actions/widgets';
-import { wizardSelector, wizardStateToProps } from './commons';
+
+import { insertWidget, onEditorChange, setPage } from '../../actions/widgets';
 import BorderLayout from '../../components/layout/BorderLayout';
-import withExitButton from './enhancers/withExitButton';
+import TextWizardComp from '../../components/widgets/builder/wizard/TextWizard';
+import ToolbarComp from '../../components/widgets/builder/wizard/text/Toolbar';
 import BuilderHeader from './BuilderHeader';
+import { wizardSelector, wizardStateToProps } from './commons';
+import withExitButton from './enhancers/withExitButton';
 
 const Toolbar = compose(
     connect(wizardSelector, {
@@ -31,7 +33,7 @@ const Toolbar = compose(
         }
     })),
     withExitButton(),
-)(require('../../components/widgets/builder/wizard/text/Toolbar'));
+)(ToolbarComp);
 
 const Builder = connect(
     wizardSelector,
@@ -39,7 +41,7 @@ const Builder = connect(
         onChange: onEditorChange
     },
     wizardStateToProps
-)(require('../../components/widgets/builder/wizard/TextWizard'));
+)(TextWizardComp);
 export default ({ enabled, onClose = () => {}} = {}) =>
     (<BorderLayout
         header={<BuilderHeader onClose={onClose}><Toolbar /></BuilderHeader>}

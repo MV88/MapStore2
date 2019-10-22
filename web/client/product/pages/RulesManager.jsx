@@ -1,3 +1,6 @@
+import url from 'url';
+
+import PropTypes from 'prop-types';
 /*
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,18 +9,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import url from 'url';
-const urlQuery = url.parse(window.location.href, true).query;
 
-import ConfigUtils from '../../utils/ConfigUtils';
-import Message from '../../components/I18N/Message';
 import { loadMapConfig } from '../../actions/config';
 import { resetControls } from '../../actions/controls';
-import Page from '../../containers/Page';
+import Message from '../../components/I18N/Message';
 import BorderLayout from '../../components/layout/BorderLayout';
+import Page from '../../containers/Page';
+import ConfigUtils from '../../utils/ConfigUtils';
+
+const urlQuery = url.parse(window.location.href, true).query;
+
 /**
   * @name RulesManager
   * @memberof pages
@@ -31,10 +33,11 @@ import BorderLayout from '../../components/layout/BorderLayout';
   * 1. *add this page to the appConfig.js `pages` (if not present):*
   *
   * ```
+  * import RulesManager from './pages/RulesManager';
   * {
   *      name: "rulesmanager",
   *      path: "/rules-manager",
-  *      component: require('./pages/RulesManager')
+  *      component: RulesManager
   *  }
   *  ```
   * 2. *Setup of this page in localConfig.json* adding the plugins (note `disableDetails` option):

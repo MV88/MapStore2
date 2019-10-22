@@ -9,113 +9,220 @@
 /**
   * Please, keep them sorted alphabetically
  */
+import ReactSwipe from 'react-swipeable-views';
+
+import SwipeHeader from '../components/data/identify/SwipeHeader';
+
+// product plugins
+import AboutPlugin from './plugins/About';
+import AttributionPlugin from './plugins/Attribution';
+import ExamplesPlugin from './plugins/Examples';
+import FooterPlugin from './plugins/Footer';
+import ForkPlugin from './plugins/Fork';
+import HeaderPlugin from './plugins/Header';
+import HomeDescriptionPlugin from './plugins/HomeDescription';
+import MadeWithLovePlugin from './plugins/MadeWithLove';
+import MailingListsPlugin from './plugins/MailingLists';
+import MapTypePlugin from './plugins/MapType';
+import NavMenu from './plugins/NavMenu';
+// framework plugins
+import AddGroupPlugin from '../plugins/AddGroup';
+import AnnotationsPlugin from '../plugins/Annotations';
+import AutoMapUpdatePlugin from '../plugins/AutoMapUpdate';
+import BackgroundSelectorPlugin from '../plugins/BackgroundSelector';
+import BackgroundSwitcherPlugin from '../plugins/BackgroundSwitcher';
+import BurgerMenuPlugin from '../plugins/BurgerMenu';
+import CRSSelectorPlugin from '../plugins/CRSSelector';
+import ContentTabs from '../plugins/ContentTabs';
+import CookiePlugin from '../plugins/Cookie';
+import CreateNewMapPlugin from '../plugins/CreateNewMap';
+import Dashboard from '../plugins/Dashboard';
+import DashboardEditor from '../plugins/DashboardEditor';
+import DashboardsPlugin from '../plugins/Dashboards';
+import DetailsPlugin from '../plugins/Details';
+import DrawerMenuPlugin from '../plugins/DrawerMenu';
+import ExpanderPlugin from '../plugins/Expander';
+import FeatureEditorPlugin from '../plugins/FeatureEditor';
+import FeaturedMaps from '../plugins/FeaturedMaps';
+import FeedbackMaskPlugin from '../plugins/FeedbackMask';
+import FloatingLegendPlugin from '../plugins/FloatingLegend';
+import FullScreenPlugin from '../plugins/FullScreen';
+import GeoStoriesPlugin from '../plugins/GeoStories';
+import GeoStoryPlugin from '../plugins/GeoStory';
+import GeoStoryEditorPlugin from '../plugins/GeoStoryEditor';
+import GeoStoryNavigationPlugin from '../plugins/GeoStoryNavigation';
+import SaveStoryPlugin from '../plugins/GeoStorySave';
+import {GeoStorySaveAs as GeoStorySaveAsPlugin}  from '../plugins/GeoStorySave';
+import {GeoStorySave as GeoStorySavePlugin} from '../plugins/GeoStorySave';
+import GlobeViewSwitcherPlugin from '../plugins/GlobeViewSwitcher';
+import GoFull from '../plugins/GoFull';
+import GridContainerPlugin from '../plugins/GridContainer';
+import HelpPlugin from '../plugins/Help';
+import HelpLinkPlugin from '../plugins/HelpLink';
+import RedoPlugin from '../plugins/History';
+import UndoPlugin from '../plugins/History';
+import HomePlugin from '../plugins/Home';
+import IdentifyPlugin from '../plugins/Identify';
+import LanguagePlugin from '../plugins/Language';
+import LocatePlugin from '../plugins/Locate';
+import LoginPlugin from '../plugins/Login';
+import MapPlugin from '../plugins/Map';
+import MapExportPlugin from '../plugins/MapExport';
+import MapFooterPlugin from '../plugins/MapFooter';
+import MapImportPlugin from '../plugins/MapImport';
+import MapLoadingPlugin from '../plugins/MapLoading';
+import MapSearchPlugin from '../plugins/MapSearch';
+import MapsPlugin from '../plugins/Maps';
+import MeasurePlugin from '../plugins/Measure';
+import MediaEditorPlugin from '../plugins/MediaEditor';
+import MetadataExplorerPlugin from '../plugins/MetadataExplorer';
+import MousePositionPlugin from '../plugins/MousePosition';
+import NotificationsPlugin from '../plugins/Notifications';
+import OmniBarPlugin from '../plugins/OmniBar';
+import PlaybackPlugin from '../plugins/Playback.jsx';
+import PrintPlugin from '../plugins/Print';
+import QueryPanelPlugin from '../plugins/QueryPanel';
+import RedirectPlugin from '../plugins/Redirect';
+import RulesDataGridPlugin from '../plugins/RulesDataGrid';
+import RulesEditorPlugin from '../plugins/RulesEditor';
+import RulesManagerFooter from '../plugins/RulesManagerFooter';
+import SavePlugin from '../plugins/Save';
+import SaveAsPlugin from '../plugins/SaveAs';
+import ScaleBoxPlugin from '../plugins/ScaleBox';
+import ScrollTopPlugin from '../plugins/ScrollTop';
+import SearchPlugin from '../plugins/Search';
+import SearchServicesConfigPlugin from '../plugins/SearchServicesConfig';
+import SettingsPlugin from '../plugins/Settings';
+import SharePlugin from '../plugins/Share';
+import SnapshotPlugin from '../plugins/Snapshot';
+import StyleEditorPlugin from '../plugins/StyleEditor';
+import TOCPlugin from '../plugins/TOC';
+import TOCItemsSettingsPlugin from '../plugins/TOCItemsSettings';
+import ThematicLayerPlugin from '../plugins/ThematicLayer';
+import ThemeSwitcherPlugin from '../plugins/ThemeSwitcher';
+import TimelinePlugin from '../plugins/Timeline';
+import ToolbarPlugin from '../plugins/Toolbar';
+import TutorialPlugin from '../plugins/Tutorial';
+import VersionPlugin from '../plugins/Version';
+import WFSDownloadPlugin from '../plugins/WFSDownload';
+import WidgetsPlugin from '../plugins/Widgets';
+import WidgetsBuilderPlugin from '../plugins/WidgetsBuilder';
+import WidgetsTrayPlugin from '../plugins/WidgetsTray';
+import ZoomAllPlugin from '../plugins/ZoomAll';
+import ZoomInPlugin from '../plugins/ZoomIn';
+import ZoomOutPlugin from '../plugins/ZoomOut';
+import GroupManagerPlugin from '../plugins/manager/GroupManager';
+import ManagerPlugin from '../plugins/manager/Manager';
+import ManagerMenuPlugin from '../plugins/manager/ManagerMenu';
+import UserManagerPlugin from '../plugins/manager/UserManager';
+
 export default {
     plugins: {
         // product plugins
-        AboutPlugin: require('./plugins/About'),
-        AttributionPlugin: require('./plugins/Attribution'),
-        ExamplesPlugin: require('./plugins/Examples'),
-        FooterPlugin: require('./plugins/Footer'),
-        ForkPlugin: require('./plugins/Fork'),
-        HeaderPlugin: require('./plugins/Header'),
-        HomeDescriptionPlugin: require('./plugins/HomeDescription'),
-        MadeWithLovePlugin: require('./plugins/MadeWithLove'),
-        MailingListsPlugin: require('./plugins/MailingLists'),
-        MapTypePlugin: require('./plugins/MapType'),
-        NavMenu: require('./plugins/NavMenu'),
+        AboutPlugin,
+        AttributionPlugin,
+        ExamplesPlugin,
+        FooterPlugin,
+        ForkPlugin,
+        HeaderPlugin,
+        HomeDescriptionPlugin,
+        MadeWithLovePlugin,
+        MailingListsPlugin,
+        MapTypePlugin,
+        NavMenu,
         // framework plugins
-        AddGroupPlugin: require('../plugins/AddGroup').default,
-        AnnotationsPlugin: require('../plugins/Annotations'),
-        AutoMapUpdatePlugin: require('../plugins/AutoMapUpdate'),
-        BackgroundSelectorPlugin: require('../plugins/BackgroundSelector'),
-        BackgroundSwitcherPlugin: require('../plugins/BackgroundSwitcher'),
-        BurgerMenuPlugin: require('../plugins/BurgerMenu'),
-        CRSSelectorPlugin: require('../plugins/CRSSelector'),
-        ContentTabs: require('../plugins/ContentTabs'),
-        CookiePlugin: require('../plugins/Cookie'),
-        CreateNewMapPlugin: require('../plugins/CreateNewMap'),
-        Dashboard: require('../plugins/Dashboard'),
-        DashboardEditor: require('../plugins/DashboardEditor'),
-        DashboardsPlugin: require('../plugins/Dashboards'),
-        DetailsPlugin: require('../plugins/Details'),
-        DrawerMenuPlugin: require('../plugins/DrawerMenu'),
-        ExpanderPlugin: require('../plugins/Expander'),
-        FeatureEditorPlugin: require('../plugins/FeatureEditor'),
-        FeaturedMaps: require('../plugins/FeaturedMaps'),
-        FeedbackMaskPlugin: require('../plugins/FeedbackMask'),
-        FloatingLegendPlugin: require('../plugins/FloatingLegend'),
-        FullScreenPlugin: require('../plugins/FullScreen'),
-        GeoStoryPlugin: require('../plugins/GeoStory').default,
-        GeoStoriesPlugin: require('../plugins/GeoStories'),
-        GeoStoryEditorPlugin: require('../plugins/GeoStoryEditor').default,
-        GeoStorySavePlugin: require('../plugins/GeoStorySave').GeoStorySave,
-        GeoStorySaveAsPlugin: require('../plugins/GeoStorySave').GeoStorySaveAs,
-        GeoStoryNavigationPlugin: require('../plugins/GeoStoryNavigation').default,
-        GlobeViewSwitcherPlugin: require('../plugins/GlobeViewSwitcher'),
-        GoFull: require('../plugins/GoFull'),
-        GridContainerPlugin: require('../plugins/GridContainer'),
-        GroupManagerPlugin: require('../plugins/manager/GroupManager'),
-        HelpLinkPlugin: require('../plugins/HelpLink'),
-        HelpPlugin: require('../plugins/Help'),
-        HomePlugin: require('../plugins/Home'),
-        IdentifyPlugin: require('../plugins/Identify'),
-        LanguagePlugin: require('../plugins/Language'),
-        LocatePlugin: require('../plugins/Locate'),
-        LoginPlugin: require('../plugins/Login'),
-        ManagerMenuPlugin: require('../plugins/manager/ManagerMenu'),
-        ManagerPlugin: require('../plugins/manager/Manager'),
-        MapExportPlugin: require('../plugins/MapExport'),
-        MapFooterPlugin: require('../plugins/MapFooter'),
-        MapImportPlugin: require('../plugins/MapImport'),
-        MapLoadingPlugin: require('../plugins/MapLoading'),
-        MapPlugin: require('../plugins/Map'),
-        MapSearchPlugin: require('../plugins/MapSearch'),
-        MapsPlugin: require('../plugins/Maps'),
-        MeasurePlugin: require('../plugins/Measure'),
-        MediaEditorPlugin: require('../plugins/MediaEditor').default,
-        MetadataExplorerPlugin: require('../plugins/MetadataExplorer'),
-        MousePositionPlugin: require('../plugins/MousePosition'),
-        NotificationsPlugin: require('../plugins/Notifications'),
-        OmniBarPlugin: require('../plugins/OmniBar'),
-        PlaybackPlugin: require('../plugins/Playback.jsx'),
-        PrintPlugin: require('../plugins/Print'),
-        QueryPanelPlugin: require('../plugins/QueryPanel'),
-        RedirectPlugin: require('../plugins/Redirect'),
-        RedoPlugin: require('../plugins/History'),
-        RulesDataGridPlugin: require('../plugins/RulesDataGrid'),
-        RulesEditorPlugin: require('../plugins/RulesEditor'),
-        RulesManagerFooter: require('../plugins/RulesManagerFooter'),
-        SaveAsPlugin: require('../plugins/SaveAs'),
-        SavePlugin: require('../plugins/Save'),
-        SaveStoryPlugin: require('../plugins/GeoStorySave'),
-        ScaleBoxPlugin: require('../plugins/ScaleBox'),
-        ScrollTopPlugin: require('../plugins/ScrollTop'),
-        SearchPlugin: require('../plugins/Search'),
-        SearchServicesConfigPlugin: require('../plugins/SearchServicesConfig'),
-        SettingsPlugin: require('../plugins/Settings'),
-        SharePlugin: require('../plugins/Share'),
-        SnapshotPlugin: require('../plugins/Snapshot'),
-        StyleEditorPlugin: require('../plugins/StyleEditor'),
-        TOCItemsSettingsPlugin: require('../plugins/TOCItemsSettings'),
-        TOCPlugin: require('../plugins/TOC'),
-        ThematicLayerPlugin: require('../plugins/ThematicLayer'),
-        ThemeSwitcherPlugin: require('../plugins/ThemeSwitcher'),
-        TimelinePlugin: require('../plugins/Timeline'),
-        ToolbarPlugin: require('../plugins/Toolbar'),
-        TutorialPlugin: require('../plugins/Tutorial'),
-        UndoPlugin: require('../plugins/History'),
-        UserManagerPlugin: require('../plugins/manager/UserManager'),
-        VersionPlugin: require('../plugins/Version'),
-        WFSDownloadPlugin: require('../plugins/WFSDownload'),
-        WidgetsBuilderPlugin: require('../plugins/WidgetsBuilder'),
-        WidgetsPlugin: require('../plugins/Widgets'),
-        WidgetsTrayPlugin: require('../plugins/WidgetsTray'),
-        ZoomAllPlugin: require('../plugins/ZoomAll'),
-        ZoomInPlugin: require('../plugins/ZoomIn'),
-        ZoomOutPlugin: require('../plugins/ZoomOut')
+        AddGroupPlugin,
+        AnnotationsPlugin,
+        AutoMapUpdatePlugin,
+        BackgroundSelectorPlugin,
+        BackgroundSwitcherPlugin,
+        BurgerMenuPlugin,
+        CRSSelectorPlugin,
+        ContentTabs,
+        CookiePlugin,
+        CreateNewMapPlugin,
+        Dashboard,
+        DashboardEditor,
+        DashboardsPlugin,
+        DetailsPlugin,
+        DrawerMenuPlugin,
+        ExpanderPlugin,
+        FeatureEditorPlugin,
+        FeaturedMaps,
+        FeedbackMaskPlugin,
+        FloatingLegendPlugin,
+        FullScreenPlugin,
+        GeoStoryPlugin,
+        GeoStoriesPlugin,
+        GeoStoryEditorPlugin,
+        GeoStorySavePlugin,
+        GeoStorySaveAsPlugin,
+        GeoStoryNavigationPlugin,
+        GlobeViewSwitcherPlugin,
+        GoFull,
+        GridContainerPlugin,
+        GroupManagerPlugin,
+        HelpLinkPlugin,
+        HelpPlugin,
+        HomePlugin,
+        IdentifyPlugin,
+        LanguagePlugin,
+        LocatePlugin,
+        LoginPlugin,
+        ManagerMenuPlugin,
+        ManagerPlugin,
+        MapExportPlugin,
+        MapFooterPlugin,
+        MapImportPlugin,
+        MapLoadingPlugin,
+        MapPlugin,
+        MapSearchPlugin,
+        MapsPlugin,
+        MeasurePlugin,
+        MediaEditorPlugin,
+        MetadataExplorerPlugin,
+        MousePositionPlugin,
+        NotificationsPlugin,
+        OmniBarPlugin,
+        PlaybackPlugin,
+        PrintPlugin,
+        QueryPanelPlugin,
+        RedirectPlugin,
+        RedoPlugin,
+        RulesDataGridPlugin,
+        RulesEditorPlugin,
+        RulesManagerFooter,
+        SaveAsPlugin,
+        SavePlugin,
+        SaveStoryPlugin,
+        ScaleBoxPlugin,
+        ScrollTopPlugin,
+        SearchPlugin,
+        SearchServicesConfigPlugin,
+        SettingsPlugin,
+        SharePlugin,
+        SnapshotPlugin,
+        StyleEditorPlugin,
+        TOCItemsSettingsPlugin,
+        TOCPlugin,
+        ThematicLayerPlugin,
+        ThemeSwitcherPlugin,
+        TimelinePlugin,
+        ToolbarPlugin,
+        TutorialPlugin,
+        UndoPlugin,
+        UserManagerPlugin,
+        VersionPlugin,
+        WFSDownloadPlugin,
+        WidgetsBuilderPlugin,
+        WidgetsPlugin,
+        WidgetsTrayPlugin,
+        ZoomAllPlugin,
+        ZoomInPlugin,
+        ZoomOutPlugin
     },
     requires: {
-        ReactSwipe: require('react-swipeable-views').default,
-        SwipeHeader: require('../components/data/identify/SwipeHeader')
+        ReactSwipe,
+        SwipeHeader
     }
 };

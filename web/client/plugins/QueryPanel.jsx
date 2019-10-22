@@ -5,97 +5,92 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
-
 import React from 'react';
 import { connect } from 'react-redux';
 import Sidebar from 'react-sidebar';
+import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 
-import {
-    changeLayerProperties,
-    changeGroupProperties,
-    toggleNode,
-    sortNode,
-    showSettings,
-    hideSettings,
-    updateSettings,
-    updateNode,
-    removeNode,
-} from '../actions/layers';
-
-import Message from './locale/Message';
-import { getLayerCapabilities } from '../actions/layerCapabilities';
-import { storeCurrentFilter, discardCurrentFilter, applyFilter } from '../actions/layerFilter';
-import { zoomToExtent } from '../actions/map';
 import { toggleControl } from '../actions/controls';
-import { groupsSelector, selectedLayerLoadingErrorSelector } from '../selectors/layers';
-import { mapSelector } from '../selectors/map';
-import { isDashboardAvailable } from '../selectors/dashboard';
-
+import { changeDrawingStatus } from '../actions/draw';
+import { getLayerCapabilities } from '../actions/layerCapabilities';
+import { applyFilter, discardCurrentFilter, storeCurrentFilter } from '../actions/layerFilter';
 import {
-    crossLayerFilterSelector,
-    availableCrossLayerFilterLayersSelector,
-    storedFilterSelector,
-    appliedFilterSelector,
-} from '../selectors/queryform';
-
-import { isEqual } from 'lodash';
-import LayersUtils from '../utils/LayersUtils';
-
-// include application component
-import QueryBuilder from '../components/data/query/QueryBuilder';
-
-import QueryPanelHeader from '../components/data/query/QueryPanelHeader';
-
+    changeGroupProperties,
+    changeLayerProperties,
+    hideSettings,
+    removeNode,
+    showSettings,
+    sortNode,
+    toggleNode,
+    updateNode,
+    updateSettings,
+} from '../actions/layers';
+import { zoomToExtent } from '../actions/map';
 import {
-    featureTypeSelectedEpic,
-    wfsQueryEpic,
-    viewportSelectedEpic,
-    redrawSpatialFilterEpic,
-} from '../epics/wfsquery';
-
-import autocompleteEpics from '../epics/autocomplete';
-import { bindActionCreators } from 'redux';
-import { mapLayoutValuesSelector } from '../selectors/maplayout';
-import layerFilterEpics from '../epics/layerfilter';
-import ResizableModal from '../components/misc/ResizableModal';
-import Portal from '../components/misc/Portal';
-
-import {
-    addGroupField,
-    addFilterField,
-    removeFilterField,
-    updateFilterField,
-    updateExceptionField,
-    updateLogicCombo,
-    removeGroupField,
-    changeCascadingValue,
-    expandAttributeFilterPanel,
-    expandSpatialFilterPanel,
-    expandCrossLayerFilterPanel,
-    selectSpatialMethod,
-    selectViewportSpatialMethod,
-    selectSpatialOperation,
-    removeSpatialSelection,
-    changeSpatialFilterValue,
-    showSpatialSelectionDetails,
-    setCrossLayerFilterParameter,
     addCrossLayerFilterField,
-    updateCrossLayerFilterField,
+    addFilterField,
+    addGroupField,
+    changeCascadingValue,
+    changeDwithinValue,
+    changeSpatialFilterValue,
+    expandAttributeFilterPanel,
+    expandCrossLayerFilterPanel,
+    expandSpatialFilterPanel,
     removeCrossLayerFilterField,
+    removeFilterField,
+    removeGroupField,
+    removeSpatialSelection,
+    reset,
     resetCrossLayerFilter,
     search,
-    reset,
-    changeDwithinValue,
+    selectSpatialMethod,
+    selectSpatialOperation,
+    selectViewportSpatialMethod,
+    setCrossLayerFilterParameter,
+    showSpatialSelectionDetails,
+    toggleMenu,
+    updateCrossLayerFilterField,
+    updateExceptionField,
+    updateFilterField,
+    updateLogicCombo,
+    zoneChange,
     zoneGetValues,
     zoneSearch,
-    zoneChange,
-    toggleMenu,
 } from '../actions/queryform';
-
 import { initQueryPanel } from '../actions/wfsquery';
-import { changeDrawingStatus } from '../actions/draw';
+// include application component
+import QueryBuilder from '../components/data/query/QueryBuilder';
+import QueryPanelHeader from '../components/data/query/QueryPanelHeader';
+import Portal from '../components/misc/Portal';
+import ResizableModal from '../components/misc/ResizableModal';
+import autocompleteEpics from '../epics/autocomplete';
+import layerFilterEpics from '../epics/layerfilter';
+import epics from '../epics/queryform';
+import {
+    featureTypeSelectedEpic,
+    redrawSpatialFilterEpic,
+    viewportSelectedEpic,
+    wfsQueryEpic,
+} from '../epics/wfsquery';
+import layerFilter from '../reducers/layerFilter';
+import query from '../reducers/query';
+import queryform from '../reducers/queryform';
+import { isDashboardAvailable } from '../selectors/dashboard';
+import { groupsSelector, selectedLayerLoadingErrorSelector } from '../selectors/layers';
+import { mapSelector } from '../selectors/map';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import {
+    appliedFilterSelector,
+    availableCrossLayerFilterLayersSelector,
+    crossLayerFilterSelector,
+    storedFilterSelector,
+} from '../selectors/queryform';
+import LayersUtils from '../utils/LayersUtils';
+import Message from './locale/Message';
+
 const onReset = reset.bind(null, "query");
 // connecting a Dumb component to the store
 // makes it a smart component
@@ -463,9 +458,9 @@ const QueryPanelPlugin = connect(tocSelector, {
 export default {
     QueryPanelPlugin,
     reducers: {
-        queryform: require('../reducers/queryform'),
-        query: require('../reducers/query'),
-        layerFilter: require('../reducers/layerFilter')
+        queryform,
+        query,
+        layerFilter
     },
-    epics: {featureTypeSelectedEpic, wfsQueryEpic, viewportSelectedEpic, redrawSpatialFilterEpic, ...autocompleteEpics, ...require('../epics/queryform'), ...layerFilterEpics}
+    epics: {featureTypeSelectedEpic, wfsQueryEpic, viewportSelectedEpic, redrawSpatialFilterEpic, ...autocompleteEpics, ...epics, ...layerFilterEpics}
 };

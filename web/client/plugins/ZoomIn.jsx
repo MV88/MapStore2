@@ -6,17 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import './zoom/zoom.css';
 
+import assign from 'object-assign';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+
+import { changeZoomLevel } from '../actions/map';
+import Message from '../components/I18N/Message';
+import ZoomButton from '../components/buttons/ZoomButton';
 import { mapSelector } from '../selectors/map';
 
 // TODO: make step and glyphicon configurable
 const selector = createSelector([mapSelector], (map) => ({currentZoom: map && map.zoom, id: "zoomin-btn", step: 1, glyphicon: "plus"}));
-
-import { changeZoomLevel } from '../actions/map';
-import Message from '../components/I18N/Message';
 
 /**
   * ZoomIn Plugin. Provides button to zoom in
@@ -30,10 +33,8 @@ import Message from '../components/I18N/Message';
   */
 const ZoomInButton = connect(selector, {
     onZoom: changeZoomLevel
-})(require('../components/buttons/ZoomButton'));
+})(ZoomButton);
 
-import './zoom/zoom.css';
-import assign from 'object-assign';
 
 
 export default {

@@ -5,14 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import ReactDOM from 'react-dom';
-import mainApp from '../main';
 import expect from 'expect';
-import assign from 'object-assign';
-import ConfigUtils from '../../utils/ConfigUtils';
 import { includes } from 'lodash';
+import assign from 'object-assign';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import catalog from '../../reducers/catalog';
+import ConfigUtils from '../../utils/ConfigUtils';
+import mainApp from '../main';
 
 class AppComponent extends React.Component {
     render() {
@@ -83,7 +85,7 @@ describe('standard application runner', () => {
     it('testing default appStore plus some extra reducers', () => {
         let defaultConfig = {
             appReducers: {
-                catalog: require("../../reducers/catalog")
+                catalog
             }
         };
         mainApp(defaultConfig, {plugins: {}}, (config) => {
@@ -101,7 +103,7 @@ describe('standard application runner', () => {
     it('testing appStore overridng default reducers', () => {
         let defaultConfig = {
             baseReducers: {
-                catalog: require("../../reducers/catalog")
+                catalog
             }
         };
         mainApp(defaultConfig, {plugins: {}}, (config) => {

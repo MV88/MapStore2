@@ -6,11 +6,15 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-import React from 'react';
+import '../../assets/css/viewer.css';
+
+import url from 'url';
 
 import PropTypes from 'prop-types';
+import React from 'react';
+
 import ConfigUtils from '../../../utils/ConfigUtils';
-import '../../assets/css/viewer.css';
+
 let oldLocation;
 
 class MapViewerComponent extends React.Component {
@@ -61,7 +65,6 @@ class MapViewerComponent extends React.Component {
                     require('../../assets/css/mobile.css');
                 }
             }
-            const url = require('url');
             const urlQuery = url.parse(window.location.href, true).query;
             // if 0 it loads config.json
             // if mapId is a string it loads mapId.json

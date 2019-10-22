@@ -6,9 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
+import epics from '../epics/widgetsTray';
 import WidgetsTray from './widgets/WidgetsTray';
-
 import autoDisableWidgets from './widgets/autoDisableWidgets';
 
 /**
@@ -20,5 +19,5 @@ import autoDisableWidgets from './widgets/autoDisableWidgets';
  */
 export default {
     WidgetsTrayPlugin: autoDisableWidgets(WidgetsTray),
-    epics: require('../epics/widgetsTray')
+    epics
 };

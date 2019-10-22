@@ -6,34 +6,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { compose, branch, toClass } from 'recompose';
-import assign from 'object-assign';
 import { isArray, isString } from 'lodash';
-import Loader from '../components/misc/Loader';
-import BorderLayout from '../components/layout/BorderLayout';
-import loadingState from '../components/misc/enhancers/loadingState';
-import emptyState from '../components/misc/enhancers/emptyState';
-import HTML from '../components/I18N/HTML';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import { branch, compose, toClass } from 'recompose';
+import { createSelector } from 'reselect';
 
+import { updateSettingsParams } from '../actions/layers';
+import { initStyleService } from '../actions/styleeditor';
+import HTML from '../components/I18N/HTML';
+import BorderLayout from '../components/layout/BorderLayout';
+import Loader from '../components/misc/Loader';
+import emptyState from '../components/misc/enhancers/emptyState';
+import loadingState from '../components/misc/enhancers/loadingState';
+import epics from '../epics/styleeditor';
+import styleeditor from '../reducers/styleeditor';
+import { userRoleSelector } from '../selectors/security';
 import {
-    statusStyleSelector,
-    loadingStyleSelector,
-    getUpdatedLayer,
-    errorStyleSelector,
     canEditStyleSelector,
+    errorStyleSelector,
+    getUpdatedLayer,
+    loadingStyleSelector,
+    statusStyleSelector,
     styleServiceSelector,
 } from '../selectors/styleeditor';
-
-import { userRoleSelector } from '../selectors/security';
-import { initStyleService } from '../actions/styleeditor';
-import { updateSettingsParams } from '../actions/layers';
-import { StyleSelector, StyleToolbar, StyleCodeEditor } from './styleeditor/index';
 import { isSameOrigin } from '../utils/StyleEditorUtils';
+import { StyleCodeEditor, StyleSelector, StyleToolbar } from './styleeditor/index';
 
 class StyleEditorPanel extends React.Component {
     static propTypes = {
@@ -186,7 +186,7 @@ export default {
         }
     }),
     reducers: {
-        styleeditor: require('../reducers/styleeditor')
+        styleeditor
     },
-    epics: require('../epics/styleeditor')
+    epics
 };

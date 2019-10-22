@@ -6,27 +6,44 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import ReactSwipe from 'react-swipeable-views';
+
+import SwipeHeader from '../components/data/identify/SwipeHeader';
+import BackgroundSwitcherPlugin from '../plugins/BackgroundSwitcher';
+import DrawerMenuPlugin from '../plugins/DrawerMenu';
+import FeedbackMaskPlugin from '../plugins/FeedbackMask';
+import GoFullPlugin from '../plugins/GoFull';
+import IdentifyPlugin from '../plugins/Identify';
+import LocatePlugin from '../plugins/Locate';
+import MapPlugin from '../plugins/Map';
+import MapFooterPlugin from '../plugins/MapFooter';
+import MapLoadingPlugin from '../plugins/MapLoading';
+import OmniBarPlugin from '../plugins/OmniBar';
+import SearchPlugin from '../plugins/Search';
+import TOCPlugin from '../plugins/TOC';
+import ToolbarPlugin from '../plugins/Toolbar';
+import ZoomAllPlugin from '../plugins/ZoomAll';
+
 export default {
     plugins: {
         // framework plugins
-        BackgroundSwitcherPlugin: require('../plugins/BackgroundSwitcher'),
-        DrawerMenuPlugin: require('../plugins/DrawerMenu'),
-        FeedbackMaskPlugin: require('../plugins/FeedbackMask'),
-        GoFullPlugin: require('../plugins/GoFull'),
-        IdentifyPlugin: require('../plugins/Identify'),
-        LocatePlugin: require('../plugins/Locate'),
-        MapFooterPlugin: require('../plugins/MapFooter'),
-        MapLoadingPlugin: require('../plugins/MapLoading'),
-        MapPlugin: require('../plugins/Map'),
-        OmniBarPlugin: require('../plugins/OmniBar'),
-        SearchPlugin: require('../plugins/Search'),
-        TOCPlugin: require('../plugins/TOC'),
-        ToolbarPlugin: require('../plugins/Toolbar'),
-        ZoomAllPlugin: require('../plugins/ZoomAll')
+        BackgroundSwitcherPlugin,
+        DrawerMenuPlugin,
+        FeedbackMaskPlugin,
+        GoFullPlugin,
+        IdentifyPlugin,
+        LocatePlugin,
+        MapFooterPlugin,
+        MapLoadingPlugin,
+        MapPlugin,
+        OmniBarPlugin,
+        SearchPlugin,
+        TOCPlugin,
+        ToolbarPlugin,
+        ZoomAllPlugin
     },
     requires: {
-        ReactSwipe: require('react-swipeable-views').default,
-
-        SwipeHeader: require('../components/data/identify/SwipeHeader')
+        ReactSwipe,
+        SwipeHeader
     }
 };

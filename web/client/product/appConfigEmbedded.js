@@ -7,17 +7,21 @@
 */
 
 import { updateMapLayoutEpic } from '../epics/maplayout';
-
 import { readQueryParamsOnMapEpic } from '../epics/queryparams';
+import maplayout from '../reducers/maplayout';
+import searchconfig from '../reducers/searchconfig';
+import version from '../reducers/version';
+import apiPlugins from './apiPlugins.js';
+import MapViewer from './pages/MapViewer';
 
 export default {
     mode: "embedded",
     pages: [{
         name: "mapviewer",
         path: "/:mapId",
-        component: require('./pages/MapViewer')
+        component: MapViewer
     }],
-    pluginsDef: require('./apiPlugins.js'),
+    pluginsDef: apiPlugins,
     initialState: {
         defaultState: {
             mode: "embedded",
@@ -45,9 +49,9 @@ export default {
     },
     baseReducers: {
         mode: (state = 'embedded') => state,
-        version: require('../reducers/version'),
-        maplayout: require('../reducers/maplayout'),
-        searchconfig: require('../reducers/searchconfig')
+        version,
+        maplayout,
+        searchconfig
     },
     baseEpics: {
         updateMapLayoutEpic,

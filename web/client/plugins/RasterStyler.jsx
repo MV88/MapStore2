@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 /**
  * Copyright 2016, GeoSolutions Sas.
@@ -8,33 +7,34 @@ import PropTypes from 'prop-types';
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import { connect } from 'react-redux';
-import { Grid, Row, Col, Panel, PanelGroup, Button, Glyphicon } from 'react-bootstrap';
-import { Combobox } from 'react-widgets';
-import { getWindowSize } from '../utils/AgentUtils';
-import { setRasterStyleParameter, setRasterLayer } from '../actions/rasterstyler';
-import { changeLayerProperties } from '../actions/layers';
-
-import {
-    RedBandSelector,
-    BlueBandSelector,
-    GreenBandSelector,
-    GrayBandSelector,
-    PseudoBandSelector,
-    RasterStyleTypePicker,
-    EqualInterval,
-    PseudoColor,
-    OpacityPicker,
-} from './rasterstyler/index';
-
-import { layersSelector } from '../selectors/layers';
-import { createSelector } from 'reselect';
-import assign from 'object-assign';
 import './rasterstyler/rasterstyler.css';
-import Message from './locale/Message';
+
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Button, Col, Glyphicon, Grid, Panel, PanelGroup, Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Combobox } from 'react-widgets';
+import { createSelector } from 'reselect';
+
+import { changeLayerProperties } from '../actions/layers';
+import { setRasterLayer, setRasterStyleParameter } from '../actions/rasterstyler';
+import rasterstyler from '../reducers/rasterstyler';
+import { layersSelector } from '../selectors/layers';
+import { getWindowSize } from '../utils/AgentUtils';
 import { jsonToSLD } from '../utils/SLDUtils';
+import Message from './locale/Message';
+import {
+    BlueBandSelector,
+    EqualInterval,
+    GrayBandSelector,
+    GreenBandSelector,
+    OpacityPicker,
+    PseudoBandSelector,
+    PseudoColor,
+    RasterStyleTypePicker,
+    RedBandSelector,
+} from './rasterstyler/index';
 
 class RasterStyler extends React.Component {
     static propTypes = {
@@ -274,5 +274,5 @@ export default {
                 exclusive: true
             }
         }),
-    reducers: {rasterstyler: require('../reducers/rasterstyler')}
+    reducers: {rasterstyler}
 };

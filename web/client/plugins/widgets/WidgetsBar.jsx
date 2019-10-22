@@ -5,14 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { compose, defaultProps, withProps } from 'recompose';
 
-import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { filterHiddenWidgets } from './widgetsPermission';
-import { toggleCollapse } from '../../actions/widgets';
-import { trayWidgets } from '../../selectors/widgetsTray';
+import { compose, defaultProps, withProps } from 'recompose';
+import { createSelector } from 'reselect';
 
+import { toggleCollapse } from '../../actions/widgets';
+import WidgetsBarComp from '../../components/widgets/view/WidgetsBar';
+import { trayWidgets } from '../../selectors/widgetsTray';
+import { filterHiddenWidgets } from './widgetsPermission';
 
 /**
  * Button bar with the list of all the widgets to minimize/expand.
@@ -45,4 +46,4 @@ export default compose(
             ...(btnDefaultProps || {})
         }
     }))
-)(require('../../components/widgets/view/WidgetsBar'));
+)(WidgetsBarComp);

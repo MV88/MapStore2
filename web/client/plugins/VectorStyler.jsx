@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,31 +6,32 @@ import PropTypes from 'prop-types';
  * LICENSE file in the root directory of this source tree.
  */
 
+import './vectorstyler/vectorstyler.css';
+
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
 import React from 'react';
-
+import { Button, Col, FormControl, Glyphicon, Grid, Panel, PanelGroup, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Grid, Row, Col, Panel, PanelGroup, Button, Glyphicon, FormControl } from 'react-bootstrap';
 import { Combobox } from 'react-widgets';
-import { getWindowSize } from '../utils/AgentUtils';
-
-import {
-    setVectorStyleParameter,
-    setVectorLayer,
-    newVectorRule,
-    selectVectorRule,
-    removeVectorRule,
-    setVectorRuleParameter,
-} from '../actions/vectorstyler';
+import { createSelector } from 'reselect';
 
 import { changeLayerProperties } from '../actions/layers';
-import { StylePolygon, StylePolyline, StylePoint, ScaleDenominator } from './vectorstyler/index';
+import {
+    newVectorRule,
+    removeVectorRule,
+    selectVectorRule,
+    setVectorLayer,
+    setVectorRuleParameter,
+    setVectorStyleParameter,
+} from '../actions/vectorstyler';
+import vectorstyler from '../reducers/vectorstyler'
 import { layersSelector } from '../selectors/layers';
 import { ruleselctor } from '../selectors/vectorstyler';
-import { createSelector } from 'reselect';
-import assign from 'object-assign';
-import './vectorstyler/vectorstyler.css';
-import Message from './locale/Message';
+import { getWindowSize } from '../utils/AgentUtils';
 import { vecStyleToSLD } from '../utils/SLDUtils';
+import Message from './locale/Message';
+import { ScaleDenominator, StylePoint, StylePolygon, StylePolyline } from './vectorstyler/index';
 
 class VectorStyler extends React.Component {
     static propTypes = {
@@ -288,6 +287,6 @@ export default {
             }
         }),
     reducers: {
-        vectorstyler: require('../reducers/vectorstyler')
+        vectorstyler
     }
 };

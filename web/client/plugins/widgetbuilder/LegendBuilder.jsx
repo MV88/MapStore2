@@ -6,23 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import { connect } from 'react-redux';
 import { get } from 'lodash';
-import { compose, renameProps, mapPropsStream, withProps } from 'recompose';
-import InfoPopover from '../../components/widgets/widget/InfoPopover';
+import React from 'react';
+import { connect } from 'react-redux';
+import { compose, mapPropsStream, renameProps, withProps } from 'recompose';
+
+import { insertWidget, onEditorChange, openFilterEditor, setPage } from '../../actions/widgets';
 import Message from '../../components/I18N/Message';
 import BorderLayout from '../../components/layout/BorderLayout';
-import { insertWidget, onEditorChange, setPage, openFilterEditor } from '../../actions/widgets';
+import LegendWizardComp from '../../components/widgets/builder/wizard/LegendWizard';
+import ToolbarComp from '../../components/widgets/builder/wizard/legend/Toolbar';
+import InfoPopover from '../../components/widgets/widget/InfoPopover';
+import BuilderHeader from './BuilderHeader';
+import { wizardSelector, wizardStateToProps } from './commons';
 import legendBuilderConnect from './enhancers/connection/legendBuilderConnect';
 import viewportBuilderConnectMask from './enhancers/connection/viewportBuilderConnectMask';
-import withExitButton from './enhancers/withExitButton';
 import withConnectButton from './enhancers/connection/withConnectButton';
 import withMapConnect from './enhancers/connection/withMapConnect';
-const withValidMap = withProps(({ availableDependencies = [], editorData }) => ({ valid: availableDependencies.length > 0 && editorData.mapSync }));
+import withExitButton from './enhancers/withExitButton';
 
-import { wizardStateToProps, wizardSelector } from './commons';
+const withValidMap = withProps(({ availableDependencies = [], editorData }) => ({ valid: availableDependencies.length > 0 && editorData.mapSync }));
 
 const Builder = compose(
     connect(
@@ -40,9 +43,8 @@ const Builder = compose(
         onEditorChange: "onChange"
     }),
 
-)(require('../../components/widgets/builder/wizard/LegendWizard'));
+)(LegendWizardComp);
 
-import BuilderHeader from './BuilderHeader';
 const Toolbar = compose(
     connect(wizardSelector, {
         openFilterEditor,
@@ -69,7 +71,7 @@ const Toolbar = compose(
     withExitButton(({ step}) => step === 0),
     // end exit support
     withConnectButton(({ step }) => step === 0)
-)(require('../../components/widgets/builder/wizard/legend/Toolbar'));
+)(ToolbarComp);
 
 /*
  * in case you don't have a layer selected (e.g. dashboard) the table builder

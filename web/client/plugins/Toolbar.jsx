@@ -6,16 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import './toolbar/assets/css/toolbar.css';
+
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group';
+import { createSelector } from 'reselect';
+
+import controls from '../reducers/controls';
 import { isFeatureGridOpen } from '../selectors/featuregrid';
 import { mapLayoutValuesSelector } from '../selectors/maplayout';
-import { createSelector } from 'reselect';
-import assign from 'object-assign';
 import ToolsContainer from './containers/ToolsContainer';
 
 class AnimatedContainer extends React.Component {
@@ -129,5 +131,5 @@ const toolbarSelector = stateSelector => createSelector([
 
 export default {
     ToolbarPlugin: (stateSelector = 'toolbar') => connect(toolbarSelector(stateSelector))(Toolbar),
-    reducers: {controls: require('../reducers/controls')}
+    reducers: {controls}
 };

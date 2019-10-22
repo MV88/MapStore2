@@ -6,27 +6,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import LocaleUtils from '../utils/LocaleUtils';
-import CoordinatesUtils from '../utils/CoordinatesUtils';
-import MapUtils from '../utils/MapUtils';
-import Dialog from '../components/misc/Dialog';
-import { Grid, Row, Col, Panel, Accordion, Glyphicon } from 'react-bootstrap';
-import { toggleControl, setControlProperty } from '../actions/controls';
-import { printSubmit, printSubmitting, configurePrintMap } from '../actions/print';
-import { mapSelector } from '../selectors/map';
-import { layersSelector } from '../selectors/layers';
-import { createSelector } from 'reselect';
-import assign from 'object-assign';
-import { head } from 'lodash';
-import { scalesSelector } from '../selectors/map';
-import { currentLocaleSelector } from '../selectors/locale';
-import { mapTypeSelector } from '../selectors/maptype';
-import Message from '../components/I18N/Message';
 import './print/print.css';
+
+import { head } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Accordion, Col, Glyphicon, Grid, Panel, Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+
+import { setControlProperty, toggleControl } from '../actions/controls';
+import { configurePrintMap, printSubmit, printSubmitting } from '../actions/print';
+import Message from '../components/I18N/Message';
+import Dialog from '../components/misc/Dialog';
+import print from '../reducers/print';
+import { layersSelector } from '../selectors/layers';
+import { currentLocaleSelector } from '../selectors/locale';
+import { mapSelector } from '../selectors/map';
+import { scalesSelector } from '../selectors/map';
+import { mapTypeSelector } from '../selectors/maptype';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
+import LocaleUtils from '../utils/LocaleUtils';
+import MapUtils from '../utils/MapUtils';
+import PrintUtils from '../utils/PrintUtils';
 
 /**
  * Print plugin. This plugin allows to print current map view.
@@ -92,9 +95,6 @@ export default {
                     PrintSubmit,
                     PrintPreview
                 } = require('./print/index');
-
-                const PrintUtils = require('../utils/PrintUtils');
-
 
                 class Print extends React.Component {
                     static propTypes = {
@@ -447,5 +447,5 @@ export default {
             doNotHide: true
         }
     }),
-    reducers: {print: require('../reducers/print')}
+    reducers: {print}
 };

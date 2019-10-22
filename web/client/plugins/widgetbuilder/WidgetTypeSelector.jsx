@@ -6,18 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
-import Message from '../../components/I18N/Message';
-import { onEditorChange } from '../../actions/widgets';
 import { connect } from 'react-redux';
+
+import { onEditorChange } from '../../actions/widgets';
+import Message from '../../components/I18N/Message';
 import BorderLayout from '../../components/layout/BorderLayout';
+import WidgetTypeSelector from '../../components/widgets/builder/WidgetTypeSelector';
 import BuilderHeader from './BuilderHeader';
+
 const TypeSelector = connect(
     () => ({}),
     {
         onSelect: (type) => onEditorChange("widgetType", type)
     }
-)(require('../../components/widgets/builder/WidgetTypeSelector'));
+)(WidgetTypeSelector);
 
 /**
  * Builder page that shows the type selector

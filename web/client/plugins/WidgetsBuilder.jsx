@@ -6,19 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
 import PropTypes from 'prop-types';
-import DockPanel from '../components/misc/panels/DockPanel';
+import React from 'react';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import { compose } from 'recompose';
+import { createSelector } from 'reselect';
+
 import { setControlProperty } from '../actions/controls';
-import { mapLayoutValuesSelector } from '../selectors/maplayout';
-import { widgetBuilderSelector } from '../selectors/controls';
-import { dependenciesSelector, availableDependenciesSelector } from '../selectors/widgets';
 import { toggleConnection } from '../actions/widgets';
+import DockPanel from '../components/misc/panels/DockPanel';
+import epics from '../epics/widgetsbuilder';
+import { widgetBuilderSelector } from '../selectors/controls';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import { availableDependenciesSelector, dependenciesSelector } from '../selectors/widgets';
+import WidgetTypeBuilder from './widgetbuilder/WidgetTypeBuilder';
 import withMapExitButton from './widgetbuilder/enhancers/withMapExitButton';
+
 const Builder = compose(
     connect(
         createSelector(
@@ -27,7 +30,7 @@ const Builder = compose(
             (dependencies, availableDependenciesProps) => ({ dependencies, ...availableDependenciesProps }))
         , { toggleConnection }),
     withMapExitButton
-)(require('./widgetbuilder/WidgetTypeBuilder'));
+)(WidgetTypeBuilder);
 
 class SideBarComponent extends React.Component {
      static propTypes = {
@@ -111,5 +114,5 @@ const Plugin = connect(
 )(SideBarComponent);
 export default {
     WidgetsBuilderPlugin: Plugin,
-    epics: require('../epics/widgetsbuilder')
+    epics
 };

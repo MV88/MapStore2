@@ -6,37 +6,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
-
+import ContainerDimensions from 'react-container-dimensions';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import { compose, defaultProps, withProps, withPropsOnChange } from 'recompose';
-import { mapIdSelector } from '../selectors/map';
+import { createSelector } from 'reselect';
 
 import {
-    getVisibleFloatingWidgets,
-    dependenciesSelector,
-    getFloatingWidgetsLayout,
-    isTrayEnabled,
-} from '../selectors/widgets';
-
-import {
-    editWidget,
-    updateWidgetProperty,
-    deleteWidget,
     changeLayout,
+    deleteWidget,
+    editWidget,
     exportCSV,
     exportImage,
     toggleCollapse,
+    updateWidgetProperty,
 } from '../actions/widgets';
-
-import editOptions from './widgets/editOptions';
+import { heightProvider } from '../components/layout/enhancers/gridLayout';
+import WidgetsViewComp from '../components/widgets/view/WidgetsView';
+import epics from '../epics/widgets';
+import widgets from '../reducers/widgets';
+import { mapIdSelector } from '../selectors/map';
+import {
+    dependenciesSelector,
+    getFloatingWidgetsLayout,
+    getVisibleFloatingWidgets,
+    isTrayEnabled,
+} from '../selectors/widgets';
 import autoDisableWidgets from './widgets/autoDisableWidgets';
+import editOptions from './widgets/editOptions';
 
 const RIGHT_MARGIN = 70;
-import { heightProvider } from '../components/layout/enhancers/gridLayout';
-import ContainerDimensions from 'react-container-dimensions';
-import PropTypes from 'prop-types';
 const WidgetsView =
 compose(
     connect(
@@ -121,7 +121,7 @@ compose(
             })
         )
     )
-)(require('../components/widgets/view/WidgetsView'));
+)(WidgetsViewComp);
 
 
 class Widgets extends React.Component {
@@ -158,7 +158,7 @@ const WidgetsPlugin = autoDisableWidgets(Widgets);
 export default {
     WidgetsPlugin,
     reducers: {
-        widgets: require('../reducers/widgets')
+        widgets
     },
-    epics: require('../epics/widgets')
+    epics
 };

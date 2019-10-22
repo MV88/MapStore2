@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,13 +5,17 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import I18N from '../../../components/I18N/I18N';
-import { Label, FormControl, FormGroup } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { FormControl, FormGroup, Label } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { updateMapMetadata, deleteMap, createThumbnail } from '../../../actions/maps';
-const MapGrid = connect(() => ({}), {updateMapMetadata, deleteMap, createThumbnail})(require('../../../components/maps/MapGrid'));
+
+import { createThumbnail, deleteMap, updateMapMetadata } from '../../../actions/maps';
+import I18N from '../../../components/I18N/I18N';
+import MapGridComp from '../../../components/maps/MapGrid';
+
+const MapGrid = connect(() => ({}), {updateMapMetadata, deleteMap, createThumbnail})(MapGridComp);
 
 class MapsList extends React.Component {
     static propTypes = {

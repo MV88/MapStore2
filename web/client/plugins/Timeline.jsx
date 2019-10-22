@@ -6,47 +6,49 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { head, isString } from 'lodash';
+import moment from 'moment';
+import assign from 'object-assign';
 import React from 'react';
-
+import { Button as ButtonRB, Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import {
+    branch,
+    compose,
+    defaultProps,
+    renderNothing,
+    withProps,
+    withState,
+    withStateHandlers,
+} from 'recompose';
 import { createSelector } from 'reselect';
-import Timeline from './timeline/Timeline';
-import InlineDateTimeSelector from '../components/time/InlineDateTimeSelector';
-import Toolbar from '../components/misc/toolbar/Toolbar';
-import { offsetEnabledSelector, currentTimeSelector } from '../selectors/dimension';
 
+import { setCurrentOffset } from '../actions/dimension';
+import { selectPlaybackRange } from '../actions/playback';
+import { enableOffset, onRangeChanged, selectTime, setMapSync } from '../actions/timeline';
+import Message from '../components/I18N/Message';
+import tooltip from '../components/misc/enhancers/tooltip';
+import withResizeSpy from '../components/misc/enhancers/withResizeSpy';
+import Toolbar from '../components/misc/toolbar/Toolbar';
+import InlineDateTimeSelector from '../components/time/InlineDateTimeSelector';
+import epics from '../epics/timeline';
+import dimension from '../reducers/dimension';
+import timeline from '../reducers/timeline';
+import { currentTimeSelector, offsetEnabledSelector } from '../selectors/dimension';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import { playbackRangeSelector, statusSelector } from '../selectors/playback';
 import {
     currentTimeRangeSelector,
+    isMapSync,
     isVisible,
     rangeSelector,
     timelineLayersSelector,
-    isMapSync,
 } from '../selectors/timeline';
+import Timeline from './timeline/Timeline';
+import TimelineToggle from './timeline/TimelineToggle';
 
-import { mapLayoutValuesSelector } from '../selectors/maplayout';
-
-import {
-    withState,
-    compose,
-    branch,
-    renderNothing,
-    withStateHandlers,
-    withProps,
-    defaultProps,
-} from 'recompose';
-
-import withResizeSpy from '../components/misc/enhancers/withResizeSpy';
-import { selectTime, enableOffset, onRangeChanged, setMapSync } from '../actions/timeline';
-import { setCurrentOffset } from '../actions/dimension';
-import Message from '../components/I18N/Message';
-import { selectPlaybackRange } from '../actions/playback';
-import { playbackRangeSelector, statusSelector } from '../selectors/playback';
-import { Button as ButtonRB, Glyphicon } from 'react-bootstrap';
-import tooltip from '../components/misc/enhancers/tooltip';
 const Button = tooltip(ButtonRB);
 
-import { head, isString } from 'lodash';
-import moment from 'moment';
 const isPercent = (val) => isString(val) && val.indexOf("%") !== -1;
 const getPercent = (val) => parseInt(val, 10) / 100;
 const isValidOffset = (start, end) => moment(end).diff(start) > 0;
@@ -307,8 +309,6 @@ const TimelinePlugin = compose(
     }
 );
 
-import assign from 'object-assign';
-import TimelineToggle from './timeline/TimelineToggle';
 export default {
     TimelinePlugin: assign(TimelinePlugin, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
@@ -318,8 +318,8 @@ export default {
         }
     }),
     reducers: {
-        dimension: require('../reducers/dimension'),
-        timeline: require('../reducers/timeline')
+        dimension,
+        timeline
     },
-    epics: require('../epics/timeline')
+    epics
 };

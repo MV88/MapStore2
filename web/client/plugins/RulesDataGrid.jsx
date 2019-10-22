@@ -6,16 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
-
+import ContainerDimensions from 'react-container-dimensions';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { createSelector } from 'reselect';
-import { selectedRules, filterSelector, isEditorActive, triggerLoadSel } from '../selectors/rulesmanager';
-import ContainerDimensions from 'react-container-dimensions';
-import PropTypes from 'prop-types';
-import { rulesSelected, setLoading, setFilter } from '../actions/rulesmanager';
+
 import { error } from '../actions/notifications';
+import { rulesSelected, setFilter, setLoading } from '../actions/rulesmanager';
+import RulesGridComp from '../components/manager/rulesmanager/rulesgrid/RulesGrid';
+import rulesgrid from '../components/manager/rulesmanager/rulesgrid/enhancers/rulesgrid';
+import rulesmanager from '../reducers/rulesmanager';
+import { filterSelector, isEditorActive, selectedRules, triggerLoadSel } from '../selectors/rulesmanager';
 
 const ruelsSelector = createSelector([selectedRules, filterSelector, triggerLoadSel], (rules, filters, triggerLoad) => {
     return {
@@ -26,9 +29,9 @@ const ruelsSelector = createSelector([selectedRules, filterSelector, triggerLoad
 });
 const rulesGridEnhancer = compose(
     connect( ruelsSelector, {onSelect: rulesSelected, onLoadError: error, setLoading, setFilters: setFilter}),
-    require('../components/manager/rulesmanager/rulesgrid/enhancers/rulesgrid'));
+    rulesgrid);
 
-const RulesGrid = rulesGridEnhancer(require('../components/manager/rulesmanager/rulesgrid/RulesGrid'));
+const RulesGrid = rulesGridEnhancer(RulesGridComp);
 
 /**
   * @name RulesDataGrid
@@ -73,5 +76,5 @@ const RulesDataGridPlugin = connect(
 )(RulesDataGrid);
 export default {
     RulesDataGridPlugin,
-    reducers: {rulesmanager: require('../reducers/rulesmanager')}
+    reducers: {rulesmanager}
 };

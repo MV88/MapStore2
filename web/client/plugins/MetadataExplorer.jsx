@@ -6,67 +6,70 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-import React from 'react';
+import './metadataexplorer/css/style.css';
 
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import assign from 'object-assign';
-import { createSelector } from 'reselect';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { Glyphicon, Panel } from 'react-bootstrap';
 import ContainerDimensions from 'react-container-dimensions';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 
 import {
-    addService,
-    deleteService,
-    textSearch,
-    changeCatalogFormat,
-    changeCatalogMode,
-    changeUrl,
-    changeTitle,
-    changeAutoload,
-    changeType,
-    changeSelectedService,
     addLayer,
     addLayerError,
-    resetCatalog,
-    focusServicesList,
-    changeText,
+    addService,
+    changeAutoload,
+    changeCatalogFormat,
+    changeCatalogMode,
     changeMetadataTemplate,
+    changeSelectedService,
+    changeText,
+    changeTitle,
+    changeType,
+    changeUrl,
+    deleteService,
+    focusServicesList,
+    resetCatalog,
+    textSearch,
     toggleAdvancedSettings,
-    toggleThumbnail,
     toggleTemplate,
+    toggleThumbnail,
 } from '../actions/catalog';
-
+import { setControlProperties, setControlProperty } from '../actions/controls';
 import { zoomToExtent } from '../actions/map';
-import { currentLocaleSelector, currentMessagesSelector } from '../selectors/locale';
-import { setControlProperty, setControlProperties } from '../actions/controls';
-
+import csw from '../api/CSW';
+import wms from '../api/WMS';
+import wmts from '../api/WMTS';
+import Message from '../components/I18N/Message';
+import CatalogComp from '../components/catalog/Catalog';
+import DockPanel from '../components/misc/panels/DockPanel';
+import epics from "../epics/catalog";
+import catalog from '../reducers/catalog'
 import {
-    resultSelector,
-    serviceListOpenSelector,
+    activeSelector,
+    authkeyParamNameSelector,
+    formatsSelector,
+    groupSelector,
+    layerErrorSelector,
+    loadingErrorSelector,
+    loadingSelector,
+    modeSelector,
     newServiceSelector,
     newServiceTypeSelector,
-    selectedServiceTypeSelector,
-    searchOptionsSelector,
-    servicesSelector,
-    formatsSelector,
-    loadingErrorSelector,
-    selectedServiceSelector,
-    modeSelector,
-    layerErrorSelector,
-    activeSelector,
-    savingSelector,
-    authkeyParamNameSelector,
-    searchTextSelector,
-    groupSelector,
     pageSizeSelector,
-    loadingSelector,
+    resultSelector,
+    savingSelector,
+    searchOptionsSelector,
+    searchTextSelector,
+    selectedServiceSelector,
+    selectedServiceTypeSelector,
+    serviceListOpenSelector,
+    servicesSelector,
 } from '../selectors/catalog';
-
+import { currentLocaleSelector, currentMessagesSelector } from '../selectors/locale';
 import { mapLayoutValuesSelector } from '../selectors/maplayout';
-import Message from '../components/I18N/Message';
-import DockPanel from '../components/misc/panels/DockPanel';
-import './metadataexplorer/css/style.css';
 import CatalogUtils from '../utils/CatalogUtils';
 
 const catalogSelector = createSelector([
@@ -107,9 +110,8 @@ const Catalog = connect(catalogSelector, {
     // add layer action to pass to the layers
     onZoomToExtent: zoomToExtent,
     onFocusServicesList: focusServicesList
-})(require('../components/catalog/Catalog'));
+})(CatalogComp);
 
-// const Dialog = require('../components/misc/Dialog');
 
 class MetadataExplorerComponent extends React.Component {
     static propTypes = {
@@ -239,9 +241,6 @@ const MetadataExplorerPlugin = connect(metadataExplorerSelector, {
     onError: addLayerError
 })(MetadataExplorerComponent);
 
-import csw from '../api/CSW';
-import wms from '../api/WMS';
-import wmts from '../api/WMTS';
 
 const API = {
     csw,
@@ -286,6 +285,6 @@ export default {
             doNotHide: true
         }
     }),
-    reducers: {catalog: require('../reducers/catalog')},
-    epics: require("../epics/catalog").default(API)
+    reducers: {catalog},
+    epics: epics(API)
 };

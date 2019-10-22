@@ -6,22 +6,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
 import { connect } from 'react-redux';
+import { branch, compose, renderComponent, withHandlers, withProps, withState } from 'recompose';
+
 import { onEditorChange } from '../../actions/widgets';
+import BorderLayout from '../../components/layout/BorderLayout';
+import MapWizardComp from '../../components/widgets/builder/wizard/MapWizard';
+import ToolbarComp from '../../components/widgets/builder/wizard/map/Toolbar';
+import handleNodeSelection from '../../components/widgets/builder/wizard/map/enhancers/handleNodeSelection';
+import BuilderHeader from './BuilderHeader';
+import MapLayerSelectorComp from './MapLayerSelector';
+import MapSelector from './MapSelector';
 import { wizardSelector, wizardStateToProps } from './commons';
+import mapBuilderConnectMask from './enhancers/connection/mapBuilderConnectMask';
+import handleNodeEditing from './enhancers/handleNodeEditing';
 import layerSelector from './enhancers/layerSelector';
 import manageLayers from './enhancers/manageLayers';
 import mapToolbar from './enhancers/mapToolbar';
-import handleNodeEditing from './enhancers/handleNodeEditing';
-import mapBuilderConnectMask from './enhancers/connection/mapBuilderConnectMask';
-import BorderLayout from '../../components/layout/BorderLayout';
-import BuilderHeader from './BuilderHeader';
-import { compose, branch, renderComponent, withState, withHandlers, withProps } from 'recompose';
-import handleNodeSelection from '../../components/widgets/builder/wizard/map/enhancers/handleNodeSelection';
 
-const Toolbar = mapToolbar(require('../../components/widgets/builder/wizard/map/Toolbar'));
-import MapSelector from './MapSelector';
+const Toolbar = mapToolbar(ToolbarComp);
 
 
 /*
@@ -50,7 +53,7 @@ const chooseMapEnhancer = compose(
                     }
                 }),
                 layerSelector,
-            )(require('./MapLayerSelector'))
+            )(MapLayerSelectorComp)
         )
     ),
     // add button to back to map selection
@@ -70,7 +73,7 @@ const Builder = connect(
         onChange: onEditorChange
     },
     wizardStateToProps,
-)(require('../../components/widgets/builder/wizard/MapWizard'));
+)(MapWizardComp);
 
 const mapBuilder = compose(
     chooseMapEnhancer,

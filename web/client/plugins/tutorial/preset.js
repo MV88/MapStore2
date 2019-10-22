@@ -6,11 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import cesium_mobile_tutorial from './preset/cesium_mobile_tutorial';
+import cesium_tutorial from './preset/cesium_tutorial';
+import dashboard_tutorial from './preset/dashboard_tutorial';
+import default_mobile_tutorial from './preset/default_mobile_tutorial';
+import default_tutorial from './preset/default_tutorial';
+import home_tutorial from './preset/home_tutorial';
+
 export default {
-    default_tutorial: require('./preset/default_tutorial'),
-    default_mobile_tutorial: require('./preset/default_mobile_tutorial'),
-    home_tutorial: require('./preset/home_tutorial'),
-    cesium_tutorial: require('./preset/cesium_tutorial'),
-    cesium_mobile_tutorial: require('./preset/cesium_mobile_tutorial'),
-    dashboard_tutorial: require('./preset/dashboard_tutorial')
+    default_tutorial,
+    default_mobile_tutorial,
+    home_tutorial,
+    cesium_tutorial,
+    cesium_mobile_tutorial,
+    dashboard_tutorial
 };

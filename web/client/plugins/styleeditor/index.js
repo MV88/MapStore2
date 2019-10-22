@@ -7,54 +7,53 @@
  */
 
 import React from 'react';
-
 import { connect } from 'react-redux';
+import { branch, compose, defaultProps, lifecycle, withState } from 'recompose';
 import { createSelector } from 'reselect';
-import { compose, withState, defaultProps, branch, lifecycle } from 'recompose';
-import inlineWidgets from './inlineWidgets';
-
-import {
-    selectStyleTemplate,
-    updateStatus,
-    addStyle,
-    createStyle,
-    updateStyleCode,
-    editStyleCode,
-    deleteStyle,
-    setDefaultStyle,
-} from '../../actions/styleeditor';
 
 import { updateOptionsByOwner } from '../../actions/additionallayers';
-import { updateSettingsParams } from '../../actions/layers';
 import { getLayerCapabilities } from '../../actions/layerCapabilities';
-import BorderLayout from '../../components/layout/BorderLayout';
-import Editor from '../../components/styleeditor/Editor';
-import withMask from '../../components/misc/enhancers/withMask';
-import loadingState from '../../components/misc/enhancers/loadingState';
-import emptyState from '../../components/misc/enhancers/emptyState';
-import Loader from '../../components/misc/Loader';
-import Message from '../../components/I18N/Message';
-
+import { updateSettingsParams } from '../../actions/layers';
 import {
-    templateIdSelector,
-    statusStyleSelector,
-    codeStyleSelector,
-    geometryTypeSelector,
-    formatStyleSelector,
-    loadingStyleSelector,
-    errorStyleSelector,
-    layerPropertiesSelector,
-    initialCodeStyleSelector,
+    addStyle,
+    createStyle,
+    deleteStyle,
+    editStyleCode,
+    selectStyleTemplate,
+    setDefaultStyle,
+    updateStatus,
+    updateStyleCode,
+} from '../../actions/styleeditor';
+import Message from '../../components/I18N/Message';
+import BorderLayout from '../../components/layout/BorderLayout';
+import Loader from '../../components/misc/Loader';
+import emptyState from '../../components/misc/enhancers/emptyState';
+import loadingState from '../../components/misc/enhancers/loadingState';
+import withMask from '../../components/misc/enhancers/withMask';
+import Editor from '../../components/styleeditor/Editor';
+import StyleListComp from '../../components/styleeditor/StyleList';
+import StyleTemplatesComp from '../../components/styleeditor/StyleTemplates';
+import StyleToolbarComp from '../../components/styleeditor/StyleToolbar';
+import {
     addStyleSelector,
-    selectedStyleSelector,
     canEditStyleSelector,
+    codeStyleSelector,
+    errorStyleSelector,
+    formatStyleSelector,
+    geometryTypeSelector,
     getAllStyles,
-    styleServiceSelector,
     getUpdatedLayer,
+    initialCodeStyleSelector,
+    layerPropertiesSelector,
+    loadingStyleSelector,
     selectedStyleFormatSelector,
+    selectedStyleSelector,
+    statusStyleSelector,
+    styleServiceSelector,
+    templateIdSelector,
 } from '../../selectors/styleeditor';
-
-import { getEditorMode, STYLE_OWNER_NAME, getStyleTemplates } from '../../utils/StyleEditorUtils';
+import { STYLE_OWNER_NAME, getEditorMode, getStyleTemplates } from '../../utils/StyleEditorUtils';
+import inlineWidgets from './inlineWidgets';
 
 const stylesTemplates = getStyleTemplates();
 
@@ -140,7 +139,7 @@ const StyleTemplates = compose(
     loadingEnhancers(({geometryType}) => !geometryType),
     withState('filterText', 'onFilter', ''),
     withState('styleSettings', 'onUpdate', {})
-)(require('../../components/styleeditor/StyleTemplates'));
+)(StyleTemplatesComp);
 
 const StyleList = compose(
     connect(
@@ -175,7 +174,7 @@ const StyleList = compose(
             }
         }
     )
-)(require('../../components/styleeditor/StyleList'));
+)(StyleListComp);
 
 const StyleToolbar = compose(
     withState('showModal', 'onShowModal'),
@@ -217,7 +216,7 @@ const StyleToolbar = compose(
             onSetDefault: setDefaultStyle
         }
     )
-)(require('../../components/styleeditor/StyleToolbar'));
+)(StyleToolbarComp);
 
 const ReadOnlyStyleList = compose(
     connect(createSelector(

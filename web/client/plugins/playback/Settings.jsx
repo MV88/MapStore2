@@ -6,15 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { connect } from 'react-redux';
-
-import { createSelector } from 'reselect';
 import moment from 'moment';
-import { compose, withProps, withHandlers } from 'recompose';
-import { playbackSettingsSelector, playbackRangeSelector } from '../../selectors/playback';
-import { selectedLayerSelector, rangeSelector, selectedLayerDataRangeSelector } from '../../selectors/timeline';
-import { selectPlaybackRange, changeSetting, toggleAnimationMode } from '../../actions/playback';
+import { connect } from 'react-redux';
+import { compose, withHandlers, withProps } from 'recompose';
+import { createSelector } from 'reselect';
+
+import { changeSetting, selectPlaybackRange, toggleAnimationMode } from '../../actions/playback';
 import { onRangeChanged } from '../../actions/timeline';
+import Settings from '../../components/playback/Settings';
+import { playbackRangeSelector, playbackSettingsSelector } from '../../selectors/playback';
+import { rangeSelector, selectedLayerDataRangeSelector, selectedLayerSelector } from '../../selectors/timeline';
 
 /**
  * Playback settings component connected to the state
@@ -91,4 +92,4 @@ export default compose(
         })
     )
 
-)(require("../../components/playback/Settings"));
+)(Settings);

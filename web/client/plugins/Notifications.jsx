@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { hide, dispatchAction } from '../actions/notifications';
-
-import { clearNotificationOnLocationChange } from '../epics/notifications';
 import { connect } from 'react-redux';
 
+import { dispatchAction, hide } from '../actions/notifications';
+import NotificationContainer from '../components/notifications/NotificationContainer';
+import { clearNotificationOnLocationChange } from '../epics/notifications';
+import notifications from '../reducers/notifications';
 
 /**
   * Notifications Plugin. Provides support to show notifications
@@ -28,9 +29,9 @@ export default {
             onRemove: hide,
             onDispatch: dispatchAction
         }
-    )(require('../components/notifications/NotificationContainer')),
+    )(NotificationContainer),
     reducers: {
-        notifications: require('../reducers/notifications')
+        notifications
     },
     epics: {
         clearNotificationOnLocationChange

@@ -6,28 +6,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import assign from 'object-assign';
 import React from 'react';
-
+import { Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { createSelector } from 'reselect';
 
 import {
-    initTutorial,
-    startTutorial,
-    updateTutorial,
-    disableTutorial,
-    resetTutorial,
     closeTutorial,
+    disableTutorial,
+    initTutorial,
+    resetTutorial,
+    startTutorial,
     toggleTutorial,
+    updateTutorial,
 } from '../actions/tutorial';
-
-import presetList from './tutorial/preset';
-import assign from 'object-assign';
 import I18N from '../components/I18N/I18N';
-import { Glyphicon } from 'react-bootstrap';
-import { createSelector } from 'reselect';
+import TutorialComp from '../components/tutorial/Tutorial';
+import { closeTutorialEpic, getActionsFromStepEpic, switchTutorialEpic } from '../epics/tutorial';
+import tutorial from '../reducers/tutorial';
 import { tutorialSelector } from '../selectors/tutorial';
-import { closeTutorialEpic, switchTutorialEpic, getActionsFromStepEpic } from '../epics/tutorial';
+import presetList from './tutorial/preset';
 
 /**
  * Tutorial plugin. Enables the steps of tutorial.
@@ -158,7 +158,7 @@ const Tutorial = connect(tutorialPluginSelector, (dispatch) => {
         ...presetList,
         ...ownProps.presetList
     }
-}))(require('../components/tutorial/Tutorial'));
+}))(TutorialComp);
 
 export default {
     TutorialPlugin: assign(Tutorial, {
@@ -173,7 +173,7 @@ export default {
         }
     }),
     reducers: {
-        tutorial: require('../reducers/tutorial')
+        tutorial
     },
     epics: {
         closeTutorialEpic,

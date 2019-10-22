@@ -6,23 +6,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
 import { connect } from 'react-redux';
+import { branch, compose } from 'recompose';
 import { createSelector } from 'reselect';
+
+import { HTML, Message } from '../../components/I18N/I18N';
 import BorderLayout from '../../components/layout/BorderLayout';
-import { selectedCatalogSelector } from '../../selectors/catalog';
 import Toolbar from '../../components/misc/toolbar/Toolbar';
-import BuilderHeader from './BuilderHeader';
 import InfoPopover from '../../components/widgets/widget/InfoPopover';
-import { Message, HTML } from '../../components/I18N/I18N';
-import { compose, branch } from 'recompose';
+import { selectedCatalogSelector } from '../../selectors/catalog';
+import BuilderHeader from './BuilderHeader';
+import CatalogComp from './Catalog';
 
 const Catalog = compose(
     branch(
         ({catalog} = {}) => !catalog,
         connect(createSelector(selectedCatalogSelector, catalog => ({catalog})))
     ),
-)(require('./Catalog'));
+)(CatalogComp);
 /**
  * Builder page that allows layer's selection
  */

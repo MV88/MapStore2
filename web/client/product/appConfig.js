@@ -6,47 +6,54 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import Dashboard from './pages/Dashboard';
+import GeoStory from './pages/GeoStory';
+import Manager from './pages/Manager';
+import MapViewer from './pages/MapViewer';
+import Maps from './pages/Maps';
+import RulesManager from './pages/RulesManager';
+
 export default {
     pages: [{
         name: "home",
         path: "/",
-        component: require('./pages/Maps')
+        component: Maps
     }, {
         name: "maps",
         path: "/maps",
-        component: require('./pages/Maps')
+        component: Maps
     }, {
         name: "mapviewer",
         path: "/viewer/:mapType/:mapId",
-        component: require('./pages/MapViewer')
+        component: MapViewer
     }, {
         name: "mapviewer",
         path: "/viewer/:mapId",
-        component: require('./pages/MapViewer')
+        component: MapViewer
     }, {
         name: "manager",
         path: "/manager",
-        component: require('./pages/Manager')
+        component: Manager
     }, {
         name: "manager",
         path: "/manager/:tool",
-        component: require('./pages/Manager')
+        component: Manager
     }, {
         name: "dashboard",
         path: "/dashboard",
-        component: require('./pages/Dashboard')
+        component: Dashboard
     }, {
         name: "dashboard",
         path: "/dashboard/:did",
-        component: require('./pages/Dashboard')
+        component: Dashboard
     }, {
         name: "rulesmanager",
         path: "/rules-manager",
-        component: require('./pages/RulesManager')
+        component: RulesManager
     }, {
         name: "geostory",
         path: "/geostory/:gid",
-        component: require('./pages/GeoStory').default
+        component: GeoStory
     }],
     initialState: {
         defaultState: {
