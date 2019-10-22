@@ -6,41 +6,60 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {connect, Provider} from 'react-redux';
+
+import ConfigUtils from '../../utils/ConfigUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
+import ThemeUtils from '../../utils/ThemeUtils';
+
+import {changeBrowserProperties} from '../../actions/browser';
+import {loadMapConfig} from '../../actions/config';
+import {loadLocale} from '../../actions/locale';
+import {loadPrintCapabilities} from '../../actions/print';
+import {selectTheme} from '../../actions/theme';
+import {changeMapType} from '../../actions/maptype';
+import PluginsContainerComp from '../../components/plugins/PluginsContainer';
+import ThemeSwitcherComp from '../../components/theme/ThemeSwitcher';
+import Template from '../../components/data/template/jsx/Template';
+import themes from '../../themes';
+import ThemeComp from '../../components/theme/Theme';
+import {FormControl, FormGroup} from 'react-bootstrap';
+import SaveAndLoad from './components/SaveAndLoad';
+import Debug from '../../components/development/Debug';
+import assign from 'object-assign';
+import codeSample from "raw-loader!./sample.js.raw";
+import themeSample from "raw-loader!./sample.less.raw";
+import {savePluginConfig, compileError, resetError} from './actions/config';
+import storeCreator from './store';
+import('./assets/css/plugins.css');
+
+import Babel from 'babel-standalone';
+import {plugins} from './plugins';
+import LocalizedComp from '../../components/I18N/Localized';
+import PluginConfigurator from './components/PluginConfigurator';
+import PluginCreatorComp from './components/PluginCreator';
+import ThemeCreatorComp from './components/ThemeCreator';
+
 const startApp = () => {
-    const React = require('react');
-    const ReactDOM = require('react-dom');
-    const {connect} = require('react-redux');
-
-    const ConfigUtils = require('../../utils/ConfigUtils');
-    const LocaleUtils = require('../../utils/LocaleUtils');
-    const PluginsUtils = require('../../utils/PluginsUtils');
-    const ThemeUtils = require('../../utils/ThemeUtils');
-
-    const {changeBrowserProperties} = require('../../actions/browser');
-    const {loadMapConfig} = require('../../actions/config');
-    const {loadLocale} = require('../../actions/locale');
-    const {loadPrintCapabilities} = require('../../actions/print');
-    const {selectTheme} = require('../../actions/theme');
-    const {changeMapType} = require('../../actions/maptype');
     const PluginsContainer = connect((state) => ({
         pluginsState: state && state.controls || {}
-    }))(require('../../components/plugins/PluginsContainer'));
+    }))(PluginsContainerComp);
 
     const ThemeSwitcher = connect((state) => ({
         selectedTheme: state.theme && state.theme.selectedTheme || 'default',
-        themes: require('../../themes')
+        themes
     }), {
         onThemeSelected: selectTheme
-    })(require('../../components/theme/ThemeSwitcher'));
+    })(ThemeSwitcherComp);
 
     const Theme = connect((state) => ({
         theme: state.theme && state.theme.selectedTheme && state.theme.selectedTheme.id || 'default'
-    }))(require('../../components/theme/Theme'));
-
-    const {plugins} = require('./plugins');
+    }))(ThemeComp);
 
     let userPlugin;
-    const Template = require('../../components/data/template/jsx/Template');
 
     let pluginsCfg = {
         standard: ['Map', 'Toolbar']
@@ -48,18 +67,6 @@ const startApp = () => {
 
     let customStyle = null;
     let userCfg = {};
-
-    const {Provider} = require('react-redux');
-
-    const {FormControl, FormGroup} = require('react-bootstrap');
-
-    const SaveAndLoad = require('./components/SaveAndLoad');
-
-    const Debug = require('../../components/development/Debug');
-
-    const assign = require('object-assign');
-    const codeSample = require("raw-loader!./sample.js.raw");
-    const themeSample = require("raw-loader!./sample.less.raw");
 
     let customReducers;
     const customReducer = (state = {}, action) => {
@@ -72,22 +79,13 @@ const startApp = () => {
         }
         return state;
     };
-
-    const store = require('./store')(plugins, customReducer);
-
-    const {savePluginConfig, compileError, resetError} = require('./actions/config');
-
-    require('./assets/css/plugins.css');
-
-    const Babel = require('babel-standalone');
-
+    const store = storeCreator(plugins, customReducer);
     let mapType = 'leaflet';
-
     const Localized = connect((state) => ({
         messages: state.locale && state.locale.messages,
         locale: state.locale && state.locale.current,
         loadingError: state.locale && state.locale.localeError
-    }))(require('../../components/I18N/Localized'));
+    }))(LocalizedComp);
 
     const togglePlugin = (pluginName, callback) => {
         pluginsCfg.standard = pluginsCfg.standard.indexOf(pluginName) !== -1 ?
@@ -157,15 +155,13 @@ const startApp = () => {
         });
     };
 
-    const PluginConfigurator = require('./components/PluginConfigurator');
-
     const PluginCreator = connect((state) => ({
         error: state.pluginsConfig && state.pluginsConfig.error
-    }))(require('./components/PluginCreator'));
+    }))(PluginCreatorComp);
 
     const ThemeCreator = connect((state) => ({
         error: state.pluginsConfig && state.pluginsConfig.error
-    }))(require('./components/ThemeCreator'));
+    }))(ThemeCreatorComp);
 
     const renderPlugins = (callback) => {
         return Object.keys(plugins).map((plugin) => {

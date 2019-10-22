@@ -6,7 +6,10 @@
 * LICENSE file in the root directory of this source tree.
 */
 
+import LMap from '../../../components/map/cesium/Map';
+import Layer from '../../../components/map/cesium/Layer';
+
 export default {
-    LMap: require('../../../components/map/cesium/Map'),
-    Layer: require('../../../components/map/cesium/Layer')
+    LMap,
+    Layer
 };

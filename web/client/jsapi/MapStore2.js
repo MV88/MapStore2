@@ -21,7 +21,12 @@ import assign from 'object-assign';
 import { partialRight, merge } from 'lodash';
 import defaultConfig from '../config.json';
 import localConfig from '../localConfig.json';
-
+import embedded from '../containers/Embedded';
+import {loadVersion} from '../actions/version';
+import {versionSelector} from '../selectors/version';
+import {loadAfterThemeSelector} from '../selectors/config';
+import StandardContainerComp from '../components/app/StandardContainer';
+import StandardStoreComp from '../stores/StandardStore';
 const defaultPlugins = {
     "mobile": localConfig.plugins.embedded,
     "desktop": localConfig.plugins.embedded
@@ -157,13 +162,9 @@ const MapStore2 = {
      * });
      */
     create(container, opts, pluginsDef, component) {
-        const embedded = require('../containers/Embedded');
         const options = merge({}, this.defaultOptions || {}, opts);
         const {initialState, storeOpts} = options;
 
-        const {loadVersion} = require('../actions/version');
-        const {versionSelector} = require('../selectors/version');
-        const {loadAfterThemeSelector} = require('../selectors/config');
 
         const StandardContainer = connect((state) => ({
             locale: state.locale || {},
@@ -175,10 +176,10 @@ const MapStore2 = {
             },
             version: versionSelector(state),
             loadAfterTheme: loadAfterThemeSelector(state)
-        }))(require('../components/app/StandardContainer'));
+        }))(StandardContainerComp);
         const actionTrigger = generateActionTrigger(options.startAction || "CHANGE_MAP_VIEW");
         triggerAction = actionTrigger.trigger;
-        const appStore = require('../stores/StandardStore').bind(null, initialState || {}, {
+        const appStore = StandardStoreComp.bind(null, initialState || {}, {
             version
         }, {
             jsAPIEpic: actionTrigger.epic,

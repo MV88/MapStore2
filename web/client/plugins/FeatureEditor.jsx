@@ -14,17 +14,19 @@ import { get, pick } from 'lodash';
 import { compose, lifecycle } from 'recompose';
 import Grid from '../components/data/featuregrid/FeatureGrid';
 import { paginationInfo, describeSelector, wfsURLSelector, typeNameSelector } from '../selectors/query';
-
+import dock from 'react-dock';
 import {
     modeSelector,
     changesSelector,
     newFeaturesSelector,
     hasChangesSelector,
     selectedFeaturesSelector,
-    getDockSize,
+    getDockSize
 } from '../selectors/featuregrid';
 
 import { toChangesMap } from '../utils/FeatureGridUtils';
+import epics from '../epics/featuregrid';
+import featuregrid from '../reducers/featuregrid';
 
 import {
     getPanels,
@@ -32,7 +34,7 @@ import {
     getFooter,
     getDialogs,
     getEmptyRowsView,
-    getFilterRenderers,
+    getFilterRenderers
 } from './featuregrid/panels/index';
 
 import BorderLayout from '../components/layout/BorderLayout';
@@ -50,7 +52,7 @@ const Dock = connect(createSelector(
         dockStyle
     })
 )
-)(require('react-dock').default);
+)(dock);
 /**
   * @name FeatureEditor
   * @memberof plugins
@@ -263,8 +265,8 @@ const EditorPlugin = compose(
 
 export default {
     FeatureEditorPlugin: EditorPlugin,
-    epics: require('../epics/featuregrid'),
+    epics,
     reducers: {
-        featuregrid: require('../reducers/featuregrid')
+        featuregrid
     }
 };

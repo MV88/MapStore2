@@ -15,11 +15,12 @@ import ConfigUtils from '../../utils/ConfigUtils';
 import LocaleUtils from '../../utils/LocaleUtils';
 import PluginsUtils from '../../utils/PluginsUtils';
 import assign from 'object-assign';
+import {plugins, requires} from './plugins.js';
+import store from './stores/store';
+import App from './containers/App';
 
 function startApp() {
-    const {plugins, requires} = require('./plugins.js');
-    const store = require('./stores/store')(plugins);
-    const App = require('./containers/App');
+    store(plugins);
 
     store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
     ConfigUtils.loadConfiguration().then(() => {

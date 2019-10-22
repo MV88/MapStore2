@@ -21,11 +21,11 @@ import { connect } from 'react-redux';
 import CrsSelectorMenu from '../components/mapcontrols/crsselectormenu/CrsSelectorMenu';
 import { projectionDefsSelector, projectionSelector } from '../selectors/map';
 import { bottomPanelOpenSelector } from '../selectors/maplayout';
-import { printSelector, measureSelector } from '../selectors/controls';
+import { printSelector, measureSelector, queryPanelSelector } from '../selectors/controls';
 import { editingSelector } from '../selectors/annotations';
 import { crsInputValueSelector } from '../selectors/crsselector';
 import { currentBackgroundSelector } from '../selectors/layers';
-import { queryPanelSelector } from '../selectors/controls';
+import crsselector from '../reducers/crsselector';
 import { modeSelector } from '../selectors/featuregrid';
 import { error } from '../actions/notifications';
 import { userRoleSelector } from '../selectors/security';
@@ -188,6 +188,6 @@ export default {
             priority: 1
         }
     }),
-    reducers: {crsselector: require('../reducers/crsselector')},
+    reducers: {crsselector},
     epics: {}
 };

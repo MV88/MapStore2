@@ -16,15 +16,15 @@ import {
     layersSelector,
     backgroundControlsSelector,
     currentBackgroundSelector,
-    tempBackgroundSelector,
+    tempBackgroundSelector
 } from '../selectors/layers';
-
+import controlsReducers from '../reducers/controls';
+import BackgroundSelector from '../components/background/BackgroundSelector';
 import { mapTypeSelector } from '../selectors/maptype';
 import { invalidateUnsupportedLayer } from '../utils/LayersUtils';
-import { mapSelector } from '../selectors/map';
+import { mapSelector, projectionSelector} from '../selectors/map';
 import { mapLayoutValuesSelector } from '../selectors/maplayout';
 import { drawerEnabledControlSelector } from '../selectors/controls';
-import { projectionSelector } from '../selectors/map';
 import ROADMAP from './background/assets/img/ROADMAP.jpg';
 import TERRAIN from './background/assets/img/TERRAIN.jpg';
 import SATELLITE from './background/assets/img/SATELLITE.jpg';
@@ -136,11 +136,11 @@ const BackgroundSelectorPlugin = connect(backgroundSelector, {
         ...ownProps.thumbs
     }
 })
-)(require('../components/background/BackgroundSelector'));
+)(BackgroundSelector);
 
 export default {
     BackgroundSelectorPlugin,
     reducers: {
-        controls: require('../reducers/controls')
+        controls: controlsReducers
     }
 };

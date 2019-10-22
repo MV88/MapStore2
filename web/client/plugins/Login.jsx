@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /*
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -12,8 +10,10 @@ import React from 'react';
 
 import assign from 'object-assign';
 import { UserDetails, PasswordReset, UserMenu, Login, LoginNav } from './login/index';
+import PropTypes from 'prop-types';
 import './login/login.css';
-
+import security from '../reducers/security';
+import epics from '../epics/login';
 /**
   * Login Plugin. Allow to login/logout or show user info and reset password tools
   * @class Login
@@ -63,6 +63,6 @@ export default {
             priority: 1
         }
     }),
-    reducers: {security: require('../reducers/security')},
-    epics: require('../epics/login')
+    reducers: {security},
+    epics
 };

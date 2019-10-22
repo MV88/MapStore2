@@ -24,7 +24,7 @@ import { legendSizeSelector, legendExpandedSelector } from '../selectors/floatin
 import FloatingLegend from '../components/TOC/FloatingLegend';
 import { parseLayoutValue, getScales } from '../utils/MapUtils';
 import { getLocalizedProp } from '../utils/LocaleUtils';
-
+import floatinglegend from '../reducers/floatinglegend';
 /**
  * FloatingLegend plugin.
  * This plugin shows a list of layers with visibility and opacity controls.
@@ -126,6 +126,6 @@ export default {
         disablePluginIf: "{state('featuregridmode') === 'EDIT'}"
     }),
     reducers: {
-        floatinglegend: require('../reducers/floatinglegend')
+        floatinglegend
     }
 };

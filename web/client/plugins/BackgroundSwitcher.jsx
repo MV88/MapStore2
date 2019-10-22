@@ -14,12 +14,13 @@ import Message from './locale/Message';
 import { Glyphicon } from 'react-bootstrap';
 import assign from 'object-assign';
 import { changeLayerProperties } from '../actions/layers';
+import BackgroundSwitcher from '../components/TOC/background/BackgroundSwitcher';
 
 const BackgroundSwitcherPlugin = connect((state) => ({
     layers: state.layers && state.layers.flat && state.layers.flat.filter((layer) => layer.group === "background") || []
 }), {
     propertiesChangeHandler: changeLayerProperties
-})(require('../components/TOC/background/BackgroundSwitcher'));
+})(BackgroundSwitcher);
 
 import './background/background.css';
 /**

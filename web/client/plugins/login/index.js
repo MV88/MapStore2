@@ -11,6 +11,10 @@ import { connect } from '../../utils/PluginsUtils';
 import { login, loginFail, logoutWithReload, changePassword, resetError } from '../../actions/security';
 import { setControlProperty } from '../../actions/controls';
 import { Glyphicon } from 'react-bootstrap';
+import UserMenuComp from '../../components/security/UserMenu';
+import UserDetailsModalComp from '../../components/security/modals/UserDetailsModal';
+import PasswordResetModalComp from '../../components/security/modals/PasswordResetModal';
+import LoginModalComp from '../../components/security/modals/LoginModal';
 
 const closeLogin = () => {
     return (dispatch) => {
@@ -26,14 +30,14 @@ const UserMenu = connect((state) => ({
     onShowAccountInfo: setControlProperty.bind(null, "AccountInfo", "enabled", true, true),
     onShowChangePassword: setControlProperty.bind(null, "ResetPassword", "enabled", true, true),
     onLogout: logoutWithReload
-})(require('../../components/security/UserMenu'));
+})(UserMenuComp);
 
 const UserDetails = connect((state) => ({
     user: state.security && state.security.user,
     show: state.controls.AccountInfo && state.controls.AccountInfo.enabled}
 ), {
     onClose: setControlProperty.bind(null, "AccountInfo", "enabled", false, false)
-})(require('../../components/security/modals/UserDetailsModal'));
+})(UserDetailsModalComp);
 
 const PasswordReset = connect((state) => ({
     user: state.security && state.security.user,
@@ -43,7 +47,7 @@ const PasswordReset = connect((state) => ({
 }), {
     onPasswordChange: (user, pass) => { return changePassword(user, pass); },
     onClose: setControlProperty.bind(null, "ResetPassword", "enabled", false, false)
-})(require('../../components/security/modals/PasswordResetModal'));
+})(PasswordResetModalComp);
 
 const Login = connect((state) => ({
     show: state.controls.LoginForm && state.controls.LoginForm.enabled,
@@ -54,7 +58,7 @@ const Login = connect((state) => ({
     onClose: closeLogin,
     onSubmit: login,
     onError: loginFail
-})(require('../../components/security/modals/LoginModal'));
+})(LoginModalComp);
 
 const LoginNav = connect((state) => ({
     user: state.security && state.security.user,
@@ -68,7 +72,7 @@ const LoginNav = connect((state) => ({
     onShowAccountInfo: setControlProperty.bind(null, "AccountInfo", "enabled", true, true),
     onShowChangePassword: setControlProperty.bind(null, "ResetPassword", "enabled", true, true),
     onLogout: logoutWithReload
-})(require('../../components/security/UserMenu'));
+})(UserMenuComp);
 
 export default {
     UserDetails,

@@ -22,7 +22,8 @@ import { compose } from 'recompose';
 import DashboardGrid from './dashboard/DashboardsGrid';
 import PaginationToolbar from './dashboard/PaginationToolbar';
 import EmptyDashboardsView from './dashboard/EmptyDashboardsView';
-
+import dashboards from '../reducers/dashboards';
+import epics from '../epics/dashboards';
 const dashboardsCountSelector = createSelector(
     totalCountSelector,
     count => ({ count })
@@ -124,8 +125,8 @@ export default {
             priority: 1
         }
     }),
-    epics: require('../epics/dashboards'),
     reducers: {
-        dashboards: require('../reducers/dashboards')
-    }
+        dashboards
+    },
+    epics
 };

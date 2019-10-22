@@ -20,6 +20,18 @@ import ConfigUtils from '../utils/ConfigUtils';
 import { errorLoadingFont, setMapResolutions } from '../actions/map';
 import { isString } from 'lodash';
 let plugins;
+import { mapSelector, projectionDefsSelector } from '../selectors/map';
+import { mapTypeSelector, isOpenlayers } from '../selectors/maptype';
+import { layerSelectorWithMarkers } from '../selectors/layers';
+import { highlighedFeatures } from '../selectors/highlight';
+import { securityTokenSelector } from '../selectors/security';
+import pluginsIndex from './map/index';
+
+import draw from '../reducers/draw';
+import highlight from '../reducers/highlight';
+import maptype from '../reducers/maptype';
+import additionallayers from '../reducers/additionallayers';
+import epics from '../epics/map';
 /**
  * The Map plugin allows adding mapping library dependent functionality using support tools.
  * Some are already available for the supported mapping libraries (openlayers, leaflet, cesium), but it's possible to develop new ones.
@@ -63,7 +75,9 @@ let plugins;
  * To do that you need to:
  *  - develop a tool Component, in JSX (e.g. TestSupport), for each supported mapping library
  * ```
- * const React = require('react');
+ * import React from 'react';
+ * import MapPlugin from '../plugins/Map';
+ * import TestSupportLeaflet from '../components/map/leaflet/TestSupport';
  *    const TestSupport = React.createClass({
  *     propTypes: {
  *            label: PropTypes.string
@@ -79,12 +93,12 @@ let plugins;
  * ```
  *    export default {
  *        plugins: {
- *            MapPlugin: require('../plugins/Map'),
+ *            MapPlugin,
  *            ...
  *        },
  *        requires: {
  *            ...
- *            TestSupportLeaflet: require('../components/map/leaflet/TestSupport')
+ *            TestSupportLeaflet
  *        }
  *    };
  * ```
@@ -385,15 +399,10 @@ class MapPlugin extends React.Component {
         return !layer.useForElevation || this.props.mapType === 'cesium' || this.props.elevationEnabled;
     };
     updatePlugins = (props) => {
-        plugins = require('./map/index')(props.mapType, props.actions);
+        plugins = pluginsIndex(props.mapType, props.actions);
     };
 }
 
-import { mapSelector, projectionDefsSelector } from '../selectors/map';
-import { mapTypeSelector, isOpenlayers } from '../selectors/maptype';
-import { layerSelectorWithMarkers } from '../selectors/layers';
-import { highlighedFeatures } from '../selectors/highlight';
-import { securityTokenSelector } from '../selectors/security';
 
 const selector = createSelector(
     [
@@ -424,10 +433,10 @@ export default {
         onResolutionsChange: setMapResolutions
     })(MapPlugin),
     reducers: {
-        draw: require('../reducers/draw'),
-        highlight: require('../reducers/highlight'),
-        maptype: require('../reducers/maptype'),
-        additionallayers: require('../reducers/additionallayers')
+        draw,
+        highlight,
+        maptype,
+        additionallayers
     },
-    epics: require('../epics/map')
+    epics
 };

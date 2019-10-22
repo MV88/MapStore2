@@ -18,6 +18,7 @@ import { mapLayoutValuesSelector } from '../selectors/maplayout';
 import { currentMapDetailsTextSelector } from '../selectors/currentmap';
 import { openDetailsPanel, closeDetailsPanel } from '../actions/maps';
 import { get } from 'lodash';
+import DetailsPanel from '../components/details/DetailsPanel';
 
 /**
  * Details plugin used for fetching details of the map
@@ -33,7 +34,7 @@ export default {
         detailsText: currentMapDetailsTextSelector(state)
     }), {
         onClose: closeDetailsPanel
-    })(assign(require('../components/details/DetailsPanel'), {
+    })(assign(DetailsPanel, {
         BurgerMenu: {
             name: 'details',
             position: 1000,

@@ -5,7 +5,6 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { connect } from 'react-redux';
 
 /**
  * GoFull plugin. Shows a button that opens full MapStore2 in a new tab. Try to find the `originalUrl` in configuration or tries to guess the mapId and creates the proper URL.
@@ -17,10 +16,11 @@ import { connect } from 'react-redux';
  * @memberof plugins
  * @class GoFull
  */
-const GoFullPlugin = connect(() => ({}))(require('../components/buttons/GoFullButton'));
-
+import { connect } from 'react-redux';
+import GoFullButton from '../components/buttons/GoFullButton';
 import assign from 'object-assign';
 
+const GoFullPlugin = connect(() => ({}))(GoFullButton);
 
 export default {
     GoFullPlugin: assign(GoFullPlugin, {

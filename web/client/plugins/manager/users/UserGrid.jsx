@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import assign from 'object-assign';
 import { getUsers, editUser, deleteUser } from '../../../actions/users';
 import PaginationToolbar from './UsersPaginationToolbar';
-
+import UserGrid from '../../../components/manager/users/UserGrid';
 const mapStateToProps = (state) => {
     const users = state && state.users;
     return {
@@ -44,4 +44,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         }
     });
 };
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps, {pure: false})(require('../../../components/manager/users/UserGrid'));
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps, {pure: false})(UserGrid);

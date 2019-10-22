@@ -17,9 +17,9 @@ import {
     resultsSelector,
     searchParamsSelector,
     totalCountSelector,
-    isLoadingSelector,
+    isLoadingSelector
 } from '../../selectors/dashboards';
-
+import PaginationToolbarComp from '../../components/misc/PaginationToolbar';
 import { createSelector } from 'reselect';
 const PaginationToolbar = compose(
     connect(
@@ -55,5 +55,5 @@ const PaginationToolbar = compose(
             loadPage(searchText, { start, limit });
         }
     })
-)(require('../../components/misc/PaginationToolbar'));
+)(PaginationToolbarComp);
 export default PaginationToolbar;

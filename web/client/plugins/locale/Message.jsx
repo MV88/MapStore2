@@ -6,8 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { connect } from 'react-redux';
-
+import Message from '../../components/I18N/Message';
 export default connect((state) => ({
     locale: state.locale && state.locale.currentLocale,
     messages: state.locale && state.locale.messages || []
-}))(require('../../components/I18N/Message'));
+}))(Message);

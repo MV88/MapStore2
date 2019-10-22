@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import WMap from '../../../components/map/leaflet/Map';
 import Layer from '../../../components/map/leaflet/Layer';
 import Feature from '../../../components/map/leaflet/Feature';
-require('../../../components/map/leaflet/plugins/index');
+import('../../../components/map/leaflet/plugins/index');
 
 const PrintMap = (props) => {
     let features = props.features;

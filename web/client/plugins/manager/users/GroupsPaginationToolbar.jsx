@@ -8,6 +8,9 @@
 import { connect } from 'react-redux';
 
 import { getUserGroups } from '../../../actions/usergroups';
+import PaginationToolbarComp from '../../../components/misc/PaginationToolbar';
+
+
 const PaginationToolbar = connect((state) => {
     if (!state.usergroups ) {
         return {};
@@ -36,5 +39,5 @@ const PaginationToolbar = connect((state) => {
             dispatchProps.onSelect(stateProps.searchText, {params: { start, limit}});
         }
     };
-})(require('../../../components/misc/PaginationToolbar'));
+})(PaginationToolbarComp);
 export default PaginationToolbar;

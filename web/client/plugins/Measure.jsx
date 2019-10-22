@@ -20,8 +20,11 @@ import {
     changeFormatMeasurement,
     changeCoordinates,
     addAnnotation,
-    init,
+    init
 } from '../actions/measurement';
+import AnnotationsEditorComp from '../components/mapcontrols/annotations/AnnotationsEditor';
+import measurement from '../reducers/measurement';
+import getEpics from '../epics/measurement';
 
 import { toggleControl, setControlProperty } from '../actions/controls';
 import { MeasureDialog } from './measure/index';
@@ -62,7 +65,7 @@ import {
     highlightPoint,
     confirmDeleteFeature,
     toggleDeleteFtModal,
-    changeFormat,
+    changeFormat
 } from '../actions/annotations';
 
 import { zoomToExtent } from '../actions/map';
@@ -116,7 +119,7 @@ const AnnotationsInfoViewer = connect(annotationsInfoSelector,
         onConfirmClose: confirmCloseAnnotations,
         onConfirmRemove: confirmRemoveAnnotation,
         ...commonEditorActions
-    })(require('../components/mapcontrols/annotations/AnnotationsEditor'));
+    })(AnnotationsEditorComp);
 
 
 const selector = (state) => {
@@ -187,6 +190,6 @@ export default {
             action: () => setControlProperty("measure", "enabled", true)
         }
     }),
-    reducers: {measurement: require('../reducers/measurement')},
-    epics: require('../epics/measurement')(AnnotationsInfoViewer)
+    reducers: {measurement},
+    epics: getEpics(AnnotationsInfoViewer)
 };

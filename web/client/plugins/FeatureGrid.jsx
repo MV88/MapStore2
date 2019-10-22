@@ -11,7 +11,9 @@ import { selectFeatures, dockSizeFeatures } from '../actions/featuregrid';
 import { query, queryClose } from '../actions/wfsquery';
 import { changeMapView } from '../actions/map';
 import { toggleControl } from '../actions/controls';
-
+import featuregrid from '../reducers/featuregrid';
+import highlight from '../reducers/highlight';
+import DockedFeatureGrid from '../components/data/featuregrid_ag/DockedFeatureGrid';
 export default {
     FeatureGridPlugin: connect((state) => ({
         open: state.query && state.query.open,
@@ -42,9 +44,9 @@ export default {
         onQuery: query,
         onBackToSearch: queryClose,
         setDockSize: dockSizeFeatures
-    })(require('../components/data/featuregrid_ag/DockedFeatureGrid')),
+    })(DockedFeatureGrid),
     reducers: {
-        featuregrid: require('../reducers/featuregrid'),
-        highlight: require('../reducers/highlight')
+        featuregrid,
+        highlight
     }
 };

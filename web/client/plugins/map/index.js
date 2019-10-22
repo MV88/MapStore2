@@ -23,7 +23,7 @@ import {
     geometryChanged,
     drawStopped,
     selectFeatures,
-    drawingFeatures,
+    drawingFeatures
 } from '../../actions/draw';
 
 import { updateHighlighted } from '../../actions/highlight';

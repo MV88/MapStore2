@@ -14,6 +14,8 @@ import { userSelector } from '../../selectors/security';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import resourceGrid from '../../components/resources/enhancers/resourceGrid';
+
+import ResourceGrid from '../../components/resources/ResourceGrid';
 const Grid = compose(
     connect(createSelector(userSelector, user => ({ user })), {
         onDelete: deleteGeostory,
@@ -35,6 +37,6 @@ const Grid = compose(
         category: "GEOSTORY"
     }),
     resourceGrid
-)(require('../../components/resources/ResourceGrid'));
+)(ResourceGrid);
 
 export default Grid;

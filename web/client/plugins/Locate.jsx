@@ -12,7 +12,8 @@ import { changeLocateState } from '../actions/locate';
 import Message from './locale/Message';
 import { Glyphicon } from 'react-bootstrap';
 import assign from 'object-assign';
-
+import LocateBtn from '../components/mapcontrols/locate/LocateBtn';
+import locate from '../reducers/locate';
 /**
   * Locate Plugin. Provides button to locate the user's position on the map.
   * By deafault it will follow the user until he moves the map. He can click again to
@@ -30,7 +31,7 @@ const LocatePlugin = connect((state) => ({
     locate: state.locate && state.locate.state || 'DISABLED'
 }), {
     onClick: changeLocateState
-})(require('../components/mapcontrols/locate/LocateBtn'));
+})(LocateBtn);
 
 import './locate/locate.css';
 
@@ -47,5 +48,5 @@ export default {
             priority: 1
         }
     }),
-    reducers: {locate: require('../reducers/locate')}
+    reducers: {locate}
 };

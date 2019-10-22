@@ -15,7 +15,8 @@ import { connect } from 'react-redux';
 import assign from 'object-assign';
 import { createSelector } from 'reselect';
 import { onTabSelected } from '../actions/contenttabs';
-
+import contenttabs from '../reducers/contenttabs';
+import epics from '../epics/contenttabs';
 const selectedSelector = createSelector(
     state => state && state.contenttabs && state.contenttabs.selected,
     selected => ({ selected })
@@ -110,6 +111,6 @@ export default {
             glyph: 'dashboard'
         }
     }),
-    reducers: {contenttabs: require('../reducers/contenttabs')},
-    epics: require('../epics/contenttabs')
+    reducers: {contenttabs},
+    epics
 };

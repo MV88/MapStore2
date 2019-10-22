@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,12 +5,13 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { Button, Grid, Glyphicon } from 'react-bootstrap';
-import { editUser } from '../../actions/users';
-import { getUsers, usersSearchTextChanged } from '../../actions/users';
+import { editUser, getUsers, usersSearchTextChanged } from '../../actions/users';
 import SearchBar from '../../components/mapcontrols/search/SearchBar';
 import UserGrid from './users/UserGrid';
 import UserDialog from './users/UserDialog';
@@ -20,7 +19,7 @@ import UserDeleteConfirm from './users/UserDeleteConfirm';
 import Message from '../../components/I18N/Message';
 import assign from 'object-assign';
 import { trim } from 'lodash';
-
+import users from '../../reducers/users'
 class UserManager extends React.Component {
     static propTypes = {
         onNewUser: PropTypes.func,
@@ -128,6 +127,6 @@ export default {
                 glyph: "1-user-mod"
             }}),
     reducers: {
-        users: require('../../reducers/users')
+        users
     }
 };

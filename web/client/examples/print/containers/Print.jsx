@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,7 +5,9 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Debug from '../../../components/development/Debug';
 import Localized from '../../../components/I18N/Localized';
@@ -15,12 +15,13 @@ import { connect } from 'react-redux';
 import PrintMap from '../components/PrintMap';
 import PrintPreview from '../components/PrintPreview';
 import { changeZoomLevel } from '../../../actions/map';
+import ScaleBoxComp from '../../../components/mapcontrols/scale/ScaleBox';
 
 const ScaleBox = connect((state) => ({
     currentZoomLvl: state.map && state.map.zoom || state.config && state.config.map && state.config.map.zoom
 }), {
     onChange: changeZoomLevel
-})(require("../../../components/mapcontrols/scale/ScaleBox"));
+})(ScaleBoxComp);
 
 class Print extends React.Component {
     static propTypes = {

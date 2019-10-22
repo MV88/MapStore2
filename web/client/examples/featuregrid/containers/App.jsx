@@ -10,11 +10,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Debug from '../../../components/development/Debug';
 import Localized from '../../../components/I18N/Localized';
+import MapViewerComp from '../pages/MapViewer';
 
 const App = (props) => {
     const MapViewer = connect(() => ({
         plugins: props.plugins
-    }))(require('../pages/MapViewer'));
+    }))(MapViewerComp);
     return (
         <div className="fill">
             <Localized messages={props.messages} locale={props.current} loadingError={props.localeError}>

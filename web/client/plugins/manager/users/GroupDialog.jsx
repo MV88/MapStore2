@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 import { editGroup, changeGroupMetadata, saveGroup, searchUsers } from '../../../actions/usergroups';
-
+import GroupDialog from '../../../components/manager/users/GroupDialog';
 
 const mapStateToProps = (state) => {
     const usergroups = state && state.usergroups;
@@ -30,4 +30,4 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(require('../../../components/manager/users/GroupDialog'));
+export default connect(mapStateToProps, mapDispatchToProps)(GroupDialog);

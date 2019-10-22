@@ -21,7 +21,7 @@ import assign from 'object-assign';
 import { Glyphicon, Button } from 'react-bootstrap';
 import Dialog from '../components/misc/StandardDialog';
 import Select from 'react-select';
-
+import epics from '../epics/mapexport';
 const enhanceExport = compose(
     connect(
         createStructuredSelector({
@@ -79,5 +79,5 @@ export default {
             doNotHide: true
         }
     }),
-    epics: require('../epics/mapexport')
+    epics
 };

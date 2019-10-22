@@ -15,6 +15,10 @@ import PropTypes from 'prop-types';
 import { Glyphicon } from 'react-bootstrap';
 import { on, toggleControl } from '../actions/controls';
 import { createSelector } from 'reselect';
+import AnnotationsEditorComp from '../components/mapcontrols/annotations/AnnotationsEditor';
+import AnnotationsComp from '../components/mapcontrols/annotations/Annotations';
+import annotationsReducers from '../reducers/annotations';
+import annotationsEpics from '../epics/annotations';
 
 import {
     cancelRemoveAnnotation,
@@ -61,7 +65,7 @@ import {
     openEditor,
     updateSymbols,
     changePointType,
-    setErrorSymbol,
+    setErrorSymbol
 } from '../actions/annotations';
 
 import { zoomToExtent } from '../actions/map';
@@ -113,13 +117,13 @@ const AnnotationsEditor = connect(annotationsInfoSelector,
     {
         onCancel: cancelShowAnnotation,
         ...commonEditorActions
-    })(require('../components/mapcontrols/annotations/AnnotationsEditor'));
+    })(AnnotationsEditorComp);
 
 const AnnotationsInfoViewer = connect(annotationsInfoSelector,
     {
         ...commonEditorActions,
         onEdit: openEditor
-    })(require('../components/mapcontrols/annotations/AnnotationsEditor'));
+    })(AnnotationsEditorComp);
 
 const panelSelector = createSelector([annotationsListSelector], (list) => ({
     ...list,
@@ -143,7 +147,7 @@ const Annotations = connect(panelSelector, {
     onFilter: filterAnnotations,
     onDownload: download,
     onLoadAnnotations: loadAnnotations
-})(require('../components/mapcontrols/annotations/Annotations'));
+})(AnnotationsComp);
 
 import ContainerDimensions from 'react-container-dimensions';
 import Dock from 'react-dock';
@@ -264,7 +268,7 @@ export default {
         }
     }),
     reducers: {
-        annotations: require('../reducers/annotations')
+        annotations: annotationsReducers
     },
-    epics: require('../epics/annotations')(AnnotationsInfoViewer)
+    epics: annotationsEpics(AnnotationsInfoViewer)
 };

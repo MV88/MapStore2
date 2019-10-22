@@ -11,6 +11,7 @@ import React from 'react';
 import assign from 'object-assign';
 import { Glyphicon } from 'react-bootstrap';
 import Message from '../components/I18N/Message';
+import help from '../reducers/help';
 
 export default {
     HelpLinkPlugin: assign(class extends React.Component {
@@ -29,5 +30,5 @@ export default {
             doNotHide: true
         }
     }),
-    reducers: {help: require('../reducers/help')}
+    reducers: {help}
 };

@@ -30,15 +30,15 @@ import {
     resetUpdating,
     backDetails,
     undoDetails,
-    updateAttribute,
+    updateAttribute
 } from '../../actions/maps';
-
+import MapGridComp from '../../components/maps/MapGrid';
 import {
     editMap,
     updateCurrentMap,
     errorCurrentMap,
     removeThumbnail,
-    resetCurrentMap,
+    resetCurrentMap
 } from '../../actions/currentMap';
 
 import { mapTypeSelector } from '../../selectors/maptype';
@@ -82,6 +82,6 @@ const MapsGrid = connect((state) => {
             onDeleteDetails: deleteDetails
         }, dispatch)
     };
-})(require('../../components/maps/MapGrid'));
+})(MapGridComp);
 
 export default MapsGrid;

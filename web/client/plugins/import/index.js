@@ -9,6 +9,10 @@ import { connect } from 'react-redux';
 
 import { onShapeError } from '../../actions/mapimport';
 import { setStyleParameter } from '../../actions/style';
+import ShapefileUploadAndStyleComp from '../../components/import/ShapefileUploadAndStyle';
+import StylePolygonComp from '../../components/style/StylePolygon';
+import StylePointComp from '../../components/style/StylePoint';
+import StylePolylineComp from '../../components/style/StylePolyline';
 
 const ShapeFileUploadAndStyle = connect((state) => (
     {
@@ -18,7 +22,7 @@ const ShapeFileUploadAndStyle = connect((state) => (
     }
 ), {
     onShapeError: onShapeError
-})(require('../../components/import/ShapefileUploadAndStyle'));
+})(ShapefileUploadAndStyleComp);
 
 const StylePolygon = connect((state) => (
     {
@@ -26,7 +30,7 @@ const StylePolygon = connect((state) => (
     }
 ), {
     setStyleParameter: setStyleParameter
-})(require('../../components/style/StylePolygon'));
+})(StylePolygonComp);
 
 const StylePoint = connect((state) => (
     {
@@ -34,7 +38,7 @@ const StylePoint = connect((state) => (
     }
 ), {
     setStyleParameter: setStyleParameter
-})(require('../../components/style/StylePoint'));
+})(StylePointComp);
 
 const StylePolyline = connect((state) => (
     {
@@ -42,7 +46,7 @@ const StylePolyline = connect((state) => (
     }
 ), {
     setStyleParameter: setStyleParameter
-})(require('../../components/style/StylePolyline'));
+})(StylePolylineComp);
 
 export default {
     ShapeFileUploadAndStyle,

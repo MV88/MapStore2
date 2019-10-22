@@ -22,7 +22,8 @@ import { compose } from 'recompose';
 import GeostoryGrid from './geostories/GeostoriesGrid';
 import PaginationToolbar from './geostories/PaginationToolbar';
 import EmptyGeostoriesView from './geostories/EmptyGeostoriesView';
-
+import geostoriesEpics from '../epics/geostories';
+import geostoriesReducers from '../reducers/geostories';
 const geostoriesCountSelector = createSelector(
     totalCountSelector,
     count => ({ count })
@@ -124,8 +125,8 @@ export default {
             priority: 1
         }
     }),
-    epics: require('../epics/geostories'),
+    epics: geostoriesEpics,
     reducers: {
-        geostories: require('../reducers/geostories')
+        geostories: geostoriesReducers
     }
 };

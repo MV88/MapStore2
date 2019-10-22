@@ -16,8 +16,8 @@ const selector = createSelector([layersSelector], (layers) => ({
 }));
 
 import './maploading/maploading.css';
-
-const MapLoadingPlugin = connect(selector)(require('../components/misc/spinners/GlobalSpinner/GlobalSpinner'));
+import GlobalSpinner from '../components/misc/spinners/GlobalSpinner/GlobalSpinner';
+const MapLoadingPlugin = connect(selector)(GlobalSpinner);
 
 export default {
     MapLoadingPlugin: assign(MapLoadingPlugin, {

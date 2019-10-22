@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,7 +5,9 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
@@ -24,13 +24,14 @@ var store = createStore(combineReducers({browser, mouseposition}));
 
 import '../../components/map/leaflet/plugins/OSMLayer';
 import './components/mouseposition.css';
+import MousePosition from "../../components/mapcontrols/mouseposition/MousePosition";
+import LabelDD from "../../components/mapcontrols/mouseposition/MousePositionLabelDD";
+import LabelDM from "../../components/mapcontrols/mouseposition/MousePositionLabelDM";
+import LabelDMSNW from "../../components/mapcontrols/mouseposition/MousePositionLabelDMSNW";
+import SearchGeoS from "./components/FindGeoSolutions.jsx";
 
 function startApp() {
-    let MousePosition = require("../../components/mapcontrols/mouseposition/MousePosition");
-    let LabelDD = require("../../components/mapcontrols/mouseposition/MousePositionLabelDD");
-    let LabelDM = require("../../components/mapcontrols/mouseposition/MousePositionLabelDM");
-    let LabelDMSNW = require("../../components/mapcontrols/mouseposition/MousePositionLabelDMSNW");
-    let SearchGeoS = require("./components/FindGeoSolutions.jsx");
+
     /**
     * Detect Browser's properties and save in app state.
     **/

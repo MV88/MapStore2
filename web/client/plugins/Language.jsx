@@ -9,13 +9,14 @@ import { connect } from 'react-redux';
 
 import { loadLocale } from '../actions/locale';
 import assign from 'object-assign';
+import LangBarComp from '../components/I18N/LangBar';
 
 
 const LangBar = connect((state) => ({
     currentLocale: state.locale && state.locale.current
 }), {
     onLanguageChange: loadLocale.bind(null, null)
-})(require('../components/I18N/LangBar'));
+})(LangBarComp);
 
 export default {
     LanguagePlugin: assign(LangBar, {

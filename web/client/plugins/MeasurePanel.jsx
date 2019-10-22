@@ -13,7 +13,7 @@ import Message from './locale/Message';
 import assign from 'object-assign';
 import { changeMeasurement } from '../actions/measurement';
 import { MeasureComponent } from './measure';
-
+import measurement from '../reducers/measurement';
 const selector = (state) => {
     return {
         measurement: state.measurement || {},
@@ -61,5 +61,5 @@ export default {
             priority: 2
         }
     }),
-    reducers: {measurement: require('../reducers/measurement')}
+    reducers: {measurement}
 };

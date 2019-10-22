@@ -12,22 +12,26 @@ import { withProps, compose } from 'recompose';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { isDashboardEditing } from '../selectors/dashboard';
 import { isLoggedIn } from '../selectors/security';
 import { dashboardHasWidgets, getWidgetsDependenciesGroups } from '../selectors/widgets';
-
+import dashboard from '../reducers/dashboard';
+import epics from '../epics/dashboard';
 import {
+    isDashboardEditing,
     showConnectionsSelector,
     dashboardResource,
     isDashboardLoading,
-    buttonCanEdit,
+    buttonCanEdit
 } from '../selectors/dashboard';
+import SaveDialog from './dashboard/SaveDialog';
+import ToolbarComp from '../components/misc/toolbar/Toolbar';
 
 import { dashboardSelector } from './widgetbuilder/commons';
 import { createWidget, toggleConnection } from '../actions/widgets';
-import { triggerShowConnections, triggerSave } from '../actions/dashboard';
+import { triggerShowConnections, triggerSave, setEditing, setEditorAvailable } from '../actions/dashboard';
 import withDashboardExitButton from './widgetbuilder/enhancers/withDashboardExitButton';
 import LoadingSpinner from '../components/misc/LoadingSpinner';
+import WidgetTypeBuilder from './widgetbuilder/WidgetTypeBuilder';
 
 const Builder =
     compose(
@@ -36,7 +40,7 @@ const Builder =
             availableDependencies: availableDependencies.filter(d => d !== "map")
         })),
         withDashboardExitButton
-    )(require('./widgetbuilder/WidgetTypeBuilder'));
+    )(WidgetTypeBuilder);
 
 const Toolbar = compose(
     connect(
@@ -93,10 +97,7 @@ const Toolbar = compose(
             onClick: () => onShowConnections(!showConnections)
         }]
     }))
-)(require('../components/misc/toolbar/Toolbar'));
-
-import SaveDialog from './dashboard/SaveDialog';
-import { setEditing, setEditorAvailable } from '../actions/dashboard';
+)(ToolbarComp);
 
 
 class DashboardEditorComponent extends React.Component {
@@ -162,7 +163,7 @@ const Plugin = connect(
 export default {
     DashboardEditorPlugin: Plugin,
     reducers: {
-        dashboard: require('../reducers/dashboard')
+        dashboard
     },
-    epics: require('../epics/dashboard')
+    epics
 };

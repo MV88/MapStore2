@@ -18,6 +18,8 @@ import { isLoggedIn } from '../selectors/security';
 import Message from '../components/I18N/Message';
 import ResourceUnavailable from '../components/errors/ResourceUnavailable';
 import { feedbackMaskSelector } from '../selectors/feedbackmask';
+import feedbackMask from '../reducers/feedbackMask';
+import epics from '../epics/feedbackMask';
 
 const feedbackMaskPluginSelector = createSelector([
     feedbackMaskSelector,
@@ -75,7 +77,7 @@ const FeedbackMaskPlugin = compose(
 export default {
     FeedbackMaskPlugin,
     reducers: {
-        feedbackMask: require('../reducers/feedbackMask')
+        feedbackMask
     },
-    epics: require('../epics/feedbackMask')
+    epics
 };

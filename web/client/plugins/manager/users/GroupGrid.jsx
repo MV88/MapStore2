@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import assign from 'object-assign';
 import { getUserGroups, editGroup, deleteGroup } from '../../../actions/usergroups';
 import PaginationToolbar from './GroupsPaginationToolbar';
-
+import GroupGrid from '../../../components/manager/users/GroupGrid';
 const mapStateToProps = (state) => {
     const usergroups = state && state.usergroups;
     return {
@@ -44,4 +44,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         }
     });
 };
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps, {pure: false})(require('../../../components/manager/users/GroupGrid'));
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps, {pure: false})(GroupGrid);

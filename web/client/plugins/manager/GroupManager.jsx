@@ -19,6 +19,7 @@ import GroupDeleteConfirm from './users/GroupDeleteConfirm';
 import Message from '../../components/I18N/Message';
 import assign from 'object-assign';
 import { trim } from 'lodash';
+import usergroups from '../../reducers/usergroups';
 
 class GroupManager extends React.Component {
     static propTypes = {
@@ -128,6 +129,6 @@ export default {
                 glyph: "1-group-mod"
             }}),
     reducers: {
-        usergroups: require('../../reducers/usergroups')
+        usergroups
     }
 };

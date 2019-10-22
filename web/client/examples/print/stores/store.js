@@ -10,15 +10,20 @@ import DebugUtils from '../../../utils/DebugUtils';
 
 import { combineReducers } from 'redux';
 import map from '../../../reducers/map';
+import browser from '../../../reducers/browser';
+import config from '../../../reducers/config';
+import locale from '../../../reducers/locale';
+import print from '../../../reducers/print';
+import controls from '../../../reducers/controls';
 
 // reducers
 const allReducers = combineReducers({
-    browser: require('../../../reducers/browser'),
-    config: require('../../../reducers/config'),
-    locale: require('../../../reducers/locale'),
+    browser,
+    config,
+    locale,
     map: () => {return null; },
-    print: require('../../../reducers/print'),
-    controls: require('../../../reducers/controls')
+    print,
+    controls
 });
 
 const rootReducer = (state, action) => {

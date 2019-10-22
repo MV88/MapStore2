@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { connect } from 'react-redux';
-
+import PaginationToolbarComp from '../../../components/misc/PaginationToolbar';
 import { getUsers } from '../../../actions/users';
 const PaginationToolbar = connect((state) => {
     if (!state.users ) {
@@ -36,5 +36,5 @@ const PaginationToolbar = connect((state) => {
             dispatchProps.onSelect(stateProps.searchText, {params: { start, limit}});
         }
     };
-})(require('../../../components/misc/PaginationToolbar'));
+})(PaginationToolbarComp);
 export default PaginationToolbar;

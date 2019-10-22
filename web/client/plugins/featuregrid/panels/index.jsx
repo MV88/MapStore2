@@ -19,6 +19,8 @@ import {
     resultsSelector,
     isSyncWmsActive,
     featureCollectionResultSelector,
+    isDescribeLoaded,
+    isFilterActive
 } from '../../../selectors/query';
 
 import {
@@ -38,6 +40,10 @@ import {
     editingAllowedRolesSelector,
     timeSyncActive,
     showTimeSync,
+    chartDisabledSelector,
+    showAgainSelector,
+    showPopoverSyncSelector,
+    selectedLayerNameSelector
 } from '../../../selectors/featuregrid';
 
 import { userRoleSelector } from '../../../selectors/security';
@@ -45,31 +51,32 @@ import { isCesium } from '../../../selectors/maptype';
 import { mapLayoutValuesSelector } from '../../../selectors/maplayout';
 
 import {
-    chartDisabledSelector,
-    showAgainSelector,
-    showPopoverSyncSelector,
-    selectedLayerNameSelector,
-} from '../../../selectors/featuregrid';
-
-import {
     deleteFeatures,
     toggleTool,
     clearChangeConfirmed,
     closeFeatureGridConfirmed,
-    closeFeatureGrid,
+    closeFeatureGrid
 } from '../../../actions/featuregrid';
 
 import { toolbarEvents, pageEvents } from '../index';
 import { getAttributeFields } from '../../../utils/FeatureGridUtils';
 import { getFilterRenderer } from '../../../components/data/featuregrid/filterRenderers';
-import { isDescribeLoaded, isFilterActive } from '../../../selectors/query';
+
+import EmptyRowsViewComp from '../../../components/data/featuregrid/EmptyRowsView';
+import ToolbarComp from '../../../components/data/featuregrid/toolbars/Toolbar';
+import HeaderComp from '../../../components/data/featuregrid/Header';
+import FooterComp from '../../../components/data/featuregrid/Footer';
+import ConfirmDeleteComp from '../../../components/data/featuregrid/dialog/ConfirmDelete';
+import ConfirmClearComp from '../../../components/data/featuregrid/dialog/ConfirmClear';
+import ConfirmFeatureCloseComp from '../../../components/data/featuregrid/dialog/ConfirmFeatureClose';
+
 
 const filterEditingAllowedUser = (role, editingAllowedRoles = ["ADMIN"]) => {
     return editingAllowedRoles.indexOf(role) !== -1;
 };
 const EmptyRowsView = connect(createStructuredSelector({
     loading: featureLoadingSelector
-}))(require('../../../components/data/featuregrid/EmptyRowsView'));
+}))(EmptyRowsViewComp);
 const Toolbar = connect(
     createStructuredSelector({
         saving: isSavingSelector,
@@ -102,7 +109,7 @@ const Toolbar = connect(
         timeSync: timeSyncActive
     }),
     (dispatch) => ({events: bindActionCreators(toolbarEvents, dispatch)})
-)(require('../../../components/data/featuregrid/toolbars/Toolbar'));
+)(ToolbarComp);
 
 
 const Header = connect(
@@ -112,7 +119,7 @@ const Header = connect(
     {
         onClose: toolbarEvents.onClose
     }
-)(require('../../../components/data/featuregrid/Header'));
+)(HeaderComp);
 
 // loading={props.featureLoading} totalFeatures={props.totalFeatures} resultSize={props.resultSize}/
 const Footer = connect(
@@ -126,22 +133,22 @@ const Footer = connect(
             virtualScroll
         })),
     pageEvents
-)(require('../../../components/data/featuregrid/Footer'));
+)(FooterComp);
 const DeleteDialog = connect(
     createSelector(selectedFeaturesCount, (count) => ({count})), {
         onClose: () => toggleTool("deleteConfirm", false),
         onConfirm: () => deleteFeatures()
-    })(require('../../../components/data/featuregrid/dialog/ConfirmDelete'));
+    })(ConfirmDeleteComp);
 const ClearDialog = connect(
     createSelector(selectedFeaturesCount, (count) => ({count})), {
         onClose: () => toggleTool("clearConfirm", false),
         onConfirm: () => clearChangeConfirmed()
-    })(require('../../../components/data/featuregrid/dialog/ConfirmClear'));
+    })(ConfirmClearComp);
 const FeatureCloseDialog = connect(() => {}
     , {
         onClose: () => closeFeatureGridConfirmed(),
         onConfirm: () => closeFeatureGrid()
-    })(require('../../../components/data/featuregrid/dialog/ConfirmFeatureClose'));
+    })(ConfirmFeatureCloseComp);
 
 import settings from './AttributeSelector';
 

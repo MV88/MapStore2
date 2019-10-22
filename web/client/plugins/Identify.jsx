@@ -24,7 +24,7 @@ import {
     showEmptyMessageGFISelector,
     isHighlightEnabledSelector,
     currentFeatureSelector,
-    currentFeatureCrsSelector,
+    currentFeatureCrsSelector
 } from '../selectors/mapInfo';
 
 import {
@@ -41,8 +41,14 @@ import {
     changeFormat,
     toggleShowCoordinateEditor,
     changePage,
-    toggleHighlightFeature,
+    toggleHighlightFeature
 } from '../actions/mapInfo';
+
+import DefaultViewerComp from '../components/data/identify/DefaultViewer';
+import IdentifyContainerComp from '../components/data/identify/IdentifyContainer';
+import FeatureInfoFormatSelectorComp from '../components/misc/FeatureInfoFormatSelector';
+import mapInfo from '../reducers/mapInfo';
+import epics from '../epics/identify';
 
 import { changeMousePointer, zoomToExtent } from '../actions/map';
 import { currentLocaleSelector } from '../selectors/locale';
@@ -98,7 +104,7 @@ const DefaultViewer = compose(
     defaultViewerDefaultProps,
     defaultViewerHandlers,
     loadingState(({responses}) => responses.length === 0)
-)(require('../components/data/identify/DefaultViewer'));
+)(DefaultViewerComp);
 
 
 const identifyDefaultProps = defaultProps({
@@ -231,14 +237,14 @@ const IdentifyPlugin = compose(
     identifyIndex,
     defaultViewerHandlers,
     identifyLifecycle
-)(require('../components/data/identify/IdentifyContainer'));
+)(IdentifyContainerComp);
 
 // configuration UI
 const FeatureInfoFormatSelector = connect((state) => ({
     infoFormat: generalInfoFormatSelector(state)
 }), {
     onInfoFormatChange: changeMapInfoFormat
-})(require("../components/misc/FeatureInfoFormatSelector"));
+})(FeatureInfoFormatSelectorComp);
 
 export default {
     IdentifyPlugin: assign(IdentifyPlugin, {
@@ -262,6 +268,6 @@ export default {
             position: 3
         }
     }),
-    reducers: {mapInfo: require('../reducers/mapInfo')},
-    epics: require('../epics/identify')
+    reducers: {mapInfo},
+    epics
 };

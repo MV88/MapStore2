@@ -32,9 +32,10 @@ import {
     loadWorkspaces,
     selectWorkSpace,
     createWorkspace,
-    dismissWorkspaceCreationStatus,
+    dismissWorkspaceCreationStatus
 } from '../../actions/importer';
-
+import Importer from '../../components/manager/importer/Importer';
+import importer from '../../reducers/importer';
 import assign from 'object-assign';
 const getURL = function(props) {
     return props.geoserverRestURL || "/geoserver/rest/";
@@ -189,7 +190,7 @@ const ImporterPlugin = connect(
             }
         });
     }
-)(require("../../components/manager/importer/Importer"));
+)(Importer);
 export default {
     ImporterPlugin: assign(ImporterPlugin, {
         hide: true,
@@ -201,5 +202,5 @@ export default {
             glyph: "import"
         }
     }),
-    reducers: {importer: require('../../reducers/importer')}
+    reducers: {importer}
 };

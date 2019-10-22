@@ -13,13 +13,14 @@ import assign from 'object-assign';
 import { Glyphicon } from 'react-bootstrap';
 import Message from '../components/I18N/Message';
 import { toggleControl } from '../actions/controls';
-
+import HelpTextPanelComp from '../components/help/HelpTextPanel';
+import help from '../reducers/help';
 const HelpTextPanel = connect((state) => ({
     isVisible: state.controls && state.controls.help && state.controls.help.enabled,
     helpText: state.help && state.help.helpText
 }), {
     onClose: toggleControl.bind(null, 'help', null)
-})(require('../components/help/HelpTextPanel'));
+})(HelpTextPanelComp);
 
 export default {
     HelpPlugin: assign(HelpTextPanel, {
@@ -41,5 +42,5 @@ export default {
             doNotHide: true
         }
     }),
-    reducers: {help: require('../reducers/help')}
+    reducers: {help}
 };

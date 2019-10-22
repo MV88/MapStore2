@@ -28,7 +28,9 @@ import tooltip from '../components/misc/enhancers/tooltip';
 import MapsGrid from './maps/MapsGrid';
 import MetadataModal from './maps/MetadataModal';
 import { scrollIntoViewId } from '../utils/DOMUtil';
-
+import featuredmaps from '../reducers/featuredmaps';
+import maptype from '../reducers/maptype';
+import currentMap from '../reducers/currentMap';
 const ToolTipedNavItem = tooltip(NavItem);
 
 const PAGE_SIZE = 4;
@@ -185,8 +187,8 @@ export default {
         ...mapsEpics
     },
     reducers: {
-        featuredmaps: require('../reducers/featuredmaps'),
-        maptype: require('../reducers/maptype'),
-        currentMap: require('../reducers/currentMap')
+        featuredmaps,
+        maptype,
+        currentMap
     }
 };

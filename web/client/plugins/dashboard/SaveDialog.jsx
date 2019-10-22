@@ -16,11 +16,12 @@ import {
     isShowSaveOpen,
     dashboardResource,
     isDashboardLoading,
-    getDashboardSaveErrors,
+    getDashboardSaveErrors
 } from '../../selectors/dashboard';
 
 import { saveDashboard, triggerSave } from '../../actions/dashboard';
 import handleSaveModal from '../../components/resources/modals/enhancers/handleSaveModal';
+import Save from '../../components/resources/modals/Save';
 
 /**
  * Save dialog component enhanced for dashboard
@@ -40,4 +41,4 @@ export default compose(
         onSave: saveDashboard
     }),
     handleSaveModal
-)(require('../../components/resources/modals/Save'));
+)(Save);

@@ -19,6 +19,7 @@ import Section from './drawer/Section';
 import { partialRight } from 'lodash';
 import assign from 'object-assign';
 import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import DrawerMenu from './drawer/Menu';
 import tooltip from '../components/misc/enhancers/tooltip';
 const Button = tooltip(ButtonB);
 
@@ -33,13 +34,12 @@ const menuSelector = createSelector([
     dynamicWidth,
     layout
 }));
-
 const Menu = connect(menuSelector, {
     onToggle: toggleControl.bind(null, 'drawer', null),
     onResize: setControlProperty.bind(null, 'drawer', 'resizedWidth'),
     onChoose: partialRight(setControlProperty.bind(null, 'drawer', 'menu'), true),
     changeMapStyle: changeMapStyle
-})(require('./drawer/Menu'));
+})(DrawerMenu);
 
 import './drawer/drawer.css';
 

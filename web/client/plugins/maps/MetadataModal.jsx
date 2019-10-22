@@ -8,12 +8,11 @@
 
 import { connect } from 'react-redux';
 
-import { metadataChanged } from '../../actions/maps';
-import { loadPermissions, updatePermissions, loadAvailableGroups } from '../../actions/maps';
+import { metadataChanged, loadPermissions, updatePermissions, loadAvailableGroups } from '../../actions/maps';
 import { updateCurrentMapPermissions, addCurrentMapPermission } from '../../actions/currentMap';
 import { setControlProperty } from '../../actions/controls';
 import { showMapDetailsSelector } from '../../selectors/maps.js';
-
+import MetadataModalComp from '../../components/maps/modals/MetadataModal';
 const MetadataModal = connect(
     (state = {}) => ({
         metadata: state.currentMap.metadata,
@@ -27,6 +26,6 @@ const MetadataModal = connect(
         loadPermissions, loadAvailableGroups, updatePermissions, onGroupsChange: updateCurrentMapPermissions, onAddPermission: addCurrentMapPermission, metadataChanged,
         onNewGroupChoose: setControlProperty.bind(null, 'permissionEditor', 'newGroup'),
         onNewPermissionChoose: setControlProperty.bind(null, 'permissionEditor', 'newPermission')
-    }, null)(require('../../components/maps/modals/MetadataModal'));
+    }, null)(MetadataModalComp);
 
 export default MetadataModal;

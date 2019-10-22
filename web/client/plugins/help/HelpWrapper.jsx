@@ -8,10 +8,11 @@
 import { connect } from 'react-redux';
 
 import { changeHelpwinVisibility, changeHelpText } from '../../actions/help';
+import HelpWrapper from '../../components/help/HelpWrapper';
 
 export default connect((state) => ({
     helpEnabled: state.controls && state.controls.help && state.controls.help.enabled
 }), {
     changeHelpText,
     changeHelpwinVisibility
-})(require('../../components/help/HelpWrapper'));
+})(HelpWrapper);

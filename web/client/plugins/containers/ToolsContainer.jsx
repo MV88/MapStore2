@@ -12,13 +12,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { changeHelpText, changeHelpwinVisibility } from '../../actions/help';
-
+import HelpBadgeComp from '../../components/help/HelpBadge';
 const HelpBadge = connect((state) => ({
     isVisible: state.controls && state.controls.help && state.controls.help.enabled
 }), {
     changeHelpText,
     changeHelpwinVisibility
-})(require('../../components/help/HelpBadge'));
+})(HelpBadgeComp);
 
 import Message from '../../components/I18N/Message';
 import { Button, Tooltip, Panel, Collapse, Glyphicon } from 'react-bootstrap';

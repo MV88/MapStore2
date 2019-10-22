@@ -13,20 +13,25 @@ import { createEpicMiddleware } from 'redux-observable';
 import map from '../../reducers/map';
 import layers from '../../reducers/layers';
 import mapConfig from '../../reducers/config';
+import locale from '../../reducers/locale';
+import browser from '../../reducers/browser';
+import theme from '../../reducers/theme';
+import pluginsConfig from './reducers/config';
+import controlsEpics from '../../epics/controls';
 
 export default (plugins, custom) => {
     const allReducers = combineReducers(plugins, {
-        locale: require('../../reducers/locale'),
-        browser: require('../../reducers/browser'),
-        theme: require('../../reducers/theme'),
+        locale,
+        browser,
+        theme,
         map: () => {return null; },
         mapInitialConfig: () => {return null; },
         layers: () => {return null; },
-        pluginsConfig: require('./reducers/config'),
+        pluginsConfig,
         custom
     });
     const standardEpics = {
-        ...require('../../epics/controls')
+        ...controlsEpics
     };
     const rootEpic = combineEpics(plugins, {...standardEpics });
     const epicMiddleware = createEpicMiddleware(rootEpic);

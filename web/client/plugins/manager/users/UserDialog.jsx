@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 import { editUser, changeUserMetadata, saveUser } from '../../../actions/users';
-
+import UserDialog from '../../../components/manager/users/UserDialog';
 
 const mapStateToProps = (state) => {
     const users = state && state.users;
@@ -29,4 +29,4 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(require('../../../components/manager/users/UserDialog'));
+export default connect(mapStateToProps, mapDispatchToProps)(UserDialog);

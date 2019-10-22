@@ -12,14 +12,15 @@ import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { compose, withProps, withHandlers } from 'recompose';
 import { createSelector } from 'reselect';
-
+import DashboardComp from '../components/dashboard/Dashboard';
+import widgetsReducers from '../reducers/widgets';
 import {
     getDashboardWidgets,
     dependenciesSelector,
     getDashboardWidgetsLayout,
     isWidgetSelectionActive,
     getEditingWidget,
-    getWidgetsDependenciesGroups,
+    getWidgetsDependenciesGroups
 } from '../selectors/widgets';
 
 import {
@@ -29,7 +30,7 @@ import {
     changeLayout,
     exportCSV,
     exportImage,
-    selectWidget,
+    selectWidget
 } from '../actions/widgets';
 
 import { showConnectionsSelector, dashboardResource, isDashboardLoading } from '../selectors/dashboard';
@@ -79,7 +80,7 @@ const WidgetsView = compose(
         // TODO: maybe using availableDependencies here will be better when different widgets type dependencies are supported
         isWidgetSelectable: ({ editingWidgetId }) => ({ widgetType, id }) => widgetType === "map" && id !== editingWidgetId
     })
-)(require('../components/dashboard/Dashboard'));
+)(DashboardComp);
 
 
 class Widgets extends React.Component {
@@ -100,6 +101,6 @@ const DashboardPlugin = Widgets;
 export default {
     DashboardPlugin,
     reducers: {
-        widgets: require('../reducers/widgets')
+        widgets: widgetsReducers
     }
 };

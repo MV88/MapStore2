@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 
 import { loadMaps, mapsSearchTextChanged } from '../actions/maps';
 import ConfigUtils from '../utils/ConfigUtils';
+import SearchBarComp from '../components/mapcontrols/search/SearchBar';
+import maps from '../reducers/maps';
 /**
 * MapSearch Plugin is a plugin that allows to make a search, reset its content, show a loading spinner while search is going on and can be
 * used for different purpose (maps, wfs services)
@@ -70,9 +72,9 @@ const SearchBar = connect((state) => ({
         },
         onSearchTextChange: dispatchProps.onSearchTextChange
     };
-})(require("../components/mapcontrols/search/SearchBar"));
+})(SearchBarComp);
 
 export default {
     MapSearchPlugin: SearchBar,
-    reducers: {maps: require('../reducers/maps')}
+    reducers: {maps }
 };

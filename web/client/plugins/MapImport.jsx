@@ -18,9 +18,10 @@ import {
     onSelectLayer,
     onLayerAdded,
     updateBBox,
-    onSuccess,
+    onSuccess
 } from '../actions/mapimport';
-
+import mapimport from '../reducers/mapimport';
+import style from  '../reducers/style';
 import { zoomToExtent } from '../actions/map';
 import { addLayer } from '../actions/layers';
 import { toggleControl } from '../actions/controls';
@@ -72,7 +73,7 @@ export default {
         }
     }),
     reducers: {
-        mapimport: require('../reducers/mapimport'),
-        style: require('../reducers/style')
+        mapimport,
+        style
     }
 };

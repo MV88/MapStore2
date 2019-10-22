@@ -25,7 +25,10 @@ import MapsGrid from './maps/MapsGrid';
 import MetadataModal from './maps/MetadataModal';
 import EmptyMaps from './maps/EmptyMaps';
 import { loadMaps, setShowMapDetails } from '../actions/maps';
-
+import PaginationToolbarComp from '../components/misc/PaginationToolbar';
+import mapsReducers from '../reducers/maps';
+import maptype from '../reducers/maptype';
+import currentMap from '../reducers/currentMap';
 const mapsCountSelector = createSelector(
     totalCountSelector,
     count => ({ count })
@@ -56,7 +59,7 @@ const PaginationToolbar = connect((state) => {
             dispatchProps.onSelect(ConfigUtils.getDefaults().geoStoreUrl, stateProps.searchText, {start, limit});
         }
     };
-})(require('../components/misc/PaginationToolbar'));
+})(PaginationToolbarComp);
 
 class Maps extends React.Component {
     static propTypes = {
@@ -159,8 +162,8 @@ export default {
         ...mapsEpics
     },
     reducers: {
-        maps: require('../reducers/maps'),
-        maptype: require('../reducers/maptype'),
-        currentMap: require('../reducers/currentMap')
+        maps: mapsReducers,
+        maptype,
+        currentMap
     }
 };
