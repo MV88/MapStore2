@@ -11,13 +11,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Message from '../../components/I18N/Message';
 import { toggleControl } from '../../actions/controls';
-
+import AboutComp from '../components/viewer/about/About';
 const About = connect((state) => ({
     enabled: state.controls && state.controls.about && state.controls.about.enabled || false,
     withButton: false
 }), {
     onClose: toggleControl.bind(null, 'about', null)
-})(require('../components/viewer/about/About'));
+})(AboutComp);
 
 import assign from 'object-assign';
 import { Glyphicon } from 'react-bootstrap';

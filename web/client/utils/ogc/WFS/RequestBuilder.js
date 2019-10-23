@@ -43,7 +43,7 @@ const getStaticAttributesWFS2 = (ver) => 'service="WFS" version="' + ver + '" ' 
  * @return {Object} A request builder. it contains all the `FilterBuilder` methods, plus the getFeature, query... methods
  * The request builder provides all the methods to compose the request (query, filter...).
  * @example
- * const requestBuilder = require('.../RequestBuilder');
+ * import requestBuilder from '.../RequestBuilder';
  * const {getFeature, query, filter, property} = requestBuilder({wfsVersion: "1.0.0"});
  * const reqBody = getFeature(query(
  *      "workspace:layer",

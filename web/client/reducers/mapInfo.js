@@ -28,8 +28,12 @@ import {
     UPDATE_CENTER_TO_MARKER,
     TOGGLE_EMPTY_MESSAGE_GFI,
     CHANGE_FORMAT,
-    TOGGLE_SHOW_COORD_EDITOR,
+    TOGGLE_SHOW_COORD_EDITOR
 } from '../actions/mapInfo';
+
+import buffer from 'turf-buffer';
+import intersect from 'turf-intersect';
+
 
 import { MAP_CONFIG_LOADED } from '../actions/config';
 import { RESET_CONTROLS } from '../actions/controls';
@@ -262,8 +266,6 @@ function mapInfo(state = initState, action) {
         });
     }
     case GET_VECTOR_INFO: {
-        const buffer = require('turf-buffer');
-        const intersect = require('turf-intersect');
         const point = {
             "type": "Feature",
             "properties": {},

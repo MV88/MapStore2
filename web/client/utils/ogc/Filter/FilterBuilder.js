@@ -12,7 +12,7 @@ import {
     literal,
     propertyName,
     valueReference,
-    distance,
+    distance
 } from './operators';
 
 import { filter, fidFilter } from './filter';
@@ -25,7 +25,7 @@ import { processOGCGeometry } from '../GML';
  * The property object have the methods listed as properies below.
  * The builder provides all the methods to compose the filter (filter, and, or, not, property) to compose the filter.
  * ```
- * const filterBuilder = require('.../FilterBuilder');
+ * import filterBuilder from '.../FilterBuilder';
  * const {filter, property, and, or, not} = filterBuilder({gmlVersion: "3.1.1"});
  *      filter(
  *          and(

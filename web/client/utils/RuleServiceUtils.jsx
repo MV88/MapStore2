@@ -5,7 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {castArray} = require('lodash');
+
+import {castArray} from 'lodash';
 
 /**
  * Utilities for rule services (GeoFence REST API, stand-alone and GeoServer integrated)

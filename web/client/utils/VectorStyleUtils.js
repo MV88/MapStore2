@@ -6,12 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { isNil } from 'lodash';
-
-import { set } from './ImmutableUtils';
-import { colorToRgbaStr } from './ColorUtils';
 import axios from 'axios';
 import SLDParser from 'geostyler-sld-parser';
+import { isNil } from 'lodash';
+
+import svgMissing from '../product/assets/symbols/symbolMissing.svg';
+import { colorToRgbaStr } from './ColorUtils';
+import { set } from './ImmutableUtils';
+
 const StyleParsers = {
     sld: new SLDParser()
 };
@@ -312,7 +314,7 @@ const createSvgUrl = (style = {}, url) => {
 
                 return symbolUrlCustomized;
             }).catch(()=> {
-                return require('../product/assets/symbols/symbolMissing.svg');
+                return svgMissing;
             }) : new Promise((resolve) => {
             resolve(null);
         });
@@ -324,7 +326,7 @@ const createStylesAsync = (styles = []) => {
             .then(symbolUrlCustomized => {
                 return symbolUrlCustomized ? {...style, symbolUrlCustomized} : fetchStyle(hashAndStringify(style));
             }).catch(() => {
-                return {...style, symbolUrlCustomized: require('../product/assets/symbols/symbolMissing.svg')};
+                return {...style, symbolUrlCustomized: svgMissing};
             }) : new Promise((resolve) => {
             resolve(isSymbolStyle(style) ? fetchStyle(hashAndStringify(style)) : style);
         });

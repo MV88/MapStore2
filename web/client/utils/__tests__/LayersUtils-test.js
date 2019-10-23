@@ -9,6 +9,9 @@ import expect from 'expect';
 
 import assign from 'object-assign';
 import LayersUtils from '../LayersUtils';
+import LayersLeaflet from '../leaflet/Layers';
+import LayersOL from '../openlayers/Layers';
+
 const {extractTileMatrixSetFromLayers} = LayersUtils;
 const typeV1 = "empty";
 const emptyBackground = {
@@ -677,49 +680,49 @@ describe('LayersUtils', () => {
         });
         it('type: wms  maptype: leaflet, supported', () => {
             const maptype = "leaflet";
-            const Layers = require('../' + maptype + '/Layers');
+            const Layers = LayersLeaflet;
             Layers.registerType('wms', {});
             const res = LayersUtils.isSupportedLayer(wmsLayer, maptype);
             expect(res).toBeTruthy();
         });
         it('type: wms  maptype: leaflet, not supported because invalid', () => {
             const maptype = "leaflet";
-            const Layers = require('../' + maptype + '/Layers');
+            const Layers = LayersLeaflet;
             Layers.registerType('wms', {});
             const res = LayersUtils.isSupportedLayer(assign({}, wmsLayer, {invalid: true}), maptype);
             expect(res).toBeFalsy();
         });
         it('type: mapquest  maptype: openlayers, with apikey supported', () => {
             const maptype = "openlayers";
-            const Layers = require('../' + maptype + '/Layers');
+            const Layers = LayersOL;
             Layers.registerType('mapquest', {});
             const res = LayersUtils.isSupportedLayer(mapquestLayerWithApikey, maptype);
             expect(res).toBeTruthy();
         });
         it('type: mapquest  maptype: openlayers, without apikey not supported', () => {
             const maptype = "openlayers";
-            const Layers = require('../' + maptype + '/Layers');
+            const Layers = LayersOL;
             Layers.registerType('mapquest', {});
             const res = LayersUtils.isSupportedLayer(mapquestLayerWithoutApikey, maptype);
             expect(res).toBeFalsy();
         });
         it('type: bing  maptype: openlayers, with invalid apikey, not supported', () => {
             const maptype = "openlayers";
-            const Layers = require('../' + maptype + '/Layers');
+            const Layers = LayersOL;
             Layers.registerType('bing', {});
             const res = LayersUtils.isSupportedLayer(assign({}, bingLayerWithApikey, {apiKey: "__API_KEY_MAPQUEST__"}), maptype);
             expect(res).toBeFalsy();
         });
         it('type: bing  maptype: openlayers, with apikey supported', () => {
             const maptype = "openlayers";
-            const Layers = require('../' + maptype + '/Layers');
+            const Layers = LayersOL;
             Layers.registerType('bing', {});
             const res = LayersUtils.isSupportedLayer(bingLayerWithApikey, maptype);
             expect(res).toBeTruthy();
         });
         it('type: bing  maptype: openlayers, without apikey not supported', () => {
             const maptype = "openlayers";
-            const Layers = require('../' + maptype + '/Layers');
+            const Layers = LayersOL;
             Layers.registerType('bing', {});
             const res = LayersUtils.isSupportedLayer(bingLayerWithoutApikey, maptype);
             expect(res).toBeFalsy();

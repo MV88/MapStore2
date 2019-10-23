@@ -6,13 +6,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {processOGCGeometry, pointElement, polygonElement, lineStringElement, closePolygon } = require("./ogc/GML");
-const {wfsToGmlVersion} = require('./ogc/WFS/base');
-const {ogcComparisonOperators, ogcLogicalOperators, ogcSpatialOperators} = require("./ogc/Filter/operators");
-const { read } = require('./ogc/Filter/CQL/parser');
-const fromObject = require('./ogc/Filter/fromObject');
-const filterBuilder = require('./ogc/Filter/FilterBuilder');
-const CoordinatesUtils = require('./CoordinatesUtils');
+import {processOGCGeometry, pointElement, polygonElement, lineStringElement, closePolygon } from "./ogc/GML";
+import {wfsToGmlVersion} from './ogc/WFS/base';
+import {ogcComparisonOperators, ogcLogicalOperators, ogcSpatialOperators} from "./ogc/Filter/operators";
+import { read } from './ogc/Filter/CQL/parser';
+import fromObject from './ogc/Filter/fromObject';
+import filterBuilder from './ogc/Filter/FilterBuilder';
+import CoordinatesUtils from './CoordinatesUtils';
+import {get, isNil, isUndefined, isArray} from 'lodash';
 
 const cqlToOgc = (cqlFilter, fOpts) => {
     const fb = filterBuilder(fOpts);
@@ -20,7 +21,6 @@ const cqlToOgc = (cqlFilter, fOpts) => {
     return toFilter(read(cqlFilter));
 };
 
-const {get, isNil, isUndefined, isArray} = require('lodash');
 const escapeCQLStrings = str => str && str.replace ? str.replace(/\'/g, "''") : str;
 
 const checkOperatorValidity = (value, operator) => {

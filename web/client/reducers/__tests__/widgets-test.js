@@ -22,9 +22,9 @@ import {
     toggleCollapse,
     toggleCollapseAll,
     toggleTray,
-    DEFAULT_TARGET,
+    DEFAULT_TARGET
 } from '../../actions/widgets';
-
+import {initialState, changeLayoutAction} from '../../test-resources/widgets/layout-state-collapse.js';
 import { configureMap } from '../../actions/config';
 import { dashboardLoaded } from '../../actions/dashboard';
 import widgets from '../widgets';
@@ -188,7 +188,7 @@ describe('Test the widgets reducer', () => {
         expect(state.containers[DEFAULT_TARGET].widgets.length).toBe(1);
     });
     it('widgets toggleCollapse and toggleCollapseAll', () => {
-        const {initialState, changeLayoutAction} = require('../../test-resources/widgets/layout-state-collapse.js');
+
         const widgetToCollapse = getFloatingWidgets({
             widgets: initialState
         })[0];

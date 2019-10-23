@@ -6,7 +6,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// const {isNil} = require('lodash');
 import {
     EDIT_MAP,
     UPDATE_CURRENT_MAP,
@@ -14,7 +13,7 @@ import {
     UPDATE_CURRENT_MAP_PERMISSIONS,
     UPDATE_CURRENT_MAP_GROUPS,
     RESET_CURRENT_MAP,
-    ADD_CURRENT_MAP_PERMISSION,
+    ADD_CURRENT_MAP_PERMISSION
 } from '../actions/currentMap';
 
 import {
@@ -39,7 +38,7 @@ import {
     SET_UNSAVED_CHANGES,
     METADATA_CHANGED,
     DETAILS_SAVING,
-    TOGGLE_DETAILS_EDITABILITY,
+    TOGGLE_DETAILS_EDITABILITY
 } from '../actions/maps';
 
 import assign from 'object-assign';

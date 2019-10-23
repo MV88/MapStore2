@@ -9,7 +9,14 @@ import assign from 'object-assign';
 
 import { mapConfigHistory, createHistory } from '../utils/MapHistoryUtils';
 
-const map = mapConfigHistory(require('../reducers/map'));
+import mapReducer from '../reducers/map';
+const map = mapConfigHistory(mapReducer);
+import localConfig from '../reducers/localConfig';
+import locale from '../reducers/locale';
+import browser from '../reducers/browser';
+import controls from '../reducers/controls';
+import theme from '../reducers/theme';
+import help from '../reducers/help';
 
 import layers from '../reducers/layers';
 import mapConfig from '../reducers/config';
@@ -24,6 +31,7 @@ import { routerMiddleware, connectRouter } from 'connected-react-router';
 import layersEpics from '../epics/layers';
 import controlsEpics from '../epics/controls';
 import timeManagerEpics from '../epics/dimension';
+import History from './History';
 const standardEpics = {
     ...layersEpics,
     ...controlsEpics,
@@ -31,16 +39,16 @@ const standardEpics = {
 };
 
 export default (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, appEpics = {}, plugins = {}, storeOpts = {}) => {
-    const history = storeOpts.noRouter ? null : require('./History').default;
+    const history = storeOpts.noRouter ? null : History;
     const allReducers = combineReducers(plugins, {
         ...appReducers,
-        localConfig: require('../reducers/localConfig'),
-        locale: require('../reducers/locale'),
+        localConfig,
+        locale,
         locales: () => {return null; },
-        browser: require('../reducers/browser'),
-        controls: require('../reducers/controls'),
-        theme: require('../reducers/theme'),
-        help: require('../reducers/help'),
+        browser,
+        controls,
+        theme,
+        help,
         map: () => {return null; },
         mapInitialConfig: () => {return null; },
         layers: () => {return null; },

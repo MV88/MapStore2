@@ -24,9 +24,9 @@ import {
     tempBackgroundSelector,
     centerToMarkerSelector,
     getLayersWithDimension,
-    elementSelector,
+    elementSelector
 } from '../layers';
-
+import {defaultIconStyle} from '../../utils/SearchUtils';
 describe('Test layers selectors', () => {
     it('test getLayerFromName', () => {
         let layer = getLayerFromName({}, "ws:layer_1");
@@ -142,8 +142,6 @@ describe('Test layers selectors', () => {
         }});
         expect(props.length).toBe(2);
         expect(props[1].type).toBe("vector");
-        const {defaultIconStyle} = require('../../utils/SearchUtils');
-
         expect(props[1].style).toEqual(defaultIconStyle);
     });
 
@@ -151,8 +149,6 @@ describe('Test layers selectors', () => {
         const style = {
             color: '#ff0000'
         };
-
-        const {defaultIconStyle} = require('../../utils/SearchUtils');
 
         const props = layerSelectorWithMarkers({config: {layers: [{type: "osm"}]}, search: {
             markerPosition: {
@@ -168,7 +164,6 @@ describe('Test layers selectors', () => {
         expect(props[1].type).toBe("vector");
         expect(props[1].style).toEqual({...defaultIconStyle, ...style});
     });
-
 
     it('test layerSelectorWithMarkers with override layers from additionallayers', () => {
         const state = {

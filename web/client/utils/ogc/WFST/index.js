@@ -9,7 +9,6 @@ import { transaction } from './transaction';
 
 import { insert } from './insert';
 
-// const {update, property} = require('./update');
 import { deleteFeature, deleteFeaturesByFilter, deleteById } from './delete';
 
 export default {

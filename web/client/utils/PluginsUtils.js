@@ -6,15 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import assign from 'object-assign';
-import { omit, isObject, head, isArray, isString, memoize, get, endsWith } from 'lodash';
-import { combineReducers } from 'redux';
-import { connect } from 'react-redux';
 import url from 'url';
-const defaultMonitoredState = [{name: "mapType", path: 'maptype.mapType'}, {name: "user", path: 'security.user'}];
+
+import { endsWith, get, head, isArray, isObject, isString, memoize, omit } from 'lodash';
+import assign from 'object-assign';
+import React from 'react';
+import { connect } from 'react-redux';
+import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
+
+const defaultMonitoredState = [{name: "mapType", path: 'maptype.mapType'}, {name: "user", path: 'security.user'}];
+
 
 /**
  * Gives a reduced version of the status to check.
@@ -400,6 +402,8 @@ const PluginsUtils = {
      * @param {promise} config.loader: promise that will return the loaded implementation
      *
      * @example statically loaded plugin
+     * import my from '.../reducers/my';
+     * import epics from '.../epics/my';
      * createPlugin('My', {
      *  component: MyPluginComponent,
      *  options: {...},
@@ -410,16 +414,18 @@ const PluginsUtils = {
      *          ...
      *      }
      *  },
-     *  reducers: {my: require('...')},
-     *  epics: {myEpic: require('...')}
+     *  reducers: {my},
+     *  epics
      * });
      *
      * @example lazy loaded plugin
+     * import my from '...';
+     * import epics from '...';
      * createPlugin('My', {
      *  enabler: (state) => state.my.enabled || false,
      *  loader: () => new Promise((resolve) => {
      *    require.ensure(['...'], () => {
-     *        const MyComponent = require('...');
+     *        import MyComponent from '...');
      *        ...
      *        const MyPlugin = connect(...)(MyComponent);
      *        resolve(MyPlugin);
@@ -433,8 +439,8 @@ const PluginsUtils = {
      *          ...
      *      }
      *  },
-     *  reducers: {my: require('...')},
-     *  epics: {myEpic: require('...')}
+     *  reducers: {my},
+     *  epics
      * });
      */
     createPlugin: (name, { component, options = {}, containers = {}, reducers = {}, epics = {}, lazy = false, enabler = () => true, loader}) => {

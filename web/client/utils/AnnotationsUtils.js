@@ -16,7 +16,7 @@ import { values, isNil, slice, head, castArray, last, isArray, findIndex, isStri
 import uuid from 'uuid';
 import turfCenter from '@turf/center';
 import assign from 'object-assign';
-
+import missingSVG from '../product/assets/symbols/symbolMissing.svg';
 
 const STYLE_CIRCLE = {
     color: '#ffcc33',
@@ -571,7 +571,7 @@ const AnnotationsUtils = {
         return symbolErrors.length && findIndex(symbolErrors, (s) => s === error) !== -1;
     },
     isAMissingSymbol: (style) => {
-        return style.symbolUrlCustomized === require('../product/assets/symbols/symbolMissing.svg');
+        return style.symbolUrlCustomized === missingSVG;
     },
     /**
      * it tells if the filtered list of the coordinates is a geojson polygon,
