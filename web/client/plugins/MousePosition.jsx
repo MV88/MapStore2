@@ -65,8 +65,6 @@ const MousePositionButton = connect((state) => ({
     onClick: changeMousePositionState
 })(ToggleButton);
 
-
-
 class MousePosition extends React.Component {
     static propTypes = {
         degreesTemplate: PropTypes.string,
@@ -78,8 +76,9 @@ class MousePosition extends React.Component {
         projectedTemplate: 'MousePositionLabelYX'
     };
 
-    getTemplate = (template) => {
-        return require('../components/mapcontrols/mouseposition/' + template);
+    getTemplate = async(template) => {
+        const templ = await import(`../components/mapcontrols/mouseposition/${template}`);
+        return templ;
     };
     render() {
         const { degreesTemplate, projectedTemplate, ...other} = this.props;

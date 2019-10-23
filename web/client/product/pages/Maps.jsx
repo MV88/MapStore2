@@ -6,16 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '../assets/css/maps.css';
+
+import url from 'url';
+
 import PropTypes from 'prop-types';
 import React from 'react';
-
-import '../assets/css/maps.css';
 import { connect } from 'react-redux';
-import url from 'url';
-const urlQuery = url.parse(window.location.href, true).query;
 
 import { resetControls } from '../../actions/controls';
 import Page from '../../containers/Page';
+
+const urlQuery = url.parse(window.location.href, true).query;
+
 
 class MapsPage extends React.Component {
     static propTypes = {
@@ -33,7 +36,7 @@ class MapsPage extends React.Component {
     UNSAFE_componentWillMount() {
         if (this.props.match.params.mapType && this.props.match.params.mapId) {
             if (this.props.mode === 'mobile') {
-                require('../assets/css/mobile.css');
+                import('../assets/css/mobile.css');
             }
             this.props.reset();
         }

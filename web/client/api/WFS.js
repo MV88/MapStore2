@@ -5,10 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import axios from '../libs/ajax';
 
 import urlUtil from 'url';
+
 import assign from 'object-assign';
+
+import axios from '../libs/ajax';
 
 const Api = {
     /**
@@ -36,15 +38,15 @@ const Api = {
                 request: "DescribeFeatureType"
             }, parsed.query)
         }));
-        return new Promise((resolve) => {
-            require.ensure(['../utils/ogc/WFS'], () => {
-                const {unmarshaller} = require('../utils/ogc/WFS');
-                resolve(axios.get(describeLayerUrl).then((response) => {
-                    let json = unmarshaller.unmarshalString(response.data);
-                    return json && json.value;
+        return new Promise(async(resolve) => {
+            const {unmarshaller} = await import(
+                /* webpackChunkName: "WFS_OGC_Utils" */
+                '../utils/ogc/WFS');
+            resolve(axios.get(describeLayerUrl).then((response) => {
+                let json = unmarshaller.unmarshalString(response.data);
+                return json && json.value;
 
-                }));
-            });
+            }));
         });
     }
 };

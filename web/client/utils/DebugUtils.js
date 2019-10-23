@@ -7,9 +7,8 @@
  */
 import url from 'url';
 
-import { createStore, compose, applyMiddleware } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-
 
 const urlQuery = url.parse(window.location.href, true).query;
 /* eslint-disable */
@@ -22,14 +21,14 @@ var warningFilterKey = function(warning) {
 };
 
 var DebugUtils = {
-    createDebugStore: function(reducer, initialState, userMiddlewares, enhancer) {
+    createDebugStore: async function(reducer, initialState, userMiddlewares, enhancer) {
         let finalCreateStore;
         if (urlQuery && urlQuery.debug && __DEVTOOLS__) {
-            let logger = require('redux-logger').default;
-            let immutable = require('redux-immutable-state-invariant').default();
+            let logger = await import('redux-logger');
+            let immutable = await import('redux-immutable-state-invariant').default();
             let middlewares = [immutable, thunkMiddleware, logger].concat(userMiddlewares || []);
-            const {persistState} = require('redux-devtools');
-            const DevTools = require('../components/development/DevTools');
+            const {persistState} = await import('redux-devtools');
+            const DevTools = await import('../components/development/DevTools');
 
             finalCreateStore = compose(
                 applyMiddleware.apply(null, middlewares),

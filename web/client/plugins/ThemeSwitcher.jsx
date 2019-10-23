@@ -6,10 +6,12 @@
  * LICENSE file in the root directory of this source tree.
 */
 
+import assign from 'object-assign';
 import { connect } from 'react-redux';
 
 import { selectTheme } from '../actions/theme';
-import assign from 'object-assign';
+import ThemeSwitcherComp from '../components/theme/ThemeSwitcher';
+import theme from '../reducers/theme';
 import themes from '../themes';
 
 const ThemeSwitcherPlugin = connect((s) => ({
@@ -17,7 +19,7 @@ const ThemeSwitcherPlugin = connect((s) => ({
     themes
 }), {
     onThemeSelected: selectTheme
-})(require('../components/theme/ThemeSwitcher'));
+})(ThemeSwitcherComp);
 
 export default {
     ThemeSwitcherPlugin: assign(ThemeSwitcherPlugin, {
@@ -30,6 +32,6 @@ export default {
         }
     }),
     reducers: {
-        theme: require('../reducers/theme')
+        theme
     }
 };

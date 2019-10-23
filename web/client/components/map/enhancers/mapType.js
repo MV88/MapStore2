@@ -1,5 +1,3 @@
-import { withPropsOnChange } from 'recompose';
-
 /*
  * Copyright 2018, GeoSolutions Sas.
  * All rights reserved.
@@ -8,10 +6,13 @@ import { withPropsOnChange } from 'recompose';
  * LICENSE file in the root directory of this source tree.
  */
 
+import { withPropsOnChange } from 'recompose';
 
 export default withPropsOnChange(
     ['mapType', 'plugins'],
-    ({mapType, plugins} = {}) => ({
-        plugins: {...require('../plugins/' + mapType + '.js')(), ...plugins}
-    })
+    async({mapType, plugins} = {}) => {
+        const plugin = await import(
+            `../plugins/${mapType}.json`);
+        return {plugins: {...plugin(), ...plugins}};
+    }
 );

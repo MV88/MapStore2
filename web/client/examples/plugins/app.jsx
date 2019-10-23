@@ -6,42 +6,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import Babel from 'babel-standalone';
+import assign from 'object-assign';
+import codeSample from "raw-loader!./sample.js.raw";
+import themeSample from "raw-loader!./sample.less.raw";
 import React from 'react';
+import {FormControl, FormGroup} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
-import {connect, Provider} from 'react-redux';
-
-import ConfigUtils from '../../utils/ConfigUtils';
-import LocaleUtils from '../../utils/LocaleUtils';
-import PluginsUtils from '../../utils/PluginsUtils';
-import ThemeUtils from '../../utils/ThemeUtils';
+import {Provider, connect} from 'react-redux';
 
 import {changeBrowserProperties} from '../../actions/browser';
 import {loadMapConfig} from '../../actions/config';
 import {loadLocale} from '../../actions/locale';
+import {changeMapType} from '../../actions/maptype';
 import {loadPrintCapabilities} from '../../actions/print';
 import {selectTheme} from '../../actions/theme';
-import {changeMapType} from '../../actions/maptype';
-import PluginsContainerComp from '../../components/plugins/PluginsContainer';
-import ThemeSwitcherComp from '../../components/theme/ThemeSwitcher';
-import Template from '../../components/data/template/jsx/Template';
-import themes from '../../themes';
-import ThemeComp from '../../components/theme/Theme';
-import {FormControl, FormGroup} from 'react-bootstrap';
-import SaveAndLoad from './components/SaveAndLoad';
-import Debug from '../../components/development/Debug';
-import assign from 'object-assign';
-import codeSample from "raw-loader!./sample.js.raw";
-import themeSample from "raw-loader!./sample.less.raw";
-import {savePluginConfig, compileError, resetError} from './actions/config';
-import storeCreator from './store';
-import('./assets/css/plugins.css');
-
-import Babel from 'babel-standalone';
-import {plugins} from './plugins';
 import LocalizedComp from '../../components/I18N/Localized';
+import Template from '../../components/data/template/jsx/Template';
+import Debug from '../../components/development/Debug';
+import PluginsContainerComp from '../../components/plugins/PluginsContainer';
+import ThemeComp from '../../components/theme/Theme';
+import ThemeSwitcherComp from '../../components/theme/ThemeSwitcher';
+import themes from '../../themes';
+import ConfigUtils from '../../utils/ConfigUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
+import ThemeUtils from '../../utils/ThemeUtils';
+import {compileError, resetError, savePluginConfig} from './actions/config';
 import PluginConfigurator from './components/PluginConfigurator';
 import PluginCreatorComp from './components/PluginCreator';
+import SaveAndLoad from './components/SaveAndLoad';
 import ThemeCreatorComp from './components/ThemeCreator';
+import {plugins} from './plugins';
+import storeCreator from './store';
+
+import('./assets/css/plugins.css');
+
 
 const startApp = () => {
     const PluginsContainer = connect((state) => ({
@@ -148,11 +148,11 @@ const startApp = () => {
         }
     };
 
-    const customPlugin = (callback, code) => {
-        require.ensure(['./context'], (require) => {
-            const context = require('./context');
-            customPluginApply(callback, code, context);
-        });
+    const customPlugin = async(callback, code) => {
+        const context = await import(
+            /* webpackChunkName: "context" */
+            './context');
+        customPluginApply(callback, code, context);
     };
 
     const PluginCreator = connect((state) => ({
@@ -287,10 +287,13 @@ const startApp = () => {
 };
 
 if (!global.Intl ) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
+    import(
+        /* webpackChunkName: "intl" */
+        'intl').then(module => {
+        // TODO CHECK THIS IS OK
+        global.Intl = module;
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
         startApp();
     });
 } else {

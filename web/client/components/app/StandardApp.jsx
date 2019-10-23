@@ -5,28 +5,30 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import { Provider } from 'react-redux';
+import './appPolyfill';
+
+import url from 'url';
+
+import { isArray, isObject } from 'lodash';
+import assign from 'object-assign';
+import proj4 from 'proj4';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import html5Backend from 'react-dnd-html5-backend';
-import proj4 from 'proj4';
+import ErrorBoundary from 'react-error-boundary';
+import { Provider } from 'react-redux';
+
 import { changeBrowserProperties } from '../../actions/browser';
-import { loadLocale } from '../../actions/locale';
 import { localConfigLoaded } from '../../actions/localConfig';
+import { loadLocale } from '../../actions/locale';
 import { loadPrintCapabilities } from '../../actions/print';
 import ConfigUtils from '../../utils/ConfigUtils';
 import LocaleUtils from '../../utils/LocaleUtils';
 import PluginsUtils from '../../utils/PluginsUtils';
-import assign from 'object-assign';
-import url from 'url';
-import { isObject, isArray } from 'lodash';
 
 const urlQuery = url.parse(window.location.href, true).query;
-
-import './appPolyfill';
-import ErrorBoundary from 'react-error-boundary';
 
 /**
  * Standard MapStore2 application component
@@ -80,14 +82,14 @@ class StandardApp extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-        const onInit = (config) => {
+        const onInit = async(config) => {
             if (!global.Intl ) {
-                require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-                    global.Intl = require('intl');
-                    require('intl/locale-data/jsonp/en.js');
-                    require('intl/locale-data/jsonp/it.js');
-                    this.init(config);
-                });
+                global.Intl = await import(
+                    /* webpackChunkName: "intl" */
+                    'intl');
+                import('intl/locale-data/jsonp/en.js');
+                import('intl/locale-data/jsonp/it.js');
+                this.init(config);
             } else {
                 this.init(config);
             }

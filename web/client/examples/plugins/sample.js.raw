@@ -1,6 +1,6 @@
 const clickHandler = () => ({type: 'CLICKED'});
 
-const ToggleButton = require('./components/buttons/ToggleButton.jsx');
+import ToggleButton from './components/buttons/ToggleButton.jsx';
 
 const Comp = connect((state) => ({
     msg: state.custom.comp && state.custom.comp.msg || "Click me!"

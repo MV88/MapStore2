@@ -14,11 +14,11 @@ import Map from '../openlayers/Map';
 import MeasurementSupport from '../openlayers/MeasurementSupport';
 import Overview from '../openlayers/Overview';
 import ScaleBar from '../openlayers/ScaleBar';
-import * as leafletPlugins from '../openlayers/plugins/index';
+import * as openlayersPlugins from '../openlayers/plugins/index';
 
 export default () => {
     return {
-        ...leafletPlugins,
+        ...openlayersPlugins,
         Map,
         Layer,
         Feature,

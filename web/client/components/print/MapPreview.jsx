@@ -1,5 +1,5 @@
+import assign from 'object-assign';
 import PropTypes from 'prop-types';
-
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,11 +8,10 @@ import PropTypes from 'prop-types';
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
-import assign from 'object-assign';
-import ScaleBox from '../mapcontrols/scale/ScaleBox';
 import { Button, Glyphicon } from 'react-bootstrap';
+
 import PrintUtils from '../../utils/PrintUtils';
+import ScaleBox from '../mapcontrols/scale/ScaleBox';
 
 let PMap;
 let Layer;
@@ -55,12 +54,12 @@ class MapPreview extends React.Component {
         useFixedScales: false
     };
 
-    UNSAFE_componentWillMount() {
-        const mapComponents = require('../map/' + this.props.mapType + '/index');
+    async UNSAFE_componentWillMount() {
+        const mapComponents = await import(`../map/${this.props.mapType}/index`);
         PMap = mapComponents.LMap;
         Layer = mapComponents.LLayer;
         Feature = mapComponents.Feature;
-        require('../map/' + this.props.mapType + '/plugins/index');
+        import(`../map/${this.props.mapType}/plugins/index`);
     }
 
     getRatio = () => {

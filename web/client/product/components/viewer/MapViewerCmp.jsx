@@ -62,7 +62,7 @@ class MapViewerComponent extends React.Component {
             oldLocation = this.props.location;
             if (!ConfigUtils.getDefaults().ignoreMobileCss) {
                 if (this.props.mode === 'mobile') {
-                    require('../../assets/css/mobile.css');
+                    import('../../assets/css/mobile.css');
                 }
             }
             const urlQuery = url.parse(window.location.href, true).query;

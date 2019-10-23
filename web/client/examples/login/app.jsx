@@ -1,3 +1,5 @@
+import url from 'url';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,19 +8,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-// initializes Redux store
-import store from './stores/store';
-
-import { loadMapConfig } from '../../actions/config';
 import { changeBrowserProperties } from '../../actions/browser';
+import { loadMapConfig } from '../../actions/config';
 import { loadLocale } from '../../actions/locale';
 import ConfigUtils from '../../utils/ConfigUtils';
 import LocaleUtils from '../../utils/LocaleUtils';
-import url from 'url';
+import Login from './containers/Login';
+// initializes Redux store
+import store from './stores/store';
 
 // reads parameter(s) from the url
 const urlQuery = url.parse(window.location.href, true).query;
@@ -31,7 +31,6 @@ store.dispatch(loadMapConfig(configUrl, legacy));
 
 store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
 
-import Login from './containers/Login';
 
 // we spread the store to the all application
 // wrapping it with a Provider component
@@ -53,10 +52,13 @@ const startApp = () => {
 };
 
 if (!global.Intl ) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
+    import(
+        /* webpackChunkName: "intl" */
+        'intl').then(module => {
+        // TODO CHECK THIS IS OK
+        global.Intl = module;
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
         startApp();
     });
 } else {

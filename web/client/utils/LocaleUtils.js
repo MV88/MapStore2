@@ -9,16 +9,17 @@ import url from 'url';
 
 import { isObject } from 'lodash';
 import { addLocaleData } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import it from 'react-intl/locale-data/it';
-import fr from 'react-intl/locale-data/fr';
 import de from 'react-intl/locale-data/de';
+import en from 'react-intl/locale-data/en';
 import es from 'react-intl/locale-data/es';
-import nl from 'react-intl/locale-data/nl';
-import zh from 'react-intl/locale-data/zh';
+import fr from 'react-intl/locale-data/fr';
 import hr from 'react-intl/locale-data/hr';
+import it from 'react-intl/locale-data/it';
+import nl from 'react-intl/locale-data/nl';
 import pt from 'react-intl/locale-data/pt';
 import vi from 'react-intl/locale-data/vi';
+import zh from 'react-intl/locale-data/zh';
+
 addLocaleData([...en, ...it, ...fr, ...de, ...es, ...nl, ...zh, ...hr, ...pt, ...vi]);
 
 /*
@@ -85,23 +86,23 @@ let errorParser = {};
  * @memberof utils
  */
 const LocaleUtils = {
-    ensureIntl(callback) {
-        require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js', 'intl/locale-data/jsonp/fr.js', 'intl/locale-data/jsonp/de.js', 'intl/locale-data/jsonp/es.js', 'intl/locale-data/jsonp/nl.js', 'intl/locale-data/jsonp/zh.js', 'intl/locale-data/jsonp/hr.js', 'intl/locale-data/jsonp/vi.js'], (require) => {
-            global.Intl = require('intl');
-            require('intl/locale-data/jsonp/en.js');
-            require('intl/locale-data/jsonp/it.js');
-            require('intl/locale-data/jsonp/fr.js');
-            require('intl/locale-data/jsonp/de.js');
-            require('intl/locale-data/jsonp/es.js');
-            require('intl/locale-data/jsonp/nl.js');
-            require('intl/locale-data/jsonp/zh.js');
-            require('intl/locale-data/jsonp/hr.js');
-            require('intl/locale-data/jsonp/pt.js');
-            require('intl/locale-data/jsonp/vi.js');
-            if (callback) {
-                callback();
-            }
-        });
+    async ensureIntl(callback) {
+        global.Intl = await import(
+            /* webpackChunkName: "intl" */
+            'intl');
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
+        import('intl/locale-data/jsonp/fr.js');
+        import('intl/locale-data/jsonp/de.js');
+        import('intl/locale-data/jsonp/es.js');
+        import('intl/locale-data/jsonp/nl.js');
+        import('intl/locale-data/jsonp/zh.js');
+        import('intl/locale-data/jsonp/hr.js');
+        import('intl/locale-data/jsonp/pt.js');
+        import('intl/locale-data/jsonp/vi.js');
+        if (callback) {
+            callback();
+        }
     },
     setSupportedLocales: function(locales) {
         supportedLocales = locales;

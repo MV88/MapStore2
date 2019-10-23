@@ -38,10 +38,13 @@ const startApp = () => {
 };
 
 if (!global.Intl ) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
+    import(
+        /* webpackChunkName: "intl" */
+        'intl').then(module => {
+        // TODO CHECK THIS IS OK
+        global.Intl = module;
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
         startApp();
     });
 } else {

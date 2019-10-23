@@ -6,29 +6,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
-import { changeBrowserProperties } from '../../actions/browser';
-import ConfigUtils from '../../utils/ConfigUtils';
-import Localized from '../../components/I18N/Localized';
-import browser from '../../reducers/browser';
-import { Modal, Grid, Row, Col, Button } from 'react-bootstrap';
-import LMap from '../../components/map/leaflet/Map';
-import LLayer from '../../components/map/leaflet/Layer';
-import mouseposition from '../../reducers/mousePosition';
-import { changeMousePosition } from '../../actions/mousePosition';
-var store = createStore(combineReducers({browser, mouseposition}));
-
 import '../../components/map/leaflet/plugins/OSMLayer';
 import './components/mouseposition.css';
+
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Button, Col, Grid, Modal, Row } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import { combineReducers, createStore } from 'redux';
+
+import { changeBrowserProperties } from '../../actions/browser';
+import { changeMousePosition } from '../../actions/mousePosition';
+import Localized from '../../components/I18N/Localized';
+import LLayer from '../../components/map/leaflet/Layer';
+import LMap from '../../components/map/leaflet/Map';
 import MousePosition from "../../components/mapcontrols/mouseposition/MousePosition";
 import LabelDD from "../../components/mapcontrols/mouseposition/MousePositionLabelDD";
 import LabelDM from "../../components/mapcontrols/mouseposition/MousePositionLabelDM";
 import LabelDMSNW from "../../components/mapcontrols/mouseposition/MousePositionLabelDMSNW";
+import browser from '../../reducers/browser';
+import mouseposition from '../../reducers/mousePosition';
+import ConfigUtils from '../../utils/ConfigUtils';
 import SearchGeoS from "./components/FindGeoSolutions.jsx";
+
+var store = createStore(combineReducers({browser, mouseposition}));
+
 
 function startApp() {
 
@@ -133,10 +135,13 @@ function startApp() {
 }
 
 if (!global.Intl ) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
+    import(
+        /* webpackChunkName: "intl" */
+        'intl').then(module => {
+        // TODO CHECK THIS IS OK
+        global.Intl = module;
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
         startApp();
     });
 } else {

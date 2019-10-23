@@ -6,24 +6,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
+import { Button, Carousel, CarouselItem, Panel } from 'react-bootstrap';
 
 import I18N from '../../../components/I18N/I18N';
-import { Panel, Button, Carousel, CarouselItem } from 'react-bootstrap';
-import viewer from '../../assets/img/Viewer.jpg';
-import '../../assets/img/3DViewer.jpg';
-import mouseposition from '../../assets/img/MousePosition.jpg';
-import scalebar from '../../assets/img/ScaleBar.jpg';
-import layertree from '../../assets/img/LayerTree.jpg';
-import queryform from '../../assets/img/QueryForm.jpg';
-import featuregrid from '../../assets/img/FeatureGrid.jpg';
-import print from '../../assets/img/Print.jpg';
-import plugins from '../../assets/img/Plugins.jpg';
+import viewer3d from '../../assets/img/3DViewer.jpg';
 import api from '../../assets/img/Api.jpg';
+import featuregrid from '../../assets/img/FeatureGrid.jpg';
+import layertree from '../../assets/img/LayerTree.jpg';
+import mouseposition from '../../assets/img/MousePosition.jpg';
+import plugins from '../../assets/img/Plugins.jpg';
+import print from '../../assets/img/Print.jpg';
+import queryform from '../../assets/img/QueryForm.jpg';
+import scalebar from '../../assets/img/ScaleBar.jpg';
+import viewer from '../../assets/img/Viewer.jpg';
 import rasterstyler from '../../assets/img/rasterstyler.jpg';
 
 const carouselImages = {
     viewer,
-    "3dviewer",
+    viewer3d,
     mouseposition,
     scalebar,
     layertree,

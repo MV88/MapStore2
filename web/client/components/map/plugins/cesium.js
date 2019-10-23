@@ -7,11 +7,18 @@
 */
 import { createSink } from 'recompose';
 
-export default () => {
-    require('../cesium/plugins/index');
+export default async() => {
+    import('../cesium/plugins/index');
+    const Map = await import(
+        /* webpackChunkName: "cesium_Map" */
+        '../cesium/Map');
+    const Layer = await import(
+        /* webpackChunkName: "cesium_Layer" */
+        '../cesium/Layer');
+
     return {
-        Map: require('../cesium/Map'),
-        Layer: require('../cesium/Layer'),
+        Map,
+        Layer,
         Feature: createSink(() => {})
     };
 };

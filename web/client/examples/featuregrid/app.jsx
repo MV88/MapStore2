@@ -1,3 +1,4 @@
+import assign from 'object-assign';
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,18 +7,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+
 import { changeBrowserProperties } from '../../actions/browser';
 import { loadLocale } from '../../actions/locale';
 import ConfigUtils from '../../utils/ConfigUtils';
 import LocaleUtils from '../../utils/LocaleUtils';
 import PluginsUtils from '../../utils/PluginsUtils';
-import assign from 'object-assign';
+import App from './containers/App';
 import {plugins, requires} from './plugins.js';
 import store from './stores/store';
-import App from './containers/App';
 
 function startApp() {
     store(plugins);
@@ -36,10 +36,13 @@ function startApp() {
     );
 }
 if (!global.Intl ) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
+    import(
+        /* webpackChunkName: "intl" */
+        'intl').then(module => {
+        // TODO CHECK THIS IS OK
+        global.Intl = module;
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
         startApp();
     });
 } else {

@@ -6,22 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+    castArray,
+    findIndex,
+    head,
+    isArray,
+    isEmpty,
+    isNil,
+    isObject,
+    isString,
+    pick,
+} from 'lodash';
 import assign from 'object-assign';
-
 import toBbox from 'turf-bbox';
 import uuidv1 from 'uuid/v1';
 
-import {
-    isString,
-    isObject,
-    isArray,
-    head,
-    castArray,
-    isEmpty,
-    findIndex,
-    pick,
-    isNil,
-} from 'lodash';
+import SecurityUtils from './SecurityUtils';
 
 let regGeoServerRule = /\/[\w- ]*geoserver[\w- ]*\//;
 
@@ -75,8 +75,8 @@ const addBaseParams = (url, params) => {
     return url.indexOf('?') === -1 ? (url + '?' + query) : (url + '&' + query);
 };
 
-const isSupportedLayer = (layer, maptype) => {
-    const Layers = require('./' + maptype + '/Layers');
+const isSupportedLayer = async(layer, maptype) => {
+    const Layers = await import(`./${maptype}/Layers`);
     if (layer.type === "mapquest" || layer.type === "bing") {
         return Layers.isSupported(layer.type) && layer.apiKey && layer.apiKey !== "__API_KEY_MAPQUEST__" && !layer.invalid;
     }
@@ -250,7 +250,6 @@ const getURLs = (urls, queryParametersString = '') => {
     return urls.map((url) => url.split("\?")[0] + queryParametersString);
 };
 
-import SecurityUtils from './SecurityUtils';
 
 const LayerCustomUtils = {};
 

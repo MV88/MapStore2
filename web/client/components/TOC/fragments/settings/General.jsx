@@ -6,19 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import PropTypes from 'prop-types';
-import Spinner from 'react-spinkit';
-import { FormControl, FormGroup, ControlLabel, InputGroup, Col } from 'react-bootstrap';
-import Message from '../../../I18N/Message';
-import { SimpleSelect } from 'react-selectize';
-import { isString, isObject, find } from 'lodash';
-import LocaleUtils from '../../../../utils/LocaleUtils';
-import assign from 'object-assign';
 import 'react-selectize/themes/index.css';
-import { Grid } from 'react-bootstrap';
+
+import { find, isObject, isString } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Col, ControlLabel, FormControl, FormGroup, Grid, InputGroup } from 'react-bootstrap';
+import { SimpleSelect } from 'react-selectize';
+import Spinner from 'react-spinkit';
+
+import LocaleUtils from '../../../../utils/LocaleUtils';
 import { createFromSearch, flattenGroups } from '../../../../utils/TOCUtils';
+import Message from '../../../I18N/Message';
 
 /**
  * General Settings form for layer
@@ -84,10 +84,10 @@ class General extends React.Component {
                     </FormGroup>
                     {hideTitleTranslations || (<FormGroup>
                         <ControlLabel><Message msgId="layerProperties.titleTranslations" /></ControlLabel>
-                        {Object.keys(locales).map((a) => {
+                        {Object.keys(locales).map(async(a) => {
                             let flagImgSrc;
                             try {
-                                flagImgSrc = require('../../../I18N/images/flags/' + locales[a].code + '.png');
+                                flagImgSrc = await import(`../../../I18N/images/flags/${locales[a].code}.png`);
                             } catch (e) {
                                 flagImgSrc = false;
                             }

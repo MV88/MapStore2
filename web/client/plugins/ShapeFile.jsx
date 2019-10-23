@@ -6,57 +6,57 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Promise } from 'es6-promise';
 import React from 'react';
-
+import { Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
+
+import { toggleControl } from '../actions/controls';
+import { addLayer } from '../actions/layers';
+import { zoomToExtent } from '../actions/map';
+import {
+    onLayerAdded,
+    onSelectLayer,
+    onShapeChoosen,
+    onShapeError,
+    onShapeSuccess,
+    shapeLoading,
+    updateShapeBBox
+} from '../actions/shapefile';
+import shapefile from '../reducers/shapefile';
+import style from '../reducers/style';
+import { createPlugin } from '../utils/PluginsUtils';
 import Message from './locale/Message';
 
-import {
-    onShapeError,
-    shapeLoading,
-    onShapeChoosen,
-    onSelectLayer,
-    onLayerAdded,
-    updateShapeBBox,
-    onShapeSuccess,
-} from '../actions/shapefile';
+const loader = () => new Promise(async(resolve) => {
+    const ShapeFile = await import(
+        /* webpackChunkName: ShapeFileComp */
+        './shapefile/ShapeFile'
+    );
+    const ShapeFilePlugin = connect((state) => (
+        {
+            visible: state.controls && state.controls.shapefile && state.controls.shapefile.enabled,
+            layers: state.shapefile && state.shapefile.layers || null,
+            selected: state.shapefile && state.shapefile.selected || null,
+            bbox: state.shapefile && state.shapefile.bbox || null,
+            success: state.shapefile && state.shapefile.success || null,
+            error: state.shapefile && state.shapefile.error || null,
+            shapeStyle: state.style || {}
+        }
+    ), {
+        onShapeChoosen: onShapeChoosen,
+        onLayerAdded: onLayerAdded,
+        onSelectLayer: onSelectLayer,
+        onShapeError: onShapeError,
+        onShapeSuccess: onShapeSuccess,
+        addShapeLayer: addLayer,
+        onZoomSelected: zoomToExtent,
+        updateShapeBBox: updateShapeBBox,
+        shapeLoading: shapeLoading,
+        toggleControl: toggleControl.bind(null, 'shapefile', null)
+    })(ShapeFile);
 
-import { zoomToExtent } from '../actions/map';
-import { addLayer } from '../actions/layers';
-import { toggleControl } from '../actions/controls';
-import { Glyphicon } from 'react-bootstrap';
-import { createPlugin } from '../utils/PluginsUtils';
-import { Promise } from 'es6-promise';
-
-const loader = () => new Promise((resolve) => {
-    require.ensure(['./shapefile/ShapeFile'], () => {
-        const ShapeFile = require('./shapefile/ShapeFile');
-
-        const ShapeFilePlugin = connect((state) => (
-            {
-                visible: state.controls && state.controls.shapefile && state.controls.shapefile.enabled,
-                layers: state.shapefile && state.shapefile.layers || null,
-                selected: state.shapefile && state.shapefile.selected || null,
-                bbox: state.shapefile && state.shapefile.bbox || null,
-                success: state.shapefile && state.shapefile.success || null,
-                error: state.shapefile && state.shapefile.error || null,
-                shapeStyle: state.style || {}
-            }
-        ), {
-            onShapeChoosen: onShapeChoosen,
-            onLayerAdded: onLayerAdded,
-            onSelectLayer: onSelectLayer,
-            onShapeError: onShapeError,
-            onShapeSuccess: onShapeSuccess,
-            addShapeLayer: addLayer,
-            onZoomSelected: zoomToExtent,
-            updateShapeBBox: updateShapeBBox,
-            shapeLoading: shapeLoading,
-            toggleControl: toggleControl.bind(null, 'shapefile', null)
-        })(ShapeFile);
-
-        resolve(ShapeFilePlugin);
-    });
+    resolve(ShapeFilePlugin);
 });
 
 export default createPlugin(
@@ -92,8 +92,8 @@ export default createPlugin(
             }
         },
         reducers: {
-            shapefile: require('../reducers/shapefile'),
-            style: require('../reducers/style')
+            shapefile,
+            style
         }
     }
 );

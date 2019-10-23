@@ -6,37 +6,35 @@
 * LICENSE file in the root directory of this source tree.
 */
 
+import assign from 'object-assign';
 import React from 'react';
-
-import { creationError, changeMapView, clickOnMap } from '../../actions/map';
-import { layerLoading, layerLoad, layerError } from '../../actions/layers';
-import { changeMousePosition } from '../../actions/mousePosition';
-import { changeMeasurementState, changeGeometry, resetGeometry, updateMeasures } from '../../actions/measurement';
-import { measurementSelector } from '../../selectors/measurement';
-import { changeSelectionState } from '../../actions/selection';
-import { changeLocateState, onLocateError } from '../../actions/locate';
+import { connect } from 'react-redux';
 
 import {
     changeDrawingStatus,
-    endDrawing,
-    setCurrentStyle,
-    geometryChanged,
     drawStopped,
+    drawingFeatures,
+    endDrawing,
+    geometryChanged,
     selectFeatures,
-    drawingFeatures
+    setCurrentStyle
 } from '../../actions/draw';
-
 import { updateHighlighted } from '../../actions/highlight';
+import { layerError, layerLoad, layerLoading } from '../../actions/layers';
+import { changeLocateState, onLocateError } from '../../actions/locate';
+import { changeMapView, clickOnMap, creationError } from '../../actions/map';
+import { changeGeometry, changeMeasurementState, resetGeometry, updateMeasures } from '../../actions/measurement';
+import { changeMousePosition } from '../../actions/mousePosition';
 import { warning } from '../../actions/notifications';
-import { connect } from 'react-redux';
-import assign from 'object-assign';
+import { changeSelectionState } from '../../actions/selection';
 import { projectionDefsSelector } from '../../selectors/map';
+import { measurementSelector } from '../../selectors/measurement';
 
 const Empty = () => { return <span/>; };
 
-export default (mapType, actions) => {
+export default async(mapType, actions) => {
 
-    const components = require('./' + mapType + '/index');
+    const components = await import(`./${mapType}/index`);
 
     const LMap = connect((state) => ({
         projectionDefs: projectionDefsSelector(state),
@@ -100,7 +98,7 @@ export default (mapType, actions) => {
         changeSelectionState
     })(components.SelectionSupport || Empty);
 
-    require('../../components/map/' + mapType + '/plugins/index');
+    import(`../../components/map/${mapType}'/plugins/index`);
     const LLayer = connect(null, {onWarning: warning})( components.Layer || Empty);
 
     return {
