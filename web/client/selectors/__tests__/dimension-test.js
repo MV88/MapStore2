@@ -14,7 +14,7 @@ import { updateLayerDimensionData } from '../../actions/dimension';
 import {
     layerDimensionRangeSelector,
     layerDimensionSelectorCreator,
-    layerTimeSequenceSelectorCreator,
+    layerTimeSequenceSelectorCreator
 } from '../dimension';
 
 describe('Test dimension selectors', () => {

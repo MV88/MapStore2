@@ -21,7 +21,7 @@ import {
     geostoryDeleted,
     GEOSTORY_DELETED,
     reloadGeostories,
-    RELOAD,
+    RELOAD
 } from '../geostories';
 
 describe('geostories (browse) actions', () => {

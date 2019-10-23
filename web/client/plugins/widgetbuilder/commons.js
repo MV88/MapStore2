@@ -12,7 +12,7 @@ import {
     dependenciesSelector,
     getEditorSettings,
     getWidgetLayer,
-    availableDependenciesSelector,
+    availableDependenciesSelector
 } from '../../selectors/widgets';
 
 import { showConnectionsSelector } from '../../selectors/dashboard';

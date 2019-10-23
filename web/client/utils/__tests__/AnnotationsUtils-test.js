@@ -41,7 +41,7 @@ import {
     updateAllStyles,
     fromLineStringToGeodesicLineString,
     isCompletePolygon,
-    getDashArrayFromStyle,
+    getDashArrayFromStyle
 } from '../AnnotationsUtils';
 
 const featureCollection = {

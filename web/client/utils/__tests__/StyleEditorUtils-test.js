@@ -24,7 +24,7 @@ import {
     isSameOrigin,
     getStyleTemplates,
     getNameParts,
-    stringifyNameParts,
+    stringifyNameParts
 } from '../StyleEditorUtils';
 
 describe('StyleEditorUtils test', () => {

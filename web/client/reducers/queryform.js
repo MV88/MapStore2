@@ -46,7 +46,7 @@ import {
     RESET_CROSS_LAYER_FILTER,
     SET_AUTOCOMPLETE_MODE,
     TOGGLE_AUTOCOMPLETE_MENU,
-    LOAD_FILTER,
+    LOAD_FILTER
 } from '../actions/queryform';
 
 import { END_DRAWING, CHANGE_DRAWING_STATUS } from '../actions/draw';

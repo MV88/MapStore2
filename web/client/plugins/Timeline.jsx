@@ -19,7 +19,7 @@ import {
     renderNothing,
     withProps,
     withState,
-    withStateHandlers,
+    withStateHandlers
 } from 'recompose';
 import { createSelector } from 'reselect';
 
@@ -42,7 +42,7 @@ import {
     isMapSync,
     isVisible,
     rangeSelector,
-    timelineLayersSelector,
+    timelineLayersSelector
 } from '../selectors/timeline';
 import Timeline from './timeline/Timeline';
 import TimelineToggle from './timeline/TimelineToggle';

@@ -27,7 +27,7 @@ import {
     selectSearchItem,
     textSearch,
     updateResultsStyle,
-    zoomAndAddPoint,
+    zoomAndAddPoint
 } from '../actions/search';
 import SearchBarComp from '../components/mapcontrols/search/SearchBar';
 import SearchResultListComp from '../components/mapcontrols/search/SearchResultList';

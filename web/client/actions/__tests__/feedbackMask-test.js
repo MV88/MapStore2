@@ -16,7 +16,7 @@ import {
     feedbackMaskLoading,
     feedbackMaskLoaded,
     feedbackMaskEnabled,
-    detectedNewPage,
+    detectedNewPage
 } from '../feedbackMask';
 
 describe('Test correctness of the feedbackMask actions', () => {

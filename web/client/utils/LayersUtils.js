@@ -15,7 +15,7 @@ import {
     isNil,
     isObject,
     isString,
-    pick,
+    pick
 } from 'lodash';
 import assign from 'object-assign';
 import toBbox from 'turf-bbox';

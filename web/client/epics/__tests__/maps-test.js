@@ -34,7 +34,7 @@ import {
     DISPLAY_METADATA_EDIT,
     SAVING_MAP,
     MAP_UPDATING,
-    MAPS_LOAD_MAP,
+    MAPS_LOAD_MAP
 } from '../../actions/maps';
 
 import { mapInfoLoaded } from '../../actions/config';
@@ -53,7 +53,7 @@ import {
     deleteMapAndAssociatedResourcesEpic,
     storeDetailsInfoEpic,
     mapSaveMapResourceEpic,
-    reloadMapsEpic,
+    reloadMapsEpic
 } from '../maps';
 
 const rootEpic = combineEpics(setDetailsChangedEpic, closeDetailsPanelEpic);

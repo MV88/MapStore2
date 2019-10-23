@@ -14,7 +14,7 @@ import ConfigUtils from '../../utils/ConfigUtils';
 import {
     searchDashboardsOnMapSearch,
     searchDashboards as searchDashboardsEpic,
-    reloadOnDashboards,
+    reloadOnDashboards
 } from '../dashboards';
 
 import { dashboardSaved } from '../../actions/dashboard';

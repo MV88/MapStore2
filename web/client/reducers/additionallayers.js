@@ -11,7 +11,7 @@ import {
     UPDATE_ADDITIONAL_LAYER,
     REMOVE_ADDITIONAL_LAYER,
     UPDATE_OPTIONS_BY_OWNER,
-    REMOVE_ALL_ADDITIONAL_LAYERS,
+    REMOVE_ALL_ADDITIONAL_LAYERS
 } from '../actions/additionallayers';
 
 import { head, pickBy, identity, isObject, isArray } from 'lodash';

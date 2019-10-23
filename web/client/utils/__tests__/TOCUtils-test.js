@@ -12,7 +12,7 @@ import {
     getTooltip,
     getTooltipFragment,
     flattenGroups,
-    getTitleAndTooltip,
+    getTitleAndTooltip
 } from '../TOCUtils';
 
 let options = [{label: "lab1", value: "val1"}];

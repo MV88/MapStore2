@@ -28,7 +28,7 @@ import {
     addAnnotation,
     ADD_MEASURE_AS_ANNOTATION,
     updateMeasures,
-    UPDATE_MEASURES,
+    UPDATE_MEASURES
 } from '../measurement';
 
 const feature = {type: "Feature", geometry: {

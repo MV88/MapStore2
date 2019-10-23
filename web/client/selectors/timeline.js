@@ -7,7 +7,7 @@ import {
     timeIntervalToSequence,
     timeIntervalToIntervalSequence,
     analyzeIntervalInRange,
-    isTimeDomainInterval,
+    isTimeDomainInterval
 } from '../utils/TimeUtils';
 
 import {
@@ -16,7 +16,7 @@ import {
     offsetTimeSelector,
     layerDimensionRangeSelector,
     layersWithTimeDataSelector,
-    layerDimensionDataSelectorCreator,
+    layerDimensionDataSelectorCreator
 } from '../selectors/dimension';
 
 import { mapSelector, projectionSelector } from '../selectors/map';

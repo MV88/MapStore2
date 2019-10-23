@@ -14,7 +14,7 @@ import {
     isValid,
     isValidValueForPropertyName,
     findGeometryProperty,
-    getPropertyDesciptor,
+    getPropertyDesciptor
 } from './ogc/WFS/base';
 
 const getGeometryName = (describe) => get(findGeometryProperty(describe), "name");

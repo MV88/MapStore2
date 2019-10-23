@@ -29,7 +29,7 @@ import {
     getIdFromUri,
     getSimpleGeomType,
     isSimpleGeomType,
-    parseLayoutValue,
+    parseLayoutValue
 } from '../MapUtils';
 
 const POINT = "Point";

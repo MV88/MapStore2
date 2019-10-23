@@ -13,7 +13,7 @@ import {
     defaultProps,
     mapPropsStream,
     withHandlers,
-    withState,
+    withState
 } from 'recompose';
 import Rx from 'rxjs';
 

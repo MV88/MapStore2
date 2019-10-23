@@ -14,7 +14,7 @@ import {
     startDrawingFeature,
     deleteGeometry,
     openAdvancedSearch,
-    zoomAll,
+    zoomAll
 } from '../../actions/featuregrid';
 
 import { createChart } from '../../actions/widgets';

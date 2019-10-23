@@ -16,7 +16,7 @@ import {
     REMOVE_ALL_ADDITIONAL_LAYERS,
     removeAllAdditionalLayers,
     UPDATE_OPTIONS_BY_OWNER,
-    updateOptionsByOwner,
+    updateOptionsByOwner
 } from '../additionallayers';
 
 describe('Test additional layers actions', () => {

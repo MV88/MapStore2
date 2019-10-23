@@ -45,7 +45,7 @@ import {
     IMPORTER_WORKSPACE_SELECTED,
     IMPORTER_WORKSPACE_CREATED,
     dismissWorkspaceCreationStatus,
-    IMPORTER_WORKSPACE_STATUS_CHANGE,
+    IMPORTER_WORKSPACE_STATUS_CHANGE
 } from '../importer';
 
 import { MAP_CONFIG_LOADED } from '../config';

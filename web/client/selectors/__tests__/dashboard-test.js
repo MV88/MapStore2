@@ -15,7 +15,7 @@ import {
     dashboardResource,
     isDashboardLoading,
     getDashboardSaveErrors,
-    buttonCanEdit,
+    buttonCanEdit
 } from '../dashboard';
 
 describe('dashboard selectors', () => {

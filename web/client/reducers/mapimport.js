@@ -14,7 +14,7 @@ import {
     ON_LAYER_ADDED,
     UPDATE_BBOX,
     ON_SUCCESS,
-    ON_SHAPE_ERROR,
+    ON_SHAPE_ERROR
 } from '../actions/mapimport';
 
 import { uniqWith } from 'lodash';

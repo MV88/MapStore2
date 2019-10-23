@@ -16,7 +16,7 @@ import {
     spatial,
     comparison,
     literal,
-    propertyName,
+    propertyName
 } from '../operators';
 
 describe('OGC Operators', () => {

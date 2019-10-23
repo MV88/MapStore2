@@ -29,7 +29,7 @@ import {
     isStrokeStyle,
     isSymbolStyle,
     isTextStyle,
-    registerStyle,
+    registerStyle
 } from '../../../utils/VectorStyleUtils';
 import SwitchPanel from '../../misc/switch/SwitchPanel';
 import StyleCanvas from '../StyleCanvas';

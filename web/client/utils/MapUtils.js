@@ -6,7 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { isString, trim, isNumber } from 'lodash';
+import { findIndex, head, isEmpty, isNumber, isObject, isString, trim } from 'lodash';
+import assign from 'object-assign';
+
+import CoordinatesUtils from './CoordinatesUtils';
+import { set } from './ImmutableUtils';
+import LayersUtils from './LayersUtils';
 
 const DEFAULT_SCREEN_DPI = 96;
 
@@ -41,11 +46,6 @@ const GET_PIXEL_FROM_COORDINATES_HOOK = 'GET_PIXEL_FROM_COORDINATES_HOOK';
 const GET_COORDINATES_FROM_PIXEL_HOOK = 'GET_COORDINATES_FROM_PIXEL_HOOK';
 
 let hooks = {};
-import CoordinatesUtils from './CoordinatesUtils';
-import { set } from './ImmutableUtils';
-import LayersUtils from './LayersUtils';
-import assign from 'object-assign';
-import { isObject, head, isEmpty, findIndex } from 'lodash';
 
 function registerHook(name, hook) {
     hooks[name] = hook;

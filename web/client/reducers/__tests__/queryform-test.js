@@ -21,7 +21,7 @@ import {
     addCrossLayerFilterField,
     updateCrossLayerFilterField,
     removeCrossLayerFilterField,
-    changeSpatialFilterValue,
+    changeSpatialFilterValue
 } from '../../actions/queryform';
 
 import { END_DRAWING, CHANGE_DRAWING_STATUS } from '../../actions/draw';

@@ -17,7 +17,7 @@ import {
     checkOperatorValidity,
     setupCrossLayerFilterDefaults,
     isCrossLayerFilterValid,
-    isFilterEmpty,
+    isFilterEmpty
 } from '../../../utils/FilterUtils';
 
 import Toolbar from '../../misc/toolbar/Toolbar';

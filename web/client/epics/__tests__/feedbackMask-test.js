@@ -12,14 +12,14 @@ import {
     updateMapVisibility,
     updateDashboardVisibility,
     updateGeoStoryFeedbackMaskVisibility,
-    detectNewPage,
+    detectNewPage
 } from '../feedbackMask';
 
 import {
     FEEDBACK_MASK_LOADING,
     FEEDBACK_MASK_LOADED,
     FEEDBACK_MASK_ENABLED,
-    DETECTED_NEW_PAGE,
+    DETECTED_NEW_PAGE
 } from '../../actions/feedbackMask';
 
 import { initMap } from '../../actions/map';

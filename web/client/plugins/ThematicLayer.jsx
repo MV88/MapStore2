@@ -15,7 +15,7 @@ import {
     loadFields,
     resetInvalidInput,
     setDirty,
-    setInvalidInput,
+    setInvalidInput
 } from '../actions/thematic';
 import API from '../api/SLDService';
 import SLDService from '../api/SLDService';

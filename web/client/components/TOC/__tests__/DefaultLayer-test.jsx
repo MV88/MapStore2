@@ -18,7 +18,6 @@ import DefaultLayer from '../DefaultLayer';
 const Layer = dragDropContext(testBackend)(DefaultLayer);
 
 
-
 describe('test DefaultLayer module component', () => {
     beforeEach((done) => {
         document.body.innerHTML = '<div id="container"></div>';

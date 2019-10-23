@@ -20,7 +20,7 @@ import LayersUtils from '../utils/LayersUtils';
 import {
     initialSettingsSelector,
     originalSettingsSelector,
-    activeTabSettingsSelector,
+    activeTabSettingsSelector
 } from '../selectors/controls';
 
 import { layerSettingSelector, layersSelector, groupsSelector, elementSelector } from '../selectors/layers';

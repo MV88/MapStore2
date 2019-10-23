@@ -67,7 +67,7 @@ import {
     CHANGE_METADATA_TEMPLATE,
     changeMetadataTemplate,
     SET_LOADING,
-    recordsNotFound,
+    recordsNotFound
 } from '../catalog';
 
 import { CHANGE_LAYER_PROPERTIES, ADD_LAYER } from '../layers';

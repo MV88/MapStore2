@@ -19,7 +19,7 @@ import {
     ZOOM_TO_POINT,
     RESIZE_MAP,
     CHANGE_MAP_LIMITS,
-    SET_MAP_RESOLUTIONS,
+    SET_MAP_RESOLUTIONS
 } from '../actions/map';
 
 import assign from 'object-assign';

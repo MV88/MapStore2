@@ -10,7 +10,7 @@ import {
     FormControl,
     MenuItem,
     DropdownButton as DropdownButtonRB,
-    Glyphicon as GlyphiconRB,
+    Glyphicon as GlyphiconRB
 } from 'react-bootstrap';
 
 import tooltip from '../../misc/enhancers/tooltip';

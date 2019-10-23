@@ -35,7 +35,7 @@ import {
     DELETE_STYLE,
     setEditPermissionStyleEditor,
     SET_DEFAULT_STYLE,
-    initStyleService,
+    initStyleService
 } from '../actions/styleeditor';
 
 import StylesAPI from '../api/geoserver/Styles';
@@ -51,7 +51,7 @@ import {
     enabledStyleEditorSelector,
     loadingStyleSelector,
     styleServiceSelector,
-    getUpdatedLayer,
+    getUpdatedLayer
 } from '../selectors/styleeditor';
 
 import { getSelectedLayer, layerSettingSelector } from '../selectors/layers';

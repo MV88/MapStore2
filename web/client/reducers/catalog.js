@@ -27,7 +27,7 @@ import {
     SET_LOADING,
     TOGGLE_THUMBNAIL,
     TOGGLE_TEMPLATE,
-    TOGGLE_ADVANCED_SETTINGS,
+    TOGGLE_ADVANCED_SETTINGS
 } from '../actions/catalog';
 
 import { MAP_CONFIG_LOADED } from '../actions/config';

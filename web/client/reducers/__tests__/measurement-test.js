@@ -18,7 +18,7 @@ import {
     resetGeometry,
     changeGeometry,
     updateMeasures,
-    init,
+    init
 } from '../../actions/measurement';
 
 import { RESET_CONTROLS, setControlProperty } from '../../actions/controls';

@@ -16,7 +16,7 @@ import {
     TOGGLE_COLLAPSE_ALL,
     UPDATE_PROPERTY,
     toggleCollapseAll,
-    DELETE,
+    DELETE
 } from '../actions/widgets';
 
 import { MAP_CONFIG_LOADED } from '../actions/config';

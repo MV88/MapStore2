@@ -5,14 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import Proj4js from 'proj4';
 
-import PropTypes from 'prop-types';
 import url from 'url';
+
 import axios from 'axios';
-import { isArray, isObject, endsWith, isNil } from 'lodash';
-import assign from 'object-assign';
 import { Promise } from 'es6-promise';
+import isMobile from 'ismobilejs';
+import { endsWith, isArray, isNil, isObject } from 'lodash';
+import assign from 'object-assign';
+import Proj4js from 'proj4';
+import PropTypes from 'prop-types';
 
 const epsg4326 = Proj4js ? new Proj4js.Proj('EPSG:4326') : null;
 const centerPropType = PropTypes.shape({
@@ -22,8 +24,6 @@ const centerPropType = PropTypes.shape({
 });
 
 const urlQuery = url.parse(window.location.href, true).query;
-
-import isMobile from 'ismobilejs';
 
 let localConfigFile = 'localConfig.json';
 
@@ -95,7 +95,7 @@ const getUrlWithoutParameters = (urlToFilter, skip) => {
     return !!paramsFiltered ? urlparts[0] + "?" + paramsFiltered : urlparts[0];
 };
 
-var ConfigUtils = {
+const ConfigUtils = {
     defaultSourceType: "gxp_wmssource",
     backgroundGroup: "background",
 

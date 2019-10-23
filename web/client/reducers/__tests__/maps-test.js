@@ -25,7 +25,7 @@ import {
     permissionsUpdated,
     resetUpdating,
     mapsSearchTextChanged,
-    setShowMapDetails,
+    setShowMapDetails
 } from '../../actions/maps';
 
 const sampleMap = {

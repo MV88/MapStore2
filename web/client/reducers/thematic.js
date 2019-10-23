@@ -15,7 +15,7 @@ import {
     CLASSIFICATION_ERROR,
     CHANGE_CONFIGURATION,
     CHANGE_DIRTY,
-    CHANGE_INPUT_VALIDITY,
+    CHANGE_INPUT_VALIDITY
 } from '../actions/thematic';
 
 import { HIDE_SETTINGS } from '../actions/layers';

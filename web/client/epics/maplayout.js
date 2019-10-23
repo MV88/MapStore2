@@ -18,7 +18,7 @@ import {
     TOGGLE_MAPINFO_STATE,
     LOAD_FEATURE_INFO,
     EXCEPTIONS_FEATURE_INFO,
-    NO_QUERYABLE_LAYERS,
+    NO_QUERYABLE_LAYERS
 } from '../actions/mapInfo';
 
 import { SHOW_SETTINGS, HIDE_SETTINGS } from '../actions/layers';

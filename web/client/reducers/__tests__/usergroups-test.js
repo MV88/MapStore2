@@ -20,7 +20,7 @@ import {
     STATUS_SUCCESS,
     STATUS_LOADING,
     STATUS_SAVED,
-    STATUS_ERROR,
+    STATUS_ERROR
 } from '../../actions/usergroups';
 
 describe('Test the usergroups reducer', () => {

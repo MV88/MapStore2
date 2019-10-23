@@ -52,7 +52,7 @@ import {
     TOGGLE_TEMPLATE,
     TOGGLE_ADVANCED_SETTINGS,
     changeText,
-    setLoading,
+    setLoading
 } from '../../actions/catalog';
 
 import { MAP_CONFIG_LOADED } from '../../actions/config';

@@ -5,7 +5,7 @@ import {
     getRowVirtual,
     getGridEvents,
     applyAllChanges,
-    createNewAndEditingFilter,
+    createNewAndEditingFilter
 } from '../../../../utils/FeatureGridUtils';
 
 import EditorRegistry from '../../../../utils/featuregrid/EditorRegistry';

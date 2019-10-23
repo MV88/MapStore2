@@ -12,7 +12,7 @@ import {
     SET_COOKIE_VISIBILITY,
     setCookieVisibility,
     SET_MORE_DETAILS_VISIBILITY,
-    setMoreDetailsVisibility,
+    setMoreDetailsVisibility
 } from '../cookie';
 
 

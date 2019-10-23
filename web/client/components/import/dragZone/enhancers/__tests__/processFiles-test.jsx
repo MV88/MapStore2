@@ -19,7 +19,7 @@ import {
     getKmzFile,
     getGpxFile,
     getGeoJsonFile,
-    getMapFile,
+    getMapFile
 } from './testData';
 
 import rxjsConfig from 'recompose/rxjsObservableConfig';

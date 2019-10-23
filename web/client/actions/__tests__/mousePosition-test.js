@@ -14,7 +14,7 @@ import {
     CHANGE_MOUSE_POSITION_STATE,
     changeMousePosition,
     changeMousePositionCrs,
-    changeMousePositionState,
+    changeMousePositionState
 } from '../mousePosition';
 
 describe('Test correctness of mausePosition actions', () => {

@@ -11,7 +11,7 @@ import {
     MAP_INFO_LOAD_START,
     MAP_INFO_LOADED,
     MAP_INFO_LOAD_ERROR,
-    MAP_CONFIG_LOAD_ERROR,
+    MAP_CONFIG_LOAD_ERROR
 } from '../actions/config';
 
 import { MAP_CREATED, DETAILS_LOADED } from '../actions/maps';

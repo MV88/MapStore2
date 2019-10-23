@@ -15,7 +15,7 @@ import {
     DASHBOARD_LOADED,
     DASHBOARD_SAVED,
     DASHBOARD_RESET,
-    SAVE_ERROR,
+    SAVE_ERROR
 } from '../actions/dashboard';
 
 import { INSERT, UPDATE, DELETE } from '../actions/widgets';

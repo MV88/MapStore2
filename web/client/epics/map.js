@@ -16,7 +16,7 @@ import {
     ZOOM_TO_EXTENT,
     CHANGE_MAP_CRS,
     changeMapView,
-    changeMapLimits,
+    changeMapLimits
 } from '../actions/map';
 
 import {
@@ -24,7 +24,7 @@ import {
     configuredRestrictedExtentSelector,
     configuredMinZoomSelector,
     mapSelector,
-    mapIdSelector,
+    mapIdSelector
 } from '../selectors/map';
 
 import { loadMapInfo } from '../actions/config';

@@ -13,7 +13,7 @@ import {
     timeDataLoading,
     rangeDataLoaded,
     onRangeChanged,
-    selectLayer,
+    selectLayer
 } from '../actions/timeline';
 
 import { setCurrentTime, UPDATE_LAYER_DIMENSION_DATA, setCurrentOffset } from '../actions/dimension';
@@ -29,14 +29,14 @@ import {
     selectedLayerSelector,
     timelineLayersSelector,
     multidimOptionsSelectorCreator,
-    isMapSync,
+    isMapSync
 } from '../selectors/timeline';
 
 import {
     layerTimeSequenceSelectorCreator,
     timeDataSelector,
     offsetTimeSelector,
-    currentTimeSelector,
+    currentTimeSelector
 } from '../selectors/dimension';
 
 import { getNearestDate, roundRangeResolution, isTimeDomainInterval } from '../utils/TimeUtils';

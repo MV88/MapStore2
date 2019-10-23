@@ -15,7 +15,7 @@ import {
     dashboardLoaded,
     dashboardSaved,
     dashboardSaveError,
-    dashboardLoading,
+    dashboardLoading
 } from '../../actions/dashboard';
 
 import { insertWidget, updateWidget, deleteWidget } from '../../actions/widgets';

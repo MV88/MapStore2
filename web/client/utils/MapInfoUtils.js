@@ -6,20 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { findIndex } from 'lodash';
+import pointOnSurface from 'turf-point-on-surface';
+
+import HTMLViewer from '../components/data/identify/viewers/HTMLViewer';
+import JSONViewer from '../components/data/identify/viewers/JSONViewer';
+import TextViewer from '../components/data/identify/viewers/TextViewer';
+import iconUrl from '../components/map/openlayers/img/marker-icon.png';
 import FeatureInfoUtils from './FeatureInfoUtils';
+import vector from './mapinfo/vector';
+import wms from './mapinfo/wms';
+import wmts from './mapinfo/wmts';
 
 const INFO_FORMATS = FeatureInfoUtils.INFO_FORMATS;
 const INFO_FORMATS_BY_MIME_TYPE = FeatureInfoUtils.INFO_FORMATS_BY_MIME_TYPE;
-import pointOnSurface from 'turf-point-on-surface';
-import { findIndex } from 'lodash';
-import iconUrl from '../components/map/openlayers/img/marker-icon.png';
-import '../components/data/identify/viewers/JSONViewer';
-import '../components/data/identify/viewers/JSONViewer';
-import '../components/data/identify/viewers/HTMLViewer';
-import '../components/data/identify/viewers/TextViewer';
-import wms from './mapinfo/wms';
-import wmts from './mapinfo/wmts';
-import vector from './mapinfo/vector';
 
 const MapInfoUtils = {
     /**
@@ -182,10 +182,10 @@ const MapInfoUtils = {
     },
     getViewers() {
         return {
-            FeatureInfoUtils.INFO_FORMATS.PROPERTIES,
-            FeatureInfoUtils.INFO_FORMATS.JSON,
-            FeatureInfoUtils.INFO_FORMATS.HTML,
-            FeatureInfoUtils.INFO_FORMATS.TEXT
+            [FeatureInfoUtils.INFO_FORMATS.PROPERTIES]: JSONViewer,
+            [FeatureInfoUtils.INFO_FORMATS.JSON]: JSONViewer,
+            [FeatureInfoUtils.INFO_FORMATS.HTML]: HTMLViewer,
+            [FeatureInfoUtils.INFO_FORMATS.TEXT]: TextViewer
         };
     },
     defaultQueryableFilter(l) {

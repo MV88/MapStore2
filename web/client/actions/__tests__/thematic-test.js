@@ -28,7 +28,7 @@ import {
     setDirty,
     cancelDirty,
     setInvalidInput,
-    resetInvalidInput,
+    resetInvalidInput
 } from '../thematic';
 
 const layer = {

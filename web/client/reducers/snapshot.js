@@ -11,7 +11,7 @@ import {
     SNAPSHOT_ERROR,
     SNAPSHOT_READY,
     SNAPSHOT_ADD_QUEUE,
-    SNAPSHOT_REMOVE_QUEUE,
+    SNAPSHOT_REMOVE_QUEUE
 } from '../actions/snapshot';
 
 import assign from 'object-assign';

@@ -12,7 +12,7 @@ import {
     REMOVE_VECTOR_RULE,
     SET_VECTORSTYLE_PARAMETER,
     SET_VECTOR_LAYER,
-    SET_VECTOR_RULE_PARAMETER,
+    SET_VECTOR_RULE_PARAMETER
 } from '../actions/vectorstyler';
 
 import { STYLER_RESET } from '../actions/styler';

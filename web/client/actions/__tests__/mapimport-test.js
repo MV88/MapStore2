@@ -24,7 +24,7 @@ import {
     ON_SUCCESS,
     onSuccess,
     ON_SHAPE_ERROR,
-    onShapeError,
+    onShapeError
 } from '../mapimport';
 
 describe('map import actions', () => {

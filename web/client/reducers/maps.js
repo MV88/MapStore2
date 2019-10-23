@@ -23,7 +23,7 @@ import {
     RESET_UPDATING,
     MAPS_SEARCH_TEXT_CHANGED,
     METADATA_CHANGED,
-    SHOW_DETAILS,
+    SHOW_DETAILS
 } from '../actions/maps';
 
 import { EDIT_MAP, RESET_CURRENT_MAP } from '../actions/currentMap';

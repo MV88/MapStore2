@@ -18,7 +18,7 @@ import {
     changeSetting,
     selectPlaybackRange,
     framesLoading,
-    STATUS,
+    STATUS
 } from '../../actions/playback';
 
 import playback from '../playback';

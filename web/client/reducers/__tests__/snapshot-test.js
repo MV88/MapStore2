@@ -14,7 +14,7 @@ import {
     SNAPSHOT_READY,
     SNAPSHOT_ERROR,
     SNAPSHOT_ADD_QUEUE,
-    SNAPSHOT_REMOVE_QUEUE,
+    SNAPSHOT_REMOVE_QUEUE
 } from '../../actions/snapshot';
 
 describe('Test the snapshot reducer', () => {

@@ -20,7 +20,7 @@ import {
     resetTutorial,
     startTutorial,
     toggleTutorial,
-    updateTutorial,
+    updateTutorial
 } from '../actions/tutorial';
 import I18N from '../components/I18N/I18N';
 import TutorialComp from '../components/tutorial/Tutorial';

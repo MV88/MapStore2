@@ -23,9 +23,9 @@ import {
     selectVectorRule,
     setVectorLayer,
     setVectorRuleParameter,
-    setVectorStyleParameter,
+    setVectorStyleParameter
 } from '../actions/vectorstyler';
-import vectorstyler from '../reducers/vectorstyler'
+import vectorstyler from '../reducers/vectorstyler';
 import { layersSelector } from '../selectors/layers';
 import { ruleselctor } from '../selectors/vectorstyler';
 import { getWindowSize } from '../utils/AgentUtils';

@@ -17,7 +17,7 @@ import {
     currentMapDetailsTextSelector,
     currentMapThumbnailUriSelector,
     currentMapDetailsChangedSelector,
-    currentMapOriginalDetailsTextSelector,
+    currentMapOriginalDetailsTextSelector
 } from '../currentmap';
 
 const uri = "some/uri/6/";

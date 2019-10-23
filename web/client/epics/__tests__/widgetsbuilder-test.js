@@ -14,7 +14,7 @@ import {
     initEditorOnNew,
     closeWidgetEditorOnFinish,
     handleWidgetsFilterPanel,
-    initEditorOnNewChart,
+    initEditorOnNewChart
 } from '../widgetsbuilder';
 
 import {
@@ -24,7 +24,7 @@ import {
     openFilterEditor,
     createChart,
     EDIT_NEW,
-    EDITOR_CHANGE,
+    EDITOR_CHANGE
 } from '../../actions/widgets';
 
 import { CLOSE_FEATURE_GRID } from '../../actions/featuregrid';

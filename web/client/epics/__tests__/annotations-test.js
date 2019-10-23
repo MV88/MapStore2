@@ -36,7 +36,7 @@ import {
     changeSelected,
     confirmDeleteFeature,
     openEditor,
-    SHOW_ANNOTATION,
+    SHOW_ANNOTATION
 } from '../../actions/annotations';
 
 import { TOGGLE_CONTROL, toggleControl, SET_CONTROL_PROPERTY } from '../../actions/controls';

@@ -19,7 +19,7 @@ import {
     addStyle,
     loadingStyle,
     loadedStyle,
-    errorStyle,
+    errorStyle
 } from '../../actions/styleeditor';
 
 describe('Test styleeditor reducer', () => {

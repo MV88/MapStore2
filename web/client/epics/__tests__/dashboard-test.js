@@ -13,7 +13,7 @@ import {
     handleDashboardWidgetsFilterPanel,
     openDashboardWidgetEditor,
     initDashboardEditorOnNew,
-    closeDashboardWidgetEditorOnFinish,
+    closeDashboardWidgetEditorOnFinish
 } from '../dashboard';
 
 import { createWidget, insertWidget, openFilterEditor, EDIT_NEW, EDITOR_CHANGE } from '../../actions/widgets';

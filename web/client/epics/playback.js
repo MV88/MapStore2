@@ -23,7 +23,7 @@ import {
     appendFrames,
     setCurrentFrame,
     framesLoading,
-    updateMetadata,
+    updateMetadata
 } from '../actions/playback';
 
 import { moveTime, SET_CURRENT_TIME, MOVE_TIME } from '../actions/dimension';
@@ -34,7 +34,7 @@ import { error } from '../actions/notifications';
 import {
     currentTimeSelector,
     layersWithTimeDataSelector,
-    layerTimeSequenceSelectorCreator,
+    layerTimeSequenceSelectorCreator
 } from '../selectors/dimension';
 
 import { LOCATION_CHANGE } from 'connected-react-router';
@@ -47,7 +47,7 @@ import {
     playbackSettingsSelector,
     frameDurationSelector,
     statusSelector,
-    playbackMetadataSelector,
+    playbackMetadataSelector
 } from '../selectors/playback';
 
 import {
@@ -58,7 +58,7 @@ import {
     selectedLayerTimeDimensionConfiguration,
     rangeSelector,
     timelineLayersSelector,
-    multidimOptionsSelectorCreator,
+    multidimOptionsSelectorCreator
 } from '../selectors/timeline';
 
 import pausable from '../observables/pausable';

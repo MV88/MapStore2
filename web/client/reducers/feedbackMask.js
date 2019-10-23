@@ -10,7 +10,7 @@ import {
     FEEDBACK_MASK_LOADING,
     FEEDBACK_MASK_LOADED,
     FEEDBACK_MASK_ENABLED,
-    DETECTED_NEW_PAGE,
+    DETECTED_NEW_PAGE
 } from '../actions/feedbackMask';
 
 function feedbackMask(state = {}, action) {

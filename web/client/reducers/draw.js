@@ -10,7 +10,7 @@ import {
     CHANGE_DRAWING_STATUS,
     SET_CURRENT_STYLE,
     GEOMETRY_CHANGED,
-    DRAW_SUPPORT_STOPPED,
+    DRAW_SUPPORT_STOPPED
 } from '../actions/draw';
 
 import assign from 'object-assign';

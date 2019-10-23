@@ -21,7 +21,7 @@ import {
     initLayerFilter,
     DISCARD_CURRENT_FILTER,
     APPLY_FILTER,
-    storeAppliedFilter,
+    storeAppliedFilter
 } from '../actions/layerFilter';
 
 import { featureTypeSelected, toggleLayerFilter, initQueryPanel } from '../actions/wfsquery';

@@ -12,7 +12,7 @@ import {
     SET_RASTERSTYLE_PARAMETER,
     SET_RASTER_LAYER,
     setRasterStyleParameter,
-    setRasterLayer,
+    setRasterLayer
 } from '../rasterstyler';
 
 describe('Test correctness of the rasterstyle actions', () => {

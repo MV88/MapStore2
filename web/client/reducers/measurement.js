@@ -15,7 +15,7 @@ import {
     CHANGE_FORMAT,
     CHANGE_COORDINATES,
     UPDATE_MEASURES,
-    INIT,
+    INIT
 } from '../actions/measurement';
 
 import { TOGGLE_CONTROL, RESET_CONTROLS, SET_CONTROL_PROPERTY } from '../actions/controls';

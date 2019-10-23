@@ -45,7 +45,7 @@ import {
     setPage,
     setupDependencySelector,
     toggleDependencySelector,
-    toggleTray,
+    toggleTray
 } from '../widgets';
 
 describe('Test correctness of the widgets actions', () => {

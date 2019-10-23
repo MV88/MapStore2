@@ -12,7 +12,7 @@ import {
     fieldsLoaded,
     fieldsError,
     classificationLoaded,
-    classificationError,
+    classificationError
 } from '../actions/thematic';
 
 import { UPDATE_NODE, changeLayerParams } from '../actions/layers';

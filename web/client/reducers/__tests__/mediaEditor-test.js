@@ -19,7 +19,7 @@ import {
     setMediaService,
     setMediaType,
     show,
-    updateItem,
+    updateItem
 } from '../../actions/mediaEditor';
 
 describe('Test the mediaEditor reducer', () => {

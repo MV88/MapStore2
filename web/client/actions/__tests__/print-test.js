@@ -26,7 +26,7 @@ import {
     changeMapPrintPreview,
     printSubmit,
     printSubmitting,
-    printCancel,
+    printCancel
 } from '../print';
 
 describe('Test correctness of the print actions', () => {

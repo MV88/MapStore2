@@ -18,7 +18,7 @@ import {
     updateNode,
     updateSettings,
     layersRefreshError,
-    changeLayerParams,
+    changeLayerParams
 } from '../actions/layers';
 
 import { getLayersWithDimension, layerSettingSelector } from '../selectors/layers';

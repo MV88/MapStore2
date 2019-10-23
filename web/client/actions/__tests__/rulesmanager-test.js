@@ -24,7 +24,7 @@ import {
     onEditRule,
     EDIT_RULE,
     delRules,
-    DELETE_RULES,
+    DELETE_RULES
 } from '../rulesmanager';
 
 describe('test rules manager actions', () => {

@@ -19,7 +19,7 @@ import {
     DISABLE_TUTORIAL,
     RESET_TUTORIAL,
     CLOSE_TUTORIAL,
-    TOGGLE_TUTORIAL,
+    TOGGLE_TUTORIAL
 } from '../../actions/tutorial';
 
 describe('Test the tutorial reducer', () => {

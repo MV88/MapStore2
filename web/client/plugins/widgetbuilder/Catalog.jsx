@@ -12,6 +12,6 @@ import Message from '../../components/I18N/Message';
 import CompactCatalog from '../../components/catalog/CompactCatalog';
 
 export default
-    defaultProps({
-        title: <Message msgId="widgets.builder.wizard.selectALayer" />
-    })(CompactCatalog);
+defaultProps({
+    title: <Message msgId="widgets.builder.wizard.selectALayer" />
+})(CompactCatalog);

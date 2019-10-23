@@ -19,7 +19,7 @@ import {
     insertWidget,
     toggleCollapseAll,
     updateWidgetProperty,
-    TOGGLE_COLLAPSE_ALL,
+    TOGGLE_COLLAPSE_ALL
 } from '../../actions/widgets';
 
 import timeline from '../../reducers/timeline';
@@ -99,7 +99,7 @@ const NO_WIDGETS_STATE = {
 import {
     collapseTimelineOnWidgetsEvents,
     collapseWidgetsOnTimelineEvents,
-    expandTimelineIfCollapsedOnTrayUnmount,
+    expandTimelineIfCollapsedOnTrayUnmount
 } from '../widgetsTray';
 
 

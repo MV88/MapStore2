@@ -10,7 +10,7 @@ import {
     downloadFeatures,
     onDownloadFinished,
     onFormatOptionsFetch,
-    updateFormats,
+    updateFormats
 } from '../../actions/wfsdownload';
 
 import wfsdownload from '../wfsdownload';

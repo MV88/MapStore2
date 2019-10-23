@@ -19,7 +19,7 @@ import {
     updateLayerDimension,
     CHANGE_LAYER_PARAMS,
     updateSettingsParams,
-    UPDATE_SETTINGS,
+    UPDATE_SETTINGS
 } from '../../actions/layers';
 
 import { SET_CONTROL_PROPERTY } from '../../actions/controls';

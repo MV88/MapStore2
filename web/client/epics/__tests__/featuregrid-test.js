@@ -42,7 +42,7 @@ import {
     GRID_QUERY_RESULT,
     changePage,
     sort,
-    setTimeSync,
+    setTimeSync
 } from '../../actions/featuregrid';
 
 import { SET_HIGHLIGHT_FEATURES_PATH } from '../../actions/highlight';
@@ -62,7 +62,7 @@ import {
     QUERY_CREATE,
     FEATURE_TYPE_SELECTED,
     layerSelectedForSearch,
-    UPDATE_QUERY,
+    UPDATE_QUERY
 } from '../../actions/wfsquery';
 
 import { LOAD_FILTER, QUERY_FORM_RESET } from '../../actions/queryform';
@@ -97,7 +97,7 @@ import {
     autoReopenFeatureGridOnFeatureInfoClose,
     featureGridChangePage,
     featureGridSort,
-    replayOnTimeDimensionChange,
+    replayOnTimeDimensionChange
 } from '../featuregrid';
 
 import { onLocationChanged } from 'connected-react-router';

@@ -25,7 +25,7 @@ import {
     loadFeatureInfo,
     featureInfoClick,
     closeIdentify,
-    toggleHighlightFeature,
+    toggleHighlightFeature
 } from '../../actions/mapInfo';
 
 import {
@@ -35,7 +35,7 @@ import {
     closeFeatureAndAnnotationEditing,
     handleMapInfoMarker,
     featureInfoClickOnHighligh,
-    closeFeatureInfoOnCatalogOpenEpic,
+    closeFeatureInfoOnCatalogOpenEpic
 } from '../identify';
 
 import { CLOSE_ANNOTATIONS } from '../../actions/annotations';

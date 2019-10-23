@@ -22,7 +22,7 @@ import {
     getOperation,
     getRequestEncoding,
     getDefaultStyleIdentifier,
-    getDefaultFormat,
+    getDefaultFormat
 } from '../utils/WMTSUtils';
 
 const parseUrl = (url) => {

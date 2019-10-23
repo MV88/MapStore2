@@ -13,7 +13,7 @@ import {
     EDITGROUPDATA,
     DELETEGROUP,
     UPDATEGROUP,
-    SEARCHTEXTCHANGED,
+    SEARCHTEXTCHANGED
 } from '../actions/usergroups';
 
 import assign from 'object-assign';

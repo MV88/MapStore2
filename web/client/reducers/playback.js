@@ -9,7 +9,7 @@ import {
     SET_CURRENT_FRAME,
     SELECT_PLAYBACK_RANGE,
     CHANGE_SETTING,
-    UPDATE_METADATA,
+    UPDATE_METADATA
 } from '../actions/playback';
 
 import { RESET_CONTROLS } from '../actions/controls';

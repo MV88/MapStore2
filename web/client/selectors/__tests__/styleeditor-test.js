@@ -27,7 +27,7 @@ import {
     canEditStyleSelector,
     getUpdatedLayer,
     getAllStyles,
-    selectedStyleFormatSelector,
+    selectedStyleFormatSelector
 } from '../styleeditor';
 
 describe('Test styleeditor selector', () => {

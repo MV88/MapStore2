@@ -20,7 +20,7 @@ import {
     resetSearch,
     changeFormat,
     changeCoord,
-    changeActiveSearchTool,
+    changeActiveSearchTool
 } from '../../actions/search';
 
 import { resetControls } from '../../actions/controls';

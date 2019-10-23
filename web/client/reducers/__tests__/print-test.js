@@ -19,7 +19,7 @@ import {
     PRINT_SUBMITTING,
     PRINT_CREATED,
     PRINT_ERROR,
-    PRINT_CANCEL,
+    PRINT_CANCEL
 } from '../../actions/print';
 
 describe('Test the print reducer', () => {

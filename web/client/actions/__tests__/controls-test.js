@@ -17,7 +17,7 @@ import {
     setControlProperties,
     RESET_CONTROLS,
     resetControls,
-    on,
+    on
 } from '../controls';
 
 describe('Test correctness of the controls actions', () => {

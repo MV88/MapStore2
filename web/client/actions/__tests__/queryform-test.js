@@ -77,7 +77,7 @@ import {
     addSimpleFilterField,
     removeSimpleFilterField,
     removeAllSimpleFilterFields,
-    changeSpatialFilterValue,
+    changeSpatialFilterValue
 } from '../queryform';
 
 describe('Test correctness of the queryform actions', () => {

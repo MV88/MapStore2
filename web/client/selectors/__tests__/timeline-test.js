@@ -16,7 +16,7 @@ import {
     currentTimeRangeSelector,
     itemsSelector,
     rangeDataSelector,
-    multidimOptionsSelectorCreator,
+    multidimOptionsSelectorCreator
 } from '../timeline';
 
 import { set, compose } from '../../utils/ImmutableUtils';

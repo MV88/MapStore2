@@ -20,7 +20,7 @@ import {
     DISCARD_CURRENT_FILTER,
     discardCurrentFilter,
     applyFilter,
-    APPLY_FILTER,
+    APPLY_FILTER
 } from '../layerFilter';
 
 

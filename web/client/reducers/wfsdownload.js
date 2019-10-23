@@ -10,7 +10,7 @@ import {
     DOWNLOAD_FEATURES,
     DOWNLOAD_FINISHED,
     FORMAT_OPTIONS_FETCH,
-    FORMAT_OPTIONS_UPDATE,
+    FORMAT_OPTIONS_UPDATE
 } from '../actions/wfsdownload';
 
 /**

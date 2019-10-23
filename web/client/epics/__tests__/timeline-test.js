@@ -15,7 +15,7 @@ import { testEpic, addTimeoutEpic, TEST_TIMEOUT } from './epicTestUtils';
 import {
     setTimelineCurrentTime,
     updateRangeDataOnRangeChange,
-    settingInitialOffsetValue,
+    settingInitialOffsetValue
 } from '../timeline';
 
 import { changeMapView } from '../../actions/map';

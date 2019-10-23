@@ -25,7 +25,7 @@ import {
     TOGGLE_COLLAPSE,
     TOGGLE_COLLAPSE_ALL,
     TOGGLE_TRAY,
-    toggleCollapse,
+    toggleCollapse
 } from '../actions/widgets';
 
 import { MAP_CONFIG_LOADED } from '../actions/config';

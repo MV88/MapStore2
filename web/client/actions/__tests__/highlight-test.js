@@ -14,7 +14,7 @@ import {
     UPDATE_HIGHLIGHTED,
     updateHighlighted,
     SET_HIGHLIGHT_FEATURES_PATH,
-    setHighlightFeaturesPath,
+    setHighlightFeaturesPath
 } from '../highlight';
 
 describe('Test correctness of the highlight actions', () => {

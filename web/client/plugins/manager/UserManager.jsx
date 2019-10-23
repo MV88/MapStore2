@@ -19,7 +19,7 @@ import UserDeleteConfirm from './users/UserDeleteConfirm';
 import Message from '../../components/I18N/Message';
 import assign from 'object-assign';
 import { trim } from 'lodash';
-import users from '../../reducers/users'
+import users from '../../reducers/users';
 class UserManager extends React.Component {
     static propTypes = {
         onNewUser: PropTypes.func,

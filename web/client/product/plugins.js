@@ -12,19 +12,6 @@
 import ReactSwipe from 'react-swipeable-views';
 
 import SwipeHeader from '../components/data/identify/SwipeHeader';
-
-// product plugins
-import AboutPlugin from './plugins/About';
-import AttributionPlugin from './plugins/Attribution';
-import ExamplesPlugin from './plugins/Examples';
-import FooterPlugin from './plugins/Footer';
-import ForkPlugin from './plugins/Fork';
-import HeaderPlugin from './plugins/Header';
-import HomeDescriptionPlugin from './plugins/HomeDescription';
-import MadeWithLovePlugin from './plugins/MadeWithLove';
-import MailingListsPlugin from './plugins/MailingLists';
-import MapTypePlugin from './plugins/MapType';
-import NavMenu from './plugins/NavMenu';
 // framework plugins
 import AddGroupPlugin from '../plugins/AddGroup';
 import AnnotationsPlugin from '../plugins/Annotations';
@@ -51,16 +38,16 @@ import GeoStoriesPlugin from '../plugins/GeoStories';
 import GeoStoryPlugin from '../plugins/GeoStory';
 import GeoStoryEditorPlugin from '../plugins/GeoStoryEditor';
 import GeoStoryNavigationPlugin from '../plugins/GeoStoryNavigation';
-import SaveStoryPlugin from '../plugins/GeoStorySave';
-import {GeoStorySaveAs as GeoStorySaveAsPlugin}  from '../plugins/GeoStorySave';
-import {GeoStorySave as GeoStorySavePlugin} from '../plugins/GeoStorySave';
+import SaveStoryPlugin, {
+    GeoStorySaveAs as GeoStorySaveAsPlugin,
+    GeoStorySave as GeoStorySavePlugin
+} from '../plugins/GeoStorySave';
 import GlobeViewSwitcherPlugin from '../plugins/GlobeViewSwitcher';
 import GoFull from '../plugins/GoFull';
 import GridContainerPlugin from '../plugins/GridContainer';
 import HelpPlugin from '../plugins/Help';
 import HelpLinkPlugin from '../plugins/HelpLink';
-import RedoPlugin from '../plugins/History';
-import UndoPlugin from '../plugins/History';
+import History from '../plugins/History';
 import HomePlugin from '../plugins/Home';
 import IdentifyPlugin from '../plugins/Identify';
 import LanguagePlugin from '../plugins/Language';
@@ -115,6 +102,18 @@ import GroupManagerPlugin from '../plugins/manager/GroupManager';
 import ManagerPlugin from '../plugins/manager/Manager';
 import ManagerMenuPlugin from '../plugins/manager/ManagerMenu';
 import UserManagerPlugin from '../plugins/manager/UserManager';
+// product plugins
+import AboutPlugin from './plugins/About';
+import AttributionPlugin from './plugins/Attribution';
+import ExamplesPlugin from './plugins/Examples';
+import FooterPlugin from './plugins/Footer';
+import ForkPlugin from './plugins/Fork';
+import HeaderPlugin from './plugins/Header';
+import HomeDescriptionPlugin from './plugins/HomeDescription';
+import MadeWithLovePlugin from './plugins/MadeWithLove';
+import MailingListsPlugin from './plugins/MailingLists';
+import MapTypePlugin from './plugins/MapType';
+import NavMenu from './plugins/NavMenu';
 
 export default {
     plugins: {
@@ -188,7 +187,7 @@ export default {
         PrintPlugin,
         QueryPanelPlugin,
         RedirectPlugin,
-        RedoPlugin,
+        RedoPlugin: History,
         RulesDataGridPlugin,
         RulesEditorPlugin,
         RulesManagerFooter,
@@ -210,7 +209,7 @@ export default {
         TimelinePlugin,
         ToolbarPlugin,
         TutorialPlugin,
-        UndoPlugin,
+        UndoPlugin: History,
         UserManagerPlugin,
         VersionPlugin,
         WFSDownloadPlugin,

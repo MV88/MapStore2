@@ -15,7 +15,7 @@ import {
     startTask,
     TASK_STARTED,
     TASK_SUCCESS,
-    TASK_ERROR,
+    TASK_ERROR
 } from '../tasks';
 
 describe('Test correctness of the tasks actions', () => {

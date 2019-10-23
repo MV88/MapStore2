@@ -14,7 +14,7 @@ import { UPDATE_METADATA } from '../../actions/playback';
 import {
     retrieveFramesForPlayback,
     playbackStopWhenDeleteLayer,
-    playbackCacheNextPreviousTimes,
+    playbackCacheNextPreviousTimes
 } from '../playback';
 
 import DOMAIN_VALUES_RESPONSE from 'raw-loader!../../test-resources/wmts/DomainValues.xml';

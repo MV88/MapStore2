@@ -24,7 +24,7 @@ import {
     InputGroup,
     ControlLabel,
     Glyphicon,
-    Tooltip,
+    Tooltip
 } from 'react-bootstrap';
 
 import ReactQuill from 'react-quill';

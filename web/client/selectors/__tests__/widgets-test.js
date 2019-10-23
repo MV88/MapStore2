@@ -22,7 +22,7 @@ import {
     dependenciesSelector,
     availableDependenciesSelector,
     returnToFeatureGridSelector,
-    isTrayEnabled,
+    isTrayEnabled
 } from '../widgets';
 
 import { set } from '../../utils/ImmutableUtils';

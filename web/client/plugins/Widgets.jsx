@@ -20,7 +20,7 @@ import {
     exportCSV,
     exportImage,
     toggleCollapse,
-    updateWidgetProperty,
+    updateWidgetProperty
 } from '../actions/widgets';
 import { heightProvider } from '../components/layout/enhancers/gridLayout';
 import WidgetsViewComp from '../components/widgets/view/WidgetsView';
@@ -31,7 +31,7 @@ import {
     dependenciesSelector,
     getFloatingWidgetsLayout,
     getVisibleFloatingWidgets,
-    isTrayEnabled,
+    isTrayEnabled
 } from '../selectors/widgets';
 import autoDisableWidgets from './widgets/autoDisableWidgets';
 import editOptions from './widgets/editOptions';

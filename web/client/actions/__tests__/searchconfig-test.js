@@ -14,7 +14,7 @@ import {
     UPDATE_SERVICE,
     setSearchConfigProp,
     restServiceConfig,
-    updateService,
+    updateService
 } from '../searchconfig';
 
 describe('Test correctness of the searchconfig actions', () => {

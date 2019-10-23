@@ -16,7 +16,7 @@ import {
     insertWidget,
     onEditorChange,
     openFilterEditor,
-    setPage,
+    setPage
 } from '../../actions/widgets';
 import Message from '../../components/I18N/Message';
 import BorderLayout from '../../components/layout/BorderLayout';

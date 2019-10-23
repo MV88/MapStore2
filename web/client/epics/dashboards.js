@@ -19,7 +19,7 @@ import {
     searchDashboards,
     dashboardListLoaded,
     dashboardDeleted,
-    dashboardsLoading,
+    dashboardsLoading
 } from '../actions/dashboards';
 
 import { searchParamsSelector, searchTextSelector, totalCountSelector } from '../selectors/dashboards';

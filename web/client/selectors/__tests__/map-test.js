@@ -18,7 +18,7 @@ import {
     mapInfoDetailsUriFromIdSelector,
     configuredRestrictedExtentSelector,
     configuredExtentCrsSelector,
-    configuredMinZoomSelector,
+    configuredMinZoomSelector
 } from '../map';
 
 const center = {x: 1, y: 1};

@@ -17,7 +17,7 @@ import {
     feedbackMaskLoading,
     feedbackMaskLoaded,
     feedbackMaskEnabled,
-    detectedNewPage,
+    detectedNewPage
 } from '../actions/feedbackMask';
 
 import { LOAD_DASHBOARD, DASHBOARD_LOADED, DASHBOARD_LOAD_ERROR } from '../actions/dashboard';

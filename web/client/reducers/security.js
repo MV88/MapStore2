@@ -14,7 +14,7 @@ import {
     CHANGE_PASSWORD_FAIL,
     RESET_ERROR,
     REFRESH_SUCCESS,
-    SESSION_VALID,
+    SESSION_VALID
 } from '../actions/security';
 
 import { SET_CONTROL_PROPERTY } from '../actions/controls';

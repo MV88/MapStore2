@@ -13,7 +13,7 @@ import {
     updateLayerDimensionData,
     UPDATE_LAYER_DIMENSION_DATA,
     setCurrentTime,
-    SET_CURRENT_TIME,
+    SET_CURRENT_TIME
 } from '../dimension';
 
 describe('dimension actions', () => {

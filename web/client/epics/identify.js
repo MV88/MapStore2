@@ -28,7 +28,7 @@ import {
     newMapInfoRequest,
     getVectorInfo,
     showMapinfoMarker,
-    hideMapinfoMarker,
+    hideMapinfoMarker
 } from '../actions/mapInfo';
 
 import { SET_CONTROL_PROPERTIES } from '../actions/controls';
@@ -41,7 +41,7 @@ import {
     stopGetFeatureInfoSelector,
     identifyOptionsSelector,
     clickPointSelector,
-    clickLayerSelector,
+    clickLayerSelector
 } from '../selectors/mapInfo';
 
 import { centerToMarkerSelector, queryableLayersSelector } from '../selectors/layers';
@@ -53,14 +53,14 @@ import {
     centerToVisibleArea,
     isInsideVisibleArea,
     isPointInsideExtent,
-    reprojectBbox,
+    reprojectBbox
 } from '../utils/CoordinatesUtils';
 
 import {
     isHighlightEnabledSelector,
     itemIdSelector,
     overrideParamsSelector,
-    filterNameListSelector,
+    filterNameListSelector
 } from '../selectors/mapInfo';
 
 import { getCurrentResolution, parseLayoutValue } from '../utils/MapUtils';

@@ -18,7 +18,7 @@ import {
     originalSettingsSelector,
     activeTabSettingsSelector,
     drawerEnabledControlSelector,
-    showCoordinateEditorSelector,
+    showCoordinateEditorSelector
 } from '../controls';
 
 const state = {

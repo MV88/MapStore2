@@ -24,7 +24,7 @@ import {
     disableTutorial,
     resetTutorial,
     closeTutorial,
-    toggleTutorial,
+    toggleTutorial
 } from '../tutorial';
 
 describe('Test the tutorial actions', () => {

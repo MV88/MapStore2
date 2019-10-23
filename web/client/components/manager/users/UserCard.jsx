@@ -17,7 +17,6 @@ import { Button, Glyphicon } from 'react-bootstrap';
 import Message from '../../../components/I18N/Message';
 
 
-
 import './style/usercard.css';
 
 class UserCard extends React.Component {

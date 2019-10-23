@@ -39,7 +39,7 @@ import {
     zoomToExtent,
     resizeMap,
     changeMapLimits,
-    setMapResolutions,
+    setMapResolutions
 } from '../map';
 
 import { SHOW_NOTIFICATION } from '../notifications';

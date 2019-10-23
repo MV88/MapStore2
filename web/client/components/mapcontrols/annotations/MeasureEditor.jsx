@@ -27,7 +27,7 @@ import {
     withPropsOnChange,
     withState,
     withStateHandlers,
-    defaultProps,
+    defaultProps
 } from 'recompose';
 
 

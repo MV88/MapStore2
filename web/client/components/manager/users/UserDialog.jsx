@@ -26,7 +26,7 @@ import {
     Checkbox,
     FormControl,
     FormGroup,
-    ControlLabel,
+    ControlLabel
 } from 'react-bootstrap';
 
 import tooltip from '../../../components/misc/enhancers/tooltip';

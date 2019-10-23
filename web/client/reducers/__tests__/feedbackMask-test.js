@@ -12,7 +12,7 @@ import {
     feedbackMaskLoading,
     feedbackMaskLoaded,
     feedbackMaskEnabled,
-    detectedNewPage,
+    detectedNewPage
 } from '../../actions/feedbackMask';
 
 import feedbackMask from '../feedbackMask';

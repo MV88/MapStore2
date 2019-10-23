@@ -18,7 +18,7 @@ import {
     setLoading,
     onLayerAdded,
     updateBBox,
-    onSuccess,
+    onSuccess
 } from '../../actions/mapimport';
 
 const L1 = {name: "L1"};

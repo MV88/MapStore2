@@ -27,7 +27,7 @@ import {
     selectedServiceTypeSelector,
     selectedServiceSelector,
     servicesSelector,
-    serviceListOpenSelector,
+    serviceListOpenSelector
 } from '../catalog';
 
 import { set } from '../../utils/ImmutableUtils';

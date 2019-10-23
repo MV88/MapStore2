@@ -19,7 +19,7 @@ import {
     RESET_QUERY,
     UPDATE_QUERY,
     TOGGLE_SYNC_WMS,
-    TOGGLE_LAYER_FILTER,
+    TOGGLE_LAYER_FILTER
 } from '../actions/wfsquery';
 
 import { QUERY_FORM_RESET } from '../actions/queryform';

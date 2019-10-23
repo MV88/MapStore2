@@ -31,7 +31,7 @@ import {
     dashboardLoading,
     DASHBOARD_LOADING,
     dashboardLoadError,
-    DASHBOARD_LOAD_ERROR,
+    DASHBOARD_LOAD_ERROR
 } from '../dashboard';
 
 describe('Test correctness of the dashboard actions', () => {

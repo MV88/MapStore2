@@ -11,7 +11,7 @@ import {
     getFloatingWidgets,
     getFloatingWidgetsCurrentLayout,
     getCollapsedIds,
-    getCollapsedState,
+    getCollapsedState
 } from './widgets';
 
 import { find, findIndex, sortBy } from 'lodash';

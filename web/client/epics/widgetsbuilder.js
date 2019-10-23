@@ -14,7 +14,7 @@ import {
     OPEN_FILTER_EDITOR,
     NEW_CHART,
     editNewWidget,
-    onEditorChange,
+    onEditorChange
 } from '../actions/widgets';
 
 import { closeFeatureGrid } from '../actions/featuregrid';

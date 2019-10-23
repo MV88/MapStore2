@@ -20,7 +20,7 @@ import {
     UPDATE_RESULTS_STYLE,
     CHANGE_SEARCH_TOOL,
     CHANGE_FORMAT,
-    CHANGE_COORD,
+    CHANGE_COORD
 } from '../actions/search';
 
 import { RESET_CONTROLS } from '../actions/controls';

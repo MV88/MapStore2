@@ -18,7 +18,7 @@ import {
     setDirty,
     cancelDirty,
     setInvalidInput,
-    resetInvalidInput,
+    resetInvalidInput
 } from '../../actions/thematic';
 
 import thematic from '../thematic';

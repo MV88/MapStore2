@@ -19,7 +19,7 @@ import {
     info,
     hide,
     clear,
-    dispatchAction,
+    dispatchAction
 } from '../notifications';
 
 describe('Test correctness of the notifications actions', () => {

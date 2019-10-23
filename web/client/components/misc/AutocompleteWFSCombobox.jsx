@@ -18,7 +18,7 @@ import {
     compose,
     withStateHandlers,
     withPropsOnChange,
-    withHandlers,
+    withHandlers
 } from 'recompose';
 
 import rxjsConfig from 'recompose/rxjsObservableConfig';

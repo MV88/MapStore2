@@ -80,7 +80,7 @@ import {
     sizeChange,
     storeAdvancedSearchFilter,
     setUp,
-    setTimeSync,
+    setTimeSync
 } from '../../actions/featuregrid';
 
 import { featureTypeLoaded, createQuery } from '../../actions/wfsquery';

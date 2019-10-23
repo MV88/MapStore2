@@ -23,7 +23,7 @@ import {
     getFeatureById,
     attributesSelector,
     isSyncWmsActive,
-    isFilterActive,
+    isFilterActive
 } from '../query';
 
 const STRANGE_LAYER_NAME = "test.workspace:test.layer";

@@ -14,7 +14,7 @@ import {
     permissionsUpdated,
     mapsLoading,
     setFeaturedMapsEnabled,
-    setFeaturedMapsLatestResource,
+    setFeaturedMapsLatestResource
 } from '../../actions/maps';
 
 import { dashboardDeleted } from '../../actions/dashboards';

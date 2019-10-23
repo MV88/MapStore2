@@ -20,7 +20,7 @@ import {
     mapPermissionsFromIdSelector,
     mapThumbnailsUriFromIdSelector,
     searchTextSelector,
-    searchParamsSelector,
+    searchParamsSelector
 } from '../maps';
 
 const name = "name";

@@ -18,7 +18,7 @@ import {
     searchGeostories,
     geostoriesListLoaded,
     geostoryDeleted,
-    geostoriesLoading,
+    geostoriesLoading
 } from '../actions/geostories';
 
 import { searchParamsSelector, searchTextSelector, totalCountSelector } from '../selectors/geostories';

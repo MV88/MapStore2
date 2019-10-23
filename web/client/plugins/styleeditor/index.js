@@ -22,7 +22,7 @@ import {
     selectStyleTemplate,
     setDefaultStyle,
     updateStatus,
-    updateStyleCode,
+    updateStyleCode
 } from '../../actions/styleeditor';
 import Message from '../../components/I18N/Message';
 import BorderLayout from '../../components/layout/BorderLayout';
@@ -50,7 +50,7 @@ import {
     selectedStyleSelector,
     statusStyleSelector,
     styleServiceSelector,
-    templateIdSelector,
+    templateIdSelector
 } from '../../selectors/styleeditor';
 import { STYLE_OWNER_NAME, getEditorMode, getStyleTemplates } from '../../utils/StyleEditorUtils';
 import inlineWidgets from './inlineWidgets';

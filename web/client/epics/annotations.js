@@ -50,7 +50,7 @@ import {
     NEW_ANNOTATION,
     TOGGLE_STYLE,
     CONFIRM_DELETE_FEATURE,
-    OPEN_EDITOR,
+    OPEN_EDITOR
 } from '../actions/annotations';
 
 import uuidv1 from 'uuid/v1';
@@ -65,7 +65,7 @@ import {
     removeDuplicate,
     validateCoordsArray,
     getStartEndPointsForLinestring,
-    DEFAULT_ANNOTATIONS_STYLES,
+    DEFAULT_ANNOTATIONS_STYLES
 } from '../utils/AnnotationsUtils';
 
 import { mapNameSelector } from '../selectors/map';

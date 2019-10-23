@@ -15,7 +15,7 @@ import {
     intersection,
     intersectionBy,
     keys,
-    omit,
+    omit
 } from 'lodash';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -53,7 +53,6 @@ vis.timeline.components.items.BackgroundItem.prototype._createDomElement = funct
         this.dirty = true;
     }
 };
-
 
 
 const noop = () => { };

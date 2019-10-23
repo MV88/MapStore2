@@ -31,7 +31,7 @@ import {
     SELECT_NODE,
     FILTER_LAYERS,
     SHOW_LAYER_METADATA,
-    HIDE_LAYER_METADATA,
+    HIDE_LAYER_METADATA
 } from '../actions/layers';
 
 import { TOGGLE_CONTROL } from '../actions/controls';

@@ -36,7 +36,6 @@ const ZoomInButton = connect(selector, {
 })(ZoomButton);
 
 
-
 export default {
     ZoomInPlugin: assign(ZoomInButton, {
         disablePluginIf: "{state('mapType') === 'cesium'}",

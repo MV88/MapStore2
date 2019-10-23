@@ -14,7 +14,7 @@ import ConfigUtils from '../../utils/ConfigUtils';
 import {
     searchGeostoriesOnMapSearch,
     searchGeostories as searchGeostoriesEpic,
-    reloadOnGeostories,
+    reloadOnGeostories
 } from '../geostories';
 
 import { storySaved } from '../../actions/geostory';

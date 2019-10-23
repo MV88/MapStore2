@@ -13,14 +13,14 @@ import {
     isCoordinateEditorEnabledSelector,
     showAddAsAnnotationSelector,
     measurementSelector,
-    getValidFeatureSelector,
+    getValidFeatureSelector
 } from '../measurement';
 
 import {
     polyFeatureNotClosedInvalid,
     polyFeatureNotClosed,
     lineFeature3,
-    lineFeatureWithoutGeom,
+    lineFeatureWithoutGeom
 } from '../../test-resources/drawsupport/features';
 
 describe('Test maptype', () => {

@@ -23,7 +23,7 @@ import {
     highlightStyleSelector,
     itemIdSelector,
     filterNameListSelector,
-    overrideParamsSelector,
+    overrideParamsSelector
 } from '../mapInfo';
 
 const QUERY_PARAMS = {

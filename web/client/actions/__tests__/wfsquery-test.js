@@ -34,7 +34,7 @@ import {
     createQuery,
     query,
     resetQuery,
-    toggleLayerFilter,
+    toggleLayerFilter
 } from '../wfsquery';
 
 describe('wfsquery actions', () => {

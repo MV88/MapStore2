@@ -25,7 +25,7 @@ import {
     TEXT_SEARCH_ERROR,
     zoomAndAddPoint,
     ZOOM_ADD_POINT,
-    searchLayerWithFilter,
+    searchLayerWithFilter
 } from '../../actions/search';
 
 import { SHOW_NOTIFICATION } from '../../actions/notifications';

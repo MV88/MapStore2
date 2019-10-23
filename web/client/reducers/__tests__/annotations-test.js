@@ -63,7 +63,7 @@ import {
     changeFormat,
     toggleStyle,
     setStyle,
-    updateSymbols,
+    updateSymbols
 } from '../../actions/annotations';
 
 import { PURGE_MAPINFO_RESULTS } from '../../actions/mapInfo';

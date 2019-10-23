@@ -13,7 +13,7 @@ import {
     TOGGLE_CONTROL,
     SET_CONTROL_PROPERTY,
     SET_CONTROL_PROPERTIES,
-    RESET_CONTROLS,
+    RESET_CONTROLS
 } from '../../actions/controls';
 
 describe('Test the controls reducer', () => {

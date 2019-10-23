@@ -51,7 +51,7 @@ import {
     HIGHLIGHT_POINT,
     CHANGE_FORMAT,
     UPDATE_SYMBOLS,
-    ERROR_SYMBOLS,
+    ERROR_SYMBOLS
 } from '../actions/annotations';
 
 import {
@@ -63,7 +63,7 @@ import {
     validateFeature,
     getComponents,
     updateAllStyles,
-    getBaseCoord,
+    getBaseCoord
 } from '../utils/AnnotationsUtils';
 
 import { set } from '../utils/ImmutableUtils';

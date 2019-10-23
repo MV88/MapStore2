@@ -15,7 +15,7 @@ import {
     rulesSelector,
     securityTokenSelector,
     userGroupSecuritySelector,
-    userParamsSelector,
+    userParamsSelector
 } from '../security';
 
 const id = 1833;

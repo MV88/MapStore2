@@ -13,7 +13,7 @@ import axios from '../libs/ajax';
 import {
     changeSpatialAttribute,
     SELECT_VIEWPORT_SPATIAL_METHOD,
-    updateGeometrySpatialField,
+    updateGeometrySpatialField
 } from '../actions/queryform';
 
 import { CHANGE_MAP_VIEW } from '../actions/map';
@@ -26,7 +26,7 @@ import {
     featureTypeLoaded,
     featureTypeError,
     querySearchResponse,
-    queryError,
+    queryError
 } from '../actions/wfsquery';
 
 import { paginationInfo, isDescribeLoaded, layerDescribeSelector } from '../selectors/query';
@@ -44,7 +44,7 @@ import {
     spatialFieldGeomTypeSelector,
     spatialFieldGeomCoordSelector,
     spatialFieldGeomSelector,
-    spatialFieldGeomProjSelector,
+    spatialFieldGeomProjSelector
 } from '../selectors/queryform';
 
 import { changeDrawingStatus } from '../actions/draw';

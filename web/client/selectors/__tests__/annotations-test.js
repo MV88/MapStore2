@@ -35,7 +35,7 @@ import {
     aeronauticalOptionsSelector,
     annotationSelector,
     annotationsListSelector,
-    symbolListSelector,
+    symbolListSelector
 } from '../annotations';
 
 const state = {

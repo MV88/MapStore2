@@ -18,7 +18,7 @@ import {
     onDownloadOptionChange,
     onDownloadFinished,
     onFormatOptionsFetch,
-    updateFormats,
+    updateFormats
 } from '../wfsdownload';
 
 describe('Test correctness of the wfsdownload actions', () => {

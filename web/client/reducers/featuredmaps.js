@@ -13,7 +13,7 @@ import {
     PERMISSIONS_UPDATED,
     MAPS_LIST_LOADING,
     FEATURED_MAPS_SET_ENABLED,
-    FEATURED_MAPS_SET_LATEST_RESOURCE,
+    FEATURED_MAPS_SET_LATEST_RESOURCE
 } from '../actions/maps';
 
 import { DASHBOARD_DELETED } from '../actions/dashboards';

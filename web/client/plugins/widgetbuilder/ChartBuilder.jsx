@@ -15,7 +15,7 @@ import {
     insertWidget,
     onEditorChange,
     openFilterEditor,
-    setPage,
+    setPage
 } from '../../actions/widgets';
 import BorderLayout from '../../components/layout/BorderLayout';
 import ChartWizardComp from '../../components/widgets/builder/wizard/ChartWizard';

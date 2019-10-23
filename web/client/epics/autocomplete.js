@@ -15,7 +15,7 @@ import {
     updateFilterFieldOptions,
     loadingFilterFieldOptions,
     setAutocompleteMode,
-    toggleMenu,
+    toggleMenu
 } from '../actions/queryform';
 
 import { FEATURE_TYPE_SELECTED } from '../actions/wfsquery';

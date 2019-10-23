@@ -14,7 +14,7 @@ import {
     DISABLE_TUTORIAL,
     RESET_TUTORIAL,
     CLOSE_TUTORIAL,
-    TOGGLE_TUTORIAL,
+    TOGGLE_TUTORIAL
 } from '../actions/tutorial';
 
 import assign from 'object-assign';

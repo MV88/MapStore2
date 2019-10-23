@@ -22,7 +22,7 @@ import {
     getLabelFromValue,
     getDefaultInfoFormatValueFromLayer,
     getLayerFeatureInfo,
-    filterRequestParams,
+    filterRequestParams
 } from '../MapInfoUtils';
 
 import CoordinatesUtils from '../CoordinatesUtils';

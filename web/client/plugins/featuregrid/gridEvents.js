@@ -4,7 +4,7 @@ import {
     deselectFeatures,
     featureModified,
     disableToolbar,
-    updateFilter,
+    updateFilter
 } from '../../actions/featuregrid';
 
 const range = (start, end) => Array.from({length: (end + 1 - start)}, (v, k) => k + start);

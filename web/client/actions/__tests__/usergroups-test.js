@@ -25,7 +25,7 @@ import {
     DELETEGROUP,
     STATUS_DELETED,
     searchUsers,
-    SEARCHUSERS,
+    SEARCHUSERS
 } from '../usergroups';
 
 import GeoStoreDAO from '../../api/GeoStoreDAO';

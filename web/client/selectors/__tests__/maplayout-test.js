@@ -15,7 +15,7 @@ import {
     rightPanelOpenSelector,
     bottomPanelOpenSelector,
     boundingMapRectSelector,
-    mapPaddingSelector,
+    mapPaddingSelector
 } from '../maplayout';
 
 describe('Test map layout selectors', () => {

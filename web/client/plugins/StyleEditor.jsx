@@ -30,7 +30,7 @@ import {
     getUpdatedLayer,
     loadingStyleSelector,
     statusStyleSelector,
-    styleServiceSelector,
+    styleServiceSelector
 } from '../selectors/styleeditor';
 import { isSameOrigin } from '../utils/StyleEditorUtils';
 import { StyleCodeEditor, StyleSelector, StyleToolbar } from './styleeditor/index';

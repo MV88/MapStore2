@@ -11,7 +11,7 @@ import {
     DOWNLOAD_FEATURES,
     onDownloadFinished,
     updateFormats,
-    onDownloadOptionChange,
+    onDownloadOptionChange
 } from '../actions/wfsdownload';
 
 import { cleanDuplicatedQuestionMarks } from '../utils/ConfigUtils';

@@ -14,7 +14,7 @@ import {
     loadDependencies,
     toggleDependencySelector,
     DEPENDENCY_SELECTOR_KEY,
-    WIDGETS_REGEX,
+    WIDGETS_REGEX
 } from '../actions/widgets';
 
 import { MAP_CONFIG_LOADED } from '../actions/config';
@@ -22,7 +22,7 @@ import { MAP_CONFIG_LOADED } from '../actions/config';
 import {
     availableDependenciesSelector,
     isWidgetSelectionActive,
-    getDependencySelectorConfig,
+    getDependencySelectorConfig
 } from '../selectors/widgets';
 
 import { CHANGE_LAYER_PROPERTIES, LAYER_LOAD, LAYER_ERROR } from '../actions/layers';

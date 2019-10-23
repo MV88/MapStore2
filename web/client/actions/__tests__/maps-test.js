@@ -77,7 +77,7 @@ import {
     SAVE_MAP_RESOURCE,
     saveMapResource,
     FEATURED_MAPS_SET_LATEST_RESOURCE,
-    setFeaturedMapsLatestResource,
+    setFeaturedMapsLatestResource
 } from '../maps';
 
 import GeoStoreDAO from '../../api/GeoStoreDAO';

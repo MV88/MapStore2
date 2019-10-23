@@ -33,7 +33,7 @@ import {
     updateQuery,
     TOGGLE_SYNC_WMS,
     QUERY_ERROR,
-    FEATURE_LOADING,
+    FEATURE_LOADING
 } from '../actions/wfsquery';
 
 import { reset, QUERY_FORM_SEARCH, loadFilter } from '../actions/queryform';
@@ -43,7 +43,7 @@ import {
     BROWSE_DATA,
     changeLayerProperties,
     refreshLayerVersion,
-    CHANGE_LAYER_PARAMS,
+    CHANGE_LAYER_PARAMS
 } from '../actions/layers';
 
 import { closeIdentify } from '../actions/mapInfo';
@@ -90,7 +90,7 @@ import {
     storeAdvancedSearchFilter,
     fatureGridQueryResult,
     LOAD_MORE_FEATURES,
-    SET_TIME_SYNC,
+    SET_TIME_SYNC
 } from '../actions/featuregrid';
 
 import { TOGGLE_CONTROL, resetControls, setControlProperty } from '../actions/controls';
@@ -112,7 +112,7 @@ import {
     timeSyncActive,
     hasSupportedGeometry,
     queryOptionsSelector,
-    getAttributeFilters,
+    getAttributeFilters
 } from '../selectors/featuregrid';
 
 import { error, warning } from '../actions/notifications';
@@ -125,7 +125,7 @@ import {
     wfsFilter,
     featureCollectionResultSelector,
     isSyncWmsActive,
-    featureLoadingSelector,
+    featureLoadingSelector
 } from '../selectors/query';
 
 import { getSelectedLayer } from '../selectors/layers';

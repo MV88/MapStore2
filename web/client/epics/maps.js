@@ -46,7 +46,7 @@ import {
     savingMap,
     mapCreated,
     mapError,
-    loadMaps,
+    loadMaps
 } from '../actions/maps';
 
 import { resetCurrentMap, EDIT_MAP } from '../actions/currentMap';
@@ -58,7 +58,7 @@ import {
     mapThumbnailsUriFromIdSelector,
     mapDetailsUriFromIdSelector,
     searchTextSelector,
-    searchParamsSelector,
+    searchParamsSelector
 } from '../selectors/maps';
 
 import { mapIdSelector, mapInfoDetailsUriFromIdSelector } from '../selectors/map';
@@ -69,7 +69,7 @@ import {
     currentMapDetailsUriSelector,
     currentMapSelector,
     currentMapDetailsChangedSelector,
-    currentMapOriginalDetailsTextSelector,
+    currentMapOriginalDetailsTextSelector
 } from '../selectors/currentmap';
 
 import { userParamsSelector } from '../selectors/security';
@@ -78,7 +78,7 @@ import {
     deleteResourceById,
     createAssociatedResource,
     deleteAssociatedResource,
-    updateAssociatedResource,
+    updateAssociatedResource
 } from '../utils/ObservableUtils';
 
 import { getIdFromUri } from '../utils/MapUtils';

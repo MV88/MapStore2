@@ -16,7 +16,7 @@ import {
     toggleShowCoordinateEditor,
     changeFormat,
     changePage,
-    toggleHighlightFeature,
+    toggleHighlightFeature
 } from '../../actions/mapInfo';
 
 import { MAP_CONFIG_LOADED } from '../../actions/config';

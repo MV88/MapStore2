@@ -13,7 +13,7 @@ import {
     createEventHandler,
     withHandlers,
     withStateHandlers,
-    defaultProps,
+    defaultProps
 } from 'recompose';
 
 import { getFeatureTypeProperties } from '../../../../utils/ogc/WFS/base';

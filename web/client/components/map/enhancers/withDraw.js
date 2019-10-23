@@ -14,7 +14,7 @@ import {
     endDrawing,
     setCurrentStyle,
     geometryChanged,
-    drawStopped,
+    drawStopped
 } from '../../../actions/draw';
 
 const defaultDrawConnect = connect((state) =>

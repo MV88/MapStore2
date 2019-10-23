@@ -9,7 +9,7 @@
 import {
     SET_COOKIE_VISIBILITY,
     SET_MORE_DETAILS_VISIBILITY,
-    SET_DETAILS_COOKIE_HTML,
+    SET_DETAILS_COOKIE_HTML
 } from '../actions/cookie';
 
 import assign from 'object-assign';

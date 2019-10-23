@@ -24,7 +24,7 @@ import {
     RESET_CURRENT_MAP,
     resetCurrentMap,
     ADD_CURRENT_MAP_PERMISSION,
-    addCurrentMapPermission,
+    addCurrentMapPermission
 } from '../currentMap';
 
 

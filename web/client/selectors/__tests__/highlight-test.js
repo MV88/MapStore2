@@ -17,7 +17,7 @@ import {
     filteredSpatialObjectCrs,
     filteredspatialObjectType,
     filteredFeatures,
-    highlighedFeatures,
+    highlighedFeatures
 } from '../highlight';
 
 const idFt1 = "idFt1";

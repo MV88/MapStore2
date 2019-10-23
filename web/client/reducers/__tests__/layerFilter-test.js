@@ -11,7 +11,7 @@ import {
     APPLIED_FILTER,
     STORE_CURRENT_APPLIED_FILTER,
     INIT_LAYER_FILTER,
-    DISCARD_CURRENT_FILTER,
+    DISCARD_CURRENT_FILTER
 } from '../../actions/layerFilter';
 
 import { QUERY_FORM_RESET } from '../../actions/queryform';

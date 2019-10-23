@@ -6,7 +6,7 @@ import {
     withHandlers,
     withStateHandlers,
     defaultProps,
-    createEventHandler,
+    createEventHandler
 } from 'recompose';
 
 import propsStreamFactory from '../../../../misc/enhancers/propsStreamFactory';

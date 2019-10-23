@@ -40,7 +40,7 @@ import {
     deleteStyle,
     initStyleService,
     setEditPermissionStyleEditor,
-    setDefaultStyle,
+    setDefaultStyle
 } from '../styleeditor';
 
 describe('Test the styleeditor actions', () => {

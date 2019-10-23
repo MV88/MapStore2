@@ -15,7 +15,7 @@ import {
     lineFeatureInvalid2,
     polyFeatureClosed,
     polyFeatureNotClosedInvalid,
-    polyFeatureNotClosedInvalid2,
+    polyFeatureNotClosedInvalid2
 } from '../../test-resources/drawsupport/features';
 
 

@@ -16,7 +16,7 @@ import {
     CLASSIFICATION_LOADED,
     CLASSIFICATION_ERROR,
     loadFields,
-    loadClassification,
+    loadClassification
 } from '../../actions/thematic';
 
 import { updateNode, CHANGE_LAYER_PARAMS } from '../../actions/layers';

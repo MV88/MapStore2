@@ -36,7 +36,7 @@ import {
     selectedLayerNameSelector,
     queryOptionsSelector,
     showTimeSync,
-    timeSyncActive,
+    timeSyncActive
 } from '../featuregrid';
 
 const idFt1 = "idFt1";

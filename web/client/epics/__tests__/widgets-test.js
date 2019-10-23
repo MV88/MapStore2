@@ -14,7 +14,7 @@ import {
     alignDependenciesToWidgets,
     toggleWidgetConnectFlow,
     updateLayerOnLayerPropertiesChange,
-    updateLayerOnLoadingErrorChange,
+    updateLayerOnLoadingErrorChange
 } from '../widgets';
 
 import {
@@ -26,7 +26,7 @@ import {
     EDITOR_CHANGE,
     EDITOR_SETTING_CHANGE,
     LOAD_DEPENDENCIES,
-    DEPENDENCY_SELECTOR_KEY,
+    DEPENDENCY_SELECTOR_KEY
 } from '../../actions/widgets';
 
 import { savingMap, mapCreated } from '../../actions/maps';

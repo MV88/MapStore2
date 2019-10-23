@@ -22,7 +22,7 @@ import {
     SET_COLLAPSED,
     setCollapsed,
     SET_MAP_SYNC,
-    setMapSync,
+    setMapSync
 } from '../timeline';
 
 describe('timeline actions', () => {

@@ -19,7 +19,7 @@ import {
     dashboardSaveError,
     SAVE_DASHBOARD,
     LOAD_DASHBOARD,
-    dashboardLoadError,
+    dashboardLoadError
 } from '../actions/dashboard';
 
 import { setControlProperty, TOGGLE_CONTROL } from '../actions/controls';

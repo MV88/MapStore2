@@ -20,7 +20,7 @@ import {
     saveUser,
     USERMANAGER_UPDATE_USER,
     deleteUser,
-    USERMANAGER_DELETE_USER,
+    USERMANAGER_DELETE_USER
 } from '../users';
 
 import GeoStoreDAO from '../../api/GeoStoreDAO';

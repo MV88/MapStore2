@@ -13,7 +13,7 @@ import {
     withState,
     branch,
     withHandlers,
-    renderComponent,
+    renderComponent
 } from 'recompose';
 
 import { set } from '../../../../utils/ImmutableUtils';

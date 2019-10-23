@@ -26,7 +26,7 @@ import {
     sortNode,
     toggleNode,
     updateNode,
-    updateSettings,
+    updateSettings
 } from '../actions/layers';
 import { zoomToExtent } from '../actions/map';
 import {
@@ -58,7 +58,7 @@ import {
     updateLogicCombo,
     zoneChange,
     zoneGetValues,
-    zoneSearch,
+    zoneSearch
 } from '../actions/queryform';
 import { initQueryPanel } from '../actions/wfsquery';
 // include application component
@@ -73,7 +73,7 @@ import {
     featureTypeSelectedEpic,
     redrawSpatialFilterEpic,
     viewportSelectedEpic,
-    wfsQueryEpic,
+    wfsQueryEpic
 } from '../epics/wfsquery';
 import layerFilter from '../reducers/layerFilter';
 import query from '../reducers/query';
@@ -86,7 +86,7 @@ import {
     appliedFilterSelector,
     availableCrossLayerFilterLayersSelector,
     crossLayerFilterSelector,
-    storedFilterSelector,
+    storedFilterSelector
 } from '../selectors/queryform';
 import LayersUtils from '../utils/LayersUtils';
 import Message from './locale/Message';

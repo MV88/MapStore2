@@ -18,7 +18,7 @@ import {
     onCreateSnapshot,
     onRemoveSnapshot,
     onSnapshotError,
-    saveImage,
+    saveImage
 } from '../actions/snapshot';
 import SnapshotPanelComp from '../components/mapcontrols/Snapshot/SnapshotPanel';
 import SnapshotQueueComp from '../components/mapcontrols/Snapshot/SnapshotQueue';

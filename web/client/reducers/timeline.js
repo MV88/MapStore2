@@ -1,9 +1,17 @@
-import { RANGE_CHANGED } from '../actions/timeline';
-import { REMOVE_NODE } from '../actions/layers';
+/**
+ * Copyright 2019, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { assign, has, pickBy } from 'lodash';
+
 import { RESET_CONTROLS } from '../actions/controls';
-import { RANGE_DATA_LOADED, LOADING, SELECT_LAYER, SET_COLLAPSED, SET_MAP_SYNC } from '../actions/timeline';
+import { REMOVE_NODE } from '../actions/layers';
+import { LOADING, RANGE_CHANGED, RANGE_DATA_LOADED, SELECT_LAYER, SET_COLLAPSED, SET_MAP_SYNC } from '../actions/timeline';
 import { set } from '../utils/ImmutableUtils';
-import { assign, pickBy, has } from 'lodash';
 
 /**
  * Provides state for the timeline. Example:

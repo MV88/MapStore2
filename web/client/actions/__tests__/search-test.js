@@ -32,7 +32,7 @@ import {
     selectSearchItem,
     selectNestedService,
     cancelSelectedItem,
-    updateResultsStyle,
+    updateResultsStyle
 } from '../search';
 
 describe('Test correctness of the search actions', () => {

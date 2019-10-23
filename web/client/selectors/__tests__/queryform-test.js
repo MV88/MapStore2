@@ -18,7 +18,7 @@ import {
     spatialFieldMethodSelector,
     queryFormUiStateSelector,
     storedFilterSelector,
-    appliedFilterSelector,
+    appliedFilterSelector
 } from '../queryform';
 
 const circle = "Circle";

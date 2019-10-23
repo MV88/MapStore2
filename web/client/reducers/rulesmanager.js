@@ -6,24 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { castArray, head, isEmpty } from 'lodash';
 import assign from 'object-assign';
-
 import wk from 'wellknown';
-import { isEmpty } from 'lodash';
-
-import {
-    RULES_SELECTED,
-    OPTIONS_LOADED,
-    UPDATE_FILTERS_VALUES,
-    LOADING,
-    EDIT_RULE,
-    SET_FILTER,
-    CLEAN_EDITING,
-    RULE_SAVED,
-} from '../actions/rulesmanager';
 
 import { CHANGE_DRAWING_STATUS } from '../actions/draw';
-import _ from 'lodash';
+import {
+    CLEAN_EDITING,
+    EDIT_RULE,
+    LOADING,
+    OPTIONS_LOADED,
+    RULES_SELECTED,
+    RULE_SAVED,
+    SET_FILTER,
+    UPDATE_FILTERS_VALUES
+} from '../actions/rulesmanager';
+
 const defaultState = {
     services: {
         WFS: [
@@ -82,12 +80,12 @@ function rulesmanager(state = defaultState, action) {
         const existingRules = state.selectedRules || [];
         if (action.unselect) {
             return assign({}, state, {
-                selectedRules: _(existingRules).filter(
-                    rule => !_.head(newRules.filter(unselected => unselected.id === rule.id))).value()
+                selectedRules: castArray(existingRules).filter(
+                    rule => !head(newRules.filter(unselected => unselected.id === rule.id))).value()
             });
         }
         return assign({}, state, {
-            selectedRules: _(existingRules).concat(newRules).uniq(rule => rule.id).value()});
+            selectedRules: castArray(existingRules).concat(newRules).uniq(rule => rule.id).value()});
     }
     case UPDATE_FILTERS_VALUES: {
         const filtersValues = state.filtersValues || {};

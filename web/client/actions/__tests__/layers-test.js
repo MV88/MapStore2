@@ -58,7 +58,7 @@ import {
     showLayerMetadata,
     hideLayerMetadata,
     updateSettingsParams,
-    addGroup,
+    addGroup
 } from '../layers';
 
 import { getLayerCapabilities } from '../layerCapabilities';

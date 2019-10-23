@@ -15,7 +15,7 @@ import {
     changeSnapshotState,
     onSnapshotError,
     onSnapshotReady,
-    saveImage,
+    saveImage
 } from '../snapshot';
 
 import FileSaver from 'file-saver';

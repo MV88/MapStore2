@@ -16,7 +16,7 @@ import assign from 'object-assign';
 import {
     createPagedUniqueAutompleteStream,
     singleAttributeFilter,
-    createWFSFetchStream,
+    createWFSFetchStream
 } from '../autocomplete';
 
 import AutocompleteEditor from '../../components/data/featuregrid/editors/AutocompleteEditor';

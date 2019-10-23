@@ -15,7 +15,7 @@ import {
     LOADING_STYLE,
     LOADED_STYLE,
     INIT_STYLE_SERVICE,
-    SET_EDIT_PERMISSION,
+    SET_EDIT_PERMISSION
 } from '../actions/styleeditor';
 
 function styleeditor(state = {}, action) {

@@ -34,7 +34,7 @@ import {
     showSettings,
     toggleNode,
     updateNode,
-    updateSettings,
+    updateSettings
 } from '../actions/layers';
 import { zoomToExtent } from '../actions/map';
 import { createWidget } from '../actions/widgets';
@@ -60,7 +60,7 @@ import {
     layerSettingSelector,
     layersSelector,
     selectedNodesSelector,
-    wfsDownloadSelector,
+    wfsDownloadSelector
 } from '../selectors/layers';
 import { currentLocaleSelector } from '../selectors/locale';
 import { mapNameSelector, mapSelector } from '../selectors/map';

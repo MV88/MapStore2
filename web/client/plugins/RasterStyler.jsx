@@ -33,7 +33,7 @@ import {
     PseudoBandSelector,
     PseudoColor,
     RasterStyleTypePicker,
-    RedBandSelector,
+    RedBandSelector
 } from './rasterstyler/index';
 
 class RasterStyler extends React.Component {

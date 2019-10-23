@@ -18,7 +18,7 @@ import {
     selectedLayerSelector,
     currentTimeRangeSelector,
     rangeSelector,
-    timelineLayersSelector,
+    timelineLayersSelector
 } from '../../selectors/timeline';
 
 import { moveTime, setCurrentOffset } from '../../actions/dimension';

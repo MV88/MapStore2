@@ -19,7 +19,7 @@ import {
     drawStopped,
     DRAW_SUPPORT_STOPPED,
     setCurrentStyle,
-    SET_CURRENT_STYLE,
+    SET_CURRENT_STYLE
 } from '../draw';
 
 describe('Test correctness of the draw actions', () => {

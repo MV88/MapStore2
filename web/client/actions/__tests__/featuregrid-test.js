@@ -86,7 +86,7 @@ import {
     hideSyncPopover,
     HIDE_SYNC_POPOVER,
     toggleShowAgain,
-    TOGGLE_SHOW_AGAIN_FLAG,
+    TOGGLE_SHOW_AGAIN_FLAG
 } from '../featuregrid';
 
 const idFeature = "2135";

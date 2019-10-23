@@ -9,7 +9,7 @@
 import {
     CHANGE_MOUSE_POSITION,
     CHANGE_MOUSE_POSITION_CRS,
-    CHANGE_MOUSE_POSITION_STATE,
+    CHANGE_MOUSE_POSITION_STATE
 } from '../actions/mousePosition';
 
 import assign from 'object-assign';

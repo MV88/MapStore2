@@ -13,7 +13,7 @@ import {
     UPDATE_TUTORIAL,
     INIT_TUTORIAL,
     closeTutorial,
-    setupTutorial,
+    setupTutorial
 } from '../actions/tutorial';
 
 import { CHANGE_MAP_VIEW } from '../actions/map';

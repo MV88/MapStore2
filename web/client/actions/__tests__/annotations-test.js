@@ -96,7 +96,7 @@ import {
     LOAD_ANNOTATIONS,
     loadAnnotations,
     UPDATE_SYMBOLS,
-    updateSymbols,
+    updateSymbols
 } from '../annotations';
 
 describe('Test correctness of the annotations actions', () => {

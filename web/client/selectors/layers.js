@@ -6,16 +6,15 @@
 * LICENSE file in the root directory of this source tree.
 */
 
+import { castArray, find, get, head, isArray, isEmpty, isObject } from 'lodash';
 import { createSelector } from 'reselect';
 
-import MapInfoUtils from '../utils/MapInfoUtils';
-import LayersUtils from '../utils/LayersUtils';
-import { defaultIconStyle } from '../utils/SearchUtils';
 import { getNormalizedLatLon } from '../utils/CoordinatesUtils';
-import { clickedPointWithFeaturesSelector } from './mapInfo';
-import { defaultQueryableFilter } from '../utils/MapInfoUtils';
-import { get, head, isEmpty, find, isObject, isArray, castArray } from 'lodash';
+import LayersUtils from '../utils/LayersUtils';
+import {defaultQueryableFilter, getMarkerLayer} from '../utils/MapInfoUtils';
+import { defaultIconStyle } from '../utils/SearchUtils';
 import { flattenGroups } from '../utils/TOCUtils';
+import { clickedPointWithFeaturesSelector } from './mapInfo';
 
 const layersSelector = ({layers, config} = {}) => layers && isArray(layers) ? layers : layers && layers.flat || config && config.layers || [];
 const currentBackgroundLayerSelector = state => head(layersSelector(state).filter(l => l && l.visibility && l.group === "background"));
@@ -46,7 +45,7 @@ const layerSelectorWithMarkers = createSelector(
         newLayers = newLayers.concat(overlayLayers);
         if ( markerPosition ) {
             // A separate layer for feature highlight is required because the SRS is different
-            newLayers.push(MapInfoUtils.getMarkerLayer("GetFeatureInfoHighLight", { features: markerPosition.features }, undefined, {
+            newLayers.push(getMarkerLayer("GetFeatureInfoHighLight", { features: markerPosition.features }, undefined, {
                 overrideOLStyle: true,
                 featuresCrs: markerPosition.featuresCrs,
                 style: { ...defaultIconStyle, ...{
@@ -58,12 +57,12 @@ const layerSelectorWithMarkers = createSelector(
                 }}
             }));
             const coords = centerToMarker === 'enabled' ? getNormalizedLatLon(markerPosition.latlng) : markerPosition.latlng;
-            newLayers.push(MapInfoUtils.getMarkerLayer("GetFeatureInfo", coords));
+            newLayers.push(getMarkerLayer("GetFeatureInfo", coords));
         }
         if ( highlightPoint ) {
             const coords = centerToMarker === 'enabled' ? getNormalizedLatLon(highlightPoint.latlng) : highlightPoint.latlng;
-            newLayers.push(MapInfoUtils.getMarkerLayer("Annotations", coords));
-            newLayers.push(MapInfoUtils.getMarkerLayer("GetFeatureInfo", {
+            newLayers.push(getMarkerLayer("Annotations", coords));
+            newLayers.push(getMarkerLayer("GetFeatureInfo", {
                 ...coords
 
             }));
@@ -71,7 +70,7 @@ const layerSelectorWithMarkers = createSelector(
 
         if (geocoder && geocoder.markerPosition) {
             let geocoderStyle = isObject(geocoder.style) && geocoder.style || {};
-            newLayers.push(MapInfoUtils.getMarkerLayer("GeoCoder", geocoder.markerPosition, "marker",
+            newLayers.push(getMarkerLayer("GeoCoder", geocoder.markerPosition, "marker",
                 {
                     overrideOLStyle: true,
                     style: {...defaultIconStyle, ...geocoderStyle}

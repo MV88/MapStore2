@@ -38,7 +38,7 @@ import {
     CHANGE_PAGE,
     changePage,
     TOGGLE_HIGHLIGHT_FEATURE,
-    toggleHighlightFeature,
+    toggleHighlightFeature
 } from '../mapInfo';
 
 describe('Test correctness of the map actions', () => {

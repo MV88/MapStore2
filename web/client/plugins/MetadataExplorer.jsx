@@ -35,7 +35,7 @@ import {
     textSearch,
     toggleAdvancedSettings,
     toggleTemplate,
-    toggleThumbnail,
+    toggleThumbnail
 } from '../actions/catalog';
 import { setControlProperties, setControlProperty } from '../actions/controls';
 import { zoomToExtent } from '../actions/map';
@@ -46,7 +46,7 @@ import Message from '../components/I18N/Message';
 import CatalogComp from '../components/catalog/Catalog';
 import DockPanel from '../components/misc/panels/DockPanel';
 import epics from "../epics/catalog";
-import catalog from '../reducers/catalog'
+import catalog from '../reducers/catalog';
 import {
     activeSelector,
     authkeyParamNameSelector,
@@ -66,7 +66,7 @@ import {
     selectedServiceSelector,
     selectedServiceTypeSelector,
     serviceListOpenSelector,
-    servicesSelector,
+    servicesSelector
 } from '../selectors/catalog';
 import { currentLocaleSelector, currentMessagesSelector } from '../selectors/locale';
 import { mapLayoutValuesSelector } from '../selectors/maplayout';

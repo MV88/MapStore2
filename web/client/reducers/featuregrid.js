@@ -45,7 +45,7 @@ import {
     GRID_QUERY_RESULT,
     LOAD_MORE_FEATURES,
     SET_UP,
-    SET_TIME_SYNC,
+    SET_TIME_SYNC
 } from '../actions/featuregrid';
 
 import { FEATURE_TYPE_LOADED, QUERY_CREATE } from '../actions/wfsquery';

@@ -21,7 +21,7 @@ import {
     dashboardDeleted,
     DASHBOARD_DELETED,
     reloadDashboards,
-    RELOAD,
+    RELOAD
 } from '../dashboards';
 
 describe('dashboards (browse) actions', () => {

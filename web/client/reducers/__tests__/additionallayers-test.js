@@ -13,7 +13,7 @@ import {
     updateAdditionalLayer,
     updateOptionsByOwner,
     removeAdditionalLayer,
-    removeAllAdditionalLayers,
+    removeAllAdditionalLayers
 } from '../../actions/additionallayers';
 
 import additionallayers from '../additionallayers';
