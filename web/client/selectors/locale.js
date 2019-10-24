@@ -6,10 +6,5 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const currentLocaleSelector = (state) => state.locale && state.locale.current || 'en-US';
-const currentMessagesSelector = (state) => state.locale && state.locale.messages || {};
-
-export default {
-    currentLocaleSelector,
-    currentMessagesSelector
-};
+export const currentLocaleSelector = (state) => state.locale && state.locale.current || 'en-US';
+export const currentMessagesSelector = (state) => state.locale && state.locale.messages || {};

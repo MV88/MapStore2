@@ -21,8 +21,4 @@ import { get } from 'lodash';
  * @param  {object} state the state
  * @return {array} array of layers items eg: [{ id: 'layerId', actionType: 'override', options: {}, owner: 'myplugin' }]
  */
-const additionalLayersSelector = state => get(state, 'additionallayers') || [];
-
-export default {
-    additionalLayersSelector
-};
+export const additionalLayersSelector = state => get(state, 'additionallayers') || [];

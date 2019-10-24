@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { castArray } from 'lodash';
 import Rx from 'rxjs';
 
-import { castArray } from 'lodash';
 const start = (stream$, actions = []) => stream$
     .startWith(...actions);
 /**
@@ -19,7 +19,7 @@ const start = (stream$, actions = []) => stream$
  * @param {object|object[]} endAction end action(s)
  * @param {function} exception an optional function that returns the stream for exceptions
  */
-const wrapStartStop = (startAction, endAction, exceptionStream$) => stream$ =>
+export const wrapStartStop = (startAction, endAction, exceptionStream$) => stream$ =>
     (exceptionStream$ ?
         start(stream$, castArray(startAction))
             .catch(exceptionStream$)
@@ -34,6 +34,3 @@ const wrapStartStop = (startAction, endAction, exceptionStream$) => stream$ =>
  * @module observables.epics
  */
 
-export default {
-    wrapStartStop
-};

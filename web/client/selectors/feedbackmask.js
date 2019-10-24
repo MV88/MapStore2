@@ -8,6 +8,4 @@
 
 import { get } from 'lodash';
 
-export default {
-    feedbackMaskSelector: state => get(state, 'feedbackMask', {})
-};
+export const feedbackMaskSelector = state => get(state, 'feedbackMask', {});

@@ -6,10 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { compose, withHandlers, withPropsOnChange, withState } from 'recompose';
 
-import { compose, withState, withPropsOnChange, withHandlers } from 'recompose';
-
-const wizardHandlers = compose(
+/**
+ * Use this enhancer if you want to change step and use setPage as handler
+ */
+export const wizardHandlers = compose(
     withPropsOnChange(["step"], ({skipButtonsOnSteps = [], step, hideButtons} = {}) => {
         if (skipButtonsOnSteps && skipButtonsOnSteps.indexOf(step) >= 0) {
             return {hideButtons: true};
@@ -25,20 +27,13 @@ const wizardHandlers = compose(
         }
     })
 );
-export default {
     /**
     * Apply this enhancer to the WizardContainer to make it controlled.
     * It controls the step and the hideButtons properties
     */
-    controlledWizard: compose(
-        withState(
-            "step", "setPage", 0
-        ),
-        wizardHandlers
+export const controlledWizard = compose(
+    withState(
+        "step", "setPage", 0
     ),
-    /**
-     * Use this enhancer if you want to change step and use setPage as handler
-     */
     wizardHandlers
-
-};
+);

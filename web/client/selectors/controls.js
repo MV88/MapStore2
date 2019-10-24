@@ -1,7 +1,14 @@
-import { get } from 'lodash';
-const createControlVariableSelector = (name, attribute) => state => get(state, `controls[${name}][${attribute}]`);
-const createControlEnabledSelector = name => createControlVariableSelector(name, 'enabled');
+/*
+ * Copyright 2019, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
+import { get } from 'lodash';
+export const createControlVariableSelector = (name, attribute) => state => get(state, `controls[${name}][${attribute}]`);
+export const createControlEnabledSelector = name => createControlVariableSelector(name, 'enabled');
 
 /**
  * selects the showCoordinateEditor flag from state
@@ -9,21 +16,15 @@ const createControlEnabledSelector = name => createControlVariableSelector(name,
  * @param  {object} state the state
  * @return {boolean} the showCoordinateEditor in the state
  */
-const showCoordinateEditorSelector = (state) => get(state, "controls.measure.showCoordinateEditor");
-
-export default {
-    createControlEnabledSelector,
-    createControlVariableSelector,
-    showCoordinateEditorSelector,
-    measureSelector: (state) => get(state, "controls.measure.enabled"),
-    queryPanelSelector: (state) => get(state, "controls.queryPanel.enabled"),
-    printSelector: (state) => get(state, "controls.print.enabled"),
-    wfsDownloadAvailable: state => !!get(state, "controls.wfsdownload.available"),
-    wfsDownloadSelector: state => !!get(state, "controls.wfsdownload.enabled"),
-    widgetBuilderAvailable: state => get(state, "controls.widgetBuilder.available", false),
-    widgetBuilderSelector: (state) => get(state, "controls.widgetBuilder.enabled"),
-    initialSettingsSelector: state => get(state, "controls.layersettings.initialSettings") || {},
-    originalSettingsSelector: state => get(state, "controls.layersettings.originalSettings") || {},
-    activeTabSettingsSelector: state => get(state, "controls.layersettings.activeTab") || 'general',
-    drawerEnabledControlSelector: (state) => get(state, "controls.drawer.enabled", false)
-};
+export const showCoordinateEditorSelector = (state) => get(state, "controls.measure.showCoordinateEditor");
+export const measureSelector = (state) => get(state, "controls.measure.enabled");
+export const queryPanelSelector = (state) => get(state, "controls.queryPanel.enabled");
+export const printSelector = (state) => get(state, "controls.print.enabled");
+export const wfsDownloadAvailable = state => !!get(state, "controls.wfsdownload.available");
+export const wfsDownloadSelector = state => !!get(state, "controls.wfsdownload.enabled");
+export const widgetBuilderAvailable = state => get(state, "controls.widgetBuilder.available", false);
+export const widgetBuilderSelector = (state) => get(state, "controls.widgetBuilder.enabled");
+export const initialSettingsSelector = state => get(state, "controls.layersettings.initialSettings") || {};
+export const originalSettingsSelector = state => get(state, "controls.layersettings.originalSettings") || {};
+export const activeTabSettingsSelector = state => get(state, "controls.layersettings.activeTab") || 'general';
+export const drawerEnabledControlSelector = (state) => get(state, "controls.drawer.enabled", false);

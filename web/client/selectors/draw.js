@@ -7,12 +7,8 @@
  */
 import { get } from 'lodash';
 
-const changedGeometriesSelector = state => state && state.draw && state.draw.tempFeatures;
-const drawSupportActiveSelector = (state) => {
+export const changedGeometriesSelector = state => state && state.draw && state.draw.tempFeatures;
+export const drawSupportActiveSelector = (state) => {
     const drawStatus = get(state, "draw.drawStatus", false);
     return drawStatus && drawStatus !== 'clean' && drawStatus !== 'stop';
-};
-export default {
-    drawSupportActiveSelector,
-    changedGeometriesSelector
 };

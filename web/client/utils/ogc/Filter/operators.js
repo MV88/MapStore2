@@ -31,11 +31,11 @@ const ogcSpatialOperators = {
     "DWITHIN": (ns, content) => `<${ns}:DWithin>${content}</${ns}:DWithin>`,
     "WITHIN": (ns, content) => `<${ns}:Within>${content}</${ns}:Within>`
 };
-const propertyName = (ns, name) => `<${ns}:PropertyName>${name}</${ns}:PropertyName>`;
-const valueReference = (ns, name) => `<${ns}:ValueReference>${name}</${ns}:ValueReference>`;
-const literal = (ns, value) => `<${ns}:Literal>${value}</${ns}:Literal>`;
-const multiop = (ns, op, content) => op(ns, Array.isArray(content) ? content.join("") : content);
-const logical = {
+export const propertyName = (ns, name) => `<${ns}:PropertyName>${name}</${ns}:PropertyName>`;
+export const valueReference = (ns, name) => `<${ns}:ValueReference>${name}</${ns}:ValueReference>`;
+export const literal = (ns, value) => `<${ns}:Literal>${value}</${ns}:Literal>`;
+export const multiop = (ns, op, content) => op(ns, Array.isArray(content) ? content.join("") : content);
+export const logical = {
     and: (ns, content, ...other) => other && other.length > 0 ? multiop(ns, ogcLogicalOperators.AND, [content, ...other]) : multiop(ns, ogcLogicalOperators.AND, content),
     or: (ns, content, ...other) => other && other.length > 0 ? multiop(ns, ogcLogicalOperators.OR, [content, ...other]) : multiop(ns, ogcLogicalOperators.OR, content),
     not: (ns, content) => multiop(ns, ogcLogicalOperators.NOT, content),
@@ -43,15 +43,15 @@ const logical = {
 };
 
 
-const spatial = {
+export const spatial = {
     intersects: (ns, ...args) => multiop(ns, ogcSpatialOperators.INTERSECTS, args),
     within: (ns, ...args) => multiop(ns, ogcSpatialOperators.WITHIN, args),
     bbox: (ns, ...args) => multiop(ns, ogcSpatialOperators.BBOX, args),
     dwithin: (ns, ...args) => multiop(ns, ogcSpatialOperators.DWITHIN, args),
     contains: (ns, ...args) => multiop(ns, ogcSpatialOperators.CONTAINS, args)
 };
-const distance = (ns, content, units = "m") => `<${ns}:Distance units="${units}">${content}</${ns}:Distance>`;
-const comparison = {
+export const distance = (ns, content, units = "m") => `<${ns}:Distance units="${units}">${content}</${ns}:Distance>`;
+export const comparison = {
     equal: (ns, ...args) => multiop(ns, ogcComparisonOperators["="], args),
     greater: (ns, ...args) => multiop(ns, ogcComparisonOperators[">"], args),
     less: (ns, ...args) => multiop(ns, ogcComparisonOperators["<"], args),
@@ -62,17 +62,4 @@ const comparison = {
     like: (ns, ...args) => multiop(ns, ogcComparisonOperators.like, args),
     ilike: (ns, ...args) => multiop(ns, ogcComparisonOperators.ilike, args),
     isNull: (ns, ...args) => multiop(ns, ogcComparisonOperators.isNull, args)
-};
-
-export default {
-    ogcComparisonOperators,
-    ogcLogicalOperators,
-    ogcSpatialOperators,
-    propertyName,
-    valueReference,
-    distance,
-    literal,
-    logical,
-    spatial,
-    comparison
 };

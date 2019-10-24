@@ -8,12 +8,11 @@
 
 import { createStructuredSelector } from 'reselect';
 
-import { servicesSelector, selectedServiceSelector } from './catalog';
-import { getFloatingWidgets, getCollapsedState, getFloatingWidgetsLayout } from './widgets';
+import { selectedServiceSelector, servicesSelector } from './catalog';
 import { mapInfoConfigurationSelector } from './mapInfo';
+import { getCollapsedState, getFloatingWidgets, getFloatingWidgetsLayout } from './widgets';
 
-
-const mapOptionsToSaveSelector = createStructuredSelector({
+export const mapOptionsToSaveSelector = createStructuredSelector({
     catalogServices: createStructuredSelector({
         services: servicesSelector,
         selectedService: selectedServiceSelector
@@ -25,4 +24,3 @@ const mapOptionsToSaveSelector = createStructuredSelector({
     }),
     mapInfoConfiguration: mapInfoConfigurationSelector
 });
-export default {mapOptionsToSaveSelector};

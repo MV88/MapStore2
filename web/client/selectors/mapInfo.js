@@ -6,12 +6,12 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-import { get, omit, isArray } from 'lodash';
-
+import { get, isArray, omit } from 'lodash';
 import { createSelector, createStructuredSelector } from 'reselect';
-import { mapSelector } from './map';
-import { currentLocaleSelector } from './locale';
+
 import MapInfoUtils from '../utils/MapInfoUtils';
+import { currentLocaleSelector } from './locale';
+import { mapSelector } from './map';
 
 /**
  * selects mapinfo state
@@ -27,8 +27,8 @@ import MapInfoUtils from '../utils/MapInfoUtils';
   * @param  {object} state the state
   * @return {object} the mapinfo requests
   */
-const mapInfoRequestsSelector = state => get(state, "mapInfo.requests") || [];
-const isMapInfoOpen = state => !!mapInfoRequestsSelector(state) && mapInfoRequestsSelector(state).length > 0;
+export const mapInfoRequestsSelector = state => get(state, "mapInfo.requests") || [];
+export const isMapInfoOpen = state => !!mapInfoRequestsSelector(state) && mapInfoRequestsSelector(state).length > 0;
 
 /**
  * selects generalInfoFormat from state
@@ -36,21 +36,21 @@ const isMapInfoOpen = state => !!mapInfoRequestsSelector(state) && mapInfoReques
  * @param  {object} state the state
  * @return {string}       the maptype in the state
  */
-const generalInfoFormatSelector = (state) => get(state, "mapInfo.configuration.infoFormat", "text/plain");
-const showEmptyMessageGFISelector = (state) => get(state, "mapInfo.configuration.showEmptyMessageGFI", true);
-const mapInfoConfigurationSelector = (state) => get(state, "mapInfo.configuration", {});
+export const generalInfoFormatSelector = (state) => get(state, "mapInfo.configuration.infoFormat", "text/plain");
+export const showEmptyMessageGFISelector = (state) => get(state, "mapInfo.configuration.showEmptyMessageGFI", true);
+export const mapInfoConfigurationSelector = (state) => get(state, "mapInfo.configuration", {});
 
-const measureActiveSelector = (state) => get(state, "controls.measure.enabled") && (get(state, "measurement.lineMeasureEnabled") || get(state, "measurement.areaMeasureEnabled") || get(state, "measurement.bearingMeasureEnabled"));
+export const measureActiveSelector = (state) => get(state, "controls.measure.enabled") && (get(state, "measurement.lineMeasureEnabled") || get(state, "measurement.areaMeasureEnabled") || get(state, "measurement.bearingMeasureEnabled"));
 /**
  * Clicked point of mapInfo
  * @param {object} state the state
  */
-const clickPointSelector = state => state && state.mapInfo && state.mapInfo.clickPoint;
-const clickLayerSelector = state => state && state.mapInfo && state.mapInfo.clickLayer;
-const showMarkerSelector = state => state && state.mapInfo && state.mapInfo.showMarker;
-const itemIdSelector = state => get(state, "mapInfo.itemId", null);
-const overrideParamsSelector = state => get(state, "mapInfo.overrideParams", {});
-const filterNameListSelector = state => get(state, "mapInfo.filterNameList", []);
+export const clickPointSelector = state => state && state.mapInfo && state.mapInfo.clickPoint;
+export const clickLayerSelector = state => state && state.mapInfo && state.mapInfo.clickLayer;
+export const showMarkerSelector = state => state && state.mapInfo && state.mapInfo.showMarker;
+export const itemIdSelector = state => get(state, "mapInfo.itemId", null);
+export const overrideParamsSelector = state => get(state, "mapInfo.overrideParams", {});
+export const filterNameListSelector = state => get(state, "mapInfo.filterNameList", []);
 const drawSupportActiveSelector = (state) => {
     const drawStatus = get(state, "draw.drawStatus", false);
     return drawStatus && drawStatus !== 'clean' && drawStatus !== 'stop';
@@ -64,7 +64,7 @@ const mapInfoDisabledSelector = (state) => !get(state, "mapInfo.enabled", false)
  * @param  {object} state the state
  * @return {boolean} true if the get feature info has to stop the request
  */
-const stopGetFeatureInfoSelector = createSelector(
+export const stopGetFeatureInfoSelector = createSelector(
     mapInfoDisabledSelector,
     measureActiveSelector,
     drawSupportActiveSelector,
@@ -79,7 +79,7 @@ const stopGetFeatureInfoSelector = createSelector(
 /**
  * Defines the general options of the identifyTool to build the request
  */
-const identifyOptionsSelector = createStructuredSelector({
+export const identifyOptionsSelector = createStructuredSelector({
     format: generalInfoFormatSelector,
     map: mapSelector,
     point: clickPointSelector,
@@ -95,7 +95,7 @@ const responsesSelector = state => state.mapInfo && state.mapInfo.responses || [
 /**
  * Gets only the valid responses
  */
-const validResponsesSelector = createSelector(
+export const validResponsesSelector = createSelector(
     responsesSelector,
     generalInfoFormatSelector,
     (responses, format) => {
@@ -139,7 +139,7 @@ const applyMapInfoStyle = style => f => ({
  * @param {object} state the application state
  * @returns {object} style object
  */
-const highlightStyleSelector = state => get(state, 'mapInfo.highlightStyle', {
+export const highlightStyleSelector = state => get(state, 'mapInfo.highlightStyle', {
     color: '#3388ff',
     weight: 4,
     radius: 4,
@@ -148,7 +148,7 @@ const highlightStyleSelector = state => get(state, 'mapInfo.highlightStyle', {
     fillOpacity: 0.2
 });
 
-const clickedPointWithFeaturesSelector = createSelector(
+export const clickedPointWithFeaturesSelector = createSelector(
     clickPointSelector,
     isHighlightEnabledSelector,
     currentFeatureSelector,
@@ -168,27 +168,3 @@ const clickedPointWithFeaturesSelector = createSelector(
         : undefined
 
 );
-
-
-export default {
-    isMapInfoOpen,
-    indexSelector,
-    responsesSelector,
-    validResponsesSelector,
-    currentFeatureSelector,
-    currentFeatureCrsSelector,
-    clickedPointWithFeaturesSelector,
-    highlightStyleSelector,
-    identifyOptionsSelector,
-    clickPointSelector,
-    clickLayerSelector,
-    generalInfoFormatSelector,
-    mapInfoRequestsSelector,
-    stopGetFeatureInfoSelector,
-    showEmptyMessageGFISelector,
-    mapInfoConfigurationSelector,
-    isHighlightEnabledSelector,
-    itemIdSelector,
-    overrideParamsSelector,
-    filterNameListSelector
-};

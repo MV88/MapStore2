@@ -7,17 +7,16 @@
  */
 import { createSelector } from 'reselect';
 
+import { showConnectionsSelector } from '../../selectors/dashboard';
 import {
-    getEditingWidget,
+    availableDependenciesSelector,
     dependenciesSelector,
+    getEditingWidget,
     getEditorSettings,
-    getWidgetLayer,
-    availableDependenciesSelector
+    getWidgetLayer
 } from '../../selectors/widgets';
 
-import { showConnectionsSelector } from '../../selectors/dashboard';
-
-const wizardStateToProps = ( stateProps = {}, dispatchProps = {}, ownProps = {}) => ({
+export const wizardStateToProps = ( stateProps = {}, dispatchProps = {}, ownProps = {}) => ({
     ...ownProps,
     ...stateProps,
     ...dispatchProps,
@@ -29,7 +28,7 @@ const wizardStateToProps = ( stateProps = {}, dispatchProps = {}, ownProps = {})
         ...(stateProps.editorData || {})
     }, ownProps.target)
 });
-const wizardSelector = createSelector(
+export const wizardSelector = createSelector(
     getWidgetLayer,
     getEditingWidget,
     getEditorSettings,
@@ -39,7 +38,7 @@ const wizardSelector = createSelector(
         settings
     })
 );
-const dashboardSelector = createSelector(
+export const dashboardSelector = createSelector(
     getEditingWidget,
     showConnectionsSelector,
     dependenciesSelector,
@@ -50,11 +49,3 @@ const dashboardSelector = createSelector(
         dependencies,
         ...dependencyConnectProps
     }));
-
-export default {
-    getWidgetLayer,
-    availableDependenciesSelector,
-    dashboardSelector,
-    wizardStateToProps,
-    wizardSelector
-};

@@ -6,35 +6,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
+import ContainerDimensions from 'react-container-dimensions';
+import { compose, defaultProps, withStateHandlers } from 'recompose';
 
 import withResizeSpy from '../../misc/enhancers/withResizeSpy';
-import { compose, defaultProps, withStateHandlers } from 'recompose';
-import ContainerDimensions from 'react-container-dimensions';
 
 /**
  * Width and height providers for react-grid-layout. Replace default.
  */
-export default {
-    /**
-     * widthProvider that checks the container size
-     * Useful in widgets container for dashboard and map context.
-     * Can optionally override default widthProvider in WidgetView, for instance
-     */
-    widthProvider: ({overrideWidthProvider} = {}) => compose(
-        defaultProps({
-            useDefaultWidthProvider: !overrideWidthProvider
-        }),
-        C => props => <ContainerDimensions>{({ width } = {}) => <C width={width} {...props} />}</ContainerDimensions>
 
-    ),
+/**
+ * widthProvider that checks the container size
+ * Useful in widgets container for dashboard and map context.
+ * Can optionally override default widthProvider in WidgetView, for instance
+ */
+export const widthProvider = ({overrideWidthProvider} = {}) => compose(
+    defaultProps({
+        useDefaultWidthProvider: !overrideWidthProvider
+    }),
+    C => props => <ContainerDimensions>{({ width } = {}) => <C width={width} {...props} />}</ContainerDimensions>
+
+);
     /**
      * heightProvider that checks the fill div by default.
      * Useful in widgets container for map context
      */
-    heightProvider: (opts) => compose(
-        withStateHandlers(() => ({}), {
-            onResize: () => ({ height }) => ({ height })
-        }),
-        withResizeSpy(opts)
-    )
-};
+export const heightProvider = (opts) => compose(
+    withStateHandlers(() => ({}), {
+        onResize: () => ({ height }) => ({ height })
+    }),
+    withResizeSpy(opts)
+);

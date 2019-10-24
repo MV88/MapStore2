@@ -47,10 +47,10 @@ import ConfigUtils from '../utils/ConfigUtils';
 import CoordinatesUtils from '../utils/CoordinatesUtils';
 import { describeFeatureTypeToAttributes } from '../utils/FeatureTypeUtils';
 import FilterUtils from '../utils/FilterUtils';
+import { addTimeParameter } from '../utils/WFSTimeUtils';
 import { read } from '../utils/ogc/Filter/CQL/parser';
 import filterBuilder from '../utils/ogc/Filter/FilterBuilder';
 import fromObject from '../utils/ogc/Filter/fromObject';
-import { addTimeParameter } from '../utils/WFSTimeUtils';
 
 const fb = filterBuilder({ gmlVersion: "3.1.1" });
 const toFilter = fromObject(fb);
@@ -91,7 +91,7 @@ const getDefaultSortOptions = (attribute) => {
  * @return {external:Observable}
  */
 
-const featureTypeSelectedEpic = (action$, store) =>
+export const featureTypeSelectedEpic = (action$, store) =>
     action$.ofType(FEATURE_TYPE_SELECTED)
         .filter(action => action.url && action.typeName)
         .switchMap(action => {
@@ -134,7 +134,7 @@ const featureTypeSelectedEpic = (action$, store) =>
  * @param {external:Observable} action$ manages `QUERY`
  * @return {external:Observable}
  */
-const wfsQueryEpic = (action$, store) =>
+export const wfsQueryEpic = (action$, store) =>
     action$.ofType(QUERY)
         .switchMap(action => {
             const sortOptions = getDefaultSortOptions(getFirstAttribute(store.getState()));
@@ -176,7 +176,7 @@ const wfsQueryEpic = (action$, store) =>
  * @return {external:Observable}
  */
 
-const viewportSelectedEpic = (action$, store) =>
+export const viewportSelectedEpic = (action$, store) =>
     action$.ofType(SELECT_VIEWPORT_SPATIAL_METHOD, CHANGE_MAP_VIEW)
         .switchMap((action) => {
             // calculate new geometry from map properties only for viewport
@@ -193,7 +193,7 @@ const viewportSelectedEpic = (action$, store) =>
         });
 
 
-const redrawSpatialFilterEpic = (action$, store) =>
+export const redrawSpatialFilterEpic = (action$, store) =>
     action$.ofType(INIT_QUERY_PANEL)
         .switchMap(() => {
             const state = store.getState();
@@ -219,10 +219,3 @@ const redrawSpatialFilterEpic = (action$, store) =>
   * @type {Object}
   */
 
-
-export default {
-    featureTypeSelectedEpic,
-    wfsQueryEpic,
-    redrawSpatialFilterEpic,
-    viewportSelectedEpic
-};

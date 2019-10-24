@@ -14,7 +14,4 @@ import { get } from 'lodash';
  * @param  {object} state the state
  * @return {object} error object
  */
-const hasMapAccessLoadingError = (state) => get(state, "mapInitialConfig.loadingError");
-export default {
-    hasMapAccessLoadingError
-};
+export const hasMapAccessLoadingError = (state) => get(state, "mapInitialConfig.loadingError");

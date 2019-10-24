@@ -6,18 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { head } from 'lodash';
 import { createSelector } from 'reselect';
 
-import { head } from 'lodash';
+export const ruleselctor = (state) => state.vectorstyler && state.vectorstyler.rule && head(state.vectorstyler.rules.filter((r) => {return r.id === state.vectorstyler.rule; }));
 
-const ruleselctor = (state) => state.vectorstyler && state.vectorstyler.rule && head(state.vectorstyler.rules.filter((r) => {return r.id === state.vectorstyler.rule; }));
-
-const symbolselector = createSelector([ruleselctor],
+export const symbolselector = createSelector([ruleselctor],
     (rule) => ({
         shapeStyle: rule && rule.symbol || {}
     }));
-
-export default {
-    ruleselctor,
-    symbolselector
-};

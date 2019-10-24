@@ -5,16 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import { find, findIndex, sortBy } from 'lodash';
 import { createSelector } from 'reselect';
 
 import {
-    getFloatingWidgets,
-    getFloatingWidgetsCurrentLayout,
     getCollapsedIds,
-    getCollapsedState
+    getCollapsedState,
+    getFloatingWidgets,
+    getFloatingWidgetsCurrentLayout
 } from './widgets';
-
-import { find, findIndex, sortBy } from 'lodash';
 
 /**
  * Only widgets that are not pinned (static) can be in tray
@@ -25,7 +25,7 @@ const noStaticWidgets = w => !w.dataGrid || !w.dataGrid.static;
  * A selector that retrieves widgets to display in the tray area
  * @return the widgets to display in the tray area
  */
-const trayWidgets = createSelector(
+export const trayWidgets = createSelector(
     getFloatingWidgets,
     getCollapsedIds,
     getFloatingWidgetsCurrentLayout,
@@ -52,6 +52,3 @@ const trayWidgets = createSelector(
             })
 );
 
-export default {
-    trayWidgets
-};
