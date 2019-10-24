@@ -1,5 +1,3 @@
-import SideGridComp from 'SideGrid';
-import { isNil } from 'lodash';
 /*
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -7,14 +5,17 @@ import { isNil } from 'lodash';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import { isNil } from 'lodash';
 import React from 'react';
 import { compose } from 'recompose';
 
 import Message from '../I18N/Message';
 import BorderLayout from '../layout/BorderLayout';
-import LoadingSpinner from '../misc/LoadingSpinner';
+import SideGridComp from '../misc/cardgrids/SideGrid';
 import emptyState from '../misc/enhancers/emptyState';
 import loadingState from '../misc/enhancers/loadingState';
+import LoadingSpinner from '../misc/LoadingSpinner';
 import MapCatalogForm from './MapCatalogForm';
 
 const SideGrid = compose(

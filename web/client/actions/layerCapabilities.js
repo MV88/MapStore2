@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { updateNode } from './layers';
-
-import WMS from '../api/WMS';
-import WFS from '../api/WFS';
-import WCS from '../api/WCS';
-import LayersUtils from '../utils/LayersUtils';
 import { get, head } from 'lodash';
 
-function getDescribeLayer(url, layer, options) {
+import WCS from '../api/WCS';
+import WFS from '../api/WFS';
+import WMS from '../api/WMS';
+import LayersUtils from '../utils/LayersUtils';
+import { updateNode } from './layers';
+
+export function getDescribeLayer(url, layer, options) {
     return (dispatch /* , getState */) => {
         return WMS.describeLayer(url, layer.name, options).then((describeLayer) => {
             if (describeLayer && describeLayer.owsType === "WFS") {
@@ -52,7 +52,7 @@ function getDescribeLayer(url, layer, options) {
     };
 }
 
-function getLayerCapabilities(layer, options) {
+export function getLayerCapabilities(layer, options) {
     // geoserver's specific. TODO parse layer.capabilitiesURL.
     const reqUrl = LayersUtils.getCapabilitiesUrl(layer);
     return (dispatch) => {
@@ -78,7 +78,3 @@ function getLayerCapabilities(layer, options) {
         });
     };
 }
-
-export default {
-    getDescribeLayer, getLayerCapabilities
-};

@@ -6,42 +6,38 @@
  * LICENSE file in the root directory of this source tree.
 */
 
+import pointOnSurface from '@turf/point-on-surface';
+import { isNil, sortBy } from 'lodash';
+import assign from 'object-assign';
 import * as Rx from 'rxjs';
 import toBbox from 'turf-bbox';
-import pointOnSurface from '@turf/point-on-surface';
-import assign from 'object-assign';
-import { sortBy, isNil } from 'lodash';
-
-import { queryableLayersSelector, getLayerFromName } from '../selectors/layers';
 
 import { updateAdditionalLayer } from '../actions/additionallayers';
-import { showMapinfoMarker, featureInfoClick} from '../actions/mapInfo';
-import { zoomToExtent, zoomToPoint} from '../actions/map';
+import { zoomToExtent, zoomToPoint } from '../actions/map';
+import { featureInfoClick, showMapinfoMarker } from '../actions/mapInfo';
 import {
     SEARCH_LAYER_WITH_FILTER,
-    TEXT_SEARCH_STARTED,
-    TEXT_SEARCH_RESULTS_PURGE,
-    TEXT_SEARCH_RESET,
     TEXT_SEARCH_ITEM_SELECTED,
+    TEXT_SEARCH_RESET,
+    TEXT_SEARCH_RESULTS_PURGE,
+    TEXT_SEARCH_STARTED,
     ZOOM_ADD_POINT,
     addMarker,
     nonQueriableLayerError,
-    serverError,
     resultsPurge,
-    searchTextLoading,
-    searchResultLoaded,
     searchResultError,
+    searchResultLoaded,
+    searchTextChanged,
+    searchTextLoading,
     selectNestedService,
-    searchTextChanged
+    serverError
 } from '../actions/search';
-
+import {API} from '../api/searchText';
+import {getFeatureSimple} from '../api/WFS';
+import { getLayerFromName, queryableLayersSelector } from '../selectors/layers';
 import CoordinatesUtils from '../utils/CoordinatesUtils';
 import {defaultIconStyle} from '../utils/SearchUtils';
 import {generateTemplateString} from '../utils/TemplateUtils';
-
-import {API} from '../api/searchText';
-import {getFeatureSimple} from '../api/WFS';
-
 
 /**
  * Gets every `TEXT_SEARCH_STARTED` event.

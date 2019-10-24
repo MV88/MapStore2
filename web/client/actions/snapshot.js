@@ -5,29 +5,30 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import FileUtils from '../utils/FileUtils';
 
-const CHANGE_SNAPSHOT_STATE = 'CHANGE_SNAPSHOT_STATE';
-const SNAPSHOT_ERROR = 'SNAPSHOT_ERROR';
-const SNAPSHOT_READY = 'SNAPSHOT_READY';
-const SNAPSHOT_ADD_QUEUE = 'SNAPSHOT_ADD_QUEUE';
-const SNAPSHOT_REMOVE_QUEUE = 'SNAPSHOT_REMOVE_QUEUE';
-const SAVE_IMAGE = 'SAVE_IMAGE';
+export const CHANGE_SNAPSHOT_STATE = 'CHANGE_SNAPSHOT_STATE';
+export const SNAPSHOT_ERROR = 'SNAPSHOT_ERROR';
+export const SNAPSHOT_READY = 'SNAPSHOT_READY';
+export const SNAPSHOT_ADD_QUEUE = 'SNAPSHOT_ADD_QUEUE';
+export const SNAPSHOT_REMOVE_QUEUE = 'SNAPSHOT_REMOVE_QUEUE';
+export const SAVE_IMAGE = 'SAVE_IMAGE';
 
-function changeSnapshotState(state, tainted) {
+export function changeSnapshotState(state, tainted) {
     return {
         type: CHANGE_SNAPSHOT_STATE,
         state: state,
         tainted
     };
 }
-function onSnapshotError(error) {
+export function onSnapshotError(error) {
     return {
         type: SNAPSHOT_ERROR,
         error: error
     };
 }
-function onSnapshotReady(snapshot, width, height, size) {
+export function onSnapshotReady(snapshot, width, height, size) {
     return {
         type: SNAPSHOT_READY,
         imgData: snapshot,
@@ -37,41 +38,21 @@ function onSnapshotReady(snapshot, width, height, size) {
     };
 }
 
-function onCreateSnapshot(options) {
+export function onCreateSnapshot(options) {
     return {
         type: SNAPSHOT_ADD_QUEUE,
         options: options
     };
 }
 
-function onRemoveSnapshot(options) {
+export function onRemoveSnapshot(options) {
     return {
         type: SNAPSHOT_REMOVE_QUEUE,
         options: options
     };
 }
-/**
- * Post canvas image to servicebox (IF FILE WRITER DON' WORK')
- *
- * @param canvasData {string} image to post string
 
-function postCanvas(canvasData, serviceUrl) {
-
-    return (dispatch) => {
-        // dispatch(newMapInfoRequest(reqId, param));
-        axios.post(serviceUrl, {params: canvasData}, {headers: {'Content-Type': 'application/upload'}}).then((response) => {
-            if (response.data.exceptions) {
-                dispatch(onSnapshotError(response.data.exceptions));
-            } else {
-                window.location.assign(serviceUrl + "?ID=" + response.data);
-            }
-        }).catch((e) => {
-            dispatch(onSnapshotError(e.status + " " + e.statusText));
-        });
-    };
-}
- */
-function saveImage(dataURL) {
+export function saveImage(dataURL) {
     FileUtils.downloadCanvasDataURL(dataURL, "snapshot.png", "image/png");
     return {
         type: SAVE_IMAGE,
@@ -79,16 +60,3 @@ function saveImage(dataURL) {
     };
 }
 
-export default {
-    CHANGE_SNAPSHOT_STATE,
-    SNAPSHOT_ERROR,
-    SNAPSHOT_READY,
-    SNAPSHOT_ADD_QUEUE,
-    SNAPSHOT_REMOVE_QUEUE,
-    changeSnapshotState,
-    onSnapshotError,
-    onSnapshotReady,
-    onCreateSnapshot,
-    onRemoveSnapshot,
-    saveImage
-};

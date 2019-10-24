@@ -5,18 +5,19 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { compose } from 'recompose';
 
 import Message from '../../../I18N/Message';
 import emptyState from '../../../misc/enhancers/emptyState';
+import { wizardHandlers } from '../../../misc/wizard/enhancers';
 import StepHeader from '../../../misc/wizard/StepHeader';
 import WizardContainer from '../../../misc/wizard/WizardContainer';
-import { wizardHandlers } from '../../../misc/wizard/enhancers';
 import emptyLegendState from '../../enhancers/emptyLegendState';
 import legendWidget from '../../enhancers/legendWidget';
-import LegendView from '../../widget/';
+import LegendView from '../../widget/LegendView';
 import WidgetOptions from './common/WidgetOptions';
 
 const Wizard = wizardHandlers(WizardContainer);

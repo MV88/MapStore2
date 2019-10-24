@@ -274,9 +274,6 @@ export const loadDataEpic = (action$) => {
         });
 };
 
-export default {
-    loadDataEpic
-};
 ```
 
 ### js/plugins/SideEffectComponent.jsx

@@ -13,7 +13,7 @@ import { compose } from 'recompose';
 import { createSelector } from 'reselect';
 
 import { cleanEditing, saveRule, setLoading } from '../actions/rulesmanager';
-import epics from '../epics/rulesmanagerepics';
+import epics from '../epics/rulesmanager';
 import rulesmanager from '../reducers/rulesmanager';
 import { activeRuleSelector, geometryStateSel, isEditorActive, isLoading } from '../selectors/rulesmanager';
 import enhancer from './manager/EditorEnhancer';

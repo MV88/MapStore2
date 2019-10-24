@@ -6,6 +6,5 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-export default {
-    convertToNameValue: ({name, value}, data = []) => data.map(d => ({name: d[name], value: d[value]}))
-};
+export const convertToNameValue = ({name, value}, data = []) => data.map(d => ({name: d[name], value: d[value]}));
+

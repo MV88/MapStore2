@@ -5,39 +5,40 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import GeoCodingApi from '../api/Nominatim';
 
-const LOAD_FEATURE_INFO = 'LOAD_FEATURE_INFO';
-const ERROR_FEATURE_INFO = 'ERROR_FEATURE_INFO';
-const EXCEPTIONS_FEATURE_INFO = 'EXCEPTIONS_FEATURE_INFO';
-const CHANGE_MAPINFO_STATE = 'CHANGE_MAPINFO_STATE';
-const NEW_MAPINFO_REQUEST = 'NEW_MAPINFO_REQUEST';
-const PURGE_MAPINFO_RESULTS = 'PURGE_MAPINFO_RESULTS';
-const CHANGE_MAPINFO_FORMAT = 'CHANGE_MAPINFO_FORMAT';
-const SHOW_MAPINFO_MARKER = 'SHOW_MAPINFO_MARKER';
-const HIDE_MAPINFO_MARKER = 'HIDE_MAPINFO_MARKER';
-const SHOW_REVERSE_GEOCODE = 'SHOW_REVERSE_GEOCODE';
-const HIDE_REVERSE_GEOCODE = 'HIDE_REVERSE_GEOCODE';
-const GET_VECTOR_INFO = 'GET_VECTOR_INFO';
-const NO_QUERYABLE_LAYERS = 'NO_QUERYABLE_LAYERS';
-const CLEAR_WARNING = 'CLEAR_WARNING';
-const FEATURE_INFO_CLICK = 'FEATURE_INFO_CLICK';
-const TOGGLE_HIGHLIGHT_FEATURE = "IDENTIFY:TOGGLE_HIGHLIGHT_FEATURE";
-const TOGGLE_MAPINFO_STATE = 'TOGGLE_MAPINFO_STATE';
-const UPDATE_CENTER_TO_MARKER = 'UPDATE_CENTER_TO_MARKER';
-const CHANGE_PAGE = 'IDENTIFY:CHANGE_PAGE';
-const CLOSE_IDENTIFY = 'IDENTIFY:CLOSE_IDENTIFY';
-const CHANGE_FORMAT = 'IDENTIFY:CHANGE_FORMAT';
-const TOGGLE_SHOW_COORD_EDITOR = 'IDENTIFY:TOGGLE_SHOW_COORD_EDITOR';
+export const LOAD_FEATURE_INFO = 'LOAD_FEATURE_INFO';
+export const ERROR_FEATURE_INFO = 'ERROR_FEATURE_INFO';
+export const EXCEPTIONS_FEATURE_INFO = 'EXCEPTIONS_FEATURE_INFO';
+export const CHANGE_MAPINFO_STATE = 'CHANGE_MAPINFO_STATE';
+export const NEW_MAPINFO_REQUEST = 'NEW_MAPINFO_REQUEST';
+export const PURGE_MAPINFO_RESULTS = 'PURGE_MAPINFO_RESULTS';
+export const CHANGE_MAPINFO_FORMAT = 'CHANGE_MAPINFO_FORMAT';
+export const SHOW_MAPINFO_MARKER = 'SHOW_MAPINFO_MARKER';
+export const HIDE_MAPINFO_MARKER = 'HIDE_MAPINFO_MARKER';
+export const SHOW_REVERSE_GEOCODE = 'SHOW_REVERSE_GEOCODE';
+export const HIDE_REVERSE_GEOCODE = 'HIDE_REVERSE_GEOCODE';
+export const GET_VECTOR_INFO = 'GET_VECTOR_INFO';
+export const NO_QUERYABLE_LAYERS = 'NO_QUERYABLE_LAYERS';
+export const CLEAR_WARNING = 'CLEAR_WARNING';
+export const FEATURE_INFO_CLICK = 'FEATURE_INFO_CLICK';
+export const TOGGLE_HIGHLIGHT_FEATURE = "IDENTIFY:TOGGLE_HIGHLIGHT_FEATURE";
+export const TOGGLE_MAPINFO_STATE = 'TOGGLE_MAPINFO_STATE';
+export const UPDATE_CENTER_TO_MARKER = 'UPDATE_CENTER_TO_MARKER';
+export const CHANGE_PAGE = 'IDENTIFY:CHANGE_PAGE';
+export const CLOSE_IDENTIFY = 'IDENTIFY:CLOSE_IDENTIFY';
+export const CHANGE_FORMAT = 'IDENTIFY:CHANGE_FORMAT';
+export const TOGGLE_SHOW_COORD_EDITOR = 'IDENTIFY:TOGGLE_SHOW_COORD_EDITOR';
 
-const TOGGLE_EMPTY_MESSAGE_GFI = "IDENTIFY:TOGGLE_EMPTY_MESSAGE_GFI";
-const toggleEmptyMessageGFI = () => ({type: TOGGLE_EMPTY_MESSAGE_GFI});
+export const TOGGLE_EMPTY_MESSAGE_GFI = "IDENTIFY:TOGGLE_EMPTY_MESSAGE_GFI";
+export const toggleEmptyMessageGFI = () => ({type: TOGGLE_EMPTY_MESSAGE_GFI});
 
 /**
  * Private
  * @return a LOAD_FEATURE_INFO action with the response data to a wms GetFeatureInfo
  */
-function loadFeatureInfo(reqId, data, rParams, lMetaData) {
+export function loadFeatureInfo(reqId, data, rParams, lMetaData) {
     return {
         type: LOAD_FEATURE_INFO,
         data: data,
@@ -51,7 +52,7 @@ function loadFeatureInfo(reqId, data, rParams, lMetaData) {
  * Private
  * @return a ERROR_FEATURE_INFO action with the error occurred
  */
-function errorFeatureInfo(reqId, e, rParams, lMetaData) {
+export function errorFeatureInfo(reqId, e, rParams, lMetaData) {
     return {
         type: ERROR_FEATURE_INFO,
         error: e,
@@ -66,7 +67,7 @@ function errorFeatureInfo(reqId, e, rParams, lMetaData) {
  * @return a EXCEPTIONS_FEATURE_INFO action with the wms exception occurred
  *         during a GetFeatureInfo request.
  */
-function exceptionsFeatureInfo(reqId, exceptions, rParams, lMetaData) {
+export function exceptionsFeatureInfo(reqId, exceptions, rParams, lMetaData) {
     return {
         type: EXCEPTIONS_FEATURE_INFO,
         reqId: reqId,
@@ -76,19 +77,19 @@ function exceptionsFeatureInfo(reqId, exceptions, rParams, lMetaData) {
     };
 }
 
-function noQueryableLayers() {
+export function noQueryableLayers() {
     return {
         type: NO_QUERYABLE_LAYERS
     };
 }
 
-function clearWarning() {
+export function clearWarning() {
     return {
         type: CLEAR_WARNING
     };
 }
 
-function newMapInfoRequest(reqId, reqConfig) {
+export function newMapInfoRequest(reqId, reqConfig) {
     return {
         type: NEW_MAPINFO_REQUEST,
         reqId: reqId,
@@ -96,7 +97,7 @@ function newMapInfoRequest(reqId, reqConfig) {
     };
 }
 
-function getVectorInfo(layer, request, metadata) {
+export function getVectorInfo(layer, request, metadata) {
     return {
         type: GET_VECTOR_INFO,
         layer,
@@ -105,14 +106,14 @@ function getVectorInfo(layer, request, metadata) {
     };
 }
 
-function changeMapInfoState(enabled) {
+export function changeMapInfoState(enabled) {
     return {
         type: CHANGE_MAPINFO_STATE,
         enabled: enabled
     };
 }
 
-function purgeMapInfoResults() {
+export function purgeMapInfoResults() {
     return {
         type: PURGE_MAPINFO_RESULTS
     };
@@ -128,33 +129,33 @@ function purgeMapInfoResults() {
  *   - "application/vnd.ogc.gml"
  *   - "application/vnd.ogc.gml/3.1.1"
  */
-function changeMapInfoFormat(mimeType) {
+export function changeMapInfoFormat(mimeType) {
     return {
         type: CHANGE_MAPINFO_FORMAT,
         infoFormat: mimeType
     };
 }
 
-function showMapinfoMarker() {
+export function showMapinfoMarker() {
     return {
         type: SHOW_MAPINFO_MARKER
     };
 }
 
-function hideMapinfoMarker() {
+export function hideMapinfoMarker() {
     return {
         type: HIDE_MAPINFO_MARKER
     };
 }
 
-function revGeocodeInfo(results) {
+export function revGeocodeInfo(results) {
     return {
         type: SHOW_REVERSE_GEOCODE,
         reverseGeocodeData: results.data
     };
 }
 
-function showMapinfoRevGeocode(latlng) {
+export function showMapinfoRevGeocode(latlng) {
     return (dispatch) => {
         GeoCodingApi.reverseGeocode(latlng).then((response) => {
             dispatch(revGeocodeInfo(response));
@@ -164,13 +165,13 @@ function showMapinfoRevGeocode(latlng) {
     };
 }
 
-function hideMapinfoRevGeocode() {
+export function hideMapinfoRevGeocode() {
     return {
         type: HIDE_REVERSE_GEOCODE
     };
 }
 
-function toggleMapInfoState() {
+export function toggleMapInfoState() {
     return {
         type: TOGGLE_MAPINFO_STATE
     };
@@ -180,7 +181,7 @@ function toggleMapInfoState() {
  * Update center to marker if it's not in visible extent
  */
 
-function updateCenterToMarker(status) {
+export function updateCenterToMarker(status) {
     return {
         type: UPDATE_CENTER_TO_MARKER,
         status
@@ -194,7 +195,7 @@ function updateCenterToMarker(status) {
  * @param {object} [overrideParams={}] a map based on name as key and objec as value for overriding request params
  * @param {string} [itemId=null] id of the item needed for filtering results
  */
-function featureInfoClick(point, layer, filterNameList = [], overrideParams = {}, itemId = null) {
+export function featureInfoClick(point, layer, filterNameList = [], overrideParams = {}, itemId = null) {
     return {
         type: FEATURE_INFO_CLICK,
         point,
@@ -205,7 +206,7 @@ function featureInfoClick(point, layer, filterNameList = [], overrideParams = {}
     };
 }
 
-function toggleHighlightFeature(enabled) {
+export function toggleHighlightFeature(enabled) {
     return {
         type: TOGGLE_HIGHLIGHT_FEATURE,
         enabled
@@ -217,14 +218,14 @@ function toggleHighlightFeature(enabled) {
  * The index is relative only to valid responses, excluding invalid.(see validResponsesSelector)
  * @param {number} index index of the page
  */
-function changePage(index) {
+export function changePage(index) {
     return {
         type: CHANGE_PAGE,
         index
     };
 }
 
-const closeIdentify = () => ({
+export const closeIdentify = () => ({
     type: CLOSE_IDENTIFY
 });
 
@@ -232,7 +233,7 @@ const closeIdentify = () => ({
  * change format of coordinate editor
  * @prop {string} format
 */
-const changeFormat = (format) => ({
+export const changeFormat = (format) => ({
     type: CHANGE_FORMAT,
     format
 });
@@ -241,52 +242,7 @@ const changeFormat = (format) => ({
  * action for toggling the state of the showCoordinateEditor flag
  * @prop {boolean} showCoordinateEditor
 */
-const toggleShowCoordinateEditor = (showCoordinateEditor) => ({
+export const toggleShowCoordinateEditor = (showCoordinateEditor) => ({
     type: TOGGLE_SHOW_COORD_EDITOR,
     showCoordinateEditor
 });
-
-export default {
-    ERROR_FEATURE_INFO,
-    EXCEPTIONS_FEATURE_INFO,
-    LOAD_FEATURE_INFO,
-    CHANGE_MAPINFO_STATE,
-    NEW_MAPINFO_REQUEST,
-    PURGE_MAPINFO_RESULTS,
-    CHANGE_MAPINFO_FORMAT,
-    SHOW_MAPINFO_MARKER,
-    HIDE_MAPINFO_MARKER,
-    SHOW_REVERSE_GEOCODE,
-    HIDE_REVERSE_GEOCODE,
-    GET_VECTOR_INFO,
-    NO_QUERYABLE_LAYERS,
-    CLEAR_WARNING,
-    FEATURE_INFO_CLICK,
-    TOGGLE_HIGHLIGHT_FEATURE, toggleHighlightFeature,
-    CHANGE_PAGE, changePage,
-    TOGGLE_MAPINFO_STATE,
-    UPDATE_CENTER_TO_MARKER,
-    CLOSE_IDENTIFY,
-    TOGGLE_EMPTY_MESSAGE_GFI, toggleEmptyMessageGFI,
-    TOGGLE_SHOW_COORD_EDITOR, toggleShowCoordinateEditor,
-    CHANGE_FORMAT, changeFormat,
-    closeIdentify,
-    exceptionsFeatureInfo,
-    changeMapInfoState,
-    newMapInfoRequest,
-    purgeMapInfoResults,
-    changeMapInfoFormat,
-    showMapinfoMarker,
-    hideMapinfoMarker,
-    revGeocodeInfo,
-    hideMapinfoRevGeocode,
-    showMapinfoRevGeocode,
-    getVectorInfo,
-    noQueryableLayers,
-    clearWarning,
-    errorFeatureInfo,
-    loadFeatureInfo,
-    toggleMapInfoState,
-    updateCenterToMarker,
-    featureInfoClick
-};

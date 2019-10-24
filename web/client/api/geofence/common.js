@@ -5,11 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import Rx from 'rxjs';
 
 import { isString } from 'lodash';
+import Rx from 'rxjs';
 import { parseString } from 'xml2js';
 import { stripPrefix } from 'xml2js/lib/processors';
+
 const xmlToJson = xml => {
     if (!isString(xml)) {
         return Rx.Observable.of(xml);
@@ -23,9 +24,6 @@ const xmlToJson = xml => {
 
 // parses xml as a promise
 
-const toJSONPromise = xml => xmlToJson(xml).toPromise();
+export const toJSONPromise = xml => xmlToJson(xml).toPromise();
 
-export default {
-    toJSONPromise
-};
 
