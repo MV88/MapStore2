@@ -1,5 +1,3 @@
-import { get, isArray } from 'lodash';
-import assign from 'object-assign';
 /*
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -7,6 +5,9 @@ import assign from 'object-assign';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
+
+import { get, isArray } from 'lodash';
+import assign from 'object-assign';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -33,7 +34,7 @@ import SearchBarComp from '../components/mapcontrols/search/SearchBar';
 import SearchResultListComp from '../components/mapcontrols/search/SearchResultList';
 import { searchEpic, searchItemSelected, searchOnStartEpic, zoomAndAddPointEpic } from '../epics/search';
 import mapInfo from '../reducers/mapInfo';
-import search from '../reducers/search';
+import searchReducer from '../reducers/search';
 import { mapSelector } from '../selectors/map';
 import { defaultIconStyle } from '../utils/SearchUtils';
 import HelpWrapper from './help/HelpWrapper';
@@ -300,7 +301,7 @@ export default {
     }),
     epics: {searchEpic, searchOnStartEpic, searchItemSelected, zoomAndAddPointEpic},
     reducers: {
-        search,
+        search: searchReducer,
         mapInfo
     }
 };

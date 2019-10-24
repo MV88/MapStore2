@@ -6,24 +6,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-
-import React from 'react';
-import { ControlLabel, FormGroup, Row, Col, Grid, Alert, Checkbox } from 'react-bootstrap';
-import { isObject, isEqual } from 'lodash';
-import { Combobox } from 'react-widgets';
-import assign from 'object-assign';
-import Message from '../../../I18N/Message';
-import SwitchPanel from '../../../misc/switch/SwitchPanel';
-import ColorRangeSelector from '../../../style/ColorRangeSelector';
-import { Controlled as Codemirror } from 'react-codemirror2';
-import { NumberPicker } from 'react-widgets';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
-import { getMessageById } from '../../../../utils/LocaleUtils';
+
+import { isEqual, isObject } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Alert, Checkbox, Col, ControlLabel, FormGroup, Grid, Row } from 'react-bootstrap';
+import { Controlled as Codemirror } from 'react-codemirror2';
+import { Combobox, NumberPicker } from 'react-widgets';
 import tinycolor from 'tinycolor2';
-import ColorPicker from '../../../style/ColorPicker';
+
+import { getMessageById } from '../../../../utils/LocaleUtils';
+import Message from '../../../I18N/Message';
 import LoadingView from '../../../misc/LoadingView';
+import SwitchPanel from '../../../misc/switch/SwitchPanel';
+import ColorPicker from '../../../style/ColorPicker';
+import ColorRangeSelector from '../../../style/ColorRangeSelector';
 import ThemaClassesEditor from '../../../style/ThemaClassesEditor';
 
 const internalProperties = { current: undefined, unconfigured: undefined, applied: undefined };

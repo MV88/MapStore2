@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 /**
  * Copyright 2016, GeoSolutions Sas.
@@ -8,16 +7,18 @@ import PropTypes from 'prop-types';
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import { Grid, Row, Col } from 'react-bootstrap';
-import { Combobox } from 'react-widgets';
-import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
-numberLocalizer();
-import { NumberPicker } from 'react-widgets';
 import 'react-widgets/lib/less/react-widgets.less';
-import Message from '../I18N/Message';
+
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Col, Grid, Row } from 'react-bootstrap';
+import { Combobox, NumberPicker } from 'react-widgets';
+import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
+
 import LocaleUtils from '../../utils/LocaleUtils';
+import Message from '../I18N/Message';
+
+numberLocalizer();
 
 class BandSelector extends React.Component {
     static propTypes = {

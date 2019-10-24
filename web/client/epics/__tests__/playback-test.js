@@ -9,7 +9,7 @@
 import expect from 'expect';
 
 import { testEpic } from './epicTestUtils';
-import { UPDATE_METADATA } from '../../actions/playback';
+import { UPDATE_METADATA, STOP, play, stop, FRAMES_LOADING, SET_FRAMES } from '../../actions/playback';
 
 import {
     retrieveFramesForPlayback,
@@ -19,7 +19,6 @@ import {
 
 import DOMAIN_VALUES_RESPONSE from 'raw-loader!../../test-resources/wmts/DomainValues.xml';
 import { removeNode, CHANGE_LAYER_PROPERTIES } from '../../actions/layers';
-import { STOP, play, stop, FRAMES_LOADING, SET_FRAMES } from '../../actions/playback';
 import { setCurrentTime, moveTime } from '../../actions/dimension';
 import { selectLayer, LOADING, setMapSync } from '../../actions/timeline';
 import axios from '../../libs/ajax';

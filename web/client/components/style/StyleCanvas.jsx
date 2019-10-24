@@ -11,7 +11,7 @@ import React from 'react';
 
 import { createSvgUrl, isSymbolStyle } from '../../utils/VectorStyleUtils';
 import defaultIcon from '../map/openlayers/img/marker-icon.png';
-import iconNotFound from './vector/iconNotFound.png';
+import iconNotFoundSrc from './vector/iconNotFound.png';
 
 class StyleCanvas extends React.Component {
     static propTypes = {
@@ -99,7 +99,7 @@ class StyleCanvas extends React.Component {
         ctx.clearRect(0, 0, 600, 600);
         let icon = new Image();
         let iconNotFound = new Image();
-        iconNotFound.src = iconNotFound;
+        iconNotFound.src = iconNotFoundSrc;
 
         icon.src = url || this.props.shapeStyle.symbolUrl;
         icon.onload = () => {

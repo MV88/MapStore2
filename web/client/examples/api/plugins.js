@@ -11,8 +11,7 @@ import BurgerMenuPlugin from '../../plugins/BurgerMenu';
 import DrawerMenuPlugin from '../../plugins/DrawerMenu';
 import ExpanderPlugin from '../../plugins/Expander';
 import HelpPlugin from '../../plugins/Help';
-import RedoPlugin from '../../plugins/History';
-import UndoPlugin from '../../plugins/History';
+import History from '../../plugins/History';
 import HomePlugin from '../../plugins/Home';
 import LanguagePlugin from '../../plugins/Language';
 import LocatePlugin from '../../plugins/Locate';
@@ -39,7 +38,6 @@ import ZoomInPlugin from '../../plugins/ZoomIn';
 import ZoomOutPlugin from '../../plugins/ZoomOut';
 import ManagerPlugin from '../../plugins/manager/Manager';
 import ManagerMenuPlugin from '../../plugins/manager/ManagerMenu';
-import ManagerMenuPlugin from '../../plugins/manager/ManagerMenu';
 import ReactSwipe from 'react-swipeable-views';
 import SwipeHeader from '../../components/data/identify/SwipeHeader';
 
@@ -50,8 +48,8 @@ export default {
         DrawerMenuPlugin,
         ExpanderPlugin,
         HelpPlugin,
-        RedoPlugin,
-        UndoPlugin,
+        RedoPlugin: History,
+        UndoPlugin: History,
         HomePlugin,
         LanguagePlugin,
         LocatePlugin,

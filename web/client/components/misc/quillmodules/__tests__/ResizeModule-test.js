@@ -7,13 +7,15 @@
 */
 
 import expect from 'expect';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactQuill from 'react-quill';
+
+// resizeModuleIFrametoolbarConfigToolbarDisplaySizeResizeFactory
+import resizeModuleFactory from '../../../misc/quillmodules/ResizeModule';
+
 const {Quill} = ReactQuill;
-import ResizeModuleIFrametoolbarConfigToolbarDisplaySizeResizeFactory from '../../../misc/quillmodules/ResizeModule';
-const {ResizeModule, IFrame, toolbarConfig, Toolbar, DisplaySize, Resize} = ResizeModuleIFrametoolbarConfigToolbarDisplaySizeResizeFactory(Quill);
+const {ResizeModule, IFrame, toolbarConfig, Toolbar, DisplaySize, Resize} = resizeModuleFactory(Quill);
 
 Quill.register({
     'formats/video': IFrame,

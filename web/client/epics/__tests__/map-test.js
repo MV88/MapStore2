@@ -8,13 +8,12 @@
 
 import expect from 'expect';
 
-import { resetLimitsOnInit, zoomToExtentEpic, checkMapPermissions } from '../map';
-import { CHANGE_MAP_LIMITS, changeMapCrs } from '../../actions/map';
 import { MAP_INFO_LOAD_START, configureMap } from '../../actions/config';
-import { testEpic, addTimeoutEpic, TEST_TIMEOUT } from './epicTestUtils';
-import MapUtils from '../../utils/MapUtils';
-import { CHANGE_MAP_VIEW, zoomToExtent } from '../../actions/map';
+import { CHANGE_MAP_LIMITS, CHANGE_MAP_VIEW, changeMapCrs, zoomToExtent } from '../../actions/map';
 import { LOGIN_SUCCESS } from '../../actions/security';
+import MapUtils from '../../utils/MapUtils';
+import { checkMapPermissions, resetLimitsOnInit, zoomToExtentEpic } from '../map';
+import { TEST_TIMEOUT, addTimeoutEpic, testEpic } from './epicTestUtils';
 
 const LAYOUT_STATE = {
     layout: {

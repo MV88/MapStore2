@@ -7,8 +7,8 @@
  */
 
 import React from 'react';
-
 import ReactDataGrid from 'react-data-grid';
+
 import Message from '../../I18N/Message';
 
 export default ({

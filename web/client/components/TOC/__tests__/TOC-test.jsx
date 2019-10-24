@@ -7,16 +7,16 @@
  */
 
 import expect from 'expect';
-
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import testBackend from 'react-dnd-test-backend';
-import TOC from '../TOC';
+import ReactDOM from 'react-dom';
+
 import Group from '../DefaultGroup';
 import Layer from '../DefaultLayer';
+import TOCComp from '../TOC';
 
-const TOC = dragDropContext(testBackend)(TOC);
+const TOC = dragDropContext(testBackend)(TOCComp);
 
 const testData = [
     {

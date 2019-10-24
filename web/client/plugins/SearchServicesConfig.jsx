@@ -21,7 +21,7 @@ import ServiceList from '../components/mapcontrols/searchservicesconfig/Services
 import WFSOptionalProps from '../components/mapcontrols/searchservicesconfig/WFSOptionalProps.jsx';
 import WFSServiceProps from '../components/mapcontrols/searchservicesconfig/WFSServiceProps.jsx';
 import Portal from '../components/misc/Portal';
-import searchconfig from '../reducers/searchconfig';
+import searchconfigReducer from '../reducers/searchconfig';
 import Message from './locale/Message';
 
 /**
@@ -219,6 +219,6 @@ const SearchServicesPlugin = connect(({controls = {}, searchconfig = {}}) => ({
 export default {
     SearchServicesConfigPlugin: SearchServicesPlugin,
     reducers: {
-        searchconfig
+        searchconfig: searchconfigReducer
     }
 };

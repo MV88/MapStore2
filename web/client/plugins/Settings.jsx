@@ -11,8 +11,7 @@ import './settings/css/settings.css';
 import assign from 'object-assign';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Col, FormGroup, Glyphicon, Row } from 'react-bootstrap';
-import { Panel } from 'react-bootstrap';
+import { Panel, Col, FormGroup, Glyphicon, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { ActionCreators } from 'redux-undo';
 

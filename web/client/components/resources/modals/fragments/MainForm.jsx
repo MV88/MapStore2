@@ -6,15 +6,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
-
-import Message from '../../../I18N/Message';
-import { Row, Col } from 'react-bootstrap';
-import Metadata from '../../forms/Metadata';
-import Thumbnail from '../../forms/Thumbnail';
+import { Col, Row } from 'react-bootstrap';
 import uuid from 'uuid/v1';
 
-export default class MainForm extends React.Component {
+import Message from '../../../I18N/Message';
+import Metadata from '../../forms/Metadata';
+import Thumbnail from '../../forms/Thumbnail';
+
+class MainForm extends React.Component {
+    static propTypes = {
+        resource: PropTypes.object,
+        linkedResources: PropTypes.object,
+        onError: PropTypes.func,
+        onUpdate: PropTypes.func,
+        onUpdateLinkedResource: PropTypes.func
+    }
     render() {
         const {
             resource,
@@ -53,4 +61,4 @@ export default class MainForm extends React.Component {
     }
 }
 
-
+export default MainForm;

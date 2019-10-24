@@ -5,67 +5,60 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-import Rx from 'rxjs';
 
-import { get, find, isString, isNil } from 'lodash';
-import axios from '../libs/ajax';
+import { find, get, isNil, isString } from 'lodash';
+import Rx from 'rxjs';
 import uuid from 'uuid';
 
-import {
-    LOAD_FEATURE_INFO,
-    ERROR_FEATURE_INFO,
-    GET_VECTOR_INFO,
-    FEATURE_INFO_CLICK,
-    CLOSE_IDENTIFY,
-    TOGGLE_HIGHLIGHT_FEATURE,
-    featureInfoClick,
-    updateCenterToMarker,
-    purgeMapInfoResults,
-    exceptionsFeatureInfo,
-    loadFeatureInfo,
-    errorFeatureInfo,
-    noQueryableLayers,
-    newMapInfoRequest,
-    getVectorInfo,
-    showMapinfoMarker,
-    hideMapinfoMarker
-} from '../actions/mapInfo';
-
+import { closeAnnotations } from '../actions/annotations';
+import { MAP_CONFIG_LOADED } from '../actions/config';
 import { SET_CONTROL_PROPERTIES } from '../actions/controls';
 import { closeFeatureGrid } from '../actions/featuregrid';
 import { CHANGE_MOUSE_POINTER, CLICK_ON_MAP, zoomToPoint } from '../actions/map';
-import { closeAnnotations } from '../actions/annotations';
-import { MAP_CONFIG_LOADED } from '../actions/config';
-
 import {
-    stopGetFeatureInfoSelector,
-    identifyOptionsSelector,
-    clickPointSelector,
-    clickLayerSelector
-} from '../selectors/mapInfo';
-
-import { centerToMarkerSelector, queryableLayersSelector } from '../selectors/layers';
+    CLOSE_IDENTIFY,
+    ERROR_FEATURE_INFO,
+    FEATURE_INFO_CLICK,
+    GET_VECTOR_INFO,
+    LOAD_FEATURE_INFO,
+    TOGGLE_HIGHLIGHT_FEATURE,
+    errorFeatureInfo,
+    exceptionsFeatureInfo,
+    featureInfoClick,
+    getVectorInfo,
+    hideMapinfoMarker,
+    loadFeatureInfo,
+    newMapInfoRequest,
+    noQueryableLayers,
+    purgeMapInfoResults,
+    showMapinfoMarker,
+    updateCenterToMarker
+} from '../actions/mapInfo';
+import axios from '../libs/ajax';
 import { modeSelector } from '../selectors/featuregrid';
+import { centerToMarkerSelector, queryableLayersSelector } from '../selectors/layers';
 import { mapSelector, projectionDefsSelector, projectionSelector } from '../selectors/map';
+import {
+    clickLayerSelector,
+    clickPointSelector,
+    filterNameListSelector,
+    identifyOptionsSelector,
+    isHighlightEnabledSelector,
+    itemIdSelector,
+    overrideParamsSelector,
+    stopGetFeatureInfoSelector
+} from '../selectors/mapInfo';
 import { boundingMapRectSelector } from '../selectors/maplayout';
-
 import {
     centerToVisibleArea,
     isInsideVisibleArea,
     isPointInsideExtent,
+    parseURN,
     reprojectBbox
 } from '../utils/CoordinatesUtils';
-
-import {
-    isHighlightEnabledSelector,
-    itemIdSelector,
-    overrideParamsSelector,
-    filterNameListSelector
-} from '../selectors/mapInfo';
-
-import { getCurrentResolution, parseLayoutValue } from '../utils/MapUtils';
 import MapInfoUtils from '../utils/MapInfoUtils';
-import { parseURN } from '../utils/CoordinatesUtils';
+import { getCurrentResolution, parseLayoutValue } from '../utils/MapUtils';
+
 const gridEditingSelector = state => modeSelector(state) === 'EDIT';
 
 const stopFeatureInfo = state => stopGetFeatureInfoSelector(state) || gridEditingSelector(state);

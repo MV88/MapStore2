@@ -5,16 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import rxjsconfig from 'recompose/rxjsObservableConfig';
 
-import { setObservableConfig } from 'recompose';
-setObservableConfig(rxjsconfig);
-import { Observable } from 'rxjs';
+import expect from 'expect';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createSink } from 'recompose';
-import expect from 'expect';
+import { createSink, setObservableConfig } from 'recompose';
+import rxjsconfig from 'recompose/rxjsObservableConfig';
+import { Observable } from 'rxjs';
+
 import loadMore from '../loadMore';
+
+setObservableConfig(rxjsconfig);
 
 describe('loadMore enhancer', () => {
     beforeEach((done) => {

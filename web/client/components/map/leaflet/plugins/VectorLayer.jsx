@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Layers from '../../../../utils/leaflet/Layers';
-
-import { isNil } from 'lodash';
 import L from 'leaflet';
+import { isNil } from 'lodash';
+import assign from 'object-assign';
+
+import Layers from '../../../../utils/leaflet/Layers';
 
 const defaultStyle = {
     radius: 5,
@@ -19,7 +20,6 @@ const defaultStyle = {
     fillOpacity: 0
 };
 
-import assign from 'object-assign';
 
 const setOpacity = (layer, opacity) => {
     if (layer.eachLayer) {
@@ -32,7 +32,7 @@ const setOpacity = (layer, opacity) => {
     }
 };
 
-var createVectorLayer = function(options) {
+const createVectorLayer = function(options) {
     const { hideLoading } = options;
     const layer = L.geoJson([]/* options.features */, {
         pointToLayer: options.styleName !== "marker" ? function(feature, latlng) {

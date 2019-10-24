@@ -71,7 +71,7 @@ const chooseLayerEnhancer = compose(
     viewportBuilderConnectMask,
     branch(
         ({ layer } = {}) => !layer,
-        renderComponent(chartLayerSelector(LayerSelector))
+        renderComponent(chartLayerSelector(LayerSelectorComp))
     )
 );
 

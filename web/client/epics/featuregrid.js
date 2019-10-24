@@ -5,134 +5,123 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import bbox from '@turf/bbox';
+import { LOCATION_CHANGE } from 'connected-react-router';
+import { castArray, find, get, head, includes, isEmpty, reduce } from 'lodash';
+import assign from 'object-assign';
 import Rx from 'rxjs';
 
-import { get, head, isEmpty, find, castArray, includes, reduce } from 'lodash';
-import { LOCATION_CHANGE } from 'connected-react-router';
-import axios from '../libs/ajax';
-import bbox from '@turf/bbox';
-import { fidFilter } from '../utils/ogc/Filter/filter';
-import { getDefaultFeatureProjection, getPagesToLoad } from '../utils/FeatureGridUtils';
-import { isSimpleGeomType } from '../utils/MapUtils';
-import assign from 'object-assign';
-import { changeDrawingStatus, GEOMETRY_CHANGED, drawSupportReset } from '../actions/draw';
-import requestBuilder from '../utils/ogc/WFST/RequestBuilder';
-import { findGeometryProperty } from '../utils/ogc/WFS/base';
-import { FEATURE_INFO_CLICK, HIDE_MAPINFO_MARKER } from '../actions/mapInfo';
-
+import { TOGGLE_CONTROL, resetControls, setControlProperty } from '../actions/controls';
+import { GEOMETRY_CHANGED, changeDrawingStatus, drawSupportReset } from '../actions/draw';
 import {
-    query,
-    QUERY,
-    QUERY_CREATE,
-    QUERY_RESULT,
-    LAYER_SELECTED_FOR_SEARCH,
-    FEATURE_TYPE_LOADED,
-    UPDATE_QUERY,
-    featureTypeSelected,
-    createQuery,
-    updateQuery,
-    TOGGLE_SYNC_WMS,
-    QUERY_ERROR,
-    FEATURE_LOADING
-} from '../actions/wfsquery';
-
-import { reset, QUERY_FORM_SEARCH, loadFilter } from '../actions/queryform';
-import { zoomToExtent } from '../actions/map';
-
-import {
-    BROWSE_DATA,
-    changeLayerProperties,
-    refreshLayerVersion,
-    CHANGE_LAYER_PARAMS
-} from '../actions/layers';
-
-import { closeIdentify } from '../actions/mapInfo';
-
-import {
-    SORT_BY,
     CHANGE_PAGE,
-    SAVE_CHANGES,
-    SAVE_SUCCESS,
-    DELETE_SELECTED_FEATURES,
-    featureSaving,
-    changePage,
-    saveSuccess,
-    saveError,
-    clearChanges,
-    setLayer,
-    clearSelection,
-    toggleViewMode,
-    toggleTool,
     CLEAR_CHANGES,
-    START_EDITING_FEATURE,
-    TOGGLE_MODE,
-    MODES,
-    geometryChanged,
-    DELETE_GEOMETRY,
-    deleteGeometryFeature,
-    SELECT_FEATURES,
-    DESELECT_FEATURES,
-    START_DRAWING_FEATURE,
-    CREATE_NEW_FEATURE,
     CLEAR_CHANGES_CONFIRMED,
-    FEATURE_GRID_CLOSE_CONFIRMED,
-    openFeatureGrid,
-    closeFeatureGrid,
-    OPEN_FEATURE_GRID,
     CLOSE_FEATURE_GRID,
     CLOSE_FEATURE_GRID_CONFIRM,
+    CREATE_NEW_FEATURE,
+    DELETE_GEOMETRY,
+    DELETE_SELECTED_FEATURES,
+    DESELECT_FEATURES,
+    FEATURE_GRID_CLOSE_CONFIRMED,
+    LOAD_MORE_FEATURES,
+    MODES,
     OPEN_ADVANCED_SEARCH,
-    ZOOM_ALL,
-    UPDATE_FILTER,
+    OPEN_FEATURE_GRID,
+    SAVE_CHANGES,
+    SAVE_SUCCESS,
+    SELECT_FEATURES,
+    SET_TIME_SYNC,
+    SORT_BY,
+    START_DRAWING_FEATURE,
+    START_EDITING_FEATURE,
     START_SYNC_WMS,
     STOP_SYNC_WMS,
+    TOGGLE_MODE,
+    UPDATE_FILTER,
+    ZOOM_ALL,
+    changePage,
+    clearChanges,
+    clearSelection,
+    closeFeatureGrid,
+    deleteGeometryFeature,
+    fatureGridQueryResult,
+    featureSaving,
+    geometryChanged,
+    openFeatureGrid,
+    saveError,
+    saveSuccess,
+    setLayer,
     startSyncWMS,
     storeAdvancedSearchFilter,
-    fatureGridQueryResult,
-    LOAD_MORE_FEATURES,
-    SET_TIME_SYNC
+    toggleTool,
+    toggleViewMode
 } from '../actions/featuregrid';
-
-import { TOGGLE_CONTROL, resetControls, setControlProperty } from '../actions/controls';
-import { queryPanelSelector, showCoordinateEditorSelector } from '../selectors/controls';
 import { setHighlightFeaturesPath } from '../actions/highlight';
-
 import {
-    selectedFeaturesSelector,
+    BROWSE_DATA,
+    CHANGE_LAYER_PARAMS,
+    changeLayerProperties,
+    refreshLayerVersion
+} from '../actions/layers';
+import { zoomToExtent } from '../actions/map';
+import { FEATURE_INFO_CLICK, HIDE_MAPINFO_MARKER, closeIdentify } from '../actions/mapInfo';
+import { error, warning } from '../actions/notifications';
+import { QUERY_FORM_SEARCH, loadFilter, reset } from '../actions/queryform';
+import {
+    FEATURE_LOADING,
+    FEATURE_TYPE_LOADED,
+    LAYER_SELECTED_FOR_SEARCH,
+    QUERY,
+    QUERY_CREATE,
+    QUERY_ERROR,
+    QUERY_RESULT,
+    TOGGLE_SYNC_WMS,
+    UPDATE_QUERY,
+    createQuery,
+    featureTypeSelected,
+    query,
+    updateQuery
+} from '../actions/wfsquery';
+import axios from '../libs/ajax';
+import { queryPanelSelector, showCoordinateEditorSelector } from '../selectors/controls';
+import {
     changesMapSelector,
-    newFeaturesSelector,
+    getAttributeFilters,
     hasChangesSelector,
     hasNewFeaturesSelector,
+    hasSupportedGeometry,
+    isDrawingSelector,
+    isFeatureGridOpen,
+    modeSelector,
+    newFeaturesSelector,
+    queryOptionsSelector,
     selectedFeatureSelector,
     selectedFeaturesCount,
+    selectedFeaturesSelector,
     selectedLayerIdSelector,
-    isDrawingSelector,
-    modeSelector,
-    isFeatureGridOpen,
-    timeSyncActive,
-    hasSupportedGeometry,
-    queryOptionsSelector,
-    getAttributeFilters
+    timeSyncActive
 } from '../selectors/featuregrid';
-
-import { error, warning } from '../actions/notifications';
-
+import { getSelectedLayer } from '../selectors/layers';
 import {
     describeSelector,
-    isDescribeLoaded,
-    getFeatureById,
-    wfsURL,
-    wfsFilter,
     featureCollectionResultSelector,
+    featureLoadingSelector,
+    getFeatureById,
+    isDescribeLoaded,
     isSyncWmsActive,
-    featureLoadingSelector
+    wfsFilter,
+    wfsURL
 } from '../selectors/query';
-
-import { getSelectedLayer } from '../selectors/layers';
-import { interceptOGCError } from '../utils/ObservableUtils';
-import { gridUpdateToQueryUpdate, updatePages } from '../utils/FeatureGridUtils';
 import { queryFormUiStateSelector } from '../selectors/queryform';
+import { getDefaultFeatureProjection, getPagesToLoad, gridUpdateToQueryUpdate, updatePages } from '../utils/FeatureGridUtils';
 import { composeAttributeFilters } from '../utils/FilterUtils';
+import { isSimpleGeomType } from '../utils/MapUtils';
+import { interceptOGCError } from '../utils/ObservableUtils';
+import { fidFilter } from '../utils/ogc/Filter/filter';
+import { findGeometryProperty } from '../utils/ogc/WFS/base';
+import requestBuilder from '../utils/ogc/WFST/RequestBuilder';
 
 const setupDrawSupport = (state, original) => {
     const defaultFeatureProj = getDefaultFeatureProjection();

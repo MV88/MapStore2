@@ -6,19 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import ReactDOM from 'react-dom';
-import { Observable } from 'rxjs';
-import rxjsconfig from 'recompose/rxjsObservableConfig';
-import { setObservableConfig } from 'recompose';
-setObservableConfig(rxjsconfig);
-
-
-import { lifecycle } from 'recompose';
 import expect from 'expect';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { lifecycle, setObservableConfig } from 'recompose';
+import rxjsconfig from 'recompose/rxjsObservableConfig';
+import { Observable } from 'rxjs';
+
 import withInfiniteScroll from '../withInfiniteScroll';
 
+setObservableConfig(rxjsconfig);
 
 describe('withInfiniteScroll enhancer', () => {
     beforeEach((done) => {

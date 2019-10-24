@@ -17,7 +17,7 @@ import { changeMousePositionCrs, changeMousePositionState } from '../actions/mou
 import Message from '../components/I18N/Message';
 import ToggleButton from '../components/buttons/ToggleButton';
 import MousePositionComponent from '../components/mapcontrols/mouseposition/MousePosition';
-import mousePosition from '../reducers/mousePosition';
+import mousePositionReducer from '../reducers/mousePosition';
 import { mapSelector, projectionDefsSelector } from '../selectors/map';
 
 const getDesiredPosition = (map, mousePosition, mapInfo) => {
@@ -147,5 +147,5 @@ export default {
             priority: 1
         }
     }),
-    reducers: {mousePosition}
+    reducers: {mousePosition: mousePositionReducer}
 };

@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,13 +5,14 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ReactDOM from 'react-dom';
 import DebugUtils from '../../utils/DebugUtils';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { bindActionCreators, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
 import { changeBrowserProperties } from '../../actions/browser';
 import ConfigUtils from '../../utils/ConfigUtils';
 import Debug from '../../components/development/Debug';

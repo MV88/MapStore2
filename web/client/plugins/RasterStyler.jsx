@@ -19,7 +19,7 @@ import { createSelector } from 'reselect';
 
 import { changeLayerProperties } from '../actions/layers';
 import { setRasterLayer, setRasterStyleParameter } from '../actions/rasterstyler';
-import rasterstyler from '../reducers/rasterstyler';
+import rasterstylerReducer from '../reducers/rasterstyler';
 import { layersSelector } from '../selectors/layers';
 import { getWindowSize } from '../utils/AgentUtils';
 import { jsonToSLD } from '../utils/SLDUtils';
@@ -274,5 +274,5 @@ export default {
                 exclusive: true
             }
         }),
-    reducers: {rasterstyler}
+    reducers: {rasterstyler: rasterstylerReducer}
 };

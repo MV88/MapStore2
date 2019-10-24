@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,13 +5,11 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import BootstrapReact from 'react-bootstrap';
-var Label = BootstrapReact.Label;
-var ProgressBar = BootstrapReact.ProgressBar;
-import ReactIntl from 'react-intl';
-var FormattedNumber = ReactIntl.FormattedNumber;
+import PropTypes from 'prop-types';
+import React from 'react';
+import {Label, ProgressBar} from 'react-bootstrap';
+import {FormattedNumber} from 'react-intl';
 
 class SearchTarget extends React.Component {
     static propTypes = {

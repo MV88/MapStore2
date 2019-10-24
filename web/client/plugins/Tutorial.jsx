@@ -25,7 +25,7 @@ import {
 import I18N from '../components/I18N/I18N';
 import TutorialComp from '../components/tutorial/Tutorial';
 import { closeTutorialEpic, getActionsFromStepEpic, switchTutorialEpic } from '../epics/tutorial';
-import tutorial from '../reducers/tutorial';
+import tutorialReducer from '../reducers/tutorial';
 import { tutorialSelector } from '../selectors/tutorial';
 import presetList from './tutorial/preset';
 
@@ -173,7 +173,7 @@ export default {
         }
     }),
     reducers: {
-        tutorial
+        tutorial: tutorialReducer
     },
     epics: {
         closeTutorialEpic,

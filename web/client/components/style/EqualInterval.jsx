@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 /**
  * Copyright 2016, GeoSolutions Sas.
@@ -8,19 +7,19 @@ import PropTypes from 'prop-types';
  * LICENSE file in the root directory of this source tree.
  */
 
-
+import PropTypes from 'prop-types';
 import React from 'react';
-
+import { Button, Col, Grid, Label, Overlay, Popover, Row } from 'react-bootstrap';
 import { findDOMNode } from 'react-dom';
-import { Grid, Row, Col, Button, Popover, Label, Overlay } from 'react-bootstrap';
-import { Combobox } from 'react-widgets';
+import { Combobox, NumberPicker } from 'react-widgets';
 import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
-numberLocalizer();
-import { NumberPicker } from 'react-widgets';
-import ColorRampItem from './EqualIntervalComponents/ColorRampItem';
-import colorsSchema from './EqualIntervalComponents/ColorRamp';
-import colors from './EqualIntervalComponents/ExtendColorBrewer';
+
 import Message from '../I18N/Message';
+import colorsSchema from './EqualIntervalComponents/ColorRamp';
+import ColorRampItem from './EqualIntervalComponents/ColorRampItem';
+import colors from './EqualIntervalComponents/ExtendColorBrewer';
+
+numberLocalizer();
 
 class EqualInterval extends React.Component {
     static propTypes = {

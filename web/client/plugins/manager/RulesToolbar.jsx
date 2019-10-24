@@ -1,4 +1,3 @@
-import { withPropsOnChange } from "recompose";
 
 /*
  * Copyright 2018, GeoSolutions Sas.
@@ -7,10 +6,11 @@ import { withPropsOnChange } from "recompose";
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import { compose, withProps, withStateHandlers } from 'recompose';
+import React from 'react';
+import { withPropsOnChange, compose, withProps, withStateHandlers } from 'recompose';
 import { connect } from 'react-redux';
+
 import { onEditRule, delRules, onCacheClean } from '../../actions/rulesmanager';
 import { rulesEditorToolbarSelector } from '../../selectors/rulesmanager';
 import Toolbar from '../../components/misc/toolbar/Toolbar';

@@ -7,26 +7,23 @@
  */
 import Rx from 'rxjs';
 
-import { MAPS_LIST_LOADING, ATTRIBUTE_UPDATED } from '../actions/maps';
-import { MAP_DELETED, MAP_METADATA_UPDATED } from '../actions/maps';
 import { DASHBOARD_SAVED } from '../actions/dashboard';
-
 import {
-    SEARCH_DASHBOARDS,
-    DELETE_DASHBOARD,
     DASHBOARD_DELETED,
+    DELETE_DASHBOARD,
     RELOAD,
-    searchDashboards,
-    dashboardListLoaded,
+    SEARCH_DASHBOARDS,
     dashboardDeleted,
-    dashboardsLoading
+    dashboardListLoaded,
+    dashboardsLoading,
+    searchDashboards
 } from '../actions/dashboards';
-
-import { searchParamsSelector, searchTextSelector, totalCountSelector } from '../selectors/dashboards';
-import GeoStoreApi from '../api/GeoStoreDAO';
-import { wrapStartStop } from '../observables/epics';
+import { ATTRIBUTE_UPDATED, MAPS_LIST_LOADING, MAP_DELETED, MAP_METADATA_UPDATED } from '../actions/maps';
 import { error } from '../actions/notifications';
+import GeoStoreApi from '../api/GeoStoreDAO';
 import { deleteResource } from '../api/persistence';
+import { wrapStartStop } from '../observables/epics';
+import { searchParamsSelector, searchTextSelector, totalCountSelector } from '../selectors/dashboards';
 
 const calculateNewParams = state => {
     const totalCount = totalCountSelector(state);

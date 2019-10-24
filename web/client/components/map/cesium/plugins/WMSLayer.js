@@ -6,20 +6,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Layers from '../../../../utils/cesium/Layers';
+import { isArray } from 'lodash';
+import assign from 'object-assign';
 
 import Cesium from '../../../../libs/cesium';
-import BILTerrainProviderFactory from '../../../../utils/cesium/BILTerrainProvider';
-const BILTerrainProvider = BILTerrainProviderFactory(Cesium);
-import ConfigUtils from '../../../../utils/ConfigUtils';
-import ProxyUtils from '../../../../utils/ProxyUtils';
-import assign from 'object-assign';
-import { isArray } from 'lodash';
+import bILTerrainProviderFactory from '../../../../utils/cesium/BILTerrainProvider';
+import Layers from '../../../../utils/cesium/Layers';
 import WMSUtils from '../../../../utils/cesium/WMSUtils';
+import ConfigUtils from '../../../../utils/ConfigUtils';
 import { getAuthenticationParam, getURLs } from '../../../../utils/LayersUtils';
-import { optionsToVendorParams } from '../../../../utils/VendorParamsUtils';
+import ProxyUtils from '../../../../utils/ProxyUtils';
 import SecurityUtils from '../../../../utils/SecurityUtils';
 import { isVectorFormat } from '../../../../utils/VectorTileUtils';
+import { optionsToVendorParams } from '../../../../utils/VendorParamsUtils';
+
+const BILTerrainProvider = bILTerrainProviderFactory(Cesium);
 
 function splitUrl(originalUrl) {
     let url = originalUrl;

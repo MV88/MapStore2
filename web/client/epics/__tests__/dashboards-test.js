@@ -8,20 +8,18 @@
 
 import expect from 'expect';
 
-import { testEpic } from './epicTestUtils';
-import ConfigUtils from '../../utils/ConfigUtils';
-
-import {
-    searchDashboardsOnMapSearch,
-    searchDashboards as searchDashboardsEpic,
-    reloadOnDashboards
-} from '../dashboards';
-
 import { dashboardSaved } from '../../actions/dashboard';
-import { mapMetadataUpdated } from '../../actions/maps';
-import { SEARCH_DASHBOARDS, searchDashboards, LOADING, DASHBOARDS_LIST_LOADED } from '../../actions/dashboards';
+import { DASHBOARDS_LIST_LOADED, LOADING, SEARCH_DASHBOARDS, searchDashboards } from '../../actions/dashboards';
+import { mapMetadataUpdated, mapsLoading } from '../../actions/maps';
 import { SHOW_NOTIFICATION } from '../../actions/notifications';
-import { mapsLoading } from '../../actions/maps';
+import ConfigUtils from '../../utils/ConfigUtils';
+import {
+    reloadOnDashboards,
+    searchDashboards as searchDashboardsEpic,
+    searchDashboardsOnMapSearch
+} from '../dashboards';
+import { testEpic } from './epicTestUtils';
+
 let getDefaults = ConfigUtils.getDefaults;
 describe('dashboards epics', () => {
     beforeEach( () => {

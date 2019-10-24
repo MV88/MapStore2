@@ -6,103 +6,96 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { onLocationChanged } from 'connected-react-router';
 import expect from 'expect';
-
+import { isEmpty, isNil } from 'lodash';
 import assign from 'object-assign';
-import { set } from '../../utils/ImmutableUtils';
-import CoordinatesUtils from '../../utils/CoordinatesUtils';
-import { hideMapinfoMarker, featureInfoClick } from '../../actions/mapInfo';
 
+import { RESET_CONTROLS, SET_CONTROL_PROPERTY, toggleControl } from '../../actions/controls';
+import { CHANGE_DRAWING_STATUS, geometryChanged } from '../../actions/draw';
 import {
-    toggleEditMode,
-    toggleViewMode,
-    openFeatureGrid,
+    CLEAR_CHANGES,
+    CLOSE_FEATURE_GRID,
+    DELETE_GEOMETRY_FEATURE,
+    GEOMETRY_CHANGED,
+    GRID_QUERY_RESULT,
+    MODES,
     OPEN_FEATURE_GRID,
     SET_LAYER,
-    DELETE_GEOMETRY_FEATURE,
-    deleteGeometry,
-    createNewFeatures,
-    CLOSE_FEATURE_GRID,
-    TOGGLE_MODE,
-    MODES,
-    closeFeatureGridConfirm,
-    clearChangeConfirmed,
-    CLEAR_CHANGES,
-    TOGGLE_TOOL,
-    closeFeatureGridConfirmed,
-    zoomAll,
     START_SYNC_WMS,
     STOP_SYNC_WMS,
+    TOGGLE_MODE,
+    TOGGLE_TOOL,
+    changePage,
+    clearChangeConfirmed,
+    closeFeatureGrid,
+    closeFeatureGridConfirm,
+    closeFeatureGridConfirmed,
+    createNewFeatures,
+    deleteGeometry,
+    moreFeatures,
+    openAdvancedSearch,
+    openFeatureGrid,
+    setTimeSync,
+    sort,
     startDrawingFeature,
     startEditingFeature,
-    closeFeatureGrid,
-    GEOMETRY_CHANGED,
-    openAdvancedSearch,
-    moreFeatures,
-    GRID_QUERY_RESULT,
-    changePage,
-    sort,
-    setTimeSync
+    toggleEditMode,
+    toggleViewMode,
+    zoomAll
 } from '../../actions/featuregrid';
-
 import { SET_HIGHLIGHT_FEATURES_PATH } from '../../actions/highlight';
-import { CHANGE_DRAWING_STATUS } from '../../actions/draw';
-import { SHOW_NOTIFICATION } from '../../actions/notifications';
-import { RESET_CONTROLS, SET_CONTROL_PROPERTY, toggleControl } from '../../actions/controls';
+import { CHANGE_LAYER_PROPERTIES, browseData, changeLayerParams } from '../../actions/layers';
 import { ZOOM_TO_EXTENT } from '../../actions/map';
-import { CLOSE_IDENTIFY } from '../../actions/mapInfo';
-import { CHANGE_LAYER_PROPERTIES, changeLayerParams, browseData } from '../../actions/layers';
-import { geometryChanged } from '../../actions/draw';
-
-import {
-    toggleSyncWms,
-    QUERY,
-    querySearchResponse,
-    query,
-    QUERY_CREATE,
-    FEATURE_TYPE_SELECTED,
-    layerSelectedForSearch,
-    UPDATE_QUERY
-} from '../../actions/wfsquery';
-
+import { CLOSE_IDENTIFY, featureInfoClick, hideMapinfoMarker } from '../../actions/mapInfo';
+import { SHOW_NOTIFICATION } from '../../actions/notifications';
 import { LOAD_FILTER, QUERY_FORM_RESET } from '../../actions/queryform';
-
 import {
-    featureGridBrowseData,
-    setHighlightFeaturesPath,
-    triggerDrawSupportOnSelectionChange,
-    featureGridLayerSelectionInitialization,
+    FEATURE_TYPE_SELECTED,
+    QUERY,
+    QUERY_CREATE,
+    UPDATE_QUERY,
+    layerSelectedForSearch,
+    query,
+    querySearchResponse,
+    toggleSyncWms
+} from '../../actions/wfsquery';
+import CoordinatesUtils from '../../utils/CoordinatesUtils';
+import { set } from '../../utils/ImmutableUtils';
+import {
+    askChangesConfirmOnFeatureGridClose,
+    autoCloseFeatureGridEpicOnDrowerOpen,
+    autoReopenFeatureGridOnFeatureInfoClose,
+    closeIdentifyWhenOpenFeatureGrid,
     closeRightPanelOnFeatureGridOpen,
     deleteGeometryFeature,
-    onFeatureGridCreateNewFeature,
-    resetGridOnLocationChange,
-    resetQueryPanel,
-    autoCloseFeatureGridEpicOnDrowerOpen,
-    askChangesConfirmOnFeatureGridClose,
-    onClearChangeConfirmedFeatureGrid,
-    onCloseFeatureGridConfirmed,
-    onFeatureGridZoomAll,
-    resetControlsOnEnterInEditMode,
-    closeIdentifyWhenOpenFeatureGrid,
-    startSyncWmsFilter,
-    stopSyncWmsFilter,
+    featureGridBrowseData,
+    featureGridChangePage,
+    featureGridLayerSelectionInitialization,
+    featureGridSort,
     handleDrawFeature,
     handleEditFeature,
-    resetEditingOnFeatureGridClose,
+    onClearChangeConfirmedFeatureGrid,
+    onCloseFeatureGridConfirmed,
+    onFeatureGridCreateNewFeature,
     onFeatureGridGeometryEditing,
-    syncMapWmsFilter,
+    onFeatureGridZoomAll,
     onOpenAdvancedSearch,
-    virtualScrollLoadFeatures,
     removeWmsFilterOnGridClose,
-    autoReopenFeatureGridOnFeatureInfoClose,
-    featureGridChangePage,
-    featureGridSort,
-    replayOnTimeDimensionChange
+    replayOnTimeDimensionChange,
+    resetControlsOnEnterInEditMode,
+    resetEditingOnFeatureGridClose,
+    resetGridOnLocationChange,
+    resetQueryPanel,
+    setHighlightFeaturesPath,
+    startSyncWmsFilter,
+    stopSyncWmsFilter,
+    syncMapWmsFilter,
+    triggerDrawSupportOnSelectionChange,
+    virtualScrollLoadFeatures
 } from '../featuregrid';
+import { TEST_TIMEOUT, addTimeoutEpic, testEpic } from './epicTestUtils';
 
-import { onLocationChanged } from 'connected-react-router';
-import { TEST_TIMEOUT, testEpic, addTimeoutEpic } from './epicTestUtils';
-import { isEmpty, isNil } from 'lodash';
 const filterObj = {
     featureTypeName: 'TEST',
     groupFields: [

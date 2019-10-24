@@ -6,57 +6,51 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { find } from 'lodash';
+import assign from 'object-assign';
 import Rx from 'rxjs';
 
-import axios from '../libs/ajax';
-
+import { changeDrawingStatus } from '../actions/draw';
+import { CHANGE_MAP_VIEW } from '../actions/map';
+import notifications from '../actions/notifications';
 import {
-    changeSpatialAttribute,
     SELECT_VIEWPORT_SPATIAL_METHOD,
+    changeSpatialAttribute,
     updateGeometrySpatialField
 } from '../actions/queryform';
-
-import { CHANGE_MAP_VIEW } from '../actions/map';
-
 import {
     FEATURE_TYPE_SELECTED,
+    INIT_QUERY_PANEL,
     QUERY,
     UPDATE_QUERY,
     featureLoading,
-    featureTypeLoaded,
     featureTypeError,
-    querySearchResponse,
-    queryError
+    featureTypeLoaded,
+    queryError,
+    querySearchResponse
 } from '../actions/wfsquery';
-
-import { paginationInfo, isDescribeLoaded, layerDescribeSelector } from '../selectors/query';
-import { mapSelector } from '../selectors/map';
+import axios from '../libs/ajax';
+import { getJSONFeatureWA, getLayerJSONFeature } from '../observables/wfs';
 import { authkeyParamNameSelector } from '../selectors/catalog';
 import { getSelectedLayer } from '../selectors/layers';
-import CoordinatesUtils from '../utils/CoordinatesUtils';
-import { addTimeParameter } from '../utils/WFSTimeUtils';
-import ConfigUtils from '../utils/ConfigUtils';
-import assign from 'object-assign';
-
+import { mapSelector } from '../selectors/map';
+import { isDescribeLoaded, layerDescribeSelector, paginationInfo } from '../selectors/query';
 import {
-    spatialFieldMethodSelector,
-    spatialFieldSelector,
-    spatialFieldGeomTypeSelector,
     spatialFieldGeomCoordSelector,
+    spatialFieldGeomProjSelector,
     spatialFieldGeomSelector,
-    spatialFieldGeomProjSelector
+    spatialFieldGeomTypeSelector,
+    spatialFieldMethodSelector,
+    spatialFieldSelector
 } from '../selectors/queryform';
-
-import { changeDrawingStatus } from '../actions/draw';
-import { INIT_QUERY_PANEL } from '../actions/wfsquery';
-import { getJSONFeatureWA, getLayerJSONFeature } from '../observables/wfs';
+import ConfigUtils from '../utils/ConfigUtils';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
 import { describeFeatureTypeToAttributes } from '../utils/FeatureTypeUtils';
-import notifications from '../actions/notifications';
-import { find } from 'lodash';
 import FilterUtils from '../utils/FilterUtils';
+import { read } from '../utils/ogc/Filter/CQL/parser';
 import filterBuilder from '../utils/ogc/Filter/FilterBuilder';
 import fromObject from '../utils/ogc/Filter/fromObject';
-import { read } from '../utils/ogc/Filter/CQL/parser';
+import { addTimeParameter } from '../utils/WFSTimeUtils';
 
 const fb = filterBuilder({ gmlVersion: "3.1.1" });
 const toFilter = fromObject(fb);

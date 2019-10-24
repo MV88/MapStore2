@@ -1,22 +1,31 @@
-import {
-    featureTypeToGridColumns,
-    getToolColumns,
-    getRow,
-    getRowVirtual,
-    getGridEvents,
-    applyAllChanges,
-    createNewAndEditingFilter
-} from '../../../../utils/FeatureGridUtils';
+/*
+ * Copyright 2019, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { isNil } from 'lodash';
+import { compose, createEventHandler, defaultProps, withHandlers, withPropsOnChange } from 'recompose';
 
 import EditorRegistry from '../../../../utils/featuregrid/EditorRegistry';
-import { compose, withPropsOnChange, withHandlers, defaultProps, createEventHandler } from 'recompose';
-import { isNil } from 'lodash';
-import { getFilterRenderer } from '../filterRenderers';
-import { getFormatter } from '../formatters';
-import { manageFilterRendererState } from '../enhancers/filterRenderers';
+import {
+    applyAllChanges,
+    createNewAndEditingFilter,
+    featureTypeToGridColumns,
+    getGridEvents,
+    getRow,
+    getRowIdx,
+    getRowVirtual,
+    getToolColumns
+} from '../../../../utils/FeatureGridUtils';
 import propsStreamFactory from '../../../misc/enhancers/propsStreamFactory';
 import editors from '../editors';
-import { getRowIdx } from '../../../../utils/FeatureGridUtils';
+import { manageFilterRendererState } from '../enhancers/filterRenderers';
+import { getFilterRenderer } from '../filterRenderers';
+import { getFormatter } from '../formatters';
+
 const loadMoreFeaturesStream = $props => {
     return $props
         .distinctUntilChanged(({features: oF, pages: oPages, isFocused: oFocused}, {features: nF, pages: nPages, isFocused: nFocused}) => oF === nF && oFocused === nFocused && oPages === nPages)

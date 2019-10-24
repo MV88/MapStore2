@@ -6,18 +6,19 @@
   * LICENSE file in the root directory of this source tree.
   */
 
+import urlUtil from 'url';
 
 import axios from '../libs/ajax';
 
-import urlUtil from 'url';
 import Rx from 'rxjs';
-import { castArray, isNil } from 'lodash';
+import { castArray,  isObject,  isNil } from 'lodash';
 import { parseString } from 'xml2js';
 import { stripPrefix } from 'xml2js/lib/processors';
 import { interceptOGCError } from '../utils/ObservableUtils';
 import { getCapabilitiesUrl } from '../utils/LayersUtils';
 import FilterUtils from '../utils/FilterUtils';
 import requestBuilder from '../utils/ogc/WFS/RequestBuilder';
+
 const {getFeature, query, sortBy, propertyName} = requestBuilder({ wfsVersion: "1.1.0" });
 
 const toDescribeURL = ({ name, search = {}, url, describeFeatureTypeURL} = {}) => {
@@ -52,8 +53,7 @@ const toLayerCapabilitiesURL = ({name, search = {}, url} = {}) => {
             }
         });
 };
-import Url from 'url';
-import { isObject } from 'lodash';
+
 
 // this is a workaround for https://osgeo-org.atlassian.net/browse/GEOS-7233. can be removed when fixed
 const workaroundGEOS7233 = ({ totalFeatures, features, ...rest } = {}, { startIndex } = {}, originalSize) => {
@@ -91,11 +91,11 @@ const getPagination = (filterObj = {}, options = {}) =>
 const getJSONFeature = (searchUrl, filterObj, options = {}) => {
     const data = FilterUtils.getWFSFilterData(filterObj, options);
 
-    const urlParsedObj = Url.parse(searchUrl, true);
+    const urlParsedObj = urlUtil.parse(searchUrl, true);
     let params = isObject(urlParsedObj.query) ? urlParsedObj.query : {};
     params.service = 'WFS';
     params.outputFormat = 'json';
-    const queryString = Url.format({
+    const queryString = urlUtil.format({
         protocol: urlParsedObj.protocol,
         host: urlParsedObj.host,
         pathname: urlParsedObj.pathname,

@@ -18,7 +18,6 @@ import {
     setInvalidInput
 } from '../actions/thematic';
 import API from '../api/SLDService';
-import SLDService from '../api/SLDService';
 import ThematicLayerComp from '../components/TOC/fragments/settings/ThematicLayer';
 import epics from '../epics/thematic';
 import thematic from '../reducers/thematic';
@@ -145,5 +144,5 @@ export default {
     reducers: {
         thematic
     },
-    epics: epics(SLDService)
+    epics: epics(API)
 };

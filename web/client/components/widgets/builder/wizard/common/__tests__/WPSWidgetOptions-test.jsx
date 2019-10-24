@@ -14,7 +14,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 
 import describeStates from '../../../../../../test-resources/wfs/describe-states.json';
 import wfsChartOptions from '../wfsChartOptions';
-import WPSWidgetOptionsComp from '../wfsChartOptions';
+import WPSWidgetOptionsComp from '../WPSWidgetOptions';
 
 const WPSWidgetOptions = wfsChartOptions(WPSWidgetOptionsComp);
 describe('WPSWidgetOptions component', () => {

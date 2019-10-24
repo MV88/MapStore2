@@ -6,16 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
 import PropTypes from 'prop-types';
+import React from 'react';
 import ReactQuill from 'react-quill';
-import ResizableModal from '../../../misc/ResizableModal';
-import Portal from '../../../misc/Portal';
+
 import Message from '../../../I18N/Message';
+import Portal from '../../../misc/Portal';
+import resizeModuleIFrametoolbarConfigFactory from '../../../misc/quillmodules/ResizeModule';
+import ResizableModal from '../../../misc/ResizableModal';
+
 const {Quill} = ReactQuill;
-import ResizeModuleIFrametoolbarConfigFactory from '../../../misc/quillmodules/ResizeModule';
-const {ResizeModule, IFrame, toolbarConfig} = ResizeModuleIFrametoolbarConfigFactory(Quill);
+const {ResizeModule, IFrame, toolbarConfig} = resizeModuleIFrametoolbarConfigFactory(Quill);
 
 Quill.register({
     'formats/video': IFrame,

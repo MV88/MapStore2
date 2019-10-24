@@ -6,70 +6,64 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Rx from 'rxjs';
-
 import { saveAs } from 'file-saver';
-import { MAP_CONFIG_LOADED } from '../actions/config';
-import { TOGGLE_CONTROL, toggleControl, setControlProperty } from '../actions/controls';
-import { addLayer, updateNode, changeLayerProperties, removeLayer } from '../actions/layers';
-import { set } from '../utils/ImmutableUtils';
-import { reprojectGeoJson } from '../utils/CoordinatesUtils';
-import { error } from '../actions/notifications';
-import { closeFeatureGrid } from '../actions/featuregrid';
-import { isFeatureGridOpen } from '../selectors/featuregrid';
-import { queryPanelSelector, measureSelector } from '../selectors/controls';
-import { hideMapinfoMarker, purgeMapInfoResults, closeIdentify } from '../actions/mapInfo';
+import { castArray, find, findIndex, head, isArray } from 'lodash';
+import assign from 'object-assign';
+import Rx from 'rxjs';
+import uuidv1 from 'uuid/v1';
 
 import {
-    updateAnnotationGeometry,
-    setStyle,
-    toggleStyle,
-    cleanHighlight,
-    toggleAdd,
-    showAnnotation,
-    editAnnotation,
-    CONFIRM_REMOVE_ANNOTATION,
-    SAVE_ANNOTATION,
-    EDIT_ANNOTATION,
+    ADD_NEW_FEATURE,
+    CANCEL_CLOSE_TEXT,
     CANCEL_EDIT_ANNOTATION,
-    SET_STYLE,
-    RESTORE_STYLE,
-    HIGHLIGHT,
+    CHANGED_SELECTED,
+    CHANGE_RADIUS,
+    CHANGE_TEXT,
     CLEAN_HIGHLIGHT,
     CONFIRM_CLOSE_ANNOTATIONS,
-    START_DRAWING,
-    CANCEL_CLOSE_TEXT,
-    SAVE_TEXT,
-    DOWNLOAD,
-    LOAD_ANNOTATIONS,
-    CHANGED_SELECTED,
-    RESET_COORD_EDITOR,
-    CHANGE_RADIUS,
-    ADD_NEW_FEATURE,
-    CHANGE_TEXT,
-    NEW_ANNOTATION,
-    TOGGLE_STYLE,
     CONFIRM_DELETE_FEATURE,
-    OPEN_EDITOR
+    CONFIRM_REMOVE_ANNOTATION,
+    DOWNLOAD,
+    EDIT_ANNOTATION,
+    HIGHLIGHT,
+    LOAD_ANNOTATIONS,
+    NEW_ANNOTATION,
+    OPEN_EDITOR,
+    RESET_COORD_EDITOR,
+    RESTORE_STYLE,
+    SAVE_ANNOTATION,
+    SAVE_TEXT,
+    SET_STYLE,
+    START_DRAWING,
+    TOGGLE_STYLE,
+    cleanHighlight,
+    editAnnotation,
+    setStyle,
+    showAnnotation,
+    toggleAdd,
+    toggleStyle,
+    updateAnnotationGeometry
 } from '../actions/annotations';
-
-import uuidv1 from 'uuid/v1';
-import { FEATURES_SELECTED, GEOMETRY_CHANGED, DRAWING_FEATURE } from '../actions/draw';
-import { PURGE_MAPINFO_RESULTS } from '../actions/mapInfo';
-import { head, findIndex, castArray, isArray, find } from 'lodash';
-import assign from 'object-assign';
+import { MAP_CONFIG_LOADED } from '../actions/config';
+import { TOGGLE_CONTROL, setControlProperty, toggleControl } from '../actions/controls';
+import { DRAWING_FEATURE, FEATURES_SELECTED, GEOMETRY_CHANGED, changeDrawingStatus } from '../actions/draw';
+import { closeFeatureGrid } from '../actions/featuregrid';
+import { addLayer, changeLayerProperties, removeLayer, updateNode } from '../actions/layers';
+import { PURGE_MAPINFO_RESULTS, closeIdentify, hideMapinfoMarker, purgeMapInfoResults } from '../actions/mapInfo';
+import { error } from '../actions/notifications';
 import { annotationsLayerSelector, multiGeometrySelector } from '../selectors/annotations';
-
+import { measureSelector, queryPanelSelector } from '../selectors/controls';
+import { isFeatureGridOpen } from '../selectors/featuregrid';
+import { mapNameSelector } from '../selectors/map';
 import {
+    DEFAULT_ANNOTATIONS_STYLES,
+    getStartEndPointsForLinestring,
     normalizeAnnotation,
     removeDuplicate,
-    validateCoordsArray,
-    getStartEndPointsForLinestring,
-    DEFAULT_ANNOTATIONS_STYLES
+    validateCoordsArray
 } from '../utils/AnnotationsUtils';
-
-import { mapNameSelector } from '../selectors/map';
-import { changeDrawingStatus } from '../actions/draw';
+import { reprojectGeoJson } from '../utils/CoordinatesUtils';
+import { set } from '../utils/ImmutableUtils';
 
 /**
     * Epics for annotations

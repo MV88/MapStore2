@@ -22,7 +22,7 @@ import {
 } from '../actions/snapshot';
 import SnapshotPanelComp from '../components/mapcontrols/Snapshot/SnapshotPanel';
 import SnapshotQueueComp from '../components/mapcontrols/Snapshot/SnapshotQueue';
-import snapshot from '../reducers/snapshot';
+import snapshotReducer from '../reducers/snapshot';
 import { layersSelector } from '../selectors/layers';
 import { mapSelector } from '../selectors/map';
 import { mapTypeSelector } from '../selectors/maptype';
@@ -86,6 +86,6 @@ export default {
         }
     }),
     reducers: {
-        snapshot
+        snapshot: snapshotReducer
     }
 };

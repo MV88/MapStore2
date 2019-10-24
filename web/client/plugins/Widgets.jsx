@@ -25,7 +25,7 @@ import {
 import { heightProvider } from '../components/layout/enhancers/gridLayout';
 import WidgetsViewComp from '../components/widgets/view/WidgetsView';
 import epics from '../epics/widgets';
-import widgets from '../reducers/widgets';
+import widgetsReducer from '../reducers/widgets';
 import { mapIdSelector } from '../selectors/map';
 import {
     dependenciesSelector,
@@ -158,7 +158,7 @@ const WidgetsPlugin = autoDisableWidgets(Widgets);
 export default {
     WidgetsPlugin,
     reducers: {
-        widgets
+        widgets: widgetsReducer
     },
     epics
 };

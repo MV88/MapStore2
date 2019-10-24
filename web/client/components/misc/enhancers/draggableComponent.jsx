@@ -6,13 +6,9 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-
 import React from 'react';
-
-import { compose, branch } from 'recompose';
-import { DragSource as dragSource } from 'react-dnd';
-import { DropTarget as dropTarget } from 'react-dnd';
-
+import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
+import { branch, compose } from 'recompose';
 
 const itemSource = {
     beginDrag: props => ({...props})

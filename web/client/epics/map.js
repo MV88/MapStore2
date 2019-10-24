@@ -6,43 +6,37 @@
  * LICENSE file in the root directory of this source tree.
 */
 
+import { head, isArray, isObject, mapValues } from 'lodash';
 import Rx from 'rxjs';
 
-import { changeLayerProperties } from '../actions/layers';
-
+import { removeAllAdditionalLayers } from '../actions/additionallayers';
+import { MAP_CONFIG_LOADED, loadMapInfo } from '../actions/config';
+import { resetControls, setControlProperty } from '../actions/controls';
+import { changeLayerProperties, clearLayers } from '../actions/layers';
 import {
+    CHANGE_MAP_CRS,
     CREATION_ERROR_LAYER,
     INIT_MAP,
     ZOOM_TO_EXTENT,
-    CHANGE_MAP_CRS,
-    changeMapView,
-    changeMapLimits
+    changeMapLimits,
+    changeMapView
 } from '../actions/map';
-
+import { warning } from '../actions/notifications';
+import { LOGIN_SUCCESS } from '../actions/security';
+import { allBackgroundLayerSelector, currentBackgroundLayerSelector, getLayerFromId } from '../selectors/layers';
 import {
     configuredExtentCrsSelector,
-    configuredRestrictedExtentSelector,
     configuredMinZoomSelector,
-    mapSelector,
-    mapIdSelector
+    configuredRestrictedExtentSelector,
+    mapIdSelector,
+    mapSelector
 } from '../selectors/map';
-
-import { loadMapInfo } from '../actions/config';
-import { LOGIN_SUCCESS } from '../actions/security';
-import { currentBackgroundLayerSelector, allBackgroundLayerSelector, getLayerFromId } from '../selectors/layers';
-import { mapTypeSelector } from '../selectors/maptype';
 import { mapPaddingSelector } from '../selectors/maplayout';
-import { setControlProperty } from '../actions/controls';
-import { MAP_CONFIG_LOADED } from '../actions/config';
+import { mapTypeSelector } from '../selectors/maptype';
+import ConfigUtils from '../utils/ConfigUtils';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
 import { isSupportedLayer } from '../utils/LayersUtils';
 import MapUtils from '../utils/MapUtils';
-import CoordinatesUtils from '../utils/CoordinatesUtils';
-import { warning } from '../actions/notifications';
-import { resetControls } from '../actions/controls';
-import { clearLayers } from '../actions/layers';
-import { removeAllAdditionalLayers } from '../actions/additionallayers';
-import { head, isArray, isObject, mapValues } from 'lodash';
-import ConfigUtils from '../utils/ConfigUtils';
 
 const handleCreationBackgroundError = (action$, store) =>
     action$.ofType(CREATION_ERROR_LAYER)

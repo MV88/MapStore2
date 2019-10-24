@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import PropTypes from 'prop-types';
-import Message from '../../../I18N/Message';
-import Select from 'react-select';
-import { Button, Glyphicon, Alert } from 'react-bootstrap';
-import { findIndex } from 'lodash';
-import { Grid } from 'react-bootstrap';
 import 'react-select/dist/react-select.css';
+
+import { findIndex } from 'lodash';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Alert, Button, Glyphicon, Grid } from 'react-bootstrap';
+import Select from 'react-select';
+
+import Message from '../../../I18N/Message';
 
 /**
  * General Settings form for layer
