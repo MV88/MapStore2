@@ -12,10 +12,10 @@ import uuidv1 from 'uuid/v1';
 import url from 'url';
 import { baseTemplates, customTemplates } from './styleeditor/stylesTemplates';
 
-const STYLE_ID_SEPARATOR = '___';
-const STYLE_OWNER_NAME = 'styleeditor';
+export const STYLE_ID_SEPARATOR = '___';
+export const STYLE_OWNER_NAME = 'styleeditor';
 
-const StyleEditorCustomUtils = {};
+let StyleEditorCustomUtils = {};
 
 const EDITOR_MODES = {
     css: 'geocss',
@@ -39,108 +39,104 @@ const getGeometryType = (geomProperty = {}) => {
  * Utility functions for Share tools.
  * @memberof utils
  */
-const StyleEditorUtils = {
-    STYLE_OWNER_NAME,
-    STYLE_ID_SEPARATOR,
-    /**
-     * generate a temporary id for style
-     * @return {string} id
-     */
-    generateTemporaryStyleId: () => `${uuidv1()}_ms_${Date.now().toString()}`,
-    /**
-     * generate a style id with title included
-     * @param  {object} properties eg: {title: 'My Title'}
-     * @return {string} id
-     */
-    generateStyleId: ({title = ''}) => `${title.toLowerCase().replace(/\s/g, '_')}${STYLE_ID_SEPARATOR}${uuidv1()}`,
-    /**
-     * extract feature properties from a layer object
-     * @param  {object} layer layer object
-     * @return {object} {geometryType, properties, owsType}
-     */
-    extractFeatureProperties: ({describeLayer = {}, describeFeatureType = {}} = {}) => {
 
-        const owsType = describeLayer && describeLayer.owsType || null;
-        const descProperties = get(describeFeatureType, 'complexType[0].complexContent.extension.sequence.element') || null;
-        const geomProperty = descProperties && head(descProperties.filter(({ type }) => type && type.prefix === 'gml'));
-        const geometryType = owsType === 'WCS' && 'raster' || geomProperty && owsType === 'WFS' && getGeometryType(geomProperty) || null;
-        const properties = descProperties && descProperties.reduce((props, { name, type = {} }) => ({
-            ...props,
-            [name]: {
-                localPart: type.localPart,
-                prefix: type.prefix
-            }
-        }), {});
-        return {
-            geometryType,
-            properties,
-            owsType
-        };
-    },
-    /**
-     * convert style format to codemirror mode
-     * @param  {string} format style format css or sld
-     * @return {string} mode name for codemirror or format string
-     */
-    getEditorMode: format => EDITOR_MODES[format] || format,
-    /**
-     * verify if layer url is valid for style editor service
-     * @param  {object} layer layer object
-     * @param  {object} service style service object
-     * @return {bool}
-     */
-    isSameOrigin: (layer = {}, service = {}) => {
-        if (StyleEditorCustomUtils.isSameOrigin) return StyleEditorCustomUtils.isSameOrigin(layer, service);
-        if (!service.baseUrl || !layer.url) return false;
-        const availableUrls = [service.baseUrl, ...(service.availableUrls || [])];
-        const parsedAvailableUrls = availableUrls.map(availableUrl => {
-            const urlObj = url.parse(availableUrl);
-            return `${urlObj.protocol}//${urlObj.host}`;
-        });
-        const layerObj = url.parse(layer.url);
-        const layerUrl = `${layerObj.protocol}//${layerObj.host}`;
-        return parsedAvailableUrls.indexOf(layerUrl) !== -1;
-    },
-    /**
-     * return a ist of style templates
-     * Can be overrided with setCustomUtils, must return an array of templates
-     * @return {array} list of templates
-     */
-    getStyleTemplates: () => {
-        if (StyleEditorCustomUtils.getStyleTemplates) {
-            const generatedTemplates = StyleEditorCustomUtils.getStyleTemplates();
-            return [...(isArray(generatedTemplates) ? generatedTemplates : [] ), ...baseTemplates];
+/**
+ * generate a temporary id for style
+ * @return {string} id
+ */
+export const generateTemporaryStyleId = () => `${uuidv1()}_ms_${Date.now().toString()}`;
+/**
+ * generate a style id with title included
+ * @param  {object} properties eg: {title: 'My Title'}
+ * @return {string} id
+ */
+export const generateStyleId = ({title = ''}) => `${title.toLowerCase().replace(/\s/g, '_')}${STYLE_ID_SEPARATOR}${uuidv1()}`;
+/**
+ * extract feature properties from a layer object
+ * @param  {object} layer layer object
+ * @return {object} {geometryType, properties, owsType}
+ */
+export const extractFeatureProperties = ({describeLayer = {}, describeFeatureType = {}} = {}) => {
+
+    const owsType = describeLayer && describeLayer.owsType || null;
+    const descProperties = get(describeFeatureType, 'complexType[0].complexContent.extension.sequence.element') || null;
+    const geomProperty = descProperties && head(descProperties.filter(({ type }) => type && type.prefix === 'gml'));
+    const geometryType = owsType === 'WCS' && 'raster' || geomProperty && owsType === 'WFS' && getGeometryType(geomProperty) || null;
+    const properties = descProperties && descProperties.reduce((props, { name, type = {} }) => ({
+        ...props,
+        [name]: {
+            localPart: type.localPart,
+            prefix: type.prefix
         }
-        return [...customTemplates, ...baseTemplates];
-    },
-    /**
-     * Override function in StyleEditorUtils (only isSameOrigin, getStyleTemplates)
-     * @param  {string} name function name
-     * @param  {function} fun function to override
-     */
-    setCustomUtils: (name, fun) => {
-        StyleEditorCustomUtils[name] = fun;
-    },
-    /**
-     * Get name and workspace from a goeserver name
-     * @param  {string} name function name
-     * @return  {object}
-     */
-    getNameParts(name) {
-        const layerPart = isString(name) && name.split(':') || [];
-        return {
-            workspace: layerPart[1] && layerPart[0],
-            name: layerPart[1] || layerPart[0]
-        };
-    },
-    /**
-     * Stringify name and workspace
-     * @param  {object} styleObj style object
-     * @param  {string} styleObj.name name of style without workspace
-     * @param  {object} styleObj.workspace {name: 'name of workspace'}
-     * @return  {string} combination of workspace and name, eg. 'workspace:stylename'
-     */
-    stringifyNameParts: ({name, workspace}) => `${workspace && workspace.name && `${workspace.name}:` || ''}${name}`
+    }), {});
+    return {
+        geometryType,
+        properties,
+        owsType
+    };
 };
+/**
+ * convert style format to codemirror mode
+ * @param  {string} format style format css or sld
+ * @return {string} mode name for codemirror or format string
+ */
+export const getEditorMode = format => EDITOR_MODES[format] || format;
+/**
+ * verify if layer url is valid for style editor service
+ * @param  {object} layer layer object
+ * @param  {object} service style service object
+ * @return {bool}
+ */
+export const isSameOrigin = (layer = {}, service = {}) => {
+    if (StyleEditorCustomUtils.isSameOrigin) return StyleEditorCustomUtils.isSameOrigin(layer, service);
+    if (!service.baseUrl || !layer.url) return false;
+    const availableUrls = [service.baseUrl, ...(service.availableUrls || [])];
+    const parsedAvailableUrls = availableUrls.map(availableUrl => {
+        const urlObj = url.parse(availableUrl);
+        return `${urlObj.protocol}//${urlObj.host}`;
+    });
+    const layerObj = url.parse(layer.url);
+    const layerUrl = `${layerObj.protocol}//${layerObj.host}`;
+    return parsedAvailableUrls.indexOf(layerUrl) !== -1;
+};
+/**
+ * return a ist of style templates
+ * Can be overrided with setCustomUtils, must return an array of templates
+ * @return {array} list of templates
+ */
+export const getStyleTemplates = () => {
+    if (StyleEditorCustomUtils.getStyleTemplates) {
+        const generatedTemplates = StyleEditorCustomUtils.getStyleTemplates();
+        return [...(isArray(generatedTemplates) ? generatedTemplates : [] ), ...baseTemplates];
+    }
+    return [...customTemplates, ...baseTemplates];
+};
+/**
+ * Override function in StyleEditorUtils (only isSameOrigin, getStyleTemplates)
+ * @param  {string} name function name
+ * @param  {function} fun function to override
+ */
+export const setCustomUtils = (name, fun) => {
+    StyleEditorCustomUtils[name] = fun;
+};
+/**
+ * Get name and workspace from a goeserver name
+ * @param  {string} name function name
+ * @return  {object}
+ */
+export const getNameParts = (name) => {
+    const layerPart = isString(name) && name.split(':') || [];
+    return {
+        workspace: layerPart[1] && layerPart[0],
+        name: layerPart[1] || layerPart[0]
+    };
+};
+/**
+ * Stringify name and workspace
+ * @param  {object} styleObj style object
+ * @param  {string} styleObj.name name of style without workspace
+ * @param  {object} styleObj.workspace {name: 'name of workspace'}
+ * @return  {string} combination of workspace and name, eg. 'workspace:stylename'
+ */
+export const stringifyNameParts = ({name, workspace}) => `${workspace && workspace.name && `${workspace.name}:` || ''}${name}`;
 
-export default StyleEditorUtils;

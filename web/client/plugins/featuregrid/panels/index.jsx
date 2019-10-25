@@ -167,49 +167,48 @@ const panelDefaultProperties = {
     }
 };
 
-export default {
-    getPanels: (tools = {}) =>
-        Object.keys(tools)
-            .filter(t => tools[t] && panels[t])
-            .map(t => {
-                const Panel = panels[t];
-                return <Panel key={t} {...(panelDefaultProperties[t] || {})} />;
-            }),
-    getHeader: () => {
-        return <Header ><Toolbar /></Header>;
-    },
-    getFooter: (props) => {
-        return ( props.focusOnEdit && props.hasChanges || props.newFeatures.length > 0) ? null : <Footer />;
-    },
-    getEmptyRowsView: () => {
-        return EmptyRowsView;
-    },
-    getFilterRenderers: createSelector((d) => d,
-        (describe) =>
-            describe ? getAttributeFields(describe).reduce( (out, cur) => ({
-                ...out,
-                [cur.name]: connect(
-                    createSelector(
-                        (state) => getAttributeFilter(state, cur.name),
-                        modeSelector,
-                        (filter, mode) => {
-                            const props = {
-                                value: filter && (filter.rawValue || filter.value)
-                            };
-                            const editProps = {
-                                disabled: true,
-                                tooltipMsgId: "featuregrid.filter.tooltips.editMode"
-                            };
-                            return mode === "EDIT" ? {...props, ...editProps} : props;
-                        }
-                    ))(getFilterRenderer(cur.localType, {name: cur.name}))
-            }), {}) : {}),
-    getDialogs: (tools = {}) => {
-        return Object.keys(tools)
-            .filter(t => tools[t] && dialogs[t])
-            .map(t => {
-                const Dialog = dialogs[t];
-                return <Dialog key={t} />;
-            });
-    }
+
+export const getPanels = (tools = {}) =>
+    Object.keys(tools)
+        .filter(t => tools[t] && panels[t])
+        .map(t => {
+            const Panel = panels[t];
+            return <Panel key={t} {...(panelDefaultProperties[t] || {})} />;
+        });
+export const getHeader = () => {
+    return <Header ><Toolbar /></Header>;
+};
+export const getFooter = (props) => {
+    return ( props.focusOnEdit && props.hasChanges || props.newFeatures.length > 0) ? null : <Footer />;
+};
+export const getEmptyRowsView = () => {
+    return EmptyRowsView;
+};
+export const getFilterRenderers = createSelector((d) => d,
+    (describe) =>
+        describe ? getAttributeFields(describe).reduce( (out, cur) => ({
+            ...out,
+            [cur.name]: connect(
+                createSelector(
+                    (state) => getAttributeFilter(state, cur.name),
+                    modeSelector,
+                    (filter, mode) => {
+                        const props = {
+                            value: filter && (filter.rawValue || filter.value)
+                        };
+                        const editProps = {
+                            disabled: true,
+                            tooltipMsgId: "featuregrid.filter.tooltips.editMode"
+                        };
+                        return mode === "EDIT" ? {...props, ...editProps} : props;
+                    }
+                ))(getFilterRenderer(cur.localType, {name: cur.name}))
+        }), {}) : {});
+export const getDialogs = (tools = {}) => {
+    return Object.keys(tools)
+        .filter(t => tools[t] && dialogs[t])
+        .map(t => {
+            const Dialog = dialogs[t];
+            return <Dialog key={t} />;
+        });
 };

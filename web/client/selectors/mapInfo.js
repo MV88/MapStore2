@@ -51,12 +51,12 @@ export const showMarkerSelector = state => state && state.mapInfo && state.mapIn
 export const itemIdSelector = state => get(state, "mapInfo.itemId", null);
 export const overrideParamsSelector = state => get(state, "mapInfo.overrideParams", {});
 export const filterNameListSelector = state => get(state, "mapInfo.filterNameList", []);
-const drawSupportActiveSelector = (state) => {
+export const drawSupportActiveSelector = (state) => {
     const drawStatus = get(state, "draw.drawStatus", false);
     return drawStatus && drawStatus !== 'clean' && drawStatus !== 'stop';
 };
-const annotationsEditingSelector = (state) => get(state, "annotations.editing");
-const mapInfoDisabledSelector = (state) => !get(state, "mapInfo.enabled", false);
+export const annotationsEditingSelector = (state) => get(state, "annotations.editing");
+export const mapInfoDisabledSelector = (state) => !get(state, "mapInfo.enabled", false);
 
 /**
  * selects stopGetFeatureInfo from state
@@ -86,11 +86,11 @@ export const identifyOptionsSelector = createStructuredSelector({
     currentLocale: currentLocaleSelector
 });
 
-const isHighlightEnabledSelector = (state = {}) => state.mapInfo && state.mapInfo.highlight;
+export const isHighlightEnabledSelector = (state = {}) => state.mapInfo && state.mapInfo.highlight;
 
-const indexSelector = (state = {}) => state && state.mapInfo && state.mapInfo.index;
+export const indexSelector = (state = {}) => state && state.mapInfo && state.mapInfo.index;
 
-const responsesSelector = state => state.mapInfo && state.mapInfo.responses || [];
+export const responsesSelector = state => state.mapInfo && state.mapInfo.responses || [];
 
 /**
  * Gets only the valid responses
@@ -103,15 +103,15 @@ export const validResponsesSelector = createSelector(
         return validatorFormat.getValidResponses(responses);
     });
 
-const currentResponseSelector = createSelector(
+export const currentResponseSelector = createSelector(
     validResponsesSelector, indexSelector,
     (responses = [], index = 0) => responses[index]
 );
-const currentFeatureSelector = state => {
+export const currentFeatureSelector = state => {
     const currentResponse = currentResponseSelector(state) || {};
     return get(currentResponse, 'layerMetadata.features');
 };
-const currentFeatureCrsSelector = state => {
+export const currentFeatureCrsSelector = state => {
     const currentResponse = currentResponseSelector(state) || {};
     return get(currentResponse, 'layerMetadata.featuresCrs');
 };
@@ -120,7 +120,7 @@ const currentFeatureCrsSelector = state => {
  * Returns the a function that returns the correct style based on the geometry type, to use in the highlight
  * @param {feature} f the feature in json format
  */
-const getStyleForFeature = (style) => (f = {}) =>
+export const getStyleForFeature = (style) => (f = {}) =>
     f.style
         || (f.geometry && (f.geometry.type === "Point" || f.geometry.type === "MultiPoint"))
     // point style circle requires radius (it's strange circle should be a default)
@@ -130,7 +130,7 @@ const getStyleForFeature = (style) => (f = {}) =>
 /**
  * Create a function that add the style property to the feature.
  */
-const applyMapInfoStyle = style => f => ({
+export const applyMapInfoStyle = style => f => ({
     ...f,
     style: getStyleForFeature(style)(f)
 });

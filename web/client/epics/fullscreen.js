@@ -31,7 +31,7 @@ const getFullScreenEvent = () => {
  * @memberof epics.fullscreen
  * @return {external:Observable} emitting {@link #actions.controls.setControlProperty} events
  */
-const toggleFullscreenEpic = action$ =>
+export const toggleFullscreenEpic = action$ =>
     action$.ofType(TOGGLE_FULLSCREEN).switchMap(action => {
         const element = document.querySelector(action && action.querySelector || '.' + (ConfigUtils.getConfigProp('themePrefix') || 'ms2') + " > div");
         if (element && action.enable && screenfull.enabled) {
@@ -55,6 +55,3 @@ const toggleFullscreenEpic = action$ =>
  * @name epics.fullscreen
  * @type {Object}
  */
-export default {
-    toggleFullscreenEpic
-};

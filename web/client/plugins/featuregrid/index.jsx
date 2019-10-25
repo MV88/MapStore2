@@ -6,14 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import gridTools from './gridTools';
-import toolbarEvents from './toolbarEvents';
-import gridEvents from './gridEvents';
-import pageEvents from './pageEvents';
+import gridToolsEnhancer from './gridTools';
+import toolbarEventsEnhancer from './toolbarEvents';
+import gridEventsEnhancer from './gridEvents';
+import pageEventsEnhancer from './pageEvents';
 
-export default {
-    gridTools,
-    toolbarEvents,
-    gridEvents,
-    pageEvents
-};
+export const gridTools = gridToolsEnhancer;
+export const toolbarEvents = toolbarEventsEnhancer;
+export const gridEvents = gridEventsEnhancer;
+export const pageEvents = pageEventsEnhancer;

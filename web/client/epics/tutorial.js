@@ -33,7 +33,7 @@ import { isEmpty, isArray, isObject } from 'lodash';
  * @return {external:Observable}
  */
 
-const closeTutorialEpic = (action$) =>
+export const closeTutorialEpic = (action$) =>
     action$.ofType(START_TUTORIAL)
         .audit(() => action$.ofType(TOGGLE_3D))
         .switchMap( () => Rx.Observable.of(closeTutorial()));
@@ -45,7 +45,7 @@ const closeTutorialEpic = (action$) =>
  * @return {external:Observable}
  */
 
-const switchTutorialEpic = (action$, store) =>
+export const switchTutorialEpic = (action$, store) =>
     action$.ofType(LOCATION_CHANGE)
         .filter(action =>
             action.payload
@@ -77,7 +77,7 @@ const switchTutorialEpic = (action$, store) =>
  * @return {external:Observable}
  */
 
-const getActionsFromStepEpic = (action$) =>
+export const getActionsFromStepEpic = (action$) =>
     action$.ofType(UPDATE_TUTORIAL)
         .filter(action => action.tour && action.tour.step && action.tour.step.action && action.tour.step.action[action.tour.action])
         .switchMap( (action) => {
@@ -91,9 +91,3 @@ const getActionsFromStepEpic = (action$) =>
  * @name epics.tutorial
  * @type {Object}
  */
-
-export default {
-    closeTutorialEpic,
-    switchTutorialEpic,
-    getActionsFromStepEpic
-};

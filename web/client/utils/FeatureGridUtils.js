@@ -22,13 +22,13 @@ const getPropertyName = (name, describe) => name === "geometry" ? getGeometryNam
 
 const getBlockIdx = (indexes = [], size = 0, rowIdx) => findIndex(indexes, (startIdx) => startIdx <= rowIdx && rowIdx < startIdx + size);
 
-/** Features are stored in an array grupped by block of pages. The page could be loaded unorderd
+/** Features are stored in an array grouped by block of pages. The page could be loaded unordered
  * This function recover the correct rowIndex in features, given the array of indexes
  * of loaded page and the page size.
- * @param  {int}   rowIdx React-data-grid idex to search
- * @param  {Array} idxes  Array of loaded pages start index
+ * @param  {int}   rowIdx React-data-grid index to search
+ * @param  {Array} indexes  Array of loaded pages start index
  * @param  {size}  size   Page size
- * @return {int}          The new correspondinx index in features array or -1 if not present
+ * @return {int}          The new correspond index in features array or -1 if not present
  */
 export const getRowIdx = (rowIdx, indexes, size) => {
     const blockIdx = getBlockIdx(indexes, size, rowIdx);
@@ -43,7 +43,7 @@ export const getRow = (i, rows) => rows[i];
 
 /* eslint-disable */
 
-const toChangesMap = (changesArray = []) => isArray(changesArray) ? changesArray.reduce((changes, c) => ({
+export const toChangesMap = (changesArray = []) => isArray(changesArray) ? changesArray.reduce((changes, c) => ({
     ...changes,
     [c.id]: {
         ...changes[c.id],

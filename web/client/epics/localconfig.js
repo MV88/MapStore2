@@ -27,7 +27,7 @@ import { get } from 'lodash';
  */
 
 
-const setSupportedLocales = (action$) =>
+export const setSupportedLocales = (action$) =>
     action$.ofType(LOCAL_CONFIG_LOADED)
         .switchMap(action => {
             const supportedLocales = get(action, "config.initialState.defaultState.locales.supportedLocales", {});
@@ -38,7 +38,3 @@ const setSupportedLocales = (action$) =>
             return Rx.Observable.of(supportedLanguagesRegistered(supportedLocales));
         });
 
-
-export default {
-    setSupportedLocales
-};

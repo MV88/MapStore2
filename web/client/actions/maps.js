@@ -861,7 +861,7 @@ export function doNothing() {
  * @memberof actions.maps
  * @param {boolean} enabled the `enabled` flag
  */
-const setFeaturedMapsEnabled = (enabled) => ({
+export const setFeaturedMapsEnabled = (enabled) => ({
     type: FEATURED_MAPS_SET_ENABLED,
     enabled
 });
@@ -870,7 +870,7 @@ const setFeaturedMapsEnabled = (enabled) => ({
  * @memberof actions.maps
  * @param {boolean} enabled the `enabled` flag
  */
-const saveMapResource = (resource) => ({
+export const saveMapResource = (resource) => ({
     type: SAVE_MAP_RESOURCE,
     resource
 });
@@ -879,7 +879,7 @@ const saveMapResource = (resource) => ({
  * @memberof actions.maps
  * @param {boolean} enabled the `enabled` flag
  */
-const setFeaturedMapsLatestResource = (resource) => ({
+export const setFeaturedMapsLatestResource = (resource) => ({
     type: FEATURED_MAPS_SET_LATEST_RESOURCE,
     resource
 });
