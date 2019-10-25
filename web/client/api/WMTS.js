@@ -15,7 +15,7 @@ import xml2js from 'xml2js';
 const capabilitiesCache = {};
 
 import { castArray } from 'lodash';
-import CoordinatesUtils from '../utils/CoordinatesUtils';
+import {getEPSGCode} from '../utils/CoordinatesUtils';
 
 import {
     getOperations,
@@ -44,7 +44,7 @@ const searchAndPaginate = (json, startPosition, maxRecords, text, url) => {
     let SRSList = [];
     let len = TileMatrixSet.length;
     for (let i = 0; i < len; i++) {
-        SRSList.push(CoordinatesUtils.getEPSGCode(TileMatrixSet[i]["ows:SupportedCRS"]));
+        SRSList.push(getEPSGCode(TileMatrixSet[i]["ows:SupportedCRS"]));
     }
     const layersObj = root.Layer;
     const layers = castArray(layersObj);

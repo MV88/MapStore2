@@ -17,7 +17,7 @@ import { withState, withHandlers, compose, lifecycle } from 'recompose';
  * @memberof enhancers.settingsState
  * @class
  */
-const settingsState = compose(
+export const settingsState = compose(
     withState('alertModal', 'onShowAlertModal', false),
     withState('showEditor', 'onShowEditor', false)
 );
@@ -34,7 +34,7 @@ const settingsState = compose(
  * @memberof enhancers.settingsLifecycle
  * @class
  */
-const settingsLifecycle = compose(
+export const settingsLifecycle = compose(
     withHandlers({
         onClose: ({ onUpdateInitialSettings = () => {}, onUpdateOriginalSettings = () => {}, onUpdateNode = () => {}, originalSettings, settings, onHideSettings = () => {}, onShowAlertModal = () => {} }) => (forceClose, tabsCloseActions = []) => {
             const originalOptions = Object.keys(settings.options).reduce((options, key) => ({ ...options, [key]: key === 'opacity' && !originalSettings[key] && 1.0 || originalSettings[key] }), {});
@@ -118,16 +118,12 @@ const settingsLifecycle = compose(
     })
 );
 
-export default {
+/**
+ * Enhancer for compose together settings lifecycle and state
+ * @memberof enhancers.updateSettingsLifecycle
+ * @class
+ */
+export const updateSettingsLifecycle = compose(
     settingsState,
-    settingsLifecycle,
-    /**
-     * Enhancer for compose together settings lifecycle and state
-     * @memberof enhancers.updateSettingsLifecycle
-     * @class
-     */
-    updateSettingsLifecycle: compose(
-        settingsState,
-        settingsLifecycle
-    )
-};
+    settingsLifecycle
+);

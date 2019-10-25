@@ -5,18 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { transaction } from './transaction';
+import { transaction as transactionEnhancer } from './transaction';
 
-import { insert } from './insert';
+import { insert as insertEnhancer } from './insert';
 
-import { deleteFeature, deleteFeaturesByFilter, deleteById } from './delete';
+import {
+    deleteFeature as deleteFeatureEnhancer,
+    deleteFeaturesByFilter as deleteFeaturesByFilterEnhancer,
+    deleteById as deleteByIdEnhancer
+} from './delete';
 
-export default {
-    insert,
-    //    update,
-    //    property,
-    deleteFeature,
-    deleteFeaturesByFilter,
-    deleteById,
-    transaction
-};
+
+export const insert = insertEnhancer;
+export const deleteFeature = deleteFeatureEnhancer;
+export const deleteFeaturesByFilter = deleteFeaturesByFilterEnhancer;
+export const deleteById = deleteByIdEnhancer;
+export const transaction = transactionEnhancer;
+

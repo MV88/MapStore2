@@ -143,13 +143,13 @@ export function convertUom(value, source = "m", dest = "m") {
 }
 
 
-const validateCoord = c => (!isNaN(parseFloat(c[0])) && !isNaN(parseFloat(c[1])));
+export const validateCoord = c => (!isNaN(parseFloat(c[0])) && !isNaN(parseFloat(c[1])));
 
 /**
  * validate a geometry feature,
  * if invalid return an empty one
 */
-const validateFeatureCoordinates = ({coordinates, type} = {}) => {
+export const validateFeatureCoordinates = ({coordinates, type} = {}) => {
     let filteredCoords = coordinates;
     if (type === "LineString") {
         filteredCoords = coordinates.filter(validateCoord);

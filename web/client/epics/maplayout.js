@@ -43,7 +43,7 @@ import { isFeatureGridOpen, getDockSize } from '../selectors/featuregrid';
  * @return {external:Observable} emitting {@link #actions.map.updateMapLayout} action
  */
 
-const updateMapLayoutEpic = (action$, store) =>
+export const updateMapLayoutEpic = (action$, store) =>
 
     action$.ofType(MAP_CONFIG_LOADED, SIZE_CHANGE, CLOSE_FEATURE_GRID, OPEN_FEATURE_GRID, CLOSE_IDENTIFY, NO_QUERYABLE_LAYERS, TOGGLE_MAPINFO_STATE, LOAD_FEATURE_INFO, EXCEPTIONS_FEATURE_INFO, TOGGLE_CONTROL, SET_CONTROL_PROPERTY, SET_CONTROL_PROPERTIES, SHOW_SETTINGS, HIDE_SETTINGS, ERROR_FEATURE_INFO)
         .switchMap(() => {
@@ -112,7 +112,3 @@ const updateMapLayoutEpic = (action$, store) =>
                 boundingMapRect
             }));
         });
-
-export default {
-    updateMapLayoutEpic
-};

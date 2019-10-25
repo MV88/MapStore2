@@ -14,7 +14,7 @@ import union from 'lodash/union';
 import isArray from 'lodash/isArray';
 import assign from 'object-assign';
 
-import CoordinatesUtils from '../../../../utils/CoordinatesUtils';
+import {normalizeSRS} from '../../../../utils/CoordinatesUtils';
 import ProxyUtils from '../../../../utils/ProxyUtils';
 
 import {optionsToVendorParams} from '../../../../utils/VendorParamsUtils';
@@ -50,8 +50,8 @@ function wmsToOpenlayersOptions(options) {
         STYLES: options.style || "",
         FORMAT: options.format || 'image/png',
         TRANSPARENT: options.transparent !== undefined ? options.transparent : true,
-        SRS: CoordinatesUtils.normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS),
-        CRS: CoordinatesUtils.normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS),
+        SRS: normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS),
+        CRS: normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS),
         TILED: !isNil(options.tiled) ? options.tiled : true,
         VERSION: options.version || "1.3.0"
     }, assign(
@@ -153,7 +153,7 @@ const createLayer = (options, map) => {
         });
     }
     const mapSrs = map && map.getView() && map.getView().getProjection() && map.getView().getProjection().getCode() || 'EPSG:3857';
-    const extent = get(CoordinatesUtils.normalizeSRS(options.srs || mapSrs, options.allowedSRS)).getExtent();
+    const extent = get(normalizeSRS(options.srs || mapSrs, options.allowedSRS)).getExtent();
     const sourceOptions = addTileLoadFunction({
         attributions: toOLAttributions(options.credits),
         urls: urls,
@@ -233,7 +233,7 @@ Layers.registerType('wms', {
         const vectorSource = newIsVector ? layer.getSource() : null;
 
         if (oldOptions.srs !== newOptions.srs) {
-            const extent = get(CoordinatesUtils.normalizeSRS(newOptions.srs, newOptions.allowedSRS)).getExtent();
+            const extent = get(normalizeSRS(newOptions.srs, newOptions.allowedSRS)).getExtent();
             if (newOptions.singleTile && !newIsVector) {
                 layer.setExtent(extent);
             } else {

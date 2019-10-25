@@ -94,7 +94,7 @@ const resultToProps = ({result = {}, permission}) => ({
 /*
  * retrieves data from a GeoStore service and converts to props
  */
-const loadPage = ({permission, viewSize = 4, searchText = '', pageSize = 4} = {}, page = 0) => Rx.Observable
+export const loadPage = ({permission, viewSize = 4, searchText = '', pageSize = 4} = {}, page = 0) => Rx.Observable
     .fromPromise(searchFeaturedMaps(page * pageSize, page === 0 ? viewSize : pageSize, searchText))
     .map((result) => ({permission, result: result && result.ExtResourceList || []}))
     .map(resultToProps);
@@ -102,7 +102,7 @@ const loadPage = ({permission, viewSize = 4, searchText = '', pageSize = 4} = {}
 /*
  * add viewSize and previousItems props to control previus and current items in the grid view
  */
-const updateItemsLifecycle = compose(
+export const updateItemsLifecycle = compose(
     withState('viewSize', 'onChangeSize', 4),
     withState('previousItems', 'onUpdatePreviousItems', []),
     lifecycle({
@@ -129,8 +129,3 @@ const updateItemsLifecycle = compose(
         }
     })
 );
-
-export default {
-    loadPage,
-    updateItemsLifecycle
-};

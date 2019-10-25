@@ -9,7 +9,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Layers from '../../../utils/openlayers/Layers';
-import CoordinatesUtils from '../../../utils/CoordinatesUtils';
+import {
+    normalizeSRS,
+    reprojectBbox,
+    getExtentFromNormalized,
+    isBboxCompatible,
+    getPolygonFromExtent
+} from '../../../utils/CoordinatesUtils';
 import assign from 'object-assign';
 import Rx from 'rxjs';
 import isNumber from 'lodash/isNumber';
@@ -129,21 +135,21 @@ export default class OpenlayersLayer extends React.Component {
 
     createLayer = (type, options, position, securityToken) => {
         if (type) {
-            const layerOptions = this.generateOpts(options, position, CoordinatesUtils.normalizeSRS(this.props.srs), securityToken);
+            const layerOptions = this.generateOpts(options, position, normalizeSRS(this.props.srs), securityToken);
             this.layer = Layers.createLayer(type, layerOptions, this.props.map, this.props.mapId);
             const compatible = Layers.isCompatible(type, layerOptions);
             if (this.layer && !this.layer.detached) {
                 const parentMap = this.props.map;
                 const mapExtent = parentMap && parentMap.getView().getProjection().getExtent();
                 const layerExtent = options && options.bbox && options.bbox.bounds;
-                const mapBboxPolygon = mapExtent && CoordinatesUtils.reprojectBbox(mapExtent, this.props.srs, 'EPSG:4326');
-                let layerBboxPolygon = layerExtent && CoordinatesUtils.getExtentFromNormalized(layerExtent, this.props.srs).extent;
+                const mapBboxPolygon = mapExtent && reprojectBbox(mapExtent, this.props.srs, 'EPSG:4326');
+                let layerBboxPolygon = layerExtent && getExtentFromNormalized(layerExtent, this.props.srs).extent;
                 if (layerBboxPolygon && layerBboxPolygon.length === 2 && isArray(layerBboxPolygon[1])) {
                     layerBboxPolygon = layerBboxPolygon[1];
                 }
 
                 if (mapBboxPolygon && layerBboxPolygon &&
-                    !CoordinatesUtils.isBboxCompatible(CoordinatesUtils.getPolygonFromExtent(mapBboxPolygon), CoordinatesUtils.getPolygonFromExtent(layerBboxPolygon)) ||
+                    !isBboxCompatible(getPolygonFromExtent(mapBboxPolygon), getPolygonFromExtent(layerBboxPolygon)) ||
                     !compatible) {
                     this.props.onWarning({
                         title: "warning",
