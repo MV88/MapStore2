@@ -22,13 +22,10 @@ import LMap from '../../components/map/leaflet/Map';
 import LLayer from '../../components/map/leaflet/Layer';
 import { changeMapView, changeZoomLevel } from '../../actions/map';
 import ScaleBox from '../../components/mapcontrols/scale/ScaleBox';
-import BootstrapReact from 'react-bootstrap';
-var Grid = BootstrapReact.Grid;
-var Row = BootstrapReact.Row;
-var Col = BootstrapReact.Col;
+import {Grid, Row, Col} from 'react-bootstrap';
 
 // Here we create the store, we use Debug utils but is not necessary
-// Insteed we need to pass here map configuration
+// Instead we need to pass here map configuration
 var store = DebugUtils.createDebugStore(combineReducers({browser, mapConfig}),
     {mapConfig: {
         zoom: 14,

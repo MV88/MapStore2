@@ -22,7 +22,7 @@ import { mapUpdateOptions } from '../selectors/automapupdate';
  * @return {external:Observable}
  */
 
-const manageAutoMapUpdate = (action$, store) =>
+export const manageAutoMapUpdate = (action$, store) =>
     action$.ofType(MAP_CONFIG_LOADED)
         .switchMap((mapConfigLoaded) =>
             action$.ofType(MAP_INFO_LOADED)
@@ -71,7 +71,3 @@ const manageAutoMapUpdate = (action$, store) =>
  * @name epics.automapupdate
  * @type {Object}
  */
-
-export default {
-    manageAutoMapUpdate
-};

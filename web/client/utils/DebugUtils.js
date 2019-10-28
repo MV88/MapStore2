@@ -20,30 +20,32 @@ var warningFilterKey = function(warning) {
     return warning.indexOf("Warning: owner-based and parent-based contexts differ") >= 0;
 };
 
-var DebugUtils = {
-    createDebugStore: async function(reducer, initialState, userMiddlewares, enhancer) {
-        let finalCreateStore;
-        if (urlQuery && urlQuery.debug && __DEVTOOLS__) {
-            let logger = await import('redux-logger');
-            let immutable = await import('redux-immutable-state-invariant').default();
-            let middlewares = [immutable, thunkMiddleware, logger].concat(userMiddlewares || []);
-            const {persistState} = await import('redux-devtools');
-            const DevTools = await import('../components/development/DevTools');
+export const createDebugStore =  async(reducer, initialState, userMiddlewares, enhancer) => {
+    let finalCreateStore;
+    if (urlQuery && urlQuery.debug && __DEVTOOLS__) {
+        let logger = await import('redux-logger');
+        let immutable = await import('redux-immutable-state-invariant').default();
+        let middlewares = [immutable, thunkMiddleware, logger].concat(userMiddlewares || []);
+        const {persistState} = await import('redux-devtools');
+        const DevTools = await import('../components/development/DevTools');
 
-            finalCreateStore = compose(
-                applyMiddleware.apply(null, middlewares),
-                persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-                window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
+        finalCreateStore = compose(
+            applyMiddleware.apply(null, middlewares),
+            persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
+            window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
 
-            )(createStore);
-        } else {
-            let middlewares = [thunkMiddleware].concat(userMiddlewares || []);
-            finalCreateStore = applyMiddleware.apply(null, middlewares)(createStore);
-        }
-        return finalCreateStore(reducer, initialState, enhancer);
+        )(createStore);
+    } else {
+        let middlewares = [thunkMiddleware].concat(userMiddlewares || []);
+        finalCreateStore = applyMiddleware.apply(null, middlewares)(createStore);
     }
+    return finalCreateStore(reducer, initialState, enhancer);
 };
 
+
+var DebugUtils = {
+    createDebugStore
+};
 /* eslint-disable */
 console.warn = function() {
     if ( arguments && arguments.length > 0 && typeof arguments[0] === "string" && warningFilterKey(arguments[0]) ) {

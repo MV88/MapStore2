@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,11 +5,11 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import PropTypes from 'prop-types';
 import React from 'react';
 
-import BootstrapReact from 'react-bootstrap';
-var Button = BootstrapReact.Button;
-var Glyphicon = BootstrapReact.Glyphicon;
+import {Button, Glyphicon} from 'react-bootstrap';
 import ImageButton from './ImageButton';
 import Dialog from '../misc/Dialog';
 import './css/infoButton.css';

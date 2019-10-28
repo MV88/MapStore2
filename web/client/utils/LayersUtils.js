@@ -249,7 +249,7 @@ const extractDataFromSources = mapState => {
     }) : [...mapState.layers];
 };
 
-const getURLs = (urls, queryParametersString = '') => {
+export const getURLs = (urls, queryParametersString = '') => {
     return urls.map((url) => url.split("\?")[0] + queryParametersString);
 };
 

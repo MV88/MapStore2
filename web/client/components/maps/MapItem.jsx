@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -10,12 +8,10 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 
-import BootstrapReact from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { ListGroupItem, Button, Glyphicon, Tooltip} from 'react-bootstrap';
 import I18N from '../I18N/I18N';
-var ListGroupItem = BootstrapReact.ListGroupItem;
-var Button = BootstrapReact.Button;
-var Glyphicon = BootstrapReact.Glyphicon;
-var Tooltip = BootstrapReact.Tooltip;
+
 import OverlayTrigger from '../misc/OverlayTrigger';
 import { isFunction } from 'lodash';
 

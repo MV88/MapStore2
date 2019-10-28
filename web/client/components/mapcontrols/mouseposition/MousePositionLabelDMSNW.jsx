@@ -8,8 +8,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import BootstrapReact from 'react-bootstrap';
-const Label = BootstrapReact.Label;
+import {Label} from 'react-bootstrap';
 import NumberFormat from '../../I18N/Number';
 import { roundCoord } from '../../../utils/CoordinatesUtils';
 

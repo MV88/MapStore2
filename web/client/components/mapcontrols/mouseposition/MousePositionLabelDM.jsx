@@ -5,13 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import PropTypes from 'prop-types';
-import BootstrapReact from 'react-bootstrap';
-const Label = BootstrapReact.Label;
-import NumberFormat from '../../I18N/Number';
 import { isNil } from 'lodash';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Label} from 'react-bootstrap';
+
+import NumberFormat from '../../I18N/Number';
 import { roundCoord } from '../../../utils/CoordinatesUtils';
 
 class MousePositionLabelDM extends React.Component {
