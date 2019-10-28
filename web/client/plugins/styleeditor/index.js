@@ -70,7 +70,7 @@ const loadingEnhancers = (funcBool) => loadingState(
     props => <div style={{position: 'relative', height: '100%', display: 'flex'}}><Loader {...props}/></div>
 );
 
-const StyleCodeEditor = compose(
+export const StyleCodeEditor = compose(
     defaultProps({
         inlineWidgets
     }),
@@ -106,7 +106,7 @@ const StyleCodeEditor = compose(
     </BorderLayout>
 ));
 
-const StyleTemplates = compose(
+export const StyleTemplates = compose(
     defaultProps({
         templates: stylesTemplates
     }),
@@ -141,7 +141,7 @@ const StyleTemplates = compose(
     withState('styleSettings', 'onUpdate', {})
 )(StyleTemplatesComp);
 
-const StyleList = compose(
+export const StyleList = compose(
     connect(
         createSelector(
             [
@@ -176,7 +176,7 @@ const StyleList = compose(
     )
 )(StyleListComp);
 
-const StyleToolbar = compose(
+export const StyleToolbar = compose(
     withState('showModal', 'onShowModal'),
     connect(
         createSelector(
@@ -243,12 +243,7 @@ const ReadOnlyStyleList = compose(
         </BorderLayout>
 );
 
-export default {
-    StyleSelector: branch(
-        ({ readOnly }) => readOnly,
-        () => ReadOnlyStyleList
-    )(StyleList),
-    StyleTemplates,
-    StyleToolbar,
-    StyleCodeEditor
-};
+export const StyleSelector = branch(
+    ({ readOnly }) => readOnly,
+    () => ReadOnlyStyleList
+)(StyleList);

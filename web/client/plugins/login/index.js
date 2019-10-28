@@ -16,14 +16,14 @@ import UserDetailsModalComp from '../../components/security/modals/UserDetailsMo
 import PasswordResetModalComp from '../../components/security/modals/PasswordResetModal';
 import LoginModalComp from '../../components/security/modals/LoginModal';
 
-const closeLogin = () => {
+export const closeLogin = () => {
     return (dispatch) => {
         dispatch(setControlProperty('LoginForm', 'enabled', false));
         dispatch(resetError());
     };
 };
 
-const UserMenu = connect((state) => ({
+export const UserMenu = connect((state) => ({
     user: state.security && state.security.user
 }), {
     onShowLogin: setControlProperty.bind(null, "LoginForm", "enabled", true, true),
@@ -32,14 +32,14 @@ const UserMenu = connect((state) => ({
     onLogout: logoutWithReload
 })(UserMenuComp);
 
-const UserDetails = connect((state) => ({
+export const UserDetails = connect((state) => ({
     user: state.security && state.security.user,
     show: state.controls.AccountInfo && state.controls.AccountInfo.enabled}
 ), {
     onClose: setControlProperty.bind(null, "AccountInfo", "enabled", false, false)
 })(UserDetailsModalComp);
 
-const PasswordReset = connect((state) => ({
+export const PasswordReset = connect((state) => ({
     user: state.security && state.security.user,
     show: state.controls.ResetPassword && state.controls.ResetPassword.enabled,
     changed: state.security && state.security.passwordChanged && true || false,
@@ -49,7 +49,7 @@ const PasswordReset = connect((state) => ({
     onClose: setControlProperty.bind(null, "ResetPassword", "enabled", false, false)
 })(PasswordResetModalComp);
 
-const Login = connect((state) => ({
+export const Login = connect((state) => ({
     show: state.controls.LoginForm && state.controls.LoginForm.enabled,
     user: state.security && state.security.user,
     loginError: state.security && state.security.loginError
@@ -60,7 +60,7 @@ const Login = connect((state) => ({
     onError: loginFail
 })(LoginModalComp);
 
-const LoginNav = connect((state) => ({
+export const LoginNav = connect((state) => ({
     user: state.security && state.security.user,
     nav: false,
     renderButtonText: false,

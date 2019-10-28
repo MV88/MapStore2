@@ -22,7 +22,7 @@ import randomDots from './img/randomdots.png';
  * @prop {string} styleId identifier
  */
 
-const baseTemplates = [{
+export const baseTemplates = [{
     types: ['point', 'linestring', 'polygon', 'vector'],
     title: 'Base CSS',
     format: 'css',
@@ -95,7 +95,7 @@ const baseTemplates = [{
         ]}/>
 }].map(style => ({ ...style, styleId: uuidv1() }));
 
-const customTemplates = [
+export const customTemplates = [
     {
         types: ['linestring', 'vector'],
         title: 'Line',
@@ -1102,8 +1102,3 @@ const customTemplates = [
             ]}/>
     }
 ].map(style => ({ ...style, styleId: uuidv1() }));
-
-export default {
-    baseTemplates,
-    customTemplates
-};

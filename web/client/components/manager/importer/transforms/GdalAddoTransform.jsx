@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 /**
  * Copyright 2016, GeoSolutions Sas.
@@ -7,12 +6,14 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import { FormControl } from 'react-bootstrap';
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { FormControl, Alert } from 'react-bootstrap';
 import assign from 'object-assign';
 import { findIndex } from 'lodash';
-import { Message, Alert } from '../../../I18N/I18N';
+import { Message } from '../../../I18N/I18N';
 
 class GdalTranslateTransform extends React.Component {
     static propTypes = {

@@ -6,11 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import MeasureComponent from '../../components/mapcontrols/measure/MeasureComponent';
+import MeasureComponentComp from '../../components/mapcontrols/measure/MeasureComponent';
+import MeasureDialogComp from '../../components/mapcontrols/measure/MeasureDialog';
 
-import MeasureDialog from '../../components/mapcontrols/measure/MeasureDialog';
 
-export default {
-    MeasureComponent,
-    MeasureDialog
-};
+export const MeasureComponent = MeasureComponentComp;
+export const MeasureDialog = MeasureDialogComp;

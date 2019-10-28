@@ -14,7 +14,6 @@ import uuidv1 from 'uuid/v1';
 
 import {
     ADD_NEW_FEATURE,
-    CANCEL_CLOSE_TEXT,
     CANCEL_EDIT_ANNOTATION,
     CHANGED_SELECTED,
     CHANGE_RADIUS,
@@ -32,7 +31,6 @@ import {
     RESET_COORD_EDITOR,
     RESTORE_STYLE,
     SAVE_ANNOTATION,
-    SAVE_TEXT,
     SET_STYLE,
     START_DRAWING,
     TOGGLE_STYLE,
@@ -367,31 +365,6 @@ export default (viewer) => ({
             return Rx.Observable.from([
                 updateAnnotationGeometry(mergeGeometry(action.features), action.textChanged, action.circleChanged)
             ].concat(!multiGeometrySelector(store.getState()) && store.getState().annotations.drawing ? [toggleAdd()] : []));
-        }),
-    endDrawTextEpic: (action$, store) => action$.ofType(SAVE_TEXT)
-        .switchMap( () => {
-            const feature = store.getState().annotations.selected;
-            // let reprojected = reprojectGeoJson(feature, "EPSG:4326", "EPSG:3857");
-            const style = store.getState().annotations.editing.style;
-            return Rx.Observable.from([
-                changeDrawingStatus("replace", store.getState().annotations.featureType, "annotations", [feature], {featureProjection: "EPSG:3857",
-                    transformToFeatureCollection: true}, assign({}, style, {highlight: false}))
-            ].concat(!multiGeometrySelector(store.getState()) ? [toggleAdd()] : []));
-        }),
-    cancelTextAnnotationsEpic: (action$, store) => action$.ofType(CANCEL_CLOSE_TEXT)
-        .switchMap( () => {
-            const state = store.getState();
-            const feature = state.annotations.editing;
-            const multiGeometry = multiGeometrySelector(state);
-            const style = feature.style;
-            return Rx.Observable.from([
-                changeDrawingStatus("drawOrEdit", "Text", "annotations", [feature], {
-                    featureProjection: "EPSG:4326",
-                    stopAfterDrawing: !multiGeometry,
-                    editEnabled: false,
-                    drawEnabled: true
-                }, assign({}, style, {highlight: false}))
-            ]);
         }),
     setAnnotationStyleEpic: (action$, store) => action$.ofType(SET_STYLE)
         .switchMap( () => {

@@ -37,18 +37,19 @@ import { CHANGE_DRAWING_STATUS, DRAWING_FEATURE, drawingFeatures, selectFeatures
 import { ADD_LAYER, CHANGE_LAYER_PROPERTIES, UPDATE_NODE } from '../../actions/layers';
 import { CLOSE_IDENTIFY, HIDE_MAPINFO_MARKER, PURGE_MAPINFO_RESULTS, purgeMapInfoResults } from '../../actions/mapInfo';
 import { set } from '../../utils/ImmutableUtils';
-import addAnnotationsLayerEpiceditAnnotationEpicremoveAnnotationEpicsaveAnnotationEpicnewAnnotationEpicaddAnnotationEpicdisableInteractionsEpiccancelEditAnnotationEpicstartDrawingMultiGeomEpicendDrawGeomEpicendDrawTextEpiccancelTextAnnotationsEpicsetAnnotationStyleEpicrestoreStyleEpichighlighAnnotationEpiccleanHighlightAnnotationEpiccloseAnnotationsEpicconfirmCloseAnnotationsEpicdownloadAnnotationsonLoadAnnotationsonChangedSelectedFeatureEpiconBackToEditingFeatureEpicredrawOnChangeRadiusEpicredrawOnChangeTextEpiceditSelectedFeatureEpiceditCircleFeatureEpicpurgeMapInfoEpiccloseMeasureToolEpicopenEditorEpicFactory from '../annotations';
+
 import { TEST_TIMEOUT, addTimeoutEpic, testEpic } from './epicTestUtils';
 
+import getAnnotationsEpics from '../annotations';
 const {addAnnotationsLayerEpic, editAnnotationEpic, removeAnnotationEpic, saveAnnotationEpic, newAnnotationEpic, addAnnotationEpic,
-    disableInteractionsEpic, cancelEditAnnotationEpic, startDrawingMultiGeomEpic, endDrawGeomEpic, endDrawTextEpic, cancelTextAnnotationsEpic,
+    disableInteractionsEpic, cancelEditAnnotationEpic, startDrawingMultiGeomEpic, endDrawGeomEpic,
     setAnnotationStyleEpic, restoreStyleEpic, highlighAnnotationEpic, cleanHighlightAnnotationEpic, closeAnnotationsEpic, confirmCloseAnnotationsEpic,
     downloadAnnotations, onLoadAnnotations, onChangedSelectedFeatureEpic, onBackToEditingFeatureEpic, redrawOnChangeRadiusEpic, redrawOnChangeTextEpic,
     editSelectedFeatureEpic, editCircleFeatureEpic, purgeMapInfoEpic, closeMeasureToolEpic, openEditorEpic
-} = addAnnotationsLayerEpiceditAnnotationEpicremoveAnnotationEpicsaveAnnotationEpicnewAnnotationEpicaddAnnotationEpicdisableInteractionsEpiccancelEditAnnotationEpicstartDrawingMultiGeomEpicendDrawGeomEpicendDrawTextEpiccancelTextAnnotationsEpicsetAnnotationStyleEpicrestoreStyleEpichighlighAnnotationEpiccleanHighlightAnnotationEpiccloseAnnotationsEpicconfirmCloseAnnotationsEpicdownloadAnnotationsonLoadAnnotationsonChangedSelectedFeatureEpiconBackToEditingFeatureEpicredrawOnChangeRadiusEpicredrawOnChangeTextEpiceditSelectedFeatureEpiceditCircleFeatureEpicpurgeMapInfoEpiccloseMeasureToolEpicopenEditorEpicFactory({});
+} = getAnnotationsEpics({});
 
 const rootEpic = combineEpics(addAnnotationsLayerEpic, editAnnotationEpic, removeAnnotationEpic, saveAnnotationEpic, newAnnotationEpic, addAnnotationEpic,
-    disableInteractionsEpic, cancelEditAnnotationEpic, startDrawingMultiGeomEpic, endDrawGeomEpic, endDrawTextEpic, cancelTextAnnotationsEpic,
+    disableInteractionsEpic, cancelEditAnnotationEpic, startDrawingMultiGeomEpic, endDrawGeomEpic,
     setAnnotationStyleEpic, restoreStyleEpic, highlighAnnotationEpic, cleanHighlightAnnotationEpic, closeAnnotationsEpic, confirmCloseAnnotationsEpic,
     downloadAnnotations, onLoadAnnotations, onChangedSelectedFeatureEpic, onBackToEditingFeatureEpic, redrawOnChangeRadiusEpic, redrawOnChangeTextEpic,
     editSelectedFeatureEpic, editCircleFeatureEpic, purgeMapInfoEpic, closeMeasureToolEpic, openEditorEpic

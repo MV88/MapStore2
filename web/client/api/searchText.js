@@ -64,4 +64,5 @@ const Utils = {
     }
 };
 
-export default {API: {Services, Utils}};
+export const API = {Services, Utils};
+export default {API};

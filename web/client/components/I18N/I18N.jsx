@@ -6,12 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Message from './Message';
-import HTML from './HTML';
-import DateFormat from './Date';
+import MessageComp from './Message';
+import HTMLComp from './HTML';
+import DateFormatComp from './Date';
 
-export default {
-    Message,
-    HTML,
-    DateFormat
-};
+export const Message = MessageComp;
+export const HTML = HTMLComp;
+export const DateFormat = DateFormatComp;

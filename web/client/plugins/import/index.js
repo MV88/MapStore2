@@ -14,7 +14,7 @@ import StylePolygonComp from '../../components/style/StylePolygon';
 import StylePointComp from '../../components/style/StylePoint';
 import StylePolylineComp from '../../components/style/StylePolyline';
 
-const ShapeFileUploadAndStyle = connect((state) => (
+export const ShapeFileUploadAndStyle = connect((state) => (
     {
         uploadOptions: {
             error: state.mapimport && state.mapimport.error || null,
@@ -24,7 +24,7 @@ const ShapeFileUploadAndStyle = connect((state) => (
     onShapeError: onShapeError
 })(ShapefileUploadAndStyleComp);
 
-const StylePolygon = connect((state) => (
+export const StylePolygon = connect((state) => (
     {
         shapeStyle: state.style || {}
     }
@@ -32,7 +32,7 @@ const StylePolygon = connect((state) => (
     setStyleParameter: setStyleParameter
 })(StylePolygonComp);
 
-const StylePoint = connect((state) => (
+export const StylePoint = connect((state) => (
     {
         shapeStyle: state.style || {}
     }
@@ -40,17 +40,10 @@ const StylePoint = connect((state) => (
     setStyleParameter: setStyleParameter
 })(StylePointComp);
 
-const StylePolyline = connect((state) => (
+export const StylePolyline = connect((state) => (
     {
         shapeStyle: state.style || {}
     }
 ), {
     setStyleParameter: setStyleParameter
 })(StylePolylineComp);
-
-export default {
-    ShapeFileUploadAndStyle,
-    StylePolygon,
-    StylePolyline,
-    StylePoint
-};

@@ -22,9 +22,9 @@ import controls from '../../../reducers/controls';
 import layers from '../../../reducers/layers';
 import query from '../../../reducers/query';
 import { getLayerFromId } from '../../../selectors/layers';
-import { layerSelectedForSearch, LAYER_SELECTED_FOR_SEARCH, CLOSE_FEATURE_GRID } from '../../../actions/wfsquery';
+import { layerSelectedForSearch, LAYER_SELECTED_FOR_SEARCH } from '../../../actions/wfsquery';
 import { browseData } from '../../../actions/layers';
-import { clearChanges, setPermission, toggleTool } from '../../../actions/featuregrid';
+import { CLOSE_FEATURE_GRID, clearChanges, setPermission, toggleTool } from '../../../actions/featuregrid';
 import { hasChangesSelector, hasNewFeaturesSelector } from '../../../selectors/featuregrid';
 import standardStore from '../../../stores/StandardStore';
 export default (plugins) => {
