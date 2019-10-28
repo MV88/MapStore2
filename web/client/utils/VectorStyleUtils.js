@@ -205,7 +205,7 @@ let SymbolsStyles = {
 * @param {number} sha unique id generated from the json stringify of the style object
 * @param {object} styleItems object to register {style, base64, svg} etc.
 */
-const registerStyle = (sha, styleItems) => {
+export const registerStyle = (sha, styleItems) => {
     if (sha && styleItems) {
         SymbolsStyles[sha] = styleItems;
     } else {
@@ -243,7 +243,7 @@ export const getSymbolsStyles = () => {
 * @param {object} style object
 * @return {number} the sha
 */
-const hashAndStringify = (style) => {
+export const hashAndStringify = (style) => {
     // style to has in case we want to exclude in future some props
     if (style) {
         return hashCode(JSON.stringify(style));
@@ -255,13 +255,13 @@ const hashAndStringify = (style) => {
  * takes a dom element and parses it to a string
  * @param {object} domNode to parse
 */
-const domNodeToString = (domNode) => {
+export const domNodeToString = (domNode) => {
     let element = document.createElement("div");
     element.appendChild(domNode);
     return element.innerHTML;
 };
 
-const createSvgUrl = (style = {}, url) => {
+export const createSvgUrl = (style = {}, url) => {
     /**
      * it loads an svg and it overrides some style option,
      * then it create and object URL that can be cached in a dictionary

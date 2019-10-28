@@ -6,22 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { connect } from '../utils/PluginsUtils';
-import assign from 'object-assign';
-import { Glyphicon } from 'react-bootstrap';
-import Message from '../components/I18N/Message';
-import { toggleControl, setControlProperty } from '../actions/controls';
-import ConfigUtils from '../utils/ConfigUtils';
-import ShareUtils from '../utils/ShareUtils';
-import { versionSelector } from '../selectors/version';
-import * as shareEpics from '../epics/queryparams';
-import SharePanel from '../components/share/SharePanel';
-import { createSelector } from 'reselect';
-import { mapSelector } from '../selectors/map';
-import { reprojectBbox, getViewportGeometry } from '../utils/CoordinatesUtils';
 import { get } from 'lodash';
+import assign from 'object-assign';
+import React from 'react';
+import { Glyphicon } from 'react-bootstrap';
+import { createSelector } from 'reselect';
+
+import { setControlProperty, toggleControl } from '../actions/controls';
+import Message from '../components/I18N/Message';
+import SharePanel from '../components/share/SharePanel';
+import * as shareEpics from '../epics/queryparams';
 import controls from '../reducers/controls';
+import { mapSelector } from '../selectors/map';
+import { versionSelector } from '../selectors/version';
+import ConfigUtils from '../utils/ConfigUtils';
+import { getViewportGeometry, reprojectBbox } from '../utils/CoordinatesUtils';
+import { connect } from '../utils/PluginsUtils';
+import {
+    getApiUrl,
+    getConfigUrl
+} from '../utils/ShareUtils';
 
 /**
  * Get wider and valid extent in viewport
@@ -71,8 +75,8 @@ const Share = connect(createSelector([
 ], (isVisible, version, map, settings) => ({
     isVisible,
     shareUrl: location.href,
-    shareApiUrl: ShareUtils.getApiUrl(location.href),
-    shareConfigUrl: ShareUtils.getConfigUrl(location.href, ConfigUtils.getConfigProp('geoStoreUrl')),
+    shareApiUrl: getApiUrl(location.href),
+    shareConfigUrl: getConfigUrl(location.href, ConfigUtils.getConfigProp('geoStoreUrl')),
     version,
     bbox: isVisible && map && map.bbox && getExtentFromViewport(map.bbox),
     settings

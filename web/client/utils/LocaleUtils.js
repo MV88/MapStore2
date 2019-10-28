@@ -68,7 +68,7 @@ let supportedLocales = {
         description: "tiếng Việt"
     }
 };
-const DATE_FORMATS = {
+export const DATE_FORMATS = {
     "default": "YYYY/MM/DD",
     "en-US": "MM/DD/YYYY",
     "it-IT": "DD/MM/YYYY",
@@ -85,96 +85,109 @@ let errorParser = {};
  * Utilities for locales.
  * @memberof utils
  */
-const LocaleUtils = {
-    async ensureIntl(callback) {
-        global.Intl = await import(
-            /* webpackChunkName: "intl" */
-            'intl');
-        import('intl/locale-data/jsonp/en.js');
-        import('intl/locale-data/jsonp/it.js');
-        import('intl/locale-data/jsonp/fr.js');
-        import('intl/locale-data/jsonp/de.js');
-        import('intl/locale-data/jsonp/es.js');
-        import('intl/locale-data/jsonp/nl.js');
-        import('intl/locale-data/jsonp/zh.js');
-        import('intl/locale-data/jsonp/hr.js');
-        import('intl/locale-data/jsonp/pt.js');
-        import('intl/locale-data/jsonp/vi.js');
-        if (callback) {
-            callback();
-        }
-    },
-    setSupportedLocales: function(locales) {
-        supportedLocales = locales;
-    },
-    normalizeLocaleCode: function(localeCode) {
-        var retval;
-        if (localeCode === undefined || localeCode === null) {
-            retval = undefined;
-        } else {
-            let rg = /^[a-z]+/i;
-            let match = rg.exec(localeCode);
-            if (match && match.length > 0) {
-                retval = match[0].toLowerCase();
-            } else {
-                retval = undefined;
-            }
-        }
-        return retval;
-    },
-    getUserLocale: function() {
-        return LocaleUtils.getLocale(url.parse(window.location.href, true).query);
-    },
-    getLocale: function(query = {}) {
-        const key = Object.keys(supportedLocales)[0];
-        const defaultLocale = supportedLocales.en ? { key: 'en', locale: supportedLocales.en } : { key, locale: supportedLocales[key] };
-        let locale = supportedLocales[
-            LocaleUtils.normalizeLocaleCode(query.locale || (navigator ? navigator.language || navigator.browserLanguage : defaultLocale.key))
-        ];
-        return locale ? locale.code : defaultLocale.locale.code;
-    },
-    getSupportedLocales: function() {
-        return supportedLocales;
-    },
-    getDateFormat(locale) {
-        return DATE_FORMATS[locale] || DATE_FORMATS.default;
-    },
-    DATE_FORMATS,
-    getMessageById: function(messages, msgId) {
-        var message = messages;
-        msgId.split('.').forEach(part => {
-            message = message ? message[part] : null;
-        });
-        return message || msgId;
-    },
-    /**
-     * Register a parser to translate error services
-     * @param type {string} name of the service
-     * @param parser {object} custom parser of the service
-     */
-    registerErrorParser: (type, parser) => {
-        errorParser[type] = parser;
-    },
-    /**
-     * Return localized id of error messages
-     * @param e {object} error
-     * @param service {string} service that thrown the error
-     * @param section {string} section where the error happens
-     * @return {object} {title, message}
-     */
-    getErrorMessage: (e, service, section) => {
-        return service && section && errorParser[service] && errorParser[service][section] && errorParser[service][section](e) || {
-            title: 'errorTitleDefault',
-            message: 'errorDefault'
-        };
-    },
-    /**
-     * Retrieve localized string from object of translations
-     * @param {string} locale code of locale, eg. en-US
-     * @param {string|object} prop source of translation
-     * @returns {string} localized string
-     */
-    getLocalizedProp: (locale, prop) => isObject(prop) ? prop[locale] || prop.default : prop || ''
+export const ensureIntl = async(callback) => {
+    global.Intl = await import(
+        /* webpackChunkName: "intl" */
+        'intl');
+    import('intl/locale-data/jsonp/en.js');
+    import('intl/locale-data/jsonp/it.js');
+    import('intl/locale-data/jsonp/fr.js');
+    import('intl/locale-data/jsonp/de.js');
+    import('intl/locale-data/jsonp/es.js');
+    import('intl/locale-data/jsonp/nl.js');
+    import('intl/locale-data/jsonp/zh.js');
+    import('intl/locale-data/jsonp/hr.js');
+    import('intl/locale-data/jsonp/pt.js');
+    import('intl/locale-data/jsonp/vi.js');
+    if (callback) {
+        callback();
+    }
 };
+export const setSupportedLocales = (locales) => {
+    supportedLocales = locales;
+};
+export const normalizeLocaleCode = (localeCode) => {
+    var retval;
+    if (localeCode === undefined || localeCode === null) {
+        retval = undefined;
+    } else {
+        let rg = /^[a-z]+/i;
+        let match = rg.exec(localeCode);
+        if (match && match.length > 0) {
+            retval = match[0].toLowerCase();
+        } else {
+            retval = undefined;
+        }
+    }
+    return retval;
+};
+export const getLocale = (query = {}) => {
+    const key = Object.keys(supportedLocales)[0];
+    const defaultLocale = supportedLocales.en ? { key: 'en', locale: supportedLocales.en } : { key, locale: supportedLocales[key] };
+    let locale = supportedLocales[
+        normalizeLocaleCode(query.locale || (navigator ? navigator.language || navigator.browserLanguage : defaultLocale.key))
+    ];
+    return locale ? locale.code : defaultLocale.locale.code;
+};
+export const getUserLocale = () => {
+    return getLocale(url.parse(window.location.href, true).query);
+};
+export const getSupportedLocales = () => {
+    return supportedLocales;
+};
+export const getDateFormat = (locale) => {
+    return DATE_FORMATS[locale] || DATE_FORMATS.default;
+};
+export const getMessageById = (messages, msgId) => {
+    var message = messages;
+    msgId.split('.').forEach(part => {
+        message = message ? message[part] : null;
+    });
+    return message || msgId;
+};
+/**
+ * Register a parser to translate error services
+ * @param type {string} name of the service
+ * @param parser {object} custom parser of the service
+ */
+export const registerErrorParser = (type, parser) => {
+    errorParser[type] = parser;
+};
+/**
+ * Return localized id of error messages
+ * @param e {object} error
+ * @param service {string} service that thrown the error
+ * @param section {string} section where the error happens
+ * @return {object} {title, message}
+ */
+export const getErrorMessage = (e, service, section) => {
+    return service && section && errorParser[service] && errorParser[service][section] && errorParser[service][section](e) || {
+        title: 'errorTitleDefault',
+        message: 'errorDefault'
+    };
+};
+/**
+ * Retrieve localized string from object of translations
+ * @param {string} locale code of locale, eg. en-US
+ * @param {string|object} prop source of translation
+ * @returns {string} localized string
+ */
+export const getLocalizedProp = (locale, prop) => isObject(prop) ? prop[locale] || prop.default : prop || '';
+
+const LocaleUtils = {
+    ensureIntl,
+    setSupportedLocales,
+    normalizeLocaleCode,
+    getUserLocale,
+    getLocale,
+    getSupportedLocales,
+    getDateFormat,
+    DATE_FORMATS,
+    getMessageById,
+    registerErrorParser,
+    getErrorMessage,
+    getLocalizedProp
+};
+
 
 export default LocaleUtils;

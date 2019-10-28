@@ -1,4 +1,3 @@
-import assign from 'object-assign';
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,6 +5,8 @@ import assign from 'object-assign';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import assign from 'object-assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

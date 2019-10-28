@@ -6,21 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import LayerSelectorPlugin from './plugins/LayerSelector';
-import MapPlugin from '../../plugins/Map';
-import WFSDownload from '../../plugins/WFSDownload';
 import FeatureEditor from '../../plugins/FeatureEditor';
-import QueryPanel from '../../plugins/QueryPanel';
+import MapPlugin from '../../plugins/Map';
 import Notifications from '../../plugins/Notifications';
+import QueryPanel from '../../plugins/QueryPanel';
+import WFSDownload from '../../plugins/WFSDownload';
+import LayerSelectorPlugin from './plugins/LayerSelector';
 
-export default {
-    plugins: {
-        LayerSelectorPlugin,
-        MapPlugin,
-        WFSDownload,
-        FeatureEditor,
-        QueryPanel,
-        Notifications
-    },
-    requires: {}
+export const plugins = {
+    LayerSelectorPlugin,
+    MapPlugin,
+    WFSDownload,
+    FeatureEditor,
+    QueryPanel,
+    Notifications
 };
+export const requires = {};

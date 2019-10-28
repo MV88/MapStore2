@@ -6,11 +6,11 @@
 * LICENSE file in the root directory of this source tree.
 */
 
+import { get, isArray, isEqual, isObject } from 'lodash';
+import { compose, lifecycle, withState } from 'recompose';
 import Rx from 'rxjs';
 
-import { isArray, isObject, isEqual, get } from 'lodash';
-import { searchListByAttributes } from '../../../api/GeoStoreDAO';
-import { compose, withState, lifecycle } from 'recompose';
+import GeoStoreDAO from '../../../api/GeoStoreDAO';
 
 /*
  * send a search list request to GeoStore with NAME and ATTRIBUTE filters
@@ -25,7 +25,7 @@ const searchFeaturedMaps = (start, limit, searchText = '') => {
             }
         ]
     } : {};
-    return searchListByAttributes({
+    return GeoStoreDAO.searchListByAttributes({
         AND: {
             ...searchObj,
             ATTRIBUTE: [
