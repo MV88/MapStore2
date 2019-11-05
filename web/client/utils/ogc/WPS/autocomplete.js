@@ -7,11 +7,11 @@
  */
 
 import FilterUtils from '../../FilterUtils';
-
 import filterBuilder from '../Filter/FilterBuilder';
+
 const {and} = filterBuilder({});
 
-const getWpsPayload = ({layerName, layerFilter, attribute, maxFeatures, startIndex, value}) => {
+export const getWpsPayload = ({layerName, layerFilter, attribute, maxFeatures, startIndex, value}) => {
     const attributeFilterObj = value
         ? '<ogc:PropertyIsLike matchCase="false" wildCard="*" singleChar="." escapeChar="!">'
     + '   <ogc:PropertyName>' + attribute + '</ogc:PropertyName>'
@@ -81,8 +81,4 @@ const getWpsPayload = ({layerName, layerFilter, attribute, maxFeatures, startInd
     + ' </wps:ResponseForm>'
     + '</wps:Execute>';
     return requestBody;
-};
-
-export default {
-    getWpsPayload
 };

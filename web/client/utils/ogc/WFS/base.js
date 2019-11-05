@@ -15,8 +15,8 @@ import { processOGCGeometry } from '../GML';
 // <![CDATA[Certain tokens like ]]> can be difficult and <invalid>]]>
 // should be written as
 // <![CDATA[Certain tokens like ]]]]><![CDATA[> can be difficult and <valid>]]>
-const toCData = (value) => /[<>&'"]/.test(value) ? `<![CDATA[${value}]]>` : value;
-const WFS_TO_GML = {
+export const toCData = (value) => /[<>&'"]/.test(value) ? `<![CDATA[${value}]]>` : value;
+export const WFS_TO_GML = {
     "1.0.0": "2.0",
     "1.1.0": "3.1.1",
     "2.0": "3.2",
@@ -33,7 +33,7 @@ export const wfsToGmlVersion = (v = "1.1.0") => WFS_TO_GML[v];
  * @param  {object} describeFeatureType the describeFeatureType object
  * @return {object[]}                     The array of featuretypes properties
  */
-const getFeatureTypeProperties = (describeFeatureType) => get(describeFeatureType, "featureTypes[0].properties");
+export const getFeatureTypeProperties = (describeFeatureType) => get(describeFeatureType, "featureTypes[0].properties");
 /**
  * Provides the first geometry type found
  * @param  {object} describeFeatureType the describeFeatureType object
@@ -47,7 +47,7 @@ export const findGeometryProperty = (describeFeatureType) => head((getFeatureTyp
  * @param  {object} describeFeatureType the describeFeatureType object
  * @return {object}                     the property descriptor
  */
-const getPropertyDescriptor = (propName, describeFeatureType) =>
+export const getPropertyDescriptor = (propName, describeFeatureType) =>
     head(
         (getFeatureTypeProperties(describeFeatureType) || []).filter(d => d.name === propName)
     );
@@ -57,14 +57,14 @@ const getPropertyDescriptor = (propName, describeFeatureType) =>
  * @param  {object} describeFeatureType schemaLocation
  * @return {string}   url of the schemaLocation
  */
-const schemaLocation = (d) => d.targetNamespace;
-const isGeometryType = (pd) => pd.type.indexOf("gml:") === 0;
-const isValidValue = (v, pd) =>
+export const schemaLocation = (d) => d.targetNamespace;
+export const isGeometryType = (pd) => pd.type.indexOf("gml:") === 0;
+export const isValidValue = (v, pd) =>
     pd === undefined
     || pd === null
     || pd && pd.nillable === true
     || pd && pd.nillable === false && v !== undefined && v !== null; // TODO validate type
-const isValidProperty = ({geom, properties} = {}, pd) => isValidValue(isGeometryType(pd) ? geom : properties[pd.name], pd);
+export const isValidProperty = ({geom, properties} = {}, pd) => isValidValue(isGeometryType(pd) ? geom : properties[pd.name], pd);
 /**
  * Base utilities for WFS.
  * @name WFS

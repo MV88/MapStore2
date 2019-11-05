@@ -8,8 +8,6 @@
 
 import { withState } from 'recompose';
 
-export default {
-    manageFilterRendererState: withState("value", "onValueChange", event => {
-        return event.value;
-    })
-};
+export const manageFilterRendererState = withState("value", "onValueChange", event => {
+    return event.value;
+});

@@ -5,13 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import assign from 'object-assign';
 
-import mapConfigHistory from './MapHistory';
-import undoable from 'redux-undo';
 import { isEqual } from 'lodash';
+import assign from 'object-assign';
+import undoable from 'redux-undo';
 
-const createHistory = (mapState) => {
+import {mapConfigHistory as mapConfigHistoryStore} from './MapHistory';
+
+export const createHistory = (mapState) => {
     if (mapState && mapState.map && mapState.map.center) {
         return assign({}, mapState, {
             map: {
@@ -24,17 +25,14 @@ const createHistory = (mapState) => {
     return mapState;
 };
 
-export default {
-    mapConfigHistory: (reducer) => mapConfigHistory(undoable(reducer, {
-        filter: (action, currentState, previousState) => {
-            let bool = false;
-            if (previousState && previousState.mapStateSource && previousState.mapStateSource === 'map'
-                    && previousState.center && previousState.zoom !== undefined) {
-                // Check geometry part
-                bool = !(isEqual(currentState.center, previousState.center) && currentState.zoom === previousState.zoom);
-            }
-            return bool;
+export const mapConfigHistory = (reducer) => mapConfigHistoryStore(undoable(reducer, {
+    filter: (action, currentState, previousState) => {
+        let bool = false;
+        if (previousState && previousState.mapStateSource && previousState.mapStateSource === 'map'
+                && previousState.center && previousState.zoom !== undefined) {
+            // Check geometry part
+            bool = !(isEqual(currentState.center, previousState.center) && currentState.zoom === previousState.zoom);
         }
-    })),
-    createHistory
-};
+        return bool;
+    }
+}));

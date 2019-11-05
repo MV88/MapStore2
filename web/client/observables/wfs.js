@@ -8,20 +8,20 @@
 
 import urlUtil from 'url';
 
-import axios from '../libs/ajax';
-
+import { castArray, isNil, isObject } from 'lodash';
 import Rx from 'rxjs';
-import { castArray,  isObject,  isNil } from 'lodash';
 import { parseString } from 'xml2js';
 import { stripPrefix } from 'xml2js/lib/processors';
-import { interceptOGCError } from '../utils/ObservableUtils';
-import { getCapabilitiesUrl } from '../utils/LayersUtils';
+
+import axios from '../libs/ajax';
 import FilterUtils from '../utils/FilterUtils';
+import { getCapabilitiesUrl } from '../utils/LayersUtils';
+import { interceptOGCError } from '../utils/ObservableUtils';
 import requestBuilder from '../utils/ogc/WFS/RequestBuilder';
 
 const {getFeature, query, sortBy, propertyName} = requestBuilder({ wfsVersion: "1.1.0" });
 
-const toDescribeURL = ({ name, search = {}, url, describeFeatureTypeURL} = {}) => {
+export const toDescribeURL = ({ name, search = {}, url, describeFeatureTypeURL} = {}) => {
     const parsed = urlUtil.parse(describeFeatureTypeURL || search.url || url, true);
     return urlUtil.format(
         {
@@ -38,7 +38,7 @@ const toDescribeURL = ({ name, search = {}, url, describeFeatureTypeURL} = {}) =
             }
         });
 };
-const toLayerCapabilitiesURL = ({name, search = {}, url} = {}) => {
+export const toLayerCapabilitiesURL = ({name, search = {}, url} = {}) => {
     const URL = getCapabilitiesUrl({name, url: search && search.url || url });
     const parsed = urlUtil.parse(URL, true);
     return urlUtil.format(
@@ -56,7 +56,7 @@ const toLayerCapabilitiesURL = ({name, search = {}, url} = {}) => {
 
 
 // this is a workaround for https://osgeo-org.atlassian.net/browse/GEOS-7233. can be removed when fixed
-const workaroundGEOS7233 = ({ totalFeatures, features, ...rest } = {}, { startIndex } = {}, originalSize) => {
+export const workaroundGEOS7233 = ({ totalFeatures, features, ...rest } = {}, { startIndex } = {}, originalSize) => {
     if (originalSize > totalFeatures && originalSize === startIndex + features.length && totalFeatures === features.length) {
         return {
             ...rest,
@@ -73,7 +73,7 @@ const workaroundGEOS7233 = ({ totalFeatures, features, ...rest } = {}, { startIn
 };
 
 
-const getPagination = (filterObj = {}, options = {}) =>
+export const getPagination = (filterObj = {}, options = {}) =>
     filterObj.pagination
     || !isNil(options.startIndex)
         && !isNil(options.maxFeatures)
@@ -88,7 +88,7 @@ const getPagination = (filterObj = {}, options = {}) =>
  * @param {number} totalFeatures optional number to use in case of a previews request, needed to workaround GEOS-7233.
  * @return {Observable} a stream that emits the GeoJSON or an error.
  */
-const getJSONFeature = (searchUrl, filterObj, options = {}) => {
+export const getJSONFeature = (searchUrl, filterObj, options = {}) => {
     const data = FilterUtils.getWFSFilterData(filterObj, options);
 
     const urlParsedObj = urlUtil.parse(searchUrl, true);
@@ -121,7 +121,7 @@ const getJSONFeature = (searchUrl, filterObj, options = {}) => {
  * @param {object} options params that can contain `totalFeatures` and sort options
  * @return {Observable} a stream that emits the GeoJSON or an error.
  */
-const getJSONFeatureWA = (searchUrl, filterObj, { sortOptions = {}, ...options } = {}) =>
+export const getJSONFeatureWA = (searchUrl, filterObj, { sortOptions = {}, ...options } = {}) =>
     getJSONFeature(searchUrl, filterObj, options)
         .catch(error => {
             if (error.name === "OGCError" && error.code === 'NoApplicableCode') {
@@ -144,7 +144,7 @@ const getJSONFeatureWA = (searchUrl, filterObj, { sortOptions = {}, ...options }
  * retro compatibility the filter object can contain pagination info, typeName and so on.
  * @param {object} options the options (pagination, totalFeatures and so on ...)
  */
-const getLayerJSONFeature = ({ search = {}, url, name } = {}, filter, {sortOptions, propertyName: pn, ...options} = {}) =>
+export const getLayerJSONFeature = ({ search = {}, url, name } = {}, filter, {sortOptions, propertyName: pn, ...options} = {}) =>
     // TODO: Apply sort workaround for no primary keys
     getJSONFeature(search.url || url,
         filter && typeof filter === 'object' ? {
@@ -179,20 +179,16 @@ const getLayerJSONFeature = ({ search = {}, url, name } = {}, filter, {sortOptio
             throw error;
         });
 
-export default {
-    getJSONFeature,
-    getLayerJSONFeature,
-    getJSONFeatureWA,
-    describeFeatureType: ({layer}) =>
-        Rx.Observable.defer(() =>
-            axios.get(toDescribeURL(layer))).let(interceptOGCError),
-    getLayerWFSCapabilities: ({layer}) =>
-        Rx.Observable.defer( () => axios.get(toLayerCapabilitiesURL(layer)))
-            .let(interceptOGCError)
-            .switchMap( response => Rx.Observable.bindNodeCallback( (data, callback) => parseString(data, {
-                tagNameProcessors: [stripPrefix],
-                explicitArray: false,
-                mergeAttrs: true
-            }, callback))(response.data)
-            )
-};
+
+export const describeFeatureType = ({layer}) =>
+    Rx.Observable.defer(() =>
+        axios.get(toDescribeURL(layer))).let(interceptOGCError);
+export const getLayerWFSCapabilities = ({layer}) =>
+    Rx.Observable.defer( () => axios.get(toLayerCapabilitiesURL(layer)))
+        .let(interceptOGCError)
+        .switchMap( response => Rx.Observable.bindNodeCallback( (data, callback) => parseString(data, {
+            tagNameProcessors: [stripPrefix],
+            explicitArray: false,
+            mergeAttrs: true
+        }, callback))(response.data)
+        );

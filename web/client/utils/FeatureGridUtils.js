@@ -6,21 +6,21 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-import { get, findIndex, isNil, fill, isArray } from 'lodash';
+import { fill, findIndex, get, isArray, isNil } from 'lodash';
 
 import {
+    findGeometryProperty,
     getFeatureTypeProperties,
+    getPropertyDescriptor,
     isGeometryType,
     isValid,
-    isValidValueForPropertyName as isValidValueForPropertyNameWFS,
-    findGeometryProperty,
-    getPropertyDesciptor
+    isValidValueForPropertyName as isValidValueForPropertyNameWFS
 } from './ogc/WFS/base';
 
-const getGeometryName = (describe) => get(findGeometryProperty(describe), "name");
-const getPropertyName = (name, describe) => name === "geometry" ? getGeometryName(describe) : name;
+export const getGeometryName = (describe) => get(findGeometryProperty(describe), "name");
+export const getPropertyName = (name, describe) => name === "geometry" ? getGeometryName(describe) : name;
 
-const getBlockIdx = (indexes = [], size = 0, rowIdx) => findIndex(indexes, (startIdx) => startIdx <= rowIdx && rowIdx < startIdx + size);
+export const getBlockIdx = (indexes = [], size = 0, rowIdx) => findIndex(indexes, (startIdx) => startIdx <= rowIdx && rowIdx < startIdx + size);
 
 /** Features are stored in an array grouped by block of pages. The page could be loaded unordered
  * This function recover the correct rowIndex in features, given the array of indexes
@@ -36,7 +36,7 @@ export const getRowIdx = (rowIdx, indexes, size) => {
 };
 
 // const getRow = (i, rows) => rows[i];
-const EMPTY_ROW = {id: "empty_row", get: () => undefined};
+export const EMPTY_ROW = {id: "empty_row", get: () => undefined};
 
 export const getRowVirtual = (i, rows, pages = [], size) => rows[getRowIdx(i, pages, size)] || {...EMPTY_ROW};
 export const getRow = (i, rows) => rows[i];
@@ -50,7 +50,7 @@ export const toChangesMap = (changesArray = []) => isArray(changesArray) ? chang
         ...c.updated
     }
 }), {}) : {};
-const applyChanges = (feature, changes) => {
+export const applyChanges = (feature, changes) => {
     const propChanges = Object.keys(changes).filter(k => k !== "geometry").reduce((acc, cur) => ({
         ...acc,
         [cur]: changes[cur]
@@ -76,22 +76,22 @@ const applyChanges = (feature, changes) => {
  * @param  {object} newObject         the new object to insert
  * @return {Array}                   The new array with the modified/new element.
  */
-const upsertFilterField = (filterFields = [], filter, newObject) => {
+export const upsertFilterField = (filterFields = [], filter, newObject) => {
     const index = findIndex(filterFields, filter);
     if ( index >= 0) {
         return filterFields.map((f, i) => i === index ? newObject : f);
     }
     return [...filterFields, newObject];
 };
-const getAttributeFields = (describe) => (getFeatureTypeProperties(describe) || []).filter( e => !isGeometryType(e));
+export const getAttributeFields = (describe) => (getFeatureTypeProperties(describe) || []).filter( e => !isGeometryType(e));
 
 // virtual scroll utility functions
-const getIdxFarthestEl = (startIdx, pages = [], firstRow, lastRow) => {
+export const getIdxFarthestEl = (startIdx, pages = [], firstRow, lastRow) => {
     return pages.map(val => firstRow <= val && val <= lastRow ? 0 : Math.abs(val - startIdx)).reduce((i, distance, idx, vals) => distance > vals[i] && idx || i, 0);
 };
-const removePage = (idxFarthestEl, pages) => pages.filter((el, i) => i !== idxFarthestEl);
-const removePageFeatures = (features, idxToRemove, size) => features.filter((el, i) => i < idxToRemove || i >= idxToRemove + size);
-const getPagesToLoad = (startPage, endPage, pages, size) => {
+export const removePage = (idxFarthestEl, pages) => pages.filter((el, i) => i !== idxFarthestEl);
+export const removePageFeatures = (features, idxToRemove, size) => features.filter((el, i) => i < idxToRemove || i >= idxToRemove + size);
+export const getPagesToLoad = (startPage, endPage, pages, size) => {
     let firstMissingPage;
     let lastMissingPage;
     for (let i = startPage; i <= endPage && firstMissingPage === undefined; i++) {
@@ -158,7 +158,7 @@ export const getGridEvents = (gridEvents = {}, rowGetter, describe, actionOpts, 
     ...events,
     [currentEventKey]: (...args) => gridEvents[currentEventKey](...args, rowGetter, describe, actionOpts, columns)
 }), {});
-export const isProperty = ( k, d) => !!getPropertyDesciptor(k, d);
+export const isProperty = ( k, d) => !!getPropertyDescriptor(k, d);
 export const isValidValueForPropertyName = (v, k, d) => isValidValueForPropertyNameWFS(v, getPropertyName(k, d), d);
 export const getDefaultFeatureProjection = () => "EPSG:4326";
 export const createNewAndEditingFilter = (hasChanges, newFeatures, changes) => f => newFeatures.length > 0 ? f._new : !hasChanges || hasChanges && !!changes[f.id];

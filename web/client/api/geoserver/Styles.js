@@ -1,6 +1,3 @@
-import { head } from 'lodash';
-import assign from 'object-assign';
-
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,6 +5,9 @@ import assign from 'object-assign';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import { head } from 'lodash';
+import assign from 'object-assign';
 import axios from '../../libs/ajax';
 import { getNameParts, stringifyNameParts } from '../../utils/StyleEditorUtils';
 import { getVersion } from './About';

@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const ogcComparisonOperators = {
+export const ogcComparisonOperators = {
     "=": (ns, content) => `<${ns}:PropertyIsEqualTo>${content}</${ns}:PropertyIsEqualTo>`,
     ">": (ns, content) => `<${ns}:PropertyIsGreaterThan>${content}</${ns}:PropertyIsGreaterThan>`,
     "<": (ns, content) => `<${ns}:PropertyIsLessThan>${content}</${ns}:PropertyIsLessThan>`,
@@ -17,14 +17,14 @@ const ogcComparisonOperators = {
     "ilike": (ns, content) => `<${ns}:PropertyIsLike matchCase="false" wildCard="*" singleChar="." escapeChar="!">${content}</${ns}:PropertyIsLike>`,
     "isNull": (ns, content) => `<${ns}:PropertyIsNull>${content}</${ns}:PropertyIsNull>`
 };
-const ogcLogicalOperators = {
+export const ogcLogicalOperators = {
     "AND": (ns, content) => `<${ns}:And>${content}</${ns}:And>`,
     "OR": (ns, content) => `<${ns}:Or>${content}</${ns}:Or>`,
     "NOR": (ns, content) => `<${ns}:Not><${ns}:Or>${content}</${ns}:Or></${ns}:Not>`,
     "NOT": (ns, content) => `<${ns}:Not>${content}</${ns}:Not>`
 };
 
-const ogcSpatialOperators = {
+export const ogcSpatialOperators = {
     "INTERSECTS": (ns, content) => `<${ns}:Intersects>${content}</${ns}:Intersects>`,
     "BBOX": (ns, content) => `<${ns}:BBOX>${content}</${ns}:BBOX>`,
     "CONTAINS": (ns, content) => `<${ns}:Contains>${content}</${ns}:Contains>`,

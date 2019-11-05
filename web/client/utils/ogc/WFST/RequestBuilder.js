@@ -8,12 +8,12 @@
 
 import { get } from 'lodash';
 
-import { insert, feature, attribute } from './insert';
-import { transaction } from './transaction';
-import { deleteFeaturesByFilter, deleteFeature } from './delete';
-import { update, propertyChange } from './update';
-import { getPropertyDesciptor, getValue, findGeometryProperty, featureTypeSchema } from '../WFS/base';
+import { featureTypeSchema, findGeometryProperty, getPropertyDescriptor, getValue } from '../WFS/base';
 import wfsRequestBuilder from '../WFS/RequestBuilder';
+import { deleteFeature, deleteFeaturesByFilter } from './delete';
+import { attribute, feature, insert } from './insert';
+import { transaction } from './transaction';
+import { propertyChange, update } from './update';
 
 const mergeArray = (e, arr2) => arr2 && arr2.length > 0 ? [e, ...arr2] : e;
 const WFSVersionNotSupportedException = function(wfsVersion) {
@@ -62,7 +62,7 @@ export default function(describe, {wfsVersion = "1.1.0", wfsNS = "wfs", ...other
         throw new WFSVersionNotSupportedException(wfsVersion);
     }
     const toFeature = (f) => feature( describe.targetPrefix, getTypeName(describe), Object.keys(f.properties || [])
-        .filter(k => getPropertyDesciptor(k, describe))
+        .filter(k => getPropertyDescriptor(k, describe))
         .map((key) => attribute(describe.targetPrefix, key, getValue(f.properties[key], key, describe)))
         .concat(f.geometry ? attribute(describe.targetPrefix, getGeometryName(f, describe), getValue(f.geometry, getGeometryName(f, describe), describe) ) : [])
     );

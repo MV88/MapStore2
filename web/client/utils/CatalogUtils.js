@@ -382,115 +382,121 @@ export const getRecordLinks = (record) => {
     }
     return links;
 };
+
+
+/**
+ * Convert a record into a MS2 layer
+ * @param  {Object} record            The record
+ * @param  {String} [type="wms"]      The layer type
+ * @param  {Object} options an object with additional options.
+ *  - `catalogURL` to attach to the layer
+ *  - `removeParameters` if you didn't provided an `url` option and you want to use record's one, you can remove some params (typically authkey params) using this.
+ *  - `url`, if you already have the correct service URL (typically when you want to use you URL already stripped from some parameters, e.g. authkey params)
+ */
+export const recordToLayer = (record, type = "wms", {removeParams = [], catalogURL, url} = {}, baseConfig = {}) => {
+    if (!record || !record.references) {
+        // we don't have a valid record so no buttons to add
+        return null;
+    }
+    // let's extract the references we need
+    const {wms, wmts} = extractOGCServicesReferences(record);
+    const ogcServiceReference = wms || wmts;
+
+    // typically you should remove authkey parameters
+    const cleanURL = URL => removeParameters(ConfigUtils.cleanDuplicatedQuestionMarks(URL), ["request", "layer", "layers", "service", "version"].concat(removeParams));
+    let originalUrl;
+    let params;
+    const urls = ogcServiceReference.url;
+
+    // extract additional parameters and alternative URLs.
+    if (urls && isArray(urls)) {
+        originalUrl = urls.map( u => cleanURL(u)).map( ({url: u}) => u);
+        params = urls.map(u => cleanURL(u)).map(({params: p}) => p).reduce( (prev, cur) => ({...prev, ...cur}), {});
+    } else {
+        const { url: uu, params: pp } = cleanURL(urls || catalogURL);
+        originalUrl = uu;
+        params = pp;
+    }
+
+    // calculate and normalize URL
+    // if array of 1 element, take simply the string
+    const toLayerURL = u => isArray(u) && u.length === 1 ? u[0] : u;
+    const layerURL = toLayerURL(url || originalUrl);
+
+    const allowedSRS = buildSRSMap(ogcServiceReference.SRS);
+    return {
+        type: type,
+        requestEncoding: record.requestEncoding, // WMTS KVP vs REST, KVP by default
+        style: record.style,
+        url: layerURL,
+        capabilitiesURL: record.capabilitiesURL,
+        queryable: record.queryable,
+        visibility: true,
+        dimensions: record.dimensions || [],
+        name: ogcServiceReference.params && ogcServiceReference.params.name,
+        title: record.title || ogcServiceReference.params && ogcServiceReference.params.name,
+        matrixIds: type === "wmts" ? record.matrixIds || [] : undefined,
+        description: record.description || "",
+        tileMatrixSet: type === "wmts" ? record.tileMatrixSet || [] : undefined,
+        credits: !ConfigUtils.getConfigProp("noCreditsFromCatalog") && record.credits,
+        bbox: {
+            crs: record.boundingBox.crs,
+            bounds: {
+                minx: record.boundingBox.extent[0],
+                miny: record.boundingBox.extent[1],
+                maxx: record.boundingBox.extent[2],
+                maxy: record.boundingBox.extent[3]
+            }
+        },
+        links: getRecordLinks(record),
+        params: params,
+        allowedSRS: allowedSRS,
+        catalogURL,
+        ...baseConfig
+    };
+};
+export const getCatalogRecords = (format, records, options, locales) => {
+    return converters[format] && converters[format](records, options, locales) || null;
+};
+export const esriToLayer = (record, baseConfig = {}) => {
+    if (!record || !record.references) {
+        // we don't have a valid record so no buttons to add
+        return null;
+    }
+    // let's extract the references we need
+    const {esri} = extractEsriReferences(record);
+    return {
+        type: esri.type,
+        url: esri.url,
+        visibility: true,
+        dimensions: record.dimensions || [],
+        name: esri.params && esri.params.name,
+        bbox: {
+            crs: record.boundingBox.crs,
+            bounds: {
+                minx: record.boundingBox.extent[0],
+                miny: record.boundingBox.extent[1],
+                maxx: record.boundingBox.extent[2],
+                maxy: record.boundingBox.extent[3]
+            }
+        },
+        ...baseConfig
+    };
+
+};
+
+/**
+ * Creates a map of SRS based on the record's srs object
+ * @type {String}
+ */
 const CatalogUtils = {
-    /**
-     * Creates a map of SRS based on the record's srs object
-     * @type {String}
-     */
     buildSRSMap,
-    removeParameters,
-    getRecordLinks,
+    esriToLayer,
     extractOGCServicesReferences,
     extractEsriReferences,
-    /**
-     * Convert a record into a MS2 layer
-     * @param  {Object} record            The record
-     * @param  {String} [type="wms"]      The layer type
-     * @param  {Object} options an object with additional options.
-     *  - `catalogURL` to attach to the layer
-     *  - `removeParameters` if you didn't provided an `url` option and you want to use record's one, you can remove some params (typically authkey params) using this.
-     *  - `url`, if you already have the correct service URL (typically when you want to use you URL already stripped from some parameters, e.g. authkey params)
-     */
-    recordToLayer: (record, type = "wms", {removeParams = [], catalogURL, url} = {}, baseConfig = {}) => {
-        if (!record || !record.references) {
-            // we don't have a valid record so no buttons to add
-            return null;
-        }
-        // let's extract the references we need
-        const {wms, wmts} = extractOGCServicesReferences(record);
-        const ogcServiceReference = wms || wmts;
-
-        // typically you should remove authkey parameters
-        const cleanURL = URL => removeParameters(ConfigUtils.cleanDuplicatedQuestionMarks(URL), ["request", "layer", "layers", "service", "version"].concat(removeParams));
-        let originalUrl;
-        let params;
-        const urls = ogcServiceReference.url;
-
-        // extract additional parameters and alternative URLs.
-        if (urls && isArray(urls)) {
-            originalUrl = urls.map( u => cleanURL(u)).map( ({url: u}) => u);
-            params = urls.map(u => cleanURL(u)).map(({params: p}) => p).reduce( (prev, cur) => ({...prev, ...cur}), {});
-        } else {
-            const { url: uu, params: pp } = cleanURL(urls || catalogURL);
-            originalUrl = uu;
-            params = pp;
-        }
-
-        // calculate and normalize URL
-        // if array of 1 element, take simply the string
-        const toLayerURL = u => isArray(u) && u.length === 1 ? u[0] : u;
-        const layerURL = toLayerURL(url || originalUrl);
-
-        const allowedSRS = buildSRSMap(ogcServiceReference.SRS);
-        return {
-            type: type,
-            requestEncoding: record.requestEncoding, // WMTS KVP vs REST, KVP by default
-            style: record.style,
-            url: layerURL,
-            capabilitiesURL: record.capabilitiesURL,
-            queryable: record.queryable,
-            visibility: true,
-            dimensions: record.dimensions || [],
-            name: ogcServiceReference.params && ogcServiceReference.params.name,
-            title: record.title || ogcServiceReference.params && ogcServiceReference.params.name,
-            matrixIds: type === "wmts" ? record.matrixIds || [] : undefined,
-            description: record.description || "",
-            tileMatrixSet: type === "wmts" ? record.tileMatrixSet || [] : undefined,
-            credits: !ConfigUtils.getConfigProp("noCreditsFromCatalog") && record.credits,
-            bbox: {
-                crs: record.boundingBox.crs,
-                bounds: {
-                    minx: record.boundingBox.extent[0],
-                    miny: record.boundingBox.extent[1],
-                    maxx: record.boundingBox.extent[2],
-                    maxy: record.boundingBox.extent[3]
-                }
-            },
-            links: getRecordLinks(record),
-            params: params,
-            allowedSRS: allowedSRS,
-            catalogURL,
-            ...baseConfig
-        };
-    },
-    getCatalogRecords: (format, records, options, locales) => {
-        return converters[format] && converters[format](records, options, locales) || null;
-    },
-    esriToLayer: (record, baseConfig = {}) => {
-        if (!record || !record.references) {
-            // we don't have a valid record so no buttons to add
-            return null;
-        }
-        // let's extract the references we need
-        const {esri} = extractEsriReferences(record);
-        return {
-            type: esri.type,
-            url: esri.url,
-            visibility: true,
-            dimensions: record.dimensions || [],
-            name: esri.params && esri.params.name,
-            bbox: {
-                crs: record.boundingBox.crs,
-                bounds: {
-                    minx: record.boundingBox.extent[0],
-                    miny: record.boundingBox.extent[1],
-                    maxx: record.boundingBox.extent[2],
-                    maxy: record.boundingBox.extent[3]
-                }
-            },
-            ...baseConfig
-        };
-
-    }
+    getCatalogRecords,
+    getRecordLinks,
+    removeParameters,
+    recordToLayer
 };
 export default CatalogUtils;
