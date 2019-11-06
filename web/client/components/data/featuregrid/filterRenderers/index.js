@@ -8,12 +8,17 @@
 
 import { withProps } from 'recompose';
 
-import DefaultFilter from './DefaultFilter';
-import StringFilter from './StringFilter';
-import NumberFilter from './NumberFilter';
-import DateTimeFilter from './DateTimeFilter';
+import DefaultFilterComp from './DefaultFilter';
+import StringFilterComp from './StringFilter';
+import NumberFilterComp from './NumberFilter';
+import DateTimeFilterComp from './DateTimeFilter';
 
-const types = {
+export const DefaultFilter = DefaultFilterComp;
+export const StringFilter = StringFilterComp;
+export const NumberFilter = NumberFilterComp;
+export const DateTimeFilter = DateTimeFilterComp;
+
+export const types = {
     "defaultFilter": (type) => withProps(() =>({type: type}))(DefaultFilter),
     "string": () => StringFilter,
     "number": () => NumberFilter,
@@ -22,10 +27,5 @@ const types = {
     "time": () => withProps(() =>({type: "time"}))(DateTimeFilter),
     "date-time": () => withProps(() =>({type: "date-time"}))(DateTimeFilter)
 };
-export default {
-    getFilterRenderer: (type, props) => types[type] ? types[type](type, props) : types.defaultFilter(type, props),
-    DefaultFilter,
-    StringFilter,
-    NumberFilter,
-    DateTimeFilter
-};
+
+export const getFilterRenderer = (type, props) => types[type] ? types[type](type, props) : types.defaultFilter(type, props);

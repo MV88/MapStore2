@@ -54,19 +54,19 @@ export const FORMULAS = {
     }
 };
 // Checks if `list` looks like a `[x, y]`.
-function isXY(list) {
+export function isXY(list) {
     return list.length >= 2 &&
         typeof list[0] === 'number' &&
         typeof list[1] === 'number';
 }
-function traverseCoords(coordinates, callback) {
+export function traverseCoords(coordinates, callback) {
     if (isXY(coordinates)) return callback(coordinates);
     return coordinates.map(function(coord) { return traverseCoords(coord, callback); });
 }
 export const getProjUrl = (EPSG) => {
     return `http://spatialreference.org/ref/epsg/${EPSG}/proj4/`;
 };
-function traverseGeoJson(geojson, leafCallback, nodeCallback) {
+export function traverseGeoJson(geojson, leafCallback, nodeCallback) {
     if (geojson === null) return geojson;
 
     let r = cloneDeep(geojson);
@@ -93,7 +93,7 @@ export const determineCrs = (crs) => {
     return crs;
 };
 
-let crsLabels = {
+export let crsLabels = {
     "EPSG:4326": "WGS 84",
     "EPSG:3857": "EPSG:3857"
 };
@@ -106,7 +106,7 @@ export const normalizePoint = (point) => {
         crs: point.srs || point.crs || 'EPSG:4326'
     };
 };
-const numberize = (point) => {
+export const numberize = (point) => {
     let outpoint = point;
     if (!isNumber(point.x)) {
         outpoint.x = parseFloat(point.x);
@@ -131,7 +131,7 @@ export const reproject = (point, source, dest, normalize = true) => {
     return null;
 };
 
-const supportedSplitExtentEPSG = [
+export const supportedSplitExtentEPSG = [
     'EPSG:900913',
     'EPSG:4326',
     'EPSG:3857'
@@ -205,7 +205,7 @@ export const getPolygonFromExtent = (extent) => {
  * @param projection {string} the projection of bounds
  * @return {object} {extent, isIDL}
  */
-const getExtentFromNormalized = (bounds, projection) => {
+export const getExtentFromNormalized = (bounds, projection) => {
     const normalizedXExtent = normalizeExtent(bounds, projection);
     const isIDL = normalizedXExtent[2] < normalizedXExtent[0];
 

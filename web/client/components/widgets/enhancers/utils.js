@@ -10,15 +10,13 @@ import { get, find } from 'lodash';
 /**
  * Utility function to get the original layer from "layers" dependency, then, get the "params" object.
  */
-export default {
-    getDependencyLayerParams: (layer, dependencies) =>
-        layer
-            && layer.id
-            && get(
-                find(dependencies.layers || [], {
-                    id: layer.id
-                }),
-                "params",
-                {}
-            )
-};
+export const getDependencyLayerParams = (layer, dependencies) =>
+    layer
+        && layer.id
+        && get(
+            find(dependencies.layers || [], {
+                id: layer.id
+            }),
+            "params",
+            {}
+        );

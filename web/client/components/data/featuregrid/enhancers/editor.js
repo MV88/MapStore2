@@ -58,7 +58,7 @@ const dataStreamFactory = $props => {
     return loadMoreFeaturesStream($p).startWith({}).map( o => ({...o, onGridScroll}));
 };
 
-const featuresToGrid = compose(
+export const featuresToGrid = compose(
     defaultProps({
         sortable: true,
         autocompleteEnabled: false,
@@ -207,6 +207,4 @@ const featuresToGrid = compose(
     ),
     propsStreamFactory
 );
-export default {
-    featuresToGrid
-};
+export default featuresToGrid;

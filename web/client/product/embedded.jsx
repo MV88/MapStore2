@@ -8,7 +8,7 @@
 
 import { loadVersion } from '../actions/version';
 import apiPlugins from './apiPlugins.js';
-import appConfigEmbedded from './appConfigEmbedded';
+import * as appConfigEmbedded from './appConfigEmbedded';
 import main from './main';
 
 main(

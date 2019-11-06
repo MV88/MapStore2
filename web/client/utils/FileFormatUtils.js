@@ -1,3 +1,11 @@
+/*
+ * Copyright 2019, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { head } from 'lodash';
 
 const getFormatByName = (outF) => {
@@ -5,7 +13,7 @@ const getFormatByName = (outF) => {
     return extension ? {outputFormat: outF, extension: extension.toLowerCase()} : undefined;
 
 };
-const formats = [{
+export const formats = [{
     outputFormat: "shape-zip",
     extension: "zip"
 }, {
@@ -68,7 +76,4 @@ const formats = [{
 }
 ];
 
-export default {
-    formats,
-    getByOutputFormat: (outF) => head(formats.filter(format => format.outputFormat === outF)) || getFormatByName(outF)
-};
+export const getByOutputFormat = (outF) => head(formats.filter(format => format.outputFormat === outF)) || getFormatByName(outF);

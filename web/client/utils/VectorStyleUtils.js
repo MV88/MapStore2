@@ -121,7 +121,7 @@ export const getStylerTitle = (style = {}) => {
  * TODO needs maptype management (although, on leaflet they must interact
  * on the original  geojson feature)
 */
-let geometryFunctions = {
+export let geometryFunctions = {
     "centerPoint": {
         type: "Point",
         func: () => {}

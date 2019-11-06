@@ -14,52 +14,61 @@ import version from '../reducers/version';
 import apiPlugins from './apiPlugins.js';
 import MapViewer from './pages/MapViewer';
 
-export default {
-    mode: "embedded",
-    pages: [{
-        name: "mapviewer",
-        path: "/:mapId",
-        component: MapViewer
-    }],
-    pluginsDef: apiPlugins,
-    initialState: {
-        defaultState: {
-            mode: "embedded",
-            mousePosition: {enabled: false},
-            controls: {
-                help: {
-                    enabled: false
-                },
-                print: {
-                    enabled: false
-                },
-                toolbar: {
-                    active: null,
-                    expanded: false
-                },
-                drawer: {
-                    enabled: false,
-                    menu: "1"
-                }
+
+export const mode = "embedded";
+export const pages = [{
+    name: "mapviewer",
+    path: "/:mapId",
+    component: MapViewer
+}];
+export const pluginsDef = apiPlugins;
+export const initialState = {
+    defaultState: {
+        mode: "embedded",
+        mousePosition: {enabled: false},
+        controls: {
+            help: {
+                enabled: false
             },
-            mapInfo: {enabled: true, infoFormat: 'text/html' }
+            print: {
+                enabled: false
+            },
+            toolbar: {
+                active: null,
+                expanded: false
+            },
+            drawer: {
+                enabled: false,
+                menu: "1"
+            }
         },
-        mobile: {
-        }
+        mapInfo: {enabled: true, infoFormat: 'text/html' }
     },
-    baseReducers: {
-        mode: (state = 'embedded') => state,
-        version,
-        maplayout,
-        searchconfig
-    },
-    baseEpics: {
-        updateMapLayoutEpic,
-        readQueryParamsOnMapEpic
-    },
-    storeOpts: {
-        persist: {
-            whitelist: ['security']
-        }
+    mobile: {
     }
+};
+export const baseReducers = {
+    mode: (state = 'embedded') => state,
+    version,
+    maplayout,
+    searchconfig
+};
+export const baseEpics = {
+    updateMapLayoutEpic,
+    readQueryParamsOnMapEpic
+};
+export const storeOpts = {
+    persist: {
+        whitelist: ['security']
+    }
+};
+
+export default {
+    mode,
+    pages,
+    pluginsDef,
+    initialState,
+    baseReducers,
+    baseEpics,
+    storeOpts
 };

@@ -9,7 +9,7 @@ import Undoable from 'redux-undo';
 
 import assign from 'object-assign';
 
-const mapConfigHistory = (reducer) => {
+export const mapConfigHistory = (reducer) => {
     return (state, action) => {
         let newState = reducer(state, action);
         let unredoState;
@@ -24,5 +24,3 @@ const mapConfigHistory = (reducer) => {
         return unredoState || {past: newState.past, present: newState.present, future: newState.future};
     };
 };
-
-export default mapConfigHistory;

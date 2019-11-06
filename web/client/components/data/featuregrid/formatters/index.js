@@ -7,6 +7,4 @@
 */
 import React from 'react';
 
-export default {
-    getFormatter: (desc) => desc.localType === 'boolean' ? ({value} = {}) => value !== undefined ? <span>{value.toString()}</span> : undefined : undefined
-};
+export const getFormatter = (desc) => desc.localType === 'boolean' ? ({value} = {}) => value !== undefined ? <span>{value.toString()}</span> : undefined : undefined;
