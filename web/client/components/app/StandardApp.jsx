@@ -123,17 +123,8 @@ class StandardApp extends React.Component {
         const {pluginsDef, appStore, initialActions, appComponent, mode, ...other} = this.props;
         const App = dragDropContext(html5Backend)(this.props.appComponent);
 
-
-        const MyFallbackComponent = ({ componentStack, error }) => (
-            <div>
-                <p><strong>Oops! An error occured!</strong></p>
-                <p>Here’s what we know…</p>
-                <p><strong>Error:</strong> {error.toString()}</p>
-                <p><strong>Stacktrace:</strong> {componentStack}</p>
-            </div>
-        );
         return this.state.initialized ?
-            <ErrorBoundary FallbackComponent={ ErrorBoundaryFallbackComponent || MyFallbackComponent}>
+            <ErrorBoundary FallbackComponent={ ErrorBoundaryFallbackComponent}>
                 <Provider store={this.store}>
                     <App {...other} plugins={assign(PluginsUtils.getPlugins(plugins), { requires })} />
                 </Provider>
