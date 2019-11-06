@@ -30,6 +30,7 @@ const urlQuery = url.parse(window.location.href, true).query;
 require('./appPolyfill');
 
 const ErrorBoundary = require('react-error-boundary').default;
+const ErrorBoundaryFallbackComponent = require('./ErrorFallBackComp').default;
 
 /**
  * Standard MapStore2 application component
@@ -121,10 +122,22 @@ class StandardApp extends React.Component {
         const {plugins, requires} = this.props.pluginsDef;
         const {pluginsDef, appStore, initialActions, appComponent, mode, ...other} = this.props;
         const App = dragDropContext(html5Backend)(this.props.appComponent);
+
+
+        const MyFallbackComponent = ({ componentStack, error }) => (
+            <div>
+                <p><strong>Oops! An error occured!</strong></p>
+                <p>Here’s what we know…</p>
+                <p><strong>Error:</strong> {error.toString()}</p>
+                <p><strong>Stacktrace:</strong> {componentStack}</p>
+            </div>
+        );
         return this.state.initialized ?
-            <ErrorBoundary><Provider store={this.store}>
-                <App {...other} plugins={assign(PluginsUtils.getPlugins(plugins), { requires })} />
-            </Provider></ErrorBoundary>
+            <ErrorBoundary FallbackComponent={ ErrorBoundaryFallbackComponent || MyFallbackComponent}>
+                <Provider store={this.store}>
+                    <App {...other} plugins={assign(PluginsUtils.getPlugins(plugins), { requires })} />
+                </Provider>
+            </ErrorBoundary>
             : (<span><div className="_ms2_init_spinner _ms2_init_center"><div></div></div>
                 <div className="_ms2_init_text _ms2_init_center">Loading MapStore</div></span>);
     }
