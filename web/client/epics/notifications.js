@@ -16,7 +16,7 @@ import { LOCATION_CHANGE } from 'connected-react-router';
  * @memberof epics.notifications
  * @return {external:Observable}
  */
-const clearNotificationOnLocationChange = action$ =>
+export const clearNotificationOnLocationChange = action$ =>
     action$.ofType(LOCATION_CHANGE)
         .switchMap(() => Rx.Observable.of(clear()));
 
@@ -25,7 +25,3 @@ const clearNotificationOnLocationChange = action$ =>
  * @name epics.notifications
  * @type {Object}
  */
-
-export default {
-    clearNotificationOnLocationChange
-};

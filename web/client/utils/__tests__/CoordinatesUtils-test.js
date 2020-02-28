@@ -8,7 +8,7 @@
 import expect from 'expect';
 
 import CoordinatesUtils from '../CoordinatesUtils';
-import Proj4js from 'proj4';
+const proj4 = require('proj4').default;
 
 describe('CoordinatesUtils', () => {
     afterEach((done) => {
@@ -64,7 +64,7 @@ describe('CoordinatesUtils', () => {
         }
     });
     it('test getAvailableCRS', () => {
-        const defs = Object.keys(Proj4js.defs);
+        const defs = Object.keys(proj4.defs);
         const toCheck = Object.keys(CoordinatesUtils.getAvailableCRS());
 
         toCheck.forEach(item => {

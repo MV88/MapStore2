@@ -6,22 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import BingLayer from './BingLayer';
-import OSMLayer from './OSMLayer';
-import TileProviderLayer from './TileProviderLayer';
-import WMSLayer from './WMSLayer';
-import WMTSLayer from './WMTSLayer';
-import GraticuleLayer from './GraticuleLayer';
-import MarkerLayer from './MarkerLayer';
-import OverlayLayer from './OverlayLayer';
-
-export default {
-    BingLayer,
-    OSMLayer,
-    TileProviderLayer,
-    WMSLayer,
-    WMTSLayer,
-    GraticuleLayer,
-    MarkerLayer,
-    OverlayLayer
+module.exports = {
+    BingLayer: require('./BingLayer'),
+    OSMLayer: require('./OSMLayer'),
+    TileProviderLayer: require('./TileProviderLayer'),
+    WMSLayer: require('./WMSLayer'),
+    WMTSLayer: require('./WMTSLayer'),
+    GraticuleLayer: require('./GraticuleLayer'),
+    MarkerLayer: require('./MarkerLayer'),
+    OverlayLayer: require('./OverlayLayer')
 };

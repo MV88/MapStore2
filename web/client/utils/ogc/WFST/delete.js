@@ -16,12 +16,7 @@ import { fidFilter } from '../Filter/base';
  * @param  {object} describeFeatureType describeFeatureType object
  * @return {string}                     the XML for the update
  */
-const deleteFeaturesByFilter = (ns, content, typeName) =>
+export const deleteFeaturesByFilter = (ns, content, typeName) =>
     `<${ns}:Delete typeName="${typeName}">${content}</${ns}:Delete>`;
-const deleteById = (ns, fid, typeName) => deleteFeaturesByFilter(ns, fidFilter("ogc", fid), typeName);
-const deleteFeature = (ns, feature, typeName) => deleteById(ns, feature.features && feature.features.length === 1 ? feature.features[0].id : feature.id, typeName);
-export default {
-    deleteFeaturesByFilter,
-    deleteById,
-    deleteFeature
-};
+export const deleteById = (ns, fid, typeName) => deleteFeaturesByFilter(ns, fidFilter("ogc", fid), typeName);
+export const deleteFeature = (ns, feature, typeName) => deleteById(ns, feature.features && feature.features.length === 1 ? feature.features[0].id : feature.id, typeName);

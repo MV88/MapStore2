@@ -13,7 +13,7 @@ import { Promise } from 'es6-promise';
 import isMobile from 'ismobilejs';
 import { endsWith, isArray, isNil, isObject } from 'lodash';
 import assign from 'object-assign';
-import Proj4js from 'proj4';
+const Proj4js = require('proj4').default;
 import PropTypesLib from 'prop-types';
 
 const epsg4326 = Proj4js ? new Proj4js.Proj('EPSG:4326') : null;
@@ -67,7 +67,7 @@ const getConfigurationOptions = function(query, defaultName, extension, geoStore
  * so the url can not be parsed in any way to solve the problem via configuration,
  * because you can not know if ${url.wms} contains ? or not.
 */
-const cleanDuplicatedQuestionMarks = (urlToNormalize) => {
+export const cleanDuplicatedQuestionMarks = (urlToNormalize) => {
     const urlParts = urlToNormalize.split("?");
     if (urlParts.length > 2) {
         let newUrlParts = urlParts.slice(1);
@@ -154,6 +154,44 @@ export const getCenter = (center, projection) => {
     const transformed = crs !== 'EPSG:4326' ? Proj4js.transform(new Proj4js.Proj(crs), epsg4326, point) : point;
     return assign({}, transformed, {crs: "EPSG:4326"});
 };
+export const setApiKeys = (layer) => {
+    if (layer.type === 'bing') {
+        layer.apiKey = this.bingApiKey || defaultConfig.bingApiKey;
+    }
+    if (layer.type === 'mapquest') {
+        layer.apiKey = this.mapquestApiKey || defaultConfig.mapquestApiKey;
+    }
+    return layer;
+};
+export const setLayerId = (layer, i) => {
+    if (!layer.id) {
+        layer.id = layer.name + "__" + i;
+    }
+    return layer;
+};
+export const replacePlaceholders = (inputUrl) => {
+    let currentUrl = inputUrl;
+    (currentUrl.match(/\{.*?\}/g) || []).forEach((placeholder) => {
+        const replacement = defaultConfig[placeholder.substring(1, placeholder.length - 1)];
+        // replacement must exist, or the URL is intended as a real template for the URL (e.g REST URLs of WMTS)
+        if (replacement !== undefined) {
+            currentUrl = currentUrl.replace(placeholder, replacement || '');
+        }
+    });
+    return currentUrl;
+};
+export const setUrlPlaceholders = (layer) => {
+    if (layer.url) {
+        if (isArray(layer.url)) {
+            layer.url = layer.url.map((currentUrl) => {
+                return replacePlaceholders(currentUrl);
+            });
+        } else {
+            layer.url = replacePlaceholders(layer.url);
+        }
+    }
+    return layer;
+};
 export const normalizeConfig = (config) => {
     const {layers, groups, plugins, ...other} = config;
     other.center = getCenter(other.center);
@@ -207,11 +245,11 @@ export const convertFromLegacy = (config) => {
 /**
  * set default wms source
  */
-export const setupSources = (sources, defaultSourceType) => {
-    var defType = defaultSourceType;
+export const setupSources = (sources, defaultSrcType = defaultSourceType) => {
+    var defType = defaultSrcType;
     var source;
-    if (!defaultSourceType) {
-        defType = this.defaultSourceType;
+    if (!defaultSrcType) {
+        defType = defaultSourceType;
     }
     for (source in sources) {
         if (sources.hasOwnProperty(source)) {
@@ -404,44 +442,6 @@ export const getBrowserProperties = () => {
 
         retina: retina
     };
-};
-export const setApiKeys = (layer) => {
-    if (layer.type === 'bing') {
-        layer.apiKey = this.bingApiKey || defaultConfig.bingApiKey;
-    }
-    if (layer.type === 'mapquest') {
-        layer.apiKey = this.mapquestApiKey || defaultConfig.mapquestApiKey;
-    }
-    return layer;
-};
-export const replacePlaceholders = (inputUrl) => {
-    let currentUrl = inputUrl;
-    (currentUrl.match(/\{.*?\}/g) || []).forEach((placeholder) => {
-        const replacement = defaultConfig[placeholder.substring(1, placeholder.length - 1)];
-        // replacement must exist, or the URL is intended as a real template for the URL (e.g REST URLs of WMTS)
-        if (replacement !== undefined) {
-            currentUrl = currentUrl.replace(placeholder, replacement || '');
-        }
-    });
-    return currentUrl;
-};
-export const setUrlPlaceholders = (layer) => {
-    if (layer.url) {
-        if (isArray(layer.url)) {
-            layer.url = layer.url.map((currentUrl) => {
-                return replacePlaceholders(currentUrl);
-            });
-        } else {
-            layer.url = replacePlaceholders(layer.url);
-        }
-    }
-    return layer;
-};
-export const setLayerId = (layer, i) => {
-    if (!layer.id) {
-        layer.id = layer.name + "__" + i;
-    }
-    return layer;
 };
 export const getConfigProp = (prop) => {
     return defaultConfig[prop];

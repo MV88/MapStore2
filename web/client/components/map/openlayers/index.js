@@ -6,19 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import LLayerComp from './Layer.jsx';
-import LocateComp from './Locate.jsx';
-import LMapComp from './Map.jsx';
-import MeasurementSupportComp from './MeasurementSupport';
-import OverviewComp from './Overview';
-import ScaleBarComp from './ScaleBar';
-import FeatureComp from './Feature';
-
-
-export const LLayer = LLayerComp;
-export const Locate = LocateComp;
-export const LMap = LMapComp;
-export const MeasurementSupport = MeasurementSupportComp;
-export const Overview = OverviewComp;
-export const ScaleBar = ScaleBarComp;
-export const Feature = FeatureComp;
+module.exports = {
+    LLayer: require('./Layer.jsx').default,
+    Locate: require('./Locate.jsx').default,
+    LMap: require('./Map.jsx').default,
+    MeasurementSupport: require('./MeasurementSupport').default,
+    Overview: require('./Overview').default,
+    ScaleBar: require('./ScaleBar').default,
+    Feature: require('./Feature').default
+};

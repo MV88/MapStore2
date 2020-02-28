@@ -64,7 +64,6 @@ import {
     changeFormat,
     openEditor,
     updateSymbols,
-    changePointType,
     setErrorSymbol
 } from '../actions/annotations';
 
@@ -76,7 +75,6 @@ const commonEditorActions = {
     onSetErrorSymbol: setErrorSymbol,
     onEdit: editAnnotation,
     onCancelEdit: cancelEditAnnotation,
-    onChangePointType: changePointType,
     onChangeFormat: changeFormat,
     onConfirmDeleteFeature: confirmDeleteFeature,
     onCleanHighlight: cleanHighlight,

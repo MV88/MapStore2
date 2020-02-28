@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Draggable from 'react-draggable';
-import { PrintPlugin } from '../../../plugins/Print';
+import PrintPlugin from '../../../plugins/Print';
 
 class PrintPreview extends React.Component {
     static propTypes = {

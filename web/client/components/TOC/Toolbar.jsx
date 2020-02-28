@@ -15,7 +15,8 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { head } from 'lodash';
 import ConfirmModal from '../maps/modals/ConfirmModal';
 import LayerMetadataModal from './fragments/LayerMetadataModal';
-import Proj4js from 'proj4';
+const proj4 = require('proj4').default;
+
 import Message from '../I18N/Message';
 
 class Toolbar extends React.Component {
@@ -179,7 +180,7 @@ class Toolbar extends React.Component {
     render() {
         const status = this.getStatus();
         const currentEPSG = this.checkBbox();
-        const epsgIsSupported = currentEPSG && Proj4js.defs(currentEPSG);
+        const epsgIsSupported = currentEPSG && proj4.defs(currentEPSG);
 
         const layerMetadataModal = (<LayerMetadataModal
             key="toollayermetadatamodal"

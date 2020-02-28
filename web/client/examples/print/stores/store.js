@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import DebugUtils from '../../../utils/DebugUtils';
+import {createDebugStore} from '../../../utils/DebugUtils';
 
 import { combineReducers } from 'redux';
 import map from '../../../reducers/map';
@@ -35,7 +35,7 @@ const rootReducer = (state, action) => {
 };
 
 // export the store with the given reducers
-export default DebugUtils.createDebugStore(rootReducer, {
+export default createDebugStore(rootReducer, {
     controls: {
         print: {
             enabled: true

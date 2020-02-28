@@ -19,11 +19,13 @@ import nl from 'react-intl/locale-data/nl';
 import pt from 'react-intl/locale-data/pt';
 import vi from 'react-intl/locale-data/vi';
 import zh from 'react-intl/locale-data/zh';
+import "regenerator-runtime/runtime";
+
 
 addLocaleData([...en, ...it, ...fr, ...de, ...es, ...nl, ...zh, ...hr, ...pt, ...vi]);
 
 /*
- * it, en, fr, de, es are the default locales and it is preferrable to customize them via configuration.
+ * it, en, fr, de, es are the default locales and it is preferable to customize them via configuration.
  * if you want to change it please read documentation guide on how to do this.
 */
 let supportedLocales = {
@@ -89,16 +91,16 @@ export const ensureIntl = async(callback) => {
     global.Intl = await import(
         /* webpackChunkName: "intl" */
         'intl');
-    import('intl/locale-data/jsonp/en.js');
-    import('intl/locale-data/jsonp/it.js');
-    import('intl/locale-data/jsonp/fr.js');
-    import('intl/locale-data/jsonp/de.js');
-    import('intl/locale-data/jsonp/es.js');
-    import('intl/locale-data/jsonp/nl.js');
-    import('intl/locale-data/jsonp/zh.js');
-    import('intl/locale-data/jsonp/hr.js');
-    import('intl/locale-data/jsonp/pt.js');
-    import('intl/locale-data/jsonp/vi.js');
+    await import('intl/locale-data/jsonp/en.js');
+    await import('intl/locale-data/jsonp/it.js');
+    await import('intl/locale-data/jsonp/fr.js');
+    await import('intl/locale-data/jsonp/de.js');
+    await import('intl/locale-data/jsonp/es.js');
+    await import('intl/locale-data/jsonp/nl.js');
+    await import('intl/locale-data/jsonp/zh.js');
+    await import('intl/locale-data/jsonp/hr.js');
+    await import('intl/locale-data/jsonp/pt.js');
+    await import('intl/locale-data/jsonp/vi.js');
     if (callback) {
         callback();
     }

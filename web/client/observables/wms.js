@@ -9,7 +9,8 @@
 import urlUtil from 'url';
 
 import { head } from 'lodash';
-import Proj4js from 'proj4';
+const proj4 = require('proj4').default;
+
 import { Observable } from 'rxjs';
 
 import WMS from '../api/WMS';
@@ -18,8 +19,6 @@ import CoordinatesUtils from '../utils/CoordinatesUtils';
 import LayersUtils from '../utils/LayersUtils';
 import { interceptOGCError } from '../utils/ObservableUtils';
 import SecurityUtils from '../utils/SecurityUtils';
-
-const proj4 = Proj4js;
 
 export const toDescribeLayerURL = ({name, search = {}, url} = {}) => {
     const parsed = urlUtil.parse(search.url || url, true);

@@ -58,17 +58,15 @@ const types = {
     // 'xsd:NOTATION': 'string',
     'xsd:float': 'number'
 };
-export default {
-    describeFeatureTypeToAttributes: (data) => get(data, "featureTypes[0].properties")
-        .filter((attribute) => attribute.type.indexOf('gml:') !== 0 && types[attribute.type])
-        .map((attribute) => {
-            return {
-                label: attribute.name,
-                attribute: attribute.name,
-                type: types[attribute.type],
-                valueId: "id",
-                valueLabel: "name",
-                values: []
-            };
-        })
-};
+export const describeFeatureTypeToAttributes = (data) => get(data, "featureTypes[0].properties")
+    .filter((attribute) => attribute.type.indexOf('gml:') !== 0 && types[attribute.type])
+    .map((attribute) => {
+        return {
+            label: attribute.name,
+            attribute: attribute.name,
+            type: types[attribute.type],
+            valueId: "id",
+            valueLabel: "name",
+            values: []
+        };
+    });

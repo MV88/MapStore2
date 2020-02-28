@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -8,10 +6,9 @@ import PropTypes from 'prop-types';
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import ReactIntl from 'react-intl';
-
-const FormattedMessage = ReactIntl.FormattedMessage;
+import {FormattedMessage} from 'react-intl';
 
 class Message extends React.Component {
     static propTypes = {

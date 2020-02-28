@@ -85,6 +85,9 @@ const Share = connect(createSelector([
     onUpdateSettings: setControlProperty.bind(null, 'share', 'settings')
 })(SharePanel);
 
+export const reducers = { controls };
+export const epics = shareEpics;
+
 export const SharePlugin = assign(Share, {
     disablePluginIf: "{state('router') && state('router').endsWith('new')}",
     BurgerMenu: {
@@ -93,8 +96,13 @@ export const SharePlugin = assign(Share, {
         text: <Message msgId="share.title"/>,
         icon: <Glyphicon glyph="share-alt"/>,
         action: toggleControl.bind(null, 'share', null)
-    }
+    },
+    reducers,
+    epics
 });
 
-export const reducers = { controls };
-export const epics = shareEpics;
+export default {
+    SharePlugin: SharePlugin,
+    reducers,
+    epics
+};

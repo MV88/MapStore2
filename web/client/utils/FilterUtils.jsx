@@ -1001,7 +1001,7 @@ export const normalizeFilterCQL = (filter, nativeCrs) => {
     return filter;
 };
 
-/* const FilterUtils = {
+const FilterUtils = {
     checkOperatorValidity,
     composeAttributeFilters,
     cqlBooleanField,
@@ -1048,4 +1048,3 @@ export const normalizeFilterCQL = (filter, nativeCrs) => {
 };
 
 export default FilterUtils;
-*/

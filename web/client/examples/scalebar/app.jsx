@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ReactDOM from 'react-dom';
-import DebugUtils from '../../utils/DebugUtils';
+import {createDebugStore} from '../../utils/DebugUtils';
 import { connect, Provider } from 'react-redux';
 import { bindActionCreators, combineReducers } from 'redux';
 import { changeBrowserProperties } from '../../actions/browser';
@@ -26,7 +26,7 @@ import {Grid, Row, Col} from 'react-bootstrap';
 
 // Here we create the store, we use Debug utils but is not necessary
 // Instead we need to pass here map configuration
-var store = DebugUtils.createDebugStore(combineReducers({browser, mapConfig}),
+var store = createDebugStore(combineReducers({browser, mapConfig}),
     {mapConfig: {
         zoom: 14,
         center: {

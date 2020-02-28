@@ -37,7 +37,7 @@ import PluginConfigurator from './components/PluginConfigurator';
 import PluginCreatorComp from './components/PluginCreator';
 import SaveAndLoad from './components/SaveAndLoad';
 import ThemeCreatorComp from './components/ThemeCreator';
-import {plugins} from './plugins';
+import Plugins from './plugins';
 import storeCreator from './store';
 
 import('./assets/css/plugins.css');
@@ -79,7 +79,7 @@ const startApp = () => {
         }
         return state;
     };
-    const store = storeCreator(plugins, customReducer);
+    const store = storeCreator(Plugins.plugins, customReducer);
     let mapType = 'leaflet';
     const Localized = connect((state) => ({
         messages: state.locale && state.locale.messages,
@@ -164,10 +164,10 @@ const startApp = () => {
     }))(ThemeCreatorComp);
 
     const renderPlugins = (callback) => {
-        return Object.keys(plugins).map((plugin) => {
+        return Object.keys(Plugins.plugins).map((plugin) => {
             const pluginName = plugin.substring(0, plugin.length - 6);
             return (<PluginConfigurator key={pluginName} pluginName={pluginName} pluginsCfg={pluginsCfg.standard}
-                pluginImpl={plugins[plugin][plugin]}
+                pluginImpl={Plugins.plugins[plugin][plugin]}
                 onToggle={togglePlugin.bind(null, pluginName, callback)}
                 onApplyCfg={configurePlugin.bind(null, plugin, callback)}
                 pluginConfig={userCfg[pluginName + 'Plugin'] && JSON.stringify(userCfg[pluginName + 'Plugin'], null, 2) || "{}"}
@@ -175,7 +175,7 @@ const startApp = () => {
         });
     };
 
-    const isHidden = (plugin) => plugins[plugin + 'Plugin'][plugin + 'Plugin'].Toolbar && plugins[plugin + 'Plugin'][plugin + 'Plugin'].Toolbar.hide;
+    const isHidden = (plugin) => Plugins.plugins[plugin + 'Plugin'][plugin + 'Plugin'].Toolbar && Plugins.plugins[plugin + 'Plugin'][plugin + 'Plugin'].Toolbar.hide;
 
     const getPluginsConfiguration = () => {
         return {
@@ -223,7 +223,7 @@ const startApp = () => {
     };
 
     const getPlugins = () => {
-        return assign({}, plugins, userPlugin ? {MyPlugin: {MyPlugin: userPlugin}} : {});
+        return assign({}, Plugins.plugins, userPlugin ? {MyPlugin: {MyPlugin: userPlugin}} : {});
     };
 
     const renderPage = () => {

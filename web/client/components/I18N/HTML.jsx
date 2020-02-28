@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -9,8 +7,8 @@ import PropTypes from 'prop-types';
  */
 import React from 'react';
 
-import ReactIntl from 'react-intl';
-var FormattedHTMLMessage = ReactIntl.FormattedHTMLMessage;
+import {FormattedHTMLMessage} from 'react-intl';
+import PropTypes from 'prop-types';
 
 class Message extends React.Component {
     static propTypes = {

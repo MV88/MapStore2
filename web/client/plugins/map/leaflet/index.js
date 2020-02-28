@@ -6,24 +6,15 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-import LMap from '../../../components/map/leaflet/Map';
-import Layer from '../../../components/map/leaflet/Layer';
-import Feature from '../../../components/map/leaflet/Feature';
-import Locate from '../../../components/map/leaflet/Locate';
-import MeasurementSupport from '../../../components/map/leaflet/MeasurementSupport';
-import Overview from '../../../components/map/leaflet/Overview';
-import ScaleBar from '../../../components/map/leaflet/ScaleBar';
-import DrawSupport from '../../../components/map/leaflet/DrawSupport';
-import HighlightFeatureSupport from '../../../components/map/leaflet/HighlightFeatureSupport';
 
-export default {
-    LMap,
-    Layer,
-    Feature,
-    Locate,
-    MeasurementSupport,
-    Overview,
-    ScaleBar,
-    DrawSupport,
-    HighlightFeatureSupport
+module.exports = {
+    LMap: require('../../../components/map/leaflet/Map'),
+    Layer: require('../../../components/map/leaflet/Layer'),
+    Feature: require('../../../components/map/leaflet/Feature'),
+    Locate: require('../../../components/map/leaflet/Locate'),
+    MeasurementSupport: require('../../../components/map/leaflet/MeasurementSupport'),
+    Overview: require('../../../components/map/leaflet/Overview'),
+    ScaleBar: require('../../../components/map/leaflet/ScaleBar'),
+    DrawSupport: require('../../../components/map/leaflet/DrawSupport'),
+    HighlightFeatureSupport: require('../../../components/map/leaflet/HighlightFeatureSupport')
 };

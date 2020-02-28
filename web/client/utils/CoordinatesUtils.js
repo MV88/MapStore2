@@ -8,8 +8,8 @@
 
 import geo from 'node-geo-distance';
 
-import Proj4js from 'proj4';
-const proj4 = Proj4js;
+const proj4 = require('proj4').default;
+
 import axios from '../libs/ajax';
 import assign from 'object-assign';
 import { isArray, flattenDeep, chunk, cloneDeep, isNumber, slice, head, last } from 'lodash';
@@ -88,7 +88,7 @@ export function traverseGeoJson(geojson, leafCallback, nodeCallback) {
 
 export const determineCrs = (crs) => {
     if (typeof crs === 'string' || crs instanceof String) {
-        return Proj4js.defs(crs) ? new Proj4js.Proj(crs) : null;
+        return proj4.defs(crs) ? new proj4.Proj(crs) : null;
     }
     return crs;
 };
@@ -117,12 +117,12 @@ export const numberize = (point) => {
     return outpoint;
 };
 export const reproject = (point, source, dest, normalize = true) => {
-    const sourceProj = source && Proj4js.defs(source) ? new Proj4js.Proj(source) : null;
-    const destProj = dest && Proj4js.defs(dest) ? new Proj4js.Proj(dest) : null;
+    const sourceProj = source && proj4.defs(source) ? new proj4.Proj(source) : null;
+    const destProj = dest && proj4.defs(dest) ? new proj4.Proj(dest) : null;
     if (sourceProj && destProj) {
-        let p = isArray(point) ? Proj4js.toPoint(point) : Proj4js.toPoint([point.x, point.y]);
+        let p = isArray(point) ? proj4.toPoint(point) : proj4.toPoint([point.x, point.y]);
 
-        const transformed = assign({}, source === dest ? numberize(p) : Proj4js.transform(sourceProj, destProj, numberize(p)), {srs: dest});
+        const transformed = assign({}, source === dest ? numberize(p) : proj4.transform(sourceProj, destProj, numberize(p)), {srs: dest});
         if (normalize) {
             return normalizePoint(transformed);
         }
@@ -240,7 +240,7 @@ export const getExtentFromNormalized = (bounds, projection) => {
  */
 
 export const getUnits =  function(projection) {
-    const proj = new Proj4js.Proj(projection);
+    const proj = new proj4.Proj(projection);
     return proj.units || 'degrees';
 };
 
@@ -416,8 +416,8 @@ export const isAllowedSRS = (srs, allowedSRS) => {
 };
 export const getAvailableCRS = () => {
     let crsList = {};
-    for (let a in Proj4js.defs) {
-        if (Proj4js.defs.hasOwnProperty(a)) {
+    for (let a in proj4.defs) {
+        if (proj4.defs.hasOwnProperty(a)) {
             crsList[a] = {label: crsLabels[a] || a};
         }
     }
@@ -724,7 +724,7 @@ export const getWMSBoundingBox = (BoundingBox, mapSRS) => {
     return isArray(bbox) && {minx: bbox[0], miny: bbox[1], maxx: bbox[2], maxy: bbox[3]} || null;
 };
 export const isSRSAllowed = (srs) => {
-    return !!Proj4js.defs(srs);
+    return !!proj4.defs(srs);
 };
 /**
  * Return normalized latitude and longitude

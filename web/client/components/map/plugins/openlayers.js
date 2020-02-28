@@ -6,26 +6,16 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-import DrawSupport from '../openlayers/DrawSupport';
-import Feature from '../openlayers/Feature';
-import Layer from '../openlayers/Layer';
-import Locate from '../openlayers/Locate';
-import Map from '../openlayers/Map';
-import MeasurementSupport from '../openlayers/MeasurementSupport';
-import Overview from '../openlayers/Overview';
-import ScaleBar from '../openlayers/ScaleBar';
-import * as openlayersPlugins from '../openlayers/plugins/index';
-
-export default () => {
+module.exports = () => {
+    require('../openlayers/plugins/index');
     return {
-        ...openlayersPlugins,
-        Map,
-        Layer,
-        Feature,
-        Locate,
-        MeasurementSupport,
-        Overview,
-        ScaleBar,
-        DrawSupport
+        Map: require('../openlayers/Map').default,
+        Layer: require('../openlayers/Layer').default,
+        Feature: require('../openlayers/Feature').default,
+        Locate: require('../openlayers/Locate').default,
+        MeasurementSupport: require('../openlayers/MeasurementSupport').default,
+        Overview: require('../openlayers/Overview').default,
+        ScaleBar: require('../openlayers/ScaleBar').default,
+        DrawSupport: require('../openlayers/DrawSupport').default
     };
 };

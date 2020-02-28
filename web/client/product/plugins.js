@@ -38,7 +38,7 @@ import GeoStoriesPlugin from '../plugins/GeoStories';
 import GeoStoryPlugin from '../plugins/GeoStory';
 import GeoStoryEditorPlugin from '../plugins/GeoStoryEditor';
 import GeoStoryNavigationPlugin from '../plugins/GeoStoryNavigation';
-import SaveStoryPlugin, {
+import {
     GeoStorySaveAs as GeoStorySaveAsPlugin,
     GeoStorySave as GeoStorySavePlugin
 } from '../plugins/GeoStorySave';
@@ -193,7 +193,6 @@ export default {
         RulesManagerFooter,
         SaveAsPlugin,
         SavePlugin,
-        SaveStoryPlugin,
         ScaleBoxPlugin,
         ScrollTopPlugin,
         SearchPlugin,

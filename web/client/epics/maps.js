@@ -83,7 +83,7 @@ import {
 
 import { getIdFromUri } from '../utils/MapUtils';
 import { getErrorMessage } from '../utils/LocaleUtils';
-import Persistence from '../api/persistence';
+import {updateResource, createResource} from '../api/persistence';
 
 const manageMapResource = ({map = {}, attribute = "", resource = null, type = "STRING", optionsDel = {}, messages = {}} = {}) => {
     const attrVal = map[attribute];
@@ -344,7 +344,7 @@ const storeDetailsInfoEpic = (action$, store) =>
                     });
         });
 // UPDATE MAP_RESOURCE FLOW
-const updateMapResource = (resource) => Persistence.updateResource(resource)
+const updateMapResource = (resource) => updateResource(resource)
     .switchMap(() =>
         Rx.Observable.of(basicSuccess({
             title: 'map.savedMapTitle',
@@ -362,7 +362,7 @@ const updateMapResource = (resource) => Persistence.updateResource(resource)
     ))
     .startWith(mapUpdating(resource.metadata));
 // CREATE MAP_RESOURCE FLOW
-const createMapResource = (resource) => Persistence.createResource(resource)
+const createMapResource = (resource) => createResource(resource)
     .switchMap((rid) =>
         Rx.Observable.of(
             mapCreated(rid, assign({id: rid, canDelete: true, canEdit: true, canCopy: true}, resource.metadata), resource.data),
@@ -383,7 +383,7 @@ const createMapResource = (resource) => Persistence.createResource(resource)
     ))
     .startWith(savingMap(resource.metadata));
 /**
- * Create or update map reosurce with persistence api
+ * Create or update map resource with persistence api
  */
 const mapSaveMapResourceEpic = (action$) =>
     action$.ofType(SAVE_MAP_RESOURCE)

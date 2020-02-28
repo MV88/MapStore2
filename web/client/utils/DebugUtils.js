@@ -20,14 +20,15 @@ var warningFilterKey = function(warning) {
     return warning.indexOf("Warning: owner-based and parent-based contexts differ") >= 0;
 };
 
-export const createDebugStore =  async(reducer, initialState, userMiddlewares, enhancer) => {
+
+export const createDebugStore = (reducer, initialState, userMiddlewares, enhancer) => {
     let finalCreateStore;
     if (urlQuery && urlQuery.debug && __DEVTOOLS__) {
-        let logger = await import('redux-logger');
-        let immutable = await import('redux-immutable-state-invariant').default();
+        let logger = require('redux-logger').default;
+        let immutable = require('redux-immutable-state-invariant').default();
         let middlewares = [immutable, thunkMiddleware, logger].concat(userMiddlewares || []);
-        const {persistState} = await import('redux-devtools');
-        const DevTools = await import('../components/development/DevTools');
+        const {persistState} = require('redux-devtools');
+        const DevTools = require('../components/development/DevTools');
 
         finalCreateStore = compose(
             applyMiddleware.apply(null, middlewares),
@@ -42,10 +43,6 @@ export const createDebugStore =  async(reducer, initialState, userMiddlewares, e
     return finalCreateStore(reducer, initialState, enhancer);
 };
 
-
-var DebugUtils = {
-    createDebugStore
-};
 /* eslint-disable */
 console.warn = function() {
     if ( arguments && arguments.length > 0 && typeof arguments[0] === "string" && warningFilterKey(arguments[0]) ) {
@@ -55,5 +52,9 @@ console.warn = function() {
     }
 };
 /* eslint-enable */
+
+const DebugUtils = {
+    createDebugStore
+};
 
 export default DebugUtils;

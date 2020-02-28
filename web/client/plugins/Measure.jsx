@@ -46,7 +46,6 @@ import {
     cancelCloseAnnotations,
     confirmCloseAnnotations,
     startDrawing,
-    changeStyler,
     setUnsavedChanges,
     toggleUnsavedChangesModal,
     changedProperties,
@@ -77,7 +76,6 @@ import { showCoordinateEditorSelector, measureSelector } from '../selectors/cont
 const commonEditorActions = {
     onEdit: openEditor,
     onCancelEdit: cancelEditAnnotation,
-    onChangeStyler: changeStyler,
     onChangeFormat: changeFormat,
     onConfirmDeleteFeature: confirmDeleteFeature,
     onCleanHighlight: cleanHighlight,

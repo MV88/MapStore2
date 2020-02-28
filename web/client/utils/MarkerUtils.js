@@ -57,7 +57,7 @@ const loadGlyphs = (font) => {
     }, {});
 };
 
-const extraMarkers = {
+export const extraMarkers = {
     size: [36, 46],
     colors: ['red', 'orange-dark', 'orange', 'yellow', 'blue-dark', 'blue', 'cyan', 'purple', 'violet',
         'pink', 'green-dark', 'green', 'green-light', 'black'],

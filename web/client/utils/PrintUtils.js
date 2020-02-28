@@ -11,7 +11,7 @@ import CoordinatesUtils from './CoordinatesUtils';
 import SecurityUtils from './SecurityUtils';
 import MapUtils from './MapUtils';
 import { optionsToVendorParams } from './VendorParamsUtils';
-import AnnotationsUtils from './AnnotationsUtils';
+import { annotationsToPrint } from './AnnotationsUtils';
 import { colorToHexStr } from './ColorUtils';
 import { isArray } from 'lodash';
 import url from 'url';
@@ -254,7 +254,7 @@ const PrintUtils = {
                 },
                 geoJson: CoordinatesUtils.reprojectGeoJson({
                     type: "FeatureCollection",
-                    features: layer.id === "annotations" && AnnotationsUtils.annotationsToPrint(layer.features) ||
+                    features: layer.id === "annotations" && annotationsToPrint(layer.features) ||
                                     layer.features.map( f => ({...f, properties: {...f.properties, ms_style: f && f.geometry && f.geometry.type && f.geometry.type.replace("Multi", "") || 1}}))
                 },
                 "EPSG:4326",

@@ -47,7 +47,6 @@ class Manager extends React.Component {
         lineDashOptions: PropTypes.array,
         onChangeStyle: PropTypes.func,
         pointType: PropTypes.string,
-        onChangePointType: PropTypes.func,
         onUpdateSymbols: PropTypes.func,
         onSetErrorSymbol: PropTypes.func,
         width: PropTypes.number,
@@ -81,7 +80,6 @@ class Manager extends React.Component {
             iconColor: 'blue'
         },
         onChangeStyle: () => {},
-        onChangePointType: () => {},
         onUpdateSymbols: () => {},
         switchPanelOptions: []
     };
@@ -282,7 +280,6 @@ class Manager extends React.Component {
         if (styleChangedIndex !== -1) {
             let newStyles = styles.map((s, k) => k === styleChangedIndex ? {...pointStyle, id: s.id, title: s.title, geometry: s.geometry, filtering: s.filtering} : s);
             this.props.onChangeStyle(newStyles);
-            this.props.onChangePointType(pointType);
         }
     }
     checkSymbolUrl = ({style, symbolErrors, onLoadingError = this.props.onSetErrorSymbol}) => {

@@ -7,7 +7,7 @@
  */
 import ConfigUtils from '../../utils/ConfigUtils';
 
-import geostore from '../../observables/geostore';
+import * as geostore from '../../observables/geostore';
 const ApiProviders = {
     geostore
 };

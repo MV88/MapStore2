@@ -666,5 +666,5 @@ export default {
         queryform,
         query
     },
-    epics: epics.default(API)
+    epics: epics(API)
 };

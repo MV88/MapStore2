@@ -13,15 +13,13 @@ import React from 'react';
 if (!global.Symbol) {
     import("babel-polyfill");
 }
+import DevTools from './DevTools';
 
 const urlQuery = url.parse(window.location.href, true).query;
 
 class Debug extends React.Component {
-    async render() {
+    render() {
         if (urlQuery && urlQuery.debug && __DEVTOOLS__ && !window.devToolsExtension) {
-            const DevTools = await import(
-                /* webpackChunkName: "DevTools" */
-                './DevTools');
             return (
                 <DevTools/>
             );

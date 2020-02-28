@@ -20,7 +20,7 @@ import help from '../reducers/help';
 
 import layers from '../reducers/layers';
 import mapConfig from '../reducers/config';
-import DebugUtils from '../utils/DebugUtils';
+import {createDebugStore} from '../utils/DebugUtils';
 import { combineReducers, combineEpics } from '../utils/PluginsUtils';
 import LayersUtils from '../utils/LayersUtils';
 import { CHANGE_BROWSER_PROPERTIES } from '../actions/browser';
@@ -99,8 +99,8 @@ export default (initialState = {defaultState: {}, mobile: {}}, appReducers = {},
         const reduxRouterMiddleware = routerMiddleware(history);
         middlewares = [...middlewares, reduxRouterMiddleware];
     }
+    store = createDebugStore(rootReducer, defaultState, middlewares, enhancer);
 
-    store = DebugUtils.createDebugStore(rootReducer, defaultState, middlewares, enhancer);
     if (storeOpts && storeOpts.persist) {
         const persisted = {};
         store.subscribe(() => {

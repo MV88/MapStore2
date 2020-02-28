@@ -12,7 +12,7 @@ import Rx from 'rxjs';
 
 import { changeDrawingStatus } from '../actions/draw';
 import { CHANGE_MAP_VIEW } from '../actions/map';
-import notifications from '../actions/notifications';
+import { error } from '../actions/notifications';
 import {
     SELECT_VIEWPORT_SPATIAL_METHOD,
     changeSpatialAttribute,
@@ -113,7 +113,7 @@ export const featureTypeSelectedEpic = (action$, store) =>
                     } catch (e) {
                         return Rx.Observable.from([
                             featureTypeError(action.typeName, 'Error from WFS: ' + e.message),
-                            notifications.error({
+                            error({
                                 title: 'warning',
                                 message: 'layerProperties.featureTypeErrorInvalidJSON',
                                 autoDismiss: 3,
@@ -163,7 +163,7 @@ export const wfsQueryEpic = (action$, store) =>
             return Rx.Observable.merge(
                 (typeof filterObj === 'object' && getJSONFeatureWA(queryUrl, filterObj, options) || getLayerJSONFeature(layer, filterObj, options))
                     .map(data => querySearchResponse(data, action.searchUrl, action.filterObj, action.queryOptions))
-                    .catch(error => Rx.Observable.of(queryError(error)))
+                    .catch(err => Rx.Observable.of(queryError(err)))
                     .startWith(featureLoading(true))
                     .concat(Rx.Observable.of(featureLoading(false)))
             ).takeUntil(action$.ofType(UPDATE_QUERY));

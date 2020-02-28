@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 /**
  * Copyright 2016, GeoSolutions Sas.
@@ -8,11 +7,12 @@ import PropTypes from 'prop-types';
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Debug from '../../../components/development/Debug';
 import Localized from '../../../components/I18N/Localized';
 import { connect } from 'react-redux';
-import { LoginPlugin } from '../../../plugins/Login';
+import LoginPlugin from '../../../plugins/Login';
 import { Jumbotron } from 'react-bootstrap';
 
 class Login extends React.Component {

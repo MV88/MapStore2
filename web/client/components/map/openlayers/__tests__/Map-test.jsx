@@ -13,7 +13,8 @@ import OpenlayersMap from '../Map';
 
 import assign from 'object-assign';
 
-import proj from 'proj4';
+const proj4 = require('proj4').default;
+
 import MapUtils from '../../../../utils/MapUtils';
 
 import '../../../../utils/openlayers/Layers';
@@ -104,7 +105,7 @@ describe('OpenlayersMap', () => {
     });
 
     it('custom projection', () => {
-        proj.defs("EPSG:25830", "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+        proj4.defs("EPSG:25830", "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
         const projectionDefs = [{
             code: "EPSG:25830",
             extent: [-1300000, 4000000, 1900000, 7500000],
@@ -120,7 +121,7 @@ describe('OpenlayersMap', () => {
     });
 
     it('custom projection with axisOrientation', () => {
-        proj.defs("EPSG:31468", "+proj=tmerc +lat_0=0 +lon_0=12 +k=1 +x_0=4500000 +y_0=0 +ellps=bessel +towgs84=598.1,73.7,418.2,0.202,0.045,-2.455,6.7 +units=m +no_defs");
+        proj4.defs("EPSG:31468", "+proj=tmerc +lat_0=0 +lon_0=12 +k=1 +x_0=4500000 +y_0=0 +ellps=bessel +towgs84=598.1,73.7,418.2,0.202,0.045,-2.455,6.7 +units=m +no_defs");
         const projectionDefs = [{
             code: "EPSG:31468",
             axisOrientation: "neu",
@@ -954,7 +955,7 @@ describe('OpenlayersMap', () => {
                 ]
             }
         ];
-        proj.defs(projectionDefs[0].code, projectionDefs[0].def);
+        proj4.defs(projectionDefs[0].code, projectionDefs[0].def);
         const maxResolution = 1847542.2626266503 - 1241482.0019432348;
         const tileSize = 256;
         const expectedResolutions = Array.from(Array(29).keys()).map(k => maxResolution / tileSize / Math.pow(2, k));
@@ -1021,7 +1022,7 @@ describe('OpenlayersMap', () => {
                 ]
             }
         ];
-        proj.defs(projectionDefs[0].code, projectionDefs[0].def);
+        proj4.defs(projectionDefs[0].code, projectionDefs[0].def);
         ReactDOM.render(<OpenlayersMap
             id="ol-map"
             center={CENTER_OUTSIDE_OF_MAX_EXTENT}

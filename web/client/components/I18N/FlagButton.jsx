@@ -37,7 +37,7 @@ class LangBar extends React.Component {
         let tooltip = <Tooltip id={"flag-button." + this.props.code} >{this.props.label}</Tooltip>;
         let imgSrc;
         try {
-            imgSrc = import('./images/flags/' + this.props.code + '.png');
+            imgSrc = require('./images/flags/' + this.props.code + '.png');
         } catch (e) {
             imgSrc = null;
         }

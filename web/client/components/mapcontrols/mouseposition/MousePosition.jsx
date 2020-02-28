@@ -8,7 +8,8 @@
 import PropTypes from 'prop-types';
 
 import React from 'react';
-import proj4js from 'proj4';
+const proj4 = require('proj4').default;
+
 import { Glyphicon, Button, Label } from 'react-bootstrap';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import CoordinatesUtils from '../../../utils/CoordinatesUtils';
@@ -79,7 +80,7 @@ class MousePosition extends React.Component {
     };
 
     getUnits = (crs) => {
-        return proj4js.defs(crs).units;
+        return proj4.defs(crs).units;
     };
 
     getPosition = () => {
@@ -87,7 +88,7 @@ class MousePosition extends React.Component {
         if (!x && !y) {
             // if we repoject null coordinates we can end up with -0.00 instead of 0.00
             ({x, y} = {x: 0, y: 0, z});
-        } else if (proj4js.defs(this.props.mousePosition.crs) !== proj4js.defs(this.props.crs)) {
+        } else if (proj4.defs(this.props.mousePosition.crs) !== proj4.defs(this.props.crs)) {
             ({x, y} = CoordinatesUtils.reproject([x, y], this.props.mousePosition.crs, this.props.crs));
         }
         let units = this.getUnits(this.props.crs);

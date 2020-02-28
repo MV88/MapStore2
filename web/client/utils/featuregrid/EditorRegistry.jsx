@@ -8,9 +8,9 @@
 
 import {find} from 'lodash';
 import assign from 'object-assign';
-import * as customEditors from '../../components/data/featuregrid/editors/customEditors';
+import {Editors as defaultEditors} from '../../components/data/featuregrid/editors/customEditors';
 
-let Editors = assign({}, ...customEditors);
+let Editors = assign({}, {...defaultEditors});
 
 const isPresent = (editorName) => {
     return Object.keys(Editors).indexOf(editorName) !== -1;

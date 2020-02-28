@@ -34,7 +34,7 @@ import ZoomAllPlugin from '../../plugins/ZoomAll';
 import ZoomInPlugin from '../../plugins/ZoomIn';
 import ZoomOutPlugin from '../../plugins/ZoomOut';
 
-export default {
+export const Plugins = {
     plugins: {
         BackgroundSelectorPlugin,
         BurgerMenuPlugin,
@@ -66,3 +66,5 @@ export default {
     },
     requires: {}
 };
+
+export default Plugins;

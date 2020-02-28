@@ -67,4 +67,4 @@ const extendColorBrewer = {
 import * as colorbrewer from 'colorbrewer';
 import assign from 'object-assign';
 
-export default assign({}, ...colorbrewer, extendColorBrewer);
+export default assign({}, {...colorbrewer}, extendColorBrewer);

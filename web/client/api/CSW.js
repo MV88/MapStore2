@@ -30,9 +30,11 @@ var Api = {
     parseUrl,
     getRecordById: function(catalogURL) {
         return new Promise(async(resolve) => {
-            const {unmarshaller} = await import(
+            const Module = await import(
                 /* webpackChunkName: "CSW_OGC_Utils" */
                 '../utils/ogc/CSW');
+            const {unmarshaller} = Module.default;
+
             resolve(axios.get(catalogURL)
                 .then((response) => {
                     if (response) {
@@ -83,9 +85,12 @@ var Api = {
     },
     getRecords: function(url, startPosition, maxRecords, filter) {
         return new Promise( async(resolve) => {
-            const {CSW, marshaller, unmarshaller} = await import(
+            const Module = await import(
                 /* webpackChunkName: "CSW_OGC_Utils" */
-                '../utils/ogc/CSW');
+                '../utils/ogc/CSW'
+            );
+            const {CSW, marshaller, unmarshaller} = Module.default;
+
             let body = marshaller.marshalString({
                 name: "csw:GetRecords",
                 value: CSW.getRecords(startPosition, maxRecords, filter)
@@ -192,10 +197,10 @@ var Api = {
     },
     textSearch: function(url, startPosition, maxRecords, text) {
         return new Promise(async(resolve) => {
-            const {Filter} = await import(
+            const Module = await import(
                 /* webpackChunkName: "Filter_OGC_Utils" */
                 '../utils/ogc/Filter');
-
+            const {Filter} = Module.default;
             // <ogc:PropertyName>apiso:AnyText</ogc:PropertyName><ogc:Literal>%a%</ogc:Literal></ogc:PropertyIsLike>
             let filter = null;
             if (text) {
@@ -207,9 +212,10 @@ var Api = {
     },
     workspaceSearch: function(url, startPosition, maxRecords, text, workspace) {
         return new Promise(async(resolve) => {
-            const {Filter} = await import(
+            const Module = await import(
                 /* webpackChunkName: "Filter_OGC_Utils" */
                 '../utils/ogc/Filter');
+            const {Filter} = Module.default;
             const workspaceTerm = workspace || "%";
             const layerNameTerm = text && "%" + text + "%" || "%";
             const ops = Filter.propertyIsLike("identifier", workspaceTerm + ":" + layerNameTerm);

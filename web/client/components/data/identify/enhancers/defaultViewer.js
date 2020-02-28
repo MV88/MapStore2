@@ -17,7 +17,7 @@ import MapInfoUtils from '../../../../utils/MapInfoUtils';
  * @memberof enhancers.defaultViewerHandlers
  * @class
  */
-const defaultViewerHandlers = withHandlers({
+export const defaultViewerHandlers = withHandlers({
     onNext: ({index = 0, setIndex = () => {}, validResponses = []}) => () => {
         setIndex(Math.min(validResponses.length - 1, index + 1));
     },
@@ -32,12 +32,7 @@ const defaultViewerHandlers = withHandlers({
  * @memberof enhancers.defaultViewerDefaultProps
  * @class
  */
-const defaultViewerDefaultProps = defaultProps({
+export const defaultViewerDefaultProps = defaultProps({
     format: MapInfoUtils.getDefaultInfoFormatValue(),
     validator: MapInfoUtils.getValidator
 });
-
-export default {
-    defaultViewerHandlers,
-    defaultViewerDefaultProps
-};

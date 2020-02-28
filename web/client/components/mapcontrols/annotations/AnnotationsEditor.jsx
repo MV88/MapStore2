@@ -60,7 +60,6 @@ import bbox from '@turf/bbox';
  * @prop {function} onCancelRemove triggered when the user cancels removal
  * @prop {function} onCancelClose triggered when the user cancels closing
  * @prop {function} onConfirmClose triggered when the user confirms closing
-  * @prop {function} onChangePointType triggered when the user switches between the point stylers
  * @prop {function} onStartDrawing triggered before the user starts the drawing process
  * @prop {object} editedFields fields of the annotation
  * @prop {object} drawingText it contains info of the text annotation, 'drawing' if being added or 'show' used to show the modal to add the relative value
@@ -145,7 +144,6 @@ class AnnotationsEditor extends React.Component {
         onResetCoordEditor: PropTypes.func,
         onHighlightPoint: PropTypes.func,
         onSetStyle: PropTypes.func,
-        onChangePointType: PropTypes.func,
         onStartDrawing: PropTypes.func,
         onZoom: PropTypes.func,
         editing: PropTypes.object,
@@ -454,7 +452,6 @@ class AnnotationsEditor extends React.Component {
                 this.props.onSetUnsavedChanges(true);
             }}
             pointType={this.props.pointType}
-            onChangePointType={this.props.onChangePointType}
             style={this.props.selected && this.props.selected.style || this.props.editing.style}
             width={this.props.width}
             symbolsPath={this.props.symbolsPath}

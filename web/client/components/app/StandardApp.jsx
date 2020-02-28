@@ -12,7 +12,7 @@ import url from 'url';
 
 import { isArray, isObject } from 'lodash';
 import assign from 'object-assign';
-import proj4 from 'proj4';
+const proj4 = require('proj4').default;
 import PropTypes from 'prop-types';
 import React from 'react';
 import { DragDropContext as dragDropContext } from 'react-dnd';
