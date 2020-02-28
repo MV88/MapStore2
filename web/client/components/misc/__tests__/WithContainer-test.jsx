@@ -5,17 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
 
-const withContainer = require('../WithContainer');
-const Portal = withContainer(require('react-overlays').Portal);
-const expect = require('expect');
-const ConfigUtils = require('../../../utils/ConfigUtils');
+import expect from 'expect';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Portal as PortalComp} from 'react-overlays';
+
+import ConfigUtils from '../../../utils/ConfigUtils';
+import withContainer from '../WithContainer';
+
+const Portal = withContainer(PortalComp);
 
 describe('WithContainer Overlay', () => {
     beforeEach((done) => {
-        document.body.innerHTML = '<div id="main-conatiner" class="custom"><div id="container"><div><div id="old-container"></div></div>';
+        document.body.innerHTML = '<div id="main-container" class="custom"><div id="container"><div><div id="old-container"></div></div>';
         setTimeout(done);
     });
 

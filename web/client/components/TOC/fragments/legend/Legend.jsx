@@ -1,12 +1,10 @@
-const urlUtil = require('url');
-const PropTypes = require('prop-types');
-const React = require('react');
-const {isArray} = require('lodash');
-
-const Message = require('../../../I18N/Message');
-const SecurityUtils = require('../../../../utils/SecurityUtils');
-
-const assign = require('object-assign');
+import urlUtil from 'url';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { isArray } from 'lodash';
+import Message from '../../../I18N/Message';
+import SecurityUtils from '../../../../utils/SecurityUtils';
+import assign from 'object-assign';
 
 class Legend extends React.Component {
     static propTypes = {
@@ -87,4 +85,4 @@ class Legend extends React.Component {
     }
 }
 
-module.exports = Legend;
+export default Legend;

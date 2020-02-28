@@ -6,28 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const ConfirmDialog = require('../../misc/ConfirmDialog');
-const Message = require('../../I18N/Message');
-const LocaleUtils = require('../../../utils/LocaleUtils');
-const LineThumb = require('../../../components/style/thumbGeoms/LineThumb.jsx');
-const CircleThumb = require('../../../components/style/thumbGeoms/CircleThumb.jsx');
-const MultiGeomThumb = require('../../../components/style/thumbGeoms/MultiGeomThumb.jsx');
-const PolygonThumb = require('../../../components/style/thumbGeoms/PolygonThumb.jsx');
-const {head} = require('lodash');
-const assign = require('object-assign');
-const Filter = require('../../misc/Filter');
-const uuidv1 = require('uuid/v1');
+import React from 'react';
 
-const {Grid, Col, Row, Glyphicon, Button} = require('react-bootstrap');
-const BorderLayout = require('../../layout/BorderLayout');
-const Toolbar = require('../../misc/toolbar/Toolbar');
-const SideGrid = require('../../misc/cardgrids/SideGrid');
-
-const SelecAnnotationsFile = require("./SelectAnnotationsFile");
-
-const defaultConfig = require('./AnnotationsConfig');
+import PropTypes from 'prop-types';
+import ConfirmDialog from '../../misc/ConfirmDialog';
+import Message from '../../I18N/Message';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import LineThumb from '../../../components/style/thumbGeoms/LineThumb.jsx';
+import CircleThumb from '../../../components/style/thumbGeoms/CircleThumb.jsx';
+import MultiGeomThumb from '../../../components/style/thumbGeoms/MultiGeomThumb.jsx';
+import PolygonThumb from '../../../components/style/thumbGeoms/PolygonThumb.jsx';
+import { head } from 'lodash';
+import assign from 'object-assign';
+import Filter from '../../misc/Filter';
+import uuidv1 from 'uuid/v1';
+import { Grid, Col, Row, Glyphicon, Button } from 'react-bootstrap';
+import BorderLayout from '../../layout/BorderLayout';
+import Toolbar from '../../misc/toolbar/Toolbar';
+import SideGrid from '../../misc/cardgrids/SideGrid';
+import SelecAnnotationsFile from './SelectAnnotationsFile';
+import defaultConfig from './AnnotationsConfig';
 
 /**
  * Annotations panel component.
@@ -378,4 +376,4 @@ class Annotations extends React.Component {
     };
 }
 
-module.exports = Annotations;
+export default Annotations;

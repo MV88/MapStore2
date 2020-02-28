@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,15 +7,15 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Select = require('react-select');
-const {FormControl, Button, Alert} = require('react-bootstrap');
-const Message = require('../../I18N/Message');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import React from 'react';
 
-require('react-select/dist/react-select.css');
+import Select from 'react-select';
+import { FormControl, Button, Alert } from 'react-bootstrap';
+import Message from '../../I18N/Message';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import 'react-select/dist/react-select.css';
 
-module.exports = class extends React.Component {
+export default class extends React.Component {
     static propTypes = {
         enabled: PropTypes.bool,
         status: PropTypes.object,
@@ -111,4 +112,4 @@ module.exports = class extends React.Component {
             this.props.createWorkspace(name, this.props.datastoreTemplates);
         }
     };
-};
+}

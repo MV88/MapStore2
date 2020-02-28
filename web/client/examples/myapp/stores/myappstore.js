@@ -1,7 +1,6 @@
-var {createStore, combineReducers, applyMiddleware} = require('redux');
-
-var thunkMiddleware = require('redux-thunk');
-var mapConfig = require('../../../reducers/config');
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import mapConfig from '../../../reducers/config';
 
 // reducers
 const reducers = combineReducers({
@@ -12,4 +11,4 @@ const reducers = combineReducers({
 let finalCreateStore = applyMiddleware(thunkMiddleware)(createStore);
 
 // export the store with the given reducers (and middleware applied)
-module.exports = finalCreateStore(reducers, {});
+export default finalCreateStore(reducers, {});

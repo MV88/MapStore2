@@ -5,23 +5,23 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const {connect} = require('react-redux');
-const PropTypes = require('prop-types');
-const Debug = require('../development/Debug');
-const {Route} = require('react-router');
-const {ConnectedRouter} = require('connected-react-router');
-const history = require('../../stores/History').default;
+import React from 'react';
 
-const Localized = require('../I18N/Localized');
-
-const assign = require('object-assign');
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Debug from '../development/Debug';
+import { Route } from 'react-router';
+import { ConnectedRouter } from 'connected-react-router';
+import history from '../../stores/History';
+import Localized from '../I18N/Localized';
+import assign from 'object-assign';
+import ThemeComp from '../theme/Theme';
 
 const Theme = connect((state) => ({
     theme: state.theme && state.theme.selectedTheme && state.theme.selectedTheme.id
 }), {}, (stateProps, dispatchProps, ownProps) => {
     return assign({}, stateProps, dispatchProps, ownProps);
-})(require('../theme/Theme'));
+})(ThemeComp);
 
 class StandardRouter extends React.Component {
     static propTypes = {
@@ -100,4 +100,4 @@ class StandardRouter extends React.Component {
     }
 }
 
-module.exports = StandardRouter;
+export default StandardRouter;

@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,12 +8,13 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {Grid, Row, Col} = require('react-bootstrap');
-const GroupCard = require('./GroupCard');
-const Spinner = require('react-spinkit');
-const Message = require('../../I18N/Message');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import React from 'react';
+
+import { Grid, Row, Col } from 'react-bootstrap';
+import GroupCard from './GroupCard';
+import Spinner from 'react-spinkit';
+import Message from '../../I18N/Message';
+import LocaleUtils from '../../../utils/LocaleUtils';
 
 class GroupsGrid extends React.Component {
     static propTypes = {
@@ -105,4 +107,4 @@ class GroupsGrid extends React.Component {
     }
 }
 
-module.exports = GroupsGrid;
+export default GroupsGrid;

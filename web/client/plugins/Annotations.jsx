@@ -6,36 +6,75 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const {connect} = require('../utils/PluginsUtils');
-const assign = require('object-assign');
-const Message = require('../components/I18N/Message');
-const PropTypes = require('prop-types');
+import React from 'react';
 
-const {Glyphicon} = require('react-bootstrap');
-const {on, toggleControl} = require('../actions/controls');
-const {createSelector} = require('reselect');
+import { connect } from '../utils/PluginsUtils';
+import assign from 'object-assign';
+import Message from '../components/I18N/Message';
+import PropTypes from 'prop-types';
+import { Glyphicon } from 'react-bootstrap';
+import { on, toggleControl } from '../actions/controls';
+import { createSelector } from 'reselect';
+import AnnotationsEditorComp from '../components/mapcontrols/annotations/AnnotationsEditor';
+import AnnotationsComp from '../components/mapcontrols/annotations/Annotations';
+import annotationsReducers from '../reducers/annotations';
+import annotationsEpics from '../epics/annotations';
 
-const {cancelRemoveAnnotation, confirmRemoveAnnotation, editAnnotation, newAnnotation, removeAnnotation, cancelEditAnnotation,
-    saveAnnotation, toggleAdd, validationError, removeAnnotationGeometry, toggleStyle, setStyle, restoreStyle,
-    highlight, cleanHighlight, showAnnotation, cancelShowAnnotation, filterAnnotations, closeAnnotations,
-    cancelCloseAnnotations, confirmCloseAnnotations, startDrawing, setUnsavedChanges, toggleUnsavedChangesModal,
-    changedProperties, setUnsavedStyle, toggleUnsavedStyleModal, addText, download, loadAnnotations,
-    changeSelected, resetCoordEditor, changeRadius, changeText, toggleUnsavedGeometryModal, addNewFeature, setInvalidSelected,
-    highlightPoint, confirmDeleteFeature, toggleDeleteFtModal, changeFormat, openEditor, updateSymbols, changePointType,
+import {
+    cancelRemoveAnnotation,
+    confirmRemoveAnnotation,
+    editAnnotation,
+    newAnnotation,
+    removeAnnotation,
+    cancelEditAnnotation,
+    saveAnnotation,
+    toggleAdd,
+    validationError,
+    removeAnnotationGeometry,
+    toggleStyle,
+    setStyle,
+    restoreStyle,
+    highlight,
+    cleanHighlight,
+    showAnnotation,
+    cancelShowAnnotation,
+    filterAnnotations,
+    closeAnnotations,
+    cancelCloseAnnotations,
+    confirmCloseAnnotations,
+    startDrawing,
+    setUnsavedChanges,
+    toggleUnsavedChangesModal,
+    changedProperties,
+    setUnsavedStyle,
+    toggleUnsavedStyleModal,
+    addText,
+    download,
+    loadAnnotations,
+    changeSelected,
+    resetCoordEditor,
+    changeRadius,
+    changeText,
+    toggleUnsavedGeometryModal,
+    addNewFeature,
+    setInvalidSelected,
+    highlightPoint,
+    confirmDeleteFeature,
+    toggleDeleteFtModal,
+    changeFormat,
+    openEditor,
+    updateSymbols,
     setErrorSymbol
-} = require('../actions/annotations');
+} from '../actions/annotations';
 
-const { zoomToExtent } = require('../actions/map');
-
-const { annotationsInfoSelector, annotationsListSelector } = require('../selectors/annotations');
-const { mapLayoutValuesSelector } = require('../selectors/maplayout');
+import { zoomToExtent } from '../actions/map';
+import { annotationsInfoSelector, annotationsListSelector } from '../selectors/annotations';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
 const commonEditorActions = {
     onUpdateSymbols: updateSymbols,
     onSetErrorSymbol: setErrorSymbol,
     onEdit: editAnnotation,
     onCancelEdit: cancelEditAnnotation,
-    onChangePointType: changePointType,
     onChangeFormat: changeFormat,
     onConfirmDeleteFeature: confirmDeleteFeature,
     onCleanHighlight: cleanHighlight,
@@ -76,13 +115,13 @@ const AnnotationsEditor = connect(annotationsInfoSelector,
     {
         onCancel: cancelShowAnnotation,
         ...commonEditorActions
-    })(require('../components/mapcontrols/annotations/AnnotationsEditor'));
+    })(AnnotationsEditorComp);
 
 const AnnotationsInfoViewer = connect(annotationsInfoSelector,
     {
         ...commonEditorActions,
         onEdit: openEditor
-    })(require('../components/mapcontrols/annotations/AnnotationsEditor'));
+    })(AnnotationsEditorComp);
 
 const panelSelector = createSelector([annotationsListSelector], (list) => ({
     ...list,
@@ -106,10 +145,10 @@ const Annotations = connect(panelSelector, {
     onFilter: filterAnnotations,
     onDownload: download,
     onLoadAnnotations: loadAnnotations
-})(require('../components/mapcontrols/annotations/Annotations'));
+})(AnnotationsComp);
 
-const ContainerDimensions = require('react-container-dimensions').default;
-const Dock = require('react-dock').default;
+import ContainerDimensions from 'react-container-dimensions';
+import Dock from 'react-dock';
 
 class AnnotationsPanel extends React.Component {
     static propTypes = {
@@ -212,7 +251,7 @@ const AnnotationsPlugin = connect(annotationsSelector, {
     toggleControl: conditionalToggle
 })(AnnotationsPanel);
 
-module.exports = {
+export default {
     AnnotationsPlugin: assign(AnnotationsPlugin, {
         disablePluginIf: "{state('mapType') === 'cesium' || state('mapType') === 'leaflet' }"
     }, {
@@ -227,7 +266,7 @@ module.exports = {
         }
     }),
     reducers: {
-        annotations: require('../reducers/annotations')
+        annotations: annotationsReducers
     },
-    epics: require('../epics/annotations')(AnnotationsInfoViewer)
+    epics: annotationsEpics(AnnotationsInfoViewer)
 };

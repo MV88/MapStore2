@@ -5,20 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const PropTypes = require('prop-types');
-const React = require('react');
-const {DropdownList} = require('react-widgets');
-const {ButtonToolbar, Tooltip, Glyphicon, Grid, Row, Col, FormGroup} = require('react-bootstrap');
-const {isEqual, round, get} = require('lodash');
+import PropTypes from 'prop-types';
 
-const NumberFormat = require('../../I18N/Number');
-const Message = require('../../I18N/Message');
-const {convertUom, getFormattedBearingValue} = require('../../../utils/MeasureUtils');
-const LocaleUtils = require('../../../utils/LocaleUtils');
-const Toolbar = require('../../misc/toolbar/Toolbar');
-const BorderLayout = require('../../layout/BorderLayout');
-const CoordinatesEditor = require('../annotations/CoordinatesEditor');
-require('./measure.css');
+import React from 'react';
+import { DropdownList } from 'react-widgets';
+import { ButtonToolbar, Tooltip, Glyphicon, Grid, Row, Col, FormGroup } from 'react-bootstrap';
+import { isEqual, round, get } from 'lodash';
+import NumberFormat from '../../I18N/Number';
+import Message from '../../I18N/Message';
+import { convertUom, getFormattedBearingValue } from '../../../utils/MeasureUtils';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import Toolbar from '../../misc/toolbar/Toolbar';
+import BorderLayout from '../../layout/BorderLayout';
+import CoordinatesEditor from '../annotations/CoordinatesEditor';
+import './measure.css';
 
 class MeasureComponent extends React.Component {
     static propTypes = {
@@ -355,4 +355,4 @@ class MeasureComponent extends React.Component {
     };
 }
 
-module.exports = MeasureComponent;
+export default MeasureComponent;

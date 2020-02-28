@@ -6,13 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {createStructuredSelector} = require('reselect');
-const {servicesSelector, selectedServiceSelector} = require('./catalog');
-const {getFloatingWidgets, getCollapsedState, getFloatingWidgetsLayout} = require('./widgets');
-const { mapInfoConfigurationSelector } = require('./mapInfo');
+import { createStructuredSelector } from 'reselect';
 
+import { selectedServiceSelector, servicesSelector } from './catalog';
+import { mapInfoConfigurationSelector } from './mapInfo';
+import { getCollapsedState, getFloatingWidgets, getFloatingWidgetsLayout } from './widgets';
 
-const mapOptionsToSaveSelector = createStructuredSelector({
+export const mapOptionsToSaveSelector = createStructuredSelector({
     catalogServices: createStructuredSelector({
         services: servicesSelector,
         selectedService: selectedServiceSelector
@@ -24,4 +24,3 @@ const mapOptionsToSaveSelector = createStructuredSelector({
     }),
     mapInfoConfiguration: mapInfoConfigurationSelector
 });
-module.exports = {mapOptionsToSaveSelector};

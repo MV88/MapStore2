@@ -6,18 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const Spinner = require('react-spinkit');
-const { FormControl, FormGroup, ControlLabel, InputGroup, Col } = require('react-bootstrap');
-const Message = require('../../../I18N/Message');
-const { SimpleSelect } = require('react-selectize');
-const { isString, isObject, find } = require('lodash');
-const LocaleUtils = require('../../../../utils/LocaleUtils');
-const assign = require('object-assign');
-require('react-selectize/themes/index.css');
-const { Grid } = require('react-bootstrap');
-const { createFromSearch, flattenGroups } = require('../../../../utils/TOCUtils');
+import 'react-selectize/themes/index.css';
+
+import { find, isObject, isString } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Col, ControlLabel, FormControl, FormGroup, Grid, InputGroup } from 'react-bootstrap';
+import { SimpleSelect } from 'react-selectize';
+import Spinner from 'react-spinkit';
+
+import LocaleUtils from '../../../../utils/LocaleUtils';
+import { createFromSearch, flattenGroups } from '../../../../utils/TOCUtils';
+import Message from '../../../I18N/Message';
 
 /**
  * General Settings form for layer
@@ -198,4 +199,4 @@ class General extends React.Component {
     };
 }
 
-module.exports = General;
+export default General;

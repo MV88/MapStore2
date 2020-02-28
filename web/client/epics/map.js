@@ -6,40 +6,37 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const {changeLayerProperties} = require('../actions/layers');
+import { head, isArray, isObject, mapValues } from 'lodash';
+import Rx from 'rxjs';
 
-const {
+import { removeAllAdditionalLayers } from '../actions/additionallayers';
+import { MAP_CONFIG_LOADED, loadMapInfo } from '../actions/config';
+import { resetControls, setControlProperty } from '../actions/controls';
+import { changeLayerProperties, clearLayers } from '../actions/layers';
+import {
+    CHANGE_MAP_CRS,
     CREATION_ERROR_LAYER,
     INIT_MAP,
     ZOOM_TO_EXTENT,
-    CHANGE_MAP_CRS,
-    changeMapView,
-    changeMapLimits
-} = require('../actions/map');
-const {configuredExtentCrsSelector, configuredRestrictedExtentSelector, configuredMinZoomSelector, mapSelector, mapIdSelector} = require('../selectors/map');
-
-
-const { loadMapInfo} = require('../actions/config');
-const {LOGIN_SUCCESS} = require('../actions/security');
-
-const {currentBackgroundLayerSelector, allBackgroundLayerSelector, getLayerFromId} = require('../selectors/layers');
-const {mapTypeSelector} = require('../selectors/maptype');
-const { mapPaddingSelector } = require('../selectors/maplayout');
-
-const {setControlProperty} = require('../actions/controls');
-const {MAP_CONFIG_LOADED} = require('../actions/config');
-const {isSupportedLayer} = require('../utils/LayersUtils');
-const MapUtils = require('../utils/MapUtils');
-const CoordinatesUtils = require('../utils/CoordinatesUtils');
-
-const {warning} = require('../actions/notifications');
-const {resetControls} = require('../actions/controls');
-const {clearLayers} = require('../actions/layers');
-const {removeAllAdditionalLayers} = require('../actions/additionallayers');
-const { head, isArray, isObject, mapValues } = require('lodash');
-
-const ConfigUtils = require('../utils/ConfigUtils');
+    changeMapLimits,
+    changeMapView
+} from '../actions/map';
+import { warning } from '../actions/notifications';
+import { LOGIN_SUCCESS } from '../actions/security';
+import { allBackgroundLayerSelector, currentBackgroundLayerSelector, getLayerFromId } from '../selectors/layers';
+import {
+    configuredExtentCrsSelector,
+    configuredMinZoomSelector,
+    configuredRestrictedExtentSelector,
+    mapIdSelector,
+    mapSelector
+} from '../selectors/map';
+import { mapPaddingSelector } from '../selectors/maplayout';
+import { mapTypeSelector } from '../selectors/maptype';
+import ConfigUtils from '../utils/ConfigUtils';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
+import { isSupportedLayer } from '../utils/LayersUtils';
+import MapUtils from '../utils/MapUtils';
 
 const handleCreationBackgroundError = (action$, store) =>
     action$.ofType(CREATION_ERROR_LAYER)
@@ -214,7 +211,7 @@ const checkMapPermissions = (action$, {getState = () => {} }) =>
             return loadMapInfo(ConfigUtils.getConfigProp("geoStoreUrl") + "extjs/resource/" + mapId, mapId);
         });
 
-module.exports = {
+export default {
     checkMapPermissions,
     handleCreationLayerError,
     handleCreationBackgroundError,

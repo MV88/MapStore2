@@ -1,4 +1,3 @@
-import { withPropsOnChange } from "recompose";
 
 /*
  * Copyright 2018, GeoSolutions Sas.
@@ -7,14 +6,16 @@ import { withPropsOnChange } from "recompose";
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require("react");
-const {compose, withProps, withStateHandlers} = require("recompose");
-const {connect} = require("react-redux");
-const { onEditRule, delRules, onCacheClean} = require('../../actions/rulesmanager');
-const {rulesEditorToolbarSelector} = require('../../selectors/rulesmanager');
-const Toolbar = require('../../components/misc/toolbar/Toolbar');
-const Modal = require("../../components/manager/rulesmanager/ModalDialog");
-const Message = require("../../components/I18N/Message");
+
+import React from 'react';
+import { withPropsOnChange, compose, withProps, withStateHandlers } from 'recompose';
+import { connect } from 'react-redux';
+
+import { onEditRule, delRules, onCacheClean } from '../../actions/rulesmanager';
+import { rulesEditorToolbarSelector } from '../../selectors/rulesmanager';
+import Toolbar from '../../components/misc/toolbar/Toolbar';
+import Modal from '../../components/manager/rulesmanager/ModalDialog';
+import Message from '../../components/I18N/Message';
 
 const ToolbarWithModal = ({modalsProps, loading, ...props}) => {
     return (

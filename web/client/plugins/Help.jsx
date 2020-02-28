@@ -6,24 +6,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const {connect} = require('react-redux');
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
-
-const Message = require('../components/I18N/Message');
-
-const {toggleControl} = require('../actions/controls');
-
+import { connect } from 'react-redux';
+import assign from 'object-assign';
+import { Glyphicon } from 'react-bootstrap';
+import Message from '../components/I18N/Message';
+import { toggleControl } from '../actions/controls';
+import HelpTextPanelComp from '../components/help/HelpTextPanel';
+import help from '../reducers/help';
 const HelpTextPanel = connect((state) => ({
     isVisible: state.controls && state.controls.help && state.controls.help.enabled,
     helpText: state.help && state.help.helpText
 }), {
     onClose: toggleControl.bind(null, 'help', null)
-})(require('../components/help/HelpTextPanel'));
+})(HelpTextPanelComp);
 
-module.exports = {
+export default {
     HelpPlugin: assign(HelpTextPanel, {
         Toolbar: {
             name: 'help',
@@ -43,5 +42,5 @@ module.exports = {
             doNotHide: true
         }
     }),
-    reducers: {help: require('../reducers/help')}
+    reducers: {help}
 };

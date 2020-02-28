@@ -6,25 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { connect } = require('react-redux');
-const { compose, withState, defaultProps } = require('recompose');
-const { createStructuredSelector } = require('reselect');
-const Message = require('./locale/Message');
+import React from 'react';
 
-const { toggleControl } = require('../actions/controls');
-const { exportMap } = require('../actions/mapexport');
-
-
-const { createControlEnabledSelector } = require('../selectors/controls');
+import { connect } from 'react-redux';
+import { compose, withState, defaultProps } from 'recompose';
+import { createStructuredSelector } from 'reselect';
+import Message from './locale/Message';
+import { toggleControl } from '../actions/controls';
+import { exportMap } from '../actions/mapexport';
+import { createControlEnabledSelector } from '../selectors/controls';
 const isEnabled = createControlEnabledSelector('export');
 
-const assign = require('object-assign');
-const { Glyphicon, Button } = require('react-bootstrap');
-
-const Dialog = require('../components/misc/StandardDialog');
-const Select = require('react-select');
-
+import assign from 'object-assign';
+import { Glyphicon, Button } from 'react-bootstrap';
+import Dialog from '../components/misc/StandardDialog';
+import Select from 'react-select';
+import epics from '../epics/mapexport';
 const enhanceExport = compose(
     connect(
         createStructuredSelector({
@@ -68,7 +65,7 @@ const MapExport = enhanceExport(
     </Dialog>
 );
 
-module.exports = {
+export default {
     MapExportPlugin: assign(MapExport, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
         BurgerMenu: {
@@ -82,5 +79,5 @@ module.exports = {
             doNotHide: true
         }
     }),
-    epics: require('../epics/mapexport')
+    epics
 };

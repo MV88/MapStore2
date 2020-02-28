@@ -1,5 +1,5 @@
 /* eslint-disable */
-module.exports = function(Cesium) {
+export default function(Cesium) {
 	var OGCHelper = {};
 	 var intersectionRectangle=function(rectangle0,rectangle1){
 		var west = Math.max(rectangle0.west, rectangle1.west);

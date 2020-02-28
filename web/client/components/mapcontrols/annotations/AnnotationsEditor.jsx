@@ -6,25 +6,25 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const Toolbar = require('../../misc/toolbar/Toolbar');
-const Portal = require('../../misc/Portal');
-const GeometryEditor = require('./GeometryEditor');
-const BorderLayout = require('../../layout/BorderLayout');
-const Manager = require('../../style/vector/Manager');
-const Message = require('../../I18N/Message');
-const { FormControl, Grid, Row, Col } = require('react-bootstrap');
-const DropdownFeatureType = require('./DropdownFeatureType');
-const ReactQuill = require('react-quill');
-require('react-quill/dist/quill.snow.css');
-const { isFunction } = require('lodash');
+import PropTypes from 'prop-types';
 
-const ConfirmDialog = require('../../misc/ConfirmDialog');
-const assign = require('object-assign');
-const PluginsUtils = require('../../../utils/PluginsUtils');
-const defaultConfig = require('./AnnotationsConfig');
-const bbox = require('@turf/bbox');
+import React from 'react';
+import Toolbar from '../../misc/toolbar/Toolbar';
+import Portal from '../../misc/Portal';
+import GeometryEditor from './GeometryEditor';
+import BorderLayout from '../../layout/BorderLayout';
+import Manager from '../../style/vector/Manager';
+import Message from '../../I18N/Message';
+import { FormControl, Grid, Row, Col } from 'react-bootstrap';
+import DropdownFeatureType from './DropdownFeatureType';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { isFunction } from 'lodash';
+import ConfirmDialog from '../../misc/ConfirmDialog';
+import assign from 'object-assign';
+import PluginsUtils from '../../../utils/PluginsUtils';
+import defaultConfig from './AnnotationsConfig';
+import bbox from '@turf/bbox';
 
 /**
  * (Default) Viewer / Editor for Annotations.
@@ -60,7 +60,6 @@ const bbox = require('@turf/bbox');
  * @prop {function} onCancelRemove triggered when the user cancels removal
  * @prop {function} onCancelClose triggered when the user cancels closing
  * @prop {function} onConfirmClose triggered when the user confirms closing
-  * @prop {function} onChangePointType triggered when the user switches between the point stylers
  * @prop {function} onStartDrawing triggered before the user starts the drawing process
  * @prop {object} editedFields fields of the annotation
  * @prop {object} drawingText it contains info of the text annotation, 'drawing' if being added or 'show' used to show the modal to add the relative value
@@ -145,7 +144,6 @@ class AnnotationsEditor extends React.Component {
         onResetCoordEditor: PropTypes.func,
         onHighlightPoint: PropTypes.func,
         onSetStyle: PropTypes.func,
-        onChangePointType: PropTypes.func,
         onStartDrawing: PropTypes.func,
         onZoom: PropTypes.func,
         editing: PropTypes.object,
@@ -454,7 +452,6 @@ class AnnotationsEditor extends React.Component {
                 this.props.onSetUnsavedChanges(true);
             }}
             pointType={this.props.pointType}
-            onChangePointType={this.props.onChangePointType}
             style={this.props.selected && this.props.selected.style || this.props.editing.style}
             width={this.props.width}
             symbolsPath={this.props.symbolsPath}
@@ -692,4 +689,4 @@ class AnnotationsEditor extends React.Component {
     };
 }
 
-module.exports = AnnotationsEditor;
+export default AnnotationsEditor;

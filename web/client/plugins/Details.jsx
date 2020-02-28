@@ -6,17 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
-const Message = require('../components/I18N/Message');
-const {mapFromIdSelector} = require('../selectors/maps');
-const {mapIdSelector, mapInfoDetailsUriFromIdSelector} = require('../selectors/map');
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-const {currentMapDetailsTextSelector} = require('../selectors/currentmap');
-const {openDetailsPanel, closeDetailsPanel} = require("../actions/maps");
-const {get} = require("lodash");
+import React from 'react';
+
+import { connect } from 'react-redux';
+import assign from 'object-assign';
+import { Glyphicon } from 'react-bootstrap';
+import Message from '../components/I18N/Message';
+import { mapFromIdSelector } from '../selectors/maps';
+import { mapIdSelector, mapInfoDetailsUriFromIdSelector } from '../selectors/map';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import { currentMapDetailsTextSelector } from '../selectors/currentmap';
+import { openDetailsPanel, closeDetailsPanel } from '../actions/maps';
+import { get } from 'lodash';
+import DetailsPanel from '../components/details/DetailsPanel';
 
 /**
  * Details plugin used for fetching details of the map
@@ -24,7 +26,7 @@ const {get} = require("lodash");
  * @memberof plugins
  */
 
-module.exports = {
+export default {
     DetailsPlugin: connect((state) => ({
         active: get(state, "controls.details.enabled"),
         map: mapFromIdSelector(state, mapIdSelector(state)),
@@ -32,7 +34,7 @@ module.exports = {
         detailsText: currentMapDetailsTextSelector(state)
     }), {
         onClose: closeDetailsPanel
-    })(assign(require('../components/details/DetailsPanel'), {
+    })(assign(DetailsPanel, {
         BurgerMenu: {
             name: 'details',
             position: 1000,

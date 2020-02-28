@@ -5,23 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+
+import {loadMapConfig} from '../../actions/config';
+import {loadLocale} from '../../actions/locale';
+import ConfigUtils from '../../utils/ConfigUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+// include application component
+import Viewer from './containers/Viewer';
+// initializes Redux store
+import store from './stores/store';
+
 const startApp = () => {
-    var React = require('react');
-    var ReactDOM = require('react-dom');
-
-    var Provider = require('react-redux').Provider;
-
-    // include application component
-    var Viewer = require('./containers/Viewer');
-
-    var {loadMapConfig} = require('../../actions/config');
-    var {loadLocale} = require('../../actions/locale');
-
-    var ConfigUtils = require('../../utils/ConfigUtils');
-    const LocaleUtils = require('../../utils/LocaleUtils');
-
-    // initializes Redux store
-    var store = require('./stores/store');
 
     ConfigUtils.loadConfiguration().then(() => {
         const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
@@ -41,10 +38,13 @@ const startApp = () => {
 };
 
 if (!global.Intl ) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
+    import(
+        /* webpackChunkName: "intl" */
+        'intl').then(module => {
+        // TODO CHECK THIS IS OK
+        global.Intl = module;
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
         startApp();
     });
 } else {

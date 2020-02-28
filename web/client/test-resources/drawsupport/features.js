@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     pointFt: {
         type: "Feature",
         geometry: {

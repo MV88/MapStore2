@@ -5,7 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {withProps} = require('recompose');
+import { withProps } from 'recompose';
+
 /**
  * re-map widget dependencies to a new object, based on a mapping object
  *
@@ -26,7 +27,7 @@ const buildDependencies = (map, deps) => map
  * return <EnhancedCmp dependenciesMap={dependenciesMap} dependencies={dependencies} />
  * // the enhancer will pass to the component dependencies={x: "b"}
  */
-module.exports = withProps(
+export default withProps(
     ({ dependencies, dependenciesMap }) => ({
         dependencies: dependenciesMap
             ? buildDependencies(dependenciesMap, dependencies)

@@ -6,35 +6,41 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {connect} = require('react-redux');
-const {toggleControl, setControlProperty} = require('../actions/controls');
-const {changeLayerProperties} = require('../actions/layers');
+import { connect } from 'react-redux';
 
-const {createSelector} = require('reselect');
-const {layersSelector, backgroundControlsSelector, currentBackgroundSelector, tempBackgroundSelector} = require('../selectors/layers');
-const {mapTypeSelector} = require('../selectors/maptype');
-const {invalidateUnsupportedLayer} = require('../utils/LayersUtils');
-const {mapSelector} = require('../selectors/map');
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
+import { toggleControl, setControlProperty } from '../actions/controls';
+import { changeLayerProperties } from '../actions/layers';
+import { createSelector } from 'reselect';
 
-const {drawerEnabledControlSelector} = require('../selectors/controls');
-
-const {projectionSelector} = require('../selectors/map');
-const ROADMAP = require('./background/assets/img/ROADMAP.jpg');
-const TERRAIN = require('./background/assets/img/TERRAIN.jpg');
-const SATELLITE = require('./background/assets/img/SATELLITE.jpg');
-const Aerial = require('./background/assets/img/Aerial.jpg');
-const mapnik = require('./background/assets/img/mapnik.jpg');
-const s2cloodless = require('./background/assets/img/s2cloudless.jpg');
-const empty = require('./background/assets/img/none.jpg');
-const unknown = require('./background/assets/img/dafault.jpg');
-const Night2012 = require('./background/assets/img/NASA_NIGHT.jpg');
-const AerialWithLabels = require('./background/assets/img/AerialWithLabels.jpg');
-const OpenTopoMap = require('./background/assets/img/OpenTopoMap.jpg');
+import {
+    layersSelector,
+    backgroundControlsSelector,
+    currentBackgroundSelector,
+    tempBackgroundSelector
+} from '../selectors/layers';
+import controlsReducers from '../reducers/controls';
+import BackgroundSelector from '../components/background/BackgroundSelector';
+import { mapTypeSelector } from '../selectors/maptype';
+import { invalidateUnsupportedLayer } from '../utils/LayersUtils';
+import { mapSelector, projectionSelector} from '../selectors/map';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import { drawerEnabledControlSelector } from '../selectors/controls';
+import ROADMAP from './background/assets/img/ROADMAP.jpg';
+import TERRAIN from './background/assets/img/TERRAIN.jpg';
+import SATELLITE from './background/assets/img/SATELLITE.jpg';
+import Aerial from './background/assets/img/Aerial.jpg';
+import mapnik from './background/assets/img/mapnik.jpg';
+import s2cloodless from './background/assets/img/s2cloudless.jpg';
+import empty from './background/assets/img/none.jpg';
+import unknown from './background/assets/img/dafault.jpg';
+import Night2012 from './background/assets/img/NASA_NIGHT.jpg';
+import AerialWithLabels from './background/assets/img/AerialWithLabels.jpg';
+import OpenTopoMap from './background/assets/img/OpenTopoMap.jpg';
 
 // TODO REMOVE these once they are removed from all maps see issue #3304
-const HYBRID = require('./background/assets/img/HYBRID.jpg');
-const mapquestOsm = require('./background/assets/img/mapquest-osm.jpg');
+import HYBRID from './background/assets/img/HYBRID.jpg';
+
+import mapquestOsm from './background/assets/img/mapquest-osm.jpg';
 
 const thumbs = {
     google: {
@@ -130,11 +136,11 @@ const BackgroundSelectorPlugin = connect(backgroundSelector, {
         ...ownProps.thumbs
     }
 })
-)(require('../components/background/BackgroundSelector'));
+)(BackgroundSelector);
 
-module.exports = {
+export default {
     BackgroundSelectorPlugin,
     reducers: {
-        controls: require('../reducers/controls')
+        controls: controlsReducers
     }
 };

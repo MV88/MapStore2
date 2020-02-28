@@ -1,4 +1,4 @@
-const PropTypes = require('prop-types');
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,19 +6,19 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
+import PropTypes from 'prop-types';
+import Spinner from 'react-spinkit';
 
-const GroupField = require('./GroupField');
-const SpatialFilter = require('./SpatialFilter');
-const QueryToolbar = require('./QueryToolbar');
-const crossLayerFilterEnhancer = require('./enhancers/crossLayerFilter');
-const CrossLayerFilter = crossLayerFilterEnhancer(require('./CrossLayerFilter'));
-const BorderLayout = require('../../layout/BorderLayout');
+import GroupField from './GroupField';
+import SpatialFilter from './SpatialFilter';
+import QueryToolbar from './QueryToolbar';
+import crossLayerFilterEnhancer from './enhancers/crossLayerFilter';
+import CrossLayerFilterComp from './CrossLayerFilter';
+import BorderLayout from '../../layout/BorderLayout';
+import './queryform.css';
 
-const Spinner = require('react-spinkit');
-
-require('./queryform.css');
-
+const CrossLayerFilter = crossLayerFilterEnhancer(CrossLayerFilterComp);
 class QueryBuilder extends React.Component {
     static propTypes = {
         params: PropTypes.object,
@@ -211,4 +211,4 @@ class QueryBuilder extends React.Component {
     }
 }
 
-module.exports = QueryBuilder;
+export default QueryBuilder;

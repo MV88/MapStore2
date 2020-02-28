@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const SET_RASTERSTYLE_PARAMETER = 'SET_RASTERSTYLE_PARAMETER';
-const SET_RASTER_LAYER = 'SET_RASTER_LAYER';
 
-function setRasterStyleParameter(component, property, value) {
+export const SET_RASTERSTYLE_PARAMETER = 'SET_RASTERSTYLE_PARAMETER';
+export const SET_RASTER_LAYER = 'SET_RASTER_LAYER';
+
+export function setRasterStyleParameter(component, property, value) {
     return {
         type: SET_RASTERSTYLE_PARAMETER,
         component,
@@ -17,15 +18,9 @@ function setRasterStyleParameter(component, property, value) {
         value
     };
 }
-function setRasterLayer(layer) {
+export function setRasterLayer(layer) {
     return {
         type: SET_RASTER_LAYER,
         layer
     };
 }
-module.exports = {
-    SET_RASTERSTYLE_PARAMETER,
-    SET_RASTER_LAYER,
-    setRasterStyleParameter,
-    setRasterLayer
-};

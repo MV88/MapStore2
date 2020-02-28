@@ -1,21 +1,11 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const assign = require('object-assign');
-var L = require('leaflet');
-const {
-    slice
-} = require('lodash');
-const {
-    reproject,
-    calculateAzimuth,
-    calculateDistance,
-    transformLineToArcs
-} = require('../../../utils/CoordinatesUtils');
-const {
-    convertUom,
-    getFormattedBearingValue
-} = require('../../../utils/MeasureUtils');
-require('leaflet-draw');
+import PropTypes from 'prop-types';
+import React from 'react';
+import assign from 'object-assign';
+import L from 'leaflet';
+import { slice } from 'lodash';
+import { reproject, calculateAzimuth, calculateDistance, transformLineToArcs } from '../../../utils/CoordinatesUtils';
+import { convertUom, getFormattedBearingValue } from '../../../utils/MeasureUtils';
+import 'leaflet-draw';
 
 let defaultPrecision = {
     km: 2,
@@ -525,4 +515,4 @@ class MeasurementSupport extends React.Component {
     }
 }
 
-module.exports = MeasurementSupport;
+export default MeasurementSupport;

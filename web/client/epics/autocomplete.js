@@ -6,17 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const axios = require('../libs/ajax');
-const {UPDATE_FILTER_FIELD, updateFilterFieldOptions, loadingFilterFieldOptions, setAutocompleteMode, toggleMenu} = require('../actions/queryform');
-const {FEATURE_TYPE_SELECTED} = require('../actions/wfsquery');
-const {getWpsPayload} = require('../utils/ogc/WPS/autocomplete');
-const {isArray, startsWith} = require('lodash');
-const {error} = require('../actions/notifications');
-const {typeNameSelector} = require('../selectors/query');
-const {maxFeaturesWPSSelector, appliedFilterSelector, storedFilterSelector} = require('../selectors/queryform');
-const {getParsedUrl} = require('../utils/ConfigUtils');
-const {authkeyParamNameSelector} = require('../selectors/catalog');
+import Rx from 'rxjs';
+
+import axios from '../libs/ajax';
+
+import {
+    UPDATE_FILTER_FIELD,
+    updateFilterFieldOptions,
+    loadingFilterFieldOptions,
+    setAutocompleteMode,
+    toggleMenu
+} from '../actions/queryform';
+
+import { FEATURE_TYPE_SELECTED } from '../actions/wfsquery';
+import { getWpsPayload } from '../utils/ogc/WPS/autocomplete';
+import { isArray, startsWith } from 'lodash';
+import { error } from '../actions/notifications';
+import { typeNameSelector } from '../selectors/query';
+import { maxFeaturesWPSSelector, appliedFilterSelector, storedFilterSelector } from '../selectors/queryform';
+import { getParsedUrl } from '../utils/ConfigUtils';
+import { authkeyParamNameSelector } from '../selectors/catalog';
 
 /**
     * Epics for WFS query requests
@@ -24,7 +33,7 @@ const {authkeyParamNameSelector} = require('../selectors/catalog');
     * @type {Object}
     */
 
-module.exports = {
+export default {
 
     isAutoCompleteEnabled: (action$, store) =>
         action$.ofType(FEATURE_TYPE_SELECTED)

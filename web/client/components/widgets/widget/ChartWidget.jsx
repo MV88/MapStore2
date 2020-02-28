@@ -5,14 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const TableView = require('./TableView');
-const ChartView = require('./ChartView');
+import React from 'react';
 
-const WidgetContainer = require('./WidgetContainer');
-const {
-    Glyphicon
-} = require('react-bootstrap');
+import TableView from './TableView';
+import ChartView from './ChartView';
+import WidgetContainer from './WidgetContainer';
+import { Glyphicon } from 'react-bootstrap';
 
 const renderHeaderLeftTopItem = ({ showTable, toggleTableView = () => {}} = {}) => {
     if (showTable) {
@@ -22,7 +20,7 @@ const renderHeaderLeftTopItem = ({ showTable, toggleTableView = () => {}} = {}) 
 };
 
 
-module.exports = ({
+export default ({
     id,
     title,
     description,

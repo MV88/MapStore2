@@ -1,10 +1,18 @@
-const {isString, isDate, get, castArray} = require('lodash');
-const moment = require('moment');
-const LocaleUtils = require('./LocaleUtils');
+/**
+  * Copyright 2019, GeoSolutions Sas.
+  * All rights reserved.
+  *
+  * This source code is licensed under the BSD-style license found in the
+  * LICENSE file in the root directory of this source tree.
+  */
+
+import { isString, isDate, get, castArray } from 'lodash';
+import moment from 'moment';
+import LocaleUtils from './LocaleUtils';
 
 const ROUND_RESOLUTION_REGEX = /PT?[\d\.]+[YMWDHMS]/;
 
-const toTime = date => {
+export const toTime = date => {
     if (!date) {
         return null;
     } else if (isString(date)) {
@@ -14,7 +22,7 @@ const toTime = date => {
     }
     return date;
 };
-const getNearestDateIndex = (dates, rawTarget) => {
+export const getNearestDateIndex = (dates, rawTarget) => {
     const target = toTime(rawTarget);
 
     let nearest = Infinity;
@@ -38,13 +46,13 @@ const getNearestDateIndex = (dates, rawTarget) => {
  * @param {string} end end date
  * @param {string} duration duration
  */
-const timeIntervalNumber = ({start, end, duration}) => {
+export const timeIntervalNumber = ({start, end, duration}) => {
     const milliseconds = moment.duration(duration).asMilliseconds();
     return ((new Date(end)).getTime() - (new Date(start)).getTime()) / milliseconds;
 };
 
 
-const timeIntervalToSequence = ({start, end, duration}) => {
+export const timeIntervalToSequence = ({start, end, duration}) => {
     const milliseconds = moment.duration(duration).asMilliseconds();
     let arr = [];
     let dt = new Date(start);
@@ -56,13 +64,13 @@ const timeIntervalToSequence = ({start, end, duration}) => {
     return arr;
 };
 
-const timeIntervalToIntervalSequence = ({start, end, duration}) =>
+export const timeIntervalToIntervalSequence = ({start, end, duration}) =>
     timeIntervalToSequence({start, end, duration}).map(d => ({
         start: new Date(d),
         end: new Date(new Date(d).getTime() + moment.duration(duration).asMilliseconds())
     }));
 // TEST WITH 2017-03-11T17:43:50.000Z/2017-07-28T17:25:52.000Z/PT1S
-const analyzeIntervalInRange = (
+export const analyzeIntervalInRange = (
     {start, end, duration} = {},
     range = {}
 ) => {
@@ -109,7 +117,7 @@ const analyzeIntervalInRange = (
  *
  * @param {string} iso the duration iso string
  */
-const roundResolution = (iso) => iso.match(ROUND_RESOLUTION_REGEX)[0];
+export const roundResolution = (iso) => iso.match(ROUND_RESOLUTION_REGEX)[0];
 
 /**
  * Returns an object that contains resolution.
@@ -118,7 +126,7 @@ const roundResolution = (iso) => iso.match(ROUND_RESOLUTION_REGEX)[0];
  * @param {object} param0 range object
  * @param {number} max max items in range
  */
-const roundRangeResolution = ({start, end} = {}, max) => {
+export const roundRangeResolution = ({start, end} = {}, max) => {
     const sms = new Date(start);
     const ems = new Date(end);
     const dms = Math.floor(ems.getTime() - sms.getTime()) / max;
@@ -133,9 +141,9 @@ const roundRangeResolution = ({start, end} = {}, max) => {
     };
 };
 
-const getNearestDate = (dates = [], target) => dates[getNearestDateIndex(dates, target)];
+export const getNearestDate = (dates = [], target) => dates[getNearestDateIndex(dates, target)];
 
-const isTimeDomainInterval = values => values && values.indexOf && values.indexOf("--") > 0;
+export const isTimeDomainInterval = values => values && values.indexOf && values.indexOf("--") > 0;
 
 /**
  * Gets 2 dates (Date object or ISO8601) and returns then in the form `{start: d1, end: d2}
@@ -143,7 +151,7 @@ const isTimeDomainInterval = values => values && values.indexOf && values.indexO
  * @param {string|Date} startTime the first value
  * @param {string|Date} endTime the second date
  */
-const getStartEnd = (startTime, endTime) => {
+export const getStartEnd = (startTime, endTime) => {
     const diff = moment(startTime).diff(endTime);
     return {
         start: diff >= 0 ? endTime : startTime,
@@ -156,7 +164,7 @@ const getStartEnd = (startTime, endTime) => {
  * @param {object} date
  * @return {number} the offset in milliseconds
 */
-const getTimezoneOffsetMillis = (date) => {
+export const getTimezoneOffsetMillis = (date) => {
     return (date).getTimezoneOffset() * 60000;
 };
 
@@ -164,7 +172,7 @@ const getTimezoneOffsetMillis = (date) => {
  * @param {Date|string} date to parse
  * @return {string} time part of the TimeStamp
 */
-const getUTCTimePart = (date) => {
+export const getUTCTimePart = (date) => {
     let dateToParse = date;
     if (!isDate(date) & isString(date)) {
         dateToParse = new Date(date);
@@ -182,7 +190,7 @@ const getUTCTimePart = (date) => {
  * @param {Date|string} date to parse
  * @return {string} date part of the TimeStamp
 */
-const getUTCDatePart = (date) => {
+export const getUTCDatePart = (date) => {
     let dateToParse = date;
     if (!isDate(date) & isString(date)) {
         dateToParse = new Date(date);
@@ -200,7 +208,7 @@ const getUTCDatePart = (date) => {
  * @param {string} type of the dateTime attribute ("date", "time", "date-time")
  * @return {string} format to be returned
 */
-const getDateTimeFormat = (locale, type) => {
+export const getDateTimeFormat = (locale, type) => {
     const dateFormat = LocaleUtils.getDateFormat(locale);
     const timeFormat = "HH:mm:SS";
     switch (type) {
@@ -232,7 +240,7 @@ const getDateTimeFormat = (locale, type) => {
  * @param {object} domains the domains object (JSON version of the XML)
  * @param {string} url of the service
  */
-const domainsToDimensionsObject = ({ Domains = {} } = {}, url) => {
+export const domainsToDimensionsObject = ({ Domains = {} } = {}, url) => {
     let dimensions = castArray(Domains.DimensionDomain || []).concat();
     let version = Domains['@version'];
     const bbox = get(Domains, 'SpaceDomain.BoundingBox');
@@ -251,22 +259,4 @@ const domainsToDimensionsObject = ({ Domains = {} } = {}, url) => {
         name,
         domain
     }));
-};
-
-module.exports = {
-    getDateTimeFormat,
-    getTimezoneOffsetMillis,
-    domainsToDimensionsObject,
-    getUTCTimePart,
-    getUTCDatePart,
-    timeIntervalNumber,
-    timeIntervalToSequence,
-    timeIntervalToIntervalSequence,
-    analyzeIntervalInRange,
-    getNearestDate,
-    getNearestDateIndex,
-    roundResolution,
-    roundRangeResolution,
-    isTimeDomainInterval,
-    getStartEnd
 };

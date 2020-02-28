@@ -19,8 +19,5 @@
  * @param  {object} state the state
  * @return {object}       the tutorial in the state
  */
-const tutorialSelector = (state) => state && state.tutorial;
+export const tutorialSelector = (state) => state && state.tutorial;
 
-module.exports = {
-    tutorialSelector
-};

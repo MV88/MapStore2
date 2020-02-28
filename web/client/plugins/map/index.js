@@ -6,25 +6,33 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
+import assign from 'object-assign';
+import React from 'react';
+import { connect } from 'react-redux';
 
-const {creationError, changeMapView, clickOnMap} = require('../../actions/map');
-const {layerLoading, layerLoad, layerError} = require('../../actions/layers');
-const {changeMousePosition} = require('../../actions/mousePosition');
-const {changeMeasurementState, changeGeometry, resetGeometry, updateMeasures} = require('../../actions/measurement');
-const {measurementSelector} = require('../../selectors/measurement');
-const {changeSelectionState} = require('../../actions/selection');
-const {changeLocateState, onLocateError} = require('../../actions/locate');
-const {changeDrawingStatus, endDrawing, setCurrentStyle, geometryChanged, drawStopped, selectFeatures, drawingFeatures} = require('../../actions/draw');
-const {updateHighlighted} = require('../../actions/highlight');
-const {warning} = require('../../actions/notifications');
-const {connect} = require('react-redux');
-const assign = require('object-assign');
-const {projectionDefsSelector} = require('../../selectors/map');
+import {
+    changeDrawingStatus,
+    drawStopped,
+    drawingFeatures,
+    endDrawing,
+    geometryChanged,
+    selectFeatures,
+    setCurrentStyle
+} from '../../actions/draw';
+import { updateHighlighted } from '../../actions/highlight';
+import { layerError, layerLoad, layerLoading } from '../../actions/layers';
+import { changeLocateState, onLocateError } from '../../actions/locate';
+import { changeMapView, clickOnMap, creationError } from '../../actions/map';
+import { changeGeometry, changeMeasurementState, resetGeometry, updateMeasures } from '../../actions/measurement';
+import { changeMousePosition } from '../../actions/mousePosition';
+import { warning } from '../../actions/notifications';
+import { changeSelectionState } from '../../actions/selection';
+import { projectionDefsSelector } from '../../selectors/map';
+import { measurementSelector } from '../../selectors/measurement';
 
 const Empty = () => { return <span/>; };
 
-module.exports = (mapType, actions) => {
+export const getPlugins = (mapType, actions) => {
 
     const components = require('./' + mapType + '/index');
 
@@ -90,7 +98,8 @@ module.exports = (mapType, actions) => {
         changeSelectionState
     })(components.SelectionSupport || Empty);
 
-    require('../../components/map/' + mapType + '/plugins/index');
+    import(`../../components/map/${mapType}/plugins/index`);
+
     const LLayer = connect(null, {onWarning: warning})( components.Layer || Empty);
 
     return {

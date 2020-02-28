@@ -5,16 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
-const {Glyphicon} = require('react-bootstrap');
+import React from 'react';
 
-const Message = require('./locale/Message');
-
-const assign = require('object-assign');
-const {changeMeasurement} = require('../actions/measurement');
-const {MeasureComponent} = require('./measure');
-
+import { connect } from 'react-redux';
+import { Glyphicon } from 'react-bootstrap';
+import Message from './locale/Message';
+import assign from 'object-assign';
+import { changeMeasurement } from '../actions/measurement';
+import { MeasureComponent } from './measure';
+import measurement from '../reducers/measurement';
 const selector = (state) => {
     return {
         measurement: state.measurement || {},
@@ -35,7 +34,7 @@ const MeasurePanelPlugin = connect(selector, {
     toggleMeasure: changeMeasurement
 }, null, {pure: false})(MeasureComponent);
 
-module.exports = {
+export default {
     MeasurePanelPlugin: assign(MeasurePanelPlugin, {
         Toolbar: {
             name: 'measurement',
@@ -62,5 +61,5 @@ module.exports = {
             priority: 2
         }
     }),
-    reducers: {measurement: require('../reducers/measurement')}
+    reducers: {measurement}
 };

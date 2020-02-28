@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,19 +5,21 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
-const {Button, Grid, Glyphicon} = require('react-bootstrap');
-const {editUser} = require('../../actions/users');
-const {getUsers, usersSearchTextChanged} = require('../../actions/users');
-const SearchBar = require("../../components/mapcontrols/search/SearchBar");
-const UserGrid = require('./users/UserGrid');
-const UserDialog = require('./users/UserDialog');
-const UserDeleteConfirm = require('./users/UserDeleteConfirm');
-const Message = require('../../components/I18N/Message');
-const assign = require('object-assign');
-const {trim} = require('lodash');
 
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { Button, Grid, Glyphicon } from 'react-bootstrap';
+import { editUser, getUsers, usersSearchTextChanged } from '../../actions/users';
+import SearchBar from '../../components/mapcontrols/search/SearchBar';
+import UserGrid from './users/UserGrid';
+import UserDialog from './users/UserDialog';
+import UserDeleteConfirm from './users/UserDeleteConfirm';
+import Message from '../../components/I18N/Message';
+import assign from 'object-assign';
+import { trim } from 'lodash';
+import users from '../../reducers/users';
 class UserManager extends React.Component {
     static propTypes = {
         onNewUser: PropTypes.func,
@@ -85,7 +86,7 @@ class UserManager extends React.Component {
     }
 }
 
-module.exports = {
+export default {
     UserManagerPlugin: assign(
         connect((state) => {
             let searchState = state && state.users;
@@ -126,6 +127,6 @@ module.exports = {
                 glyph: "1-user-mod"
             }}),
     reducers: {
-        users: require('../../reducers/users')
+        users
     }
 };

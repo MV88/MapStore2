@@ -5,16 +5,17 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
+import React from 'react';
 
-const enhancer = require("./enhancers/Map");
-const autoMapType = require('../../map/enhancers/autoMapType');
-const mapType = require('../../map/enhancers/mapType');
-const autoResize = require('../../map/enhancers/autoResize');
-const onMapViewChanges = require('../../map/enhancers/onMapViewChanges');
-const withDraw = require("../../map/enhancers/withDraw");
-const {compose} = require('recompose');
-
+import enhancer from './enhancers/Map';
+import autoMapType from '../../map/enhancers/autoMapType';
+import mapType from '../../map/enhancers/mapType';
+import autoResize from '../../map/enhancers/autoResize';
+import onMapViewChanges from '../../map/enhancers/onMapViewChanges';
+import withDraw from '../../map/enhancers/withDraw';
+import { compose } from 'recompose';
+import BaseMap from '../../map/BaseMap';
+import { Portal } from 'react-overlays';
 const MapWitDraw = compose(
     enhancer,
     onMapViewChanges,
@@ -22,11 +23,10 @@ const MapWitDraw = compose(
     autoMapType,
     mapType,
     withDraw()
-)(require('../../map/BaseMap'));
+)(BaseMap);
 
-const Portal = require('react-overlays').Portal;
 
-module.exports = ({layer, onMapReady = () => {}}) => {
+export default ({layer, onMapReady = () => {}}) => {
     return (
         <Portal container={document.querySelector('.rules-data-gird')}>
             <div className="rules-manager-map-modal" style={{position: "absolute", zIndex: 15, top: 0, bottom: 0, width: "100%"}}>
@@ -38,4 +38,3 @@ module.exports = ({layer, onMapReady = () => {}}) => {
             </div>
         </Portal>);
 };
-

@@ -6,7 +6,8 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const {isArray, head, isNaN} = require('lodash');
+import { head, isArray, isNaN } from 'lodash';
+
 function degToDms(deg) {
     // convert decimal deg to minutes and seconds
     var d = Math.floor(deg);
@@ -18,7 +19,7 @@ function degToDms(deg) {
     return "" + d + "° " + m + "' " + s + "'' ";
 }
 
-function getFormattedBearingValue(azimuth = 0) {
+export function getFormattedBearingValue(azimuth = 0) {
     var bearing = "";
     if (azimuth >= 0 && azimuth < 90) {
         bearing = "N " + degToDms(azimuth) + "E";
@@ -134,7 +135,7 @@ const CONVERSION_RATE = {
     }
 };
 
-function convertUom(value, source = "m", dest = "m") {
+export function convertUom(value, source = "m", dest = "m") {
     if (!!CONVERSION_RATE[source] && !!CONVERSION_RATE[source][dest]) {
         return value * CONVERSION_RATE[source][dest];
     }
@@ -142,13 +143,13 @@ function convertUom(value, source = "m", dest = "m") {
 }
 
 
-const validateCoord = c => (!isNaN(parseFloat(c[0])) && !isNaN(parseFloat(c[1])));
+export const validateCoord = c => (!isNaN(parseFloat(c[0])) && !isNaN(parseFloat(c[1])));
 
 /**
  * validate a geometry feature,
  * if invalid return an empty one
 */
-const validateFeatureCoordinates = ({coordinates, type} = {}) => {
+export const validateFeatureCoordinates = ({coordinates, type} = {}) => {
     let filteredCoords = coordinates;
     if (type === "LineString") {
         filteredCoords = coordinates.filter(validateCoord);
@@ -168,7 +169,7 @@ const validateFeatureCoordinates = ({coordinates, type} = {}) => {
     return filteredCoords;
 };
 
-const isValidGeometry = ({coordinates, type} = {}) => {
+export const isValidGeometry = ({coordinates, type} = {}) => {
     if (!type || !coordinates || coordinates && isArray(coordinates) && coordinates.length === 0) {
         return false;
     }
@@ -177,10 +178,3 @@ const isValidGeometry = ({coordinates, type} = {}) => {
     return validatedCoords.length > 0;
 };
 
-module.exports = {
-    validateFeatureCoordinates,
-    isValidGeometry,
-    convertUom,
-    getFormattedBearingValue,
-    degToDms
-};

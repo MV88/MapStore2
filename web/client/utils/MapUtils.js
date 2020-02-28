@@ -6,9 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {isString, trim, isNumber} = require('lodash');
+import { findIndex, head, isEmpty, isNumber, isObject, isString, trim } from 'lodash';
+import assign from 'object-assign';
 
-const DEFAULT_SCREEN_DPI = 96;
+import CoordinatesUtils from './CoordinatesUtils';
+import { set } from './ImmutableUtils';
+import LayersUtils from './LayersUtils';
+
+export const DEFAULT_SCREEN_DPI = 96;
 
 const METERS_PER_UNIT = {
     'm': 1,
@@ -23,7 +28,7 @@ const GOOGLE_MERCATOR = {
     ZOOM_FACTOR: 2
 };
 
-const EXTENT_TO_ZOOM_HOOK = 'EXTENT_TO_ZOOM_HOOK';
+export const EXTENT_TO_ZOOM_HOOK = 'EXTENT_TO_ZOOM_HOOK';
 
 /**
  * `ZOOM_TO_EXTENT_HOOK` hook takes 2 arguments:
@@ -33,25 +38,20 @@ const EXTENT_TO_ZOOM_HOOK = 'EXTENT_TO_ZOOM_HOOK';
  *   - `maxZoom`: max zoom for the zoom to functionality.
  *   - `padding`: object with attributes, `top`, `right`, `bottom` and `top` with the size, in pixels of the padding for the visible part of the map. When supported by the mapping lib, it will zoom to visible area
  */
-const ZOOM_TO_EXTENT_HOOK = 'ZOOM_TO_EXTENT_HOOK';
-const RESOLUTIONS_HOOK = 'RESOLUTIONS_HOOK';
-const RESOLUTION_HOOK = 'RESOLUTION_HOOK';
-const COMPUTE_BBOX_HOOK = 'COMPUTE_BBOX_HOOK';
-const GET_PIXEL_FROM_COORDINATES_HOOK = 'GET_PIXEL_FROM_COORDINATES_HOOK';
-const GET_COORDINATES_FROM_PIXEL_HOOK = 'GET_COORDINATES_FROM_PIXEL_HOOK';
+export const ZOOM_TO_EXTENT_HOOK = 'ZOOM_TO_EXTENT_HOOK';
+export const RESOLUTIONS_HOOK = 'RESOLUTIONS_HOOK';
+export const RESOLUTION_HOOK = 'RESOLUTION_HOOK';
+export const COMPUTE_BBOX_HOOK = 'COMPUTE_BBOX_HOOK';
+export const GET_PIXEL_FROM_COORDINATES_HOOK = 'GET_PIXEL_FROM_COORDINATES_HOOK';
+export const GET_COORDINATES_FROM_PIXEL_HOOK = 'GET_COORDINATES_FROM_PIXEL_HOOK';
 
 let hooks = {};
-let CoordinatesUtils = require('./CoordinatesUtils');
-let {set} = require('./ImmutableUtils');
-const LayersUtils = require('./LayersUtils');
-const assign = require('object-assign');
-const {isObject, head, isEmpty, findIndex} = require('lodash');
 
-function registerHook(name, hook) {
+export function registerHook(name, hook) {
     hooks[name] = hook;
 }
 
-function getHook(name) {
+export function getHook(name) {
     return hooks[name];
 }
 
@@ -70,7 +70,7 @@ function executeHook(hookName, existCallback, dontExistCallback) {
  * @param dpi {number} dot per inch resolution
  * @return {number} dot per meter resolution
  */
-function dpi2dpm(dpi) {
+export function dpi2dpm(dpi) {
     return dpi * (100 / 2.54);
 }
 
@@ -79,7 +79,7 @@ function dpi2dpm(dpi) {
  * @param projection {string} map projection.
  * @return {number} dots per map unit.
  */
-function dpi2dpu(dpi, projection) {
+export function dpi2dpu(dpi, projection) {
     const units = CoordinatesUtils.getUnits(projection || "EPSG:3857");
     return METERS_PER_UNIT[units] * dpi2dpm(dpi || DEFAULT_SCREEN_DPI);
 }
@@ -92,7 +92,7 @@ function dpi2dpu(dpi, projection) {
  * @param dpi {number} screen resolution in dot per inch.
  * @return {number} the scale of the showed map.
  */
-function getSphericalMercatorScale(radius, tileWidth, zoomFactor, zoomLvl, dpi) {
+export function getSphericalMercatorScale(radius, tileWidth, zoomFactor, zoomLvl, dpi) {
     return 2 * Math.PI * radius / (tileWidth * Math.pow(zoomFactor, zoomLvl) / dpi2dpm(dpi || DEFAULT_SCREEN_DPI));
 }
 
@@ -101,7 +101,7 @@ function getSphericalMercatorScale(radius, tileWidth, zoomFactor, zoomLvl, dpi) 
  * @param dpi {number} screen resolution in dot per inch.
  * @return {number} the scale of the showed map.
  */
-function getGoogleMercatorScale(zoomLvl, dpi) {
+export function getGoogleMercatorScale(zoomLvl, dpi) {
     return getSphericalMercatorScale(GOOGLE_MERCATOR.RADIUS, GOOGLE_MERCATOR.TILE_WIDTH, GOOGLE_MERCATOR.ZOOM_FACTOR, zoomLvl, dpi);
 }
 
@@ -114,7 +114,7 @@ function getGoogleMercatorScale(zoomLvl, dpi) {
  * @param dpi {number} screen resolution in dot per inch.
  * @return {array} a list of scale for each zoom level in the given interval.
  */
-function getSphericalMercatorScales(radius, tileWidth, zoomFactor, minZoom, maxZoom, dpi) {
+export function getSphericalMercatorScales(radius, tileWidth, zoomFactor, minZoom, maxZoom, dpi) {
     var retval = [];
     for (let l = minZoom; l <= maxZoom; l++) {
         retval.push(
@@ -136,7 +136,7 @@ function getSphericalMercatorScales(radius, tileWidth, zoomFactor, minZoom, maxZ
  * @param maxZoom {number} max zoom level.
  * @return {array} a list of scale for each zoom level in the given interval.
  */
-function getGoogleMercatorScales(minZoom, maxZoom, dpi) {
+export function getGoogleMercatorScales(minZoom, maxZoom, dpi) {
     return getSphericalMercatorScales(
         GOOGLE_MERCATOR.RADIUS,
         GOOGLE_MERCATOR.TILE_WIDTH,
@@ -153,7 +153,7 @@ function getGoogleMercatorScales(minZoom, maxZoom, dpi) {
  * @param dpi {number} screen resolution in dots per inch.
  * @return {array} a list of resolutions corresponding to the given scales, projection and dpi.
  */
-function getResolutionsForScales(scales, projection, dpi) {
+export function getResolutionsForScales(scales, projection, dpi) {
     const dpu = dpi2dpu(dpi, projection);
     const resolutions = scales.map((scale) => {
         return scale / dpu;
@@ -161,23 +161,23 @@ function getResolutionsForScales(scales, projection, dpi) {
     return resolutions;
 }
 
-function getGoogleMercatorResolutions(minZoom, maxZoom, dpi) {
+export function getGoogleMercatorResolutions(minZoom, maxZoom, dpi) {
     return getResolutionsForScales(getGoogleMercatorScales(minZoom, maxZoom, dpi), "EPSG:3857", dpi);
 }
 
-function getResolutions() {
+export function getResolutions() {
     if (getHook('RESOLUTIONS_HOOK')) {
         return getHook('RESOLUTIONS_HOOK')();
     }
     return getGoogleMercatorResolutions(0, 21, DEFAULT_SCREEN_DPI);
 }
 
-function getScales(projection, dpi) {
+export function getScales(projection, dpi) {
     const dpu = dpi2dpu(dpi, projection);
     return getResolutions().map((resolution) => resolution * dpu);
 }
 
-function defaultGetZoomForExtent(extent, mapSize, minZoom, maxZoom, dpi, mapResolutions) {
+export function defaultGetZoomForExtent(extent, mapSize, minZoom, maxZoom, dpi, mapResolutions) {
     const wExtent = extent[2] - extent[0];
     const hExtent = extent[3] - extent[1];
 
@@ -206,7 +206,7 @@ function defaultGetZoomForExtent(extent, mapSize, minZoom, maxZoom, dpi, mapReso
  * @param dpi {number} screen resolution in dot per inch.
  * @return {Number} the zoom level fitting th extent
  */
-function getZoomForExtent(extent, mapSize, minZoom, maxZoom, dpi) {
+export function getZoomForExtent(extent, mapSize, minZoom, maxZoom, dpi) {
     if (getHook("EXTENT_TO_ZOOM_HOOK")) {
         return getHook("EXTENT_TO_ZOOM_HOOK")(extent, mapSize, minZoom, maxZoom, dpi);
     }
@@ -224,7 +224,7 @@ function getZoomForExtent(extent, mapSize, minZoom, maxZoom, dpi) {
 * @param dpi {number} screen resolution in dot per inch.
 * @return {Number} the actual resolution
 */
-function getCurrentResolution(currentZoom, minZoom, maxZoom, dpi) {
+export function getCurrentResolution(currentZoom, minZoom, maxZoom, dpi) {
     if (getHook("RESOLUTION_HOOK")) {
         return getHook("RESOLUTION_HOOK")(currentZoom, minZoom, maxZoom, dpi);
     }
@@ -240,7 +240,7 @@ function getCurrentResolution(currentZoom, minZoom, maxZoom, dpi) {
  * @param  {String} projection projection of the extent
  * @return {object} center object
  */
-function getCenterForExtent(extent, projection) {
+export function getCenterForExtent(extent, projection) {
 
     var wExtent = extent[2] - extent[0];
     var hExtent = extent[3] - extent[1];
@@ -261,7 +261,7 @@ function getCenterForExtent(extent, projection) {
  * @param  {object} center object
  * @param  {number} zoom level
  */
-function getBbox(center, zoom) {
+export function getBbox(center, zoom) {
     return executeHook("COMPUTE_BBOX_HOOK",
         (hook) => {
             return hook(center, zoom);
@@ -269,21 +269,21 @@ function getBbox(center, zoom) {
     );
 }
 
-const isNearlyEqual = function(a, b) {
+export const isNearlyEqual = function(a, b) {
     if (a === undefined || b === undefined) {
         return false;
     }
     return a.toFixed(12) - b.toFixed(12) === 0;
 };
 
-function mapUpdated(oldMap, newMap) {
+export function mapUpdated(oldMap, newMap) {
     const centersEqual = isNearlyEqual(newMap.center.x, oldMap.center.x) &&
                           isNearlyEqual(newMap.center.y, oldMap.center.y);
     return !centersEqual || newMap.zoom !== oldMap.zoom;
 }
 
 /* Transform width and height specified in meters to the units of the specified projection */
-function transformExtent(projection, center, width, height) {
+export function transformExtent(projection, center, width, height) {
     let units = CoordinatesUtils.getUnits(projection);
     if (units === 'ft') {
         return {width: width / METERS_PER_UNIT.ft, height: height / METERS_PER_UNIT.ft};
@@ -306,7 +306,7 @@ const groupSaveFormatted = (node) => {
 };
 
 
-function saveMapConfiguration(currentMap, currentLayers, currentGroups, textSearchConfig, additionalOptions) {
+export function saveMapConfiguration(currentMap, currentLayers, currentGroups, textSearchConfig, additionalOptions) {
 
     const map = {
         center: currentMap.center,
@@ -370,13 +370,13 @@ function saveMapConfiguration(currentMap, currentLayers, currentGroups, textSear
     };
 }
 
-function isSimpleGeomType(geomType) {
+export function isSimpleGeomType(geomType) {
     switch (geomType) {
     case "MultiPoint": case "MultiLineString": case "MultiPolygon": case "GeometryCollection": case "Text": return false;
     case "Point": case "Circle": case "LineString": case "Polygon": default: return true;
     }
 }
-function getSimpleGeomType(geomType = "Point") {
+export function getSimpleGeomType(geomType = "Point") {
     switch (geomType) {
     case "Point": case "LineString": case "Polygon": case "Circle": return geomType;
     case "MultiPoint": case "Marker": return "Point";
@@ -388,7 +388,7 @@ function getSimpleGeomType(geomType = "Point") {
     }
 }
 
-const getIdFromUri = (uri, regex = /data\/(\d+)/) => {
+export const getIdFromUri = (uri, regex = /data\/(\d+)/) => {
     const decodedUri = decodeURIComponent(uri);
     const findDataDigit = regex.exec(decodedUri);
     return findDataDigit && findDataDigit.length && findDataDigit.length > 1 ? findDataDigit[1] : null;
@@ -404,14 +404,15 @@ const getIdFromUri = (uri, regex = /data\/(\d+)/) => {
  * @param size {number} only in case of percentage
  * @return {number}
  */
-const parseLayoutValue = (value, size = 0) => {
+export const parseLayoutValue = (value, size = 0) => {
     if (isString(value) && value.indexOf('%') !== -1) {
         return parseFloat(trim(value)) * size / 100;
     }
     return isNumber(value) ? value : 0;
 };
 
-module.exports = {
+
+export default {
     EXTENT_TO_ZOOM_HOOK,
     RESOLUTIONS_HOOK,
     RESOLUTION_HOOK,

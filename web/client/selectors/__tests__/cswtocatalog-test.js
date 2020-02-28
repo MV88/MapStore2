@@ -5,9 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
-const {cswToCatalogSelector} = require('../cswtocatalog');
-const _ = require('lodash');
+import expect from 'expect';
+import {isEqual} from 'lodash';
+
+import { cswToCatalogSelector } from '../cswtocatalog';
+
 /** Geonetwork Style **/
 const sampleCSWRecord = {
     boundingBox: {
@@ -100,7 +102,7 @@ describe('Test csw to catalog selector', () => {
         const records = cswToCatalogSelector(testState.catalog);
         expect(records).toExist();
         expect(records[0]).toExist();
-        expect(_.isEqual(records[0], sampleRecord)).toBe(true);
+        expect(isEqual(records[0], sampleRecord)).toBe(true);
     });
     it('test correct conversion for geoserver style', () => {
         const testState = {
@@ -119,6 +121,6 @@ describe('Test csw to catalog selector', () => {
         const records = cswToCatalogSelector(testState.catalog);
         expect(records).toExist();
         expect(records[0]).toExist();
-        expect(_.isEqual(records[0], sampleRecord)).toBe(true);
+        expect(isEqual(records[0], sampleRecord)).toBe(true);
     });
 });

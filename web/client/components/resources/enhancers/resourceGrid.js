@@ -1,4 +1,3 @@
-
 /*
 * Copyright 2018, GeoSolutions Sas.
 * All rights reserved.
@@ -6,11 +5,27 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const Rx = require('rxjs');
-const { compose, branch, withState, withHandlers, defaultProps, mapPropsStream, createEventHandler } = require('recompose');
-const handleSaveModal = require('../modals/enhancers/handleSaveModal');
-const handleResourceDownload = require('../modals/enhancers/handleResourceDownload');
-const { updateResource } = require('../../../api/persistence');
+
+import {
+    branch,
+    compose,
+    createEventHandler,
+    defaultProps,
+    mapPropsStream,
+    withHandlers,
+    withState
+} from 'recompose';
+import Rx from 'rxjs';
+
+import { updateResource } from '../../../api/persistence';
+import Save from '../modals/Save';
+import handleResourceDownload from '../modals/enhancers/handleResourceDownload';
+import handleSaveModal from '../modals/enhancers/handleSaveModal';
+
+/*
+ * EditDialog
+ * Automatically downloads missing data and manage resource changes. Manages save, triggering onSaveSuccess
+ */
 
 const handleSave = mapPropsStream(props$ => {
     const { handler: onSave, stream: saveEventStream$ } = createEventHandler();
@@ -47,10 +62,6 @@ const handleSave = mapPropsStream(props$ => {
         })
     );
 });
-/*
- * EditDialog
- * Automatically downloads missing data and manage resource changes. Manages save, triggering onSaveSuccess
- */
 const EditDialog = compose(
     handleResourceDownload,
     withHandlers({
@@ -63,7 +74,7 @@ const EditDialog = compose(
             handleSaveModal
         )
     )
-)(require('../modals/Save'));
+)(Save);
 
 const resourceGrid = compose(
     defaultProps({
@@ -86,4 +97,4 @@ const resourceGrid = compose(
     })
 );
 
-module.exports = resourceGrid;
+export default resourceGrid;

@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {
+import {
     editWidget,
     editNewWidget,
     changeEditorSetting,
@@ -23,15 +23,14 @@ const {
     toggleCollapseAll,
     toggleTray,
     DEFAULT_TARGET
-} = require('../../actions/widgets');
-const {configureMap} = require('../../actions/config');
-const {dashboardLoaded} = require('../../actions/dashboard');
-const widgets = require('../widgets');
-const {getFloatingWidgets, getVisibleFloatingWidgets, getCollapsedIds} = require('../../selectors/widgets');
-
-
-const expect = require('expect');
-const {find} = require('lodash');
+} from '../../actions/widgets';
+import {initialState, changeLayoutAction} from '../../test-resources/widgets/layout-state-collapse.js';
+import { configureMap } from '../../actions/config';
+import { dashboardLoaded } from '../../actions/dashboard';
+import widgets from '../widgets';
+import { getFloatingWidgets, getVisibleFloatingWidgets, getCollapsedIds } from '../../selectors/widgets';
+import expect from 'expect';
+import { find } from 'lodash';
 
 describe('Test the widgets reducer', () => {
     it('initial state', () => {
@@ -189,7 +188,7 @@ describe('Test the widgets reducer', () => {
         expect(state.containers[DEFAULT_TARGET].widgets.length).toBe(1);
     });
     it('widgets toggleCollapse and toggleCollapseAll', () => {
-        const {initialState, changeLayoutAction} = require('../../test-resources/widgets/layout-state-collapse.js');
+
         const widgetToCollapse = getFloatingWidgets({
             widgets: initialState
         })[0];

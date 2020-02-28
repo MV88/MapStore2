@@ -18,11 +18,7 @@ import uuid from 'uuid/v1';
 
 import axios from '../libs/ajax';
 
-const {
-    createResource,
-    updateResource,
-    getResource
-} = require('../api/persistence');
+import { createResource, updateResource, getResource } from '../api/persistence';
 
 import {
     ADD,

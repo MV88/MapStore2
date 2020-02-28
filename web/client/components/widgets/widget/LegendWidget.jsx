@@ -5,13 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const WidgetContainer = require('./WidgetContainer');
-const emptyLegendState = require('../enhancers/emptyLegendState');
+import React from 'react';
 
-const LegendView = emptyLegendState()(require('./LegendView'));
+import emptyLegendState from '../enhancers/emptyLegendState';
+import LegendView from './LegendView';
+import WidgetContainer from './WidgetContainer';
 
-module.exports = ({
+const LegendWidget = emptyLegendState()(LegendView);
+
+export default ({
     toggleDeleteConfirm = () => {},
     id, title,
     icons,
@@ -25,7 +27,7 @@ module.exports = ({
         icons={icons}
         topRightItems={topRightItems}
     >
-        <LegendView {...props} />
+        <LegendWidget {...props} />
     </WidgetContainer>
 
     );

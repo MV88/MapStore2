@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {THEME_SELECTED} = require('../actions/theme');
-const assign = require('object-assign');
+import { THEME_SELECTED } from '../actions/theme';
+
+import assign from 'object-assign';
 
 function controls(state = {}, action) {
     switch (action.type) {
@@ -20,4 +21,4 @@ function controls(state = {}, action) {
     }
 }
 
-module.exports = controls;
+export default controls;

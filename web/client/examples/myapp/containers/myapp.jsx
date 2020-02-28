@@ -1,8 +1,8 @@
-var PropTypes = require('prop-types');
-var React = require('react');
-var connect = require('react-redux').connect;
-var LMap = require('../../../components/map/leaflet/Map');
-var LLayer = require('../../../components/map/leaflet/Layer');
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import LMap from '../../../components/map/leaflet/Map';
+import LLayer from '../../../components/map/leaflet/Layer';
 
 class MyApp extends React.Component {
     static propTypes = {
@@ -35,11 +35,12 @@ class MyApp extends React.Component {
 }
 
 // include support for OSM and WMS layers
-require('../../../components/map/leaflet/plugins/OSMLayer');
-require('../../../components/map/leaflet/plugins/WMSLayer');
+import '../../../components/map/leaflet/plugins/OSMLayer';
+
+import '../../../components/map/leaflet/plugins/WMSLayer';
 
 // connect Redux store slice with map configuration
-module.exports = connect((state) => {
+export default connect((state) => {
     return {
         mapConfig: state.mapConfig
     };

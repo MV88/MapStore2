@@ -1,6 +1,6 @@
 
-const {compose, withHandlers, withProps} = require('recompose');
-const {round, isNaN} = require('lodash');
+import { compose, withHandlers, withProps } from 'recompose';
+import { round, isNaN } from 'lodash';
 
 const convertDDToDMS = (D, lng, {seconds} = {seconds: {decimals: 4}}) => {
 
@@ -47,7 +47,7 @@ const convertDDToDMS = (D, lng, {seconds} = {seconds: {decimals: 4}}) => {
  * The `onChange` handler property is masked to have been called with an object of `{degrees, minutes, seconds, direction}` as argument
  * and call the original handler with the decimal value.
  */
-module.exports = compose(
+export default compose(
     withProps(({
         value,
         coordinate,

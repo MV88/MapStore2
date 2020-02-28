@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,9 +8,10 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const DropdownList = require('react-widgets').DropdownList;
-const LocaleUtils = require('../../utils/LocaleUtils');
+import React from 'react';
+
+import { DropdownList } from 'react-widgets';
+import LocaleUtils from '../../utils/LocaleUtils';
 
 class MarkNameSelector extends React.Component {
     static propTypes = {
@@ -45,4 +47,4 @@ class MarkNameSelector extends React.Component {
     }
 }
 
-module.exports = MarkNameSelector;
+export default MarkNameSelector;

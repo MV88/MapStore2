@@ -5,9 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const expect = require('expect');
-const measurement = require('../measurement');
-const {
+import expect from 'expect';
+
+import measurement from '../measurement';
+
+import {
     toggleMeasurement,
     changeMeasurementState,
     changeUom,
@@ -17,8 +19,9 @@ const {
     changeGeometry,
     updateMeasures,
     init
-} = require('../../actions/measurement');
-const {RESET_CONTROLS, setControlProperty} = require('../../actions/controls');
+} from '../../actions/measurement';
+
+import { RESET_CONTROLS, setControlProperty } from '../../actions/controls';
 const feature = {
     type: "Feature",
     geometry: {

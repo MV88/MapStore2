@@ -5,10 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const SAVE_PLUGIN_CONFIG = 'SAVE_PLUGIN_CONFIG';
-const COMPILE_ERROR = 'COMPILE_ERROR';
+export const SAVE_PLUGIN_CONFIG = 'SAVE_PLUGIN_CONFIG';
+export const COMPILE_ERROR = 'COMPILE_ERROR';
 
-function savePluginConfig(plugin, cfg) {
+export function savePluginConfig(plugin, cfg) {
     return {
         type: SAVE_PLUGIN_CONFIG,
         plugin,
@@ -16,18 +16,16 @@ function savePluginConfig(plugin, cfg) {
     };
 }
 
-function compileError(message) {
+export function compileError(message) {
     return {
         type: COMPILE_ERROR,
         message
     };
 }
 
-function resetError() {
+export function resetError() {
     return {
         type: COMPILE_ERROR,
         message: null
     };
 }
-
-module.exports = {SAVE_PLUGIN_CONFIG, COMPILE_ERROR, savePluginConfig, compileError, resetError};

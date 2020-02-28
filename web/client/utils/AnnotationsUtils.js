@@ -6,30 +6,41 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const uuidv1 = require('uuid/v1');
-const LocaleUtils = require('./LocaleUtils');
-const {extraMarkers} = require('./MarkerUtils');
-const {geometryFunctions, fetchStyle, hashAndStringify} = require('./VectorStyleUtils');
-const {set} = require('./ImmutableUtils');
-const {values, isNil, slice, head, castArray, last, isArray, findIndex, isString} = require('lodash');
-const uuid = require('uuid');
-const turfCenter = require('@turf/center').default;
-const assign = require('object-assign');
+import { castArray, findIndex, head, isArray, isNil, isString, last, slice, values } from 'lodash';
+import assign from 'object-assign';
+import uuid from 'uuid';
+import uuidv1 from 'uuid/v1';
 
+import turfCenter from '@turf/center';
 
-const STYLE_CIRCLE = {
+import missingSVG from '../product/assets/symbols/symbolMissing.svg';
+import { set } from './ImmutableUtils';
+import LocaleUtils from './LocaleUtils';
+import { extraMarkers } from './MarkerUtils';
+import { fetchStyle, geometryFunctions, hashAndStringify } from './VectorStyleUtils';
+
+export const COMPONENTS_VALIDATION = {
+    "Point": {min: 1, add: false, remove: false, validation: "validateCoordinates", notValid: "Add a valid coordinate to complete the Point"},
+    "MultiPoint": {min: 2, add: true, remove: true, validation: "validateCoordinates", notValid: "Add 2 valid coordinates to complete the Polyline"},
+    "Polygon": {min: 3, add: true, remove: true, validation: "validateCoordinates", notValid: "Add 3 valid coordinates to complete the Polygon"},
+    "LineString": {min: 2, add: true, remove: true, validation: "validateCoordinates", notValid: "Add 2 valid coordinates to complete the Polyline"},
+    "Circle": {add: false, remove: false, validation: "validateCircle", notValid: "Add a valid coordinate and a radius (m) to complete the Circle"},
+    "Text": {add: false, remove: false, validation: "validateText", notValid: "Add a valid coordinate and a Text value"}
+};
+
+export const  STYLE_CIRCLE = {
     color: '#ffcc33',
     opacity: 1,
     weight: 3,
     fillColor: '#ffffff',
     fillOpacity: 0.2
 };
-const STYLE_POINT = {
+export const  STYLE_POINT = {
     iconGlyph: 'comment',
     iconShape: 'square',
     iconColor: 'blue'
 };
-const STYLE_TEXT = {
+export const  STYLE_TEXT = {
     fontStyle: 'normal',
     fontSize: '14',
     fontSizeUom: 'px',
@@ -42,7 +53,7 @@ const STYLE_TEXT = {
     fillColor: '#000000',
     fillOpacity: 1
 };
-const STYLE_LINE = {
+export const  STYLE_LINE = {
     color: '#ffcc33',
     opacity: 1,
     weight: 3,
@@ -50,7 +61,7 @@ const STYLE_LINE = {
         fill: 1
     }
 };
-const STYLE_POLYGON = {
+export const  STYLE_POLYGON = {
     color: '#ffcc33',
     opacity: 1,
     weight: 3,
@@ -61,7 +72,7 @@ const STYLE_POLYGON = {
     }
 };
 
-const DEFAULT_ANNOTATIONS_STYLES = {
+export const  DEFAULT_ANNOTATIONS_STYLES = {
     "Text": STYLE_TEXT,
     "Point": STYLE_POINT,
     "Circle": STYLE_CIRCLE,
@@ -72,12 +83,66 @@ const DEFAULT_ANNOTATIONS_STYLES = {
     "MultiPolygon": STYLE_POLYGON
 };
 
+export const validateCoords = ({lat, lon} = {}) => !isNaN(parseFloat(lat)) && !isNaN(parseFloat(lon));
+export const validateCoordsArray = ([lon, lat] = []) => !isNaN(parseFloat(lat)) && !isNaN(parseFloat(lon));
+export const validateCoord = (c) => !isNaN(parseFloat(c));
+export const coordToArray = (c = {}) => [c.lon, c.lat];
+export const validateCoordinates = ({components = [], remove = false, type } = {}) => {
+    if (components && components.length) {
+        const validComponents = components.filter(validateCoords);
+
+        if (remove) {
+            return validComponents.length > COMPONENTS_VALIDATION[type].min && validComponents.length === components.length;
+        }
+        return validComponents.length >= COMPONENTS_VALIDATION[type].min && validComponents.length === components.length;
+    }
+    return false;
+};
+export const validateCircle = ({components = [], properties = {radius: 0}} = {}) => {
+    if (components && components.length) {
+        const cmp = head(components);
+        return !isNaN(parseFloat(properties.radius)) && validateCoords(cmp);
+    }
+    return false;
+};
+export const validateText = ({components = [], properties = {valueText: ""}} = {}) => {
+    if (components && components.length) {
+        const cmp = head(components);
+        return properties && !!properties.valueText && validateCoords(cmp);
+    }
+    return false;
+};
+export const validateFeature = ({components = [[]], type, remove = false, properties = {}} = {}) => {
+    if (isNil(type)) {
+        return false;
+    }
+    if (type === "Text") {
+        return validateText({components, properties});
+    }
+    if (type === "Circle") {
+        return validateCircle({components, properties});
+    }
+    return validateCoordinates({components, remove, type});
+};
+
+/**
+ * it tells if the filtered list of the coordinates is a geojson polygon,
+ * with the first point = to the last
+ * @param {number[[[]]]} coords the coordinates of the polygon
+ * @return {boolean} true if it is a valid polygon, false otherwise
+*/
+export const isCompletePolygon = (coords = [[[]]]) => {
+    const validCoords = coords[0].filter(validateCoordsArray);
+    return validCoords.length > 3 && head(validCoords)[0] === last(validCoords)[0] && head(validCoords)[1] === last(validCoords)[1];
+};
+
+
 /**
  * return two styles object for start and end point.
  * usually added to a LineString
  * @return {object[]} the two styles
 */
-const getStartEndPointsForLinestring = () => {
+export const getStartEndPointsForLinestring = () => {
     return [{...DEFAULT_ANNOTATIONS_STYLES.Point, highlight: true, iconAnchor: [0.5, 0.5], type: "Point", title: "StartPoint Style", geometry: "startPoint", filtering: false, id: uuidv1()},
         {...DEFAULT_ANNOTATIONS_STYLES.Point, highlight: true, iconAnchor: [0.5, 0.5], type: "Point", title: "EndPoint Style", geometry: "endPoint", filtering: false, id: uuidv1()}];
 };
@@ -198,391 +263,324 @@ const annStyleToOlStyle = (type, tempStyle, label = "") => {
     }
 };
 
-const AnnotationsUtils = {
-    /**
-     * function used to convert a geojson into a internal model.
-     * if it finds some textValues in the properties it will return this as Text
-     * otherwise it will return the original geometry type.
-     * @return {object} a transformed geojson with only geometry types
-    */
-    convertGeoJSONToInternalModel: ({type = "Point", geometries = [], features = []}, textValues = [], circles = []) => {
-        switch (type) {
-        case "Point": case "MultiPoint": {
-            return {type: textValues.length === 1 ? "Text" : type};
-        }
-        case "Polygon": {
-            return {type: circles.length === 1 ? "Circle" : type};
-        }
-        case "GeometryCollection": {
-            const onlyPoints = geometries.filter(g => g.type === "Point" || g.type === "MultiPoint");
-            const onlyMultiPolygons = geometries.filter(g => g.type === "Polygon");
-            let t = 0;
-            let p = 0;
-            return {type: "GeometryCollection", geometries: geometries.map(g => {
-                if (g.type === "Point" || g.type === "MultiPoint") {
-                    if (onlyPoints.length === textValues.length) {
-                        return {type: "Text"};
-                    }
-                    if (textValues.length === 0) {
-                        return {type: g.type};
-                    }
-                    if (t === 0) {
-                        t++;
-                        return {type: "Text" };
-                    }
-                }
-                if (g.type === "Polygon") {
-                    if (onlyMultiPolygons.length === circles.length) {
-                        return {type: "Circle"};
-                    }
-                    if (circles.length === 0) {
-                        return {type: g.type};
-                    }
-                    if (p === 0) {
-                        p++;
-                        return {type: "Circle" };
-                    }
-                }
-                return {type: g.type};
-            })};
-        }
-        case "FeatureCollection" : {
-            const featuresTypes = features.map(f => {
-                if (f.properties && f.properties.isCircle) {
-                    return {type: "Circle"};
-                }
-                if (f.properties && f.properties.isText) {
+
+/**
+ * function used to convert a geojson into a internal model.
+ * if it finds some textValues in the properties it will return this as Text
+ * otherwise it will return the original geometry type.
+ * @return {object} a transformed geojson with only geometry types
+*/
+export const convertGeoJSONToInternalModel = ({type = "Point", geometries = [], features = []}, textValues = [], circles = []) => {
+    switch (type) {
+    case "Point": case "MultiPoint": {
+        return {type: textValues.length === 1 ? "Text" : type};
+    }
+    case "Polygon": {
+        return {type: circles.length === 1 ? "Circle" : type};
+    }
+    case "GeometryCollection": {
+        const onlyPoints = geometries.filter(g => g.type === "Point" || g.type === "MultiPoint");
+        const onlyMultiPolygons = geometries.filter(g => g.type === "Polygon");
+        let t = 0;
+        let p = 0;
+        return {type: "GeometryCollection", geometries: geometries.map(g => {
+            if (g.type === "Point" || g.type === "MultiPoint") {
+                if (onlyPoints.length === textValues.length) {
                     return {type: "Text"};
                 }
-                return {type: f.geometry.type};
-            });
-            return {type: "FeatureCollection", features: featuresTypes};
-        }
-        default: return {type};
-        }
-    },
-    /**
-     * Retrieves a non duplicated list of stylers
-     * @return {string[]} it returns the array of available styler from geometry of a feature
-    */
-    getAvailableStyler: ({type = "Point", geometries = [], features = []} = {}) => {
-        switch (type) {
-        case "Point": case "MultiPoint": {
-            return [AnnotationsUtils.getRelativeStyler(type)];
-        }
-        case "Symbol": {
-            return [AnnotationsUtils.getRelativeStyler(type)];
-        }
-        case "LineString": case "MultiLineString": {
-            return [AnnotationsUtils.getRelativeStyler(type)];
-        }
-        case "Polygon": case "MultiPolygon": {
-            return [AnnotationsUtils.getRelativeStyler(type)];
-        }
-        case "Text": {
-            return [AnnotationsUtils.getRelativeStyler(type)];
-        }
-        case "Circle": {
-            return [AnnotationsUtils.getRelativeStyler(type)];
-        }
-        case "GeometryCollection": {
-            return geometries.reduce((p, c) => {
-                return (p.indexOf(AnnotationsUtils.getRelativeStyler(c.type)) !== -1) ? p : p.concat(AnnotationsUtils.getAvailableStyler(c));
-            }, []);
-        }
-        case "FeatureCollection": {
-            return features.reduce((p, c) => {
-                return (p.indexOf(AnnotationsUtils.getRelativeStyler(c.type)) !== -1) ? p : p.concat(AnnotationsUtils.getAvailableStyler(c));
-            }, []);
-        }
-        default: return [];
-        }
-    },
-    /**
-     * it converts a geometryType to a stylertype
-     * @return {string} a stylertype
-    */
-    getRelativeStyler: (type) => {
-        switch (type) {
-        case "Point": case "MultiPoint": {
-            return "marker";
-        }
-        case "Symbol": {
-            return "symbol";
-        }
-        case "Circle": {
-            return "circle";
-        }
-        case "LineString": case "MultiLineString": {
-            return "lineString";
-        }
-        case "Polygon": case "MultiPolygon": {
-            return "polygon";
-        }
-        case "Text": {
-            return "text";
-        }
-        default: return "";
-        }
-    },
-    /**
-     * it converts some props of a CSS-font into a shorhand form
-     * @return {string} a CSS-font
-    */
-    createFont: ({fontSize = "14", fontSizeUom = "px", fontFamily = "Arial", fontStyle = "normal", fontWeight = "normal"} = {}) => {
-        return `${fontStyle} ${fontWeight} ${fontSize}${fontSizeUom} ${fontFamily}`;
-    },
-    /**
-     * some defaults for the style
-    */
-    DEFAULT_ANNOTATIONS_STYLES,
-    STYLE_CIRCLE,
-    STYLE_POINT,
-    STYLE_TEXT,
-    STYLE_LINE,
-    STYLE_POLYGON,
-    /**
-    * it converts any geoJSONObject to an annotation
-    * Mandatory elements: MUST be a geoJSON type Feature => properties with an ID and a title
-    * annotation style.
-    */
-    normalizeAnnotation: (ann = {}, messages = {}) => {
-        const annotation = ann.type === "FeatureCollection" ? {...ann} : {type: "Feature", geometry: ann};
-        const style = getStylesObject(annotation);
-        const properties = getProperties(annotation.properties, messages);
-        return {style, properties, ...annotation};
-    },
-    removeDuplicate: (annotations) => values(annotations.reduce((p, c) => ({...p, [c.properties.id]: c}), {})),
-    /**
-    * Compress circle in a single MultiPolygon feature with style
-    * @param {object} geometry
-    * @param {object} properties
-    * @param {object} style
-    * @return {object} feature
-    */
-    circlesToMultiPolygon: ({geometries = []}, {circles = []}, style = STYLE_CIRCLE) => {
-        const coordinates = circles.reduce((coords, cIdx) => coords.concat([geometries[cIdx].coordinates]), []);
-        return {type: "Feature", geometry: {type: "MultiPolygon", coordinates}, properties: {id: uuidv1(), ms_style: annStyleToOlStyle("Circle", style)}};
-    },
-    /**
-    * Transform circle in a single Polygon feature with style
-    * @param {object} geometry
-    * @param {object} properties
-    * @param {object} style
-    * @return {object} feature
-    */
-    fromCircleToPolygon: (geometry, properties, style = STYLE_CIRCLE) => {
-        return {type: "Feature", geometry: properties.polygonGeom || geometry, properties: {id: properties.id || uuidv1(), ms_style: annStyleToOlStyle("Circle", style)}};
-    },
-    /**
-    * Transform text point to single point with style
-    * @param {object} geometry
-    * @param {object} properties
-    * @param {object} style
-    * @return {object} feature
-    */
-    fromTextToPoint: (geometry, properties, style = STYLE_TEXT) => {
-        return {type: "Feature", geometry, properties: {id: properties.id || uuidv1(), ms_style: annStyleToOlStyle("Text", style, properties.valueText)}};
-    },
-    /**
-    * Transform LineString to geodesic LineString (with more points)
-    * @param {object} geometry
-    * @param {object} properties
-    * @param {object} style
-    * @return {object} feature
-    */
-    fromLineStringToGeodesicLineString: (properties, style = STYLE_LINE) => {
-        return {type: "Feature", geometry: properties.geometryGeodesic, properties: {id: properties.id || uuidv1(), ms_style: annStyleToOlStyle(properties.geometryGeodesic.type, style)}};
-    },
-    /**
-    * Flatten text point to single point with style
-    * @param {object} geometry
-    * @param {object} properties
-    * @param {object} style
-    * @return {object[]} features
-    */
-    textToPoint: ({geometries = []}, {textGeometriesIndexes = [], textValues = []}, style = STYLE_TEXT) => {
-        return textGeometriesIndexes.map((tIdx, cIdx) => {
-            return {type: "Feature", geometry: geometries[tIdx], properties: {id: uuidv1(), ms_style: annStyleToOlStyle("Text", style, textValues[cIdx])}};
-        });
-
-    },
-    /**
-    * Flatten geometry collection
-    * @param {object} GeometryCollection An annotation of type geometrycollection
-    * @return {object[]} an array of features
-    */
-    flattenGeometryCollection: ({geometry, properties, style}) => {
-        const circles = properties.circles && AnnotationsUtils.circlesToMultiPolygon(geometry, properties, style.Circle) || [];
-        const texts = properties.textGeometriesIndexes && AnnotationsUtils.textToPoint(geometry, properties, style.Text) || [];
-        const skeep = (properties.circles || []).concat(properties.textGeometriesIndexes || []);
-        const features = geometry.geometries.filter((el, idx) => skeep.indexOf(idx) === -1)
-            .map((geom) => ({
-                type: "Feature",
-                geometry: geom,
-                properties: {id: uuidv1(), ms_style: annStyleToOlStyle(geom.type, style[geom.type])}
-            }));
-        return features.concat(circles, texts);
-    },
-    // for the moment is used with ol functions
-    createGeometryFromGeomFunction: (ft) => {
-        let type = geometryFunctions[ft.style.geometry] && geometryFunctions[ft.style.geometry].type || ft.geometry.type;
-        let coordinates = ft.geometry.coordinates || [];
-        switch (ft.style.geometry ) {
-        case "startPoint": coordinates = head(coordinates); break;
-        case "endPoint": coordinates = last(coordinates); break;
-        case "centerPoint": coordinates = turfCenter(ft).geometry.coordinates; break;
-        default: break;
-        }
-        return {type, coordinates};
-    },
-    /**
-    * transform an annotation Feature into a simple geojson feature
-    * @param {object} feature coming from a ftcoll
-    * @return {object} a transformed feature
-    */
-    fromAnnotationToGeoJson: ({geometry: ftGeom, properties = {}, style = {}} = {}) => {
-        let geometry = style.geometry ? AnnotationsUtils.createGeometryFromGeomFunction({geometry: ftGeom, properties, style, type: "Feature"}) : ftGeom;
-        if (properties.isCircle && geometry.type === "Polygon") {
-            return AnnotationsUtils.fromCircleToPolygon(geometry, properties, style);
-        }
-        if (properties.isText) {
-            return AnnotationsUtils.fromTextToPoint(geometry, properties, style);
-        }
-        if (geometry.type === "LineString" && properties.useGeodesicLines && style.filtering) {
-            return AnnotationsUtils.fromLineStringToGeodesicLineString(properties, style);
-        }
-        return {
-            type: "Feature",
-            geometry,
-            properties: {id: properties.id || uuidv1(), ms_style: annStyleToOlStyle(geometry.type, style)}
-        };
-    },
-    /**
-    * Adapt annotation features to print pdf
-    * @param {object[]} features
-    * @param {object} style
-    * @return {object[]} features
-    */
-    annotationsToPrint: (features = []) => {
-        return features.reduce((coll, f) => {
-            if (f.type === "FeatureCollection") {
-                // takes the style from the feature coll if it is missing from the feature
-                return coll.concat(f.features.map(ft => {
-                    return castArray(ft.style || f.style || {}).filter(s => isNil(s.filtering) ? true : s.filtering).map(style => AnnotationsUtils.fromAnnotationToGeoJson({...ft, style}));
-                }).reduce((p, c) => p.concat(c), []));
+                if (textValues.length === 0) {
+                    return {type: g.type};
+                }
+                if (t === 0) {
+                    t++;
+                    return {type: "Text" };
+                }
             }
-            return f.geometry && f.geometry.type === "GeometryCollection" ? coll.concat(AnnotationsUtils.flattenGeometryCollection(f))
-                : coll.concat({type: "Feature", geometry: f.geometry, properties: {...f.properties, ms_style: annStyleToOlStyle(f.geometry.type, f.style)}});
+            if (g.type === "Polygon") {
+                if (onlyMultiPolygons.length === circles.length) {
+                    return {type: "Circle"};
+                }
+                if (circles.length === 0) {
+                    return {type: g.type};
+                }
+                if (p === 0) {
+                    p++;
+                    return {type: "Circle" };
+                }
+            }
+            return {type: g.type};
+        })};
+    }
+    case "FeatureCollection" : {
+        const featuresTypes = features.map(f => {
+            if (f.properties && f.properties.isCircle) {
+                return {type: "Circle"};
+            }
+            if (f.properties && f.properties.isText) {
+                return {type: "Text"};
+            }
+            return {type: f.geometry.type};
+        });
+        return {type: "FeatureCollection", features: featuresTypes};
+    }
+    default: return {type};
+    }
+};
+/**
+ * it converts a geometryType to a stylertype
+ * @return {string} a stylertype
+*/
+export const getRelativeStyler = (type) => {
+    switch (type) {
+    case "Point": case "MultiPoint": {
+        return "marker";
+    }
+    case "Symbol": {
+        return "symbol";
+    }
+    case "Circle": {
+        return "circle";
+    }
+    case "LineString": case "MultiLineString": {
+        return "lineString";
+    }
+    case "Polygon": case "MultiPolygon": {
+        return "polygon";
+    }
+    case "Text": {
+        return "text";
+    }
+    default: return "";
+    }
+};
+/**
+ * Retrieves a non duplicated list of stylers
+ * @return {string[]} it returns the array of available styler from geometry of a feature
+*/
+export const getAvailableStyler = ({type = "Point", geometries = [], features = []} = {}) => {
+    switch (type) {
+    case "Point": case "MultiPoint": {
+        return [getRelativeStyler(type)];
+    }
+    case "Symbol": {
+        return [getRelativeStyler(type)];
+    }
+    case "LineString": case "MultiLineString": {
+        return [getRelativeStyler(type)];
+    }
+    case "Polygon": case "MultiPolygon": {
+        return [getRelativeStyler(type)];
+    }
+    case "Text": {
+        return [getRelativeStyler(type)];
+    }
+    case "Circle": {
+        return [getRelativeStyler(type)];
+    }
+    case "GeometryCollection": {
+        return geometries.reduce((p, c) => {
+            return (p.indexOf(getRelativeStyler(c.type)) !== -1) ? p : p.concat(getAvailableStyler(c));
         }, []);
-    },
-    formatCoordinates: (coords = [[]]) => {
-        return coords.map(c => ({lat: c && c[1], lon: c && c[0]}));
-    },
-    getBaseCoord: (type) => {
-        switch (type) {
-        case "Polygon": case "LineString": case "MultiPoint": return [];
-        default: return [[{lat: "", lon: ""}]];
-        }
-    },
-    getComponents: ({type, coordinates}) => {
-        switch (type) {
-        case "Polygon": {
-            return AnnotationsUtils.isCompletePolygon(coordinates) ? AnnotationsUtils.formatCoordinates(slice(coordinates[0], 0, coordinates[0].length - 1)) : AnnotationsUtils.formatCoordinates(coordinates[0]);
-        }
-        case "LineString": case "MultiPoint": {
-            return AnnotationsUtils.formatCoordinates(coordinates);
-        }
-        default: return AnnotationsUtils.formatCoordinates([coordinates]);
-        }
-    },
-    addIds: (features) => {
-        return features.map(f => {
-            if (f.properties && f.properties.id) {
-                return f;
-            }
-            return set("properties.id", uuid.v1(), f);
-        });
-    },
-    COMPONENTS_VALIDATION: {
-        "Point": {min: 1, add: false, remove: false, validation: "validateCoordinates", notValid: "Add a valid coordinate to complete the Point"},
-        "MultiPoint": {min: 2, add: true, remove: true, validation: "validateCoordinates", notValid: "Add 2 valid coordinates to complete the Polyline"},
-        "Polygon": {min: 3, add: true, remove: true, validation: "validateCoordinates", notValid: "Add 3 valid coordinates to complete the Polygon"},
-        "LineString": {min: 2, add: true, remove: true, validation: "validateCoordinates", notValid: "Add 2 valid coordinates to complete the Polyline"},
-        "Circle": {add: false, remove: false, validation: "validateCircle", notValid: "Add a valid coordinate and a radius (m) to complete the Circle"},
-        "Text": {add: false, remove: false, validation: "validateText", notValid: "Add a valid coordinate and a Text value"}
-    },
-    validateCoords: ({lat, lon} = {}) => !isNaN(parseFloat(lat)) && !isNaN(parseFloat(lon)),
-    validateCoordsArray: ([lon, lat] = []) => !isNaN(parseFloat(lat)) && !isNaN(parseFloat(lon)),
-    validateCoord: (c) => !isNaN(parseFloat(c)),
-    coordToArray: (c = {}) => [c.lon, c.lat],
-    validateCoordinates: ({components = [], remove = false, type } = {}) => {
-        if (components && components.length) {
-            const validComponents = components.filter(AnnotationsUtils.validateCoords);
-
-            if (remove) {
-                return validComponents.length > AnnotationsUtils.COMPONENTS_VALIDATION[type].min && validComponents.length === components.length;
-            }
-            return validComponents.length >= AnnotationsUtils.COMPONENTS_VALIDATION[type].min && validComponents.length === components.length;
-        }
-        return false;
-    },
-    validateCircle: ({components = [], properties = {radius: 0}} = {}) => {
-        if (components && components.length) {
-            const cmp = head(components);
-            return !isNaN(parseFloat(properties.radius)) && AnnotationsUtils.validateCoords(cmp);
-        }
-        return false;
-    },
-    validateText: ({components = [], properties = {valueText: ""}} = {}) => {
-        if (components && components.length) {
-            const cmp = head(components);
-            return properties && !!properties.valueText && AnnotationsUtils.validateCoords(cmp);
-        }
-        return false;
-    },
-    validateFeature: ({components = [[]], type, remove = false, properties = {}} = {}) => {
-        if (isNil(type)) {
-            return false;
-        }
-        if (type === "Text") {
-            return AnnotationsUtils.validateText({components, properties});
-        }
-        if (type === "Circle") {
-            return AnnotationsUtils.validateCircle({components, properties});
-        }
-        return AnnotationsUtils.validateCoordinates({components, remove, type});
-    },
-    updateAllStyles: (ftColl = {}, newStyle = {}) => {
-        if (ftColl.features && ftColl.features.length) {
-            return {
-                ...ftColl,
-                features: ftColl.features.map(f => assign({}, f, {
-                    style: castArray(f.style).map(s => assign({}, s, newStyle))}
-                ))};
-        }
-        return ftColl;
-    },
-    getStartEndPointsForLinestring,
-    DEFAULT_SHAPE: "triangle",
-    DEFAULT_PATH: "product/assets/symbols/",
-    checkSymbolsError: (symbolErrors, error = "loading_symbols_path") => {
-        return symbolErrors.length && findIndex(symbolErrors, (s) => s === error) !== -1;
-    },
-    isAMissingSymbol: (style) => {
-        return style.symbolUrlCustomized === require('../product/assets/symbols/symbolMissing.svg');
-    },
-    /**
-     * it tells if the filtered list of the coordinates is a geojson polygon,
-     * with the first point = to the last
-     * @param {number[[[]]]} coords the coordinates of the polygon
-     * @return {boolean} true if it is a valid polygon, false otherwise
-    */
-    isCompletePolygon: (coords = [[[]]]) => {
-        const validCoords = coords[0].filter(AnnotationsUtils.validateCoordsArray);
-        return validCoords.length > 3 && head(validCoords)[0] === last(validCoords)[0] && head(validCoords)[1] === last(validCoords)[1];
-    },
-    getDashArrayFromStyle
+    }
+    case "FeatureCollection": {
+        return features.reduce((p, c) => {
+            return (p.indexOf(getRelativeStyler(c.type)) !== -1) ? p : p.concat(getAvailableStyler(c));
+        }, []);
+    }
+    default: return [];
+    }
 };
 
-module.exports = AnnotationsUtils;
+/**
+ * it converts some props of a CSS-font into a shorhand form
+ * @return {string} a CSS-font
+*/
+export const createFont = ({fontSize = "14", fontSizeUom = "px", fontFamily = "Arial", fontStyle = "normal", fontWeight = "normal"} = {}) => {
+    return `${fontStyle} ${fontWeight} ${fontSize}${fontSizeUom} ${fontFamily}`;
+};
+/**
+ * some defaults for the style
+*/
+
+/**
+* it converts any geoJSONObject to an annotation
+* Mandatory elements: MUST be a geoJSON type Feature => properties with an ID and a title
+* annotation style.
+*/
+export const normalizeAnnotation = (ann = {}, messages = {}) => {
+    const annotation = ann.type === "FeatureCollection" ? {...ann} : {type: "Feature", geometry: ann};
+    const style = getStylesObject(annotation);
+    const properties = getProperties(annotation.properties, messages);
+    return {style, properties, ...annotation};
+};
+export const removeDuplicate = (annotations) => values(annotations.reduce((p, c) => ({...p, [c.properties.id]: c}), {}));
+/**
+* Compress circle in a single MultiPolygon feature with style
+* @param {object} geometry
+* @param {object} properties
+* @param {object} style
+* @return {object} feature
+*/
+export const circlesToMultiPolygon = ({geometries = []}, {circles = []}, style = STYLE_CIRCLE) => {
+    const coordinates = circles.reduce((coords, cIdx) => coords.concat([geometries[cIdx].coordinates]), []);
+    return {type: "Feature", geometry: {type: "MultiPolygon", coordinates}, properties: {id: uuidv1(), ms_style: annStyleToOlStyle("Circle", style)}};
+};
+/**
+* Transform circle in a single Polygon feature with style
+* @param {object} geometry
+* @param {object} properties
+* @param {object} style
+* @return {object} feature
+*/
+export const fromCircleToPolygon = (geometry, properties, style = STYLE_CIRCLE) => {
+    return {type: "Feature", geometry: properties.polygonGeom || geometry, properties: {id: properties.id || uuidv1(), ms_style: annStyleToOlStyle("Circle", style)}};
+};
+/**
+* Transform text point to single point with style
+* @param {object} geometry
+* @param {object} properties
+* @param {object} style
+* @return {object} feature
+*/
+export const fromTextToPoint = (geometry, properties, style = STYLE_TEXT) => {
+    return {type: "Feature", geometry, properties: {id: properties.id || uuidv1(), ms_style: annStyleToOlStyle("Text", style, properties.valueText)}};
+};
+/**
+* Transform LineString to geodesic LineString (with more points)
+* @param {object} geometry
+* @param {object} properties
+* @param {object} style
+* @return {object} feature
+*/
+export const fromLineStringToGeodesicLineString = (properties, style = STYLE_LINE) => {
+    return {type: "Feature", geometry: properties.geometryGeodesic, properties: {id: properties.id || uuidv1(), ms_style: annStyleToOlStyle(properties.geometryGeodesic.type, style)}};
+};
+/**
+* Flatten text point to single point with style
+* @param {object} geometry
+* @param {object} properties
+* @param {object} style
+* @return {object[]} features
+*/
+export const textToPoint = ({geometries = []}, {textGeometriesIndexes = [], textValues = []}, style = STYLE_TEXT) => {
+    return textGeometriesIndexes.map((tIdx, cIdx) => {
+        return {type: "Feature", geometry: geometries[tIdx], properties: {id: uuidv1(), ms_style: annStyleToOlStyle("Text", style, textValues[cIdx])}};
+    });
+
+};
+/**
+* Flatten geometry collection
+* @param {object} GeometryCollection An annotation of type geometrycollection
+* @return {object[]} an array of features
+*/
+export const flattenGeometryCollection = ({geometry, properties, style}) => {
+    const circles = properties.circles && circlesToMultiPolygon(geometry, properties, style.Circle) || [];
+    const texts = properties.textGeometriesIndexes && textToPoint(geometry, properties, style.Text) || [];
+    const skeep = (properties.circles || []).concat(properties.textGeometriesIndexes || []);
+    const features = geometry.geometries.filter((el, idx) => skeep.indexOf(idx) === -1)
+        .map((geom) => ({
+            type: "Feature",
+            geometry: geom,
+            properties: {id: uuidv1(), ms_style: annStyleToOlStyle(geom.type, style[geom.type])}
+        }));
+    return features.concat(circles, texts);
+};
+// for the moment is used with ol functions
+export const createGeometryFromGeomFunction = (ft) => {
+    let type = geometryFunctions[ft.style.geometry] && geometryFunctions[ft.style.geometry].type || ft.geometry.type;
+    let coordinates = ft.geometry.coordinates || [];
+    switch (ft.style.geometry ) {
+    case "startPoint": coordinates = head(coordinates); break;
+    case "endPoint": coordinates = last(coordinates); break;
+    case "centerPoint": coordinates = turfCenter(ft).geometry.coordinates; break;
+    default: break;
+    }
+    return {type, coordinates};
+};
+/**
+* transform an annotation Feature into a simple geojson feature
+* @param {object} feature coming from a ftcoll
+* @return {object} a transformed feature
+*/
+export const fromAnnotationToGeoJson = ({geometry: ftGeom, properties = {}, style = {}} = {}) => {
+    let geometry = style.geometry ? createGeometryFromGeomFunction({geometry: ftGeom, properties, style, type: "Feature"}) : ftGeom;
+    if (properties.isCircle && geometry.type === "Polygon") {
+        return fromCircleToPolygon(geometry, properties, style);
+    }
+    if (properties.isText) {
+        return fromTextToPoint(geometry, properties, style);
+    }
+    if (geometry.type === "LineString" && properties.useGeodesicLines && style.filtering) {
+        return fromLineStringToGeodesicLineString(properties, style);
+    }
+    return {
+        type: "Feature",
+        geometry,
+        properties: {id: properties.id || uuidv1(), ms_style: annStyleToOlStyle(geometry.type, style)}
+    };
+};
+/**
+* Adapt annotation features to print pdf
+* @param {object[]} features
+* @param {object} style
+* @return {object[]} features
+*/
+export const annotationsToPrint = (features = []) => {
+    return features.reduce((coll, f) => {
+        if (f.type === "FeatureCollection") {
+            // takes the style from the feature coll if it is missing from the feature
+            return coll.concat(f.features.map(ft => {
+                return castArray(ft.style || f.style || {}).filter(s => isNil(s.filtering) ? true : s.filtering).map(style => fromAnnotationToGeoJson({...ft, style}));
+            }).reduce((p, c) => p.concat(c), []));
+        }
+        return f.geometry && f.geometry.type === "GeometryCollection" ? coll.concat(flattenGeometryCollection(f))
+            : coll.concat({type: "Feature", geometry: f.geometry, properties: {...f.properties, ms_style: annStyleToOlStyle(f.geometry.type, f.style)}});
+    }, []);
+};
+export const formatCoordinates = (coords = [[]]) => {
+    return coords.map(c => ({lat: c && c[1], lon: c && c[0]}));
+};
+export const getBaseCoord = (type) => {
+    switch (type) {
+    case "Polygon": case "LineString": case "MultiPoint": return [];
+    default: return [[{lat: "", lon: ""}]];
+    }
+};
+export const getComponents = ({type, coordinates}) => {
+    switch (type) {
+    case "Polygon": {
+        return isCompletePolygon(coordinates) ? formatCoordinates(slice(coordinates[0], 0, coordinates[0].length - 1)) : formatCoordinates(coordinates[0]);
+    }
+    case "LineString": case "MultiPoint": {
+        return formatCoordinates(coordinates);
+    }
+    default: return formatCoordinates([coordinates]);
+    }
+};
+export const addIds = (features) => {
+    return features.map(f => {
+        if (f.properties && f.properties.id) {
+            return f;
+        }
+        return set("properties.id", uuid.v1(), f);
+    });
+};
+
+export const updateAllStyles = (ftColl = {}, newStyle = {}) => {
+    if (ftColl.features && ftColl.features.length) {
+        return {
+            ...ftColl,
+            features: ftColl.features.map(f => assign({}, f, {
+                style: castArray(f.style).map(s => assign({}, s, newStyle))}
+            ))};
+    }
+    return ftColl;
+};
+export const DEFAULT_SHAPE = "triangle";
+export const DEFAULT_PATH = "product/assets/symbols/";
+export const checkSymbolsError = (symbolErrors, error = "loading_symbols_path") => {
+    return symbolErrors.length && findIndex(symbolErrors, (s) => s === error) !== -1;
+};
+export const isAMissingSymbol = (style) => {
+    return style.symbolUrlCustomized === missingSVG;
+};

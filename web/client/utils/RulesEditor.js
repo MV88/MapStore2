@@ -5,28 +5,25 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
-const {isEqual, isEmpty} = require("lodash");
-const checkIp = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?(\/)(?:3[0-2]|[1-2]?[0-9]))\b/g;
-const RulesEditorUtils = {
-    isSaveDisabled: (currentRule, initRule) => {
-        return RulesEditorUtils.isRulePristine(currentRule, initRule) && initRule && initRule.hasOwnProperty("id");
-    },
-    areDetailsActive: (layer, {grant} = {}) => {
-        return !!layer && grant !== "DENY";
-    },
-    isRulePristine: (currentRule, initRule) => {
-        return isEqual(currentRule, initRule);
-    },
-    isRuleValid: ({ipaddress = ""} = {}) => {
-        if (ipaddress !== null && ipaddress.length > 0 ) {
-            return !!ipaddress.match(checkIp);
-        }
-        return true;
-    },
-    askConfirm: ({constraints = {}} = {}, key, value) => {
-        return !isEmpty(constraints) && (key === "workspace" || key === "layer" || (key === "grant" && value !== "ALLOW"));
-    },
-    checkIp
-};
+import { isEqual, isEmpty } from 'lodash';
 
-module.exports = RulesEditorUtils;
+export const checkIp = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?(\/)(?:3[0-2]|[1-2]?[0-9]))\b/g;
+
+export const isRulePristine = (currentRule, initRule) => {
+    return isEqual(currentRule, initRule);
+};
+export const isSaveDisabled = (currentRule, initRule) => {
+    return isRulePristine(currentRule, initRule) && initRule && initRule.hasOwnProperty("id");
+};
+export const areDetailsActive = (layer, {grant} = {}) => {
+    return !!layer && grant !== "DENY";
+};
+export const isRuleValid = ({ipaddress = ""} = {}) => {
+    if (ipaddress !== null && ipaddress.length > 0 ) {
+        return !!ipaddress.match(checkIp);
+    }
+    return true;
+};
+export const askConfirm = ({constraints = {}} = {}, key, value) => {
+    return !isEmpty(constraints) && (key === "workspace" || key === "layer" || (key === "grant" && value !== "ALLOW"));
+};

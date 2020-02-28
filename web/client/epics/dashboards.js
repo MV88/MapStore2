@@ -5,18 +5,25 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const { MAPS_LIST_LOADING, ATTRIBUTE_UPDATED} = require('../actions/maps');
-const { MAP_DELETED, MAP_METADATA_UPDATED } = require('../actions/maps');
-const { DASHBOARD_SAVED } = require('../actions/dashboard');
+import Rx from 'rxjs';
 
-const { SEARCH_DASHBOARDS, DELETE_DASHBOARD, DASHBOARD_DELETED, RELOAD, searchDashboards, dashboardListLoaded, dashboardDeleted, dashboardsLoading } = require('../actions/dashboards');
-const { searchParamsSelector, searchTextSelector, totalCountSelector} = require('../selectors/dashboards');
-const GeoStoreApi = require('../api/GeoStoreDAO');
-const { wrapStartStop } = require('../observables/epics');
-const {error} = require('../actions/notifications');
-
-const {deleteResource} = require('../api/persistence');
+import { DASHBOARD_SAVED } from '../actions/dashboard';
+import {
+    DASHBOARD_DELETED,
+    DELETE_DASHBOARD,
+    RELOAD,
+    SEARCH_DASHBOARDS,
+    dashboardDeleted,
+    dashboardListLoaded,
+    dashboardsLoading,
+    searchDashboards
+} from '../actions/dashboards';
+import { ATTRIBUTE_UPDATED, MAPS_LIST_LOADING, MAP_DELETED, MAP_METADATA_UPDATED } from '../actions/maps';
+import { error } from '../actions/notifications';
+import GeoStoreApi from '../api/GeoStoreDAO';
+import { deleteResource } from '../api/persistence';
+import { wrapStartStop } from '../observables/epics';
+import { searchParamsSelector, searchTextSelector, totalCountSelector } from '../selectors/dashboards';
 
 const calculateNewParams = state => {
     const totalCount = totalCountSelector(state);
@@ -32,7 +39,7 @@ const calculateNewParams = state => {
     };
 };
 
-module.exports = {
+export default {
     searchDashboardsOnMapSearch: action$ =>
         action$.ofType(MAPS_LIST_LOADING)
             .switchMap(({ searchText }) => Rx.Observable.of(searchDashboards(searchText))),

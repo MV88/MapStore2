@@ -1,7 +1,14 @@
-const {sort, selectFeatures, deselectFeatures, featureModified, disableToolbar, updateFilter} = require('../../actions/featuregrid');
+import {
+    sort,
+    selectFeatures,
+    deselectFeatures,
+    featureModified,
+    disableToolbar,
+    updateFilter
+} from '../../actions/featuregrid';
 
 const range = (start, end) => Array.from({length: (end + 1 - start)}, (v, k) => k + start);
-module.exports = {
+export default {
     onGridSort: (sortBy, sortOrder) => sort(sortBy, sortOrder),
     onAddFilter: (update) => updateFilter(update),
     onTemporaryChanges: (v) => disableToolbar(v),

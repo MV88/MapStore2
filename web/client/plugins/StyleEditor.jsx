@@ -6,41 +6,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const { connect } = require('react-redux');
-const { createSelector } = require('reselect');
-const { compose, branch, toClass } = require('recompose');
-const assign = require('object-assign');
-const { isArray, isString } = require('lodash');
+import { isArray, isString } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import { branch, compose, toClass } from 'recompose';
+import { createSelector } from 'reselect';
 
-const Loader = require('../components/misc/Loader');
-const BorderLayout = require('../components/layout/BorderLayout');
-const loadingState = require('../components/misc/enhancers/loadingState');
-const emptyState = require('../components/misc/enhancers/emptyState');
-const HTML = require('../components/I18N/HTML');
-
-const {
-    statusStyleSelector,
-    loadingStyleSelector,
-    getUpdatedLayer,
-    errorStyleSelector,
+import { updateSettingsParams } from '../actions/layers';
+import { initStyleService } from '../actions/styleeditor';
+import HTML from '../components/I18N/HTML';
+import BorderLayout from '../components/layout/BorderLayout';
+import Loader from '../components/misc/Loader';
+import emptyState from '../components/misc/enhancers/emptyState';
+import loadingState from '../components/misc/enhancers/loadingState';
+import epics from '../epics/styleeditor';
+import styleeditor from '../reducers/styleeditor';
+import { userRoleSelector } from '../selectors/security';
+import {
     canEditStyleSelector,
+    errorStyleSelector,
+    getUpdatedLayer,
+    loadingStyleSelector,
+    statusStyleSelector,
     styleServiceSelector
-} = require('../selectors/styleeditor');
-
-const { userRoleSelector } = require('../selectors/security');
-
-const { initStyleService } = require('../actions/styleeditor');
-const { updateSettingsParams } = require('../actions/layers');
-
-const {
-    StyleSelector,
-    StyleToolbar,
-    StyleCodeEditor
-} = require('./styleeditor/index');
-
-const { isSameOrigin } = require('../utils/StyleEditorUtils');
+} from '../selectors/styleeditor';
+import { isSameOrigin } from '../utils/StyleEditorUtils';
+import { StyleCodeEditor, StyleSelector, StyleToolbar } from './styleeditor/index';
 
 class StyleEditorPanel extends React.Component {
     static propTypes = {
@@ -184,7 +177,7 @@ const StyleEditorPlugin = compose(
     )
 )(StyleEditorPanel);
 
-module.exports = {
+export default {
     StyleEditorPlugin: assign(StyleEditorPlugin, {
         TOC: {
             priority: 1,
@@ -193,7 +186,7 @@ module.exports = {
         }
     }),
     reducers: {
-        styleeditor: require('../reducers/styleeditor')
+        styleeditor
     },
-    epics: require('../epics/styleeditor')
+    epics
 };

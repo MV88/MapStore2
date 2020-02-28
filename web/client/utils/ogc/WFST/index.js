@@ -5,16 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {transaction} = require('./transaction');
-const {insert} = require('./insert');
-// const {update, property} = require('./update');
-const {deleteFeature, deleteFeaturesByFilter, deleteById} = require('./delete');
-module.exports = {
-    insert,
-    //    update,
-    //    property,
-    deleteFeature,
-    deleteFeaturesByFilter,
-    deleteById,
-    transaction
-};
+import { transaction as transactionEnhancer } from './transaction';
+
+import { insert as insertEnhancer } from './insert';
+
+import {
+    deleteFeature as deleteFeatureEnhancer,
+    deleteFeaturesByFilter as deleteFeaturesByFilterEnhancer,
+    deleteById as deleteByIdEnhancer
+} from './delete';
+
+
+export const insert = insertEnhancer;
+export const deleteFeature = deleteFeatureEnhancer;
+export const deleteFeaturesByFilter = deleteFeaturesByFilterEnhancer;
+export const deleteById = deleteByIdEnhancer;
+export const transaction = transactionEnhancer;
+

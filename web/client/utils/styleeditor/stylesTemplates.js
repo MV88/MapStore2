@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const uuidv1 = require('uuid/v1');
-const SVGPreview = require('../../components/styleeditor/SVGPreview');
-const randomDots = require('./img/randomdots.png');
+import React from 'react';
+
+import uuidv1 from 'uuid/v1';
+import SVGPreview from '../../components/styleeditor/SVGPreview';
+import randomDots from './img/randomdots.png';
 
 /**
  * Template object structure
@@ -21,7 +22,7 @@ const randomDots = require('./img/randomdots.png');
  * @prop {string} styleId identifier
  */
 
-const baseTemplates = [{
+export const baseTemplates = [{
     types: ['point', 'linestring', 'polygon', 'vector'],
     title: 'Base CSS',
     format: 'css',
@@ -94,7 +95,7 @@ const baseTemplates = [{
         ]}/>
 }].map(style => ({ ...style, styleId: uuidv1() }));
 
-const customTemplates = [
+export const customTemplates = [
     {
         types: ['linestring', 'vector'],
         title: 'Line',
@@ -1101,8 +1102,3 @@ const customTemplates = [
             ]}/>
     }
 ].map(style => ({ ...style, styleId: uuidv1() }));
-
-module.exports = {
-    baseTemplates,
-    customTemplates
-};

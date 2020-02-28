@@ -6,8 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-require('rxjs');
-// const { getSearchUrl } = require('../../../../utils/LayersUtils');
+import 'rxjs';
+
 const sameFilter = (f1, f2) => f1 === f2;
 const sameOptions = (o1 = {}, o2 = {}) =>
     o1.propertyName === o2.propertyName
@@ -21,7 +21,7 @@ const sameSortOptions = (o1 = {}, o2 = {}) =>
  * @param {Observable} Stream of props.
  * @return {Observable} Stream of props to trigger the data fetch
  */
-module.exports = ($props) =>
+export default ($props) =>
     $props.filter(({ layer = {} }) => layer.name )
         .distinctUntilChanged(
             ({ layer = {}, options = {}, filter, sortOptions }, newProps) =>

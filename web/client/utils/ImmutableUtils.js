@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {get, findIndex} = require('lodash');
-const set = require('lodash/fp/set');
-const unset = require('lodash/fp/unset');
-const compose = require('lodash/fp/compose');
+import { findIndex, get } from 'lodash';
+import composeLodash from 'lodash/fp/compose';
+import setLodash from 'lodash/fp/set';
+import unsetLodash from 'lodash/fp/unset';
 
 /**
  * Utility functions for reducers and immutable objects in general
@@ -17,6 +17,37 @@ const compose = require('lodash/fp/compose');
  * @static
  * @name ImmutableUtils
  */
+
+/**
+ * Set of lodash fp. **NOTE:** This function is curried, so partial applications will return a function that takes the missing parameters
+ * @memberof utils.ImmutableUtils
+ * @param {string} path the path
+ * @param {any} value the value to set
+ * @param {any} object the object to use.
+ * @example
+ * set('a.b.c',2, {}, obj); // returns {a: {b: {c: 2}}});
+ */
+export const set = setLodash;
+/**
+ * Unset of lodash fp. **NOTE:** This function is curried, so partial applications will return a function that takes the missing parameters
+ * @memberof utils.ImmutableUtil
+ * @param {string} path the path
+ * @param {any} object the object to use.
+ * @example
+ * unset('a.b.c',2, {}, obj); // returns {a: {b: {c: 2}}});
+ */
+export const unset = unsetLodash;
+/**
+ * compose of lodash fp. Allow to compose functions with currying.
+ * Allows to write something like `set(a, b, set(c, d, set(e, f, state)))`
+ * as
+ * ```
+ * compose(set(a, b), set(c, d), set(e, f))(state)
+ * ```
+ * @memberof utils.ImmutableUtils
+*/
+export const compose = composeLodash;
+
 
 /**
  * Immutable array upsert in a nested object (update or insert)
@@ -28,7 +59,7 @@ const compose = require('lodash/fp/compose');
  * @return {object} the new object
  * @memberof utils.ImmutableUtils
  */
-const arrayUpsert = (path, entry, condition, object) => {
+export const arrayUpsert = (path, entry, condition, object) => {
     const arr = path ? get(object, path) || [] : object;
     const index = findIndex(arr, condition);
     if (index >= 0) {
@@ -48,7 +79,7 @@ const arrayUpsert = (path, entry, condition, object) => {
  * @return {object} the new object
  * @memberof utils.ImmutableUtils
  */
-const arrayUpdate = (path, entry, condition, object) => {
+export const arrayUpdate = (path, entry, condition, object) => {
     const arr = path ? get(object, path) || [] : object;
     const index = findIndex(arr, condition);
     if (index >= 0) {
@@ -67,7 +98,7 @@ const arrayUpdate = (path, entry, condition, object) => {
  * @memberof utils.ImmutableUtils
  * @example arrayDelete('path.to.array', {id: id_of_the_item_to_delete}, object_to_modify)
  */
-const arrayDelete = (path, condition, object) => {
+export const arrayDelete = (path, condition, object) => {
     const arr = path ? get(object, path) || [] : object;
     const index = findIndex(arr, condition);
     if (index >= 0) {
@@ -76,38 +107,4 @@ const arrayDelete = (path, condition, object) => {
         return path ? set(path, array, object) : array();
     }
     return object;
-};
-module.exports = {
-    /**
-     * Set of lodash fp. **NOTE:** This function is curried, so partial applications will return a function that takes the missing parameters
-     * @param {string} path the path
-     * @param {any} value the value to set
-     * @param {any} object the object to use.
-     * @memberof utils.ImmutableUtils
-     * @example
-     * set('a.b.c',2, {}, obj); // returns {a: {b: {c: 2}}});
-     */
-    set,
-    /**
-     * Unset of lodash fp. **NOTE:** This function is curried, so partial applications will return a function that takes the missing parameters
-     * @param {string} path the path
-     * @memberof utils.ImmutableUtil
-     * @param {any} object the object to use.
-     * @example
-     * set('a.b.c',2, {}, obj); // returns {a: {b: {c: 2}}});
-     */
-    unset,
-    /**
-     * compose of lodash fp. Allow to compose functions with currying.
-     * Allows to write something like `set(a, b, set(c, d, set(e, f, state)))`
-     * as
-     * ```
-     * compose(set(a, b), set(c, d), set(e, f))(state)
-     * ```
-     * @memberof utils.ImmutableUtils
-     */
-    compose,
-    arrayUpsert,
-    arrayUpdate,
-    arrayDelete
 };

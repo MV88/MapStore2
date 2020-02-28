@@ -147,7 +147,7 @@ const Parser = {
     }
 };
 
-module.exports = {
+export default {
     INFO_FORMATS,
     INFO_FORMATS_BY_MIME_TYPE,
     Validator,

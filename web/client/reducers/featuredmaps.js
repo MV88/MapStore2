@@ -6,10 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { ATTRIBUTE_UPDATED, MAP_DELETED, MAP_METADATA_UPDATED, PERMISSIONS_UPDATED, MAPS_LIST_LOADING, FEATURED_MAPS_SET_ENABLED, FEATURED_MAPS_SET_LATEST_RESOURCE} = require('../actions/maps');
-const { DASHBOARD_DELETED } = require('../actions/dashboards');
+import {
+    ATTRIBUTE_UPDATED,
+    MAP_DELETED,
+    MAP_METADATA_UPDATED,
+    PERMISSIONS_UPDATED,
+    MAPS_LIST_LOADING,
+    FEATURED_MAPS_SET_ENABLED,
+    FEATURED_MAPS_SET_LATEST_RESOURCE
+} from '../actions/maps';
 
-const {set} = require('../utils/ImmutableUtils');
+import { DASHBOARD_DELETED } from '../actions/dashboards';
+import { set } from '../utils/ImmutableUtils';
 
 function dashboard(state = {}, action) {
     switch (action.type) {
@@ -59,4 +67,4 @@ function dashboard(state = {}, action) {
         return state;
     }
 }
-module.exports = dashboard;
+export default dashboard;

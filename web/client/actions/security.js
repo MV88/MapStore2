@@ -9,24 +9,24 @@
 /**
  * Here you can change the API to use for AuthenticationAPI
  */
-const AuthenticationAPI = require('../api/GeoStoreDAO');
-const SecurityUtils = require('../utils/SecurityUtils');
 
-const {loadMaps} = require('./maps');
-const ConfigUtils = require('../utils/ConfigUtils');
+import AuthenticationAPI from '../api/GeoStoreDAO';
+import ConfigUtils from '../utils/ConfigUtils';
+import SecurityUtils from '../utils/SecurityUtils';
+import { loadMaps } from './maps';
 
-const LOGIN_SUBMIT = 'LOGIN_SUBMIT';
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const LOGIN_FAIL = 'LOGIN_FAIL';
-const RESET_ERROR = 'RESET_ERROR';
-const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
-const CHANGE_PASSWORD_SUCCESS = 'CHANGE_PASSWORD_SUCCESS';
-const CHANGE_PASSWORD_FAIL = 'CHANGE_PASSWORD_FAIL';
-const LOGOUT = 'LOGOUT';
-const REFRESH_SUCCESS = 'REFRESH_SUCCESS';
-const SESSION_VALID = 'SESSION_VALID';
+export const LOGIN_SUBMIT = 'LOGIN_SUBMIT';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const RESET_ERROR = 'RESET_ERROR';
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+export const CHANGE_PASSWORD_SUCCESS = 'CHANGE_PASSWORD_SUCCESS';
+export const CHANGE_PASSWORD_FAIL = 'CHANGE_PASSWORD_FAIL';
+export const LOGOUT = 'LOGOUT';
+export const REFRESH_SUCCESS = 'REFRESH_SUCCESS';
+export const SESSION_VALID = 'SESSION_VALID';
 
-function loginSuccess(userDetails, username, password, authProvider) {
+export function loginSuccess(userDetails, username, password, authProvider) {
     return {
         type: LOGIN_SUCCESS,
         userDetails: userDetails,
@@ -39,34 +39,34 @@ function loginSuccess(userDetails, username, password, authProvider) {
     };
 }
 
-function loginFail(e) {
+export function loginFail(e) {
     return {
         type: LOGIN_FAIL,
         error: e
     };
 }
 
-function resetError() {
+export function resetError() {
     return {
         type: RESET_ERROR
     };
 }
 
-function logout(redirectUrl) {
+export function logout(redirectUrl) {
     return {
         type: LOGOUT,
         redirectUrl: redirectUrl
     };
 }
 
-function logoutWithReload() {
+export function logoutWithReload() {
     return (dispatch, getState) => {
         dispatch(logout(null));
         dispatch(loadMaps(false, getState().maps && getState().maps.searchText || ConfigUtils.getDefaults().initialMapFilter || "*"));
     };
 }
 
-function login(username, password) {
+export function login(username, password) {
     return (dispatch, getState) => {
         return AuthenticationAPI.login(username, password).then((response) => {
             dispatch(loginSuccess(response, username, password, AuthenticationAPI.authProviderName));
@@ -77,7 +77,7 @@ function login(username, password) {
     };
 }
 
-function changePasswordSuccess(user, newPassword) {
+export function changePasswordSuccess(user, newPassword) {
     return {
         type: CHANGE_PASSWORD_SUCCESS,
         user: user,
@@ -85,14 +85,14 @@ function changePasswordSuccess(user, newPassword) {
     };
 }
 
-function changePasswordFail(e) {
+export function changePasswordFail(e) {
     return {
         type: CHANGE_PASSWORD_FAIL,
         error: e
     };
 }
 
-function changePassword(user, newPassword) {
+export function changePassword(user, newPassword) {
     return (dispatch) => {
         AuthenticationAPI.changePassword(user, newPassword).then(() => {
             dispatch(changePasswordSuccess(user, newPassword));
@@ -102,7 +102,7 @@ function changePassword(user, newPassword) {
     };
 }
 
-function refreshSuccess(userDetails, authProvider) {
+export function refreshSuccess(userDetails, authProvider) {
     return {
         type: REFRESH_SUCCESS,
         userDetails: userDetails,
@@ -110,7 +110,7 @@ function refreshSuccess(userDetails, authProvider) {
     };
 }
 
-function refreshAccessToken() {
+export function refreshAccessToken() {
     return (dispatch) => {
         const accessToken = SecurityUtils.getToken();
         const refreshToken = SecurityUtils.getRefreshToken();
@@ -122,7 +122,7 @@ function refreshAccessToken() {
     };
 }
 
-function sessionValid(userDetails, authProvider) {
+export function sessionValid(userDetails, authProvider) {
     return {
         type: SESSION_VALID,
         userDetails: userDetails,
@@ -130,7 +130,7 @@ function sessionValid(userDetails, authProvider) {
     };
 }
 
-function verifySession() {
+export function verifySession() {
     return (dispatch) => {
         AuthenticationAPI.verifySession().then((response) => {
             dispatch(sessionValid(response, AuthenticationAPI.authProviderName));
@@ -140,25 +140,3 @@ function verifySession() {
     };
 }
 
-module.exports = {
-    LOGIN_SUBMIT,
-    CHANGE_PASSWORD,
-    CHANGE_PASSWORD_SUCCESS,
-    CHANGE_PASSWORD_FAIL,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    RESET_ERROR,
-    LOGOUT,
-    REFRESH_SUCCESS,
-    SESSION_VALID,
-    login,
-    loginSuccess,
-    loginFail,
-    logout,
-    changePassword,
-    logoutWithReload,
-    resetError,
-    refreshAccessToken,
-    verifySession,
-    sessionValid
-};

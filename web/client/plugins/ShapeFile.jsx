@@ -6,53 +6,60 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
+import { Promise } from 'es6-promise';
+import React from 'react';
+import { Glyphicon } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-const Message = require('./locale/Message');
+import { toggleControl } from '../actions/controls';
+import { addLayer } from '../actions/layers';
+import { zoomToExtent } from '../actions/map';
+import {
+    onLayerAdded,
+    onSelectLayer,
+    onShapeChoosen,
+    onShapeError,
+    onShapeSuccess,
+    shapeLoading,
+    updateShapeBBox
+} from '../actions/shapefile';
+import shapefile from '../reducers/shapefile';
+import style from '../reducers/style';
+import { createPlugin } from '../utils/PluginsUtils';
+import Message from './locale/Message';
 
-const {onShapeError, shapeLoading, onShapeChoosen, onSelectLayer, onLayerAdded, updateShapeBBox, onShapeSuccess} = require('../actions/shapefile');
-const {zoomToExtent} = require('../actions/map');
-const {addLayer} = require('../actions/layers');
-const {toggleControl} = require('../actions/controls');
+const loader = () => new Promise(async(resolve) => {
+    const ShapeFile = await import(
+        /* webpackChunkName: ShapeFileComp */
+        './shapefile/ShapeFile'
+    );
+    const ShapeFilePlugin = connect((state) => (
+        {
+            visible: state.controls && state.controls.shapefile && state.controls.shapefile.enabled,
+            layers: state.shapefile && state.shapefile.layers || null,
+            selected: state.shapefile && state.shapefile.selected || null,
+            bbox: state.shapefile && state.shapefile.bbox || null,
+            success: state.shapefile && state.shapefile.success || null,
+            error: state.shapefile && state.shapefile.error || null,
+            shapeStyle: state.style || {}
+        }
+    ), {
+        onShapeChoosen: onShapeChoosen,
+        onLayerAdded: onLayerAdded,
+        onSelectLayer: onSelectLayer,
+        onShapeError: onShapeError,
+        onShapeSuccess: onShapeSuccess,
+        addShapeLayer: addLayer,
+        onZoomSelected: zoomToExtent,
+        updateShapeBBox: updateShapeBBox,
+        shapeLoading: shapeLoading,
+        toggleControl: toggleControl.bind(null, 'shapefile', null)
+    })(ShapeFile);
 
-const {Glyphicon} = require('react-bootstrap');
-
-const {createPlugin} = require('../utils/PluginsUtils');
-const {Promise} = require('es6-promise');
-
-const loader = () => new Promise((resolve) => {
-    require.ensure(['./shapefile/ShapeFile'], () => {
-        const ShapeFile = require('./shapefile/ShapeFile');
-
-        const ShapeFilePlugin = connect((state) => (
-            {
-                visible: state.controls && state.controls.shapefile && state.controls.shapefile.enabled,
-                layers: state.shapefile && state.shapefile.layers || null,
-                selected: state.shapefile && state.shapefile.selected || null,
-                bbox: state.shapefile && state.shapefile.bbox || null,
-                success: state.shapefile && state.shapefile.success || null,
-                error: state.shapefile && state.shapefile.error || null,
-                shapeStyle: state.style || {}
-            }
-        ), {
-            onShapeChoosen: onShapeChoosen,
-            onLayerAdded: onLayerAdded,
-            onSelectLayer: onSelectLayer,
-            onShapeError: onShapeError,
-            onShapeSuccess: onShapeSuccess,
-            addShapeLayer: addLayer,
-            onZoomSelected: zoomToExtent,
-            updateShapeBBox: updateShapeBBox,
-            shapeLoading: shapeLoading,
-            toggleControl: toggleControl.bind(null, 'shapefile', null)
-        })(ShapeFile);
-
-        resolve(ShapeFilePlugin);
-    });
+    resolve(ShapeFilePlugin);
 });
 
-module.exports = createPlugin(
+export default createPlugin(
     'ShapeFile',
     {
         lazy: true,
@@ -85,8 +92,8 @@ module.exports = createPlugin(
             }
         },
         reducers: {
-            shapefile: require('../reducers/shapefile'),
-            style: require('../reducers/style')
+            shapefile,
+            style
         }
     }
 );

@@ -1,4 +1,5 @@
-var PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,8 +8,9 @@ var PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var L = require('leaflet');
+import React from 'react';
+
+import L from 'leaflet';
 
 class ScaleBar extends React.Component {
     static propTypes = {
@@ -59,4 +61,4 @@ class ScaleBar extends React.Component {
     }
 }
 
-module.exports = ScaleBar;
+export default ScaleBar;

@@ -5,13 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {bindActionCreators} = require('redux');
-const {connect} = require('react-redux');
-const assign = require('object-assign');
-const {getUsers, editUser, deleteUser} = require('../../../actions/users');
-const PaginationToolbar = require('./UsersPaginationToolbar');
+import React from 'react';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import assign from 'object-assign';
+import { getUsers, editUser, deleteUser } from '../../../actions/users';
+import PaginationToolbar from './UsersPaginationToolbar';
+import UserGrid from '../../../components/manager/users/UserGrid';
 const mapStateToProps = (state) => {
     const users = state && state.users;
     return {
@@ -43,4 +44,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         }
     });
 };
-module.exports = connect(mapStateToProps, mapDispatchToProps, mergeProps, {pure: false})(require('../../../components/manager/users/UserGrid'));
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps, {pure: false})(UserGrid);

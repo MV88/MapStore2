@@ -5,16 +5,19 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
 
-const {Tooltip, Legend} = require('recharts');
-
-const {sameToneRangeColors} = require('../../utils/ColorUtils');
+import { Tooltip, Legend } from 'recharts';
+import { sameToneRangeColors } from '../../utils/ColorUtils';
+import line from './Line';
+import pie from './Pie';
+import bar from './Bar';
+import gauge from './Gauge';
 const charts = {
-    line: require('./Line'),
-    pie: require('./Pie'),
-    bar: require('./Bar'),
-    gauge: require('./Gauge')
+    line,
+    pie,
+    bar,
+    gauge
 };
 
 const AUTOCOLOR_DEFAULTS = {
@@ -68,4 +71,4 @@ const SimpleChart = ({type = "line", tooltip = {}, legend = {}, autoColorOptions
     );
 };
 
-module.exports = SimpleChart;
+export default SimpleChart;

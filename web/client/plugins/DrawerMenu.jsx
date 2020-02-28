@@ -6,27 +6,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
+import React from 'react';
 
-const Message = require('./locale/Message');
-
-const {toggleControl, setControlProperty} = require('../actions/controls');
-
-const {changeMapStyle} = require('../actions/map');
-
-const {Button: ButtonB, Glyphicon, Panel} = require('react-bootstrap');
-
-const Section = require('./drawer/Section');
-
-const {partialRight} = require('lodash');
-
-const assign = require('object-assign');
-
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-const tooltip = require('../components/misc/enhancers/tooltip');
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import Message from './locale/Message';
+import { toggleControl, setControlProperty } from '../actions/controls';
+import { changeMapStyle } from '../actions/map';
+import { Button as ButtonB, Glyphicon, Panel } from 'react-bootstrap';
+import Section from './drawer/Section';
+import { partialRight } from 'lodash';
+import assign from 'object-assign';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import DrawerMenuComp from './drawer/Menu';
+import tooltip from '../components/misc/enhancers/tooltip';
 const Button = tooltip(ButtonB);
 
 const menuSelector = createSelector([
@@ -40,15 +34,14 @@ const menuSelector = createSelector([
     dynamicWidth,
     layout
 }));
-
 const Menu = connect(menuSelector, {
     onToggle: toggleControl.bind(null, 'drawer', null),
     onResize: setControlProperty.bind(null, 'drawer', 'resizedWidth'),
     onChoose: partialRight(setControlProperty.bind(null, 'drawer', 'menu'), true),
     changeMapStyle: changeMapStyle
-})(require('./drawer/Menu'));
+})(DrawerMenuComp);
 
-require('./drawer/drawer.css');
+import './drawer/drawer.css';
 
 const DrawerButton = connect(state => ({
     disabled: state.controls && state.controls.drawer && state.controls.drawer.disabled
@@ -179,7 +172,7 @@ const DrawerMenuPlugin = connect((state) => ({
     toggleMenu: toggleControl.bind(null, 'drawer', null)
 })(DrawerMenu);
 
-module.exports = {
+export default {
     DrawerMenuPlugin: assign(DrawerMenuPlugin, {
         disablePluginIf: "{state('featuregridmode') === 'EDIT'}",
         FloatingLegend: {

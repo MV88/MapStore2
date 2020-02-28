@@ -1,9 +1,10 @@
-const React = require('react');
-const {ButtonGroup, Glyphicon, Checkbox} = require('react-bootstrap');
-require("./toolbar.css");
-const Message = require('../../../I18N/Message');
-const withHint = require("../enhancers/withHint");
-const TButton = withHint(require("./TButton"));
+import React from 'react';
+import { ButtonGroup, Glyphicon, Checkbox } from 'react-bootstrap';
+import './toolbar.css';
+import Message from '../../../I18N/Message';
+import withHint from '../enhancers/withHint';
+import TButtonComp from './TButton';
+const TButton = withHint(TButtonComp);
 const getDrawFeatureTooltip = (isDrawing, isSimpleGeom) => {
     if (isDrawing) {
         return "featuregrid.toolbar.stopDrawGeom";
@@ -16,7 +17,7 @@ const getSaveMessageId = ({saving, saved}) => {
     }
     return "featuregrid.toolbar.saveChanges";
 };
-module.exports = ({ events = {}, syncPopover = { showPopoverSync: true, dockSize: "32.2%" }, mode = "VIEW", showChartButton = true, selectedCount, hasChanges, hasGeometry, hasNewFeatures, isSimpleGeom, isDrawing = false, isEditingAllowed, saving = false, saved = false, isDownloadOpen, isColumnsOpen, disableToolbar, isSearchAllowed, disableDownload, displayDownload, isSyncActive = false, hasSupportedGeometry = true, disableZoomAll = false, isFilterActive = false, showTimeSyncButton = false, timeSync = false} = {}) => {
+export default ({ events = {}, syncPopover = { showPopoverSync: true, dockSize: "32.2%" }, mode = "VIEW", showChartButton = true, selectedCount, hasChanges, hasGeometry, hasNewFeatures, isSimpleGeom, isDrawing = false, isEditingAllowed, saving = false, saved = false, isDownloadOpen, isColumnsOpen, disableToolbar, isSearchAllowed, disableDownload, displayDownload, isSyncActive = false, hasSupportedGeometry = true, disableZoomAll = false, isFilterActive = false, showTimeSyncButton = false, timeSync = false} = {}) => {
     return (<ButtonGroup id="featuregrid-toolbar" className="featuregrid-toolbar featuregrid-toolbar-margin">
         <TButton
             id="edit-mode"

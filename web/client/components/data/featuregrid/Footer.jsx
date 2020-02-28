@@ -1,10 +1,10 @@
-const React = require('react');
-const Message = require('../../I18N/Message');
-const {Button, Glyphicon, Grid, Row, Col} = require('react-bootstrap');
-const Spinner = require('react-spinkit');
-const {toPage} = require('../../../utils/FeatureGridUtils');
+import React from 'react';
+import Message from '../../I18N/Message';
+import { Button, Glyphicon, Grid, Row, Col } from 'react-bootstrap';
+import Spinner from 'react-spinkit';
+import { toPage } from '../../../utils/FeatureGridUtils';
 
-module.exports = (props = {
+export default (props = {
     loading: false,
     onPageChange: () => {}
 }) => {

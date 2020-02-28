@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const assign = require('object-assign');
+import assign from 'object-assign';
 
 const getColor = function(color) {
     return `rgb(${ color.r }, ${ color.g }, ${ color.b })`;
@@ -31,4 +31,4 @@ const toVectorStyle = function(layer, style) {
     return newLayer;
 };
 
-module.exports = toVectorStyle;
+export default toVectorStyle;

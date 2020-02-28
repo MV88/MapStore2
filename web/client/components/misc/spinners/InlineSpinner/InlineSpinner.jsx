@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,9 +8,10 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const defaultIcon = require('./img/spinner.gif');
-const {isFunction} = require('lodash');
+import React from 'react';
+
+import defaultIcon from './img/spinner.gif';
+import { isFunction } from 'lodash';
 
 class InlineSpinner extends React.Component {
     static propTypes = {
@@ -47,4 +49,4 @@ class InlineSpinner extends React.Component {
     }
 }
 
-module.exports = InlineSpinner;
+export default InlineSpinner;

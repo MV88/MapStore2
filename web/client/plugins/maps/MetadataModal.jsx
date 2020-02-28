@@ -6,13 +6,13 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const {connect} = require('react-redux');
-const {metadataChanged} = require('../../actions/maps');
-const {loadPermissions, updatePermissions, loadAvailableGroups} = require('../../actions/maps');
-const {updateCurrentMapPermissions, addCurrentMapPermission} = require('../../actions/currentMap');
-const {setControlProperty} = require('../../actions/controls');
-const {showMapDetailsSelector} = require('../../selectors/maps.js');
+import { connect } from 'react-redux';
 
+import { metadataChanged, loadPermissions, updatePermissions, loadAvailableGroups } from '../../actions/maps';
+import { updateCurrentMapPermissions, addCurrentMapPermission } from '../../actions/currentMap';
+import { setControlProperty } from '../../actions/controls';
+import { showMapDetailsSelector } from '../../selectors/maps.js';
+import MetadataModalComp from '../../components/maps/modals/MetadataModal';
 const MetadataModal = connect(
     (state = {}) => ({
         metadata: state.currentMap.metadata,
@@ -26,6 +26,6 @@ const MetadataModal = connect(
         loadPermissions, loadAvailableGroups, updatePermissions, onGroupsChange: updateCurrentMapPermissions, onAddPermission: addCurrentMapPermission, metadataChanged,
         onNewGroupChoose: setControlProperty.bind(null, 'permissionEditor', 'newGroup'),
         onNewPermissionChoose: setControlProperty.bind(null, 'permissionEditor', 'newPermission')
-    }, null)(require('../../components/maps/modals/MetadataModal'));
+    }, null)(MetadataModalComp);
 
-module.exports = MetadataModal;
+export default MetadataModal;

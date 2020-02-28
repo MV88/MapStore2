@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
+import assign from 'object-assign';
+import { Glyphicon } from 'react-bootstrap';
+import Message from '../components/I18N/Message';
+import help from '../reducers/help';
 
-const Message = require('../components/I18N/Message');
-
-module.exports = {
+export default {
     HelpLinkPlugin: assign(class extends React.Component {
         render() {
             return null;
@@ -30,5 +30,5 @@ module.exports = {
             doNotHide: true
         }
     }),
-    reducers: {help: require('../reducers/help')}
+    reducers: {help}
 };

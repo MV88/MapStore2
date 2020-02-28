@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {Grid, Row, Col} = require('react-bootstrap');
-const MapCard = require('./MapCard');
-const Spinner = require('react-spinkit');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { Grid, Row, Col } from 'react-bootstrap';
+import MapCard from './MapCard';
+import Spinner from 'react-spinkit';
 
 class MapGrid extends React.Component {
     static propTypes = {
@@ -146,4 +147,4 @@ class MapGrid extends React.Component {
     }
 }
 
-module.exports = MapGrid;
+export default MapGrid;

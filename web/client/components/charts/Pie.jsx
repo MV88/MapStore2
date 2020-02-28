@@ -5,12 +5,13 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
-const React = require('react');
-const {pure} = require('recompose');
-const {PieChart, Pie, Cell} = require('recharts');
-const {convertToNameValue} = require('./polar');
+import React from 'react';
 
-module.exports = pure(({ isAnimationActive, width = 600, height = 300, data, series = [], xAxis, colorGenerator, maxCols = 3, ...props} = {}) => {
+import { pure } from 'recompose';
+import { PieChart, Pie, Cell } from 'recharts';
+import { convertToNameValue } from './polar';
+
+export default pure(({ isAnimationActive, width = 600, height = 300, data, series = [], xAxis, colorGenerator, maxCols = 3, ...props} = {}) => {
     const seriesArray = Array.isArray(series) ? series : [series];
     const cols = Math.min(maxCols, seriesArray.length);
     const COLORS = colorGenerator(data.length);

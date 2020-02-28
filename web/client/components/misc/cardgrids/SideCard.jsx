@@ -7,7 +7,8 @@
  */
 
 
-const React = require('react');
+import React from 'react';
+
 /**
  * Component for rendering a rectangular card with preview, title, description and caption.
  * @memberof components.misc.cardgrids
@@ -30,7 +31,7 @@ const React = require('react');
  * @prop {node}         tools           add a node to the right of card
  */
 
-module.exports = ({
+export default ({
     body,
     caption,
     className = '',

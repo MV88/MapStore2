@@ -31,12 +31,21 @@ class GeoStoryPage extends React.Component {
         reset: () => { }
     };
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const id = get(this.props, "match.params.gid");
         this.props.reset();
         this.props.loadResource(id);
     }
-    componentDidUpdate(oldProps) {
+    render() {
+        return (<Page
+            id="geostory"
+            component={BorderLayout}
+            includeCommon={false}
+            plugins={this.props.plugins}
+            params={this.props.match.params}
+        />);
+    }
+    UNSAFE_componentDidUpdate(oldProps) {
         const id = get(this.props, "match.params.gid");
         const oldId = get(oldProps, "match.params.gid");
         if (oldId !== id) {
@@ -47,17 +56,8 @@ class GeoStoryPage extends React.Component {
             }
         }
     }
-    componentWillUnmount() {
+    UNSAFE_componentWillUnmount() {
         this.props.reset();
-    }
-    render() {
-        return (<Page
-            id="geostory"
-            component={BorderLayout}
-            includeCommon={false}
-            plugins={this.props.plugins}
-            params={this.props.match.params}
-        />);
     }
 }
 

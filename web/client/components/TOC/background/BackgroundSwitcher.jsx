@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,20 +8,21 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var {Grid, Col, Thumbnail, Glyphicon} = require('react-bootstrap');
-var HYBRID = require('./images/mapthumbs/HYBRID.jpg');
-var ROADMAP = require('./images/mapthumbs/ROADMAP.jpg');
-var TERRAIN = require('./images/mapthumbs/TERRAIN.jpg');
-var Aerial = require('./images/mapthumbs/Aerial.jpg');
-var mapnik = require('./images/mapthumbs/mapnik.jpg');
-var mapquestOsm = require('./images/mapthumbs/mapquest-osm.jpg');
-var empty = require('./images/mapthumbs/none.jpg');
-var unknown = require('./images/mapthumbs/dafault.jpg');
-var Night2012 = require('./images/mapthumbs/NASA_NIGHT.jpg');
-var AerialWithLabels = require('./images/mapthumbs/AerialWithLabels.jpg');
-const OpenTopoMap = require('./images/mapthumbs/OpenTopoMap.jpg');
-require("./style.css");
+import React from 'react';
+
+import { Grid, Col, Thumbnail, Glyphicon } from 'react-bootstrap';
+import HYBRID from './images/mapthumbs/HYBRID.jpg';
+import ROADMAP from './images/mapthumbs/ROADMAP.jpg';
+import TERRAIN from './images/mapthumbs/TERRAIN.jpg';
+import Aerial from './images/mapthumbs/Aerial.jpg';
+import mapnik from './images/mapthumbs/mapnik.jpg';
+import mapquestOsm from './images/mapthumbs/mapquest-osm.jpg';
+import empty from './images/mapthumbs/none.jpg';
+import unknown from './images/mapthumbs/dafault.jpg';
+import Night2012 from './images/mapthumbs/NASA_NIGHT.jpg';
+import AerialWithLabels from './images/mapthumbs/AerialWithLabels.jpg';
+import OpenTopoMap from './images/mapthumbs/OpenTopoMap.jpg';
+import './style.css';
 
 let thumbs = {
     google: {
@@ -115,4 +117,4 @@ class BackgroundSwitcher extends React.Component {
     };
 }
 
-module.exports = BackgroundSwitcher;
+export default BackgroundSwitcher;

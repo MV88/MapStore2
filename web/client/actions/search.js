@@ -5,6 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
+
+import {error} from './notifications';
+
 export const SEARCH_LAYER_WITH_FILTER = 'SEARCH:SEARCH_WITH_FILTER';
 export const TEXT_SEARCH_STARTED = 'TEXT_SEARCH_STARTED';
 export const TEXT_SEARCH_RESULTS_LOADED = 'TEXT_SEARCH_RESULTS_LOADED';
@@ -122,10 +125,10 @@ export function searchTextLoading(loading) {
  * @memberof actions.search
  * @param error the error
  */
-export function searchResultError(error) {
+export function searchResultError(errorSearch) {
     return {
         type: TEXT_SEARCH_ERROR,
-        error
+        error: errorSearch
     };
 }
 
@@ -265,8 +268,6 @@ export function changeCoord(coord, val) {
  * Actions for search
  * @name actions.search
 */
-
-import {error} from './notifications';
 
 /**
  * error for non queriable layer

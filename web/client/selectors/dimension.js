@@ -5,16 +5,18 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { layersSelector } = require('./layers');
-const { createSelector } = require('reselect');
-const {get, find} = require('lodash');
 
-const layerDimensionDataSelectorCreator = (layerId, dimension) => (state) => get(state, `dimension.data[${dimension}][${layerId}]`);
+import { find, get } from 'lodash';
+import { createSelector } from 'reselect';
 
-const getLayerStaticDimension = (layer = {}, dimension) => {
+import { layersSelector } from './layers';
+
+export const layerDimensionDataSelectorCreator = (layerId, dimension) => (state) => get(state, `dimension.data[${dimension}][${layerId}]`);
+
+export const getLayerStaticDimension = (layer = {}, dimension) => {
     return find(layer.dimensions || [], { name: dimension });
 };
-const layerDimensionSelectorCreator = (layer, dimension) => (state) => {
+export const layerDimensionSelectorCreator = (layer, dimension) => (state) => {
     return layerDimensionDataSelectorCreator(layer.id, dimension)(state) || getLayerStaticDimension(layer, dimension);
 
 };
@@ -25,7 +27,7 @@ const layerDimensionSelectorCreator = (layer, dimension) => (state) => {
  * @param {object} state the current state
  * @return {object} a map of id -> time dimension configuration for layers that have one dimension named "time".
  */
-const timeDataSelector = state => layersSelector(state).reduce((timeDataMap, layer) => {
+export const timeDataSelector = state => layersSelector(state).reduce((timeDataMap, layer) => {
     const timeData = layerDimensionSelectorCreator(layer, "time")(state);
     if (timeData) {
         return {
@@ -40,24 +42,24 @@ const timeDataSelector = state => layersSelector(state).reduce((timeDataMap, lay
  * Returns a list of layers with time data
  * @param {object} state application state
  */
-const layersWithTimeDataSelector = state => layersSelector(state).filter(l => getLayerStaticDimension(l, "time"));
+export const layersWithTimeDataSelector = state => layersSelector(state).filter(l => getLayerStaticDimension(l, "time"));
 
-const currentTimeSelector = state => {
+export const currentTimeSelector = state => {
     const currentTime = get(state, 'dimension.currentTime');
     return currentTime && currentTime.split('/')[0];
 };
 
-const offsetTimeSelector = state => get(state, 'dimension.offsetTime');
+export const offsetTimeSelector = state => get(state, 'dimension.offsetTime');
 
-const offsetEnabledSelector = state => !!offsetTimeSelector(state);
+export const offsetEnabledSelector = state => !!offsetTimeSelector(state);
 // get times sorted by date
-const timeSequenceSelector = createSelector(
+export const timeSequenceSelector = createSelector(
     timeDataSelector,
     data => Object.keys(data)
         .reduce((acc, cur) =>
             [
                 ...acc,
-                ...data[cur] && data[cur].values || []
+                ...(data[cur] && data[cur].values || [])
             ],
         [])
         .sort() || []);
@@ -67,12 +69,12 @@ const timeSequenceSelector = createSelector(
  * Returns the time dimension values for the selected layer, sorted
  * @param {object} layer layer object (only id is required)
  */
-const layerTimeSequenceSelectorCreator =
+export const layerTimeSequenceSelectorCreator =
     layer =>
         state =>
             [...get(layerDimensionSelectorCreator(layer, "time")(state), "values", [])].sort();
 
-const layerDimensionRangeSelector = (state, layerId) => {
+export const layerDimensionRangeSelector = (state, layerId) => {
     const timeRange = layerDimensionDataSelectorCreator(layerId, "time")(state);
     const dataRange = timeRange && timeRange.domain && timeRange.domain.split('--');
     if (dataRange && dataRange.length === 2) {
@@ -89,17 +91,4 @@ const layerDimensionRangeSelector = (state, layerId) => {
         };
     }
     return null;
-};
-
-module.exports = {
-    layerDimensionRangeSelector,
-    layerDimensionSelectorCreator,
-    layerDimensionDataSelectorCreator,
-    layerTimeSequenceSelectorCreator,
-    timeSequenceSelector,
-    currentTimeSelector,
-    layersWithTimeDataSelector,
-    timeDataSelector,
-    offsetTimeSelector,
-    offsetEnabledSelector
 };

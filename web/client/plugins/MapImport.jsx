@@ -6,51 +6,59 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
+import assign from 'object-assign';
+import React from 'react';
+import { Glyphicon } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-const Message = require('./locale/Message');
+import { toggleControl } from '../actions/controls';
+import { addLayer } from '../actions/layers';
+import { zoomToExtent } from '../actions/map';
+import {
+    onError,
+    onLayerAdded,
+    onSelectLayer,
+    onSuccess,
+    setLayers,
+    setLoading,
+    updateBBox
+} from '../actions/mapimport';
+import mapimport from '../reducers/mapimport';
+import style from  '../reducers/style';
+import { mapTypeSelector } from '../selectors/maptype';
+import Message from './locale/Message';
 
-const { onError, setLoading, setLayers, onSelectLayer, onLayerAdded, updateBBox, onSuccess} = require('../actions/mapimport');
-const {zoomToExtent} = require('../actions/map');
-const {addLayer} = require('../actions/layers');
-const {toggleControl} = require('../actions/controls');
+export default {
+    MapImportPlugin: assign({loadPlugin: async(resolve) => {
+        const Module = await import(
+            /* webpackChunkName: "ImportComp" */
+            './import/Import');
+        const Import = Module.default;
+        const ImportPlugin = connect((state) => (
+            {
+                enabled: state.controls && state.controls.mapimport && state.controls.mapimport.enabled,
+                layers: state.mapimport && state.mapimport.layers || null,
+                selected: state.mapimport && state.mapimport.selected || null,
+                bbox: state.mapimport && state.mapimport.bbox || null,
+                success: state.mapimport && state.mapimport.success || null,
+                errors: state.mapimport && state.mapimport.errors || null,
+                shapeStyle: state.style || {},
+                mapType: mapTypeSelector(state)
+            }
+        ), {
+            setLayers,
+            onLayerAdded,
+            onSelectLayer,
+            onError,
+            onSuccess,
+            addLayer,
+            onZoomSelected: zoomToExtent,
+            updateBBox,
+            setLoading,
+            onClose: toggleControl.bind(null, 'mapimport', null)
+        })(Import);
 
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
-const {mapTypeSelector} = require('../selectors/maptype');
-
-module.exports = {
-    MapImportPlugin: assign({loadPlugin: (resolve) => {
-        require.ensure(['./import/Import'], () => {
-            const Import = require('./import/Import');
-
-            const ImportPlugin = connect((state) => (
-                {
-                    enabled: state.controls && state.controls.mapimport && state.controls.mapimport.enabled,
-                    layers: state.mapimport && state.mapimport.layers || null,
-                    selected: state.mapimport && state.mapimport.selected || null,
-                    bbox: state.mapimport && state.mapimport.bbox || null,
-                    success: state.mapimport && state.mapimport.success || null,
-                    errors: state.mapimport && state.mapimport.errors || null,
-                    shapeStyle: state.style || {},
-                    mapType: mapTypeSelector(state)
-                }
-            ), {
-                setLayers,
-                onLayerAdded,
-                onSelectLayer,
-                onError,
-                onSuccess,
-                addLayer,
-                onZoomSelected: zoomToExtent,
-                updateBBox,
-                setLoading,
-                onClose: toggleControl.bind(null, 'mapimport', null)
-            })(Import);
-
-            resolve(ImportPlugin);
-        });
+        resolve(ImportPlugin);
     }, enabler: (state) => state.mapimport && state.mapimport.enabled || state.toolbar && state.toolbar.active === 'import'}, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
         BurgerMenu: {
@@ -64,7 +72,7 @@ module.exports = {
         }
     }),
     reducers: {
-        mapimport: require('../reducers/mapimport'),
-        style: require('../reducers/style')
+        mapimport,
+        style
     }
 };

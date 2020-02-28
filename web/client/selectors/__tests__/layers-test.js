@@ -6,14 +6,27 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {
-    getLayerFromName, getLayerFromId, layersSelector, layerSelectorWithMarkers, groupsSelector, selectedNodesSelector, layerFilterSelector, layerSettingSelector,
-    layerMetadataSelector, wfsDownloadSelector, backgroundControlsSelector,
-    currentBackgroundSelector, tempBackgroundSelector, centerToMarkerSelector,
-    getLayersWithDimension, elementSelector
-} = require('../layers');
+import expect from 'expect';
 
+import {
+    getLayerFromName,
+    getLayerFromId,
+    layersSelector,
+    layerSelectorWithMarkers,
+    groupsSelector,
+    selectedNodesSelector,
+    layerFilterSelector,
+    layerSettingSelector,
+    layerMetadataSelector,
+    wfsDownloadSelector,
+    backgroundControlsSelector,
+    currentBackgroundSelector,
+    tempBackgroundSelector,
+    centerToMarkerSelector,
+    getLayersWithDimension,
+    elementSelector
+} from '../layers';
+import {defaultIconStyle} from '../../utils/SearchUtils';
 describe('Test layers selectors', () => {
     it('test getLayerFromName', () => {
         let layer = getLayerFromName({}, "ws:layer_1");
@@ -129,8 +142,6 @@ describe('Test layers selectors', () => {
         }});
         expect(props.length).toBe(2);
         expect(props[1].type).toBe("vector");
-        const {defaultIconStyle} = require('../../utils/SearchUtils');
-
         expect(props[1].style).toEqual(defaultIconStyle);
     });
 
@@ -138,8 +149,6 @@ describe('Test layers selectors', () => {
         const style = {
             color: '#ff0000'
         };
-
-        const {defaultIconStyle} = require('../../utils/SearchUtils');
 
         const props = layerSelectorWithMarkers({config: {layers: [{type: "osm"}]}, search: {
             markerPosition: {
@@ -155,7 +164,6 @@ describe('Test layers selectors', () => {
         expect(props[1].type).toBe("vector");
         expect(props[1].style).toEqual({...defaultIconStyle, ...style});
     });
-
 
     it('test layerSelectorWithMarkers with override layers from additionallayers', () => {
         const state = {

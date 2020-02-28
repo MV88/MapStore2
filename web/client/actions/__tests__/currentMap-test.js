@@ -6,17 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-var {
-    EDIT_MAP, editMap,
-    UPDATE_CURRENT_MAP, updateCurrentMap,
-    ERROR_CURRENT_MAP, errorCurrentMap,
-    REMOVE_THUMBNAIL, removeThumbnail,
-    UPDATE_CURRENT_MAP_PERMISSIONS, updateCurrentMapPermissions,
-    UPDATE_CURRENT_MAP_GROUPS, updateCurrentMapGroups,
-    RESET_CURRENT_MAP, resetCurrentMap,
-    ADD_CURRENT_MAP_PERMISSION, addCurrentMapPermission
-} = require('../currentMap');
+import expect from 'expect';
+
+import {
+    EDIT_MAP,
+    editMap,
+    UPDATE_CURRENT_MAP,
+    updateCurrentMap,
+    ERROR_CURRENT_MAP,
+    errorCurrentMap,
+    REMOVE_THUMBNAIL,
+    removeThumbnail,
+    UPDATE_CURRENT_MAP_PERMISSIONS,
+    updateCurrentMapPermissions,
+    UPDATE_CURRENT_MAP_GROUPS,
+    updateCurrentMapGroups,
+    RESET_CURRENT_MAP,
+    resetCurrentMap,
+    ADD_CURRENT_MAP_PERMISSION,
+    addCurrentMapPermission
+} from '../currentMap';
 
 
 describe('Test correctness of the maps actions', () => {

@@ -6,38 +6,39 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const {castArray, findIndex, find, isNil, filter} = require('lodash');
-const {Grid} = require('react-bootstrap');
-const assign = require('object-assign');
-const uuidv1 = require('uuid/v1');
-const tinycolor = require("tinycolor2");
-const axios = require("axios");
+import axios from 'axios';
+import { castArray, filter, find, findIndex, isNil } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Grid } from 'react-bootstrap';
+import tinycolor from 'tinycolor2';
+import uuidv1 from 'uuid/v1';
 
-const SwitchPanel = require('../../misc/switch/SwitchPanel');
-const {arrayUpdate} = require('../../../utils/ImmutableUtils');
-const StyleCanvas = require('../StyleCanvas');
-const Stroke = require('./Stroke');
-const Fill = require('./Fill');
-const MarkerGlyph = require('./marker/MarkerGlyph');
-const MarkerType = require('./marker/MarkerType');
-const SymbolLayout = require('./marker/SymbolLayout');
-const Text = require('./Text');
-
-const {
-    createSvgUrl, registerStyle,
-    hashAndStringify, fetchStyle,
-    getStylerTitle, isSymbolStyle,
-    isMarkerStyle, isStrokeStyle,
-    isFillStyle, addOpacityToColor,
-    isTextStyle
-} = require('../../../utils/VectorStyleUtils');
-
-const {
-    DEFAULT_SHAPE, DEFAULT_PATH,
-    checkSymbolsError
-} = require('../../../utils/AnnotationsUtils');
+import symbolMissing from '../../../product/assets/symbols/symbolMissing.svg';
+import { DEFAULT_PATH, DEFAULT_SHAPE, checkSymbolsError } from '../../../utils/AnnotationsUtils';
+import { arrayUpdate } from '../../../utils/ImmutableUtils';
+import {
+    addOpacityToColor,
+    createSvgUrl,
+    fetchStyle,
+    getStylerTitle,
+    hashAndStringify,
+    isFillStyle,
+    isMarkerStyle,
+    isStrokeStyle,
+    isSymbolStyle,
+    isTextStyle,
+    registerStyle
+} from '../../../utils/VectorStyleUtils';
+import SwitchPanel from '../../misc/switch/SwitchPanel';
+import StyleCanvas from '../StyleCanvas';
+import Fill from './Fill';
+import Stroke from './Stroke';
+import Text from './Text';
+import MarkerGlyph from './marker/MarkerGlyph';
+import MarkerType from './marker/MarkerType';
+import SymbolLayout from './marker/SymbolLayout';
 
 class Manager extends React.Component {
     static propTypes = {
@@ -46,7 +47,6 @@ class Manager extends React.Component {
         lineDashOptions: PropTypes.array,
         onChangeStyle: PropTypes.func,
         pointType: PropTypes.string,
-        onChangePointType: PropTypes.func,
         onUpdateSymbols: PropTypes.func,
         onSetErrorSymbol: PropTypes.func,
         width: PropTypes.number,
@@ -80,7 +80,6 @@ class Manager extends React.Component {
             iconColor: 'blue'
         },
         onChangeStyle: () => {},
-        onChangePointType: () => {},
         onUpdateSymbols: () => {},
         switchPanelOptions: []
     };
@@ -243,7 +242,7 @@ class Manager extends React.Component {
                     this.props.onSetErrorSymbol(this.props.symbolErrors.concat(["loading_symbol" + this.props.defaultShape]));
                     defaultSymbolStyle = {
                         ...defaultSymbolStyle,
-                        symbolUrlCustomized: require('../../../product/assets/symbols/symbolMissing.svg'),
+                        symbolUrlCustomized: symbolMissing,
                         symbolUrl: this.props.symbolsPath + this.props.defaultShape + ".svg",
                         shape: this.props.defaultShape
                     };
@@ -281,7 +280,6 @@ class Manager extends React.Component {
         if (styleChangedIndex !== -1) {
             let newStyles = styles.map((s, k) => k === styleChangedIndex ? {...pointStyle, id: s.id, title: s.title, geometry: s.geometry, filtering: s.filtering} : s);
             this.props.onChangeStyle(newStyles);
-            this.props.onChangePointType(pointType);
         }
     }
     checkSymbolUrl = ({style, symbolErrors, onLoadingError = this.props.onSetErrorSymbol}) => {
@@ -300,4 +298,4 @@ class Manager extends React.Component {
     }
 }
 
-module.exports = Manager;
+export default Manager;

@@ -19,7 +19,7 @@ import { SourceTypes } from '../../../utils/MediaEditorUtils';
 import withFilter from '../enhancers/withFilter';
 
 
-const Icon = require('../../misc/FitIcon');
+import Icon from '../../misc/FitIcon';
 
 const FilterLocalized = withLocal('filterPlaceholder')(Filter);
 

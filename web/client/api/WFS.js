@@ -5,48 +5,54 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../libs/ajax');
 
-const urlUtil = require('url');
-const assign = require('object-assign');
+import urlUtil from 'url';
+import assign from 'object-assign';
 
-const Api = {
-    /**
-     * Simple getFeature using http GET method with json format
-     */
-    getFeatureSimple: function(baseUrl, params) {
-        return axios.get(baseUrl + '?service=WFS&version=1.1.0&request=GetFeature', {
-            params: assign({
-                outputFormat: "application/json"
-            }, params)
-        }).then((response) => {
-            if (typeof response.data !== 'object') {
-                return JSON.parse(response.data);
-            }
-            return response.data;
-        });
-    },
-    describeFeatureType: function(url, typeName) {
-        const parsed = urlUtil.parse(url, true);
-        const describeLayerUrl = urlUtil.format(assign({}, parsed, {
-            query: assign({
-                service: "WFS",
-                version: "1.1.0",
-                typeName: typeName,
-                request: "DescribeFeatureType"
-            }, parsed.query)
+import axios from '../libs/ajax';
+
+/**
+ * Simple getFeature using http GET method with json format
+ */
+export const getFeatureSimple = function(baseUrl, params) {
+    return axios.get(baseUrl + '?service=WFS&version=1.1.0&request=GetFeature', {
+        params: assign({
+            outputFormat: "application/json"
+        }, params)
+    }).then((response) => {
+        if (typeof response.data !== 'object') {
+            return JSON.parse(response.data);
+        }
+        return response.data;
+    });
+};
+export const describeFeatureType = function(url, typeName) {
+    const parsed = urlUtil.parse(url, true);
+    const describeLayerUrl = urlUtil.format(assign({}, parsed, {
+        query: assign({
+            service: "WFS",
+            version: "1.1.0",
+            typeName: typeName,
+            request: "DescribeFeatureType"
+        }, parsed.query)
+    }));
+    return new Promise(async(resolve) => {
+        const Module = await import(
+            /* webpackChunkName: "WFS_OGC_Utils" */
+            '../utils/ogc/WFS');
+        const {unmarshaller} = Module.default;
+
+        resolve(axios.get(describeLayerUrl).then((response) => {
+            let json = unmarshaller.unmarshalString(response.data);
+            return json && json.value;
+
         }));
-        return new Promise((resolve) => {
-            require.ensure(['../utils/ogc/WFS'], () => {
-                const {unmarshaller} = require('../utils/ogc/WFS');
-                resolve(axios.get(describeLayerUrl).then((response) => {
-                    let json = unmarshaller.unmarshalString(response.data);
-                    return json && json.value;
-
-                }));
-            });
-        });
-    }
+    });
 };
 
-module.exports = Api;
+const Api = {
+    getFeatureSimple,
+    describeFeatureType
+};
+
+export default Api;

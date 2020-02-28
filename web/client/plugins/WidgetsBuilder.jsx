@@ -6,22 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { createSelector } from 'reselect';
 
-const DockPanel = require("../components/misc/panels/DockPanel");
+import { setControlProperty } from '../actions/controls';
+import { toggleConnection } from '../actions/widgets';
+import DockPanel from '../components/misc/panels/DockPanel';
+import epics from '../epics/widgetsbuilder';
+import { widgetBuilderSelector } from '../selectors/controls';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import { availableDependenciesSelector, dependenciesSelector } from '../selectors/widgets';
+import WidgetTypeBuilder from './widgetbuilder/WidgetTypeBuilder';
+import withMapExitButton from './widgetbuilder/enhancers/withMapExitButton';
 
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const { compose } = require('recompose');
-
-const {setControlProperty} = require('../actions/controls');
-
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-const {widgetBuilderSelector} = require('../selectors/controls');
-const { dependenciesSelector, availableDependenciesSelector} = require('../selectors/widgets');
-const { toggleConnection } = require('../actions/widgets');
-const withMapExitButton = require('./widgetbuilder/enhancers/withMapExitButton');
 const Builder = compose(
     connect(
         createSelector(
@@ -30,7 +30,7 @@ const Builder = compose(
             (dependencies, availableDependenciesProps) => ({ dependencies, ...availableDependenciesProps }))
         , { toggleConnection }),
     withMapExitButton
-)(require('./widgetbuilder/WidgetTypeBuilder'));
+)(WidgetTypeBuilder);
 
 class SideBarComponent extends React.Component {
      static propTypes = {
@@ -112,7 +112,7 @@ const Plugin = connect(
     }
 
 )(SideBarComponent);
-module.exports = {
+export default {
     WidgetsBuilderPlugin: Plugin,
-    epics: require('../epics/widgetsbuilder')
+    epics
 };

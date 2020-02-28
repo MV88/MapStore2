@@ -1,24 +1,46 @@
 
-const Rx = require('rxjs');
-const {isString, get, head, castArray} = require('lodash');
-const moment = require('moment');
-const {wrapStartStop} = require('../observables/epics');
+import Rx from 'rxjs';
+import { isString, get, head, castArray } from 'lodash';
+import moment from 'moment';
+import { wrapStartStop } from '../observables/epics';
+import { CHANGE_MAP_VIEW } from '../actions/map';
 
+import {
+    SELECT_TIME,
+    RANGE_CHANGED,
+    ENABLE_OFFSET,
+    SET_MAP_SYNC,
+    timeDataLoading,
+    rangeDataLoaded,
+    onRangeChanged,
+    selectLayer
+} from '../actions/timeline';
 
-const { CHANGE_MAP_VIEW } = require('../actions/map');
+import { setCurrentTime, UPDATE_LAYER_DIMENSION_DATA, setCurrentOffset } from '../actions/dimension';
+import { REMOVE_NODE } from '../actions/layers';
+import { error } from '../actions/notifications';
+import { getLayerFromId } from '../selectors/layers';
 
-const { SELECT_TIME, RANGE_CHANGED, ENABLE_OFFSET, SET_MAP_SYNC, timeDataLoading, rangeDataLoaded, onRangeChanged, selectLayer } = require('../actions/timeline');
-const { setCurrentTime, UPDATE_LAYER_DIMENSION_DATA, setCurrentOffset } = require('../actions/dimension');
+import {
+    rangeSelector,
+    selectedLayerName,
+    selectedLayerUrl,
+    isAutoSelectEnabled,
+    selectedLayerSelector,
+    timelineLayersSelector,
+    multidimOptionsSelectorCreator,
+    isMapSync
+} from '../selectors/timeline';
 
-const {REMOVE_NODE} = require('../actions/layers');
-const {error} = require('../actions/notifications');
+import {
+    layerTimeSequenceSelectorCreator,
+    timeDataSelector,
+    offsetTimeSelector,
+    currentTimeSelector
+} from '../selectors/dimension';
 
-const {getLayerFromId} = require('../selectors/layers');
-const { rangeSelector, selectedLayerName, selectedLayerUrl, isAutoSelectEnabled, selectedLayerSelector, timelineLayersSelector, multidimOptionsSelectorCreator, isMapSync } = require('../selectors/timeline');
-const { layerTimeSequenceSelectorCreator, timeDataSelector, offsetTimeSelector, currentTimeSelector } = require('../selectors/dimension');
-
-const { getNearestDate, roundRangeResolution, isTimeDomainInterval } = require('../utils/TimeUtils');
-const { getHistogram, describeDomains, getDomainValues } = require('../api/MultiDim');
+import { getNearestDate, roundRangeResolution, isTimeDomainInterval } from '../utils/TimeUtils';
+import { getHistogram, describeDomains, getDomainValues } from '../api/MultiDim';
 
 const TIME_DIMENSION = "time";
 // const DEFAULT_RESOLUTION = "P1W";
@@ -158,7 +180,7 @@ const loadRangeData = (id, timeData, getState) => {
 };
 
 
-module.exports = {
+export default {
     /**
      * when a time is selected from timeline, tries to snap to nearest value and set the current time
      */

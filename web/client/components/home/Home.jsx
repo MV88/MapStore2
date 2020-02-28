@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,11 +7,11 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
 
-const {Glyphicon, Tooltip, Button} = require('react-bootstrap');
-const OverlayTrigger = require('../misc/OverlayTrigger');
-const Message = require('../../components/I18N/Message');
+import { Glyphicon, Tooltip, Button } from 'react-bootstrap';
+import OverlayTrigger from '../misc/OverlayTrigger';
+import Message from '../../components/I18N/Message';
 
 class Home extends React.Component {
     static propTypes = {
@@ -47,4 +48,4 @@ class Home extends React.Component {
     };
 }
 
-module.exports = Home;
+export default Home;

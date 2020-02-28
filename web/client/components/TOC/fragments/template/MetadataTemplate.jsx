@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const Message = require('../../../I18N/Message');
-const {Table} = require('react-bootstrap');
-const {isArray} = require('lodash');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import Message from '../../../I18N/Message';
+import { Table } from 'react-bootstrap';
+import { isArray } from 'lodash';
 
 class MetadataTemplate extends React.Component {
      static propTypes = {
@@ -49,4 +50,4 @@ class MetadataTemplate extends React.Component {
          </div >);
      }
 }
-module.exports = MetadataTemplate;
+export default MetadataTemplate;

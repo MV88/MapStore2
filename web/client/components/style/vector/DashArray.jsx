@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const Select = require('react-select');
-const { join} = require('lodash');
-require('react-widgets/lib/less/react-widgets.less');
+import PropTypes from 'prop-types';
+
+import React from 'react';
+import Select from 'react-select';
+import { join } from 'lodash';
+import 'react-widgets/lib/less/react-widgets.less';
 
 /**
  * Component used to manage dashArray property for a stroke style
@@ -73,4 +74,4 @@ class DashArray extends React.Component {
     }
 }
 
-module.exports = DashArray;
+export default DashArray;

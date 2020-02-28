@@ -6,8 +6,9 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {
+import expect from 'expect';
+
+import {
     currentMapSelector,
     currentMapIdSelector,
     currentMapNameSelector,
@@ -17,7 +18,7 @@ const {
     currentMapThumbnailUriSelector,
     currentMapDetailsChangedSelector,
     currentMapOriginalDetailsTextSelector
-} = require('../currentmap');
+} from '../currentmap';
 
 const uri = "some/uri/6/";
 const name = "name";

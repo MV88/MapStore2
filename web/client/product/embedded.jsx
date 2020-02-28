@@ -6,11 +6,14 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const {loadVersion} = require('../actions/version');
+import { loadVersion } from '../actions/version';
+import apiPlugins from './apiPlugins.js';
+import * as appConfigEmbedded from './appConfigEmbedded';
+import main from './main';
 
-require('./main')(
-    require('./appConfigEmbedded'),
-    require('./apiPlugins.js'),
+main(
+    appConfigEmbedded,
+    apiPlugins,
     (cfg) => ({
         ...cfg,
         initialActions: [loadVersion]

@@ -6,23 +6,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const { compose, defaultProps, withProps, withPropsOnChange} = require('recompose');
-const {mapIdSelector} = require('../selectors/map');
-const { getVisibleFloatingWidgets, dependenciesSelector, getFloatingWidgetsLayout, isTrayEnabled} = require('../selectors/widgets');
-const { editWidget, updateWidgetProperty, deleteWidget, changeLayout, exportCSV, exportImage, toggleCollapse} = require('../actions/widgets');
-const editOptions = require('./widgets/editOptions');
-const autoDisableWidgets = require('./widgets/autoDisableWidgets');
+import PropTypes from 'prop-types';
+import React from 'react';
+import ContainerDimensions from 'react-container-dimensions';
+import { connect } from 'react-redux';
+import { compose, defaultProps, withProps, withPropsOnChange } from 'recompose';
+import { createSelector } from 'reselect';
+
+import {
+    changeLayout,
+    deleteWidget,
+    editWidget,
+    exportCSV,
+    exportImage,
+    toggleCollapse,
+    updateWidgetProperty
+} from '../actions/widgets';
+import { heightProvider } from '../components/layout/enhancers/gridLayout';
+import WidgetsViewComp from '../components/widgets/view/WidgetsView';
+import epics from '../epics/widgets';
+import widgetsReducer from '../reducers/widgets';
+import { mapIdSelector } from '../selectors/map';
+import {
+    dependenciesSelector,
+    getFloatingWidgetsLayout,
+    getVisibleFloatingWidgets,
+    isTrayEnabled
+} from '../selectors/widgets';
+import autoDisableWidgets from './widgets/autoDisableWidgets';
+import editOptions from './widgets/editOptions';
 
 const RIGHT_MARGIN = 70;
-const {heightProvider} = require('../components/layout/enhancers/gridLayout');
-const ContainerDimensions = require('react-container-dimensions').default;
-
-const PropTypes = require('prop-types');
-const WidgetsView =
-compose(
+const WidgetsView = compose(
     connect(
         createSelector(
             mapIdSelector,
@@ -105,7 +120,7 @@ compose(
             })
         )
     )
-)(require('../components/widgets/view/WidgetsView'));
+)(WidgetsViewComp);
 
 
 class Widgets extends React.Component {
@@ -139,10 +154,10 @@ class Widgets extends React.Component {
  */
 const WidgetsPlugin = autoDisableWidgets(Widgets);
 
-module.exports = {
+export default {
     WidgetsPlugin,
     reducers: {
-        widgets: require('../reducers/widgets')
+        widgets: widgetsReducer
     },
-    epics: require('../epics/widgets')
+    epics
 };

@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const API = require('../WMTS');
-const WMTSUtils = require('../../utils/WMTSUtils');
+import expect from 'expect';
+
+import API from '../WMTS';
+import WMTSUtils from '../../utils/WMTSUtils';
 
 describe('Test correctness of the WMTS APIs', () => {
     it('GetRecords KVP', (done) => {

@@ -5,17 +5,25 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const {connect} = require('../utils/PluginsUtils');
-const assign = require('object-assign');
+import assign from 'object-assign';
 
-const { changeLayerParams } = require('../actions/layers');
-const { loadFields, loadClassification, changeConfiguration, cancelDirty, setDirty,
-    setInvalidInput, resetInvalidInput } = require('../actions/thematic');
-const { getSelectedLayer } = require('../selectors/layers');
-
-const API = require('../api/SLDService');
-
-const { isAdminUserSelector } = require('../selectors/security');
+import { changeLayerParams } from '../actions/layers';
+import {
+    cancelDirty,
+    changeConfiguration,
+    loadClassification,
+    loadFields,
+    resetInvalidInput,
+    setDirty,
+    setInvalidInput
+} from '../actions/thematic';
+import API from '../api/SLDService';
+import ThematicLayerComp from '../components/TOC/fragments/settings/ThematicLayer';
+import epics from '../epics/thematic';
+import thematic from '../reducers/thematic';
+import { getSelectedLayer } from '../selectors/layers';
+import { isAdminUserSelector } from '../selectors/security';
+import { connect } from '../utils/PluginsUtils';
 
 /**
  * Plugin that adds thematic styles for wms layers, through attribute classification.
@@ -84,7 +92,7 @@ const { isAdminUserSelector } = require('../selectors/security');
  */
 
 
-module.exports = {
+export default {
     ThematicLayerPlugin: assign({
         loadPlugin: (resolve)=> {
             require.ensure(['../components/TOC/fragments/settings/ThematicLayer'], () => {
@@ -123,7 +131,7 @@ module.exports = {
                     onDirtyStyle: setDirty,
                     onInvalidInput: setInvalidInput,
                     onValidInput: resetInvalidInput
-                })(require('../components/TOC/fragments/settings/ThematicLayer'));
+                })(ThematicLayerComp);
                 resolve(ThematicLayer);
             });
         }, enabler: (state) => state.layerSettings && state.layerSettings.expanded
@@ -134,7 +142,7 @@ module.exports = {
         }
     }),
     reducers: {
-        thematic: require('../reducers/thematic')
+        thematic
     },
-    epics: require('../epics/thematic')(require('../api/SLDService'))
+    epics: epics(API)
 };

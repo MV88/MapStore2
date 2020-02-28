@@ -1,23 +1,21 @@
-const {createSelector} = require('reselect');
-const {pathnameSelector} = require('../selectors/router');
+/*
+ * Copyright 2019, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-const isDashboardAvailable = state => state && state.dashboard && state.dashboard.editor && state.dashboard.editor.available;
-const isShowSaveOpen = state => state && state.dashboard && state.dashboard.showSaveModal;
-const isDashboardEditing = state => state && state.dashboard && state.dashboard.editing;
-const showConnectionsSelector = state => state && state.dashboard && state.dashboard.showConnections;
-const dashboardResource = state => state && state.dashboard && state.dashboard.resource;
-const isDashboardLoading = state => state && state.dashboard && state.dashboard.loading;
-const getDashboardSaveErrors = state => state && state.dashboard && state.dashboard.saveErrors;
-const buttonCanEdit = createSelector(pathnameSelector, dashboardResource,
+import { createSelector } from 'reselect';
+
+import { pathnameSelector } from '../selectors/router';
+
+export const isDashboardAvailable = state => state && state.dashboard && state.dashboard.editor && state.dashboard.editor.available;
+export const isShowSaveOpen = state => state && state.dashboard && state.dashboard.showSaveModal;
+export const isDashboardEditing = state => state && state.dashboard && state.dashboard.editing;
+export const showConnectionsSelector = state => state && state.dashboard && state.dashboard.showConnections;
+export const dashboardResource = state => state && state.dashboard && state.dashboard.resource;
+export const isDashboardLoading = state => state && state.dashboard && state.dashboard.loading;
+export const getDashboardSaveErrors = state => state && state.dashboard && state.dashboard.saveErrors;
+export const buttonCanEdit = createSelector(pathnameSelector, dashboardResource,
     (path, resource) => resource && resource.canEdit || isNaN(path.substr(-4)));
-
-module.exports = {
-    isDashboardAvailable,
-    isShowSaveOpen,
-    isDashboardEditing,
-    showConnectionsSelector,
-    dashboardResource,
-    isDashboardLoading,
-    getDashboardSaveErrors,
-    buttonCanEdit
-};

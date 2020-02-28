@@ -6,34 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-const { testEpic } = require('./epicTestUtils');
-const ConfigUtils = require('../../utils/ConfigUtils');
+import expect from 'expect';
 
-const {
-    searchDashboardsOnMapSearch,
-    searchDashboards: searchDashboardsEpic,
-    reloadOnDashboards
-} = require('../dashboards');
+import { dashboardSaved } from '../../actions/dashboard';
+import { DASHBOARDS_LIST_LOADED, LOADING, SEARCH_DASHBOARDS, searchDashboards } from '../../actions/dashboards';
+import { mapMetadataUpdated, mapsLoading } from '../../actions/maps';
+import { SHOW_NOTIFICATION } from '../../actions/notifications';
+import ConfigUtils from '../../utils/ConfigUtils';
+import {
+    reloadOnDashboards,
+    searchDashboards as searchDashboardsEpic,
+    searchDashboardsOnMapSearch
+} from '../dashboards';
+import { testEpic } from './epicTestUtils';
 
-const { dashboardSaved } = require('../../actions/dashboard');
-const { mapMetadataUpdated } = require('../../actions/maps');
-
-
-const {
-    SEARCH_DASHBOARDS,
-    searchDashboards,
-    LOADING,
-    DASHBOARDS_LIST_LOADED
-} = require('../../actions/dashboards');
-
-const {
-    SHOW_NOTIFICATION
-} = require('../../actions/notifications');
-
-const {
-    mapsLoading
-} = require('../../actions/maps');
 let getDefaults = ConfigUtils.getDefaults;
 describe('dashboards epics', () => {
     beforeEach( () => {

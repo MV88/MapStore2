@@ -6,15 +6,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {
-    MAPS_LIST_LOADED, MAPS_LIST_LOADING, MAPS_LIST_LOAD_ERROR, MAP_CREATED, MAP_UPDATING,
-    MAP_METADATA_UPDATED, MAP_DELETING, ATTRIBUTE_UPDATED, PERMISSIONS_LIST_LOADING,
-    PERMISSIONS_LIST_LOADED, SAVE_MAP, PERMISSIONS_UPDATED, THUMBNAIL_ERROR, RESET_UPDATING,
-    MAPS_SEARCH_TEXT_CHANGED, METADATA_CHANGED, SHOW_DETAILS} = require('../actions/maps');
-const {
-    EDIT_MAP, RESET_CURRENT_MAP} = require('../actions/currentMap');
-const assign = require('object-assign');
-const {isArray, isNil} = require('lodash');
+import {
+    MAPS_LIST_LOADED,
+    MAPS_LIST_LOADING,
+    MAPS_LIST_LOAD_ERROR,
+    MAP_CREATED,
+    MAP_UPDATING,
+    MAP_METADATA_UPDATED,
+    MAP_DELETING,
+    ATTRIBUTE_UPDATED,
+    PERMISSIONS_LIST_LOADING,
+    PERMISSIONS_LIST_LOADED,
+    SAVE_MAP,
+    PERMISSIONS_UPDATED,
+    THUMBNAIL_ERROR,
+    RESET_UPDATING,
+    MAPS_SEARCH_TEXT_CHANGED,
+    METADATA_CHANGED,
+    SHOW_DETAILS
+} from '../actions/maps';
+
+import { EDIT_MAP, RESET_CURRENT_MAP } from '../actions/currentMap';
+import assign from 'object-assign';
+import { isArray, isNil } from 'lodash';
 /**
  * Manages the state of the maps list search with it's results
  * The properties represent the shape of the state
@@ -256,4 +270,4 @@ function maps(state = {
     }
 }
 
-module.exports = maps;
+export default maps;

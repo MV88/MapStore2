@@ -6,18 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var axios = require('../libs/ajax');
+import { Promise } from 'es6-promise';
+import { castArray, merge } from 'lodash';
 
-var LocaleUtils = require('../utils/LocaleUtils');
+import axios from '../libs/ajax';
+import ConfigUtils from '../utils/ConfigUtils';
+import LocaleUtils from '../utils/LocaleUtils';
+import { error } from './notifications';
 
-const ConfigUtils = require('../utils/ConfigUtils');
-
-const CHANGE_LOCALE = 'CHANGE_LOCALE';
-const LOCALE_LOAD_ERROR = 'LOCALE_LOAD_ERROR';
-
-const {castArray, merge} = require('lodash');
-const {Promise} = require('es6-promise');
-const {error} = require('./notifications');
+export const CHANGE_LOCALE = 'CHANGE_LOCALE';
+export const LOCALE_LOAD_ERROR = 'LOCALE_LOAD_ERROR';
 
 function changeLocale(data) {
     return {
@@ -34,7 +32,7 @@ function localeError(e) {
     };
 }
 
-function loadLocale(translationFolder, language) {
+export function loadLocale(translationFolder, language) {
     return (dispatch) => {
         let locale = language;
         if (!locale) {
@@ -69,5 +67,3 @@ function loadLocale(translationFolder, language) {
         });
     };
 }
-
-module.exports = {CHANGE_LOCALE, LOCALE_LOAD_ERROR, loadLocale};

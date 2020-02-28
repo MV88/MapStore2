@@ -6,14 +6,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const Message = require('../../../I18N/Message');
-const {Row, Col} = require('react-bootstrap');
-const Metadata = require('../../forms/Metadata');
-const Thumbnail = require('../../forms/Thumbnail');
-const uuid = require('uuid/v1');
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+import uuid from 'uuid/v1';
 
-module.exports = class MainForm extends React.Component {
+import Message from '../../../I18N/Message';
+import Metadata from '../../forms/Metadata';
+import Thumbnail from '../../forms/Thumbnail';
+
+class MainForm extends React.Component {
+    static propTypes = {
+        resource: PropTypes.object,
+        linkedResources: PropTypes.object,
+        onError: PropTypes.func,
+        onUpdate: PropTypes.func,
+        onUpdateLinkedResource: PropTypes.func
+    }
     render() {
         const {
             resource,
@@ -50,6 +59,6 @@ module.exports = class MainForm extends React.Component {
             </Col>
         </Row>);
     }
-};
+}
 
-
+export default MainForm;

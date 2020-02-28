@@ -1,6 +1,6 @@
 const clickHandler = () => ({type: 'CLICKED'});
 
-const ToggleButton = require('./components/buttons/ToggleButton.jsx');
+import ToggleButton from './components/buttons/ToggleButton.jsx';
 
 const Comp = connect((state) => ({
     msg: state.custom.comp && state.custom.comp.msg || "Click me!"
@@ -17,7 +17,7 @@ const Comp = connect((state) => ({
   }
 );
 
-module.exports = {
+export default {
     Plugin: <Comp/>,
     reducers: {
         comp: (state = {msg: '', counter: 0}, action)  => {

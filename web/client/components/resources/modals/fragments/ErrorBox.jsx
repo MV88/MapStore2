@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
+
 const DEFAULT_MESSAGES = { "FORMAT": "map.errorFormat", "SIZE": "map.errorSize", 409: "dashboard.errors.resourceAlreadyExists"};
 
-const Message = require('../../../I18N/Message');
-const { Row } = require('react-bootstrap');
+import Message from '../../../I18N/Message';
+import { Row } from 'react-bootstrap';
 const errorString = err => typeof err === 'string' ? err : err.statusText;
 const errorCode = err => typeof err === 'string' ? err : err.status;
 const errorData = err => typeof err === 'string' ? undefined : err;
@@ -19,7 +20,7 @@ const errorMessage = error => {
     return <Message msgId={DEFAULT_MESSAGES[code] || ("Error:" + errorString(error))} msgParams={errorData(error)} />;
 };
 
-module.exports = ({ errors = []}) => {
+export default ({ errors = []}) => {
     return (<Row>
         {errors.length > 0 ?
             <div className="dropzone-errorBox alert-danger">

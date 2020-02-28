@@ -6,16 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {ButtonGroup, Button, Glyphicon, Tooltip} = require('react-bootstrap');
-const OverlayTrigger = require('../misc/OverlayTrigger');
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-const {head} = require('lodash');
-const ConfirmModal = require('../maps/modals/ConfirmModal');
-const LayerMetadataModal = require('./fragments/LayerMetadataModal');
-const Proj4js = require('proj4').default;
-const Message = require('../I18N/Message');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { ButtonGroup, Button, Glyphicon, Tooltip } from 'react-bootstrap';
+import OverlayTrigger from '../misc/OverlayTrigger';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { head } from 'lodash';
+import ConfirmModal from '../maps/modals/ConfirmModal';
+import LayerMetadataModal from './fragments/LayerMetadataModal';
+const proj4 = require('proj4').default;
+
+import Message from '../I18N/Message';
 
 class Toolbar extends React.Component {
 
@@ -178,7 +180,7 @@ class Toolbar extends React.Component {
     render() {
         const status = this.getStatus();
         const currentEPSG = this.checkBbox();
-        const epsgIsSupported = currentEPSG && Proj4js.defs(currentEPSG);
+        const epsgIsSupported = currentEPSG && proj4.defs(currentEPSG);
 
         const layerMetadataModal = (<LayerMetadataModal
             key="toollayermetadatamodal"
@@ -413,4 +415,4 @@ class Toolbar extends React.Component {
 
 }
 
-module.exports = Toolbar;
+export default Toolbar;

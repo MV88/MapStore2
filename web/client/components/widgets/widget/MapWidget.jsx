@@ -4,17 +4,20 @@
  *
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
- */
-const React = require('react');
-const WidgetContainer = require('./WidgetContainer');
-const { omit } = require('lodash');
-const {withHandlers} = require('recompose');
+*/
+import { omit } from 'lodash';
+import React from 'react';
+import { withHandlers } from 'recompose';
+
+import MapViewComp from './MapView';
+import WidgetContainer from './WidgetContainer';
+
 const MapView = withHandlers({
     onMapViewChanges: ({ updateProperty = () => { } }) => map => updateProperty('map', map)
-})(require('./MapView'));
+})(MapViewComp);
 
 
-module.exports = ({
+export default ({
     updateProperty = () => { },
     toggleDeleteConfirm = () => { },
     id, title,

@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,17 +7,14 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const assign = require('object-assign');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import React from 'react';
 
-const {Tooltip} = require('react-bootstrap');
-
-const OverlayTrigger = require('../../misc/OverlayTrigger');
-
-const {DropdownList, Multiselect} = require('react-widgets');
-
-const Message = require('../../../components/I18N/Message');
+import assign from 'object-assign';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import { Tooltip } from 'react-bootstrap';
+import OverlayTrigger from '../../misc/OverlayTrigger';
+import { DropdownList, Multiselect } from 'react-widgets';
+import Message from '../../../components/I18N/Message';
 
 class ComboField extends React.Component {
     static propTypes = {
@@ -156,4 +154,4 @@ class ComboField extends React.Component {
     }
 }
 
-module.exports = ComboField;
+export default ComboField;

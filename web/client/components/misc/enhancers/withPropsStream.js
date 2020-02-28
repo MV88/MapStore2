@@ -7,10 +7,10 @@
  */
 
 
-const { mapPropsStreamWithConfig } = require('recompose');
+import { mapPropsStreamWithConfig } from 'recompose';
 
-const rxjsConfig = require('recompose/rxjsObservableConfig').default;
-const Rx = require('rxjs');
+import rxjsConfig from 'recompose/rxjsObservableConfig';
+import Rx from 'rxjs';
 const mapPropsStream = mapPropsStreamWithConfig(rxjsConfig);
 /**
  * implements the stream version of withProps
@@ -21,7 +21,7 @@ const mapPropsStream = mapPropsStreamWithConfig(rxjsConfig);
  * @param {function} propStreamFactory a function that gets the stream of props and returns the stream of props to add to the enhanced component
  */
 
-module.exports = propStreamFactory => mapPropsStream(props$ => {
+export default propStreamFactory => mapPropsStream(props$ => {
     const newProps$ = propStreamFactory(props$) || Rx.Observable.empty();
     return newProps$.startWith({}).combineLatest(props$, (overrides = {}, props = {}) => ({
         ...props,

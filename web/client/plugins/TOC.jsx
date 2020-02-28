@@ -5,43 +5,71 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const PropTypes = require('prop-types');
-const React = require('react');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const {Glyphicon} = require('react-bootstrap');
 
-const {changeLayerProperties, changeGroupProperties, toggleNode, contextNode,
-    showSettings, hideSettings, updateSettings, updateNode, moveNode, removeNode,
-    browseData, selectNode, filterLayers, refreshLayerVersion, hideLayerMetadata,
-    download} = require('../actions/layers');
-const {openQueryBuilder} = require("../actions/layerFilter");
-const {getLayerCapabilities} = require('../actions/layerCapabilities');
-const {zoomToExtent} = require('../actions/map');
-const {groupsSelector, layersSelector, selectedNodesSelector, layerFilterSelector, layerSettingSelector, layerMetadataSelector, wfsDownloadSelector} = require('../selectors/layers');
-const {mapSelector, mapNameSelector} = require('../selectors/map');
-const {currentLocaleSelector} = require("../selectors/locale");
-const {widgetBuilderAvailable} = require('../selectors/controls');
-const {generalInfoFormatSelector} = require("../selectors/mapInfo");
+import { head, isObject } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Glyphicon } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 
-const LayersUtils = require('../utils/LayersUtils');
-const mapUtils = require('../utils/MapUtils');
-const LocaleUtils = require('../utils/LocaleUtils');
-
-const Message = require('../components/I18N/Message');
-const assign = require('object-assign');
-
-const layersIcon = require('./toolbar/assets/img/layers.png');
-
-const {isObject, head} = require('lodash');
-
-const { setControlProperties} = require('../actions/controls');
-const {createWidget} = require('../actions/widgets');
-
-const {getMetadataRecordById} = require("../actions/catalog");
-
-const {activeSelector} = require("../selectors/catalog");
-const {isCesium} = require('../selectors/maptype');
+import { getMetadataRecordById } from '../actions/catalog';
+import { setControlProperties } from '../actions/controls';
+import { getLayerCapabilities } from '../actions/layerCapabilities';
+import { openQueryBuilder } from '../actions/layerFilter';
+import {
+    browseData,
+    changeGroupProperties,
+    changeLayerProperties,
+    contextNode,
+    download,
+    filterLayers,
+    hideLayerMetadata,
+    hideSettings,
+    moveNode,
+    refreshLayerVersion,
+    removeNode,
+    selectNode,
+    showSettings,
+    toggleNode,
+    updateNode,
+    updateSettings
+} from '../actions/layers';
+import { zoomToExtent } from '../actions/map';
+import { createWidget } from '../actions/widgets';
+import csw from '../api/CSW';
+import wms from '../api/WMS';
+import wmts from '../api/WMTS';
+import Message from '../components/I18N/Message';
+import DefaultGroup from '../components/TOC/DefaultGroup';
+import DefaultLayer from '../components/TOC/DefaultLayer';
+import DefaultLayerOrGroup from '../components/TOC/DefaultLayerOrGroup';
+import Header from '../components/TOC/Header';
+import TOC from '../components/TOC/TOC';
+import Toolbar from '../components/TOC/Toolbar';
+import epics from '../epics/catalog';
+import query from '../reducers/query';
+import queryform from '../reducers/queryform';
+import { activeSelector } from '../selectors/catalog';
+import { widgetBuilderAvailable } from '../selectors/controls';
+import {
+    groupsSelector,
+    layerFilterSelector,
+    layerMetadataSelector,
+    layerSettingSelector,
+    layersSelector,
+    selectedNodesSelector,
+    wfsDownloadSelector
+} from '../selectors/layers';
+import { currentLocaleSelector } from '../selectors/locale';
+import { mapNameSelector, mapSelector } from '../selectors/map';
+import { generalInfoFormatSelector } from '../selectors/mapInfo';
+import { isCesium } from '../selectors/maptype';
+import LayersUtils from '../utils/LayersUtils';
+import LocaleUtils from '../utils/LocaleUtils';
+import mapUtils from '../utils/MapUtils';
+import layersIcon from './toolbar/assets/img/layers.png';
 
 const addFilteredAttributesGroups = (nodes, filters) => {
     return nodes.reduce((newNodes, currentNode) => {
@@ -130,12 +158,6 @@ const tocSelector = createSelector(
     })
 );
 
-const TOC = require('../components/TOC/TOC');
-const Header = require('../components/TOC/Header');
-const Toolbar = require('../components/TOC/Toolbar');
-const DefaultGroup = require('../components/TOC/DefaultGroup');
-const DefaultLayer = require('../components/TOC/DefaultLayer');
-const DefaultLayerOrGroup = require('../components/TOC/DefaultLayerOrGroup');
 
 class LayerTree extends React.Component {
     static propTypes = {
@@ -607,13 +629,14 @@ const TOCPlugin = connect(tocSelector, {
     refreshLayerVersion
 })(LayerTree);
 
+
 const API = {
-    csw: require('../api/CSW'),
-    wms: require('../api/WMS'),
-    wmts: require('../api/WMTS')
+    csw,
+    wms,
+    wmts
 };
 
-module.exports = {
+export default {
     TOCPlugin: assign(TOCPlugin, {
         Toolbar: {
             name: 'toc',
@@ -640,8 +663,8 @@ module.exports = {
         }
     }),
     reducers: {
-        queryform: require('../reducers/queryform'),
-        query: require('../reducers/query')
+        queryform,
+        query
     },
-    epics: require("../epics/catalog").default(API)
+    epics: epics(API)
 };

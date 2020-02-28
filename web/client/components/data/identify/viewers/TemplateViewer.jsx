@@ -6,13 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {template} = require('lodash');
-const TemplateUtils = require('../../../../utils/TemplateUtils');
-const HtmlRenderer = require('../../../misc/HtmlRenderer');
-const {Row, Col, Grid} = require('react-bootstrap');
+import React from 'react';
 
-module.exports = ({layer = {}, response}) => (
+import { template } from 'lodash';
+import TemplateUtils from '../../../../utils/TemplateUtils';
+import HtmlRenderer from '../../../misc/HtmlRenderer';
+import { Row, Col, Grid } from 'react-bootstrap';
+
+export default ({layer = {}, response}) => (
     <Grid fluid>
         {response.features.map((feature, i) =>
             <Row key={i}>

@@ -5,31 +5,31 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {Provider} = require('react-redux');
-const PropTypes = require('prop-types');
-const dragDropContext = require('react-dnd').DragDropContext;
-const html5Backend = require('react-dnd-html5-backend');
+
+import './appPolyfill';
+
+import url from 'url';
+
+import { isArray, isObject } from 'lodash';
+import assign from 'object-assign';
 const proj4 = require('proj4').default;
+import PropTypes from 'prop-types';
+import React from 'react';
+import { DragDropContext as dragDropContext } from 'react-dnd';
+import html5Backend from 'react-dnd-html5-backend';
+import ErrorBoundary from 'react-error-boundary';
+const ErrorBoundaryFallbackComponent = require('./ErrorFallBackComp').default;
+import { Provider } from 'react-redux';
 
-const {changeBrowserProperties} = require('../../actions/browser');
-const {loadLocale} = require('../../actions/locale');
-const {localConfigLoaded} = require('../../actions/localConfig');
-const {loadPrintCapabilities} = require('../../actions/print');
-
-const ConfigUtils = require('../../utils/ConfigUtils');
-const LocaleUtils = require('../../utils/LocaleUtils');
-const PluginsUtils = require('../../utils/PluginsUtils');
-
-const assign = require('object-assign');
-const url = require('url');
-const {isObject, isArray} = require('lodash');
+import { changeBrowserProperties } from '../../actions/browser';
+import { localConfigLoaded } from '../../actions/localConfig';
+import { loadLocale } from '../../actions/locale';
+import { loadPrintCapabilities } from '../../actions/print';
+import ConfigUtils from '../../utils/ConfigUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
 
 const urlQuery = url.parse(window.location.href, true).query;
-
-require('./appPolyfill');
-
-const ErrorBoundary = require('react-error-boundary').default;
 
 /**
  * Standard MapStore2 application component
@@ -121,10 +121,13 @@ class StandardApp extends React.Component {
         const {plugins, requires} = this.props.pluginsDef;
         const {pluginsDef, appStore, initialActions, appComponent, mode, ...other} = this.props;
         const App = dragDropContext(html5Backend)(this.props.appComponent);
+
         return this.state.initialized ?
-            <ErrorBoundary><Provider store={this.store}>
-                <App {...other} plugins={assign(PluginsUtils.getPlugins(plugins), {requires})}/>
-            </Provider></ErrorBoundary>
+            <ErrorBoundary FallbackComponent={ ErrorBoundaryFallbackComponent}>
+                <Provider store={this.store}>
+                    <App {...other} plugins={assign(PluginsUtils.getPlugins(plugins), { requires })} />
+                </Provider>
+            </ErrorBoundary>
             : (<span><div className="_ms2_init_spinner _ms2_init_center"><div></div></div>
                 <div className="_ms2_init_text _ms2_init_center">Loading MapStore</div></span>);
     }
@@ -168,4 +171,4 @@ class StandardApp extends React.Component {
     };
 }
 
-module.exports = StandardApp;
+export default StandardApp;

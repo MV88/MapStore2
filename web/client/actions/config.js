@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var axios = require('../libs/ajax');
+import axios from '../libs/ajax';
 
-const MAP_CONFIG_LOADED = 'MAP_CONFIG_LOADED';
-const MAP_CONFIG_LOAD_ERROR = 'MAP_CONFIG_LOAD_ERROR';
-const MAP_INFO_LOAD_START = 'MAP_INFO_LOAD_START';
-const MAP_INFO_LOADED = 'MAP_INFO_LOADED';
-const MAP_INFO_LOAD_ERROR = 'MAP_INFO_LOAD_ERROR';
+export const MAP_CONFIG_LOADED = 'MAP_CONFIG_LOADED';
+export const MAP_CONFIG_LOAD_ERROR = 'MAP_CONFIG_LOAD_ERROR';
+export const MAP_INFO_LOAD_START = 'MAP_INFO_LOAD_START';
+export const MAP_INFO_LOADED = 'MAP_INFO_LOADED';
+export const MAP_INFO_LOAD_ERROR = 'MAP_INFO_LOAD_ERROR';
 
-function configureMap(conf, mapId) {
+export function configureMap(conf, mapId) {
     return {
         type: MAP_CONFIG_LOADED,
         config: conf,
@@ -23,7 +23,7 @@ function configureMap(conf, mapId) {
     };
 }
 
-function configureError(e, mapId) {
+export function configureError(e, mapId) {
     return {
         type: MAP_CONFIG_LOAD_ERROR,
         error: e,
@@ -31,7 +31,7 @@ function configureError(e, mapId) {
     };
 }
 
-function loadMapConfig(configName, mapId) {
+export function loadMapConfig(configName, mapId) {
     return (dispatch) => {
         return axios.get(configName).then((response) => {
             if (typeof response.data === 'object') {
@@ -48,27 +48,27 @@ function loadMapConfig(configName, mapId) {
         });
     };
 }
-function mapInfoLoaded(info, mapId) {
+export function mapInfoLoaded(info, mapId) {
     return {
         type: MAP_INFO_LOADED,
         mapId,
         info
     };
 }
-function mapInfoLoadError(mapId, error) {
+export function mapInfoLoadError(mapId, error) {
     return {
         type: MAP_INFO_LOAD_ERROR,
         mapId,
         error
     };
 }
-function mapInfoLoadStart(mapId) {
+export function mapInfoLoadStart(mapId) {
     return {
         type: MAP_INFO_LOAD_START,
         mapId
     };
 }
-function loadMapInfo(url, mapId) {
+export function loadMapInfo(url, mapId) {
     return (dispatch) => {
         dispatch(mapInfoLoadStart(mapId));
         return axios.get(url).then((response) => {
@@ -92,6 +92,3 @@ function loadMapInfo(url, mapId) {
     };
 
 }
-module.exports = {MAP_CONFIG_LOADED, MAP_CONFIG_LOAD_ERROR,
-    MAP_INFO_LOAD_START, MAP_INFO_LOADED, MAP_INFO_LOAD_ERROR,
-    loadMapConfig, loadMapInfo, configureMap, configureError, mapInfoLoaded};

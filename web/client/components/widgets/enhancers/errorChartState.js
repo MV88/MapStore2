@@ -1,6 +1,6 @@
-const React = require('react');
-const Message = require('../../I18N/Message');
-const emptyState = require('../../misc/enhancers/emptyState');
+import React from 'react';
+import Message from '../../I18N/Message';
+import emptyState from '../../misc/enhancers/emptyState';
 
 const getErrorMessage = (error = {}) => {
     if (error.code === "ECONNABORTED") {
@@ -9,7 +9,7 @@ const getErrorMessage = (error = {}) => {
     return <Message msgId="widgets.errors.genericError" />;
 };
 
-module.exports = emptyState(
+export default emptyState(
     ({error}) => error,
     ({error, iconFit} = {}) => ({
         glyph: "warning-sign",

@@ -5,18 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var L = require('leaflet');
-const PropTypes = require('prop-types');
-var React = require('react');
-var ConfigUtils = require('../../../utils/ConfigUtils');
-var CoordinatesUtils = require('../../../utils/CoordinatesUtils');
-var assign = require('object-assign');
-var mapUtils = require('../../../utils/MapUtils');
-const Rx = require('rxjs');
+import L from 'leaflet';
 
-const {throttle} = require('lodash');
-
-require('./SingleClick');
+import PropTypes from 'prop-types';
+import React from 'react';
+import ConfigUtils from '../../../utils/ConfigUtils';
+import CoordinatesUtils from '../../../utils/CoordinatesUtils';
+import assign from 'object-assign';
+import mapUtils from '../../../utils/MapUtils';
+import Rx from 'rxjs';
+import { throttle } from 'lodash';
+import './SingleClick';
 
 class LeafletMap extends React.Component {
     static propTypes = {
@@ -466,4 +465,4 @@ class LeafletMap extends React.Component {
     };
 }
 
-module.exports = LeafletMap;
+export default LeafletMap;

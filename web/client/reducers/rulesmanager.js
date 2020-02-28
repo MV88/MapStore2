@@ -6,17 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const assign = require('object-assign');
-const wk = require('wellknown');
-const {isEmpty} = require("lodash");
+import { castArray, head, isEmpty } from 'lodash';
+import assign from 'object-assign';
+import wk from 'wellknown';
 
-const { RULES_SELECTED, OPTIONS_LOADED, UPDATE_FILTERS_VALUES,
-    LOADING, EDIT_RULE, SET_FILTER, CLEAN_EDITING, RULE_SAVED} = require('../actions/rulesmanager');
-const {
-    CHANGE_DRAWING_STATUS
-} = require('../actions/draw');
+import { CHANGE_DRAWING_STATUS } from '../actions/draw';
+import {
+    CLEAN_EDITING,
+    EDIT_RULE,
+    LOADING,
+    OPTIONS_LOADED,
+    RULES_SELECTED,
+    RULE_SAVED,
+    SET_FILTER,
+    UPDATE_FILTERS_VALUES
+} from '../actions/rulesmanager';
 
-const _ = require('lodash');
 const defaultState = {
     services: {
         WFS: [
@@ -75,12 +80,12 @@ function rulesmanager(state = defaultState, action) {
         const existingRules = state.selectedRules || [];
         if (action.unselect) {
             return assign({}, state, {
-                selectedRules: _(existingRules).filter(
-                    rule => !_.head(newRules.filter(unselected => unselected.id === rule.id))).value()
+                selectedRules: castArray(existingRules).filter(
+                    rule => !head(newRules.filter(unselected => unselected.id === rule.id))).value()
             });
         }
         return assign({}, state, {
-            selectedRules: _(existingRules).concat(newRules).uniq(rule => rule.id).value()});
+            selectedRules: castArray(existingRules).concat(newRules).uniq(rule => rule.id).value()});
     }
     case UPDATE_FILTERS_VALUES: {
         const filtersValues = state.filtersValues || {};
@@ -146,4 +151,4 @@ function rulesmanager(state = defaultState, action) {
     }
 }
 
-module.exports = rulesmanager;
+export default rulesmanager;

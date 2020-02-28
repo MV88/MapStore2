@@ -1,9 +1,8 @@
-const React = require('react');
-const {connect} = require('react-redux');
-const {Panel, Nav, NavItem} = require('react-bootstrap');
-
-const {layersSelector} = require('../../../selectors/layers');
-const {selectedLayerIdSelector} = require('../../../selectors/featuregrid');
+import React from 'react';
+import { connect } from 'react-redux';
+import { Panel, Nav, NavItem } from 'react-bootstrap';
+import { layersSelector } from '../../../selectors/layers';
+import { selectedLayerIdSelector } from '../../../selectors/featuregrid';
 const LayerSelector = ({layers = [], selectedLayerId, onLayerSelect = () => {}} = {}) =>
     (<Panel key="layer-selctor" style={{
         position: "absolute",
@@ -26,6 +25,6 @@ const LayerSelectorPlugin = connect((state) => ({
 })(LayerSelector);
 
 
-module.exports = {
+export default {
     LayerSelectorPlugin
 };

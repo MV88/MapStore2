@@ -5,10 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const assign = require('object-assign');
+import assign from 'object-assign';
+
 /* eslint-disable */
-const XLink_1_0 = require('w3c-schemas').XLink_1_0;
-const {
+import { XLink_1_0 } from 'w3c-schemas';
+
+import {
     WMS_1_3_0,
     SMIL_2_0_Language,
     SMIL_2_0,
@@ -17,10 +19,10 @@ const {
     OWS_1_0_0,
     Filter_1_1_0,
     Filter_1_0_0,
-    SE_1_1_0
-    } = require("ogc-schemas");
+    SE_1_1_0,
+} from 'ogc-schemas';
 
-let {SLD_1_0_0} = require("ogc-schemas/lib/SLD_1_0_0_GeoServer");
+import { SLD_1_0_0 } from 'ogc-schemas/lib/SLD_1_0_0_GeoServer';
 // Normalize miss vendorOption definition in SLD_1_0_Geoserver ogc schema
 SLD_1_0_0.tis[4].ps= [ {
             n: 'vendorOption',
@@ -28,7 +30,7 @@ SLD_1_0_0.tis[4].ps= [ {
             col: true,
             en: 'VendorOption',
             ti: '.VendorOption'}];
-const {Jsonix} = require('jsonix');
+import { Jsonix } from 'jsonix';
 
 const context = new Jsonix.Context([
     XLink_1_0,
@@ -241,7 +243,7 @@ const vecStyleToSLD = function({rules = [], layer = {}} = {}) {
     );
 };
 
-module.exports = {
+export default {
     jsonToSLD: jsonToSLD,
     vecStyleToSLD: vecStyleToSLD
 };

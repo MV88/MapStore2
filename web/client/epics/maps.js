@@ -6,51 +6,84 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const uuidv1 = require('uuid/v1');
-const assign = require('object-assign');
-const {basicError, basicSuccess} = require('../utils/NotificationUtils');
-const GeoStoreApi = require('../api/GeoStoreDAO');
-const { MAP_INFO_LOADED } = require('../actions/config');
-const {isNil, find} = require('lodash');
-const {
-    SAVE_DETAILS, SAVE_RESOURCE_DETAILS, MAPS_GET_MAP_RESOURCES_BY_CATEGORY,
-    DELETE_MAP, OPEN_DETAILS_PANEL, MAPS_LOAD_MAP,
-    CLOSE_DETAILS_PANEL, NO_DETAILS_AVAILABLE, SAVE_MAP_RESOURCE, MAP_DELETED,
-    setDetailsChanged, updateDetails, mapsLoading, mapsLoaded,
-    mapDeleting, toggleDetailsEditability, mapDeleted, loadError,
-    doNothing, detailsLoaded, detailsSaving, onDisplayMetadataEdit,
-    RESET_UPDATING, resetUpdating, toggleDetailsSheet, getMapResourcesByCategory,
-    mapUpdating, savingMap, mapCreated, mapError, loadMaps
-} = require('../actions/maps');
-const {
-    resetCurrentMap, EDIT_MAP
-} = require('../actions/currentMap');
-const {closeFeatureGrid} = require('../actions/featuregrid');
-const {toggleControl} = require('../actions/controls');
-const {
-    mapPermissionsFromIdSelector, mapThumbnailsUriFromIdSelector,
+import Rx from 'rxjs';
+
+import uuidv1 from 'uuid/v1';
+import assign from 'object-assign';
+import { basicError, basicSuccess } from '../utils/NotificationUtils';
+import GeoStoreApi from '../api/GeoStoreDAO';
+import { MAP_INFO_LOADED } from '../actions/config';
+import { isNil, find } from 'lodash';
+
+import {
+    SAVE_DETAILS,
+    SAVE_RESOURCE_DETAILS,
+    MAPS_GET_MAP_RESOURCES_BY_CATEGORY,
+    DELETE_MAP,
+    OPEN_DETAILS_PANEL,
+    MAPS_LOAD_MAP,
+    CLOSE_DETAILS_PANEL,
+    NO_DETAILS_AVAILABLE,
+    SAVE_MAP_RESOURCE,
+    MAP_DELETED,
+    setDetailsChanged,
+    updateDetails,
+    mapsLoading,
+    mapsLoaded,
+    mapDeleting,
+    toggleDetailsEditability,
+    mapDeleted,
+    loadError,
+    doNothing,
+    detailsLoaded,
+    detailsSaving,
+    onDisplayMetadataEdit,
+    RESET_UPDATING,
+    resetUpdating,
+    toggleDetailsSheet,
+    getMapResourcesByCategory,
+    mapUpdating,
+    savingMap,
+    mapCreated,
+    mapError,
+    loadMaps
+} from '../actions/maps';
+
+import { resetCurrentMap, EDIT_MAP } from '../actions/currentMap';
+import { closeFeatureGrid } from '../actions/featuregrid';
+import { toggleControl } from '../actions/controls';
+
+import {
+    mapPermissionsFromIdSelector,
+    mapThumbnailsUriFromIdSelector,
     mapDetailsUriFromIdSelector,
     searchTextSelector,
     searchParamsSelector
-} = require('../selectors/maps');
+} from '../selectors/maps';
 
-const {
-    mapIdSelector, mapInfoDetailsUriFromIdSelector
-} = require('../selectors/map');
-const {
-    currentMapDetailsTextSelector, currentMapIdSelector,
-    currentMapDetailsUriSelector, currentMapSelector,
-    currentMapDetailsChangedSelector, currentMapOriginalDetailsTextSelector
-} = require('../selectors/currentmap');
+import { mapIdSelector, mapInfoDetailsUriFromIdSelector } from '../selectors/map';
 
-const {userParamsSelector} = require('../selectors/security');
-const {deleteResourceById, createAssociatedResource, deleteAssociatedResource, updateAssociatedResource} = require('../utils/ObservableUtils');
+import {
+    currentMapDetailsTextSelector,
+    currentMapIdSelector,
+    currentMapDetailsUriSelector,
+    currentMapSelector,
+    currentMapDetailsChangedSelector,
+    currentMapOriginalDetailsTextSelector
+} from '../selectors/currentmap';
 
-const {getIdFromUri} = require('../utils/MapUtils');
+import { userParamsSelector } from '../selectors/security';
 
-const {getErrorMessage} = require('../utils/LocaleUtils');
-const Persistence = require("../api/persistence");
+import {
+    deleteResourceById,
+    createAssociatedResource,
+    deleteAssociatedResource,
+    updateAssociatedResource
+} from '../utils/ObservableUtils';
+
+import { getIdFromUri } from '../utils/MapUtils';
+import { getErrorMessage } from '../utils/LocaleUtils';
+import {updateResource, createResource} from '../api/persistence';
 
 const manageMapResource = ({map = {}, attribute = "", resource = null, type = "STRING", optionsDel = {}, messages = {}} = {}) => {
     const attrVal = map[attribute];
@@ -311,7 +344,7 @@ const storeDetailsInfoEpic = (action$, store) =>
                     });
         });
 // UPDATE MAP_RESOURCE FLOW
-const updateMapResource = (resource) => Persistence.updateResource(resource)
+const updateMapResource = (resource) => updateResource(resource)
     .switchMap(() =>
         Rx.Observable.of(basicSuccess({
             title: 'map.savedMapTitle',
@@ -329,7 +362,7 @@ const updateMapResource = (resource) => Persistence.updateResource(resource)
     ))
     .startWith(mapUpdating(resource.metadata));
 // CREATE MAP_RESOURCE FLOW
-const createMapResource = (resource) => Persistence.createResource(resource)
+const createMapResource = (resource) => createResource(resource)
     .switchMap((rid) =>
         Rx.Observable.of(
             mapCreated(rid, assign({id: rid, canDelete: true, canEdit: true, canCopy: true}, resource.metadata), resource.data),
@@ -350,13 +383,13 @@ const createMapResource = (resource) => Persistence.createResource(resource)
     ))
     .startWith(savingMap(resource.metadata));
 /**
- * Create or update map reosurce with persistence api
+ * Create or update map resource with persistence api
  */
 const mapSaveMapResourceEpic = (action$) =>
     action$.ofType(SAVE_MAP_RESOURCE)
         .exhaustMap(({resource}) => (!resource.id ? createMapResource(resource) : updateMapResource(resource))
         );
-module.exports = {
+export default {
     loadMapsEpic,
     resetCurrentMapEpic,
     storeDetailsInfoEpic,

@@ -6,9 +6,10 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const CoordinatesUtils = require('../utils/CoordinatesUtils');
-const {createSelector} = require('reselect');
-const {get} = require('lodash');
+import { get } from 'lodash';
+import { createSelector } from 'reselect';
+
+import CoordinatesUtils from '../utils/CoordinatesUtils';
 
 /**
  * selects map state
@@ -24,29 +25,29 @@ const {get} = require('lodash');
  * @param  {object} state the state
  * @return {object} the map configuration
  */
-const mapSelector = (state) => state.map && state.map.present || state.map || state.config && state.config.map || null;
+export const mapSelector = (state) => state.map && state.map.present || state.map || state.config && state.config.map || null;
 
-const projectionSelector = createSelector([mapSelector], (map) => map && map.projection);
-const stateMapIdSelector = (state) => get(mapSelector(state), "mapId") && parseInt(get(mapSelector(state), "mapId"), 10) || null;
-const mapIdSelector = (state) => get(state, "mapInitialConfig.mapId") && parseInt(get(state, "mapInitialConfig.mapId"), 10) || stateMapIdSelector(state);
-const mapInfoSelector = state => get(mapSelector(state), "info");
-const mapInfoDetailsUriFromIdSelector = state => get(mapInfoSelector(state), "details");
+export const projectionSelector = createSelector([mapSelector], (map) => map && map.projection);
+export const stateMapIdSelector = (state) => get(mapSelector(state), "mapId") && parseInt(get(mapSelector(state), "mapId"), 10) || null;
+export const mapIdSelector = (state) => get(state, "mapInitialConfig.mapId") && parseInt(get(state, "mapInitialConfig.mapId"), 10) || stateMapIdSelector(state);
+export const mapInfoSelector = state => get(mapSelector(state), "info");
+export const mapInfoDetailsUriFromIdSelector = state => get(mapInfoSelector(state), "details");
 
 // TODO: move these in selectors/localConfig.js or selectors/config.js
-const projectionDefsSelector = (state) => state.localConfig && state.localConfig.projectionDefs || [];
-const mapConstraintsSelector = state => state.localConfig && state.localConfig.mapConstraints || {};
-const configuredRestrictedExtentSelector = (state) => mapConstraintsSelector(state).restrictedExtent;
-const configuredExtentCrsSelector = (state) => mapConstraintsSelector(state).crs;
-const configuredMinZoomSelector = state => {
+export const projectionDefsSelector = (state) => state.localConfig && state.localConfig.projectionDefs || [];
+export const mapConstraintsSelector = state => state.localConfig && state.localConfig.mapConstraints || {};
+export const configuredRestrictedExtentSelector = (state) => mapConstraintsSelector(state).restrictedExtent;
+export const configuredExtentCrsSelector = (state) => mapConstraintsSelector(state).crs;
+export const configuredMinZoomSelector = state => {
     const constraints = mapConstraintsSelector(state);
     const projection = projectionSelector(state);
     return projection && get(constraints, `projectionsConstraints["${projection}"].minZoom`) || get(constraints, 'minZoom');
 };
 // END localConfig selectors
 
-const mapLimitsSelector = state => get(mapSelector(state), "limits");
-const minZoomSelector = state => get(mapLimitsSelector(state), "minZoom" );
-const resolutionsSelector = state => get(mapSelector(state), "resolutions");
+export const mapLimitsSelector = state => get(mapSelector(state), "limits");
+export const minZoomSelector = state => get(mapLimitsSelector(state), "minZoom" );
+export const resolutionsSelector = state => get(mapSelector(state), "resolutions");
 
 /**
  * Get the scales of the current map
@@ -55,7 +56,7 @@ const resolutionsSelector = state => get(mapSelector(state), "resolutions");
  * @param  {object} state the state
  * @return {number[]} the scales of the map
  */
-const scalesSelector = createSelector(
+export const scalesSelector = createSelector(
     [resolutionsSelector, projectionSelector],
     (resolutions, projection) => {
         if (resolutions && projection) {
@@ -73,7 +74,7 @@ const scalesSelector = createSelector(
  * @param  {object} state the state
  * @return {number} version of the map
  */
-const mapVersionSelector = (state) => state.map && state.map.present && state.map.present.version || 1;
+export const mapVersionSelector = (state) => state.map && state.map.present && state.map.present.version || 1;
 /**
  * Get name/title of the map
  * @function
@@ -81,20 +82,4 @@ const mapVersionSelector = (state) => state.map && state.map.present && state.ma
  * @param  {object} state the state
  * @return {string} name/title of the map
  */
-const mapNameSelector = (state) => state.map && state.map.present && state.map.present.info && state.map.present.info.name || '';
-
-module.exports = {
-    mapInfoDetailsUriFromIdSelector,
-    mapSelector,
-    scalesSelector,
-    projectionSelector,
-    minZoomSelector,
-    mapIdSelector,
-    projectionDefsSelector,
-    mapVersionSelector,
-    mapNameSelector,
-    configuredMinZoomSelector,
-    configuredExtentCrsSelector,
-    configuredRestrictedExtentSelector,
-    mapInfoSelector
-};
+export const mapNameSelector = (state) => state.map && state.map.present && state.map.present.info && state.map.present.info.name || '';

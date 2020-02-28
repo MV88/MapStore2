@@ -1,7 +1,11 @@
-module.exports = {
-    GdalAddoTransform: require("./GdalAddoTransform"),
-    GdalTranslateTransform: require('./GdalTranslateTransform'),
-    GdalWarpTransform: require('./GdalWarpTransform'),
+import GdalAddoTransform from './GdalAddoTransform';
+import GdalTranslateTransform from './GdalTranslateTransform';
+import GdalWarpTransform from './GdalWarpTransform';
+
+export default {
+    GdalAddoTransform,
+    GdalTranslateTransform,
+    GdalWarpTransform,
     help: {
         GdalAddoTransform: "http://www.gdal.org/gdaladdo.html",
         GdalTranslateTransform: "http://www.gdal.org/gdal_translate.html",

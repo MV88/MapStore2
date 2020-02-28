@@ -6,34 +6,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const Message = require('../../components/I18N/Message');
-const {defaultProps} = require('recompose');
-const {Glyphicon} = require('react-bootstrap');
+import assign from 'object-assign';
+import html from 'raw-loader!./featureInfoPreviews/responseHTML.txt';
+import responseJSON from 'raw-loader!./featureInfoPreviews/responseJSON.txt';
+import text from 'raw-loader!./featureInfoPreviews/responseText.txt';
+import React from 'react';
+import { Glyphicon } from 'react-bootstrap';
+import { defaultProps } from 'recompose';
 
-const assign = require('object-assign');
-const HTMLViewer = require('../../components/data/identify/viewers/HTMLViewer');
-const TextViewer = require('../../components/data/identify/viewers/TextViewer');
-const JSONViewer = require('../../components/data/identify/viewers/JSONViewer');
-const HtmlRenderer = require('../../components/misc/HtmlRenderer');
-
-const MapInfoUtils = require('../../utils/MapInfoUtils');
-const PluginsUtils = require('../../utils/PluginsUtils');
-
-const General = require('../../components/TOC/fragments/settings/General');
-const Display = require('../../components/TOC/fragments/settings/Display');
-
-const Elevation = require('../../components/TOC/fragments/settings/Elevation');
-const FeatureInfoEditor = require('../../components/TOC/fragments/settings/FeatureInfoEditor');
-const LoadingView = require('../../components/misc/LoadingView');
+import Message from '../../components/I18N/Message';
+import Display from '../../components/TOC/fragments/settings/Display';
+import Elevation from '../../components/TOC/fragments/settings/Elevation';
+import FeatureInfoComp from '../../components/TOC/fragments/settings/FeatureInfo';
+import FeatureInfoEditor from '../../components/TOC/fragments/settings/FeatureInfoEditor';
+import General from '../../components/TOC/fragments/settings/General';
+import HTMLViewer from '../../components/data/identify/viewers/HTMLViewer';
+import JSONViewer from '../../components/data/identify/viewers/JSONViewer';
+import TextViewer from '../../components/data/identify/viewers/TextViewer';
+import HtmlRenderer from '../../components/misc/HtmlRenderer';
+import LoadingView from '../../components/misc/LoadingView';
+import MapInfoUtils from '../../utils/MapInfoUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
+import { StyleSelector } from '../styleeditor/index';
 
 const responses = {
-    html: require('raw-loader!./featureInfoPreviews/responseHTML.txt'),
-    json: JSON.parse(require('raw-loader!./featureInfoPreviews/responseJSON.txt')),
-    text: require('raw-loader!./featureInfoPreviews/responseText.txt')
+    html,
+    json: JSON.parse(responseJSON),
+    text
 };
 
-const { StyleSelector } = require('../styleeditor/index');
 const StyleList = defaultProps({ readOnly: true })(StyleSelector);
 
 const formatCards = {
@@ -102,7 +103,7 @@ const formatCards = {
 const FeatureInfo = defaultProps({
     formatCards,
     defaultInfoFormat: MapInfoUtils.getAvailableInfoFormat()
-})(require('../../components/TOC/fragments/settings/FeatureInfo'));
+})(FeatureInfoComp);
 
 const configuredPlugins = {};
 
@@ -122,7 +123,7 @@ const getConfiguredPlugin = (plugin, loaded, loadingComp) => {
 
 let settingsPlugins;
 
-module.exports = ({showFeatureInfoTab = true, ...props}, {plugins, pluginsConfig, loadedPlugins}) => {
+export default ({showFeatureInfoTab = true, ...props}, {plugins, pluginsConfig, loadedPlugins}) => {
     if (!settingsPlugins) {
         settingsPlugins = assign({}, (PluginsUtils.getPluginItems({}, plugins, pluginsConfig, "TOC", props.id, true, loadedPlugins, (p) => p.container === 'TOCItemSettings') || [])
             .reduce((previous, p) => ({...previous, [p.name]: p}), {}));

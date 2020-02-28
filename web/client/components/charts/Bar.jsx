@@ -5,12 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const {castArray, isNil, isEqual} = require('lodash');
-const PropTypes = require('prop-types');
-const React = require('react');
-const {BarChart, Bar} = require('recharts');
+import { castArray, isNil, isEqual } from 'lodash';
 
-const renderCartesianTools = require('./cartesian').default;
+import PropTypes from 'prop-types';
+import React from 'react';
+import { BarChart, Bar } from 'recharts';
+import renderCartesianTools from './cartesian';
 
 class BarChartWrapper extends React.Component {
     static propTypes = {
@@ -84,4 +84,4 @@ class BarChartWrapper extends React.Component {
         );
     }
 }
-module.exports = BarChartWrapper;
+export default BarChartWrapper;

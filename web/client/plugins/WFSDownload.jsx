@@ -5,15 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {connect} = require('react-redux');
-const {downloadFeatures, onDownloadOptionChange, onFormatOptionsFetch} = require('../actions/wfsdownload');
-const {toggleControl, setControlProperty} = require('../actions/controls');
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 
-const {createSelector} = require('reselect');
-const {wfsURL, wfsFilter} = require('../selectors/query');
-const {getSelectedLayer} = require('../selectors/layers');
+import { setControlProperty, toggleControl } from '../actions/controls';
+import { downloadFeatures, onDownloadOptionChange, onFormatOptionsFetch } from '../actions/wfsdownload';
+import DownloadDialog from '../components/data/download/DownloadDialog';
+import epics from '../epics/wfsdownload';
+import wfsdownload from '../reducers/wfsdownload';
+import { getSelectedLayer } from '../selectors/layers';
+import { wfsFilter, wfsURL } from '../selectors/query';
 
-const DownloadDialog = require('../components/data/download/DownloadDialog');
 /**
  * Provides advanced export functionalities using WFS.
  * @memberof plugins
@@ -42,7 +44,7 @@ const DownloadDialog = require('../components/data/download/DownloadDialog');
  *  }
  * }
  */
-module.exports = {
+export default {
     WFSDownloadPlugin: connect(createSelector(
         wfsURL,
         wfsFilter,
@@ -73,8 +75,8 @@ module.exports = {
         onClose: () => toggleControl("wfsdownload")
     }
     )(DownloadDialog),
-    epics: require('../epics/wfsdownload'),
+    epics,
     reducers: {
-        wfsdownload: require('../reducers/wfsdownload')
+        wfsdownload
     }
 };

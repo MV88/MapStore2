@@ -7,6 +7,6 @@
 */
 
 module.exports = {
-    LMap: require('../../../components/map/cesium/Map'),
-    Layer: require('../../../components/map/cesium/Layer')
+    LMap: require('../../../components/map/cesium/Map').default,
+    Layer: require('../../../components/map/cesium/Layer').default
 };

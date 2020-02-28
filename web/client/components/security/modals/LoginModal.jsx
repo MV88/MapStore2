@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,14 +8,14 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const LoginForm = require('../forms/LoginForm');
-const {Button} = require('react-bootstrap');
-const Modal = require('../../misc/Modal');
-const Message = require('../../../components/I18N/Message');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import React from 'react';
 
-require('../css/security.css');
+import LoginForm from '../forms/LoginForm';
+import { Button } from 'react-bootstrap';
+import Modal from '../../misc/Modal';
+import Message from '../../../components/I18N/Message';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import '../css/security.css';
 
 /**
  * A Modal window to show password reset form
@@ -117,4 +118,4 @@ class LoginModal extends React.Component {
     };
 }
 
-module.exports = LoginModal;
+export default LoginModal;

@@ -1,9 +1,17 @@
-const { RANGE_CHANGED } = require('../actions/timeline');
-const { REMOVE_NODE } = require('../actions/layers');
-const { RESET_CONTROLS } = require('../actions/controls');
-const { RANGE_DATA_LOADED, LOADING, SELECT_LAYER, SET_COLLAPSED, SET_MAP_SYNC } = require('../actions/timeline');
-const { set } = require('../utils/ImmutableUtils');
-const { assign, pickBy, has } = require('lodash');
+/**
+ * Copyright 2019, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { assign, has, pickBy } from 'lodash';
+
+import { RESET_CONTROLS } from '../actions/controls';
+import { REMOVE_NODE } from '../actions/layers';
+import { LOADING, RANGE_CHANGED, RANGE_DATA_LOADED, SELECT_LAYER, SET_COLLAPSED, SET_MAP_SYNC } from '../actions/timeline';
+import { set } from '../utils/ImmutableUtils';
 
 /**
  * Provides state for the timeline. Example:
@@ -47,7 +55,7 @@ const { assign, pickBy, has } = require('lodash');
  * @param {action} action
 
  */
-module.exports = (state = {
+export default (state = {
     settings: {
         autoSelect: true, // selects the first layer available as guide layer. This is a configuration only setting for now
         collapsed: false

@@ -6,8 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// const {isNil} = require('lodash');
-const {
+import {
     EDIT_MAP,
     UPDATE_CURRENT_MAP,
     ERROR_CURRENT_MAP,
@@ -15,9 +14,9 @@ const {
     UPDATE_CURRENT_MAP_GROUPS,
     RESET_CURRENT_MAP,
     ADD_CURRENT_MAP_PERMISSION
-} = require('../actions/currentMap');
+} from '../actions/currentMap';
 
-const {
+import {
     THUMBNAIL_ERROR,
     MAP_UPDATING,
     SAVE_MAP,
@@ -40,10 +39,10 @@ const {
     METADATA_CHANGED,
     DETAILS_SAVING,
     TOGGLE_DETAILS_EDITABILITY
-} = require('../actions/maps');
+} from '../actions/maps';
 
-const assign = require('object-assign');
-const {isArray} = require('lodash');
+import assign from 'object-assign';
+import { isArray } from 'lodash';
 
 function currentMap(state = {}, action) {
     switch (action.type) {
@@ -219,4 +218,4 @@ function currentMap(state = {}, action) {
     }
 }
 
-module.exports = currentMap;
+export default currentMap;

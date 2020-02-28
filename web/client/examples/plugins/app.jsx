@@ -6,41 +6,60 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import Babel from 'babel-standalone';
+import assign from 'object-assign';
+import codeSample from "raw-loader!./sample.js.raw";
+import themeSample from "raw-loader!./sample.less.raw";
+import React from 'react';
+import {FormControl, FormGroup} from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import {Provider, connect} from 'react-redux';
+
+import {changeBrowserProperties} from '../../actions/browser';
+import {loadMapConfig} from '../../actions/config';
+import {loadLocale} from '../../actions/locale';
+import {changeMapType} from '../../actions/maptype';
+import {loadPrintCapabilities} from '../../actions/print';
+import {selectTheme} from '../../actions/theme';
+import LocalizedComp from '../../components/I18N/Localized';
+import Template from '../../components/data/template/jsx/Template';
+import Debug from '../../components/development/Debug';
+import PluginsContainerComp from '../../components/plugins/PluginsContainer';
+import ThemeComp from '../../components/theme/Theme';
+import ThemeSwitcherComp from '../../components/theme/ThemeSwitcher';
+import themes from '../../themes';
+import ConfigUtils from '../../utils/ConfigUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
+import ThemeUtils from '../../utils/ThemeUtils';
+import {compileError, resetError, savePluginConfig} from './actions/config';
+import PluginConfigurator from './components/PluginConfigurator';
+import PluginCreatorComp from './components/PluginCreator';
+import SaveAndLoad from './components/SaveAndLoad';
+import ThemeCreatorComp from './components/ThemeCreator';
+import Plugins from './plugins';
+import storeCreator from './store';
+
+import('./assets/css/plugins.css');
+
+
 const startApp = () => {
-    const React = require('react');
-    const ReactDOM = require('react-dom');
-    const {connect} = require('react-redux');
-
-    const ConfigUtils = require('../../utils/ConfigUtils');
-    const LocaleUtils = require('../../utils/LocaleUtils');
-    const PluginsUtils = require('../../utils/PluginsUtils');
-    const ThemeUtils = require('../../utils/ThemeUtils');
-
-    const {changeBrowserProperties} = require('../../actions/browser');
-    const {loadMapConfig} = require('../../actions/config');
-    const {loadLocale} = require('../../actions/locale');
-    const {loadPrintCapabilities} = require('../../actions/print');
-    const {selectTheme} = require('../../actions/theme');
-    const {changeMapType} = require('../../actions/maptype');
     const PluginsContainer = connect((state) => ({
         pluginsState: state && state.controls || {}
-    }))(require('../../components/plugins/PluginsContainer'));
+    }))(PluginsContainerComp);
 
     const ThemeSwitcher = connect((state) => ({
         selectedTheme: state.theme && state.theme.selectedTheme || 'default',
-        themes: require('../../themes')
+        themes
     }), {
         onThemeSelected: selectTheme
-    })(require('../../components/theme/ThemeSwitcher'));
+    })(ThemeSwitcherComp);
 
     const Theme = connect((state) => ({
         theme: state.theme && state.theme.selectedTheme && state.theme.selectedTheme.id || 'default'
-    }))(require('../../components/theme/Theme'));
-
-    const {plugins} = require('./plugins');
+    }))(ThemeComp);
 
     let userPlugin;
-    const Template = require('../../components/data/template/jsx/Template');
 
     let pluginsCfg = {
         standard: ['Map', 'Toolbar']
@@ -48,18 +67,6 @@ const startApp = () => {
 
     let customStyle = null;
     let userCfg = {};
-
-    const {Provider} = require('react-redux');
-
-    const {FormControl, FormGroup} = require('react-bootstrap');
-
-    const SaveAndLoad = require('./components/SaveAndLoad');
-
-    const Debug = require('../../components/development/Debug');
-
-    const assign = require('object-assign');
-    const codeSample = require("raw-loader!./sample.js.raw");
-    const themeSample = require("raw-loader!./sample.less.raw");
 
     let customReducers;
     const customReducer = (state = {}, action) => {
@@ -72,22 +79,13 @@ const startApp = () => {
         }
         return state;
     };
-
-    const store = require('./store')(plugins, customReducer);
-
-    const {savePluginConfig, compileError, resetError} = require('./actions/config');
-
-    require('./assets/css/plugins.css');
-
-    const Babel = require('babel-standalone');
-
+    const store = storeCreator(Plugins.plugins, customReducer);
     let mapType = 'leaflet';
-
     const Localized = connect((state) => ({
         messages: state.locale && state.locale.messages,
         locale: state.locale && state.locale.current,
         loadingError: state.locale && state.locale.localeError
-    }))(require('../../components/I18N/Localized'));
+    }))(LocalizedComp);
 
     const togglePlugin = (pluginName, callback) => {
         pluginsCfg.standard = pluginsCfg.standard.indexOf(pluginName) !== -1 ?
@@ -150,28 +148,26 @@ const startApp = () => {
         }
     };
 
-    const customPlugin = (callback, code) => {
-        require.ensure(['./context'], (require) => {
-            const context = require('./context');
-            customPluginApply(callback, code, context);
-        });
+    const customPlugin = async(callback, code) => {
+        const context = await import(
+            /* webpackChunkName: "context" */
+            './context');
+        customPluginApply(callback, code, context);
     };
-
-    const PluginConfigurator = require('./components/PluginConfigurator');
 
     const PluginCreator = connect((state) => ({
         error: state.pluginsConfig && state.pluginsConfig.error
-    }))(require('./components/PluginCreator'));
+    }))(PluginCreatorComp);
 
     const ThemeCreator = connect((state) => ({
         error: state.pluginsConfig && state.pluginsConfig.error
-    }))(require('./components/ThemeCreator'));
+    }))(ThemeCreatorComp);
 
     const renderPlugins = (callback) => {
-        return Object.keys(plugins).map((plugin) => {
+        return Object.keys(Plugins.plugins).map((plugin) => {
             const pluginName = plugin.substring(0, plugin.length - 6);
             return (<PluginConfigurator key={pluginName} pluginName={pluginName} pluginsCfg={pluginsCfg.standard}
-                pluginImpl={plugins[plugin][plugin]}
+                pluginImpl={Plugins.plugins[plugin][plugin]}
                 onToggle={togglePlugin.bind(null, pluginName, callback)}
                 onApplyCfg={configurePlugin.bind(null, plugin, callback)}
                 pluginConfig={userCfg[pluginName + 'Plugin'] && JSON.stringify(userCfg[pluginName + 'Plugin'], null, 2) || "{}"}
@@ -179,7 +175,7 @@ const startApp = () => {
         });
     };
 
-    const isHidden = (plugin) => plugins[plugin + 'Plugin'][plugin + 'Plugin'].Toolbar && plugins[plugin + 'Plugin'][plugin + 'Plugin'].Toolbar.hide;
+    const isHidden = (plugin) => Plugins.plugins[plugin + 'Plugin'][plugin + 'Plugin'].Toolbar && Plugins.plugins[plugin + 'Plugin'][plugin + 'Plugin'].Toolbar.hide;
 
     const getPluginsConfiguration = () => {
         return {
@@ -227,7 +223,7 @@ const startApp = () => {
     };
 
     const getPlugins = () => {
-        return assign({}, plugins, userPlugin ? {MyPlugin: {MyPlugin: userPlugin}} : {});
+        return assign({}, Plugins.plugins, userPlugin ? {MyPlugin: {MyPlugin: userPlugin}} : {});
     };
 
     const renderPage = () => {
@@ -291,10 +287,13 @@ const startApp = () => {
 };
 
 if (!global.Intl ) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
+    import(
+        /* webpackChunkName: "intl" */
+        'intl').then(module => {
+        // TODO CHECK THIS IS OK
+        global.Intl = module;
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
         startApp();
     });
 } else {

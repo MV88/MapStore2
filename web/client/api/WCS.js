@@ -5,11 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../libs/ajax');
 
-const urlUtil = require('url');
-const assign = require('object-assign');
-const xml2js = require('xml2js');
+import urlUtil from 'url';
+
+import assign from 'object-assign';
+import xml2js from 'xml2js';
+
+import axios from '../libs/ajax';
 
 const Api = {
     describeCoverage: function(url, typeName) {
@@ -29,18 +31,7 @@ const Api = {
             });
             return json;
         });
-        /*
-        return new Promise((resolve) => {
-            require.ensure(['../utils/ogc/WCS'], () => {
-                const {unmarshaller} = require('../utils/ogc/WCS');
-                resolve(axios.get(describeLayerUrl).then((response) => {
-                    let json = unmarshaller.unmarshalString(response.data);
-                    return json && json.value;
-                }));
-            });
-        });
-        */
     }
 };
 
-module.exports = Api;
+export default Api;

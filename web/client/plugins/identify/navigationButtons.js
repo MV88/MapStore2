@@ -13,7 +13,7 @@ const isFirst = props => props.index <= 0;
 /**
  * Navigation buttons for identify tools
  */
-module.exports = (props) => [
+export default (props) => [
     {
         keyProp: "back",
         glyph: 'arrow-left',

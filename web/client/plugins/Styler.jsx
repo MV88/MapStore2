@@ -1,39 +1,39 @@
+/*
+ * Copyright 2018, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
+import './styler/styler.css';
 
-const PropTypes = require('prop-types');
+import { head } from 'lodash';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Alert, Button, Glyphicon, Grid, Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import Spinner from 'react-spinkit';
+import { Combobox } from 'react-widgets';
+import { createSelector } from 'reselect';
 
-const React = require('react');
-const {connect} = require('react-redux');
-
-const {Grid, Row, Glyphicon, Alert, Button} = require('react-bootstrap');
-const Spinner = require('react-spinkit');
-const Dialog = require('../components/misc/Dialog');
-
-const Combobox = require('react-widgets').Combobox;
-const {head} = require('lodash');
-
-const {getWindowSize} = require('../utils/AgentUtils');
-const {setVectorLayer} = require('../actions/vectorstyler');
-const {setRasterLayer} = require('../actions/rasterstyler');
-const {toggleControl} = require('../actions/controls');
-const {changeLayerProperties} = require('../actions/layers');
-const {getDescribeLayer, getLayerCapabilities} = require('../actions/layerCapabilities');
-const {saveLayerDefaultStyle, reset} = require('../actions/styler');
-
-const {layersSelector} = require('../selectors/layers');
-
-const {zoomToExtent} = require('../actions/map');
-
-const Vector = require("./VectorStyler").VectorStylerPlugin;
-const Raster = require("./RasterStyler").RasterStylerPlugin;
-
-const {createSelector} = require('reselect');
-
-const assign = require('object-assign');
-
-require('./styler/styler.css');
-
-const Message = require('./locale/Message');
+import { toggleControl } from '../actions/controls';
+import { getDescribeLayer, getLayerCapabilities } from '../actions/layerCapabilities';
+import { changeLayerProperties } from '../actions/layers';
+import { zoomToExtent } from '../actions/map';
+import { setRasterLayer } from '../actions/rasterstyler';
+import { reset, saveLayerDefaultStyle } from '../actions/styler';
+import { setVectorLayer } from '../actions/vectorstyler';
+import Dialog from '../components/misc/Dialog';
+import rasterstyler from '../reducers/rasterstyler';
+import styler from '../reducers/styler';
+import vectorstyler from '../reducers/vectorstyler';
+import { layersSelector } from '../selectors/layers';
+import { getWindowSize } from '../utils/AgentUtils';
+import { RasterStylerPlugin as Raster } from './RasterStyler';
+import { VectorStylerPlugin as Vector } from './VectorStyler';
+import Message from './locale/Message';
 
 class Styler extends React.Component {
     /** @constructor */
@@ -342,7 +342,7 @@ const StylerPlugin = connect(selector, {
     reset
 })(Styler);
 
-module.exports = {
+export default {
     StylerPlugin: assign( StylerPlugin,
         {
             Toolbar: {
@@ -355,8 +355,8 @@ module.exports = {
             }
         }),
     reducers: {
-        styler: require('../reducers/styler'),
-        vectorstyler: require('../reducers/vectorstyler'),
-        rasterstyler: require('../reducers/rasterstyler')
+        styler,
+        vectorstyler,
+        rasterstyler
     }
 };

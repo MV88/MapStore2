@@ -6,18 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const Message = require('../../components/I18N/Message');
-const LayersUtils = require('../../utils/LayersUtils');
-const LocaleUtils = require('../../utils/LocaleUtils');
-const FileUtils = require('../../utils/FileUtils');
+import React from 'react';
+import styleUtilsFunc from '../../utils/StyleUtils';
+import PropTypes from 'prop-types';
+import Message from '../../components/I18N/Message';
+import LayersUtils from '../../utils/LayersUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+import FileUtils from '../../utils/FileUtils';
 let StyleUtils;
-const {Grid, Row, Col, Button} = require('react-bootstrap');
-const {isString} = require('lodash');
-const Combobox = require('react-widgets').DropdownList;
-const SelectShape = require('./SelectShape');
-const {Promise} = require('es6-promise');
+import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { isString } from 'lodash';
+import { DropdownList as Combobox } from 'react-widgets';
+import SelectShape from './SelectShape';
+import { Promise } from 'es6-promise';
 
 class ShapeFileUploadAndStyle extends React.Component {
     static propTypes = {
@@ -99,7 +100,7 @@ class ShapeFileUploadAndStyle extends React.Component {
     };
 
     UNSAFE_componentWillMount() {
-        StyleUtils = require('../../utils/StyleUtils')(this.props.mapType);
+        StyleUtils = styleUtilsFunc(this.props.mapType);
     }
 
     getGeometryType = (geometry) => {
@@ -268,4 +269,4 @@ class ShapeFileUploadAndStyle extends React.Component {
 }
 
 
-module.exports = ShapeFileUploadAndStyle;
+export default ShapeFileUploadAndStyle;

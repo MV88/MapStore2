@@ -5,25 +5,23 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
 
-const {Provider} = require('react-redux');
+import assign from 'object-assign';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
-const {changeBrowserProperties} = require('../../actions/browser');
-const {loadLocale} = require('../../actions/locale');
-
-const ConfigUtils = require('../../utils/ConfigUtils');
-const LocaleUtils = require('../../utils/LocaleUtils');
-const PluginsUtils = require('../../utils/PluginsUtils');
-
-
-const assign = require('object-assign');
+import { changeBrowserProperties } from '../../actions/browser';
+import { loadLocale } from '../../actions/locale';
+import ConfigUtils from '../../utils/ConfigUtils';
+import LocaleUtils from '../../utils/LocaleUtils';
+import PluginsUtils from '../../utils/PluginsUtils';
+import App from './containers/App';
+import {plugins, requires} from './plugins.js';
+import store from './stores/store';
 
 function startApp() {
-    const {plugins, requires} = require('./plugins.js');
-    const store = require('./stores/store')(plugins);
-    const App = require('./containers/App');
+    store(plugins);
 
     store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
     ConfigUtils.loadConfiguration().then(() => {
@@ -39,10 +37,13 @@ function startApp() {
     );
 }
 if (!global.Intl ) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
+    import(
+        /* webpackChunkName: "intl" */
+        'intl').then(module => {
+        // TODO CHECK THIS IS OK
+        global.Intl = module;
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
         startApp();
     });
 } else {

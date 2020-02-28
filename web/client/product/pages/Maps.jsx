@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,18 +5,20 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
 
-require("../assets/css/maps.css");
+import '../assets/css/maps.css';
 
-const {connect} = require('react-redux');
+import url from 'url';
 
-const url = require('url');
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+
+import { resetControls } from '../../actions/controls';
+import Page from '../../containers/Page';
+
 const urlQuery = url.parse(window.location.href, true).query;
 
-const {resetControls} = require('../../actions/controls');
-
-const Page = require('../../containers/Page');
 
 class MapsPage extends React.Component {
     static propTypes = {
@@ -35,7 +36,7 @@ class MapsPage extends React.Component {
     UNSAFE_componentWillMount() {
         if (this.props.match.params.mapType && this.props.match.params.mapId) {
             if (this.props.mode === 'mobile') {
-                require('../assets/css/mobile.css');
+                import('../assets/css/mobile.css');
             }
             this.props.reset();
         }
@@ -50,7 +51,7 @@ class MapsPage extends React.Component {
     }
 }
 
-module.exports = connect((state) => ({
+export default connect((state) => ({
     mode: urlQuery.mobile || state.browser && state.browser.mobile ? 'mobile' : 'desktop'
 }),
 {

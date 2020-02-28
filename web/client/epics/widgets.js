@@ -1,21 +1,40 @@
-const Rx = require('rxjs');
-const { has, get, isEqual, omit } = require('lodash');
-const { EXPORT_CSV, EXPORT_IMAGE, INSERT, TOGGLE_CONNECTION, WIDGET_SELECTED, EDITOR_SETTING_CHANGE,
-    onEditorChange, updateWidgetLayer, clearWidgets, loadDependencies, toggleDependencySelector, DEPENDENCY_SELECTOR_KEY, WIDGETS_REGEX} = require('../actions/widgets');
-const {
-    MAP_CONFIG_LOADED
-} = require('../actions/config');
-const { availableDependenciesSelector, isWidgetSelectionActive, getDependencySelectorConfig } = require('../selectors/widgets');
-const { CHANGE_LAYER_PROPERTIES, LAYER_LOAD, LAYER_ERROR } = require('../actions/layers');
-const { getLayerFromId } = require('../selectors/layers');
-const { pathnameSelector } = require('../selectors/router');
-const { MAP_CREATED, SAVING_MAP, MAP_ERROR } = require('../actions/maps');
-const { DASHBOARD_LOADED } = require('../actions/dashboard');
-const {LOCATION_CHANGE} = require('connected-react-router');
-const {saveAs} = require('file-saver');
-const FileUtils = require('../utils/FileUtils');
-const converter = require('json-2-csv');
-const canvg = require('canvg-browser');
+import Rx from 'rxjs';
+import { has, get, isEqual, omit } from 'lodash';
+
+import {
+    EXPORT_CSV,
+    EXPORT_IMAGE,
+    INSERT,
+    TOGGLE_CONNECTION,
+    WIDGET_SELECTED,
+    EDITOR_SETTING_CHANGE,
+    onEditorChange,
+    updateWidgetLayer,
+    clearWidgets,
+    loadDependencies,
+    toggleDependencySelector,
+    DEPENDENCY_SELECTOR_KEY,
+    WIDGETS_REGEX
+} from '../actions/widgets';
+
+import { MAP_CONFIG_LOADED } from '../actions/config';
+
+import {
+    availableDependenciesSelector,
+    isWidgetSelectionActive,
+    getDependencySelectorConfig
+} from '../selectors/widgets';
+
+import { CHANGE_LAYER_PROPERTIES, LAYER_LOAD, LAYER_ERROR } from '../actions/layers';
+import { getLayerFromId } from '../selectors/layers';
+import { pathnameSelector } from '../selectors/router';
+import { MAP_CREATED, SAVING_MAP, MAP_ERROR } from '../actions/maps';
+import { DASHBOARD_LOADED } from '../actions/dashboard';
+import { LOCATION_CHANGE } from 'connected-react-router';
+import { saveAs } from 'file-saver';
+import FileUtils from '../utils/FileUtils';
+import converter from 'json-2-csv';
+import canvg from 'canvg-browser';
 const updateDependencyMap = (active, id, { dependenciesMap, mappings}) => {
     const overrides = Object.keys(mappings).filter(k => mappings[k] !== undefined).reduce( (ov, k) => ({
         ...ov,
@@ -62,7 +81,7 @@ const configureDependency = (active, dependency, options) =>
             updateDependencyMap(active, dependency, options)
         )
     );
-module.exports = {
+export default {
     exportWidgetData: action$ =>
         action$.ofType(EXPORT_CSV)
             .do( ({data = [], title = "data"}) =>

@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,21 +5,23 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Debug = require('../../../components/development/Debug');
-const Localized = require('../../../components/I18N/Localized');
-const {connect} = require('react-redux');
 
-const PrintMap = require('../components/PrintMap');
-const PrintPreview = require('../components/PrintPreview');
+import React from 'react';
+import PropTypes from 'prop-types';
 
-var {changeZoomLevel} = require('../../../actions/map');
+import Debug from '../../../components/development/Debug';
+import Localized from '../../../components/I18N/Localized';
+import { connect } from 'react-redux';
+import PrintMap from '../components/PrintMap';
+import PrintPreview from '../components/PrintPreview';
+import { changeZoomLevel } from '../../../actions/map';
+import ScaleBoxComp from '../../../components/mapcontrols/scale/ScaleBox';
 
 const ScaleBox = connect((state) => ({
     currentZoomLvl: state.map && state.map.zoom || state.config && state.config.map && state.config.map.zoom
 }), {
     onChange: changeZoomLevel
-})(require("../../../components/mapcontrols/scale/ScaleBox"));
+})(ScaleBoxComp);
 
 class Print extends React.Component {
     static propTypes = {
@@ -46,7 +47,7 @@ class Print extends React.Component {
     }
 }
 
-module.exports = connect((state) => {
+export default connect((state) => {
     return {
         enabled: state.map && state.print.capabilities && true || false,
         locale: state.locale && state.locale.current,

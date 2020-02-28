@@ -5,12 +5,16 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const {connect} = require('react-redux');
+import { connect } from 'react-redux';
 
-const {onShapeError} = require('../../actions/mapimport');
-const {setStyleParameter} = require('../../actions/style');
+import { onShapeError } from '../../actions/mapimport';
+import { setStyleParameter } from '../../actions/style';
+import ShapefileUploadAndStyleComp from '../../components/import/ShapefileUploadAndStyle';
+import StylePolygonComp from '../../components/style/StylePolygon';
+import StylePointComp from '../../components/style/StylePoint';
+import StylePolylineComp from '../../components/style/StylePolyline';
 
-const ShapeFileUploadAndStyle = connect((state) => (
+export const ShapeFileUploadAndStyle = connect((state) => (
     {
         uploadOptions: {
             error: state.mapimport && state.mapimport.error || null,
@@ -18,35 +22,28 @@ const ShapeFileUploadAndStyle = connect((state) => (
     }
 ), {
     onShapeError: onShapeError
-})(require('../../components/import/ShapefileUploadAndStyle'));
+})(ShapefileUploadAndStyleComp);
 
-const StylePolygon = connect((state) => (
+export const StylePolygon = connect((state) => (
     {
         shapeStyle: state.style || {}
     }
 ), {
     setStyleParameter: setStyleParameter
-})(require('../../components/style/StylePolygon'));
+})(StylePolygonComp);
 
-const StylePoint = connect((state) => (
+export const StylePoint = connect((state) => (
     {
         shapeStyle: state.style || {}
     }
 ), {
     setStyleParameter: setStyleParameter
-})(require('../../components/style/StylePoint'));
+})(StylePointComp);
 
-const StylePolyline = connect((state) => (
+export const StylePolyline = connect((state) => (
     {
         shapeStyle: state.style || {}
     }
 ), {
     setStyleParameter: setStyleParameter
-})(require('../../components/style/StylePolyline'));
-
-module.exports = {
-    ShapeFileUploadAndStyle,
-    StylePolygon,
-    StylePolyline,
-    StylePoint
-};
+})(StylePolylineComp);

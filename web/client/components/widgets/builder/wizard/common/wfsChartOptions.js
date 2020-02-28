@@ -6,9 +6,9 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const {compose, withProps} = require('recompose');
+import { compose, withProps } from 'recompose';
 
-const {find} = require('lodash');
+import { find } from 'lodash';
 
 const propsToOptions = props => props.filter(({type} = {}) => type.indexOf("gml:") !== 0)
     .map( ({name} = {}) => ({label: name, value: name}));
@@ -28,7 +28,7 @@ const getAllowedAggregationOptions = (propertyName, featureTypeProperties = []) 
     return [{value: "Count", label: "COUNT"}];
 };
 
-module.exports = compose(
+export default compose(
     withProps(({featureTypeProperties = [], data = {}} = {}) => ({
         options: propsToOptions(featureTypeProperties),
         aggregationOptions: getAllowedAggregationOptions(data.options && data.options.aggregationAttribute, featureTypeProperties)

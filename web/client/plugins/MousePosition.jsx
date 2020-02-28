@@ -5,18 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
 
-const {connect} = require('react-redux');
-const {mapSelector, projectionDefsSelector} = require('../selectors/map');
-const Message = require('../components/I18N/Message');
-const {Tooltip} = require('react-bootstrap');
-const {createSelector} = require('reselect');
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Tooltip } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 
-const assign = require('object-assign');
-const PropTypes = require('prop-types');
-
-const {changeMousePositionCrs, changeMousePositionState} = require('../actions/mousePosition');
+import { changeMousePositionCrs, changeMousePositionState } from '../actions/mousePosition';
+import Message from '../components/I18N/Message';
+import ToggleButton from '../components/buttons/ToggleButton';
+import MousePositionComponent from '../components/mapcontrols/mouseposition/MousePosition';
+import mousePositionReducer from '../reducers/mousePosition';
+import { mapSelector, projectionDefsSelector } from '../selectors/map';
 
 const getDesiredPosition = (map, mousePosition, mapInfo) => {
     if (mousePosition.showCenter && map) {
@@ -61,10 +63,7 @@ const MousePositionButton = connect((state) => ({
         bsSize: "small"}
 }), {
     onClick: changeMousePositionState
-})(require('../components/buttons/ToggleButton'));
-
-const MousePositionComponent = require('../components/mapcontrols/mouseposition/MousePosition');
-
+})(ToggleButton);
 
 class MousePosition extends React.Component {
     static propTypes = {
@@ -77,8 +76,9 @@ class MousePosition extends React.Component {
         projectedTemplate: 'MousePositionLabelYX'
     };
 
-    getTemplate = (template) => {
-        return require('../components/mapcontrols/mouseposition/' + template);
+    getTemplate = async(template) => {
+        const templ = await import(`../components/mapcontrols/mouseposition/${template}`);
+        return templ;
     };
     render() {
         const { degreesTemplate, projectedTemplate, ...other} = this.props;
@@ -138,7 +138,7 @@ const MousePositionPlugin = connect(selector, {
     onCRSChange: changeMousePositionCrs
 })(MousePosition);
 
-module.exports = {
+export default {
     MousePositionPlugin: assign(MousePositionPlugin, {
         MapFooter: {
             name: 'mousePosition',
@@ -147,5 +147,5 @@ module.exports = {
             priority: 1
         }
     }),
-    reducers: {mousePosition: require('../reducers/mousePosition')}
+    reducers: {mousePosition: mousePositionReducer}
 };

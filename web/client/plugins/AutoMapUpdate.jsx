@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
-const {manageAutoMapUpdate} = require('../epics/automapupdate');
-const {autoMapUpdateSelector} = require('../selectors/automapupdate');
-const {setControlProperty} = require('../actions/controls');
+import React from 'react';
 
-const OverlayProgressBar = require('../components/misc/progressbars/OverlayProgressBar/OverlayProgressBar');
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { manageAutoMapUpdate } from '../epics/automapupdate';
+import { autoMapUpdateSelector } from '../selectors/automapupdate';
+import { setControlProperty } from '../actions/controls';
+import OverlayProgressBar from '../components/misc/progressbars/OverlayProgressBar/OverlayProgressBar';
 
 /**
   * AutoMapUpdate Plugin.
@@ -74,7 +74,7 @@ const AutoMapUpdatePlugin = connect(autoMapUpdateSelector, {
     onUpdateOptions: setControlProperty.bind(null, 'mapUpdate', 'options')
 })(AutoMapUpdate);
 
-module.exports = {
+export default {
     AutoMapUpdatePlugin,
     reducers: {},
     epics: {manageAutoMapUpdate}

@@ -6,13 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {get} = require('lodash');
-const {insert, feature, attribute} = require('./insert');
-const {transaction} = require('./transaction');
-const {deleteFeaturesByFilter, deleteFeature} = require('./delete');
-const {update, propertyChange} = require('./update');
-const {getPropertyDesciptor, getValue, findGeometryProperty, featureTypeSchema} = require("../WFS/base");
-const wfsRequestBuilder = require('../WFS/RequestBuilder');
+import { get } from 'lodash';
+
+import { featureTypeSchema, findGeometryProperty, getPropertyDescriptor, getValue } from '../WFS/base';
+import wfsRequestBuilder from '../WFS/RequestBuilder';
+import { deleteFeature, deleteFeaturesByFilter } from './delete';
+import { attribute, feature, insert } from './insert';
+import { transaction } from './transaction';
+import { propertyChange, update } from './update';
 
 const mergeArray = (e, arr2) => arr2 && arr2.length > 0 ? [e, ...arr2] : e;
 const WFSVersionNotSupportedException = function(wfsVersion) {
@@ -56,12 +57,12 @@ const getPropertyName = (name, describe) => name === "geometry" || name === getG
  * propertyChange("p", 2) // <Property><Name>p</Name><Value>2</Value></Property>
  * ```
  */
-module.exports = function(describe, {wfsVersion = "1.1.0", wfsNS = "wfs", ...other} = {}) {
+export default function(describe, {wfsVersion = "1.1.0", wfsNS = "wfs", ...other} = {}) {
     if (wfsVersion !== "1.1.0") {
         throw new WFSVersionNotSupportedException(wfsVersion);
     }
     const toFeature = (f) => feature( describe.targetPrefix, getTypeName(describe), Object.keys(f.properties || [])
-        .filter(k => getPropertyDesciptor(k, describe))
+        .filter(k => getPropertyDescriptor(k, describe))
         .map((key) => attribute(describe.targetPrefix, key, getValue(f.properties[key], key, describe)))
         .concat(f.geometry ? attribute(describe.targetPrefix, getGeometryName(f, describe), getValue(f.geometry, getGeometryName(f, describe), describe) ) : [])
     );
@@ -83,4 +84,4 @@ module.exports = function(describe, {wfsVersion = "1.1.0", wfsNS = "wfs", ...oth
         propertyChange: (name, value) => propertyChange(wfsNS, name, getValue(value, name, describe)),
         transaction: (content, ...rest) => transaction(mergeArray(content, rest), featureTypeSchema(describe), wfsVersion, wfsNS)
     };
-};
+}

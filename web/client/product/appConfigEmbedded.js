@@ -6,55 +6,69 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const {updateMapLayoutEpic} = require('../epics/maplayout');
-const {readQueryParamsOnMapEpic} = require('../epics/queryparams');
+import { updateMapLayoutEpic } from '../epics/maplayout';
+import { readQueryParamsOnMapEpic } from '../epics/queryparams';
+import maplayout from '../reducers/maplayout';
+import searchconfig from '../reducers/searchconfig';
+import version from '../reducers/version';
+import apiPlugins from './apiPlugins.js';
+import MapViewer from './pages/MapViewer';
 
-module.exports = {
-    mode: "embedded",
-    pages: [{
-        name: "mapviewer",
-        path: "/:mapId",
-        component: require('./pages/MapViewer')
-    }],
-    pluginsDef: require('./apiPlugins.js'),
-    initialState: {
-        defaultState: {
-            mode: "embedded",
-            mousePosition: {enabled: false},
-            controls: {
-                help: {
-                    enabled: false
-                },
-                print: {
-                    enabled: false
-                },
-                toolbar: {
-                    active: null,
-                    expanded: false
-                },
-                drawer: {
-                    enabled: false,
-                    menu: "1"
-                }
+
+export const mode = "embedded";
+export const pages = [{
+    name: "mapviewer",
+    path: "/:mapId",
+    component: MapViewer
+}];
+export const pluginsDef = apiPlugins;
+export const initialState = {
+    defaultState: {
+        mode: "embedded",
+        mousePosition: {enabled: false},
+        controls: {
+            help: {
+                enabled: false
             },
-            mapInfo: {enabled: true, infoFormat: 'text/html' }
+            print: {
+                enabled: false
+            },
+            toolbar: {
+                active: null,
+                expanded: false
+            },
+            drawer: {
+                enabled: false,
+                menu: "1"
+            }
         },
-        mobile: {
-        }
+        mapInfo: {enabled: true, infoFormat: 'text/html' }
     },
-    baseReducers: {
-        mode: (state = 'embedded') => state,
-        version: require('../reducers/version'),
-        maplayout: require('../reducers/maplayout'),
-        searchconfig: require('../reducers/searchconfig')
-    },
-    baseEpics: {
-        updateMapLayoutEpic,
-        readQueryParamsOnMapEpic
-    },
-    storeOpts: {
-        persist: {
-            whitelist: ['security']
-        }
+    mobile: {
     }
+};
+export const baseReducers = {
+    mode: (state = 'embedded') => state,
+    version,
+    maplayout,
+    searchconfig
+};
+export const baseEpics = {
+    updateMapLayoutEpic,
+    readQueryParamsOnMapEpic
+};
+export const storeOpts = {
+    persist: {
+        whitelist: ['security']
+    }
+};
+
+export default {
+    mode,
+    pages,
+    pluginsDef,
+    initialState,
+    baseReducers,
+    baseEpics,
+    storeOpts
 };

@@ -6,27 +6,33 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { connect } = require('react-redux');
-const {get} = require('lodash');
-const { isGeometryType } = require('../../utils/ogc/WFS/base');
-const { compose, renameProps, branch, renderComponent, mapPropsStream } = require('recompose');
-const InfoPopover = require('../../components/widgets/widget/InfoPopover');
-const Message = require('../../components/I18N/Message');
-const BorderLayout = require('../../components/layout/BorderLayout');
+import { get } from 'lodash';
+import React from 'react';
+import { connect } from 'react-redux';
+import { branch, compose, mapPropsStream, renameProps, renderComponent } from 'recompose';
 
-const { insertWidget, onEditorChange, setPage, openFilterEditor, changeEditorSetting } = require('../../actions/widgets');
-
-const builderConfiguration = require('../../components/widgets/enhancers/builderConfiguration');
-const chartLayerSelector = require('./enhancers/chartLayerSelector');
-const viewportBuilderConnect = require('./enhancers/connection/viewportBuilderConnect');
-const viewportBuilderConnectMask = require('./enhancers/connection/viewportBuilderConnectMask');
-const withExitButton = require('./enhancers/withExitButton');
-const withConnectButton = require('./enhancers/connection/withConnectButton');
-const {
-    wizardStateToProps,
-    wizardSelector
-} = require('./commons');
+import {
+    changeEditorSetting,
+    insertWidget,
+    onEditorChange,
+    openFilterEditor,
+    setPage
+} from '../../actions/widgets';
+import Message from '../../components/I18N/Message';
+import BorderLayout from '../../components/layout/BorderLayout';
+import TableWizardComp from '../../components/widgets/builder/wizard/TableWizard';
+import ToolbarComp from '../../components/widgets/builder/wizard/table/Toolbar';
+import builderConfiguration from '../../components/widgets/enhancers/builderConfiguration';
+import InfoPopover from '../../components/widgets/widget/InfoPopover';
+import { isGeometryType } from '../../utils/ogc/WFS/base';
+import BuilderHeader from './BuilderHeader';
+import LayerSelectorComp from './LayerSelector';
+import { wizardSelector, wizardStateToProps } from './commons';
+import chartLayerSelector from './enhancers/chartLayerSelector';
+import viewportBuilderConnect from './enhancers/connection/viewportBuilderConnect';
+import viewportBuilderConnectMask from './enhancers/connection/viewportBuilderConnectMask';
+import withConnectButton from './enhancers/connection/withConnectButton';
+import withExitButton from './enhancers/withExitButton';
 
 const Builder = connect(
     wizardSelector,
@@ -54,9 +60,8 @@ const Builder = connect(
                 }
             }).ignoreElements()
     ))
-)(require('../../components/widgets/builder/wizard/TableWizard')));
+)(TableWizardComp));
 
-const BuilderHeader = require('./BuilderHeader');
 const Toolbar = compose(
     connect(wizardSelector, {
         openFilterEditor,
@@ -69,7 +74,7 @@ const Toolbar = compose(
     viewportBuilderConnect,
     withExitButton(),
     withConnectButton(({ step }) => step === 0)
-)(require('../../components/widgets/builder/wizard/table/Toolbar'));
+)(ToolbarComp);
 
 /*
  * in case you don't have a layer selected (e.g. dashboard) the table builder
@@ -80,11 +85,11 @@ const chooseLayerEnhancer = compose(
     viewportBuilderConnectMask,
     branch(
         ({ layer } = {}) => !layer,
-        renderComponent(chartLayerSelector(require('./LayerSelector')))
+        renderComponent(chartLayerSelector(LayerSelectorComp))
     )
 );
 
-module.exports = chooseLayerEnhancer(({ enabled, onClose = () => { }, editorData = {}, exitButton, toggleConnection, availableDependencies = [], dependencies, ...props } = {}) =>
+export default chooseLayerEnhancer(({ enabled, onClose = () => { }, editorData = {}, exitButton, toggleConnection, availableDependencies = [], dependencies, ...props } = {}) =>
 
     (<BorderLayout
         header={

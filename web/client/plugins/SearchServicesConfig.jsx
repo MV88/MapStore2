@@ -6,22 +6,23 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {Glyphicon, Button} = require('react-bootstrap');
-const ConfirmButton = require('../components/buttons/ConfirmButton');
-const Dialog = require('../components//misc/Dialog');
-const Portal = require('../components/misc/Portal');
-const Message = require('./locale/Message');
-const {isEqual} = require('lodash');
-const {toggleControl} = require('../actions/controls');
-const {setSearchConfigProp, updateService, restServiceConfig} = require('../actions/searchconfig');
+import { isEqual } from 'lodash';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Button, Glyphicon } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-const ServiceList = require('../components/mapcontrols/searchservicesconfig/ServicesList.jsx');
-const WFSServiceProps = require('../components/mapcontrols/searchservicesconfig/WFSServiceProps.jsx');
-const ResultsProps = require('../components/mapcontrols/searchservicesconfig/ResultsProps.jsx');
-const WFSOptionalProps = require('../components/mapcontrols/searchservicesconfig/WFSOptionalProps.jsx');
-const PropTypes = require('prop-types');
+import { toggleControl } from '../actions/controls';
+import { restServiceConfig, setSearchConfigProp, updateService } from '../actions/searchconfig';
+import Dialog from '../components//misc/Dialog';
+import ConfirmButton from '../components/buttons/ConfirmButton';
+import ResultsProps from '../components/mapcontrols/searchservicesconfig/ResultsProps.jsx';
+import ServiceList from '../components/mapcontrols/searchservicesconfig/ServicesList.jsx';
+import WFSOptionalProps from '../components/mapcontrols/searchservicesconfig/WFSOptionalProps.jsx';
+import WFSServiceProps from '../components/mapcontrols/searchservicesconfig/WFSServiceProps.jsx';
+import Portal from '../components/misc/Portal';
+import searchconfigReducer from '../reducers/searchconfig';
+import Message from './locale/Message';
 
 /**
  * Text Search Services Editor Plugin. Allow to add and edit additional
@@ -215,9 +216,9 @@ const SearchServicesPlugin = connect(({controls = {}, searchconfig = {}}) => ({
     restServiceConfig,
     updateService})(SearchServicesConfigPanel);
 
-module.exports = {
+export default {
     SearchServicesConfigPlugin: SearchServicesPlugin,
     reducers: {
-        searchconfig: require('../reducers/searchconfig')
+        searchconfig: searchconfigReducer
     }
 };

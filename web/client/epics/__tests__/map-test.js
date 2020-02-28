@@ -6,24 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const { resetLimitsOnInit, zoomToExtentEpic, checkMapPermissions} = require('../map');
-const { CHANGE_MAP_LIMITS, changeMapCrs } = require('../../actions/map');
-
-const { MAP_INFO_LOAD_START, configureMap} = require('../../actions/config');
-
-const { testEpic, addTimeoutEpic, TEST_TIMEOUT } = require('./epicTestUtils');
-const MapUtils = require('../../utils/MapUtils');
-
-const {
-    CHANGE_MAP_VIEW,
-    zoomToExtent
-
-} = require('../../actions/map');
-
-
-const {LOGIN_SUCCESS} = require('../../actions/security');
+import { MAP_INFO_LOAD_START, configureMap } from '../../actions/config';
+import { CHANGE_MAP_LIMITS, CHANGE_MAP_VIEW, changeMapCrs, zoomToExtent } from '../../actions/map';
+import { LOGIN_SUCCESS } from '../../actions/security';
+import MapUtils from '../../utils/MapUtils';
+import { checkMapPermissions, resetLimitsOnInit, zoomToExtentEpic } from '../map';
+import { TEST_TIMEOUT, addTimeoutEpic, testEpic } from './epicTestUtils';
 
 const LAYOUT_STATE = {
     layout: {

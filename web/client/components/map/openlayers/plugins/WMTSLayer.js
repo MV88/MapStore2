@@ -14,7 +14,11 @@ import last from 'lodash/last';
 
 import SecurityUtils from '../../../../utils/SecurityUtils';
 import WMTSUtils from '../../../../utils/WMTSUtils';
-import CoordinatesUtils from '../../../../utils/CoordinatesUtils';
+import {
+    normalizeSRS,
+    parseString,
+    getEquivalentSRS
+} from '../../../../utils/CoordinatesUtils';
 import MapUtils from '../../../../utils/MapUtils';
 import { isVectorFormat} from '../../../../utils/VectorTileUtils';
 import urlParser from 'url';
@@ -45,7 +49,7 @@ function getWMSURLs(urls) {
 const createLayer = options => {
     // options.urls is an alternative name of URL.
     const urls = getWMSURLs(castArray(options.url));
-    const srs = CoordinatesUtils.normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS);
+    const srs = normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS);
     const projection = get(srs);
     const metersPerUnit = projection.getMetersPerUnit();
     const tilMatrixSetName = WMTSUtils.getTileMatrixSet(options.tileMatrixSet, srs, options.allowedSRS, options.matrixIds);
@@ -71,7 +75,7 @@ const createLayer = options => {
     let origins = tileMatrixSet
         && tileMatrixSet.TileMatrix
         && tileMatrixSet.TileMatrix
-            .map(({ TopLeftCorner } = {}) => TopLeftCorner && CoordinatesUtils.parseString(TopLeftCorner))
+            .map(({ TopLeftCorner } = {}) => TopLeftCorner && parseString(TopLeftCorner))
             .map(({ x, y } = {}) => switchOriginXY ? [y, x] : [x, y]);
 
     const bbox = options.bbox;
@@ -155,7 +159,7 @@ const updateLayer = (layer, newOptions, oldOptions) => {
     return null;
 };
 const compatibleLayer = options =>
-    head(CoordinatesUtils.getEquivalentSRS(options.srs).filter(proj => options.matrixIds && options.matrixIds.hasOwnProperty(proj))) ? true : false;
+    head(getEquivalentSRS(options.srs).filter(proj => options.matrixIds && options.matrixIds.hasOwnProperty(proj))) ? true : false;
 
 
 Layers.registerType('wmts', { create: createLayer, update: updateLayer, isCompatible: compatibleLayer });

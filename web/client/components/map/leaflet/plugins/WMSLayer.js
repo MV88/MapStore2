@@ -5,23 +5,21 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Message = require('../../../../components/I18N/Message');
-const Layers = require('../../../../utils/leaflet/Layers');
-const CoordinatesUtils = require('../../../../utils/CoordinatesUtils');
-const { optionsToVendorParams } = require('../../../../utils/VendorParamsUtils');
+import React from 'react';
 
-const WMSUtils = require('../../../../utils/leaflet/WMSUtils');
-const L = require('leaflet');
-const objectAssign = require('object-assign');
-const {isArray, isNil} = require('lodash');
-const SecurityUtils = require('../../../../utils/SecurityUtils');
-const ElevationUtils = require('../../../../utils/ElevationUtils');
-const { creditsToAttribution } = require('../../../../utils/LayersUtils');
-
-const { isVectorFormat } = require('../../../../utils/VectorTileUtils');
-
-require('leaflet.nontiledlayer');
+import Message from '../../../../components/I18N/Message';
+import Layers from '../../../../utils/leaflet/Layers';
+import CoordinatesUtils from '../../../../utils/CoordinatesUtils';
+import { optionsToVendorParams } from '../../../../utils/VendorParamsUtils';
+import WMSUtils from '../../../../utils/leaflet/WMSUtils';
+import L from 'leaflet';
+import objectAssign from 'object-assign';
+import { isArray, isNil } from 'lodash';
+import SecurityUtils from '../../../../utils/SecurityUtils';
+import ElevationUtils from '../../../../utils/ElevationUtils';
+import { creditsToAttribution } from '../../../../utils/LayersUtils';
+import { isVectorFormat } from '../../../../utils/VectorTileUtils';
+import 'leaflet.nontiledlayer';
 
 L.NonTiledLayer.WMSCustom = L.NonTiledLayer.WMS.extend({
     initialize: function(url, options) { // (String, Object)

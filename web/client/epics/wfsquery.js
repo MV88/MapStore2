@@ -6,36 +6,51 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const axios = require('../libs/ajax');
+import { find } from 'lodash';
+import assign from 'object-assign';
+import Rx from 'rxjs';
 
-const {changeSpatialAttribute, SELECT_VIEWPORT_SPATIAL_METHOD, updateGeometrySpatialField} = require('../actions/queryform');
-const {CHANGE_MAP_VIEW} = require('../actions/map');
-const {FEATURE_TYPE_SELECTED, QUERY, UPDATE_QUERY, featureLoading, featureTypeLoaded, featureTypeError, querySearchResponse, queryError} = require('../actions/wfsquery');
-const {paginationInfo, isDescribeLoaded, layerDescribeSelector} = require('../selectors/query');
-const {mapSelector} = require('../selectors/map');
-const {authkeyParamNameSelector} = require('../selectors/catalog');
-const {getSelectedLayer} = require('../selectors/layers');
-
-const CoordinatesUtils = require('../utils/CoordinatesUtils');
-const { addTimeParameter } = require('../utils/WFSTimeUtils');
-
-
-const ConfigUtils = require('../utils/ConfigUtils');
-const assign = require('object-assign');
-const {spatialFieldMethodSelector, spatialFieldSelector, spatialFieldGeomTypeSelector, spatialFieldGeomCoordSelector, spatialFieldGeomSelector, spatialFieldGeomProjSelector} = require('../selectors/queryform');
-const {changeDrawingStatus} = require('../actions/draw');
-const {INIT_QUERY_PANEL} = require('../actions/wfsquery');
-const {getJSONFeatureWA, getLayerJSONFeature} = require('../observables/wfs');
-const {describeFeatureTypeToAttributes} = require('../utils/FeatureTypeUtils');
-const notifications = require('../actions/notifications');
-
-const {find} = require("lodash");
-
-const FilterUtils = require('../utils/FilterUtils');
-const filterBuilder = require('../utils/ogc/Filter/FilterBuilder');
-const fromObject = require('../utils/ogc/Filter/fromObject');
-const { read } = require('../utils/ogc/Filter/CQL/parser');
+import { changeDrawingStatus } from '../actions/draw';
+import { CHANGE_MAP_VIEW } from '../actions/map';
+import { error } from '../actions/notifications';
+import {
+    SELECT_VIEWPORT_SPATIAL_METHOD,
+    changeSpatialAttribute,
+    updateGeometrySpatialField
+} from '../actions/queryform';
+import {
+    FEATURE_TYPE_SELECTED,
+    INIT_QUERY_PANEL,
+    QUERY,
+    UPDATE_QUERY,
+    featureLoading,
+    featureTypeError,
+    featureTypeLoaded,
+    queryError,
+    querySearchResponse
+} from '../actions/wfsquery';
+import axios from '../libs/ajax';
+import { getJSONFeatureWA, getLayerJSONFeature } from '../observables/wfs';
+import { authkeyParamNameSelector } from '../selectors/catalog';
+import { getSelectedLayer } from '../selectors/layers';
+import { mapSelector } from '../selectors/map';
+import { isDescribeLoaded, layerDescribeSelector, paginationInfo } from '../selectors/query';
+import {
+    spatialFieldGeomCoordSelector,
+    spatialFieldGeomProjSelector,
+    spatialFieldGeomSelector,
+    spatialFieldGeomTypeSelector,
+    spatialFieldMethodSelector,
+    spatialFieldSelector
+} from '../selectors/queryform';
+import ConfigUtils from '../utils/ConfigUtils';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
+import { describeFeatureTypeToAttributes } from '../utils/FeatureTypeUtils';
+import FilterUtils from '../utils/FilterUtils';
+import { addTimeParameter } from '../utils/WFSTimeUtils';
+import { read } from '../utils/ogc/Filter/CQL/parser';
+import filterBuilder from '../utils/ogc/Filter/FilterBuilder';
+import fromObject from '../utils/ogc/Filter/fromObject';
 
 const fb = filterBuilder({ gmlVersion: "3.1.1" });
 const toFilter = fromObject(fb);
@@ -76,7 +91,7 @@ const getDefaultSortOptions = (attribute) => {
  * @return {external:Observable}
  */
 
-const featureTypeSelectedEpic = (action$, store) =>
+export const featureTypeSelectedEpic = (action$, store) =>
     action$.ofType(FEATURE_TYPE_SELECTED)
         .filter(action => action.url && action.typeName)
         .switchMap(action => {
@@ -98,7 +113,7 @@ const featureTypeSelectedEpic = (action$, store) =>
                     } catch (e) {
                         return Rx.Observable.from([
                             featureTypeError(action.typeName, 'Error from WFS: ' + e.message),
-                            notifications.error({
+                            error({
                                 title: 'warning',
                                 message: 'layerProperties.featureTypeErrorInvalidJSON',
                                 autoDismiss: 3,
@@ -119,7 +134,7 @@ const featureTypeSelectedEpic = (action$, store) =>
  * @param {external:Observable} action$ manages `QUERY`
  * @return {external:Observable}
  */
-const wfsQueryEpic = (action$, store) =>
+export const wfsQueryEpic = (action$, store) =>
     action$.ofType(QUERY)
         .switchMap(action => {
             const sortOptions = getDefaultSortOptions(getFirstAttribute(store.getState()));
@@ -148,7 +163,7 @@ const wfsQueryEpic = (action$, store) =>
             return Rx.Observable.merge(
                 (typeof filterObj === 'object' && getJSONFeatureWA(queryUrl, filterObj, options) || getLayerJSONFeature(layer, filterObj, options))
                     .map(data => querySearchResponse(data, action.searchUrl, action.filterObj, action.queryOptions))
-                    .catch(error => Rx.Observable.of(queryError(error)))
+                    .catch(err => Rx.Observable.of(queryError(err)))
                     .startWith(featureLoading(true))
                     .concat(Rx.Observable.of(featureLoading(false)))
             ).takeUntil(action$.ofType(UPDATE_QUERY));
@@ -161,7 +176,7 @@ const wfsQueryEpic = (action$, store) =>
  * @return {external:Observable}
  */
 
-const viewportSelectedEpic = (action$, store) =>
+export const viewportSelectedEpic = (action$, store) =>
     action$.ofType(SELECT_VIEWPORT_SPATIAL_METHOD, CHANGE_MAP_VIEW)
         .switchMap((action) => {
             // calculate new geometry from map properties only for viewport
@@ -178,7 +193,7 @@ const viewportSelectedEpic = (action$, store) =>
         });
 
 
-const redrawSpatialFilterEpic = (action$, store) =>
+export const redrawSpatialFilterEpic = (action$, store) =>
     action$.ofType(INIT_QUERY_PANEL)
         .switchMap(() => {
             const state = store.getState();
@@ -204,10 +219,3 @@ const redrawSpatialFilterEpic = (action$, store) =>
   * @type {Object}
   */
 
-
-module.exports = {
-    featureTypeSelectedEpic,
-    wfsQueryEpic,
-    redrawSpatialFilterEpic,
-    viewportSelectedEpic
-};

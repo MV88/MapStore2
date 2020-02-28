@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,26 +5,23 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
 
-require('../../../product/assets/css/viewer.css');
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import url from 'url';
 
-const {connect} = require('react-redux');
-
-const url = require('url');
-
-const ConfigUtils = require('../../../utils/ConfigUtils');
-
-const {loadMapConfig} = require('../../../actions/config');
-
-const {resetControls} = require('../../../actions/controls');
+import '../../../product/assets/css/viewer.css';
+import ConfigUtils from '../../../utils/ConfigUtils';
+import { loadMapConfig } from '../../../actions/config';
+import { resetControls } from '../../../actions/controls';
+import PluginsContainerComp from '../../../components/plugins/PluginsContainer';
 
 const urlQuery = url.parse(window.location.href, true).query;
-
 const PluginsContainer = connect((state) => ({
     pluginsConfig: state.plugins || ConfigUtils.getConfigProp('plugins') || null,
     mode: urlQuery.mobile || state.browser && state.browser.touch ? 'mobile' : 'desktop'
-}))(require('../../../components/plugins/PluginsContainer'));
+}))(PluginsContainerComp);
 
 
 class MapViewer extends React.Component {
@@ -60,11 +56,10 @@ class MapViewer extends React.Component {
     }
 }
 
-module.exports = connect((state) => ({
+export default connect((state) => ({
     mode: urlQuery.mobile || state.browser && state.browser.touch ? 'mobile' : 'desktop'
 }),
 {
     loadMapConfig,
     reset: resetControls
 })(MapViewer);
-

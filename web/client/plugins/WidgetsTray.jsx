@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-const WidgetsTray = require('./widgets/WidgetsTray');
-const autoDisableWidgets = require('./widgets/autoDisableWidgets');
+import epics from '../epics/widgetsTray';
+import WidgetsTray from './widgets/WidgetsTray';
+import autoDisableWidgets from './widgets/autoDisableWidgets';
 
 /**
  * Plugin that allow to collapse widgets. Shows a small tray where to see the collapsed plugins list.
@@ -17,7 +17,7 @@ const autoDisableWidgets = require('./widgets/autoDisableWidgets');
  * @prop {boolean|string|array} [toolsOptions.seeHidden] hides the widgets under particular conditions. **Must** be the same of rule of the Widget plugin. @see plugins.Widgets.
  * @class
  */
-module.exports = {
+export default {
     WidgetsTrayPlugin: autoDisableWidgets(WidgetsTray),
-    epics: require('../epics/widgetsTray')
+    epics
 };

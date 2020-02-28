@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const ConfigUtils = require('./ConfigUtils');
-const URL = require('url');
-const assign = require('object-assign');
-const {head, isNil} = require('lodash');
+import ConfigUtils from './ConfigUtils';
+
+import URL from 'url';
+import assign from 'object-assign';
+import { head, isNil } from 'lodash';
 
 /**
  * This utility class will get information about the current logged user directly from the store.
@@ -204,4 +205,4 @@ const SecurityUtils = {
 
 };
 
-module.exports = SecurityUtils;
+export default SecurityUtils;

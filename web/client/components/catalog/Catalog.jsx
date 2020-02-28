@@ -5,25 +5,40 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const {isNil} = require("lodash");
-const assign = require("object-assign");
-const PropTypes = require("prop-types");
-const React = require("react");
-const {FormControl, FormGroup, Alert, Pagination, Checkbox, Button, Panel, Form, Col, InputGroup, ControlLabel, Glyphicon, Tooltip} = require("react-bootstrap");
-const ReactQuill = require("react-quill");
-const Select = require("react-select");
-const Spinner = require("react-spinkit");
+import { isNil } from 'lodash';
 
-const BorderLayout = require("../layout/BorderLayout");
-const LocaleUtils = require("../../utils/LocaleUtils");
-const Message = require("../I18N/Message");
-const OverlayTrigger = require('../misc/OverlayTrigger');
-const RecordGrid = require("./RecordGrid");
-const SwitchPanel = require("../misc/switch/SwitchPanel");
-const Loader = require('../misc/Loader');
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-require('react-select/dist/react-select.css');
-require('react-quill/dist/quill.snow.css');
+import {
+    FormControl,
+    FormGroup,
+    Alert,
+    Pagination,
+    Checkbox,
+    Button,
+    Panel,
+    Form,
+    Col,
+    InputGroup,
+    ControlLabel,
+    Glyphicon,
+    Tooltip
+} from 'react-bootstrap';
+
+import ReactQuill from 'react-quill';
+import Select from 'react-select';
+import Spinner from 'react-spinkit';
+import BorderLayout from '../layout/BorderLayout';
+import LocaleUtils from '../../utils/LocaleUtils';
+import Message from '../I18N/Message';
+import OverlayTrigger from '../misc/OverlayTrigger';
+import RecordGrid from './RecordGrid';
+import SwitchPanel from '../misc/switch/SwitchPanel';
+import Loader from '../misc/Loader';
+import 'react-select/dist/react-select.css';
+import 'react-quill/dist/quill.snow.css';
 
 class Catalog extends React.Component {
     static propTypes = {
@@ -525,4 +540,4 @@ class Catalog extends React.Component {
     };
 }
 
-module.exports = Catalog;
+export default Catalog;

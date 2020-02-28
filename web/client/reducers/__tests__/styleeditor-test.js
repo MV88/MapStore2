@@ -6,11 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const styleeditor = require('../styleeditor');
+import styleeditor from '../styleeditor';
 
-const {
+import {
     initStyleService,
     setEditPermissionStyleEditor,
     updateTemporaryStyle,
@@ -20,7 +20,7 @@ const {
     loadingStyle,
     loadedStyle,
     errorStyle
-} = require('../../actions/styleeditor');
+} from '../../actions/styleeditor';
 
 describe('Test styleeditor reducer', () => {
     it('test initStyleService', () => {

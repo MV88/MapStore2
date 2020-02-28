@@ -5,12 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const PropTypes = require('prop-types');
-const React = require('react');
-const {head, last: _last, isNil} = require('lodash');
-const L = require('leaflet');
+import PropTypes from 'prop-types';
 
-require('leaflet-draw');
+import React from 'react';
+import { head, last as _last, isNil } from 'lodash';
+import L from 'leaflet';
+import 'leaflet-draw';
 
 L.Draw.Polygon.prototype._calculateFinishDistance = function(t) {
     if (this._markers.length > 0) {
@@ -27,13 +27,11 @@ L.Draw.Polygon.prototype._calculateFinishDistance = function(t) {
     return 1 / 0;
 };
 
-const {isSimpleGeomType, getSimpleGeomType} = require('../../../utils/MapUtils');
-const {boundsToOLExtent} = require('../../../utils/leaflet/DrawSupportUtils');
-const assign = require('object-assign');
-
-const CoordinatesUtils = require('../../../utils/CoordinatesUtils');
-
-const {pointToLayer} = require('../../../utils/leaflet/Vector');
+import { isSimpleGeomType, getSimpleGeomType } from '../../../utils/MapUtils';
+import { boundsToOLExtent } from '../../../utils/leaflet/DrawSupportUtils';
+import assign from 'object-assign';
+import CoordinatesUtils from '../../../utils/CoordinatesUtils';
+import { pointToLayer } from '../../../utils/leaflet/Vector';
 
 const DEG_TO_RAD = Math.PI / 180.0;
 /**
@@ -700,4 +698,4 @@ class DrawSupport extends React.Component {
 }
 
 
-module.exports = DrawSupport;
+export default DrawSupport;

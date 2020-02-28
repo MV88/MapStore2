@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,11 +8,12 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var NominatimResult = require('./NominatimResult');
-const mapUtils = require('../../../../utils/MapUtils');
-const CoordinatesUtils = require('../../../../utils/CoordinatesUtils');
-const I18N = require('../../../I18N/I18N');
+import React from 'react';
+
+import NominatimResult from './NominatimResult';
+import mapUtils from '../../../../utils/MapUtils';
+import CoordinatesUtils from '../../../../utils/CoordinatesUtils';
+import I18N from '../../../I18N/I18N';
 
 
 class ResultList extends React.Component {
@@ -82,4 +84,4 @@ class ResultList extends React.Component {
     };
 }
 
-module.exports = ResultList;
+export default ResultList;

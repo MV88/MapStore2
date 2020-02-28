@@ -5,15 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const PropTypes = require('prop-types');
-const React = require('react');
-const Joyride = require('react-joyride').default;
-const I18N = require('../I18N/I18N');
-const assign = require('object-assign');
-const {head} = require('lodash');
+import PropTypes from 'prop-types';
 
-require('react-joyride/lib/react-joyride-compiled.css');
-require('./style/tutorial.css');
+import React from 'react';
+import Joyride from 'react-joyride';
+import I18N from '../I18N/I18N';
+import assign from 'object-assign';
+import { head } from 'lodash';
+import 'react-joyride/lib/react-joyride-compiled.css';
+import './style/tutorial.css';
 
 const defaultIntroStyle = {
     backgroundColor: 'transparent',
@@ -276,4 +276,4 @@ class Tutorial extends React.Component {
     }
 }
 
-module.exports = Tutorial;
+export default Tutorial;

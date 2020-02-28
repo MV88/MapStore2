@@ -4,17 +4,20 @@
  *
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
- */
-const autoMapType = require('../../map/enhancers/autoMapType');
-const mapType = require('../../map/enhancers/mapType');
-const autoResize = require('../../map/enhancers/autoResize');
-const onMapViewChanges = require('../../map/enhancers/onMapViewChanges');
-const {compose} = require('recompose');
-module.exports = compose(
+*/
+import { compose } from 'recompose';
+
+import BaseMap from '../../map/BaseMap';
+import autoMapType from '../../map/enhancers/autoMapType';
+import autoResize from '../../map/enhancers/autoResize';
+import mapType from '../../map/enhancers/mapType';
+import onMapViewChanges from '../../map/enhancers/onMapViewChanges';
+
+export default compose(
     onMapViewChanges,
     autoResize(0),
     autoMapType,
     mapType
 
-)(require('../../map/BaseMap'));
+)(BaseMap);
 

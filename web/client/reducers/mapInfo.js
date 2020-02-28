@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {
+import {
     ERROR_FEATURE_INFO,
     EXCEPTIONS_FEATURE_INFO,
     LOAD_FEATURE_INFO,
@@ -29,14 +29,16 @@ const {
     TOGGLE_EMPTY_MESSAGE_GFI,
     CHANGE_FORMAT,
     TOGGLE_SHOW_COORD_EDITOR
-} = require('../actions/mapInfo');
-const {
-    MAP_CONFIG_LOADED
-} = require('../actions/config');
-const {RESET_CONTROLS} = require('../actions/controls');
+} from '../actions/mapInfo';
 
-const assign = require('object-assign');
-const {head} = require('lodash');
+import buffer from 'turf-buffer';
+import intersect from 'turf-intersect';
+
+
+import { MAP_CONFIG_LOADED } from '../actions/config';
+import { RESET_CONTROLS } from '../actions/controls';
+import assign from 'object-assign';
+import { head } from 'lodash';
 
 function receiveResponse(state, action, type) {
     const request = head((state.requests || []).filter((req) => req.reqId === action.reqId));
@@ -264,8 +266,6 @@ function mapInfo(state = initState, action) {
         });
     }
     case GET_VECTOR_INFO: {
-        const buffer = require('turf-buffer');
-        const intersect = require('turf-intersect');
         const point = {
             "type": "Feature",
             "properties": {},
@@ -362,4 +362,4 @@ function mapInfo(state = initState, action) {
     }
 }
 
-module.exports = mapInfo;
+export default mapInfo;

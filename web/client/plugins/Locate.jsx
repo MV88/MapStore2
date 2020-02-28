@@ -5,17 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const {changeLocateState} = require('../actions/locate');
-
-const Message = require('./locale/Message');
-
-const {Glyphicon} = require('react-bootstrap');
-
-const assign = require('object-assign');
-
+import { connect } from 'react-redux';
+import { changeLocateState } from '../actions/locate';
+import Message from './locale/Message';
+import { Glyphicon } from 'react-bootstrap';
+import assign from 'object-assign';
+import LocateBtn from '../components/mapcontrols/locate/LocateBtn';
+import locate from '../reducers/locate';
 /**
   * Locate Plugin. Provides button to locate the user's position on the map.
   * By deafault it will follow the user until he moves the map. He can click again to
@@ -33,11 +31,11 @@ const LocatePlugin = connect((state) => ({
     locate: state.locate && state.locate.state || 'DISABLED'
 }), {
     onClick: changeLocateState
-})(require('../components/mapcontrols/locate/LocateBtn'));
+})(LocateBtn);
 
-require('./locate/locate.css');
+import './locate/locate.css';
 
-module.exports = {
+export default {
     LocatePlugin: assign(LocatePlugin, {
         disablePluginIf: "{state('mapType') === 'cesium'}",
         Toolbar: {
@@ -50,5 +48,5 @@ module.exports = {
             priority: 1
         }
     }),
-    reducers: {locate: require('../reducers/locate')}
+    reducers: {locate}
 };

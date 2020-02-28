@@ -5,16 +5,17 @@
   * This source code is licensed under the BSD-style license found in the
   * LICENSE file in the root directory of this source tree.
   */
-const React = require('react');
-const { head, get, isNil} = require('lodash');
-const { Row, Col, Form, FormGroup, FormControl, ControlLabel, Glyphicon} = require('react-bootstrap');
-const Message = require('../../../../I18N/Message');
-const Select = require('react-select');
-const Slider = require('react-nouislider');
-const ColorRangeSelector = require('../../../../style/ColorRangeSelector');
-const StepHeader = require('../../../../misc/wizard/StepHeader');
-const SwitchPanel = require('../../../../misc/switch/SwitchPanel');
-const SwitchButton = require('../../../../misc/switch/SwitchButton');
+import React from 'react';
+
+import { head, get, isNil } from 'lodash';
+import { Row, Col, Form, FormGroup, FormControl, ControlLabel, Glyphicon } from 'react-bootstrap';
+import Message from '../../../../I18N/Message';
+import Select from 'react-select';
+import Slider from 'react-nouislider';
+import ColorRangeSelector from '../../../../style/ColorRangeSelector';
+import StepHeader from '../../../../misc/wizard/StepHeader';
+import SwitchPanel from '../../../../misc/switch/SwitchPanel';
+import SwitchButton from '../../../../misc/switch/SwitchButton';
 const COLORS = [{
     name: 'global.colors.random',
     schema: 'qualitative',
@@ -64,7 +65,7 @@ const renderHeader = (data) => {
     );
 };
 
-module.exports = ({
+export default ({
     data = { options: {} },
     onChange = () => { },
     options = [],

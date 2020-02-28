@@ -6,19 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const Api = require('../api/WMS');
-const { REFRESH_LAYERS, UPDATE_LAYERS_DIMENSION, UPDATE_SETTINGS_PARAMS, layersRefreshed, updateNode, updateSettings, layersRefreshError, changeLayerParams } = require('../actions/layers');
-const {getLayersWithDimension, layerSettingSelector} = require('../selectors/layers');
+import Rx from 'rxjs';
 
-const { setControlProperty } = require('../actions/controls');
-const { initialSettingsSelector, originalSettingsSelector } = require('../selectors/controls');
+import Api from '../api/WMS';
 
-const LayersUtils = require('../utils/LayersUtils');
+import {
+    REFRESH_LAYERS,
+    UPDATE_LAYERS_DIMENSION,
+    UPDATE_SETTINGS_PARAMS,
+    layersRefreshed,
+    updateNode,
+    updateSettings,
+    layersRefreshError,
+    changeLayerParams
+} from '../actions/layers';
 
-
-const assign = require('object-assign');
-const {isArray, head} = require('lodash');
+import { getLayersWithDimension, layerSettingSelector } from '../selectors/layers';
+import { setControlProperty } from '../actions/controls';
+import { initialSettingsSelector, originalSettingsSelector } from '../selectors/controls';
+import LayersUtils from '../utils/LayersUtils';
+import assign from 'object-assign';
+import { isArray, head } from 'lodash';
 
 const getUpdates = (updates, options) => {
     return Object.keys(options).filter((opt) => options[opt]).reduce((previous, current) => {
@@ -148,7 +156,7 @@ const updateSettingsParamsEpic = (action$, store) =>
             );
         });
 
-module.exports = {
+export default {
     refresh,
     updateDimension,
     updateSettingsParamsEpic
