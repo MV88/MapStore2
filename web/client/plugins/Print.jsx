@@ -75,6 +75,10 @@ import PrintUtils from '../utils/PrintUtils';
 export default {
     PrintPlugin: assign({
         loadPlugin: async(resolve) => {
+            const Module = await import(
+                /* webpackChunkName: "printIndex" */
+                './print/index'
+            );
             const {
                 Name,
                 Description,
@@ -92,10 +96,7 @@ export default {
                 MapPreview,
                 PrintSubmit,
                 PrintPreview
-            } = await import(
-                /* webpackChunkName: "printIndex" */
-                './print/index'
-            );
+            } = Module.default;
 
             class Print extends React.Component {
                 static propTypes = {

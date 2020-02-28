@@ -11,7 +11,7 @@ import url from 'url';
 import React from 'react';
 
 if (!global.Symbol) {
-    import("babel-polyfill");
+    require("babel-polyfill");
 }
 import DevTools from './DevTools';
 

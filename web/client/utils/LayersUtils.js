@@ -76,10 +76,12 @@ const addBaseParams = (url, params) => {
 };
 
 const isSupportedLayerForMapType = async(layer, maptype) => {
-    const Layers = await import(
+
+    const Module = await import(
         /* webpackChunkName: "maptype_layers" */
         `./${maptype}/Layers`
     );
+    const Layers = Module.default;
     if (layer.type === "mapquest" || layer.type === "bing") {
         return Layers.isSupported(layer.type) && layer.apiKey && layer.apiKey !== "__API_KEY_MAPQUEST__" && !layer.invalid;
     }
@@ -322,16 +324,16 @@ export const getLayersByGroup = (configLayers) => {
         return groups;
     }, []);
 };
-export const removeEmptyGroups = (groups) => {
-    return groups.reduce((acc, group) => {
-        return acc.concat(getNotEmptyGroup(group));
-    }, []);
-};
 export const getNotEmptyGroup = (group) => {
     const nodes = group.nodes.reduce((gNodes, node) => {
         return node.nodes ? gNodes.concat(getNotEmptyGroup(node)) : gNodes.concat(node);
     }, []);
     return nodes.length > 0 ? assign({}, group, {nodes: nodes}) : [];
+};
+export const removeEmptyGroups = (groups) => {
+    return groups.reduce((acc, group) => {
+        return acc.concat(getNotEmptyGroup(group));
+    }, []);
 };
 export const reorder = (groups, allLayers) => {
     return allLayers.filter((layer) => layer.group === 'background')

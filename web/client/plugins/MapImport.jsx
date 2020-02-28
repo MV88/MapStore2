@@ -30,9 +30,10 @@ import Message from './locale/Message';
 
 export default {
     MapImportPlugin: assign({loadPlugin: async(resolve) => {
-        const Import = await import(
+        const Module = await import(
             /* webpackChunkName: "ImportComp" */
             './import/Import');
+        const Import = Module.default;
         const ImportPlugin = connect((state) => (
             {
                 enabled: state.controls && state.controls.mapimport && state.controls.mapimport.enabled,

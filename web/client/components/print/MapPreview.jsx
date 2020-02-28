@@ -54,8 +54,9 @@ class MapPreview extends React.Component {
         useFixedScales: false
     };
 
-    async UNSAFE_componentWillMount() {
-        const mapComponents = await import(`../map/${this.props.mapType}/index`);
+    UNSAFE_componentWillMount() {
+        // TODO work with this
+        const mapComponents = require(`../map/${this.props.mapType}/index`);
         PMap = mapComponents.LMap;
         Layer = mapComponents.LLayer;
         Feature = mapComponents.Feature;

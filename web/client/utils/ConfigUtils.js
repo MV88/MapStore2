@@ -156,10 +156,10 @@ export const getCenter = (center, projection) => {
 };
 export const setApiKeys = (layer) => {
     if (layer.type === 'bing') {
-        layer.apiKey = this.bingApiKey || defaultConfig.bingApiKey;
+        layer.apiKey = defaultConfig.bingApiKey;
     }
     if (layer.type === 'mapquest') {
-        layer.apiKey = this.mapquestApiKey || defaultConfig.mapquestApiKey;
+        layer.apiKey = defaultConfig.mapquestApiKey;
     }
     return layer;
 };

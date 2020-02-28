@@ -37,8 +37,7 @@ import autoDisableWidgets from './widgets/autoDisableWidgets';
 import editOptions from './widgets/editOptions';
 
 const RIGHT_MARGIN = 70;
-const WidgetsView =
-compose(
+const WidgetsView = compose(
     connect(
         createSelector(
             mapIdSelector,

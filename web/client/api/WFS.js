@@ -37,9 +37,11 @@ export const describeFeatureType = function(url, typeName) {
         }, parsed.query)
     }));
     return new Promise(async(resolve) => {
-        const {unmarshaller} = await import(
+        const Module = await import(
             /* webpackChunkName: "WFS_OGC_Utils" */
             '../utils/ogc/WFS');
+        const {unmarshaller} = Module.default;
+
         resolve(axios.get(describeLayerUrl).then((response) => {
             let json = unmarshaller.unmarshalString(response.data);
             return json && json.value;

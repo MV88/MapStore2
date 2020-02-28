@@ -18,6 +18,7 @@ import React from 'react';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import html5Backend from 'react-dnd-html5-backend';
 import ErrorBoundary from 'react-error-boundary';
+const ErrorBoundaryFallbackComponent = require('./ErrorFallBackComp').default;
 import { Provider } from 'react-redux';
 
 import { changeBrowserProperties } from '../../actions/browser';
@@ -82,14 +83,14 @@ class StandardApp extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-        const onInit = async(config) => {
+        const onInit = (config) => {
             if (!global.Intl ) {
-                global.Intl = await import(
-                    /* webpackChunkName: "intl" */
-                    'intl');
-                import('intl/locale-data/jsonp/en.js');
-                import('intl/locale-data/jsonp/it.js');
-                this.init(config);
+                require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
+                    global.Intl = require('intl');
+                    require('intl/locale-data/jsonp/en.js');
+                    require('intl/locale-data/jsonp/it.js');
+                    this.init(config);
+                });
             } else {
                 this.init(config);
             }
@@ -120,10 +121,13 @@ class StandardApp extends React.Component {
         const {plugins, requires} = this.props.pluginsDef;
         const {pluginsDef, appStore, initialActions, appComponent, mode, ...other} = this.props;
         const App = dragDropContext(html5Backend)(this.props.appComponent);
+
         return this.state.initialized ?
-            <ErrorBoundary><Provider store={this.store}>
-                <App {...other} plugins={assign(PluginsUtils.getPlugins(plugins), {requires})}/>
-            </Provider></ErrorBoundary>
+            <ErrorBoundary FallbackComponent={ ErrorBoundaryFallbackComponent}>
+                <Provider store={this.store}>
+                    <App {...other} plugins={assign(PluginsUtils.getPlugins(plugins), { requires })} />
+                </Provider>
+            </ErrorBoundary>
             : (<span><div className="_ms2_init_spinner _ms2_init_center"><div></div></div>
                 <div className="_ms2_init_text _ms2_init_center">Loading MapStore</div></span>);
     }

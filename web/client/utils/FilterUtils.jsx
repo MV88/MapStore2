@@ -14,6 +14,7 @@ import fromObject from './ogc/Filter/fromObject';
 import filterBuilder from './ogc/Filter/FilterBuilder';
 import CoordinatesUtils from './CoordinatesUtils';
 import {get, isNil, isUndefined, isArray} from 'lodash';
+let FilterUtils = {};
 
 const cqlToOgc = (cqlFilter, fOpts) => {
     const fb = filterBuilder(fOpts);
@@ -246,14 +247,14 @@ export const toCQLFilter = function(json) {
 
     let attributeFilter;
     if (objFilter.filterFields && objFilter.filterFields.length > 0) {
-        attributeFilter = this.processCQLFilterGroup(objFilter.groupFields[0], objFilter);
+        attributeFilter = FilterUtils.processCQLFilterGroup(objFilter.groupFields[0], objFilter);
         if (attributeFilter) {
             filters.push(attributeFilter);
         }
     } else if (objFilter.simpleFilterFields && objFilter.simpleFilterFields.length > 0) {
         let simpleFilter = objFilter.simpleFilterFields.reduce((cql, field) => {
             let tmp = cql;
-            let strFilter = this.processCQLSimpleFilterField(field);
+            let strFilter = FilterUtils.processCQLSimpleFilterField(field);
             if (strFilter !== false) {
                 tmp = cql.length > 0 ? cql + " AND (" + strFilter + ")" : "(" + strFilter + ")";
             }
@@ -265,7 +266,7 @@ export const toCQLFilter = function(json) {
 
     let spatialFilter;
     if (objFilter.spatialField && objFilter.spatialField.geometry && objFilter.spatialField.operation) {
-        spatialFilter = this.processCQLSpatialFilter(objFilter);
+        spatialFilter = FilterUtils.processCQLSpatialFilter(objFilter);
         filters.push(spatialFilter);
     }
     if (objFilter.crossLayerFilter) {
@@ -297,12 +298,12 @@ getCrossLayerCqlFilter = crossLayerFilter => get(crossLayerFilter, 'collectGeome
 
 
 export const processOGCFilterGroup = function(root, objFilter, nsplaceholder) {
-    let ogc = this.processOGCFilterFields(root, objFilter, nsplaceholder);
+    let ogc = FilterUtils.processOGCFilterFields(root, objFilter, nsplaceholder);
 
-    let subGroups = this.findSubGroups(root, objFilter.groupFields);
+    let subGroups = FilterUtils.findSubGroups(root, objFilter.groupFields);
     if (subGroups.length > 0) {
         subGroups.forEach((subGroup) => {
-            ogc += this.processOGCFilterGroup(subGroup, objFilter, nsplaceholder);
+            ogc += FilterUtils.processOGCFilterGroup(subGroup, objFilter, nsplaceholder);
         });
     }
     if (ogc !== "") {
@@ -460,13 +461,13 @@ export const toOGCFilterParts = function(objFilter, versionOGC, nsplaceholder) {
             const bBoxFilter = objFilter.spatialField.geometry.extent.reduce((a, extent) => {
                 let filter = Object.assign({}, objFilter);
                 filter.spatialField.geometry.extent = extent;
-                return a + this.processOGCSpatialFilter(versionOGC, filter, nsplaceholder);
+                return a + FilterUtils.processOGCSpatialFilter(versionOGC, filter, nsplaceholder);
             }, '');
 
             spatialFilter = ogcLogicalOperators[OP](nsplaceholder, bBoxFilter);
 
         } else {
-            spatialFilter = this.processOGCSpatialFilter(versionOGC, objFilter, nsplaceholder);
+            spatialFilter = FilterUtils.processOGCSpatialFilter(versionOGC, objFilter, nsplaceholder);
         }
 
         filters.push(spatialFilter);
@@ -477,9 +478,9 @@ export const toOGCFilterParts = function(objFilter, versionOGC, nsplaceholder) {
             attribute: objFilter.crossLayerFilter.attribute // || (objFilter.spatialField && objFilter.spatialField.attribute)
         };
         if (Array.isArray()) {
-            crossLayerFilter.forEach( f => filters.push(this.processOGCCrossLayerFilter(f, nsplaceholder)));
+            crossLayerFilter.forEach( f => filters.push(FilterUtils.processOGCCrossLayerFilter(f, nsplaceholder)));
         } else {
-            filters.push(this.processOGCCrossLayerFilter(crossLayerFilter, nsplaceholder));
+            filters.push(FilterUtils.processOGCCrossLayerFilter(crossLayerFilter, nsplaceholder));
         }
     }
     // this is the additional filter from layer, that have to be merged with the one of the query
@@ -506,9 +507,9 @@ export const toOGCFilter = function(ftName, json, version, sortOptions = null, h
     const nsplaceholder = versionOGC === "2.0" ? "fes" : "ogc";
 
 
-    let ogcFilter = this.getGetFeatureBase(versionOGC, objFilter.pagination, hits, format, json && json.options);
+    let ogcFilter = FilterUtils.getGetFeatureBase(versionOGC, objFilter.pagination, hits, format, json && json.options);
 
-    let filters = this.toOGCFilterParts(objFilter, versionOGC, nsplaceholder);
+    let filters = FilterUtils.toOGCFilterParts(objFilter, versionOGC, nsplaceholder);
     let filter = "";
 
     if (filters.length > 0) {
@@ -577,7 +578,7 @@ export const processOGCSpatialFilter = function(version, objFilter, nsplaceholde
     case "DWITHIN":
     case "WITHIN":
     case "CONTAINS": {
-        ogc += processOGCGeometry(wfsToGmlVersion(version), objFilter.spatialField.geometry);
+        ogc += processOGCGeometryHandler(wfsToGmlVersion(version), objFilter.spatialField.geometry);
 
         if (objFilter.spatialField.operation === "DWITHIN") {
             ogc += '<' + nsplaceholder + ':Distance units="m">' + (objFilter.spatialField.geometry.distance || 0) + '</' + nsplaceholder + ':Distance>';
@@ -659,12 +660,12 @@ export const getGetFeatureBase = function(version, pagination, hits, format, opt
 };
 
 export const processCQLFilterGroup = function(root, objFilter) {
-    let cql = this.processCQLFilterFields(root, objFilter);
+    let cql = FilterUtils.processCQLFilterFields(root, objFilter);
 
-    let subGroups = this.findSubGroups(root, objFilter.groupFields);
+    let subGroups = FilterUtils.findSubGroups(root, objFilter.groupFields);
     if (subGroups.length > 0) {
         const subGroupCql = subGroups
-            .map((subGroup) => "(" + this.processCQLFilterGroup(subGroup, objFilter) + ")")
+            .map((subGroup) => "(" + FilterUtils.processCQLFilterGroup(subGroup, objFilter) + ")")
             .join(" " + root.logic + " ");
         return cql ? [cql, subGroupCql].join(" " + root.logic + " ") : subGroupCql;
     }
@@ -732,7 +733,7 @@ export const processCQLSpatialFilter = function(objFilter) {
     } else {
         let crs = objFilter.spatialField.geometry.projection || "";
         crs = crs.split(":").length === 2 ? "SRID=" + crs.split(":")[1] + ";" : "";
-        cql += crs + this.getCQLGeometryElement(objFilter.spatialField.geometry.coordinates, objFilter.spatialField.geometry.type);
+        cql += crs + FilterUtils.getCQLGeometryElement(objFilter.spatialField.geometry.coordinates, objFilter.spatialField.geometry.type);
     }
 
     return cql + ")";
@@ -821,7 +822,7 @@ export const findSubGroups = function(root, groups) {
     return subGroups;
 };
 export const cqlListField = function(attribute, operator, value) {
-    return this.cqlStringField(attribute, operator, value);
+    return FilterUtils.cqlStringField(attribute, operator, value);
 };
 
 export const processCQLFilterFields = function(group, objFilter) {
@@ -836,19 +837,19 @@ export const processCQLFilterFields = function(group, objFilter) {
             case "date":
             case "time":
             case "date-time":
-                fieldFilter = this.cqlDateField(field.attribute, field.operator, field.value);
+                fieldFilter = FilterUtils.cqlDateField(field.attribute, field.operator, field.value);
                 break;
             case "number":
-                fieldFilter = this.cqlNumberField(field.attribute, field.operator, field.value);
+                fieldFilter = FilterUtils.cqlNumberField(field.attribute, field.operator, field.value);
                 break;
             case "string":
-                fieldFilter = this.cqlStringField(field.attribute, field.operator, field.value);
+                fieldFilter = FilterUtils.cqlStringField(field.attribute, field.operator, field.value);
                 break;
             case "boolean":
-                fieldFilter = this.cqlBooleanField(field.attribute, field.operator, field.value);
+                fieldFilter = FilterUtils.cqlBooleanField(field.attribute, field.operator, field.value);
                 break;
             case "list":
-                fieldFilter = this.cqlListField(field.attribute, field.operator, field.value);
+                fieldFilter = FilterUtils.cqlListField(field.attribute, field.operator, field.value);
                 break;
             default:
                 break;
@@ -868,16 +869,16 @@ export const processCQLSimpleFilterField = function(field) {
     let strFilter = false;
     switch (field.type) {
     case "date":
-        strFilter = this.cqlDateField(field.attribute, field.operator, field.values);
+        strFilter = FilterUtils.cqlDateField(field.attribute, field.operator, field.values);
         break;
     case "number":
-        strFilter = this.cqlNumberField(field.attribute, field.operator, field.values);
+        strFilter = FilterUtils.cqlNumberField(field.attribute, field.operator, field.values);
         break;
     case "string":
-        strFilter = this.cqlStringField(field.attribute, field.operator, field.values);
+        strFilter = FilterUtils.cqlStringField(field.attribute, field.operator, field.values);
         break;
     case "boolean":
-        strFilter = this.cqlBooleanField(field.attribute, field.operator, field.values);
+        strFilter = FilterUtils.cqlBooleanField(field.attribute, field.operator, field.values);
         break;
     case "list": {
         if (field.values.length !== field.optionsValues.length) {
@@ -914,8 +915,8 @@ export const getOgcAllPropertyValue = function(featureTypeName, attribute) {
             </wfs:GetPropertyValue>`;
 };
 export const getSLD = function(ftName, json, version) {
-    let filter = this.toOGCFilter(ftName, json, version);
-    let sIdx = filter.search( `<${this.nsplaceholder}:Filter>`);
+    let filter = FilterUtils.toOGCFilter(ftName, json, version);
+    let sIdx = filter.search( `<${FilterUtils.nsplaceholder}:Filter>`);
     if (sIdx !== -1) {
         let eIndx = filter.search( `</wfs:Query>`);
         filter = filter.substr(sIdx, eIndx - sIdx);
@@ -1001,7 +1002,7 @@ export const normalizeFilterCQL = (filter, nativeCrs) => {
     return filter;
 };
 
-const FilterUtils = {
+FilterUtils = {
     checkOperatorValidity,
     composeAttributeFilters,
     cqlBooleanField,

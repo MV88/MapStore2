@@ -118,10 +118,10 @@ const Api = {
             }, parsed.query)
         }));
         return new Promise(async(resolve) => {
-            const {unmarshaller} = await import(
+            const Module = await import(
                 /* webpackChunkName: "WMS_OGC_Utils" */
-
                 '../utils/ogc/WMS');
+            const {unmarshaller} = Module.default;
 
             resolve(axios.get(parseUrl(getCapabilitiesUrl)).then((response) => {
                 if (raw) {
@@ -147,10 +147,11 @@ const Api = {
             }, parsed.query)
         }));
         return new Promise(async(resolve) => {
-            const {unmarshaller} = await import(
-                /* webpackChunkName: "WMS_OGC_Utils" */
 
+            const Module = await import(
+                /* webpackChunkName: "WMS_OGC_Utils" */
                 '../utils/ogc/WMS');
+            const {unmarshaller} = Module.default;
 
             resolve(axios.get(parseUrl(describeLayerUrl)).then((response) => {
                 let json = unmarshaller.unmarshalString(response.data);

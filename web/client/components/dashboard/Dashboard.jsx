@@ -20,7 +20,7 @@ export default compose(
         breakpoints: { md: 480, xxs: 0 },
         cols: { md: 6, xxs: 1 }
     }),
-    widthProvider({ overrideWidthProvider: true}),
+    widthProvider({ overrideWidthProvider: false}),
     emptyState(
         ({widgets = []} = {}) => widgets.length === 0,
         ({loading}) => ({

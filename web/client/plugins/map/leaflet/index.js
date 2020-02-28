@@ -8,13 +8,13 @@
 
 
 module.exports = {
-    LMap: require('../../../components/map/leaflet/Map'),
-    Layer: require('../../../components/map/leaflet/Layer'),
-    Feature: require('../../../components/map/leaflet/Feature'),
-    Locate: require('../../../components/map/leaflet/Locate'),
-    MeasurementSupport: require('../../../components/map/leaflet/MeasurementSupport'),
-    Overview: require('../../../components/map/leaflet/Overview'),
-    ScaleBar: require('../../../components/map/leaflet/ScaleBar'),
-    DrawSupport: require('../../../components/map/leaflet/DrawSupport'),
-    HighlightFeatureSupport: require('../../../components/map/leaflet/HighlightFeatureSupport')
+    LMap: require('../../../components/map/leaflet/Map').default,
+    Layer: require('../../../components/map/leaflet/Layer').default,
+    Feature: require('../../../components/map/leaflet/Feature').default,
+    Locate: require('../../../components/map/leaflet/Locate').default,
+    MeasurementSupport: require('../../../components/map/leaflet/MeasurementSupport').default,
+    Overview: require('../../../components/map/leaflet/Overview').default,
+    ScaleBar: require('../../../components/map/leaflet/ScaleBar').default,
+    DrawSupport: require('../../../components/map/leaflet/DrawSupport').default,
+    HighlightFeatureSupport: require('../../../components/map/leaflet/HighlightFeatureSupport').default
 };

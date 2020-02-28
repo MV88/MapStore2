@@ -25,7 +25,7 @@ import { mapTypeSelector, isOpenlayers } from '../selectors/maptype';
 import { layerSelectorWithMarkers } from '../selectors/layers';
 import { highlighedFeatures } from '../selectors/highlight';
 import { securityTokenSelector } from '../selectors/security';
-import pluginsIndex from './map/index';
+import {getPlugins} from './map/index';
 
 import draw from '../reducers/draw';
 import highlight from '../reducers/highlight';
@@ -399,7 +399,8 @@ class MapPlugin extends React.Component {
         return !layer.useForElevation || this.props.mapType === 'cesium' || this.props.elevationEnabled;
     };
     updatePlugins = (props) => {
-        plugins = pluginsIndex(props.mapType, props.actions);
+        plugins = getPlugins(props.mapType, props.actions);
+        console.log(plugins);
     };
 }
 

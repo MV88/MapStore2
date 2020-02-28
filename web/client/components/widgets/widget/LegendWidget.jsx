@@ -8,10 +8,10 @@
 import React from 'react';
 
 import emptyLegendState from '../enhancers/emptyLegendState';
-import LegendWidget from './LegendWidget';
+import LegendView from './LegendView';
 import WidgetContainer from './WidgetContainer';
 
-const LegendView = emptyLegendState()(LegendWidget);
+const LegendWidget = emptyLegendState()(LegendView);
 
 export default ({
     toggleDeleteConfirm = () => {},
@@ -27,7 +27,7 @@ export default ({
         icons={icons}
         topRightItems={topRightItems}
     >
-        <LegendView {...props} />
+        <LegendWidget {...props} />
     </WidgetContainer>
 
     );

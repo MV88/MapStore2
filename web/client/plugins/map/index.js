@@ -22,7 +22,7 @@ import {
 import { updateHighlighted } from '../../actions/highlight';
 import { layerError, layerLoad, layerLoading } from '../../actions/layers';
 import { changeLocateState, onLocateError } from '../../actions/locate';
-import { changeMapView, clickOnMap } from '../../actions/map';
+import { changeMapView, clickOnMap, creationError } from '../../actions/map';
 import { changeGeometry, changeMeasurementState, resetGeometry, updateMeasures } from '../../actions/measurement';
 import { changeMousePosition } from '../../actions/mousePosition';
 import { warning } from '../../actions/notifications';
@@ -32,16 +32,15 @@ import { measurementSelector } from '../../selectors/measurement';
 
 const Empty = () => { return <span/>; };
 
-export default async(mapType, actions) => {
+export const getPlugins = (mapType, actions) => {
 
-    const Module = await import(`./${mapType}/index`);
-    const components = Module.default;
+    const components = require('./' + mapType + '/index');
 
     const LMap = connect((state) => ({
         projectionDefs: projectionDefsSelector(state),
         mousePosition: state.mousePosition || {enabled: false}
     }), assign({}, {
-        onCreationError: () => {},
+        onCreationError: creationError,
         onMapViewChanges: changeMapView,
         onClick: clickOnMap,
         onMouseMove: changeMousePosition,
@@ -99,8 +98,8 @@ export default async(mapType, actions) => {
         changeSelectionState
     })(components.SelectionSupport || Empty);
 
-    // import(`../../components/map/${mapType}/plugins/index`);
-    require('../../components/map/' + mapType + '/plugins/index');
+    import(`../../components/map/${mapType}/plugins/index`);
+
     const LLayer = connect(null, {onWarning: warning})( components.Layer || Empty);
 
     return {

@@ -84,10 +84,10 @@ class General extends React.Component {
                     </FormGroup>
                     {hideTitleTranslations || (<FormGroup>
                         <ControlLabel><Message msgId="layerProperties.titleTranslations" /></ControlLabel>
-                        {Object.keys(locales).map(async(a) => {
+                        {Object.keys(locales).map((a) => {
                             let flagImgSrc;
                             try {
-                                flagImgSrc = await import(`../../../I18N/images/flags/${locales[a].code}.png`);
+                                flagImgSrc = require('../../../I18N/images/flags/' + locales[a].code + '.png');
                             } catch (e) {
                                 flagImgSrc = false;
                             }
