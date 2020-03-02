@@ -1,7 +1,7 @@
-const expect = require('expect');
-const React = require('react');
-const ReactDOM = require('react-dom');
-const ColorPicker = require('../ColorPicker');
+import expect from 'expect';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ColorPicker from '../ColorPicker';
 
 describe("Test the ColorPicker style component", () => {
     beforeEach((done) => {

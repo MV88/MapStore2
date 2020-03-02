@@ -6,16 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
+import { Glyphicon as GlyphiconRB } from 'react-bootstrap';
 
-const { Glyphicon: GlyphiconRB } = require('react-bootstrap');
-const BorderLayout = require('../layout/BorderLayout');
-const emptyState = require('../misc/enhancers/emptyState');
-const withLocal = require("../misc/enhancers/localizedProps");
-const Filter = withLocal('filterPlaceholder')(require('../misc/Filter'));
-const SVGPreview = require('./SVGPreview');
-const Message = require('../I18N/Message');
-const tooltip = require('../misc/enhancers/tooltip');
+import Message from '../I18N/Message';
+import BorderLayout from '../layout/BorderLayout';
+import FilterComp from '../misc/Filter';
+import SideGridComp from '../misc/cardgrids/SideGrid';
+import emptyState from '../misc/enhancers/emptyState';
+import withLocal from '../misc/enhancers/localizedProps';
+import tooltip from '../misc/enhancers/tooltip';
+import SVGPreview from './SVGPreview';
+
+const Filter = withLocal('filterPlaceholder')(FilterComp);
 const Glyphicon = tooltip(GlyphiconRB);
 
 const SideGrid = emptyState(
@@ -24,7 +27,7 @@ const SideGrid = emptyState(
         title: <Message msgId="styleeditor.filterMatchNotFound"/>,
         glyph: '1-stilo'
     }
-)(require('../misc/cardgrids/SideGrid'));
+)(SideGridComp);
 
 // get the text to use in the icon
 const getFormatText = (format) => {
@@ -104,4 +107,4 @@ const StyleList = ({
     </BorderLayout>
 );
 
-module.exports = StyleList;
+export default StyleList;

@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var FeatureInfoFormatSelector = require('../FeatureInfoFormatSelector');
+import expect from 'expect';
 
-const TestUtils = require('react-dom/test-utils');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import FeatureInfoFormatSelector from '../FeatureInfoFormatSelector';
+import TestUtils from 'react-dom/test-utils';
 
 describe('FeatureInfoFormatSelector', () => {
     const data = {

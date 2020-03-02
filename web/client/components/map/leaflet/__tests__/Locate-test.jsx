@@ -5,10 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-// var React = require('react');
-var L = require('leaflet');
-// let Locate = require('../Locate');
-let expect = require('expect');
+import L from 'leaflet';
+
+import expect from 'expect';
 
 
 describe('leaflet Locate component', () => {

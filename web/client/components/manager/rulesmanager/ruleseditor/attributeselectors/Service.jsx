@@ -5,16 +5,17 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require("react");
-const PagedCombo = require('../../../../misc/combobox/PagedCombobox');
-const {Row, Col} = require('react-bootstrap');
-const fixedOptions = require("../../enhancers/fixedOptions");
-const localizedProps = require("../../../../misc/enhancers/localizedProps");
-const { compose, defaultProps, withHandlers, withPropsOnChange} = require('recompose');
-const Message = require('../../../../I18N/Message');
-const {connect} = require("react-redux");
-const {createSelector} = require("reselect");
-const {servicesSelector} = require("../../../../../selectors/rulesmanager");
+import React from 'react';
+
+import PagedCombo from '../../../../misc/combobox/PagedCombobox';
+import { Row, Col } from 'react-bootstrap';
+import fixedOptions from '../../enhancers/fixedOptions';
+import localizedProps from '../../../../misc/enhancers/localizedProps';
+import { compose, defaultProps, withHandlers, withPropsOnChange } from 'recompose';
+import Message from '../../../../I18N/Message';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { servicesSelector } from '../../../../../selectors/rulesmanager';
 
 const selector = createSelector(servicesSelector, ( services) => ({
     services
@@ -30,7 +31,7 @@ const WorkspaceSelector = (props) => (
         </Col>
     </Row>);
 
-module.exports = compose(
+export default compose(
     connect(selector),
     defaultProps({
         size: 5,

@@ -6,38 +6,63 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const Rx = require('rxjs');
-const {saveAs} = require('file-saver');
-const {MAP_CONFIG_LOADED} = require('../actions/config');
-const {TOGGLE_CONTROL, toggleControl, setControlProperty} = require('../actions/controls');
-const {addLayer, updateNode, changeLayerProperties, removeLayer} = require('../actions/layers');
-const {set} = require('../utils/ImmutableUtils');
-const {reprojectGeoJson} = require('../utils/CoordinatesUtils');
-const {error} = require('../actions/notifications');
-const {closeFeatureGrid} = require('../actions/featuregrid');
-const {isFeatureGridOpen} = require('../selectors/featuregrid');
-const {queryPanelSelector, measureSelector} = require('../selectors/controls');
-const { hideMapinfoMarker, purgeMapInfoResults, closeIdentify} = require('../actions/mapInfo');
+import { saveAs } from 'file-saver';
+import { castArray, find, findIndex, head, isArray } from 'lodash';
+import assign from 'object-assign';
+import Rx from 'rxjs';
+import uuidv1 from 'uuid/v1';
 
-const {updateAnnotationGeometry, setStyle, toggleStyle, cleanHighlight, toggleAdd,
-    showAnnotation, editAnnotation,
-    CONFIRM_REMOVE_ANNOTATION, SAVE_ANNOTATION, EDIT_ANNOTATION, CANCEL_EDIT_ANNOTATION,
-    SET_STYLE, RESTORE_STYLE, HIGHLIGHT, CLEAN_HIGHLIGHT, CONFIRM_CLOSE_ANNOTATIONS, START_DRAWING,
-    CANCEL_CLOSE_TEXT, SAVE_TEXT, DOWNLOAD, LOAD_ANNOTATIONS, CHANGED_SELECTED, RESET_COORD_EDITOR, CHANGE_RADIUS,
-    ADD_NEW_FEATURE, SET_EDITING_FEATURE, CHANGE_TEXT, NEW_ANNOTATION, TOGGLE_STYLE, CONFIRM_DELETE_FEATURE, OPEN_EDITOR
-} = require('../actions/annotations');
-
-const uuidv1 = require('uuid/v1');
-const {FEATURES_SELECTED, GEOMETRY_CHANGED, DRAWING_FEATURE} = require('../actions/draw');
-const {PURGE_MAPINFO_RESULTS} = require('../actions/mapInfo');
-
-const {head, findIndex, castArray, isArray, find} = require('lodash');
-const assign = require('object-assign');
-const {annotationsLayerSelector, multiGeometrySelector} = require('../selectors/annotations');
-const {normalizeAnnotation, removeDuplicate, validateCoordsArray, getStartEndPointsForLinestring, DEFAULT_ANNOTATIONS_STYLES} = require('../utils/AnnotationsUtils');
-
-const {mapNameSelector} = require('../selectors/map');
-const {changeDrawingStatus} = require('../actions/draw');
+import {
+    ADD_NEW_FEATURE,
+    CANCEL_EDIT_ANNOTATION,
+    CHANGED_SELECTED,
+    CHANGE_RADIUS,
+    CHANGE_TEXT,
+    CLEAN_HIGHLIGHT,
+    CONFIRM_CLOSE_ANNOTATIONS,
+    CONFIRM_DELETE_FEATURE,
+    CONFIRM_REMOVE_ANNOTATION,
+    DOWNLOAD,
+    EDIT_ANNOTATION,
+    HIGHLIGHT,
+    LOAD_ANNOTATIONS,
+    NEW_ANNOTATION,
+    OPEN_EDITOR,
+    RESET_COORD_EDITOR,
+    RESTORE_STYLE,
+    SAVE_ANNOTATION,
+    SET_STYLE,
+    START_DRAWING,
+    TOGGLE_STYLE,
+    cleanHighlight,
+    editAnnotation,
+    setStyle,
+    showAnnotation,
+    toggleAdd,
+    toggleStyle,
+    SET_EDITING_FEATURE,
+    updateAnnotationGeometry
+} from '../actions/annotations';
+import { MAP_CONFIG_LOADED } from '../actions/config';
+import { TOGGLE_CONTROL, setControlProperty, toggleControl } from '../actions/controls';
+import { DRAWING_FEATURE, FEATURES_SELECTED, GEOMETRY_CHANGED, changeDrawingStatus } from '../actions/draw';
+import { closeFeatureGrid } from '../actions/featuregrid';
+import { addLayer, changeLayerProperties, removeLayer, updateNode } from '../actions/layers';
+import { PURGE_MAPINFO_RESULTS, closeIdentify, hideMapinfoMarker, purgeMapInfoResults } from '../actions/mapInfo';
+import { error } from '../actions/notifications';
+import { annotationsLayerSelector, multiGeometrySelector } from '../selectors/annotations';
+import { measureSelector, queryPanelSelector } from '../selectors/controls';
+import { isFeatureGridOpen } from '../selectors/featuregrid';
+import { mapNameSelector } from '../selectors/map';
+import {
+    DEFAULT_ANNOTATIONS_STYLES,
+    getStartEndPointsForLinestring,
+    normalizeAnnotation,
+    removeDuplicate,
+    validateCoordsArray
+} from '../utils/AnnotationsUtils';
+import { reprojectGeoJson } from '../utils/CoordinatesUtils';
+import { set } from '../utils/ImmutableUtils';
 
 /**
     * Epics for annotations
@@ -153,7 +178,7 @@ const createNewFeature = (action) => {
 };
 
 
-module.exports = (viewer) => ({
+export default (viewer) => ({
     addAnnotationsLayerEpic: (action$, store) => action$.ofType(MAP_CONFIG_LOADED)
         .switchMap(() => {
             const annotationsLayer = annotationsLayerSelector(store.getState());
@@ -347,31 +372,6 @@ module.exports = (viewer) => ({
             return Rx.Observable.from([
                 updateAnnotationGeometry(mergeGeometry(action.features), action.textChanged, action.circleChanged)
             ].concat(!multiGeometrySelector(store.getState()) && store.getState().annotations.drawing ? [toggleAdd()] : []));
-        }),
-    endDrawTextEpic: (action$, store) => action$.ofType(SAVE_TEXT)
-        .switchMap( () => {
-            const feature = store.getState().annotations.selected;
-            // let reprojected = reprojectGeoJson(feature, "EPSG:4326", "EPSG:3857");
-            const style = store.getState().annotations.editing.style;
-            return Rx.Observable.from([
-                changeDrawingStatus("replace", store.getState().annotations.featureType, "annotations", [feature], {featureProjection: "EPSG:3857",
-                    transformToFeatureCollection: true}, assign({}, style, {highlight: false}))
-            ].concat(!multiGeometrySelector(store.getState()) ? [toggleAdd()] : []));
-        }),
-    cancelTextAnnotationsEpic: (action$, store) => action$.ofType(CANCEL_CLOSE_TEXT)
-        .switchMap( () => {
-            const state = store.getState();
-            const feature = state.annotations.editing;
-            const multiGeometry = multiGeometrySelector(state);
-            const style = feature.style;
-            return Rx.Observable.from([
-                changeDrawingStatus("drawOrEdit", "Text", "annotations", [feature], {
-                    featureProjection: "EPSG:4326",
-                    stopAfterDrawing: !multiGeometry,
-                    editEnabled: false,
-                    drawEnabled: true
-                }, assign({}, style, {highlight: false}))
-            ]);
         }),
     setAnnotationStyleEpic: (action$, store) => action$.ofType(SET_STYLE)
         .switchMap( () => {

@@ -5,15 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const {Row, Col, FormControl} = require('react-bootstrap');
-const SwitchPanel = require('../../misc/switch/SwitchPanel');
-const I18N = require('../../I18N/I18N');
+import React from 'react';
 
-const assign = require('object-assign');
-
-const CoordinatesUtils = require("../../../utils/CoordinatesUtils");
+import PropTypes from 'prop-types';
+import { Row, Col, FormControl } from 'react-bootstrap';
+import SwitchPanel from '../../misc/switch/SwitchPanel';
+import I18N from '../../I18N/I18N';
+import assign from 'object-assign';
+import CoordinatesUtils from '../../../utils/CoordinatesUtils';
 
 
 class GeometryDetails extends React.Component {
@@ -344,4 +343,4 @@ class GeometryDetails extends React.Component {
     };
 }
 
-module.exports = GeometryDetails;
+export default GeometryDetails;

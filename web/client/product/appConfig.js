@@ -6,67 +6,77 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = {
+import Dashboard from './pages/Dashboard';
+import GeoStory from './pages/GeoStory';
+import Manager from './pages/Manager';
+import MapViewer from './pages/MapViewer';
+import Maps from './pages/Maps';
+import RulesManager from './pages/RulesManager';
+import Context from './pages/Context';
+import ContextCreator from './pages/ContextCreator';
+import ContextManager from './pages/ContextManager';
+
+export default {
     pages: [{
         name: "home",
         path: "/",
-        component: require('./pages/Maps')
+        component: Maps
     }, {
         name: "maps",
         path: "/maps",
-        component: require('./pages/Maps')
+        component: Maps
     }, {
         name: "mapviewer",
         path: "/viewer/:mapType/:mapId",
-        component: require('./pages/MapViewer')
+        component: MapViewer
     }, {
         name: "mapviewer",
         path: "/viewer/:mapId",
-        component: require('./pages/MapViewer')
+        component: MapViewer
     }, {
         name: 'context',
         path: "/context/:contextName",
-        component: require('./pages/Context').default
+        component: Context
     }, {
         name: 'context',
         path: "/context/:contextName/:mapId",
-        component: require('./pages/Context').default
+        component: Context
     }, {
         name: 'context-creator',
         path: "/context-creator/:contextId",
-        component: require('./pages/ContextCreator').default
+        component: ContextCreator
     }, {
         name: "manager",
         path: "/manager",
-        component: require('./pages/Manager')
+        component: Manager
     }, {
         name: "manager",
         path: "/manager/:tool",
-        component: require('./pages/Manager')
+        component: Manager
     }, {
         name: "context-manager",
         path: "/context-manager",
-        component: require('./pages/ContextManager').default
+        component: ContextManager
     }, {
         name: "dashboard",
         path: "/dashboard",
-        component: require('./pages/Dashboard')
+        component: Dashboard
     }, {
         name: "dashboard",
         path: "/dashboard/:did",
-        component: require('./pages/Dashboard')
+        component: Dashboard
     }, {
         name: "rulesmanager",
         path: "/rules-manager",
-        component: require('./pages/RulesManager')
+        component: RulesManager
     }, {
         name: "geostory",
         path: "/geostory/:gid",
-        component: require('./pages/GeoStory').default
+        component: GeoStory
     }, {
         name: "geostory",
         path: "/geostory/shared/:gid",
-        component: require('./pages/GeoStory').default
+        component: GeoStory
     }],
     initialState: {
         defaultState: {

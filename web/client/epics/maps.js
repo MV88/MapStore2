@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const uuidv1 = require('uuid/v1');
-const assign = require('object-assign');
-const {push} = require('connected-react-router');
-const {basicError, basicSuccess} = require('../utils/NotificationUtils');
-const GeoStoreApi = require('../api/GeoStoreDAO');
-const { MAP_INFO_LOADED, MAP_SAVED, mapSaveError, mapSaved, loadMapInfo } = require('../actions/config');
-const {isNil, find} = require('lodash');
-const {
+import Rx from 'rxjs';
+import uuidv1 from 'uuid/v1';
+import assign from 'object-assign';
+import {push} from 'connected-react-router';
+import {basicError, basicSuccess} from '../utils/NotificationUtils';
+import GeoStoreApi from '../api/GeoStoreDAO';
+import { MAP_INFO_LOADED, MAP_SAVED, mapSaveError, mapSaved, loadMapInfo } from '../actions/config';
+import {isNil, find} from 'lodash';
+import {
     SAVE_DETAILS, SAVE_RESOURCE_DETAILS, MAPS_GET_MAP_RESOURCES_BY_CATEGORY,
     DELETE_MAP, OPEN_DETAILS_PANEL, MAPS_LOAD_MAP,
     CLOSE_DETAILS_PANEL, NO_DETAILS_AVAILABLE, SAVE_MAP_RESOURCE, MAP_DELETED,
@@ -23,36 +23,36 @@ const {
     doNothing, detailsLoaded, detailsSaving, onDisplayMetadataEdit,
     RESET_UPDATING, resetUpdating, toggleDetailsSheet, getMapResourcesByCategory,
     mapUpdating, savingMap, mapCreated, loadMaps
-} = require('../actions/maps');
-const {
+} from '../actions/maps';
+import {
     resetCurrentMap, EDIT_MAP
-} = require('../actions/currentMap');
-const {closeFeatureGrid} = require('../actions/featuregrid');
-const {toggleControl} = require('../actions/controls');
-const {
+} from '../actions/currentMap';
+import {closeFeatureGrid} from '../actions/featuregrid';
+import {toggleControl} from '../actions/controls';
+import {
     mapPermissionsFromIdSelector, mapThumbnailsUriFromIdSelector,
     mapDetailsUriFromIdSelector,
     searchTextSelector,
     searchParamsSelector,
     totalCountSelector
-} = require('../selectors/maps');
-const {
+} from '../selectors/maps';
+import {
     mapIdSelector, mapInfoDetailsUriFromIdSelector
-} = require('../selectors/map');
-const {mapTypeSelector} = require('../selectors/maptype');
-const {
+} from '../selectors/map';
+import {mapTypeSelector} from '../selectors/maptype';
+import {
     currentMapDetailsTextSelector, currentMapIdSelector,
     currentMapDetailsUriSelector, currentMapSelector,
     currentMapDetailsChangedSelector, currentMapOriginalDetailsTextSelector
-} = require('../selectors/currentmap');
-const {userParamsSelector} = require('../selectors/security');
-const {deleteResourceById, createAssociatedResource, deleteAssociatedResource, updateAssociatedResource} = require('../utils/ObservableUtils');
+} from '../selectors/currentmap';
+import {userParamsSelector} from '../selectors/security';
+import {deleteResourceById, createAssociatedResource, deleteAssociatedResource, updateAssociatedResource} from '../utils/ObservableUtils';
 
-const {getIdFromUri} = require('../utils/MapUtils');
+import {getIdFromUri} from '../utils/MapUtils';
 
-const {getErrorMessage} = require('../utils/LocaleUtils');
-const { EMPTY_RESOURCE_VALUE } = require('../utils/MapInfoUtils');
-const {createResource, updateResource} = require("../api/persistence");
+import {getErrorMessage} from '../utils/LocaleUtils';
+import { EMPTY_RESOURCE_VALUE } from '../utils/MapInfoUtils';
+import {createResource, updateResource} from "../api/persistence";
 
 
 const calculateNewParams = state => {
@@ -356,7 +356,7 @@ const mapSaveMapResourceEpic = (action$, store) =>
             })
             .startWith(!resource.id ? savingMap(resource.metadata) : mapUpdating(resource.metadata)));
 
-module.exports = {
+export default {
     loadMapsEpic,
     resetCurrentMapEpic,
     storeDetailsInfoEpic,

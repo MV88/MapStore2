@@ -5,13 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
-const assign = require('object-assign');
-const PropTypes = require('prop-types');
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const PluginsContainer = require('../PluginsContainer');
+import React from 'react';
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import expect from 'expect';
+import ReactDOM from 'react-dom';
+
+import PluginsContainer from '../PluginsContainer';
 
 class My extends React.Component {
     render() {

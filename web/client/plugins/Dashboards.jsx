@@ -5,25 +5,25 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const PropTypes = require('prop-types');
-const assign = require('object-assign');
-const {connect} = require('react-redux');
-const Message = require("../components/I18N/Message");
-const emptyState = require('../components/misc/enhancers/emptyState');
+import React from 'react';
 
-const { setDashboardsAvailable } = require('../actions/dashboards');
-const {mapTypeSelector} = require('../selectors/maptype');
-const { userRoleSelector } = require('../selectors/security');
-const { isFeaturedMapsEnabled } = require('../selectors/featuredmaps');
-const { totalCountSelector } = require('../selectors/dashboards');
-const {createSelector} = require('reselect');
-const { compose } = require('recompose');
-
-const DashboardGrid = require('./dashboard/DashboardsGrid');
-const PaginationToolbar = require('./dashboard/PaginationToolbar');
-const EmptyDashboardsView = require('./dashboard/EmptyDashboardsView');
-
+import PropTypes from 'prop-types';
+import assign from 'object-assign';
+import { connect } from 'react-redux';
+import Message from '../components/I18N/Message';
+import emptyState from '../components/misc/enhancers/emptyState';
+import { setDashboardsAvailable } from '../actions/dashboards';
+import { mapTypeSelector } from '../selectors/maptype';
+import { userRoleSelector } from '../selectors/security';
+import { isFeaturedMapsEnabled } from '../selectors/featuredmaps';
+import { totalCountSelector } from '../selectors/dashboards';
+import { createSelector } from 'reselect';
+import { compose } from 'recompose';
+import DashboardGrid from './dashboard/DashboardsGrid';
+import PaginationToolbar from './dashboard/PaginationToolbar';
+import EmptyDashboardsView from './dashboard/EmptyDashboardsView';
+import dashboards from '../reducers/dashboards';
+import epics from '../epics/dashboards';
 const dashboardsCountSelector = createSelector(
     totalCountSelector,
     count => ({ count })
@@ -113,7 +113,7 @@ const DashboardsPlugin = compose(
     )
 )(Dashboards);
 
-module.exports = {
+export default {
     DashboardsPlugin: assign(DashboardsPlugin, {
         NavMenu: {
             position: 2,
@@ -131,8 +131,8 @@ module.exports = {
             priority: 1
         }
     }),
-    epics: require('../epics/dashboards'),
     reducers: {
-        dashboards: require('../reducers/dashboards')
-    }
+        dashboards
+    },
+    epics
 };

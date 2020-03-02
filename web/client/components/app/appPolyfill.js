@@ -7,7 +7,7 @@
  */
 
 // issue #3147 Element.closest is not supported in ie11
-require('element-closest');
-
+import 'element-closest';
+import assign from 'es6-object-assign';
 // issue #3153  Embedded doesn't work on ie11
-require('es6-object-assign').polyfill();
+assign.polyfill();

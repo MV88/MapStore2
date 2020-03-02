@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,13 +8,14 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const mapUtils = require('../../utils/MapUtils');
-const {findDOMNode} = require('react-dom');
-const DropdownList = require('react-widgets').DropdownList;
-const {Row, Col, Overlay, Popover, Label} = require('react-bootstrap');
-const LocaleUtils = require('../../utils/LocaleUtils');
-const Message = require('../I18N/Message');
+import React from 'react';
+
+import mapUtils from '../../utils/MapUtils';
+import { findDOMNode } from 'react-dom';
+import { DropdownList } from 'react-widgets';
+import { Row, Col, Overlay, Popover, Label } from 'react-bootstrap';
+import LocaleUtils from '../../utils/LocaleUtils';
+import Message from '../I18N/Message';
 
 class ScaleDenominator extends React.Component {
     static propTypes = {
@@ -94,4 +96,4 @@ class ScaleDenominator extends React.Component {
     }
 }
 
-module.exports = ScaleDenominator;
+export default ScaleDenominator;

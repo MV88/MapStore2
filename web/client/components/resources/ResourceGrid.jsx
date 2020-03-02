@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { Grid, Row, Col } = require('react-bootstrap');
-const ResourceCard = require('./ResourceCard');
-const Spinner = require('react-spinkit');
+import React from 'react';
+
+import { Grid, Row, Col } from 'react-bootstrap';
+import ResourceCard from './ResourceCard';
+import Spinner from 'react-spinkit';
 
 const renderLoading = () => {
     return <div style={{ width: "100px", overflow: "visible", margin: "auto" }}>Loading...<Spinner spinnerName="circle" noFadeIn overrideSpinnerClassName="spinner" /></div>;
@@ -32,7 +33,7 @@ const renderMetadataModal = ({ Component, edit, resource, setEdit, errors, setEr
     return null;
 };
 
-module.exports = ({
+export default ({
     fluid,
     className,
     colProps,

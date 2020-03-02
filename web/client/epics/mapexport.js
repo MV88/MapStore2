@@ -5,18 +5,18 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const MapUtils = require('../utils/MapUtils');
-const { download } = require('../utils/FileUtils');
-const { EXPORT_MAP } = require('../actions/mapexport');
-const { setControlProperty } = require('../actions/controls');
+import Rx from 'rxjs';
+import MapUtils from '../utils/MapUtils';
+import { download } from '../utils/FileUtils';
+import { EXPORT_MAP } from '../actions/mapexport';
+import { setControlProperty } from '../actions/controls';
 
-const { mapSelector } = require('../selectors/map');
-const { layersSelector, groupsSelector } = require('../selectors/layers');
-const { backgroundListSelector } = require('../selectors/backgroundselector');
-const { mapOptionsToSaveSelector } = require('../selectors/mapsave');
-const { basicError } = require('../utils/NotificationUtils');
-const { getErrorMessage } = require('../utils/LocaleUtils');
+import { mapSelector } from '../selectors/map';
+import { layersSelector, groupsSelector } from '../selectors/layers';
+import { backgroundListSelector } from '../selectors/backgroundselector';
+import { mapOptionsToSaveSelector } from '../selectors/mapsave';
+import { basicError } from '../utils/NotificationUtils';
+import { getErrorMessage } from '../utils/LocaleUtils';
 const textSearchConfigSelector = state => state.searchconfig && state.searchconfig.textSearchConfig;
 
 const PersistMap = {
@@ -36,4 +36,3 @@ export const exportMapContext = (action$, { getState = () => { } } = {}) =>
             autoDismiss: 6,
             position: 'tc'
         })));
-

@@ -5,14 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const PropTypes = require('prop-types');
-const React = require('react');
-const Message = require('../I18N/Message');
-const GridCard = require('../misc/GridCard');
-const FitIcon = require('../misc/FitIcon');
-const thumbUrl = require('./style/default.jpg');
-const assign = require('object-assign');
-const ConfirmModal = require('../misc/ResizableModal');
+import React from 'react';
+import PropTypes from 'prop-types';
+import Message from '../I18N/Message';
+import GridCard from '../misc/GridCard';
+import FitIcon from '../misc/FitIcon';
+import thumbUrl from './style/default.jpg';
+import assign from 'object-assign';
+import ConfirmModal from './modals/ConfirmModal';
 
 class MapCard extends React.Component {
     static propTypes = {
@@ -226,4 +226,4 @@ class MapCard extends React.Component {
     };
 }
 
-module.exports = MapCard;
+export default MapCard;

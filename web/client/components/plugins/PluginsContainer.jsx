@@ -1,4 +1,4 @@
-const PropTypes = require('prop-types');
+
 /*
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,14 +6,14 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
+import PropTypes from 'prop-types';
+import assign from 'object-assign';
+import { get, isEqual, isObject, isArray } from 'lodash';
+import { componentFromProp } from 'recompose';
 
-const PluginsUtils = require('../../utils/PluginsUtils');
+import PluginsUtils from '../../utils/PluginsUtils';
 
-const assign = require('object-assign');
-
-const { get, isEqual, isObject, isArray } = require('lodash');
-const {componentFromProp} = require('recompose');
 const Component = componentFromProp('component');
 
 /**
@@ -206,4 +206,4 @@ class PluginsContainer extends React.Component {
     };
 }
 
-module.exports = PluginsContainer;
+export default PluginsContainer;

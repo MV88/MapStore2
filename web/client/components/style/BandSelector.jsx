@@ -1,4 +1,4 @@
-const PropTypes = require('prop-types');
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,18 +7,18 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import 'react-widgets/lib/less/react-widgets.less';
 
-const {Grid, Row, Col} = require('react-bootstrap');
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Col, Grid, Row } from 'react-bootstrap';
+import { Combobox, NumberPicker } from 'react-widgets';
+import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
 
-const Combobox = require('react-widgets').Combobox;
-const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
+import LocaleUtils from '../../utils/LocaleUtils';
+import Message from '../I18N/Message';
+
 numberLocalizer();
-const {NumberPicker} = require('react-widgets');
-require('react-widgets/lib/less/react-widgets.less');
-
-const Message = require('../I18N/Message');
-const LocaleUtils = require('../../utils/LocaleUtils');
 
 class BandSelector extends React.Component {
     static propTypes = {
@@ -127,4 +127,4 @@ class BandSelector extends React.Component {
     }
 }
 
-module.exports = BandSelector;
+export default BandSelector;

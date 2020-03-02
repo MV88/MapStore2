@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const ON_TAB_SELECTED = 'CONTENT_TABS:ON_TAB_SELECTED';
+export const ON_TAB_SELECTED = 'CONTENT_TABS:ON_TAB_SELECTED';
 
 /**
  * Select Tab
@@ -16,11 +16,9 @@ const ON_TAB_SELECTED = 'CONTENT_TABS:ON_TAB_SELECTED';
  * @return {object} of type `ON_TAB_SELECTED` with tab id
  */
 
-const onTabSelected = (id) => {
+export const onTabSelected = (id) => {
     return {
         type: ON_TAB_SELECTED,
         id
     };
 };
-
-module.exports = {onTabSelected, ON_TAB_SELECTED};

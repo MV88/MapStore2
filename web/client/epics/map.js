@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const {changeLayerProperties} = require('../actions/layers');
+import Rx from 'rxjs';
+import {changeLayerProperties, clearLayers} from '../actions/layers';
 
-const {
+import {
     CREATION_ERROR_LAYER,
     INIT_MAP,
     ZOOM_TO_EXTENT,
@@ -17,37 +17,34 @@ const {
     CHECK_MAP_CHANGES,
     changeMapView,
     changeMapLimits
-} = require('../actions/map');
-const {configuredExtentCrsSelector, configuredRestrictedExtentSelector, configuredMinZoomSelector, mapSelector, mapIdSelector} = require('../selectors/map');
+} from '../actions/map';
+import {configuredExtentCrsSelector, configuredRestrictedExtentSelector, configuredMinZoomSelector, mapSelector, mapIdSelector} from '../selectors/map';
 
 
-const { loadMapInfo} = require('../actions/config');
-const {LOGIN_SUCCESS} = require('../actions/security');
+import {LOGIN_SUCCESS} from '../actions/security';
 
-const {currentBackgroundLayerSelector, allBackgroundLayerSelector, getLayerFromId} = require('../selectors/layers');
-const {mapTypeSelector} = require('../selectors/maptype');
-const { mapPaddingSelector } = require('../selectors/maplayout');
+import {currentBackgroundLayerSelector, allBackgroundLayerSelector, getLayerFromId, layersSelector, groupsSelector} from '../selectors/layers';
+import {mapTypeSelector} from '../selectors/maptype';
+import { mapPaddingSelector } from '../selectors/maplayout';
 
-const {setControlProperty} = require('../actions/controls');
-const {MAP_CONFIG_LOADED, MAP_CONFIG_LOAD_ERROR} = require('../actions/config');
-const {isSupportedLayer} = require('../utils/LayersUtils');
-const MapUtils = require('../utils/MapUtils');
-const CoordinatesUtils = require('../utils/CoordinatesUtils');
+import {setControlProperty, resetControls} from '../actions/controls';
+import {loadMapInfo, MAP_CONFIG_LOADED, MAP_CONFIG_LOAD_ERROR} from '../actions/config';
+import {isSupportedLayer} from '../utils/LayersUtils';
+import MapUtils from '../utils/MapUtils';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
 
-const {warning} = require('../actions/notifications');
-const {resetControls} = require('../actions/controls');
-const {clearLayers} = require('../actions/layers');
-const {clearWarning: clearMapInfoWarning} = require('../actions/mapInfo');
-const {removeAllAdditionalLayers} = require('../actions/additionallayers');
-const { head, isArray, isObject, mapValues } = require('lodash');
+import {warning} from '../actions/notifications';
 
-const {layersSelector, groupsSelector} = require('../selectors/layers');
-const {backgroundListSelector} = require('../selectors/backgroundselector');
-const {mapOptionsToSaveSelector} = require('../selectors/mapsave');
-const {feedbackMaskSelector} = require('../selectors/feedbackmask');
-const { isLoggedIn } = require('../selectors/security');
-const { unsavedMapSelector } = require('../selectors/controls');
-const { push } = require('connected-react-router');
+import {clearWarning as clearMapInfoWarning} from '../actions/mapInfo';
+import {removeAllAdditionalLayers} from '../actions/additionallayers';
+import { head, isArray, isObject, mapValues } from 'lodash';
+
+import {backgroundListSelector} from '../selectors/backgroundselector';
+import {mapOptionsToSaveSelector} from '../selectors/mapsave';
+import {feedbackMaskSelector} from '../selectors/feedbackmask';
+import { isLoggedIn } from '../selectors/security';
+import { unsavedMapSelector } from '../selectors/controls';
+import { push } from 'connected-react-router';
 const textSearchConfigSelector = state => state.searchconfig && state.searchconfig.textSearchConfig;
 
 const handleCreationBackgroundError = (action$, store) =>
@@ -265,7 +262,7 @@ const redirectUnauthorizedUserOnNewMap = (action$, { getState = () => {}}) =>
         .filter(() => !isLoggedIn(getState()))
         .switchMap(() => Rx.Observable.of(push('/'))); // go to home page
 
-module.exports = {
+export default {
     checkMapPermissions,
     handleCreationLayerError,
     handleCreationBackgroundError,

@@ -5,11 +5,19 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {createSelector} = require('reselect');
-const { getEditingWidget, dependenciesSelector, getEditorSettings, getWidgetLayer, getFloatingWidgets, availableDependenciesForEditingWidgetSelector} = require('../../selectors/widgets');
-const { showConnectionsSelector } = require('../../selectors/dashboard');
+import { createSelector } from 'reselect';
 
-const wizardStateToProps = ( stateProps = {}, dispatchProps = {}, ownProps = {}) => ({
+import { showConnectionsSelector } from '../../selectors/dashboard';
+import {
+    getEditingWidget,
+    dependenciesSelector,
+    getEditorSettings,
+    getWidgetLayer,
+    getFloatingWidgets,
+    availableDependenciesForEditingWidgetSelector
+} from '../../selectors/widgets';
+
+export const wizardStateToProps = ( stateProps = {}, dispatchProps = {}, ownProps = {}) => ({
     ...ownProps,
     ...stateProps,
     ...dispatchProps,
@@ -21,7 +29,7 @@ const wizardStateToProps = ( stateProps = {}, dispatchProps = {}, ownProps = {})
         ...(stateProps.editorData || {})
     }, ownProps.target)
 });
-const wizardSelector = createSelector(
+export const wizardSelector = createSelector(
     getWidgetLayer,
     getEditingWidget,
     getEditorSettings,
@@ -33,7 +41,7 @@ const wizardSelector = createSelector(
         widgets
     })
 );
-const dashboardSelector = createSelector(
+export const dashboardSelector = createSelector(
     getEditingWidget,
     showConnectionsSelector,
     dependenciesSelector,
@@ -44,11 +52,3 @@ const dashboardSelector = createSelector(
         dependencies,
         ...dependencyConnectProps
     }));
-
-module.exports = {
-    getWidgetLayer,
-    availableDependenciesForEditingWidgetSelector,
-    dashboardSelector,
-    wizardStateToProps,
-    wizardSelector
-};

@@ -5,22 +5,22 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const autoMapType = require('../../map/enhancers/autoMapType');
-const mapType = require('../../map/enhancers/mapType');
-const autoResize = require('../../map/enhancers/autoResize');
-const getProjectionDefs = require('../../map/enhancers/getProjectionDefs').default;
-const onMapViewChanges = require('../../map/enhancers/onMapViewChanges');
 
+import getProjectionDefs from '../../map/enhancers/getProjectionDefs';
+import { handlingUnsupportedProjection } from '../../map/enhancers/handlingUnsupportedProjection';
+import { compose } from 'recompose';
 
-const {compose} = require('recompose');
-const { handlingUnsupportedProjection } = require('../../map/enhancers/handlingUnsupportedProjection');
+import BaseMap from '../../map/BaseMap';
+import autoMapType from '../../map/enhancers/autoMapType';
+import autoResize from '../../map/enhancers/autoResize';
+import mapType from '../../map/enhancers/mapType';
+import onMapViewChanges from '../../map/enhancers/onMapViewChanges';
 
-module.exports = compose(
+export default compose(
     onMapViewChanges,
     autoResize(0),
     autoMapType,
     mapType,
     getProjectionDefs,
     handlingUnsupportedProjection
-)(require('../../map/BaseMap'));
-
+)(BaseMap);

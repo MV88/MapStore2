@@ -6,18 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var { LAYER_LOADING, LAYER_LOAD, LAYER_ERROR, CHANGE_LAYER_PARAMS, CHANGE_LAYER_PROPERTIES, CHANGE_GROUP_PROPERTIES,
+import { LAYER_LOADING, LAYER_LOAD, LAYER_ERROR, CHANGE_LAYER_PARAMS, CHANGE_LAYER_PROPERTIES, CHANGE_GROUP_PROPERTIES,
     TOGGLE_NODE, SORT_NODE, REMOVE_NODE, UPDATE_NODE, MOVE_NODE, ADD_LAYER, REMOVE_LAYER, ADD_GROUP,
     SHOW_SETTINGS, HIDE_SETTINGS, UPDATE_SETTINGS, REFRESH_LAYERS, LAYERS_REFRESH_ERROR, LAYERS_REFRESHED, CLEAR_LAYERS, SELECT_NODE, FILTER_LAYERS, SHOW_LAYER_METADATA, HIDE_LAYER_METADATA
-} = require('../actions/layers');
+} from '../actions/layers';
 
-const {TOGGLE_CONTROL} = require('../actions/controls');
+import {TOGGLE_CONTROL} from '../actions/controls';
 
-var assign = require('object-assign');
-const uuidv1 = require('uuid/v1');
-var {isObject, isArray, head, isString, includes, castArray} = require('lodash');
+import assign from 'object-assign';
+import uuidv1 from 'uuid/v1';
+import {isObject, isArray, head, isString, includes, castArray} from 'lodash';
 
-const LayersUtils = require('../utils/LayersUtils');
+import LayersUtils from '../utils/LayersUtils';
 
 /**
 Removes a group even if it is nested
@@ -473,5 +473,4 @@ function layers(state = { flat: [] }, action) {
         return state;
     }
 }
-
-module.exports = layers;
+export default layers;

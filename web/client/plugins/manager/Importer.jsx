@@ -5,26 +5,38 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const Message = require('../../components/I18N/Message');
-const {connect} = require('react-redux');
-const {bindActionCreators} = require('redux');
+import React from 'react';
 
-const {
+import Message from '../../components/I18N/Message';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import {
     loadImports,
-    createImport, loadImport, runImport, deleteImport,
-    uploadImportFiles, loadTask, updateTask, deleteTask,
+    createImport,
+    loadImport,
+    runImport,
+    deleteImport,
+    uploadImportFiles,
+    loadTask,
+    updateTask,
+    deleteTask,
     updateProgress,
-    loadLayer, updateLayer,
-    loadTransform, deleteTransform, editTransform, updateTransform,
+    loadLayer,
+    updateLayer,
+    loadTransform,
+    deleteTransform,
+    editTransform,
+    updateTransform,
     loadStylerTool,
     loadWorkspaces,
     selectWorkSpace,
     createWorkspace,
     dismissWorkspaceCreationStatus
-} = require('../../actions/importer');
-
-const assign = require('object-assign');
+} from '../../actions/importer';
+import Importer from '../../components/manager/importer/Importer';
+import importer from '../../reducers/importer';
+import assign from 'object-assign';
 const getURL = function(props) {
     return props.geoserverRestURL || "/geoserver/rest/";
 };
@@ -178,8 +190,8 @@ const ImporterPlugin = connect(
             }
         });
     }
-)(require("../../components/manager/importer/Importer"));
-module.exports = {
+)(Importer);
+export default {
     ImporterPlugin: assign(ImporterPlugin, {
         hide: true,
         Manager: {
@@ -190,5 +202,5 @@ module.exports = {
             glyph: "import"
         }
     }),
-    reducers: {importer: require('../../reducers/importer')}
+    reducers: {importer}
 };

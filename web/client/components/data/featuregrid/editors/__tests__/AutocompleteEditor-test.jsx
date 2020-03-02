@@ -1,9 +1,8 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const AutocompleteEditor = require('../AutocompleteEditor');
-const {createPagedUniqueAutompleteStream} = require('../../../../../observables/autocomplete');
-
-var expect = require('expect');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AutocompleteEditor from '../AutocompleteEditor';
+import { createPagedUniqueAutompleteStream } from '../../../../../observables/autocomplete';
+import expect from 'expect';
 
 let testColumn = {
     key: 'columnKey'

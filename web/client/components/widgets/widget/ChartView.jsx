@@ -6,14 +6,17 @@
   * LICENSE file in the root directory of this source tree.
   */
 
+import React from 'react';
+import ContainerDimensions from 'react-container-dimensions';
 
-const loadingState = require('../../misc/enhancers/loadingState')();
-const errorChartState = require('../enhancers/errorChartState');
-const emptyChartState = require('../enhancers/emptyChartState');
-const SimpleChart = loadingState(errorChartState(emptyChartState((require('../../charts/SimpleChart')))));
-const ContainerDimensions = require('react-container-dimensions').default;
-const React = require('react');
-module.exports = (props) => (<div className="mapstore-widget-chart">
+import SimpleChartComp from '../../charts/SimpleChart';
+import loadingStateFactory from '../../misc/enhancers/loadingState';
+import emptyChartState from '../enhancers/emptyChartState';
+import errorChartState from '../enhancers/errorChartState';
+
+const loadingState = loadingStateFactory();
+const SimpleChart = loadingState(errorChartState(emptyChartState((SimpleChartComp))));
+export default (props) => (<div className="mapstore-widget-chart">
     <ContainerDimensions>
         <SimpleChart {...props}/>
     </ContainerDimensions>

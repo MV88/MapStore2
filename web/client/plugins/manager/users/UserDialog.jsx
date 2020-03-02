@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {bindActionCreators} = require('redux');
-const {connect} = require('react-redux');
-const {editUser, changeUserMetadata, saveUser} = require('../../../actions/users');
+import { bindActionCreators } from 'redux';
 
+import { connect } from 'react-redux';
+import { editUser, changeUserMetadata, saveUser } from '../../../actions/users';
+import UserDialog from '../../../components/manager/users/UserDialog';
 
 const mapStateToProps = (state) => {
     const users = state && state.users;
@@ -28,4 +29,4 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch);
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(require('../../../components/manager/users/UserDialog'));
+export default connect(mapStateToProps, mapDispatchToProps)(UserDialog);

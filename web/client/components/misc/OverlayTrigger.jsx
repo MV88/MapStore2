@@ -7,6 +7,8 @@
  ectory of this source tree.
  */
 
-const withContainer = require('./WithContainer');
+import {OverlayTrigger} from 'react-bootstrap';
 
-module.exports = withContainer(require('react-bootstrap').OverlayTrigger);
+import withContainer from './WithContainer';
+
+export default withContainer(OverlayTrigger);

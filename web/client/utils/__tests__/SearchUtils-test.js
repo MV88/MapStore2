@@ -5,15 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
-const {defaultIconStyle} = require('../SearchUtils');
+import expect from 'expect';
 
+import { defaultIconStyle } from '../SearchUtils';
+import iconred from '../../product/assets/img/marker-icon-red.png';
+import markershadow from '../../product/assets/img/marker-shadow.png';
 
 describe('SearchUtils test', () => {
     it('defaultIconStyle', () => {
         expect(defaultIconStyle).toEqual({
-            iconUrl: require('../../product/assets/img/marker-icon-red.png'),
-            shadowUrl: require('../../product/assets/img/marker-shadow.png'),
+            iconUrl: iconred,
+            shadowUrl: markershadow,
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],

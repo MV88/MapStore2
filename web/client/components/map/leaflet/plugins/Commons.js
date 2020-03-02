@@ -9,8 +9,9 @@
 /**
  * Layer initializer for a tile source
  */
-var L = require('leaflet');
-module.exports = L.TileLayer.extend({
+import L from 'leaflet';
+
+export default L.TileLayer.extend({
     initialize: function(options) {
         L.TileLayer.prototype.initialize.call(this, this.url, options);
     }

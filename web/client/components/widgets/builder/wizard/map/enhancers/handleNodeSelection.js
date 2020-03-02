@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 // handle selection
-const { withProps, compose, withStateHandlers } = require('recompose');
-const {findIndex} = require('lodash');
+import { withProps, compose, withStateHandlers } from 'recompose';
+
+import { findIndex } from 'lodash';
 const getGroupLayerIds = (id, map) =>
     (map.layers || [])
         .filter(({ group = "Default" } = {}) => group === id)
@@ -20,7 +21,7 @@ const getGroupLayerIds = (id, map) =>
  *  - selectedNodes: array of id of the selected nodes
  *  - selectedLayers, selectedGroups: same as selectedNodes, but only with selected groups or layers ids
  */
-module.exports = compose(
+export default compose(
     withStateHandlers(
         () => ({ selectedLayers: [], selectedGroups: [] }),
         {

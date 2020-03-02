@@ -5,18 +5,22 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const {connect} = require('../../utils/PluginsUtils');
-const {login, loginFail, logoutWithReload, changePassword, resetError, logout} = require('../../actions/security');
-const {setControlProperty} = require('../../actions/controls');
-const {checkMapChanges} = require('../../actions/map');
-const {Glyphicon} = require('react-bootstrap');
-const {unsavedMapSelector, unsavedMapSourceSelector} = require('../../selectors/controls');
-const {feedbackMaskSelector} = require('../../selectors/feedbackmask');
-const ConfigUtils = require('../../utils/ConfigUtils');
 
+import React from 'react';
+import {checkMapChanges} from '../../actions/map';
+import {unsavedMapSelector, unsavedMapSourceSelector} from '../../selectors/controls';
+import {feedbackMaskSelector} from '../../selectors/feedbackmask';
+import ConfigUtils from '../../utils/ConfigUtils';
+import { connect } from '../../utils/PluginsUtils';
+import { login, loginFail, logoutWithReload, changePassword, resetError, logout } from '../../actions/security';
+import { setControlProperty } from '../../actions/controls';
+import { Glyphicon } from 'react-bootstrap';
+import UserMenuComp from '../../components/security/UserMenu';
+import UserDetailsModalComp from '../../components/security/modals/UserDetailsModal';
+import PasswordResetModalComp from '../../components/security/modals/PasswordResetModal';
+import LoginModalComp from '../../components/security/modals/LoginModal';
 
-const closeLogin = () => {
+export const closeLogin = () => {
     return (dispatch) => {
         dispatch(setControlProperty('LoginForm', 'enabled', false));
         dispatch(resetError());
@@ -29,23 +33,23 @@ const checkUnsavedMapChanges = (action) => {
     };
 };
 
-const UserMenu = connect((state) => ({
+export const UserMenu = connect((state) => ({
     user: state.security && state.security.user
 }), {
     onShowLogin: setControlProperty.bind(null, "LoginForm", "enabled", true, true),
     onShowAccountInfo: setControlProperty.bind(null, "AccountInfo", "enabled", true, true),
     onShowChangePassword: setControlProperty.bind(null, "ResetPassword", "enabled", true, true),
     onLogout: logoutWithReload
-})(require('../../components/security/UserMenu'));
+})(UserMenuComp);
 
-const UserDetails = connect((state) => ({
+export const UserDetails = connect((state) => ({
     user: state.security && state.security.user,
     show: state.controls.AccountInfo && state.controls.AccountInfo.enabled}
 ), {
     onClose: setControlProperty.bind(null, "AccountInfo", "enabled", false, false)
-})(require('../../components/security/modals/UserDetailsModal'));
+})(UserDetailsModalComp);
 
-const PasswordReset = connect((state) => ({
+export const PasswordReset = connect((state) => ({
     user: state.security && state.security.user,
     show: state.controls.ResetPassword && state.controls.ResetPassword.enabled,
     changed: state.security && state.security.passwordChanged && true || false,
@@ -53,9 +57,9 @@ const PasswordReset = connect((state) => ({
 }), {
     onPasswordChange: (user, pass) => { return changePassword(user, pass); },
     onClose: setControlProperty.bind(null, "ResetPassword", "enabled", false, false)
-})(require('../../components/security/modals/PasswordResetModal'));
+})(PasswordResetModalComp);
 
-const Login = connect((state) => ({
+export const Login = connect((state) => ({
     show: state.controls.LoginForm && state.controls.LoginForm.enabled,
     user: state.security && state.security.user,
     loginError: state.security && state.security.loginError
@@ -64,9 +68,9 @@ const Login = connect((state) => ({
     onClose: closeLogin,
     onSubmit: login,
     onError: loginFail
-})(require('../../components/security/modals/LoginModal'));
+})(LoginModalComp);
 
-const LoginNav = connect((state) => ({
+export const LoginNav = connect((state) => ({
     user: state.security && state.security.user,
     nav: false,
     renderButtonText: false,
@@ -86,10 +90,9 @@ const LoginNav = connect((state) => ({
     onCheckMapChanges: checkUnsavedMapChanges,
     onCloseUnsavedDialog: setControlProperty.bind(null, "unsavedMap", "enabled", false),
     onLogoutWithRedirect: logout.bind(null, '/')
+})(UserMenuComp);
 
-})(require('../../components/security/UserMenu'));
-
-module.exports = {
+export default {
     UserDetails,
     UserMenu,
     PasswordReset,

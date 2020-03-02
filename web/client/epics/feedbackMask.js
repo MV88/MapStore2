@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2018, GeoSolutions Sas.
  * All rights reserved.
@@ -7,24 +6,27 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const {split, get, isNil} = require('lodash');
-const { LOCATION_CHANGE, push } = require('connected-react-router');
+import Rx from 'rxjs';
+import {split, get, isNil} from 'lodash';
+import { LOCATION_CHANGE, push } from 'connected-react-router';
 
-const {FEEDBACK_MASK_ENABLED, DETECTED_NEW_PAGE, feedbackMaskLoading, feedbackMaskLoaded, feedbackMaskEnabled, detectedNewPage} = require('../actions/feedbackMask');
-const { LOGIN_SUCCESS, LOGOUT, LOGIN_PROMPT_CLOSED, loginRequired } = require('../actions/security');
-const {LOAD_DASHBOARD, DASHBOARD_LOADED, DASHBOARD_LOAD_ERROR} = require('../actions/dashboard');
-const { LOAD_GEOSTORY, GEOSTORY_LOADED, LOAD_GEOSTORY_ERROR } = require('../actions/geostory');
-const { LOAD_CONTEXT, LOAD_FINISHED, CONTEXT_LOAD_ERROR } = require('../actions/context');
-const {START_RESOURCE_LOAD: LOAD_CONTEXT_CONTEXTCREATOR, LOAD_FINISHED: LOAD_FINISHED_CONTEXTCREATOR,
-    CONTEXT_LOAD_ERROR: CONTEXT_LOAD_ERROR_CONTEXTCREATOR} = require('../actions/contextcreator');
-const {INIT_MAP} = require('../actions/map');
-const {MAP_CONFIG_LOADED, MAP_CONFIG_LOAD_ERROR, MAP_INFO_LOAD_ERROR} = require('../actions/config');
+import {FEEDBACK_MASK_ENABLED, DETECTED_NEW_PAGE, feedbackMaskLoading, feedbackMaskLoaded, feedbackMaskEnabled, detectedNewPage} from '../actions/feedbackMask';
+import { LOGIN_SUCCESS, LOGOUT, LOGIN_PROMPT_CLOSED, loginRequired } from '../actions/security';
+import {LOAD_DASHBOARD, DASHBOARD_LOADED, DASHBOARD_LOAD_ERROR} from '../actions/dashboard';
+import { LOAD_GEOSTORY, GEOSTORY_LOADED, LOAD_GEOSTORY_ERROR } from '../actions/geostory';
+import { LOAD_CONTEXT, LOAD_FINISHED, CONTEXT_LOAD_ERROR } from '../actions/context';
+import {
+    START_RESOURCE_LOAD as LOAD_CONTEXT_CONTEXTCREATOR,
+    LOAD_FINISHED as LOAD_FINISHED_CONTEXTCREATOR,
+    CONTEXT_LOAD_ERROR as CONTEXT_LOAD_ERROR_CONTEXTCREATOR
+} from '../actions/contextcreator';
+import {INIT_MAP} from '../actions/map';
+import {MAP_CONFIG_LOADED, MAP_CONFIG_LOAD_ERROR, MAP_INFO_LOAD_ERROR} from '../actions/config';
 
-const {mapSelector} = require('../selectors/map');
-const { isLoggedIn } = require('../selectors/security');
-const { unsavedMapSelector } = require('../selectors/controls');
-const {isSharedStory} = require('../selectors/geostory');
+import {mapSelector} from '../selectors/map';
+import { isLoggedIn } from '../selectors/security';
+import { unsavedMapSelector } from '../selectors/controls';
+import {isSharedStory} from '../selectors/geostory';
 
 /**
  * Enabled/disabled mask based on map load feedback, in case of error enable feedbackMask.
@@ -202,7 +204,7 @@ const feedbackMaskPromptLogin = (action$, store) => // TODO: separate login requ
  * @name epics.feedbackMask
  * @type {Object}
  */
-module.exports = {
+export default {
     updateMapVisibility,
     updateContextFeedbackMaskVisibility,
     updateContextCreatorFeedbackMaskVisibility,

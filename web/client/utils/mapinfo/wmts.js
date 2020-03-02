@@ -6,16 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const MapUtils = require('../MapUtils');
-const CoordinatesUtils = require('../CoordinatesUtils');
-const WMTSUtils = require('../WMTSUtils');
-const {optionsToVendorParams} = require('../VendorParamsUtils');
+import MapUtils from '../MapUtils';
 
-const {isArray, isObject} = require('lodash');
+import CoordinatesUtils from '../CoordinatesUtils';
+import WMTSUtils from '../WMTSUtils';
+import { optionsToVendorParams } from '../VendorParamsUtils';
+import { isArray, isObject } from 'lodash';
+import assign from 'object-assign';
 
-const assign = require('object-assign');
-
-module.exports = {
+export default {
     buildRequest: (layer, props) => {
         const resolution = MapUtils.getCurrentResolution(Math.round(props.map.zoom), 0, 21, 96);
         const resolutions = layer.resolutions || MapUtils.getResolutions();

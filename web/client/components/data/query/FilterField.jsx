@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,12 +7,12 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {Row, Col} = require('react-bootstrap');
+import React from 'react';
 
-const ComboField = require('./ComboField');
-const assign = require('object-assign');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import { Row, Col } from 'react-bootstrap';
+import ComboField from './ComboField';
+import assign from 'object-assign';
+import LocaleUtils from '../../../utils/LocaleUtils';
 
 class FilterField extends React.Component {
     static propTypes = {
@@ -123,4 +124,4 @@ class FilterField extends React.Component {
     };
 }
 
-module.exports = FilterField;
+export default FilterField;

@@ -26,6 +26,8 @@ import {heightProvider} from '../components/layout/enhancers/gridLayout';
 import ContainerDimensions from 'react-container-dimensions';
 
 import WidgetsViewBase from '../components/widgets/view/WidgetsView';
+import widgetsReducer from '../reducers/widgets';
+import epics from '../epics/widgets';
 
 const WidgetsView =
 compose(
@@ -154,7 +156,7 @@ export default createPlugin("WidgetsPlugin", {
         }
     },
     reducers: {
-        widgets: require('../reducers/widgets')
+        widgets: widgetsReducer
     },
-    epics: require('../epics/widgets')
+    epics
 });

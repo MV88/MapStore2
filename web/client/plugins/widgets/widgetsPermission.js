@@ -7,27 +7,27 @@
  */
 
 
-const {compose, withProps, defaultProps} = require('recompose');
-const editOptions = require('./editOptions');
+import { compose, withProps, defaultProps } from 'recompose';
+
+import editOptions from './editOptions';
 
 /**
  * enhancers to manage widgets permissions.
  */
-module.exports = {
-    /*
-    * Hide hidden widgets (Widgets with property `hide=true`) in tray for users has not access to them.
-    * Uses `toolsOptions` property. See `editOptions` enhancer
-    */
-    filterHiddenWidgets: compose(
-        defaultProps({
-            "toolsOptions": {
-                "seeHidden": "user.role===ADMIN"
-            }
-        }),
-        // allow to customize toolsOptions object, with rules. see `accessRuleParser`
-        editOptions("toolsOptions", { asObject: true }),
-        withProps(({ widgets, toolsOptions = { seeHidden: false } }) => ({
-            widgets: toolsOptions.seeHidden ? widgets : widgets.filter(w => !w.hide)
-        }))
-    )
-};
+
+/*
+* Hide hidden widgets (Widgets with property `hide=true`) in tray for users has not access to them.
+* Uses `toolsOptions` property. See `editOptions` enhancer
+*/
+export const filterHiddenWidgets = compose(
+    defaultProps({
+        "toolsOptions": {
+            "seeHidden": "user.role===ADMIN"
+        }
+    }),
+    // allow to customize toolsOptions object, with rules. see `accessRuleParser`
+    editOptions("toolsOptions", { asObject: true }),
+    withProps(({ widgets, toolsOptions = { seeHidden: false } }) => ({
+        widgets: toolsOptions.seeHidden ? widgets : widgets.filter(w => !w.hide)
+    }))
+);

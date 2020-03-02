@@ -5,15 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
+import expect from 'expect';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-
-const dragDropContext = require('react-dnd').DragDropContext;
-const html5Backend = require('react-dnd-html5-backend');
-const AnnotationsEditor = dragDropContext(html5Backend)(require('../AnnotationsEditor'));
-const TestUtils = require('react-dom/test-utils');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { DragDropContext as dragDropContext } from 'react-dnd';
+import html5Backend from 'react-dnd-html5-backend';
+import AnnotationsEditorComp from '../AnnotationsEditor';
+const AnnotationsEditor = dragDropContext(html5Backend)(AnnotationsEditorComp);
+import TestUtils from 'react-dom/test-utils';
 
 const actions = {
     onChangeProperties: () => {},

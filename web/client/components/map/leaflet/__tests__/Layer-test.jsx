@@ -6,28 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const L = require('leaflet');
-const React = require('react');
-const ReactDOM = require('react-dom');
-const LeafLetLayer = require('../Layer.jsx');
-const Feature = require('../Feature.jsx');
-const expect = require('expect');
+import L from 'leaflet';
 
-const assign = require('object-assign');
-
-require('../../../../utils/leaflet/Layers');
-require('../plugins/OSMLayer');
-require('../plugins/GraticuleLayer');
-require('../plugins/WMSLayer');
-require('../plugins/WMTSLayer');
-require('../plugins/GoogleLayer');
-require('../plugins/BingLayer');
-require('../plugins/MapQuest');
-require('../plugins/VectorLayer');
-
-const SecurityUtils = require('../../../../utils/SecurityUtils');
-const {DEFAULT_ANNOTATIONS_STYLES} = require('../../../../utils/AnnotationsUtils');
-const ConfigUtils = require('../../../../utils/ConfigUtils');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import LeafLetLayer from '../Layer.jsx';
+import Feature from '../Feature.jsx';
+import expect from 'expect';
+import assign from 'object-assign';
+import '../../../../utils/leaflet/Layers';
+import '../plugins/OSMLayer';
+import '../plugins/GraticuleLayer';
+import '../plugins/WMSLayer';
+import '../plugins/WMTSLayer';
+import '../plugins/GoogleLayer';
+import '../plugins/BingLayer';
+import '../plugins/MapQuest';
+import '../plugins/VectorLayer';
+import SecurityUtils from '../../../../utils/SecurityUtils';
+import { DEFAULT_ANNOTATIONS_STYLES } from '../../../../utils/AnnotationsUtils';
+import ConfigUtils from '../../../../utils/ConfigUtils';
 
 describe('Leaflet layer', () => {
     let map;

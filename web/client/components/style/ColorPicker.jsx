@@ -1,8 +1,7 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-
-const { SketchPicker } = require('react-color');
-require('./colorpicker.css');
+import PropTypes from 'prop-types';
+import React from 'react';
+import { SketchPicker } from 'react-color';
+import './colorpicker.css';
 
 class ColorPicker extends React.Component {
     static propTypes = {
@@ -64,4 +63,4 @@ class ColorPicker extends React.Component {
     }
 }
 
-module.exports = ColorPicker;
+export default ColorPicker;

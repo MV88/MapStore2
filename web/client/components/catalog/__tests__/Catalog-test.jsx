@@ -5,14 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const expect = require('expect');
-const TestUtils = require('react-dom/test-utils');
-const {FormGroup} = require('react-bootstrap');
-const Select = require('react-select');
 
-const Catalog = require('../Catalog.jsx');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import expect from 'expect';
+import TestUtils from 'react-dom/test-utils';
+import {FormGroup} from 'react-bootstrap';
+import Select from 'react-select';
+
+import Catalog from '../Catalog.jsx';
 
 describe('Test Catalog panel', () => {
     beforeEach((done) => {

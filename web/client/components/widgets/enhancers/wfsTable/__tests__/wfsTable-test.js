@@ -6,22 +6,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const { createSink, setObservableConfig } = require('recompose');
-const expect = require('expect');
-const wfsTable = require('../index');
-const MockAdapter = require("axios-mock-adapter");
-const axios = require("../../../../../libs/ajax");
+import React from 'react';
 
-
-const rxjsConfig = require('recompose/rxjsObservableConfig').default;
+import ReactDOM from 'react-dom';
+import { createSink, setObservableConfig } from 'recompose';
+import expect from 'expect';
+import wfsTable from '../index';
+import MockAdapter from 'axios-mock-adapter';
+import axios from '../../../../../libs/ajax';
+import rxjsConfig from 'recompose/rxjsObservableConfig';
 setObservableConfig(rxjsConfig);
 let mockAxios;
 
+import DESCRIBE from '../../../../../test-resources/wfs/describe-pois.json';
+import WFS from '../../../../../test-resources/wfs/museam.json';
+
 const DATA = {
-    DESCRIBE: require("../../../../../test-resources/wfs/describe-pois.json"),
-    WFS: require("../../../../../test-resources/wfs/museam.json")
+    DESCRIBE,
+    WFS
 };
 
 describe('wfsTable enhancer', () => {

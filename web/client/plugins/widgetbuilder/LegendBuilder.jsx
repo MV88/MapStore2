@@ -6,27 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { connect } = require('react-redux');
-const {get} = require('lodash');
-const { compose, renameProps, mapPropsStream, withProps } = require('recompose');
-const InfoPopover = require('../../components/widgets/widget/InfoPopover');
-const Message = require('../../components/I18N/Message');
-const BorderLayout = require('../../components/layout/BorderLayout');
+import { get } from 'lodash';
+import React from 'react';
+import { connect } from 'react-redux';
+import { compose, mapPropsStream, renameProps, withProps } from 'recompose';
 
-const { insertWidget, onEditorChange, setPage, openFilterEditor } = require('../../actions/widgets');
+import { insertWidget, onEditorChange, openFilterEditor, setPage } from '../../actions/widgets';
+import Message from '../../components/I18N/Message';
+import BorderLayout from '../../components/layout/BorderLayout';
+import LegendWizardComp from '../../components/widgets/builder/wizard/LegendWizard';
+import ToolbarComp from '../../components/widgets/builder/wizard/legend/Toolbar';
+import InfoPopover from '../../components/widgets/widget/InfoPopover';
+import BuilderHeader from './BuilderHeader';
+import { wizardSelector, wizardStateToProps } from './commons';
+import legendBuilderConnect from './enhancers/connection/legendBuilderConnect';
+import viewportBuilderConnectMask from './enhancers/connection/viewportBuilderConnectMask';
+import withConnectButton from './enhancers/connection/withConnectButton';
+import withMapConnect from './enhancers/connection/withMapConnect';
+import withExitButton from './enhancers/withExitButton';
 
-const legendBuilderConnect = require('./enhancers/connection/legendBuilderConnect');
-const viewportBuilderConnectMask = require('./enhancers/connection/viewportBuilderConnectMask');
-const withExitButton = require('./enhancers/withExitButton');
-const withConnectButton = require('./enhancers/connection/withConnectButton');
-const withMapConnect = require('./enhancers/connection/withMapConnect');
 const withValidMap = withProps(({ availableDependencies = [], editorData }) => ({ valid: availableDependencies.length > 0 && editorData.mapSync }));
-
-const {
-    wizardStateToProps,
-    wizardSelector
-} = require('./commons');
 
 const Builder = compose(
     connect(
@@ -44,9 +43,8 @@ const Builder = compose(
         onEditorChange: "onChange"
     }),
 
-)(require('../../components/widgets/builder/wizard/LegendWizard'));
+)(LegendWizardComp);
 
-const BuilderHeader = require('./BuilderHeader');
 const Toolbar = compose(
     connect(wizardSelector, {
         openFilterEditor,
@@ -73,7 +71,7 @@ const Toolbar = compose(
     withExitButton(({ step}) => step === 0),
     // end exit support
     withConnectButton(({ step }) => step === 0)
-)(require('../../components/widgets/builder/wizard/legend/Toolbar'));
+)(ToolbarComp);
 
 /*
  * in case you don't have a layer selected (e.g. dashboard) the table builder
@@ -97,7 +95,7 @@ const builderEnhancer = compose(
     )
 );
 
-module.exports = builderEnhancer(({ enabled, onClose = () => { }, editorData = {}, exitButton, toggleConnection, availableDependencies = [], dependencies, ...props } = {}) =>
+export default builderEnhancer(({ enabled, onClose = () => { }, editorData = {}, exitButton, toggleConnection, availableDependencies = [], dependencies, ...props } = {}) =>
 
     (<BorderLayout
         header={

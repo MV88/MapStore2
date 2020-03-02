@@ -6,41 +6,44 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const { connect } = require('react-redux');
-const { createSelector } = require('reselect');
-const { compose, branch, toClass, lifecycle } = require('recompose');
-const assign = require('object-assign');
-const { isArray, isString } = require('lodash');
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { compose, branch, toClass, lifecycle } from 'recompose';
+import assign from 'object-assign';
+import { isArray, isString } from 'lodash';
 
-const Loader = require('../components/misc/Loader');
-const BorderLayout = require('../components/layout/BorderLayout');
-const loadingState = require('../components/misc/enhancers/loadingState');
-const emptyState = require('../components/misc/enhancers/emptyState');
-const HTML = require('../components/I18N/HTML');
+import Loader from '../components/misc/Loader';
+import BorderLayout from '../components/layout/BorderLayout';
+import loadingState from '../components/misc/enhancers/loadingState';
+import emptyState from '../components/misc/enhancers/emptyState';
+import HTML from '../components/I18N/HTML';
 
-const {
+import {
     statusStyleSelector,
     loadingStyleSelector,
     getUpdatedLayer,
     errorStyleSelector,
     canEditStyleSelector,
     styleServiceSelector
-} = require('../selectors/styleeditor');
+} from '../selectors/styleeditor';
 
-const { userRoleSelector } = require('../selectors/security');
+import { userRoleSelector } from '../selectors/security';
 
-const { initStyleService, toggleStyleEditor } = require('../actions/styleeditor');
-const { updateSettingsParams } = require('../actions/layers');
+import { initStyleService, toggleStyleEditor } from '../actions/styleeditor';
+import { updateSettingsParams } from '../actions/layers';
 
-const {
+import {
     StyleSelector,
     StyleToolbar,
     StyleCodeEditor
-} = require('./styleeditor/index');
+} from './styleeditor/index';
 
-const { isSameOrigin } = require('../utils/StyleEditorUtils');
+import { isSameOrigin } from '../utils/StyleEditorUtils';
+
+import styleeditor from '../reducers/styleeditor';
+import epics from '../epics/styleeditor';
 
 class StyleEditorPanel extends React.Component {
     static propTypes = {
@@ -194,7 +197,7 @@ const StyleEditorPlugin = compose(
     )
 )(StyleEditorPanel);
 
-module.exports = {
+export default {
     StyleEditorPlugin: assign(StyleEditorPlugin, {
         TOC: {
             priority: 1,
@@ -208,7 +211,7 @@ module.exports = {
         }
     }),
     reducers: {
-        styleeditor: require('../reducers/styleeditor')
+        styleeditor
     },
-    epics: require('../epics/styleeditor')
+    epics
 };

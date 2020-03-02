@@ -5,18 +5,15 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-
-const moment = require('moment');
-const { isNaN } = require('lodash');
-const { Form, FormGroup, ControlLabel, FormControl, InputGroup } = require('react-bootstrap');
-
-const Message = require('../I18N/Message');
-const InfoPopover = require('../widgets/widget/InfoPopover');
-
-const InlineDateTimeSelector = require('../time/InlineDateTimeSelector');
-const SwitchButton = require('../misc/switch/SwitchButton');
-const SwitchPanel = require('../misc/switch/SwitchPanel');
+import React from 'react';
+import moment from 'moment';
+import { isNaN } from 'lodash';
+import { Form, FormGroup, ControlLabel, FormControl, InputGroup } from 'react-bootstrap';
+import Message from '../I18N/Message';
+import InfoPopover from '../widgets/widget/InfoPopover';
+import InlineDateTimeSelector from '../time/InlineDateTimeSelector';
+import SwitchButton from '../misc/switch/SwitchButton';
+import SwitchPanel from '../misc/switch/SwitchPanel';
 
 /**
  *
@@ -50,7 +47,7 @@ const getPlaybackRange = ({ startPlaybackTime, endPlaybackTime }) => {
 /**
  * Form div for settings of the playback
  */
-module.exports = ({
+export default ({
     following,
     frameDuration,
     timeStep,

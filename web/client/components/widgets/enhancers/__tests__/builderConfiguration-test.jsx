@@ -6,11 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const expect = require('expect');
-const builderConfiguration = require('../builderConfiguration');
-const WidgetBuilder = builderConfiguration(require('../../builder/WidgetBuilder'));
+import expect from 'expect';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import WidgetBuilderComp from '../../builder/WidgetBuilder';
+import builderConfiguration from '../builderConfiguration';
+
+const WidgetBuilder = builderConfiguration(WidgetBuilderComp);
 describe('widgets builderConfiguration enhancer', () => {
     beforeEach((done) => {
         document.body.innerHTML = '<div id="container"></div>';

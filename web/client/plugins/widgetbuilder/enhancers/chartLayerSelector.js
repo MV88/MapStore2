@@ -5,12 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { connect } = require('react-redux');
-const { compose, defaultProps, withProps, setDisplayName } = require('recompose');
-const layerSelector = require('./layerSelector');
-const { onEditorChange } = require('../../../actions/widgets');
-const canGenerateCharts = require('../../../observables/widgets/canGenerateCharts');
-module.exports = compose(
+import { connect } from 'react-redux';
+
+import { compose, defaultProps, withProps, setDisplayName } from 'recompose';
+import layerSelector from './layerSelector';
+import { onEditorChange } from '../../../actions/widgets';
+import canGenerateCharts from '../../../observables/widgets/canGenerateCharts';
+export default compose(
     setDisplayName('ChartLayerSelector'),
     connect(() => ({}), {
         onLayerChoice: (l) => onEditorChange("layer", l),

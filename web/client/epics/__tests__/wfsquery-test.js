@@ -6,18 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
-const axios = require('../../libs/ajax');
-const MockAdapter = require('axios-mock-adapter');
-const {parse} = require('url');
-const { head } = require('lodash');
-const {UPDATE_GEOMETRY} = require('../../actions/queryform');
-const {changeMapView} = require('../../actions/map');
+import { parse } from 'url';
 
-const {testEpic, addTimeoutEpic, TEST_TIMEOUT} = require('./epicTestUtils');
-const {QUERY_RESULT, FEATURE_LOADING, query, updateQuery} = require('../../actions/wfsquery');
-const {viewportSelectedEpic, wfsQueryEpic} = require('../wfsquery');
+import MockAdapter from 'axios-mock-adapter';
+import expect from 'expect';
+import { head } from 'lodash';
 
+import { changeMapView } from '../../actions/map';
+import { UPDATE_GEOMETRY } from '../../actions/queryform';
+import { FEATURE_LOADING, QUERY_RESULT, query, updateQuery } from '../../actions/wfsquery';
+import axios from '../../libs/ajax';
+import expectedResult from '../../test-resources/wfs/museam.json';
+import { viewportSelectedEpic, wfsQueryEpic } from '../wfsquery';
+import { TEST_TIMEOUT, addTimeoutEpic, testEpic } from './epicTestUtils';
 
 describe('wfsquery Epics', () => {
 
@@ -48,7 +49,7 @@ describe('wfsquery Epics', () => {
         }, {queryform: { spatialField: {method: 'Viewport'}}});
     });
     it('wfsQueryEpic', (done) => {
-        const expectedResult = require('../../test-resources/wfs/museam.json');
+
         testEpic(wfsQueryEpic, 2, query("base/web/client/test-resources/wfs/museam.json", {pagination: {} }), actions => {
             expect(actions.length).toBe(2);
             actions.map((action) => {
@@ -66,7 +67,7 @@ describe('wfsquery Epics', () => {
         }, {});
     });
     it('wfsQueryEpic passes query options', (done) => {
-        const expectedResult = require('../../test-resources/wfs/museam.json');
+
         testEpic(wfsQueryEpic, 2, query("base/web/client/test-resources/wfs/museam.json", { pagination: {} }, {viewParams: "a:b"}), actions => {
             expect(actions.length).toBe(2);
             actions.map((action) => {
@@ -132,7 +133,6 @@ describe('wfsquery Epics', () => {
         };
         it('wfsQueryEpic manages time dimension, when enabled and present', (done) => {
             const mockAxios = new MockAdapter(axios);
-            const expectedResult = require('../../test-resources/wfs/museam.json');
             mockAxios.onPost().reply(config => {
                 const { pathname, query: queryString } = parse(config.url);
                 expect(pathname).toBe(`${BASE_URL}`);
@@ -161,7 +161,6 @@ describe('wfsquery Epics', () => {
         });
         it('wfsQueryEpic do not add time dimension, when timeSync disabled', (done) => {
             const mockAxios = new MockAdapter(axios);
-            const expectedResult = require('../../test-resources/wfs/museam.json');
             mockAxios.onPost().reply(config => {
                 const { pathname, query: queryString } = parse(config.url);
                 expect(pathname).toBe(`${BASE_URL}`);

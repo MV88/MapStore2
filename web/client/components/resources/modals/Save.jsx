@@ -5,18 +5,21 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const PropTypes = require('prop-types');
-const React = require('react');
-const {get} = require('lodash');
-const Portal = require('../../misc/Portal');
-const ResizableModal = require('../../misc/ResizableModal');
-// require('./css/modals.css');
-const {Grid} = require('react-bootstrap');
-const Message = require('../../I18N/Message');
-const ErrorBox = require('./fragments/ErrorBox');
-const MainForm = require('./fragments/MainForm');
-const ruleEditor = require('./enhancers/ruleEditor');
-const PermissionEditor = ruleEditor(require('./fragments/PermissionEditor'));
+
+import { get } from 'lodash';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Grid } from 'react-bootstrap';
+
+import Message from '../../I18N/Message';
+import Portal from '../../misc/Portal';
+import ResizableModal from '../../misc/ResizableModal';
+import ruleEditor from './enhancers/ruleEditor';
+import ErrorBox from './fragments/ErrorBox';
+import MainForm from './fragments/MainForm';
+import PermissionEditorComp from './fragments/PermissionEditor';
+
+const PermissionEditor = ruleEditor(PermissionEditorComp);
 
 /**
  * Defines if the resource permissions are available or not.
@@ -178,4 +181,4 @@ class SaveModal extends React.Component {
     isValidForm = () => get(this.props.resource, "metadata.name") && (!this.props.enableFileDrop || this.props.fileDropStatus === 'accepted')
 }
 
-module.exports = SaveModal;
+export default SaveModal;

@@ -5,22 +5,21 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { refreshAccessToken, sessionValid, logout, loginPromptClosed, LOGIN_SUCCESS, LOGOUT, LOGIN_REQUIRED} = require('../actions/security');
+import { refreshAccessToken, sessionValid, logout, loginPromptClosed, LOGIN_SUCCESS, LOGOUT, LOGIN_REQUIRED} from '../actions/security';
 
-const {loadMapConfig, configureError} = require('../actions/config');
-const {mapIdSelector} = require('../selectors/map');
-const {hasMapAccessLoadingError} = require('../selectors/mapInitialConfig');
-const {initCatalog} = require('../actions/catalog');
-const {setControlProperty, SET_CONTROL_PROPERTY} = require('../actions/controls');
-const {pathnameSelector} = require('../selectors/router');
-const {isLoggedIn} = require('../selectors/security');
-const ConfigUtils = require('../utils/ConfigUtils');
-const AuthenticationAPI = require('../api/GeoStoreDAO');
-const Rx = require('rxjs');
-const { LOCATION_CHANGE } = require('connected-react-router');
-const url = require('url');
-const {get} = require('lodash');
-const {push} = require('connected-react-router');
+import {loadMapConfig, configureError} from '../actions/config';
+import {mapIdSelector} from '../selectors/map';
+import {hasMapAccessLoadingError} from '../selectors/mapInitialConfig';
+import {initCatalog} from '../actions/catalog';
+import {setControlProperty, SET_CONTROL_PROPERTY} from '../actions/controls';
+import {pathnameSelector} from '../selectors/router';
+import {isLoggedIn} from '../selectors/security';
+import ConfigUtils from '../utils/ConfigUtils';
+import AuthenticationAPI from '../api/GeoStoreDAO';
+import Rx from 'rxjs';
+import {push, LOCATION_CHANGE } from 'connected-react-router';
+import url from 'url';
+import {get} from 'lodash';
 
 /**
  * Refresh the access_token every 5 minutes
@@ -99,7 +98,7 @@ const redirectOnLogout = action$ =>
  * @name epics.login
  * @type {Object}
  */
-module.exports = {
+export default {
     refreshTokenEpic,
     reloadMapConfig,
     promptLoginOnMapError,

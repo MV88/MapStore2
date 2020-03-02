@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,11 +8,11 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const MapInfoUtils = require('../../utils/MapInfoUtils');
+import React from 'react';
 
-const {FormControl, FormGroup, ControlLabel} = require('react-bootstrap');
+import ReactDOM from 'react-dom';
+import MapInfoUtils from '../../utils/MapInfoUtils';
+import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 
 class FeatureInfoFormatSelector extends React.Component {
     static propTypes = {
@@ -65,4 +66,4 @@ class FeatureInfoFormatSelector extends React.Component {
     };
 }
 
-module.exports = FeatureInfoFormatSelector;
+export default FeatureInfoFormatSelector;

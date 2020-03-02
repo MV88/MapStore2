@@ -5,18 +5,29 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {connect} from 'react-redux';
 
-module.exports = (config = {}, pluginsDef, overrideConfig = cfg => cfg) => {
-    const React = require('react');
-    const ReactDOM = require('react-dom');
-    const {connect} = require('react-redux');
-    const LocaleUtils = require('../utils/LocaleUtils');
+import {loadVersion} from '../actions/version';
+import StandardApp from '../components/app/StandardApp';
+import StandardRouterComp from '../components/app/StandardRouter';
+import {setSupportedLocales} from '../epics/localconfig';
+import {updateMapLayoutEpic} from '../epics/maplayout';
+import {readQueryParamsOnMapEpic} from '../epics/queryparams';
+import maplayout from '../reducers/maplayout';
+import maps from '../reducers/maps';
+import maptype from '../reducers/maptype';
+import version from '../reducers/version';
+import {loadAfterThemeSelector} from '../selectors/config';
+import {versionSelector} from '../selectors/version';
+import StandardStore from '../stores/StandardStore';
+import LocaleUtils from '../utils/LocaleUtils';
+
+export default (config = {}, pluginsDef, overrideConfig = cfg => cfg) => {
+
 
     const startApp = () => {
-        const {loadVersion} = require('../actions/version');
-        const {versionSelector} = require('../selectors/version');
-        const {loadAfterThemeSelector} = require('../selectors/config');
-        const StandardApp = require('../components/app/StandardApp');
 
         const {
             appEpics = {},
@@ -37,11 +48,7 @@ module.exports = (config = {}, pluginsDef, overrideConfig = cfg => cfg) => {
             themeCfg,
             version: versionSelector(state),
             loadAfterTheme: loadAfterThemeSelector(state)
-        }))(require('../components/app/StandardRouter'));
-
-        const {updateMapLayoutEpic} = require('../epics/maplayout');
-        const {setSupportedLocales} = require('../epics/localconfig');
-        const {readQueryParamsOnMapEpic} = require('../epics/queryparams');
+        }))(StandardRouterComp);
 
         /**
          * appStore data needed to create the store
@@ -51,13 +58,13 @@ module.exports = (config = {}, pluginsDef, overrideConfig = cfg => cfg) => {
          * @param {object} appEpics is used to extend the appEpics
          * @param {object} initialState is used to initialize the state of the application
         */
-        const appStore = require('../stores/StandardStore').bind(null,
+        const appStore = StandardStore.bind(null,
             initialState,
             baseReducers || {
-                maptype: require('../reducers/maptype'),
-                maps: require('../reducers/maps'),
-                maplayout: require('../reducers/maplayout'),
-                version: require('../reducers/version'),
+                maptype,
+                maps,
+                maplayout,
+                version,
                 ...appReducers
             },
             baseEpics || {

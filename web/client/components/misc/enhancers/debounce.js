@@ -5,8 +5,9 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const {withHandlers} = require('recompose');
-const {debounce} = require("lodash");
+import { withHandlers } from 'recompose';
+
+import { debounce } from 'lodash';
 const emptyFunc = () => {};
 /**
  * This enhancer de-bounce a method passed as prop of the given time.
@@ -19,7 +20,7 @@ const emptyFunc = () => {};
  * compose(debounce("onChangeDrawingStatus", 800));
  * the onChangeDrawingStatus action is debounced by 800 ms
  */
-module.exports = (action = "", debounceTime = 1000) => withHandlers((initProp = {}) => {
+export default (action = "", debounceTime = 1000) => withHandlers((initProp = {}) => {
     const debounced = debounce(initProp[action] || emptyFunc, debounceTime);
     return {
         [action]: () => debounced

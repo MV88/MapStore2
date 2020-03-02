@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const expect = require('expect');
-const { Responsive } = require('react-grid-layout');
-const WidgetsView = require('../WidgetsView');
-const ReactTestUtils = require('react-dom/test-utils');
+import React from 'react';
+
+import ReactDOM from 'react-dom';
+import expect from 'expect';
+import { Responsive } from 'react-grid-layout';
+import WidgetsView from '../WidgetsView';
+import ReactTestUtils from 'react-dom/test-utils';
 
 const dummyWidget = {
     title: "TEST",

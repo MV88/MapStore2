@@ -6,16 +6,44 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const {bindActionCreators} = require('redux');
-const {connect} = require('react-redux');
-const {loadMaps, updateMapMetadata, deleteMap, createThumbnail,
-    updateDetails, deleteDetails, saveDetails, toggleDetailsSheet, toggleGroupProperties, toggleUnsavedChanges, setDetailsChanged,
-    deleteThumbnail, saveMap, thumbnailError, saveAll, onDisplayMetadataEdit, resetUpdating,
-    backDetails, undoDetails, updateAttribute} = require('../../actions/maps');
-const {editMap, updateCurrentMap, errorCurrentMap, removeThumbnail, resetCurrentMap} = require('../../actions/currentMap');
-const {mapTypeSelector} = require('../../selectors/maptype');
-const {showMapDetailsSelector} = require('../../selectors/maps.js');
-const withShareTool = require('../../components/resources/enhancers/withShareTool').default;
+import withShareTool from '../../components/resources/enhancers/withShareTool';
+import { bindActionCreators } from 'redux';
+
+import { connect } from 'react-redux';
+
+import {
+    loadMaps,
+    updateMapMetadata,
+    deleteMap,
+    createThumbnail,
+    updateDetails,
+    deleteDetails,
+    saveDetails,
+    toggleDetailsSheet,
+    toggleGroupProperties,
+    toggleUnsavedChanges,
+    setDetailsChanged,
+    deleteThumbnail,
+    saveMap,
+    thumbnailError,
+    saveAll,
+    onDisplayMetadataEdit,
+    resetUpdating,
+    backDetails,
+    undoDetails,
+    updateAttribute
+} from '../../actions/maps';
+import MapGridComp from '../../components/maps/MapGrid';
+import {
+    editMap,
+    updateCurrentMap,
+    errorCurrentMap,
+    removeThumbnail,
+    resetCurrentMap
+} from '../../actions/currentMap';
+
+import { mapTypeSelector } from '../../selectors/maptype';
+import { showMapDetailsSelector } from '../../selectors/maps.js';
 
 const MapsGrid = connect((state) => {
     return {
@@ -55,6 +83,6 @@ const MapsGrid = connect((state) => {
             onDeleteDetails: deleteDetails
         }, dispatch)
     };
-})(require('../../components/maps/MapGrid'));
+})(MapGridComp);
 
-module.exports = withShareTool(MapsGrid);
+export default withShareTool(MapsGrid);

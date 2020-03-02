@@ -5,11 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const expect = require('expect');
-const ReactDOM = require('react-dom');
-const {identifyLifecycle} = require('../identify');
-const TestUtils = require('react-dom/test-utils');
+import React from 'react';
+
+import expect from 'expect';
+import ReactDOM from 'react-dom';
+import { identifyLifecycle } from '../identify';
+import TestUtils from 'react-dom/test-utils';
 
 describe("test identify enhancers", () => {
     beforeEach((done) => {

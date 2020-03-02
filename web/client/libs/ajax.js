@@ -6,18 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('axios');
-const combineURLs = require('axios/lib/helpers/combineURLs');
-const url = require('url');
-const ConfigUtils = require('../utils/ConfigUtils');
-const SecurityUtils = require('../utils/SecurityUtils');
+import axios from 'axios';
+import combineURLs from 'axios/lib/helpers/combineURLs';
+import url from 'url';
+import ConfigUtils from '../utils/ConfigUtils';
 
-const assign = require('object-assign');
-const {isObject, omitBy, isNil} = require('lodash');
-const urlUtil = require('url');
+import SecurityUtils from '../utils/SecurityUtils';
+import assign from 'object-assign';
+import {isObject, omitBy, isNil} from 'lodash';
 
 /**
- * Internal helper that adds an extra paramater to an axios configuration.
+ * Internal helper that adds an extra parameter to an axios configuration.
  */
 function addParameterToAxiosConfig(axiosConfig, parameterName, parameterValue) {
     // FIXME: the parameters can also be a URLSearchParams
@@ -121,10 +120,10 @@ axios.interceptors.request.use(config => {
             const isCORS = useCORS.reduce((found, current) => found || uri.indexOf(current) === 0, false);
             const cannotUseCORS = corsDisabled.reduce((found, current) => found || uri.indexOf(current) === 0, false);
             if (!isCORS && (!autoDetectCORS || cannotUseCORS)) {
-                const parsedUri = urlUtil.parse(uri, true, true);
+                const parsedUri = url.parse(uri, true, true);
                 const params = omitBy(config.params, isNil);
                 config.url = proxyUrl + encodeURIComponent(
-                    urlUtil.format(
+                    url.format(
                         assign({}, parsedUri, {
                             search: null,
                             query: assign({}, parsedUri.query, params)
@@ -154,4 +153,4 @@ axios.interceptors.response.use(response => response, (error) => {
     return Promise.reject(error.response ? {...error.response, originalError: error} : error);
 });
 
-module.exports = axios;
+export default axios;

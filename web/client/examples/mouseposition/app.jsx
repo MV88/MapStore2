@@ -1,4 +1,3 @@
-var PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -6,29 +5,35 @@ var PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React = require('react');
-var ReactDOM = require('react-dom');
-var { createStore, combineReducers } = require('redux');
-var { changeBrowserProperties} = require('../../actions/browser');
-var ConfigUtils = require('../../utils/ConfigUtils');
-var Localized = require('../../components/I18N/Localized');
-var browser = require('../../reducers/browser');
-var {Modal, Grid, Row, Col, Button} = require('react-bootstrap');
-var LMap = require('../../components/map/leaflet/Map');
-var LLayer = require('../../components/map/leaflet/Layer');
-var mouseposition = require('../../reducers/mousePosition');
-var {changeMousePosition} = require('../../actions/mousePosition');
+
+import '../../components/map/leaflet/plugins/OSMLayer';
+import './components/mouseposition.css';
+
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Button, Col, Grid, Modal, Row } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import { combineReducers, createStore } from 'redux';
+
+import { changeBrowserProperties } from '../../actions/browser';
+import { changeMousePosition } from '../../actions/mousePosition';
+import Localized from '../../components/I18N/Localized';
+import LLayer from '../../components/map/leaflet/Layer';
+import LMap from '../../components/map/leaflet/Map';
+import MousePosition from "../../components/mapcontrols/mouseposition/MousePosition";
+import LabelDD from "../../components/mapcontrols/mouseposition/MousePositionLabelDD";
+import LabelDM from "../../components/mapcontrols/mouseposition/MousePositionLabelDM";
+import LabelDMSNW from "../../components/mapcontrols/mouseposition/MousePositionLabelDMSNW";
+import browser from '../../reducers/browser';
+import mouseposition from '../../reducers/mousePosition';
+import ConfigUtils from '../../utils/ConfigUtils';
+import SearchGeoS from "./components/FindGeoSolutions.jsx";
+
 var store = createStore(combineReducers({browser, mouseposition}));
 
-require('../../components/map/leaflet/plugins/OSMLayer');
-require("./components/mouseposition.css");
 
 function startApp() {
-    let MousePosition = require("../../components/mapcontrols/mouseposition/MousePosition");
-    let LabelDD = require("../../components/mapcontrols/mouseposition/MousePositionLabelDD");
-    let LabelDM = require("../../components/mapcontrols/mouseposition/MousePositionLabelDM");
-    let LabelDMSNW = require("../../components/mapcontrols/mouseposition/MousePositionLabelDMSNW");
-    let SearchGeoS = require("./components/FindGeoSolutions.jsx");
+
     /**
     * Detect Browser's properties and save in app state.
     **/
@@ -130,10 +135,13 @@ function startApp() {
 }
 
 if (!global.Intl ) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
+    import(
+        /* webpackChunkName: "intl" */
+        'intl').then(module => {
+        // TODO CHECK THIS IS OK
+        global.Intl = module;
+        import('intl/locale-data/jsonp/en.js');
+        import('intl/locale-data/jsonp/it.js');
         startApp();
     });
 } else {

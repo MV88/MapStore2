@@ -6,15 +6,17 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const { compose, defaultProps, withHandlers } = require('recompose');
-const { deleteDashboard, reloadDashboards } = require('../../actions/dashboards');
-const { updateAttribute, setFeaturedMapsLatestResource } = require('../../actions/maps'); // TODO: externalize
-const { userSelector } = require('../../selectors/security');
-const { createSelector } = require('reselect');
-const { connect } = require('react-redux');
-const resourceGrid = require('../../components/resources/enhancers/resourceGrid');
-const withShareTool = require('../../components/resources/enhancers/withShareTool').default;
-const { success } = require('../../actions/notifications');
+import withShareTool from '../../components/resources/enhancers/withShareTool';
+import { success } from '../../actions/notifications';
+import { compose, defaultProps, withHandlers } from 'recompose';
+
+import { deleteDashboard, reloadDashboards } from '../../actions/dashboards';
+import { updateAttribute, setFeaturedMapsLatestResource } from '../../actions/maps'; // TODO: externalize
+import { userSelector } from '../../selectors/security';
+import { createSelector } from 'reselect';
+import { connect } from 'react-redux';
+import resourceGrid from '../../components/resources/enhancers/resourceGrid';
+import ResourceGrid from '../../components/resources/ResourceGrid';
 
 const Grid = compose(
     connect(createSelector(userSelector, user => ({ user })), {
@@ -47,6 +49,6 @@ const Grid = compose(
         withShareTool
     )
 
-)(require('../../components/resources/ResourceGrid'));
+)(ResourceGrid);
 
-module.exports = Grid;
+export default Grid;

@@ -7,10 +7,11 @@
  */
 
 
-const {getMessageById} = require('../../../utils/LocaleUtils');
-const PropTypes = require('prop-types');
-const {castArray, isArray, isNil, isString} = require('lodash');
-const {getContext, mapProps, compose} = require('recompose');
+import { getMessageById } from '../../../utils/LocaleUtils';
+
+import PropTypes from 'prop-types';
+import { castArray, isArray, isNil, isString } from 'lodash';
+import { getContext, mapProps, compose } from 'recompose';
 
 /**
  * @returns {string|object[]} the translated message or array of message in the form of [{label: "path1"}, {label: "path2"}]
@@ -48,7 +49,8 @@ const accumulate = (props, messages, labelName) => (acc = {}, propName) => ({
  * <CustomSelect options={[{customLabel: "path1", value: v}, {customLabel: "path2", value: v}]} />
  * <Select options={[{label: "path1", value: v}, {label: "path2", value: v}]} />
  */
-module.exports = (propNames, localizedKey = "label") => compose(
+
+export default (propNames, localizedKey = "label") => compose(
     getContext({
         messages: PropTypes.object
     }),

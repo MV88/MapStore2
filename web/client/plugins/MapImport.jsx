@@ -6,21 +6,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
+import assign from 'object-assign';
+import React from 'react';
+import { Glyphicon } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-const Message = require('./locale/Message');
+import { toggleControl } from '../actions/controls';
+import { addLayer } from '../actions/layers';
+import { zoomToExtent } from '../actions/map';
+import {
+    onError, setLoading, setLayers, onSelectLayer, onLayerAdded, onLayerSkipped, updateBBox, onSuccess
+} from '../actions/mapimport';
+import mapimport from '../reducers/mapimport';
+import style from  '../reducers/style';
+import { mapTypeSelector } from '../selectors/maptype';
+import Message from './locale/Message';
 
-const { onError, setLoading, setLayers, onSelectLayer, onLayerAdded, onLayerSkipped, updateBBox, onSuccess} = require('../actions/mapimport');
-const {zoomToExtent} = require('../actions/map');
-const {addLayer} = require('../actions/layers');
-const {toggleControl} = require('../actions/controls');
-
-const assign = require('object-assign');
-const {Glyphicon} = require('react-bootstrap');
-const {mapTypeSelector} = require('../selectors/maptype');
-
-module.exports = {
+export default {
     MapImportPlugin: assign({loadPlugin: (resolve) => {
         require.ensure(['./import/Import'], () => {
             const Import = require('./import/Import');
@@ -65,7 +67,7 @@ module.exports = {
         }
     }),
     reducers: {
-        mapimport: require('../reducers/mapimport'),
-        style: require('../reducers/style')
+        mapimport,
+        style
     }
 };

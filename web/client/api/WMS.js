@@ -5,18 +5,19 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../libs/ajax');
-const ConfigUtils = require('../utils/ConfigUtils');
-const CoordinatesUtils = require('../utils/CoordinatesUtils');
 
-const urlUtil = require('url');
-const assign = require('object-assign');
+import urlUtil from 'url';
 
-const xml2js = require('xml2js');
+import { castArray, get, isArray } from 'lodash';
+import assign from 'object-assign';
+import xml2js from 'xml2js';
+
+import axios from '../libs/ajax';
+import ConfigUtils from '../utils/ConfigUtils';
+import {getWMSBoundingBox} from '../utils/CoordinatesUtils';
 
 const capabilitiesCache = {};
 
-const {isArray, castArray, get} = require('lodash');
 
 const parseUrl = (urls) => {
     const url = (isArray(urls) && urls || urls.split(','))[0];
@@ -63,7 +64,6 @@ const extractCredits = attribution => {
     };
 };
 
-const _ = require('lodash');
 
 const flatLayers = (root) => {
     return root.Layer ? (isArray(root.Layer) && root.Layer || [root.Layer]).reduce((previous, current) => {
@@ -119,21 +119,23 @@ const Api = {
                 request: "GetCapabilities"
             }, parsed.query)
         }));
-        return new Promise((resolve) => {
-            require.ensure(['../utils/ogc/WMS'], () => {
-                const {unmarshaller} = require('../utils/ogc/WMS');
-                resolve(axios.get(parseUrl(getCapabilitiesUrl)).then((response) => {
-                    if (raw) {
-                        let json;
-                        xml2js.parseString(response.data, {explicitArray: false}, (ignore, result) => {
-                            json = result;
-                        });
-                        return json;
-                    }
-                    let json = unmarshaller.unmarshalString(response.data);
-                    return json && json.value;
-                }));
-            });
+        return new Promise(async(resolve) => {
+            const Module = await import(
+                /* webpackChunkName: "WMS_OGC_Utils" */
+                '../utils/ogc/WMS');
+            const {unmarshaller} = Module.default;
+
+            resolve(axios.get(parseUrl(getCapabilitiesUrl)).then((response) => {
+                if (raw) {
+                    let json;
+                    xml2js.parseString(response.data, {explicitArray: false}, (ignore, result) => {
+                        json = result;
+                    });
+                    return json;
+                }
+                let json = unmarshaller.unmarshalString(response.data);
+                return json && json.value;
+            }));
         });
     },
     describeLayer: function(url, layers, options = {}) {
@@ -148,15 +150,18 @@ const Api = {
             parsed.query,
             options.query || {})
         }));
-        return new Promise((resolve) => {
-            require.ensure(['../utils/ogc/WMS'], () => {
-                const {unmarshaller} = require('../utils/ogc/WMS');
-                resolve(axios.get(parseUrl(describeLayerUrl)).then((response) => {
-                    let json = unmarshaller.unmarshalString(response.data);
-                    return json && json.value && json.value.layerDescription && json.value.layerDescription[0];
+        return new Promise(async(resolve) => {
 
-                }));
-            });
+            const Module = await import(
+                /* webpackChunkName: "WMS_OGC_Utils" */
+                '../utils/ogc/WMS');
+            const {unmarshaller} = Module.default;
+
+            resolve(axios.get(parseUrl(describeLayerUrl)).then((response) => {
+                let json = unmarshaller.unmarshalString(response.data);
+                return json && json.value && json.value.layerDescription && json.value.layerDescription[0];
+
+            }));
         });
     },
     getRecords: function(url, startPosition, maxRecords, text) {
@@ -196,10 +201,10 @@ const Api = {
             decriptions = Array.isArray(decriptions) ? decriptions : [decriptions];
             // make it compatible with json format of describe layer
             return decriptions.map(desc => ({
-                ...desc && desc.$ || {},
+                ...(desc && desc.$ || {}),
                 layerName: desc && desc.$ && desc.$.name,
                 query: {
-                    ...desc && desc.query && desc.query.$ || {}
+                    ...(desc && desc.query && desc.query.$ || {})
                 }
             }));
         });
@@ -208,7 +213,7 @@ const Api = {
         return Api.getRecords(url, startPosition, maxRecords, text);
     },
     parseLayerCapabilities: function(capabilities, layer, lyrs) {
-        const layers = castArray(lyrs || _.get(capabilities, "capability.layer.layer"));
+        const layers = castArray(lyrs || get(capabilities, "capability.layer.layer"));
         return layers.reduce((previous, capability) => {
             if (previous) {
                 return previous;
@@ -227,10 +232,10 @@ const Api = {
     },
     getBBox: function(record, bounds) {
         let layer = record;
-        let bbox = (layer.EX_GeographicBoundingBox || layer.exGeographicBoundingBox || CoordinatesUtils.getWMSBoundingBox(layer.BoundingBox) || (layer.LatLonBoundingBox && layer.LatLonBoundingBox.$) || layer.latLonBoundingBox);
+        let bbox = (layer.EX_GeographicBoundingBox || layer.exGeographicBoundingBox || getWMSBoundingBox(layer.BoundingBox) || (layer.LatLonBoundingBox && layer.LatLonBoundingBox.$) || layer.latLonBoundingBox);
         while (!bbox && layer.Layer && layer.Layer.length) {
             layer = layer.Layer[0];
-            bbox = (layer.EX_GeographicBoundingBox || layer.exGeographicBoundingBox || CoordinatesUtils.getWMSBoundingBox(layer.BoundingBox) || (layer.LatLonBoundingBox && layer.LatLonBoundingBox.$) || layer.latLonBoundingBox);
+            bbox = (layer.EX_GeographicBoundingBox || layer.exGeographicBoundingBox || getWMSBoundingBox(layer.BoundingBox) || (layer.LatLonBoundingBox && layer.LatLonBoundingBox.$) || layer.latLonBoundingBox);
         }
         if (!bbox) {
             bbox = {
@@ -269,4 +274,4 @@ const Api = {
     }
 };
 
-module.exports = Api;
+export default Api;

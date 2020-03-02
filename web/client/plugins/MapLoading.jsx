@@ -5,21 +5,21 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const {layersSelector} = require('../selectors/layers');
+import { connect } from 'react-redux';
 
-const assign = require('object-assign');
+import { createSelector } from 'reselect';
+import { layersSelector } from '../selectors/layers';
+import assign from 'object-assign';
 
 const selector = createSelector([layersSelector], (layers) => ({
     loading: layers && layers.some((layer) => layer.loading)
 }));
 
-require('./maploading/maploading.css');
+import './maploading/maploading.css';
+import GlobalSpinner from '../components/misc/spinners/GlobalSpinner/GlobalSpinner';
+const MapLoadingPlugin = connect(selector)(GlobalSpinner);
 
-const MapLoadingPlugin = connect(selector)(require('../components/misc/spinners/GlobalSpinner/GlobalSpinner'));
-
-module.exports = {
+export default {
     MapLoadingPlugin: assign(MapLoadingPlugin, {
         Toolbar: {
             name: 'maploading',

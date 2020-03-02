@@ -5,14 +5,27 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const expect = require('expect');
-
-const maps = require('../maps');
-const {
-    mapsLoaded, mapsLoading, loadError, mapCreated, mapUpdating,
-    mapMetadataUpdated, mapDeleting, attributeUpdated, thumbnailError, mapError, permissionsLoading,
-    permissionsLoaded, saveMap, permissionsUpdated, resetUpdating,
-    mapsSearchTextChanged, setShowMapDetails} = require('../../actions/maps');
+import expect from 'expect';
+import maps from '../maps';
+import {
+    mapsLoaded,
+    mapError,
+    mapsLoading,
+    loadError,
+    mapCreated,
+    mapUpdating,
+    mapMetadataUpdated,
+    mapDeleting,
+    attributeUpdated,
+    thumbnailError,
+    permissionsLoading,
+    permissionsLoaded,
+    saveMap,
+    permissionsUpdated,
+    resetUpdating,
+    mapsSearchTextChanged,
+    setShowMapDetails
+} from '../../actions/maps';
 
 const sampleMap = {
     canDelete: false,

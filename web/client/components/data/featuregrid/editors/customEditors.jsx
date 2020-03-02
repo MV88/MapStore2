@@ -1,11 +1,11 @@
-const React = require('react');
-const DropDownEditor = require('./DropDownEditor');
+import React from 'react';
+import DropDownEditor from './DropDownEditor';
 
-const Editors = {
+export const Editors = {
     "DropDownEditor": {
         "string": (props) => <DropDownEditor dataType="string" {...props}/>
     }
 };
 
 
-module.exports = Editors;
+export default Editors;

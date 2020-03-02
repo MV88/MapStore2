@@ -6,15 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {Row, Col} = require('react-bootstrap');
-const Toolbar = require('../../misc/toolbar/Toolbar');
-const Message = require('../../I18N/Message');
-const DockablePanel = require('../../misc/panels/DockablePanel');
-const GeocodeViewer = require('./GeocodeViewer');
-const ResizableModal = require('../../misc/ResizableModal');
-const Portal = require('../../misc/Portal');
-const Coordinate = require('./coordinates/Coordinate');
+import React from 'react';
+
+import { Row, Col } from 'react-bootstrap';
+import Toolbar from '../../misc/toolbar/Toolbar';
+import Message from '../../I18N/Message';
+import DockablePanel from '../../misc/panels/DockablePanel';
+import GeocodeViewer from './GeocodeViewer';
+import ResizableModal from '../../misc/ResizableModal';
+import Portal from '../../misc/Portal';
+import Coordinate from './coordinates/Coordinate';
 /**
  * Component for rendering Identify Container inside a Dockable container
  * @memberof components.data.identify
@@ -26,7 +27,7 @@ const Coordinate = require('./coordinates/Coordinate');
  * @prop {function} getToolButtons must return an array of object representing the toolbar buttons, eg (props) => [{ glyph: 'info-sign', tooltip: 'hello!'}]
  * @prop {function} getNavigationButtons must return an array of navigation buttons, eg (props) => [{ glyph: 'info-sign', tooltip: 'hello!'}]
  */
-module.exports = props => {
+export default props => {
     const {
         enabled,
         requests = [],

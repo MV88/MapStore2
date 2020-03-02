@@ -5,20 +5,16 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-/**
- * Copyright 2016, GeoSolutions Sas.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree.
- */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const moment = require('moment');
-const {FormControl: BFormControl, FormGroup, ControlLabel} = require('react-bootstrap');
-const ConfigUtils = require('../../../utils/ConfigUtils');
-const FormControl = require('../../misc/enhancers/localizedProps')('placeholder')(BFormControl);
+import React from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
+import { FormControl as BFormControl, ControlLabel, FormGroup } from 'react-bootstrap';
+import localizedProps from '../../misc/enhancers/localizedProps';
+
+import ConfigUtils from '../../../utils/ConfigUtils';
+
+const FormControl = localizedProps('placeholder')(BFormControl);
 
 /**
  * A DropDown menu for user details:
@@ -115,4 +111,4 @@ class Metadata extends React.Component {
 }
 
 
-module.exports = Metadata;
+export default Metadata;

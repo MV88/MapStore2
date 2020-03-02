@@ -1,6 +1,6 @@
-const {compose, withHandlers, withState, withProps} = require('recompose');
+import { compose, withHandlers, withState, withProps } from 'recompose';
 
-module.exports = compose(
+export default compose(
     withProps(({ value }) => ({
         isValid: value !== ""
     })),

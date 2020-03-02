@@ -6,19 +6,19 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const {ADD_MEASURE_AS_ANNOTATION} = require('../actions/measurement');
-const {getStartEndPointsForLinestring, DEFAULT_ANNOTATIONS_STYLES, STYLE_TEXT} = require('../utils/AnnotationsUtils');
-const {convertUom, getFormattedBearingValue, validateFeatureCoordinates} = require('../utils/MeasureUtils');
-const {toggleControl, SET_CONTROL_PROPERTY} = require('../actions/controls');
-const {closeFeatureGrid} = require('../actions/featuregrid');
-const {purgeMapInfoResults, hideMapinfoMarker} = require('../actions/mapInfo');
-const {transformLineToArcs} = require('../utils/CoordinatesUtils');
-const uuidv1 = require('uuid/v1');
-const assign = require('object-assign');
-const {last, round} = require('lodash');
-const {showCoordinateEditorSelector} = require('../selectors/controls');
-const {newAnnotation, setEditingFeature} = require('../actions/annotations');
+import Rx from 'rxjs';
+import {ADD_MEASURE_AS_ANNOTATION} from '../actions/measurement';
+import {getStartEndPointsForLinestring, DEFAULT_ANNOTATIONS_STYLES, STYLE_TEXT} from '../utils/AnnotationsUtils';
+import {convertUom, getFormattedBearingValue, validateFeatureCoordinates} from '../utils/MeasureUtils';
+import {toggleControl, SET_CONTROL_PROPERTY} from '../actions/controls';
+import {closeFeatureGrid} from '../actions/featuregrid';
+import {purgeMapInfoResults, hideMapinfoMarker} from '../actions/mapInfo';
+import {transformLineToArcs} from '../utils/CoordinatesUtils';
+import uuidv1 from 'uuid/v1';
+import assign from 'object-assign';
+import {last, round} from 'lodash';
+import {showCoordinateEditorSelector} from '../selectors/controls';
+import {newAnnotation, setEditingFeature} from '../actions/annotations';
 
 const formattedValue = (uom, value) => ({
     "length": round(convertUom(value, "m", uom) || 0, 2) + " " + uom,
@@ -82,7 +82,7 @@ const convertMeasureToGeoJSON = (measureGeometry, value, uom, id, measureTool, s
     });
 };
 
-module.exports = {
+export default {
     addAnnotationFromMeasureEpic: (action$, store) =>
         action$.ofType(ADD_MEASURE_AS_ANNOTATION)
             .switchMap((a) => {

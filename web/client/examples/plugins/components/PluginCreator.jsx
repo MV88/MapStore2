@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,16 +7,12 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
 
-const {Button, Glyphicon, Modal, Checkbox, FormGroup} = require('react-bootstrap');
-
-const {Controlled: Codemirror} = require('react-codemirror2');
-
-
-require('codemirror/lib/codemirror.css');
-
-require('codemirror/mode/javascript/javascript');
+import { Button, Glyphicon, Modal, Checkbox, FormGroup } from 'react-bootstrap';
+import { Controlled as Codemirror } from 'react-codemirror2';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/mode/javascript/javascript';
 
 class PluginCreator extends React.Component {
     static propTypes = {
@@ -94,4 +91,4 @@ class PluginCreator extends React.Component {
     };
 }
 
-module.exports = PluginCreator;
+export default PluginCreator;

@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const assign = require('object-assign');
-const {transformLineToArcs} = require('../utils/CoordinatesUtils');
+import assign from 'object-assign';
+import {transformLineToArcs} from '../utils/CoordinatesUtils';
 
-const circle = require('@turf/circle').default;
+import circle from '@turf/circle';
 
-const {PURGE_MAPINFO_RESULTS} = require('../actions/mapInfo');
-const {TOGGLE_CONTROL} = require('../actions/controls');
-const {FEATURES_SELECTED, DRAWING_FEATURE} = require('../actions/draw');
-const {REMOVE_ANNOTATION, CONFIRM_REMOVE_ANNOTATION, CANCEL_REMOVE_ANNOTATION, CLOSE_ANNOTATIONS,
+import {PURGE_MAPINFO_RESULTS} from '../actions/mapInfo';
+import {TOGGLE_CONTROL} from '../actions/controls';
+import {FEATURES_SELECTED, DRAWING_FEATURE} from '../actions/draw';
+import {REMOVE_ANNOTATION, CONFIRM_REMOVE_ANNOTATION, CANCEL_REMOVE_ANNOTATION, CLOSE_ANNOTATIONS,
     CONFIRM_CLOSE_ANNOTATIONS, CANCEL_CLOSE_ANNOTATIONS,
     EDIT_ANNOTATION, CANCEL_EDIT_ANNOTATION, SAVE_ANNOTATION, TOGGLE_ADD, VALIDATION_ERROR, REMOVE_ANNOTATION_GEOMETRY,
     TOGGLE_STYLE, SET_STYLE, NEW_ANNOTATION, SHOW_ANNOTATION, CANCEL_SHOW_ANNOTATION, FILTER_ANNOTATIONS,
@@ -22,13 +22,13 @@ const {REMOVE_ANNOTATION, CONFIRM_REMOVE_ANNOTATION, CANCEL_REMOVE_ANNOTATION, C
     ADD_TEXT, CHANGED_SELECTED, RESET_COORD_EDITOR, CHANGE_RADIUS, CHANGE_TEXT,
     ADD_NEW_FEATURE, SET_EDITING_FEATURE, SET_INVALID_SELECTED, TOGGLE_DELETE_FT_MODAL, CONFIRM_DELETE_FEATURE, HIGHLIGHT_POINT,
     CHANGE_FORMAT, UPDATE_SYMBOLS, ERROR_SYMBOLS
-} = require('../actions/annotations');
+} from '../actions/annotations';
 
-const {validateCoordsArray, getAvailableStyler, DEFAULT_ANNOTATIONS_STYLES, convertGeoJSONToInternalModel, addIds, validateFeature, getComponents, updateAllStyles, getBaseCoord} = require('../utils/AnnotationsUtils');
-const {set} = require('../utils/ImmutableUtils');
-const {head, findIndex, isNil, slice, castArray} = require('lodash');
+import {validateCoordsArray, getAvailableStyler, DEFAULT_ANNOTATIONS_STYLES, convertGeoJSONToInternalModel, addIds, validateFeature, getComponents, updateAllStyles, getBaseCoord} from '../utils/AnnotationsUtils';
+import {set} from '../utils/ImmutableUtils';
+import {head, findIndex, isNil, slice, castArray} from 'lodash';
 
-const uuid = require('uuid');
+import uuid from 'uuid';
 
 const fixCoordinates = (coords, type) => {
     switch (type) {
@@ -630,4 +630,4 @@ function annotations(state = { validationErrors: {} }, action) {
     }
 }
 
-module.exports = annotations;
+export default annotations;

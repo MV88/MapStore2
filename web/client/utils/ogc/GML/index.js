@@ -1,6 +1,14 @@
-const {isArray} = require('lodash');
-const isGML2 = (version) => version.indexOf("2.") === 0;
-const closePolygon = (coords) => {
+/**
+ * Copyright 2019, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { isArray } from 'lodash';
+export  const isGML2 = (version) => version.indexOf("2.") === 0;
+export const closePolygon = (coords) => {
     if (coords.length >= 3) {
         const first = coords[0];
         const last = coords[coords.length - 1];
@@ -10,7 +18,7 @@ const closePolygon = (coords) => {
     }
     return coords;
 };
-const pointElement = (coordinates, srsName, version) => {
+export const pointElement = (coordinates, srsName, version) => {
     let gmlPoint = '<gml:Point srsDimension="2"';
     const gml2 = isGML2(version);
     gmlPoint += srsName ? ' srsName="' + srsName + '">' : '>';
@@ -25,7 +33,7 @@ const pointElement = (coordinates, srsName, version) => {
     return gmlPoint;
 };
 
-const polygonElement = (coordinates, srsName, version) => {
+export const polygonElement = (coordinates, srsName, version) => {
     const gml2 = isGML2(version);
     let gmlPolygon = '<gml:Polygon';
     gmlPolygon += srsName ? ' srsName="' + srsName + '">' : '>';
@@ -55,7 +63,7 @@ const polygonElement = (coordinates, srsName, version) => {
     gmlPolygon += '</gml:Polygon>';
     return gmlPolygon;
 };
-const lineStringElement = (coordinates, srsName, version) => {
+export const lineStringElement = (coordinates, srsName, version) => {
     const gml2 = isGML2(version);
     let gml = '<gml:LineString';
     gml += srsName ? ' srsName="' + srsName + '">' : '>';
@@ -83,7 +91,7 @@ const lineStringElement = (coordinates, srsName, version) => {
  * @param  {object} geometry the geometry in GeoJSON format
  * @return {string}          the GML version of the Geometry
  */
-const processOGCGeometry = (version, geometry) => {
+export const processOGCGeometry = (version, geometry) => {
     let ogc = '';
     const srsName = geometry.projection || "EPSG:4326";
     switch (geometry.type) {
@@ -157,12 +165,4 @@ const processOGCGeometry = (version, geometry) => {
         break;
     }
     return ogc;
-};
-
-module.exports = {
-    closePolygon,
-    pointElement,
-    polygonElement,
-    lineStringElement,
-    processOGCGeometry
 };

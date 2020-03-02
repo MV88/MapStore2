@@ -6,16 +6,17 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const React = require("react");
-const {Row, Col} = require('react-bootstrap');
-const PagedCombo = require('../../../../misc/combobox/PagedCombobox');
-const autoComplete = require("../../enhancers/autoComplete");
-const { compose, defaultProps, withHandlers} = require('recompose');
-const localizedProps = require("../../../../misc/enhancers/localizedProps");
-const {getRoles} = require('../../../../../observables/rulesmanager');
-const {connect} = require("react-redux");
-const {error} = require('../../../../../actions/notifications');
-const Message = require('../../../../I18N/Message');
+import React from 'react';
+
+import { Row, Col } from 'react-bootstrap';
+import PagedCombo from '../../../../misc/combobox/PagedCombobox';
+import autoComplete from '../../enhancers/autoComplete';
+import { compose, defaultProps, withHandlers } from 'recompose';
+import localizedProps from '../../../../misc/enhancers/localizedProps';
+import { getRoles } from '../../../../../observables/rulesmanager';
+import { connect } from 'react-redux';
+import { error } from '../../../../../actions/notifications';
+import Message from '../../../../I18N/Message';
 
 const RoleSelector = (props) => (
     <Row className={props.disabled ? 'ms-disabled' : ''}>
@@ -27,7 +28,7 @@ const RoleSelector = (props) => (
         </Col>
     </Row>);
 
-module.exports = compose(
+export default compose(
     connect(() => ({}), {onError: error}),
     defaultProps({
         size: 5,

@@ -5,29 +5,30 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const PropTypes = require('prop-types');
-const assign = require('object-assign');
-const {connect} = require('react-redux');
-const { compose } = require('recompose');
-const ConfigUtils = require('../utils/ConfigUtils');
-const Message = require("../components/I18N/Message");
+import React from 'react';
 
-const maptypeEpics = require('../epics/maptype');
-const mapsEpics = require('../epics/maps');
-const {mapTypeSelector} = require('../selectors/maptype');
-const {userRoleSelector} = require('../selectors/security');
-const { totalCountSelector } = require('../selectors/maps');
-const { isFeaturedMapsEnabled } = require('../selectors/featuredmaps');
-const emptyState = require('../components/misc/enhancers/emptyState');
-const {createSelector} = require('reselect');
-
-const MapsGrid = require('./maps/MapsGrid');
-const MetadataModal = require('./maps/MetadataModal');
-const EmptyMaps = require('./maps/EmptyMaps').default;
-
-const {loadMaps, setShowMapDetails} = require('../actions/maps');
-
+import PropTypes from 'prop-types';
+import assign from 'object-assign';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import ConfigUtils from '../utils/ConfigUtils';
+import Message from '../components/I18N/Message';
+import maptypeEpics from '../epics/maptype';
+import mapsEpics from '../epics/maps';
+import { mapTypeSelector } from '../selectors/maptype';
+import { userRoleSelector } from '../selectors/security';
+import { totalCountSelector } from '../selectors/maps';
+import { isFeaturedMapsEnabled } from '../selectors/featuredmaps';
+import emptyState from '../components/misc/enhancers/emptyState';
+import { createSelector } from 'reselect';
+import MapsGrid from './maps/MapsGrid';
+import MetadataModal from './maps/MetadataModal';
+import EmptyMaps from './maps/EmptyMaps';
+import { loadMaps, setShowMapDetails } from '../actions/maps';
+import PaginationToolbarComp from '../components/misc/PaginationToolbar';
+import mapsReducers from '../reducers/maps';
+import maptype from '../reducers/maptype';
+import currentMap from '../reducers/currentMap';
 const mapsCountSelector = createSelector(
     totalCountSelector,
     count => ({ count })
@@ -58,7 +59,7 @@ const PaginationToolbar = connect((state) => {
             dispatchProps.onSelect(ConfigUtils.getDefaults().geoStoreUrl, stateProps.searchText, {start, limit});
         }
     };
-})(require('../components/misc/PaginationToolbar'));
+})(PaginationToolbarComp);
 
 /**
  * Plugin for Maps resources
@@ -146,7 +147,7 @@ const MapsPlugin = compose(
     )
 )(Maps);
 
-module.exports = {
+export default {
     MapsPlugin: assign(MapsPlugin, {
         NavMenu: {
             position: 2,
@@ -169,8 +170,8 @@ module.exports = {
         ...mapsEpics
     },
     reducers: {
-        maps: require('../reducers/maps'),
-        maptype: require('../reducers/maptype'),
-        currentMap: require('../reducers/currentMap')
+        maps: mapsReducers,
+        maptype,
+        currentMap
     }
 };

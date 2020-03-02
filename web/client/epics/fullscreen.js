@@ -5,12 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const screenfull = require('screenfull');
-const {head, last} = require('lodash');
-const {setControlProperty} = require('../actions/controls');
-const {TOGGLE_FULLSCREEN} = require('../actions/fullscreen');
-const ConfigUtils = require('../utils/ConfigUtils');
-const Rx = require('rxjs');
+import {head, last} from 'lodash';
+import screenfull from 'screenfull';
+
+import { setControlProperty } from '../actions/controls';
+import { TOGGLE_FULLSCREEN } from '../actions/fullscreen';
+import ConfigUtils from '../utils/ConfigUtils';
+import Rx from 'rxjs';
 
 const getFullScreenEvent = () => {
     let candidates = [
@@ -31,7 +32,7 @@ const getFullScreenEvent = () => {
  * @memberof epics.fullscreen
  * @return {external:Observable} emitting {@link #actions.controls.setControlProperty} events
  */
-const toggleFullscreenEpic = action$ =>
+export const toggleFullscreenEpic = action$ =>
     action$.ofType(TOGGLE_FULLSCREEN).switchMap(action => {
         const element = document.querySelector(action && action.querySelector || '.' + (ConfigUtils.getConfigProp('themePrefix') || 'ms2') + " > div");
         if (element && action.enable && screenfull.enabled) {
@@ -55,6 +56,3 @@ const toggleFullscreenEpic = action$ =>
  * @name epics.fullscreen
  * @type {Object}
  */
-module.exports = {
-    toggleFullscreenEpic
-};

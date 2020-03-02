@@ -1,7 +1,13 @@
-const React = require('react');
-const {compose, branch, withState} = require('recompose');
-const isArray = require('lodash/isArray');
-const flatten = require('lodash/flatten');
+/**
+ * Copyright 2020, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+import {flatten, isArray} from 'lodash';
+import React from 'react';
+import { compose, branch, withState } from 'recompose';
 
 const changeNode = (nodes, id, objToMerge) => {
     const targetIndex = nodes.findIndex(node => node.id === id);
@@ -83,4 +89,4 @@ const dndTree = branch(
     )
 );
 
-module.exports = dndTree;
+export default dndTree;

@@ -162,7 +162,6 @@ const changeLayoutAction = {
     ],
     target: 'floating'
 };
-
 const initialStateWithLayers = {
     containers: {
         floating: {
@@ -188,7 +187,7 @@ const initialStateWithLayers = {
         }
     }
 };
-module.exports = {
+export default {
     initialState,
     initialStateWithLayers,
     changeLayoutAction

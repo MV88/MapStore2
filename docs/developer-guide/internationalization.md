@@ -64,16 +64,16 @@ In order to add a new language to MapStore you need to follow these steps:
 ```
 
 - *Update the LocaleUtils.js file in `web\client\utils`*:
-  add a param in the ensureIntl() function like and the relative require i.e: `'intl/locale-data/jsonp/ru.js'`
+  add a param in the ensureIntl() function like and the relative import i.e: `'intl/locale-data/jsonp/ru.js'`
 
 ```javascript
-require('intl/locale-data/jsonp/ru.js');
+import('intl/locale-data/jsonp/ru.js');
 ```
 
 - *update the addLocaleData() call with the new locale obj* i.e.:
 
 ```javascript
-const ru = require('react-intl/locale-data/ru');
+import ru from 'react-intl/locale-data/ru';
 addLocaleData([...en, ...it, ...fr, ...de, ...es, ...ru]);
 ```
 

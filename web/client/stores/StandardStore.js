@@ -5,31 +5,32 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const assign = require('object-assign');
+import assign from 'object-assign';
 
-const {mapConfigHistory, createHistory} = require('../utils/MapHistoryUtils');
+import {mapConfigHistory, createHistory} from '../utils/MapHistoryUtils';
 
-const map = mapConfigHistory(require('../reducers/map'));
+import mapReducer from '../reducers/map';
+const map = mapConfigHistory(mapReducer);
 
-const layers = require('../reducers/layers');
-const mapConfig = require('../reducers/config');
+import layers from '../reducers/layers';
+import mapConfig from '../reducers/config';
 
-const DebugUtils = require('../utils/DebugUtils').default;
-const {combineEpics, combineReducers} = require('../utils/PluginsUtils');
+import DebugUtils from '../utils/DebugUtils';
+import {combineEpics, combineReducers} from '../utils/PluginsUtils';
 
-const LayersUtils = require('../utils/LayersUtils');
-const {CHANGE_BROWSER_PROPERTIES} = require('../actions/browser');
-const {createEpicMiddleware} = require('redux-observable');
+import LayersUtils from '../utils/LayersUtils';
+import {CHANGE_BROWSER_PROPERTIES} from '../actions/browser';
+import {createEpicMiddleware} from 'redux-observable';
 
-const ListenerEnhancer = require('@carnesen/redux-add-action-listener-enhancer').default;
+import ListenerEnhancer from '@carnesen/redux-add-action-listener-enhancer';
 
-const { routerMiddleware, connectRouter } = require('connected-react-router');
+import { routerMiddleware, connectRouter } from 'connected-react-router';
 
-const layersEpics = require('../epics/layers');
-const controlsEpics = require('../epics/controls');
-const configEpics = require('../epics/config');
-const timeManagerEpics = require('../epics/dimension');
-const {persistMiddleware, persistEpic} = require('../utils/StateUtils');
+import layersEpics from '../epics/layers';
+import controlsEpics from '../epics/controls';
+import configEpics from '../epics/config';
+import timeManagerEpics from '../epics/dimension';
+import {persistMiddleware, persistEpic} from '../utils/StateUtils';
 
 const standardEpics = {
     ...layersEpics,
@@ -38,7 +39,7 @@ const standardEpics = {
     ...configEpics
 };
 
-module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, appEpics = {}, plugins = {}, storeOpts = {}) => {
+export default (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, appEpics = {}, plugins = {}, storeOpts = {}) => {
     const history = storeOpts.noRouter ? null : require('./History').default;
     const allReducers = combineReducers(plugins, {
         ...appReducers,
@@ -47,7 +48,7 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         locales: () => {return null; },
         browser: require('../reducers/browser'),
         controls: require('../reducers/controls'),
-        theme: require('../reducers/theme'),
+        theme: require('../reducers/theme').default,
         help: require('../reducers/help'),
         map: () => {return null; },
         mapInitialConfig: () => {return null; },
@@ -80,7 +81,7 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
     };
     let store;
     let enhancer;
-    if (storeOpts && storeOpts.notify) {
+    if (storeOpts && storeOpts.notify !== false) {
         enhancer = ListenerEnhancer;
     }
     if (storeOpts && storeOpts.persist) {

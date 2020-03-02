@@ -6,18 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const assign = require('object-assign');
+import React from 'react';
 
-const Message = require('../I18N/Message');
-const PreviewButton = require('./PreviewButton');
-const PreviewList = require('./PreviewList');
-const PreviewIcon = require('./PreviewIcon');
-const ToolbarButton = require('../misc/toolbar/ToolbarButton');
-const BackgroundDialog = require('./BackgroundDialog').default;
-const ConfirmDialog = require('../misc/ConfirmDialog');
-
-const PropTypes = require('prop-types');
+import Message from '../I18N/Message';
+import ToolbarButton from '../misc/toolbar/ToolbarButton';
+import BackgroundDialog from './BackgroundDialog';
+import ConfirmDialog from '../misc/ConfirmDialog';
+import assign from 'object-assign';
+import PreviewButton from './PreviewButton';
+import PreviewList from './PreviewList';
+import PreviewIcon from './PreviewIcon';
+import PropTypes from 'prop-types';
+import './css/background.css';
+import defaultImg from './img/dafault.jpg';
 
 class BackgroundSelector extends React.Component {
     static propTypes = {
@@ -75,7 +76,7 @@ class BackgroundSelector extends React.Component {
         dimensions: {},
         allowDeletion: true,
         thumbs: {
-            unknown: require('./img/default.jpg')
+            unknown: defaultImg
         },
         mapIsEditable: true,
         onRemoveBackground: () => {},
@@ -275,4 +276,4 @@ class BackgroundSelector extends React.Component {
     }
 }
 
-module.exports = BackgroundSelector;
+export default BackgroundSelector;

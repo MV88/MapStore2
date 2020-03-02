@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const CoordinatesEditor = require('./CoordinatesEditor');
-const {getComponents} = require('../../../utils/AnnotationsUtils');
+import React from 'react';
+import PropTypes from 'prop-types';
+import CoordinatesEditor from './CoordinatesEditor';
+import { getComponents } from '../../../utils/AnnotationsUtils';
 
 class GeometryEditor extends React.Component {
     static propTypes = {
@@ -75,4 +75,4 @@ class GeometryEditor extends React.Component {
 
 }
 
-module.exports = GeometryEditor;
+export default GeometryEditor;

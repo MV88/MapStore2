@@ -5,16 +5,28 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const {connect} = require('react-redux');
-const {compose} = require('redux');
-const ConfigUtils = require('../../utils/ConfigUtils');
-const {FormControl, FormGroup, ControlLabel} = require('react-bootstrap');
+import React from 'react';
+import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-const {setPrintParameter, changePrintZoomLevel, changeMapPrintPreview, printCancel} =
-    require('../../actions/print');
-
-const {setControlProperty} = require('../../actions/controls');
+import { setControlProperty } from '../../actions/controls';
+import {
+    changeMapPrintPreview,
+    changePrintZoomLevel,
+    printCancel,
+    setPrintParameter
+} from '../../actions/print';
+import ChoiceComp from '../../components/print/Choice';
+import FontComp from '../../components/print/Font';
+import MapPreviewComp from '../../components/print/MapPreview';
+import PrintOptionComp from '../../components/print/PrintOption';
+import PrintOptionsComp from '../../components/print/PrintOptions';
+import PrintPreviewComp from '../../components/print/PrintPreview';
+import PrintSubmitComp from '../../components/print/PrintSubmit';
+import SheetComp from '../../components/print/Sheet';
+import { currentLayouts, twoPageEnabled } from '../../selectors/print';
+import ConfigUtils from '../../utils/ConfigUtils';
 
 const TextWithLabel = (props) => {
     return (
@@ -47,22 +59,21 @@ const Resolution = connect((state) => ({
     })) || []
 }), {
     onChange: setPrintParameter.bind(null, 'resolution')
-})(require('../../components/print/Choice'));
+})(ChoiceComp);
 
 const Sheet = connect((state) => ({
     selected: state.print && state.print.spec && state.print.spec.sheet
 }), {
     onChange: setPrintParameter.bind(null, 'sheet')
-})(require('../../components/print/Sheet'));
+})(SheetComp);
 
-const {currentLayouts, twoPageEnabled} = require('../../selectors/print');
 
 const LegendOption = connect((state) => ({
     checked: state.print && state.print.spec && !!state.print.spec.includeLegend,
     layouts: currentLayouts(state)
 }), {
     onChange: setPrintParameter.bind(null, 'includeLegend')
-})(require('../../components/print/PrintOption'));
+})(PrintOptionComp);
 
 const MultiPageOption = connect((state) => ({
     checked: state.print && state.print.spec.includeLegend && state.print.spec && !!state.print.spec.twoPages,
@@ -70,7 +81,7 @@ const MultiPageOption = connect((state) => ({
     isEnabled: () => twoPageEnabled(state)
 }), {
     onChange: setPrintParameter.bind(null, 'twoPages')
-})(require('../../components/print/PrintOption'));
+})(PrintOptionComp);
 
 const LandscapeOption = connect((state) => ({
     selected: state.print && state.print.spec && state.print.spec.landscape ? 'landscape' : 'portrait',
@@ -78,19 +89,19 @@ const LandscapeOption = connect((state) => ({
     options: [{label: 'print.alternatives.landscape', value: 'landscape'}, {label: 'print.alternatives.portrait', value: 'portrait'}]
 }), {
     onChange: compose(setPrintParameter.bind(null, 'landscape'), (selected) => selected === 'landscape')
-})(require('../../components/print/PrintOptions'));
+})(PrintOptionsComp);
 
 const ForceLabelsOption = connect((state) => ({
     checked: state.print && state.print.spec && !!state.print.spec.forceLabels
 }), {
     onChange: setPrintParameter.bind(null, 'forceLabels')
-})(require('../../components/print/PrintOption'));
+})(PrintOptionComp);
 
 const AntiAliasingOption = connect((state) => ({
     checked: state.print && state.print.spec && !!state.print.spec.antiAliasing
 }), {
     onChange: setPrintParameter.bind(null, 'antiAliasing')
-})(require('../../components/print/PrintOption'));
+})(PrintOptionComp);
 
 const IconSizeOption = connect((state) => ({
     value: state.print && state.print.spec && state.print.spec.iconSize,
@@ -110,7 +121,7 @@ const DefaultBackgroundOption = connect((state) => ({
     checked: state.print && state.print.spec && !!state.print.spec.defaultBackground
 }), {
     onChange: setPrintParameter.bind(null, 'defaultBackground')
-})(require('../../components/print/PrintOption'));
+})(PrintOptionComp);
 
 const Font = connect((state) => ({
     family: state.print && state.print.spec && state.print.spec.fontFamily,
@@ -122,7 +133,7 @@ const Font = connect((state) => ({
     onChangeSize: setPrintParameter.bind(null, 'fontSize'),
     onChangeBold: setPrintParameter.bind(null, 'bold'),
     onChangeItalic: setPrintParameter.bind(null, 'italic')
-})(require('../../components/print/Font'));
+})(FontComp);
 
 const MapPreview = connect((state) => ({
     map: state.print && state.print.map,
@@ -131,11 +142,11 @@ const MapPreview = connect((state) => ({
 }), {
     onChangeZoomLevel: changePrintZoomLevel,
     onMapViewChanges: changeMapPrintPreview
-})(require('../../components/print/MapPreview'));
+})(MapPreviewComp);
 
 const PrintSubmit = connect((state) => ({
     loading: state.print && state.print.isLoading || false
-}))(require('../../components/print/PrintSubmit'));
+}))(PrintSubmitComp);
 
 const PrintPreview = connect((state) => ({
     url: state.print && ConfigUtils.getProxiedUrl(state.print.pdfUrl),
@@ -147,9 +158,9 @@ const PrintPreview = connect((state) => ({
     setPage: setControlProperty.bind(null, 'print', 'currentPage'),
     setPages: setControlProperty.bind(null, 'print', 'pages'),
     setScale: setControlProperty.bind(null, 'print', 'viewScale')
-})(require('../../components/print/PrintPreview'));
+})(PrintPreviewComp);
 
-module.exports = {
+export default {
     Name,
     Description,
     Resolution,

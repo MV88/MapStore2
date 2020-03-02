@@ -5,33 +5,33 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var expect = require('expect');
-const {addTimeoutEpic, TEST_TIMEOUT, testEpic } = require('./epicTestUtils');
-const {
+import expect from 'expect';
+
+import { addTimeoutEpic, TEST_TIMEOUT, testEpic } from './epicTestUtils';
+
+import {
     handleDashboardWidgetsFilterPanel,
     openDashboardWidgetEditor,
     initDashboardEditorOnNew,
     closeDashboardWidgetEditorOnFinish,
     filterAnonymousUsersForDashboard
-} = require('../dashboard');
-const {
+} from '../dashboard';
+import {
     createWidget, insertWidget,
     openFilterEditor,
     EDIT_NEW,
     EDITOR_CHANGE
-} = require('../../actions/widgets');
-const {
+} from '../../actions/widgets';
+import {
     DASHBOARD_LOAD_ERROR,
     SET_EDITING
-} = require('../../actions/dashboard');
-const {checkLoggedUser, logout} = require('../../actions/security');
+} from '../../actions/dashboard';
+import {checkLoggedUser, logout} from '../../actions/security';
 
-const { FEATURE_TYPE_SELECTED } = require('../../actions/wfsquery');
-const { LOAD_FILTER, search } = require('../../actions/queryform');
-const {
-    CHANGE_DRAWING_STATUS
-} = require('../../actions/draw');
-const { SET_CONTROL_PROPERTY } = require('../../actions/controls');
+import { FEATURE_TYPE_SELECTED } from '../../actions/wfsquery';
+import { LOAD_FILTER, search } from '../../actions/queryform';
+import { CHANGE_DRAWING_STATUS } from '../../actions/draw';
+import { SET_CONTROL_PROPERTY } from '../../actions/controls';
 
 const BASE_STATE = {
     controls: {

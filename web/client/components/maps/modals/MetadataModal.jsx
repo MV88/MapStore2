@@ -5,26 +5,27 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const PropTypes = require('prop-types');
-const React = require('react');
-const Metadata = require('../forms/Metadata');
-const Thumbnail = require('../forms/Thumbnail');
-const PermissionEditor = require('../../security/PermissionEditor');
-const ReactQuill = require('react-quill');
-const Portal = require('../../misc/Portal');
-const ResizableModal = require('../../misc/ResizableModal');
-require('react-quill/dist/quill.snow.css');
-require('./css/modals.css');
-const Spinner = require('react-spinkit');
-const { Grid, Row, Col } = require('react-bootstrap');
-const { get, isNil } = require('lodash');
-const Message = require('../../I18N/Message');
-const Toolbar = require('../../misc/toolbar/Toolbar');
-const { NO_DETAILS_AVAILABLE } = require('../../../actions/maps');
-const LocaleUtils = require('../../../utils/LocaleUtils');
-const ConfirmModal = require('../../resources/modals/ConfirmModal');
 
+import React from 'react';
+import PropTypes from 'prop-types';
+import ReactQuill from 'react-quill';
+import Spinner from 'react-spinkit';
+import { Grid, Row, Col } from 'react-bootstrap';
+import { get, isNil } from 'lodash';
 
+import ConfirmModal from '../../resources/modals/ConfirmModal';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import Metadata from '../forms/Metadata';
+import Message from '../../I18N/Message';
+import PermissionEditor from '../../security/PermissionEditor';
+import Portal from '../../misc/Portal';
+import ResizableModal from '../../misc/ResizableModal';
+import Thumbnail from '../forms/Thumbnail';
+import Toolbar from '../../misc/toolbar/Toolbar';
+import { NO_DETAILS_AVAILABLE } from '../../../actions/maps';
+
+import 'react-quill/dist/quill.snow.css';
+import './css/modals.css';
 /**
  * A Modal window to show map metadata form
 */
@@ -497,4 +498,4 @@ class MetadataModal extends React.Component {
     isValidForm = () => get(this.props.map, "metadata.name");
 }
 
-module.exports = MetadataModal;
+export default MetadataModal;

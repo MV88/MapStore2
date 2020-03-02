@@ -6,17 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
 
-const assign = require('object-assign');
-
-const Message = require('./locale/Message');
-
-const {Glyphicon} = require('react-bootstrap');
-
-const { ActionCreators } = require('redux-undo');
+import { connect } from 'react-redux';
+import assign from 'object-assign';
+import Message from './locale/Message';
+import { Glyphicon } from 'react-bootstrap';
+import { ActionCreators } from 'redux-undo';
 const {undo, redo} = ActionCreators;
+import UndoButtonComp from '../components/mapcontrols/navigationhistory/UndoButton';
+import RedoButtonComp from '../components/mapcontrols/navigationhistory/RedoButton';
 
 const UndoButton = connect((state) => {
     let mapHistory = state.map && state.map.past && {past: state.map.past, future: state.map.future} || {past: [], future: []};
@@ -25,7 +24,7 @@ const UndoButton = connect((state) => {
     };
 }, {
     onClick: undo
-})(require('../components/mapcontrols/navigationhistory/UndoButton'));
+})(UndoButtonComp);
 
 const RedoButton = connect((state) => {
     let mapHistory = state.map && state.map.past && {past: state.map.past, future: state.map.future} || {past: [], future: []};
@@ -34,9 +33,9 @@ const RedoButton = connect((state) => {
     };
 }, {
     onClick: redo
-})(require('../components/mapcontrols/navigationhistory/RedoButton'));
+})(RedoButtonComp);
 
-module.exports = {
+export default {
     UndoPlugin: assign(UndoButton, {
         Toolbar: {
             name: 'undo',

@@ -6,15 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const { Grid, Row, Col, FormGroup} = require('react-bootstrap');
-const ColorPicker = require('./ColorPicker');
-const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { Grid, Row, Col, FormGroup } from 'react-bootstrap';
+import ColorPicker from './ColorPicker';
+import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
 numberLocalizer();
-const {NumberPicker} = require('react-widgets');
-const tinycolor = require('tinycolor2');
-const assign = require('object-assign');
+import { NumberPicker } from 'react-widgets';
+import tinycolor from 'tinycolor2';
+import assign from 'object-assign';
 
 class ThemaClassesEditor extends React.Component {
     static propTypes = {
@@ -115,4 +116,4 @@ class ThemaClassesEditor extends React.Component {
     };
 }
 
-module.exports = ThemaClassesEditor;
+export default ThemaClassesEditor;

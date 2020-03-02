@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var expect = require('expect');
-var CoordinatesUtils = require('../CoordinatesUtils');
-var Proj4js = require('proj4').default;
+import expect from 'expect';
+
+import CoordinatesUtils from '../CoordinatesUtils';
+const proj4 = require('proj4').default;
 
 describe('CoordinatesUtils', () => {
     afterEach((done) => {
@@ -63,7 +64,7 @@ describe('CoordinatesUtils', () => {
         }
     });
     it('test getAvailableCRS', () => {
-        const defs = Object.keys(Proj4js.defs);
+        const defs = Object.keys(proj4.defs);
         const toCheck = Object.keys(CoordinatesUtils.getAvailableCRS());
 
         toCheck.forEach(item => {

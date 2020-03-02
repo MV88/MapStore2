@@ -1,4 +1,4 @@
-const PropTypes = require('prop-types');
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,16 +7,16 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-// const Message = require('../I18N/Message');
-const Select = require('react-select');
-const Message = require('../../I18N/Message');
-const {findIndex} = require('lodash');
+import React from 'react';
 
-require('react-select/dist/react-select.css');
 
-// const ConfirmModal = require('./modals/ConfirmModal');
-// const GroupManager = require('./GroupManager');
+import Select from 'react-select';
+
+import Message from '../../I18N/Message';
+import { findIndex } from 'lodash';
+import 'react-select/dist/react-select.css';
+import PropTypes from 'prop-types';
+
 
 class UserCard extends React.Component {
     static propTypes = {
@@ -81,4 +81,4 @@ class UserCard extends React.Component {
 
 */
 
-module.exports = UserCard;
+export default UserCard;

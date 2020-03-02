@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const Legend = require('./legend/Legend');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import Legend from './legend/Legend';
 
 class WMSLegend extends React.Component {
     static propTypes = {
@@ -38,4 +39,4 @@ class WMSLegend extends React.Component {
     };
 }
 
-module.exports = WMSLegend;
+export default WMSLegend;

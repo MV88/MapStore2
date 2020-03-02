@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,14 +7,11 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
+import { Button, Glyphicon } from 'react-bootstrap';
 
-const assign = require('object-assign');
-
-const ScaleBox = require("../mapcontrols/scale/ScaleBox");
-const {Button, Glyphicon} = require('react-bootstrap');
-
-const PrintUtils = require('../../utils/PrintUtils');
+import PrintUtils from '../../utils/PrintUtils';
+import ScaleBox from '../mapcontrols/scale/ScaleBox';
 
 let PMap;
 let Layer;
@@ -57,11 +55,12 @@ class MapPreview extends React.Component {
     };
 
     UNSAFE_componentWillMount() {
-        const mapComponents = require('../map/' + this.props.mapType + '/index');
+        // TODO work with this
+        const mapComponents = require(`../map/${this.props.mapType}/index`);
         PMap = mapComponents.LMap;
         Layer = mapComponents.LLayer;
         Feature = mapComponents.Feature;
-        require('../map/' + this.props.mapType + '/plugins/index');
+        import(`../map/${this.props.mapType}/plugins/index`);
     }
 
     getRatio = () => {
@@ -153,4 +152,4 @@ class MapPreview extends React.Component {
     }
 }
 
-module.exports = MapPreview;
+export default MapPreview;

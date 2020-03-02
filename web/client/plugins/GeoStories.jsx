@@ -5,25 +5,25 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const React = require('react');
-const PropTypes = require('prop-types');
-const assign = require('object-assign');
-const {connect} = require('react-redux');
-const Message = require("../components/I18N/Message");
-const emptyState = require('../components/misc/enhancers/emptyState');
+import React from 'react';
 
-const { setGeostoriesAvailable } = require('../actions/geostories');
-const {mapTypeSelector} = require('../selectors/maptype');
-const { userRoleSelector } = require('../selectors/security');
-const { isFeaturedMapsEnabled } = require('../selectors/featuredmaps');
-const { totalCountSelector } = require('../selectors/geostories');
-const {createSelector} = require('reselect');
-const { compose } = require('recompose');
-
-const GeostoryGrid = require('./geostories/GeostoriesGrid');
-const PaginationToolbar = require('./geostories/PaginationToolbar');
-const EmptyGeostoriesView = require('./geostories/EmptyGeostoriesView');
-
+import PropTypes from 'prop-types';
+import assign from 'object-assign';
+import { connect } from 'react-redux';
+import Message from '../components/I18N/Message';
+import emptyState from '../components/misc/enhancers/emptyState';
+import { setGeostoriesAvailable } from '../actions/geostories';
+import { mapTypeSelector } from '../selectors/maptype';
+import { userRoleSelector } from '../selectors/security';
+import { isFeaturedMapsEnabled } from '../selectors/featuredmaps';
+import { totalCountSelector } from '../selectors/geostories';
+import { createSelector } from 'reselect';
+import { compose } from 'recompose';
+import GeostoryGrid from './geostories/GeostoriesGrid';
+import PaginationToolbar from './geostories/PaginationToolbar';
+import EmptyGeostoriesView from './geostories/EmptyGeostoriesView';
+import geostoriesEpics from '../epics/geostories';
+import geostoriesReducers from '../reducers/geostories';
 const geostoriesCountSelector = createSelector(
     totalCountSelector,
     count => ({ count })
@@ -113,7 +113,7 @@ const GeoStoriesPlugin = compose(
     )
 )(Geostories);
 
-module.exports = {
+export default {
     GeoStoriesPlugin: assign(GeoStoriesPlugin, {
         NavMenu: {
             position: 3,
@@ -131,8 +131,8 @@ module.exports = {
             priority: 1
         }
     }),
-    epics: require('../epics/geostories'),
+    epics: geostoriesEpics,
     reducers: {
-        geostories: require('../reducers/geostories')
+        geostories: geostoriesReducers
     }
 };

@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const defaultIcon = require('../map/openlayers/img/marker-icon.png');
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const {createSvgUrl, isSymbolStyle} = require('../../utils/VectorStyleUtils');
+import { createSvgUrl, isSymbolStyle } from '../../utils/VectorStyleUtils';
+import defaultIcon from '../map/openlayers/img/marker-icon.png';
+import iconNotFoundSrc from './vector/iconNotFound.png';
 
 class StyleCanvas extends React.Component {
     static propTypes = {
@@ -98,7 +99,7 @@ class StyleCanvas extends React.Component {
         ctx.clearRect(0, 0, 600, 600);
         let icon = new Image();
         let iconNotFound = new Image();
-        iconNotFound.src = require('./vector/iconNotFound.png');
+        iconNotFound.src = iconNotFoundSrc;
 
         icon.src = url || this.props.shapeStyle.symbolUrl;
         icon.onload = () => {
@@ -265,4 +266,4 @@ class StyleCanvas extends React.Component {
     };
 }
 
-module.exports = StyleCanvas;
+export default StyleCanvas;

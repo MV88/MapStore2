@@ -5,10 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const ConfirmFeatureClose = require('../ConfirmFeatureClose');
-const expect = require('expect');
+import React from 'react';
+
+import ReactDOM from 'react-dom';
+import ConfirmFeatureClose from '../ConfirmFeatureClose';
+import expect from 'expect';
 
 describe('Test for ConfirmFeatureClose component', () => {
     beforeEach((done) => {

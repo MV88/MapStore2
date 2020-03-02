@@ -1,5 +1,5 @@
-const PropTypes = require('prop-types');
-const { editors } = require('react-data-grid');
+import PropTypes from 'prop-types';
+import { editors } from 'react-data-grid';
 
 class AttributeEditor extends editors.SimpleTextEditor {
     static propTypes = {
@@ -22,4 +22,4 @@ class AttributeEditor extends editors.SimpleTextEditor {
         }
     }
 }
-module.exports = AttributeEditor;
+export default AttributeEditor;

@@ -5,7 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-require('./main')(
-    require('./appConfig'),
-    require('./plugins.js')
-);
+
+import appConfig from './appConfig';
+import main from './main';
+import plugins from './plugins.js';
+
+main(appConfig, plugins);

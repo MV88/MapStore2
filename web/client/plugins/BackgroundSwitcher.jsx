@@ -7,22 +7,22 @@
  */
 
 
-const React = require('react');
-const {connect} = require('react-redux');
-const Message = require('./locale/Message');
-const {Glyphicon} = require('react-bootstrap');
+import React from 'react';
 
-const assign = require('object-assign');
-
-const {changeLayerProperties} = require('../actions/layers');
+import { connect } from 'react-redux';
+import Message from './locale/Message';
+import { Glyphicon } from 'react-bootstrap';
+import assign from 'object-assign';
+import { changeLayerProperties } from '../actions/layers';
+import BackgroundSwitcher from '../components/TOC/background/BackgroundSwitcher';
 
 const BackgroundSwitcherPlugin = connect((state) => ({
     layers: state.layers && state.layers.flat && state.layers.flat.filter((layer) => layer.group === "background") || []
 }), {
     propertiesChangeHandler: changeLayerProperties
-})(require('../components/TOC/background/BackgroundSwitcher'));
+})(BackgroundSwitcher);
 
-require('./background/background.css');
+import './background/background.css';
 /**
   * BackgroundSwitcher Plugin
   * @class BackgroundSwitcher
@@ -33,7 +33,7 @@ require('./background/background.css');
   * @prop {boolean} cfg.fluid container should be fluid, see {@link http://getbootstrap.com/css/#grid}
   *
   */
-module.exports = {
+export default {
     BackgroundSwitcherPlugin: assign(BackgroundSwitcherPlugin, {
         Toolbar: {
             name: 'backgroundswitcher',

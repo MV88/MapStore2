@@ -6,10 +6,11 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const Rx = require('rxjs');
-const {isArray, isObject, isEqual, get} = require('lodash');
-const {searchListByAttributes} = require('../../../api/GeoStoreDAO');
-const {compose, withState, lifecycle} = require('recompose');
+import { get, isArray, isEqual, isObject } from 'lodash';
+import { compose, lifecycle, withState } from 'recompose';
+import Rx from 'rxjs';
+
+import GeoStoreDAO from '../../../api/GeoStoreDAO';
 
 /*
  * send a search list request to GeoStore with NAME and ATTRIBUTE filters
@@ -24,7 +25,7 @@ const searchFeaturedMaps = (start, limit, searchText = '') => {
             }
         ]
     } : {};
-    return searchListByAttributes({
+    return GeoStoreDAO.searchListByAttributes({
         AND: {
             ...searchObj,
             ATTRIBUTE: [
@@ -93,7 +94,7 @@ const resultToProps = ({result = {}, permission}) => ({
 /*
  * retrieves data from a GeoStore service and converts to props
  */
-const loadPage = ({permission, viewSize = 4, searchText = '', pageSize = 4} = {}, page = 0) => Rx.Observable
+export const loadPage = ({permission, viewSize = 4, searchText = '', pageSize = 4} = {}, page = 0) => Rx.Observable
     .fromPromise(searchFeaturedMaps(page * pageSize, page === 0 ? viewSize : pageSize, searchText))
     .map((result) => ({permission, result: result && result.ExtResourceList || []}))
     .map(resultToProps);
@@ -101,7 +102,7 @@ const loadPage = ({permission, viewSize = 4, searchText = '', pageSize = 4} = {}
 /*
  * add viewSize and previousItems props to control previus and current items in the grid view
  */
-const updateItemsLifecycle = compose(
+export const updateItemsLifecycle = compose(
     withState('viewSize', 'onChangeSize', 4),
     withState('previousItems', 'onUpdatePreviousItems', []),
     lifecycle({
@@ -128,8 +129,3 @@ const updateItemsLifecycle = compose(
         }
     })
 );
-
-module.exports = {
-    loadPage,
-    updateItemsLifecycle
-};

@@ -6,17 +6,18 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const PropTypes = require('prop-types');
-const React = require('react');
-const {FormControl, FormGroup, Glyphicon, Row, Col} = require('react-bootstrap');
-const LocaleUtils = require('../../../utils/LocaleUtils');
-const DropdownToolbarOptions = require('../../misc/toolbar/DropdownToolbarOptions');
-const CoordinateEntry = require('../../misc/coordinateeditors/CoordinateEntry');
-const Toolbar = require('../../misc/toolbar/Toolbar');
-const Spinner = require('react-spinkit');
-const {isNumber} = require('lodash');
-const assign = require('object-assign');
-const Message = require('../../I18N/Message');
+import PropTypes from 'prop-types';
+
+import React from 'react';
+import { FormControl, FormGroup, Glyphicon, Row, Col } from 'react-bootstrap';
+import LocaleUtils from '../../../utils/LocaleUtils';
+import DropdownToolbarOptions from '../../misc/toolbar/DropdownToolbarOptions';
+import CoordinateEntry from '../../misc/coordinateeditors/CoordinateEntry';
+import Toolbar from '../../misc/toolbar/Toolbar';
+import Spinner from 'react-spinkit';
+import { isNumber } from 'lodash';
+import assign from 'object-assign';
+import Message from '../../I18N/Message';
 
 const delay = (
     function() {
@@ -27,7 +28,7 @@ const delay = (
         };
     })();
 
-require('./searchbar.css');
+import './searchbar.css';
 
 /**
  * Search Bar component. With typeAhead events
@@ -529,4 +530,4 @@ class SearchBar extends React.Component {
     areValidCoordinates = () => (isNumber(this.props.coordinate.lon) && isNumber(this.props.coordinate.lat))
 }
 
-module.exports = SearchBar;
+export default SearchBar;

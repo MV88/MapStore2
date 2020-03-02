@@ -6,25 +6,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
+import { connect } from 'react-redux';
+import { branch, compose, renameProps, renderComponent } from 'recompose';
 
-const { compose, renameProps, branch, renderComponent} = require('recompose');
-
-const BorderLayout = require('../../components/layout/BorderLayout');
-
-const {insertWidget, onEditorChange, setPage, openFilterEditor, changeEditorSetting} = require('../../actions/widgets');
-
-const builderConfiguration = require('../../components/widgets/enhancers/builderConfiguration');
-const chartLayerSelector = require('./enhancers/chartLayerSelector');
-const viewportBuilderConnect = require('./enhancers/connection/viewportBuilderConnect');
-const viewportBuilderConnectMask = require('./enhancers/connection/viewportBuilderConnectMask');
-const withExitButton = require('./enhancers/withExitButton');
-const withConnectButton = require('./enhancers/connection/withConnectButton');
-const {
-    wizardStateToProps,
-    wizardSelector
-} = require('./commons');
+import {
+    changeEditorSetting,
+    insertWidget,
+    onEditorChange,
+    openFilterEditor,
+    setPage
+} from '../../actions/widgets';
+import BorderLayout from '../../components/layout/BorderLayout';
+import ChartWizardComp from '../../components/widgets/builder/wizard/ChartWizard';
+import ToolbarComp from '../../components/widgets/builder/wizard/chart/Toolbar';
+import builderConfiguration from '../../components/widgets/enhancers/builderConfiguration';
+import BuilderHeader from './BuilderHeader';
+import LayerSelectorComp from './LayerSelector';
+import { wizardSelector, wizardStateToProps } from './commons';
+import chartLayerSelector from './enhancers/chartLayerSelector';
+import viewportBuilderConnect from './enhancers/connection/viewportBuilderConnect';
+import viewportBuilderConnectMask from './enhancers/connection/viewportBuilderConnectMask';
+import withConnectButton from './enhancers/connection/withConnectButton';
+import withExitButton from './enhancers/withExitButton';
 
 const Builder = connect(
     wizardSelector,
@@ -41,9 +45,8 @@ const Builder = connect(
         editorData: "data",
         onEditorChange: "onChange"
     })
-)(require('../../components/widgets/builder/wizard/ChartWizard')));
+)(ChartWizardComp));
 
-const BuilderHeader = require('./BuilderHeader');
 const Toolbar = compose(
     connect(wizardSelector, {
         openFilterEditor,
@@ -57,7 +60,7 @@ const Toolbar = compose(
     withExitButton(),
     withConnectButton(({step}) => step === 1)
 
-)(require('../../components/widgets/builder/wizard/chart/Toolbar'));
+)(ToolbarComp);
 
 /*
  * in case you don't have a layer selected (e.g. dashboard) the chart builder
@@ -68,12 +71,12 @@ const chooseLayerEnhancer = compose(
     viewportBuilderConnectMask,
     branch(
         ({layer} = {}) => !layer,
-        renderComponent(chartLayerSelector(require('./LayerSelector')))
+        renderComponent(chartLayerSelector(LayerSelectorComp))
     ),
 
 );
 
-module.exports = chooseLayerEnhancer(({ enabled, onClose = () => { }, exitButton, editorData, toggleConnection, availableDependencies = [], dependencies, ...props} = {}) =>
+export default chooseLayerEnhancer(({ enabled, onClose = () => { }, exitButton, editorData, toggleConnection, availableDependencies = [], dependencies, ...props} = {}) =>
 
     (<div className = "mapstore-chart-advance-options">
         <BorderLayout

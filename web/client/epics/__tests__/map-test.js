@@ -6,25 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const expect = require('expect');
+import expect from 'expect';
 
-const { resetLimitsOnInit, zoomToExtentEpic, checkMapPermissions, compareMapChanges, redirectUnauthorizedUserOnNewMap} = require('../map');
-const { CHANGE_MAP_LIMITS, changeMapCrs } = require('../../actions/map');
+import { resetLimitsOnInit, zoomToExtentEpic, checkMapPermissions, compareMapChanges, redirectUnauthorizedUserOnNewMap} from '../map';
 
-const { LOAD_MAP_INFO, configureMap, configureError} = require('../../actions/config');
+import { LOAD_MAP_INFO, configureMap, configureError} from '../../actions/config';
 
-const { testEpic, addTimeoutEpic, TEST_TIMEOUT } = require('./epicTestUtils');
-const MapUtils = require('../../utils/MapUtils');
+import { testEpic, addTimeoutEpic, TEST_TIMEOUT } from './epicTestUtils';
+import MapUtils from '../../utils/MapUtils';
 
-const {
+import {
+    CHANGE_MAP_LIMITS,
     CHANGE_MAP_VIEW,
+    changeMapCrs,
     zoomToExtent,
     checkMapChanges
-} = require('../../actions/map');
+} from '../../actions/map';
 
 
-const {LOGIN_SUCCESS} = require('../../actions/security');
-const {SET_CONTROL_PROPERTY} = require('../../actions/controls');
+import {LOGIN_SUCCESS} from '../../actions/security';
+import {SET_CONTROL_PROPERTY} from '../../actions/controls';
 
 const LAYOUT_STATE = {
     layout: {

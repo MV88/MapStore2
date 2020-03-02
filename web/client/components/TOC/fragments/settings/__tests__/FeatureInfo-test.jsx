@@ -5,13 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const expect = require('expect');
-const ReactDOM = require('react-dom');
-const FeatureInfo = require('../FeatureInfo');
-const MapInfoUtils = require('../../../../../utils/MapInfoUtils');
+import React from 'react';
+
+import expect from 'expect';
+import ReactDOM from 'react-dom';
+import FeatureInfo from '../FeatureInfo';
+import MapInfoUtils from '../../../../../utils/MapInfoUtils';
 const defaultInfoFormat = MapInfoUtils.getAvailableInfoFormat();
-const TestUtils = require('react-dom/test-utils');
+import TestUtils from 'react-dom/test-utils';
 
 const formatCards = {
     TEXT: {

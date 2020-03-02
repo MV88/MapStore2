@@ -7,14 +7,14 @@
  */
 
 module.exports = {
-    BingLayer: require('./BingLayer'),
-    Commons: require('./Commons'),
-    GraticuleLayer: require('./GraticuleLayer'),
-    GoogleLayer: require('./GoogleLayer'),
-    MapQuest: require('./MapQuest'),
-    OSMLayer: require('./OSMLayer'),
-    TileProviderLayer: require('./TileProviderLayer'),
-    WMSLayer: require('./WMSLayer'),
-    WMTSLayer: require('./WMTSLayer'),
-    VectorLayer: require('./VectorLayer')
+    BingLayer: require('./BingLayer').default,
+    Commons: require('./Commons').default,
+    GraticuleLayer: require('./GraticuleLayer').default,
+    GoogleLayer: require('./GoogleLayer').default,
+    MapQuest: require('./MapQuest').default,
+    OSMLayer: require('./OSMLayer').default,
+    TileProviderLayer: require('./TileProviderLayer').default,
+    WMSLayer: require('./WMSLayer').default,
+    WMTSLayer: require('./WMTSLayer').default,
+    VectorLayer: require('./VectorLayer').default
 };

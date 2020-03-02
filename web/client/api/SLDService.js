@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { urlParts } = require('../utils/URLUtils');
-const url = require('url');
-const { isArray, sortBy, head, castArray, isNumber } = require('lodash');
-const assign = require('object-assign');
-const chroma = require('chroma-js');
+import { urlParts } from '../utils/URLUtils';
+
+import url from 'url';
+import { isArray, sortBy, head, castArray, isNumber } from 'lodash';
+import assign from 'object-assign';
+import chroma from 'chroma-js';
 
 const isAttributeAllowed = (type) => ['Integer', 'Long', 'Double', 'Float', 'BigDecimal'].indexOf(type) !== -1;
 const getSimpleType = () => {
@@ -405,4 +406,4 @@ const API = {
     }
 };
 
-module.exports = API;
+export default API;

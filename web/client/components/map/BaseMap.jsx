@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const { isString } = require('lodash');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { isString } from 'lodash';
 
 /**
  * Base map component that renders a map.
@@ -154,6 +155,4 @@ class BaseMap extends React.Component {
         return null;
     }
 }
-
-
-module.exports = BaseMap;
+export default BaseMap;

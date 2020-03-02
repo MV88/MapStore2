@@ -19,4 +19,3 @@ module.exports = () => {
         DrawSupport: require('../openlayers/DrawSupport').default
     };
 };
-

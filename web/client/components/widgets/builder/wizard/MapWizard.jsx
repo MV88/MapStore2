@@ -5,16 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const WidgetOptions = require('./common/WidgetOptions');
-const {wizardHandlers} = require('../../../misc/wizard/enhancers');
-const Wizard = wizardHandlers(require('../../../misc/wizard/WizardContainer'));
+import React from 'react';
 
-const MapOptions = require('./map/MapOptions');
-const Preview = require('./map/PreviewMap');
+import WizardContainer from '../../../misc/wizard/WizardContainer';
+import { wizardHandlers } from '../../../misc/wizard/enhancers';
+import WidgetOptions from './common/WidgetOptions';
+import MapOptions from './map/MapOptions';
+import Preview from './map/PreviewMap';
 
+const Wizard = wizardHandlers(WizardContainer);
 
-module.exports = ({
+export default ({
     onChange = () => {}, onFinish = () => {}, setPage = () => {},
     step = 0,
     selectedNodes = [],

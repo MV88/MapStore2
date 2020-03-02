@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const MapUtils = require('../MapUtils');
+import MapUtils from '../MapUtils';
 
-module.exports = {
+export default {
     buildRequest: (layer, props) => {
         return {
             request: {

@@ -5,22 +5,20 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const LeafletMap = require('../Map.jsx');
-const LeafLetLayer = require('../Layer.jsx');
-const expect = require('expect');
-const mapUtils = require('../../../../utils/MapUtils');
-const {isNumber} = require('lodash');
-const MapUtils = require('../../../../utils/MapUtils');
 
-require('leaflet-draw');
-
-require('../../../../utils/leaflet/Layers');
-require('../plugins/OSMLayer');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import LeafletMap from '../Map.jsx';
+import LeafLetLayer from '../Layer.jsx';
+import expect from 'expect';
+import mapUtils from '../../../../utils/MapUtils';
+import { isNumber } from 'lodash';
+import 'leaflet-draw';
+import '../../../../utils/leaflet/Layers';
+import '../plugins/OSMLayer';
 
 // required for elevation tests
-require('../plugins/WMSLayer');
+import '../plugins/WMSLayer';
 
 describe('LeafletMap', () => {
 
@@ -639,14 +637,14 @@ describe('LeafletMap', () => {
             const map = ReactDOM.render(<LeafletMap id="mymap" center={{y: 43.9, x: 10.3}} zoom={11} mapOptions={{zoomAnimation: false}}/>, document.getElementById("container"));
             expect(map).toExist();
             expect(ReactDOM.findDOMNode(map).id).toBe('mymap');
-            expect(MapUtils.getHook(MapUtils.ZOOM_TO_EXTENT_HOOK)).toExist();
+            expect(mapUtils.getHook(mapUtils.ZOOM_TO_EXTENT_HOOK)).toExist();
         });
         it("with custom hookRegister", () => {
-            const customHooRegister = MapUtils.createRegisterHooks();
+            const customHooRegister = mapUtils.createRegisterHooks();
             const map = ReactDOM.render(<LeafletMap hookRegister={customHooRegister} id="mymap" center={{y: 43.9, x: 10.3}} zoom={11} mapOptions={{zoomAnimation: false}}/>, document.getElementById("container"));
             expect(map).toExist();
             expect(ReactDOM.findDOMNode(map).id).toBe('mymap');
-            expect(customHooRegister.getHook(MapUtils.ZOOM_TO_EXTENT_HOOK)).toExist();
+            expect(customHooRegister.getHook(mapUtils.ZOOM_TO_EXTENT_HOOK)).toExist();
         });
     });
 });

@@ -6,22 +6,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const { withProps, compose } = require('recompose');
-const { createSelector } = require('reselect');
-const { connect } = require('react-redux');
-const PropTypes = require('prop-types');
+import React from 'react';
+import { withProps, compose } from 'recompose';
+import { createSelector } from 'reselect';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { dashboardHasWidgets, getWidgetsDependenciesGroups } from '../selectors/widgets';
+import dashboard from '../reducers/dashboard';
+import epics from '../epics/dashboard';
+import {
+    isDashboardEditing,
+    showConnectionsSelector,
+    isDashboardLoading,
+    buttonCanEdit
+} from '../selectors/dashboard';
 
-const { isDashboardEditing } = require('../selectors/dashboard');
-const { dashboardHasWidgets, getWidgetsDependenciesGroups } = require('../selectors/widgets');
-const { showConnectionsSelector, isDashboardLoading, buttonCanEdit } = require('../selectors/dashboard');
-const { dashboardSelector } = require('./widgetbuilder/commons');
+import { dashboardSelector } from './widgetbuilder/commons';
+import { createWidget, toggleConnection } from '../actions/widgets';
+import { triggerShowConnections, setEditing, setEditorAvailable } from '../actions/dashboard';
+import withDashboardExitButton from './widgetbuilder/enhancers/withDashboardExitButton';
+import LoadingSpinner from '../components/misc/LoadingSpinner';
+import WidgetTypeBuilder from './widgetbuilder/WidgetTypeBuilder';
+import ToolbarComp from '../components/misc/toolbar/Toolbar';
 
-const { createWidget, toggleConnection } = require('../actions/widgets');
-const { triggerShowConnections } = require('../actions/dashboard');
-
-const withDashboardExitButton = require('./widgetbuilder/enhancers/withDashboardExitButton');
-const LoadingSpinner = require('../components/misc/LoadingSpinner');
 
 const Builder =
     compose(
@@ -30,7 +37,7 @@ const Builder =
             availableDependencies: availableDependencies.filter(d => d !== "map")
         })),
         withDashboardExitButton
-    )(require('./widgetbuilder/WidgetTypeBuilder'));
+    )(WidgetTypeBuilder);
 
 const Toolbar = compose(
     connect(
@@ -75,9 +82,7 @@ const Toolbar = compose(
             onClick: () => onShowConnections(!showConnections)
         }]
     }))
-)(require('../components/misc/toolbar/Toolbar'));
-
-const { setEditing, setEditorAvailable } = require('../actions/dashboard');
+)(ToolbarComp);
 
 
 class DashboardEditorComponent extends React.Component {
@@ -139,10 +144,10 @@ const Plugin = connect(
         onUnmount: () => setEditorAvailable(false)
     }
 )(DashboardEditorComponent);
-module.exports = {
+export default {
     DashboardEditorPlugin: Plugin,
     reducers: {
-        dashboard: require('../reducers/dashboard')
+        dashboard
     },
-    epics: require('../epics/dashboard')
+    epics
 };

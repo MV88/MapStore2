@@ -5,29 +5,28 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
 
-const StandardApp = require('../components/app/StandardApp');
-const LocaleUtils = require('../utils/LocaleUtils');
-const ConfigUtils = require('../utils/ConfigUtils');
-const {connect} = require('react-redux');
-
-const {configureMap, loadMapConfig} = require('../actions/config');
-const { initMap } = require('../actions/map');
-const {generateActionTrigger} = require('../epics/jsapi');
-
-const url = require('url');
-
-const ThemeUtils = require('../utils/ThemeUtils');
-
-const assign = require('object-assign');
-const {partialRight, merge} = require('lodash');
-
-const defaultConfig = require('../config.json');
-
-const localConfig = require('../localConfig.json');
-
+import ReactDOM from 'react-dom';
+import StandardApp from '../components/app/StandardApp';
+import LocaleUtils from '../utils/LocaleUtils';
+import ConfigUtils from '../utils/ConfigUtils';
+import { connect } from 'react-redux';
+import { configureMap, loadMapConfig } from '../actions/config';
+import { initMap } from '../actions/map';
+import { generateActionTrigger } from '../epics/jsapi';
+import url from 'url';
+import ThemeUtils from '../utils/ThemeUtils';
+import assign from 'object-assign';
+import { partialRight, merge } from 'lodash';
+import defaultConfig from '../config.json';
+import localConfig from '../localConfig.json';
+import embedded from '../containers/Embedded';
+import {loadVersion} from '../actions/version';
+import {versionSelector} from '../selectors/version';
+import {loadAfterThemeSelector} from '../selectors/config';
+import StandardContainerComp from '../components/app/StandardContainer';
+import StandardStoreComp from '../stores/StandardStore';
 const defaultPlugins = {
     "mobile": localConfig.plugins.embedded,
     "desktop": localConfig.plugins.embedded
@@ -102,6 +101,9 @@ const getInitialActions = (options) => {
 };
 
 
+import version from '../reducers/version';
+
+
 /**
  * MapStore2 JavaScript API. Allows embedding MapStore2 functionalities into
  * a standard HTML page.
@@ -160,13 +162,8 @@ const MapStore2 = {
      * });
      */
     create(container, opts, pluginsDef, component) {
-        const embedded = require('../containers/Embedded');
         const options = merge({}, this.defaultOptions || {}, opts);
         const {initialState, storeOpts} = options;
-
-        const {loadVersion} = require('../actions/version');
-        const {versionSelector} = require('../selectors/version');
-        const {loadAfterThemeSelector} = require('../selectors/config');
         const componentConfig = {
             component: component || embedded,
             config: {
@@ -178,11 +175,11 @@ const MapStore2 = {
             componentConfig,
             version: versionSelector(state),
             loadAfterTheme: loadAfterThemeSelector(state)
-        }))(require('../components/app/StandardContainer'));
+        }))(StandardContainerComp);
         const actionTrigger = generateActionTrigger(options.startAction || "CHANGE_MAP_VIEW");
         triggerAction = actionTrigger.trigger;
-        const appStore = require('../stores/StandardStore').bind(null, initialState || {}, {
-            version: require('../reducers/version')
+        const appStore = StandardStoreComp.bind(null, initialState || {}, {
+            version
         }, {
             jsAPIEpic: actionTrigger.epic,
             ...(options.epics || {})
@@ -338,4 +335,4 @@ if (!global.Intl ) {
     LocaleUtils.ensureIntl();
 }
 
-module.exports = MapStore2;
+export default MapStore2;

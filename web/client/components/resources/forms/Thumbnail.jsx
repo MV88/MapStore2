@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,11 +8,12 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {Glyphicon} = require('react-bootstrap');
-const Dropzone = require('react-dropzone');
-const Spinner = require('react-spinkit');
-const Message = require('../../../components/I18N/Message');
+import React from 'react';
+
+import { Glyphicon } from 'react-bootstrap';
+import Dropzone from 'react-dropzone';
+import Spinner from 'react-spinkit';
+import Message from '../../../components/I18N/Message';
 /**
  * A Dropzone area for a thumbnail.
  */
@@ -137,4 +139,4 @@ class Thumbnail extends React.Component {
     }
 }
 
-module.exports = Thumbnail;
+export default Thumbnail;

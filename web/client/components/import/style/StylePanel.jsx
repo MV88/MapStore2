@@ -1,4 +1,4 @@
-const PropTypes = require('prop-types');
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,14 +7,14 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-
-const Message = require('../../I18N/Message');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import React from 'react';
+import PropTypes from 'prop-types';
+import styleUtilsFunc from '../../../utils/StyleUtils';
+import Message from '../../I18N/Message';
+import LocaleUtils from '../../../utils/LocaleUtils';
 let StyleUtils;
-const { Grid, Row, Col, Button, Alert, ButtonToolbar} = require('react-bootstrap');
-
-const {Promise} = require('es6-promise');
+import { Grid, Row, Col, Button, Alert, ButtonToolbar } from 'react-bootstrap';
+import { Promise } from 'es6-promise';
 
 class StylePanel extends React.Component {
     static propTypes = {
@@ -66,7 +66,7 @@ class StylePanel extends React.Component {
     };
 
     UNSAFE_componentWillMount() {
-        StyleUtils = require('../../../utils/StyleUtils')(this.props.mapType);
+        StyleUtils = styleUtilsFunc(this.props.mapType);
     }
 
     componentDidMount() {
@@ -214,4 +214,4 @@ class StylePanel extends React.Component {
 }
 
 
-module.exports = StylePanel;
+export default StylePanel;

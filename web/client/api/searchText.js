@@ -5,10 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const WFS = require('./WFS');
-const assign = require('object-assign');
-const GeoCodeUtils = require('../utils/GeoCodeUtils');
-const {generateTemplateString} = require('../utils/TemplateUtils');
+import WFS from './WFS';
+
+import GeoCodeUtils from '../utils/GeoCodeUtils';
+import { generateTemplateString } from '../utils/TemplateUtils';
+import assign from 'object-assign';
+import Nominatim from './Nominatim';
 
 const defaultFromTextToFilter = ({searchText, staticFilter, blacklist, item, queriableAttributes, predicate} ) => {
     // split into words and remove blacklisted words
@@ -36,7 +38,7 @@ let Services = {
     nominatim: (searchText, options = {
         returnFullData: false
     }) =>
-        require('./Nominatim')
+        Nominatim
             .geocode(searchText, options)
             .then( res => {return options.returnFullData ? res : GeoCodeUtils.nominatimToGeoJson(res.data); }),
     wfs: (searchText, {url, typeName, queriableAttributes = [], outputFormat = "application/json", predicate = "ILIKE", staticFilter = "", blacklist = [], item, fromTextToFilter = defaultFromTextToFilter, returnFullData = false, ...params }) => {
@@ -62,4 +64,5 @@ const Utils = {
     }
 };
 
-module.exports = {API: {Services, Utils}};
+export const API = {Services, Utils};
+export default {API};

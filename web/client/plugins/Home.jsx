@@ -6,24 +6,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const assign = require('object-assign');
+import assign from 'object-assign';
 
-const {goToPage} = require('../actions/router');
+import {goToPage} from '../actions/router';
 
-const Message = require('./locale/Message');
+import Message from './locale/Message';
 
-const {Glyphicon} = require('react-bootstrap');
+import {Glyphicon} from 'react-bootstrap';
 
-const Home = require('../components/home/Home');
+import Home from '../components/home/Home';
 
-const {connect} = require('react-redux');
-const {checkMapChanges} = require('../actions/map');
-const {setControlProperty} = require('../actions/controls');
-const {unsavedMapSelector, unsavedMapSourceSelector} = require('../selectors/controls');
-const {feedbackMaskSelector} = require('../selectors/feedbackmask');
-const ConfigUtils = require('../utils/ConfigUtils');
+import {connect} from 'react-redux';
+import {checkMapChanges} from '../actions/map';
+import {setControlProperty} from '../actions/controls';
+import {unsavedMapSelector, unsavedMapSourceSelector} from '../selectors/controls';
+import {feedbackMaskSelector} from '../selectors/feedbackmask';
+import ConfigUtils from '../utils/ConfigUtils';
 
 const checkUnsavedMapChanges = (action) => {
     return dispatch => {
@@ -41,7 +41,7 @@ const HomeConnected = connect((state) => ({
     onCloseUnsavedDialog: setControlProperty.bind(null, 'unsavedMap', 'enabled', false)
 })(Home);
 
-module.exports = {
+export default {
     HomePlugin: assign(HomeConnected, {
         Toolbar: {
             name: 'home',

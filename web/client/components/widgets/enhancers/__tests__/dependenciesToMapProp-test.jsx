@@ -5,11 +5,12 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const {createSink} = require('recompose');
-const expect = require('expect');
-const dependenciesToMapProp = require('../dependenciesToMapProp');
+import React from 'react';
+
+import ReactDOM from 'react-dom';
+import { createSink } from 'recompose';
+import expect from 'expect';
+import dependenciesToMapProp from '../dependenciesToMapProp';
 
 describe('dependenciesToMapProp enhancer', () => {
     beforeEach((done) => {

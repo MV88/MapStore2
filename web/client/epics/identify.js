@@ -5,41 +5,60 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-const Rx = require('rxjs');
 
-const {get, find, isString, isNil} = require('lodash');
-const axios = require('../libs/ajax');
+import { find, get, isNil, isString } from 'lodash';
+import Rx from 'rxjs';
+import uuid from 'uuid';
 
-const uuid = require('uuid');
+import { closeAnnotations } from '../actions/annotations';
+import { MAP_CONFIG_LOADED } from '../actions/config';
+import { SET_CONTROL_PROPERTIES } from '../actions/controls';
+import { closeFeatureGrid } from '../actions/featuregrid';
+import { CHANGE_MOUSE_POINTER, CLICK_ON_MAP, zoomToPoint } from '../actions/map';
+import {
+    CLOSE_IDENTIFY,
+    ERROR_FEATURE_INFO,
+    FEATURE_INFO_CLICK,
+    GET_VECTOR_INFO,
+    LOAD_FEATURE_INFO,
+    TOGGLE_HIGHLIGHT_FEATURE,
+    errorFeatureInfo,
+    exceptionsFeatureInfo,
+    featureInfoClick,
+    getVectorInfo,
+    hideMapinfoMarker,
+    loadFeatureInfo,
+    newMapInfoRequest,
+    noQueryableLayers,
+    purgeMapInfoResults,
+    showMapinfoMarker,
+    updateCenterToMarker
+} from '../actions/mapInfo';
+import axios from '../libs/ajax';
+import { modeSelector } from '../selectors/featuregrid';
+import { centerToMarkerSelector, queryableLayersSelector } from '../selectors/layers';
+import { mapSelector, projectionDefsSelector, projectionSelector } from '../selectors/map';
+import {
+    clickLayerSelector,
+    clickPointSelector,
+    filterNameListSelector,
+    identifyOptionsSelector,
+    isHighlightEnabledSelector,
+    itemIdSelector,
+    overrideParamsSelector,
+    stopGetFeatureInfoSelector
+} from '../selectors/mapInfo';
+import { boundingMapRectSelector } from '../selectors/maplayout';
+import {
+    centerToVisibleArea,
+    isInsideVisibleArea,
+    isPointInsideExtent,
+    parseURN,
+    reprojectBbox
+} from '../utils/CoordinatesUtils';
+import MapInfoUtils from '../utils/MapInfoUtils';
+import { getCurrentResolution, parseLayoutValue } from '../utils/MapUtils';
 
-const {
-    LOAD_FEATURE_INFO, ERROR_FEATURE_INFO, GET_VECTOR_INFO,
-    FEATURE_INFO_CLICK, CLOSE_IDENTIFY, TOGGLE_HIGHLIGHT_FEATURE,
-    featureInfoClick, updateCenterToMarker, purgeMapInfoResults,
-    exceptionsFeatureInfo, loadFeatureInfo, errorFeatureInfo,
-    noQueryableLayers, newMapInfoRequest, getVectorInfo,
-    showMapinfoMarker, hideMapinfoMarker
-} = require('../actions/mapInfo');
-
-const { SET_CONTROL_PROPERTIES } = require('../actions/controls');
-
-const { closeFeatureGrid } = require('../actions/featuregrid');
-const { CHANGE_MOUSE_POINTER, CLICK_ON_MAP, zoomToPoint } = require('../actions/map');
-const { closeAnnotations } = require('../actions/annotations');
-const { MAP_CONFIG_LOADED } = require('../actions/config');
-
-const { stopGetFeatureInfoSelector, identifyOptionsSelector, clickPointSelector, clickLayerSelector } = require('../selectors/mapInfo');
-const { centerToMarkerSelector, queryableLayersSelector } = require('../selectors/layers');
-const { modeSelector } = require('../selectors/featuregrid');
-const { mapSelector, projectionDefsSelector, projectionSelector } = require('../selectors/map');
-const { boundingMapRectSelector } = require('../selectors/maplayout');
-const { centerToVisibleArea, isInsideVisibleArea, isPointInsideExtent, reprojectBbox } = require('../utils/CoordinatesUtils');
-
-const { isHighlightEnabledSelector, itemIdSelector, overrideParamsSelector, filterNameListSelector } = require('../selectors/mapInfo');
-
-const { getCurrentResolution, parseLayoutValue } = require('../utils/MapUtils');
-const MapInfoUtils = require('../utils/MapInfoUtils');
-const { parseURN } = require('../utils/CoordinatesUtils');
 const gridEditingSelector = state => modeSelector(state) === 'EDIT';
 
 const stopFeatureInfo = state => stopGetFeatureInfoSelector(state) || gridEditingSelector(state);
@@ -94,7 +113,7 @@ const getFeatureInfo = (basePath, requestParams, lMetaData, appParams = {}, atta
  * @name epics.identify
  * @type {Object}
  */
-module.exports = {
+export default {
     /**
      * Triggers data load on FEATURE_INFO_CLICK events
      */

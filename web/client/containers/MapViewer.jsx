@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,16 +5,19 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
 
-const {connect} = require('react-redux');
-const assign = require('object-assign');
+import url from 'url';
 
-const url = require('url');
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+
+import PluginsContainerComp from '../components/plugins/PluginsContainer';
+import ConfigUtils from '../utils/ConfigUtils';
+import PluginsUtils from '../utils/PluginsUtils';
+
 const urlQuery = url.parse(window.location.href, true).query;
-
-const ConfigUtils = require('../utils/ConfigUtils');
-const PluginsUtils = require('../utils/PluginsUtils');
 
 const PluginsContainer = connect((state) => ({
     statePluginsConfig: state.plugins,
@@ -24,7 +26,7 @@ const PluginsContainer = connect((state) => ({
         layerSettings: state.layers.settings
     }),
     monitoredState: PluginsUtils.getMonitoredState(state, ConfigUtils.getConfigProp('monitorState'))
-}))(require('../components/plugins/PluginsContainer'));
+}))(PluginsContainerComp);
 
 class MapViewer extends React.Component {
     static propTypes = {
@@ -55,4 +57,4 @@ class MapViewer extends React.Component {
     }
 }
 
-module.exports = MapViewer;
+export default MapViewer;

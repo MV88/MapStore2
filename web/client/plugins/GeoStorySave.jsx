@@ -21,7 +21,7 @@ import {Glyphicon} from 'react-bootstrap';
 import { Controls } from '../utils/GeoStoryUtils';
 
 import { userSelector, isLoggedIn } from '../selectors/security';
-
+import Save from '../components/resources/modals/Save';
 import {
     saveDialogSelector,
     currentStorySelector,
@@ -59,7 +59,7 @@ const SaveBaseDialog = compose(
         category: "GEOSTORY"
     }),
     handleSaveModal
-)(require('../components/resources/modals/Save'));
+)(Save);
 
 /**
  * Plugin for GeoStory Save

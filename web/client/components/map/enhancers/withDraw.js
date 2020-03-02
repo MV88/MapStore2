@@ -5,10 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { withPropsOnChange } = require("recompose");
+import { withPropsOnChange } from 'recompose';
 
-const {connect} = require("react-redux");
-const {changeDrawingStatus, endDrawing, setCurrentStyle, geometryChanged, drawStopped} = require('../../../actions/draw');
+import { connect } from 'react-redux';
+
+import {
+    changeDrawingStatus,
+    endDrawing,
+    setCurrentStyle,
+    geometryChanged,
+    drawStopped
+} from '../../../actions/draw';
 
 const defaultDrawConnect = connect((state) =>
     state.draw || {}, {
@@ -24,7 +31,7 @@ const defaultDrawConnect = connect((state) =>
  * It's possible to pass a connect function to override default connection to state and action
  * @param {function} connectFunction connect function to override default connection of the draw tool.
  */
-module.exports = (connectFunction = defaultDrawConnect) => withPropsOnChange(
+export default (connectFunction = defaultDrawConnect) => withPropsOnChange(
     ['plugins'],
     ({plugins} = {}) => {
         const {DrawSupport, tools = {}, ...rest} = plugins;

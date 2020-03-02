@@ -23,6 +23,7 @@ import PluginsUtils from '../../utils/PluginsUtils';
 
 import General from '../../components/TOC/fragments/settings/General';
 import Display from '../../components/TOC/fragments/settings/Display';
+import FeatureInfoCmp from '../../components/TOC/fragments/settings/FeatureInfo';
 
 import Elevation from '../../components/TOC/fragments/settings/Elevation';
 import FeatureInfoEditor from '../../components/TOC/fragments/settings/FeatureInfoEditor';
@@ -101,7 +102,6 @@ const formatCards = {
         )
     }
 };
-import FeatureInfoCmp from '../../components/TOC/fragments/settings/FeatureInfo';
 const FeatureInfo = defaultProps({
     formatCards,
     defaultInfoFormat: MapInfoUtils.getAvailableInfoFormat()

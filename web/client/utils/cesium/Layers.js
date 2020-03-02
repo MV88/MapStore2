@@ -44,4 +44,4 @@ var Layers = {
     }
 };
 
-module.exports = Layers;
+export default Layers;

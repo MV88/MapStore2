@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {lifecycle, withHandlers, compose} = require('recompose');
-const {set} = require('../../../../utils/ImmutableUtils');
-const {isEqual, isNil} = require('lodash');
+import { isEqual, isNil } from 'lodash';
+import { compose, lifecycle, withHandlers } from 'recompose';
+
+import { set } from '../../../../utils/ImmutableUtils';
 
 /**
  * Enhancer to enable set index only if Component has header
@@ -62,7 +63,7 @@ const identifyHandlers = withHandlers({
  * @memberof components.data.identify.enhancers.identify
  * @name identifyLifecycle
  */
-const identifyLifecycle = compose(
+export const identifyLifecycle = compose(
     identifyHandlers,
     lifecycle({
         componentDidMount() {
@@ -114,7 +115,3 @@ const identifyLifecycle = compose(
         }
     })
 );
-
-module.exports = {
-    identifyLifecycle
-};

@@ -6,8 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {isEqual} = require('lodash');
-const {shouldUpdate} = require('recompose');
+import { isEqual } from 'lodash';
+import nouislider from 'react-nouislider';
+import { shouldUpdate } from 'recompose';
+
 /**
  * Component for rendering react-nouislider.
  * It will update the component only when start and disabled props change,
@@ -17,8 +19,8 @@ const {shouldUpdate} = require('recompose');
  * @name Slider
  * @class
  */
-module.exports = shouldUpdate(
+export default shouldUpdate(
     (props, nexProps) =>
         !isEqual(props.start, nexProps.start)
         || props.disabled !== nexProps.disabled
-)(require('react-nouislider'));
+)(nouislider);

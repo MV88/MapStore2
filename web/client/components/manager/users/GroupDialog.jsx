@@ -1,3 +1,4 @@
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -6,20 +7,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const UsersTable = require('./UsersTable');
-const {Alert, Tabs, Tab, Button, Glyphicon, FormControl, FormGroup, ControlLabel} = require('react-bootstrap');
-const PropTypes = require('prop-types');
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Alert, Tabs, Tab, Button, Glyphicon, FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
+import { findIndex } from 'lodash';
+import assign from 'object-assign';
+import Spinner from 'react-spinkit';
 
-const Dialog = require('../../../components/misc/Dialog');
-const assign = require('object-assign');
-const Message = require('../../../components/I18N/Message');
-const Spinner = require('react-spinkit');
-const {findIndex} = require('lodash');
-const PagedCombobox = require('../../misc/combobox/PagedCombobox');
-const CloseConfirmButton = require('./CloseConfirmButton').default;
-
-require('./style/userdialog.css');
+import CloseConfirmButton from './CloseConfirmButton';
+import Dialog from '../../../components/misc/Dialog';
+import Message from '../../../components/I18N/Message';
+import PagedCombobox from '../../misc/combobox/PagedCombobox';
+import UsersTable from './UsersTable';
+import './style/userdialog.css';
 
 const PAGINATION_LIMIT = 5;
 
@@ -348,4 +348,4 @@ class GroupDialog extends React.Component {
     };
 }
 
-module.exports = GroupDialog;
+export default GroupDialog;

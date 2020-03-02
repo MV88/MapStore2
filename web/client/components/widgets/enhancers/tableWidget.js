@@ -5,16 +5,19 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const { compose, withPropsOnChange } = require('recompose');
-const { get } = require('lodash');
-const {editableWidget, withHeaderTools, defaultIcons} = require('./tools');
+
+import { get } from 'lodash';
+import { compose, withPropsOnChange } from 'recompose';
+
+import deleteWidget from './deleteWidget';
+import { defaultIcons, editableWidget, withHeaderTools } from './tools';
 
 /**
  * enhancer that updates widget column size on resize. and add base icons and menus
  * Moreover enhances it to allow delete.
 */
-module.exports = compose(
-    withPropsOnChange(["gridEvents"], ({ gridEvents = {}, updateProperty = () => {} } = {}) => ({
+export default compose(
+    withPropsOnChange(["gridEvents"], ({ gridEvents = {}, updateProperty = () => { } } = {}) => ({
         gridEvents: {
             ...gridEvents,
             onAddFilter: (widgetFilter) => updateProperty(`quickFilters.${widgetFilter.attribute}`, widgetFilter),
@@ -23,7 +26,7 @@ module.exports = compose(
                     updateProperty(`options.columnSettings["${get(columns.filter(c => !c.hide)[colIdx], "name")}"].width`, width)
         }
     })),
-    require('./deleteWidget'),
+    deleteWidget,
     editableWidget(),
     defaultIcons(),
     withHeaderTools()

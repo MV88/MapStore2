@@ -1,6 +1,14 @@
-const { isArray } = require('lodash');
+/**
+  * Copyright 2019, GeoSolutions Sas.
+  * All rights reserved.
+  *
+  * This source code is licensed under the BSD-style license found in the
+  * LICENSE file in the root directory of this source tree.
+  */
 
-function template(str = "", data = {}) {
+import { isArray } from 'lodash';
+
+export function template(str = "", data = {}) {
     return str.replace(/(?!(\{?[zyx]?\}))\{*([\w_]+)*\}/g, function() {
         let st = arguments[0];
         let key = arguments[1] ? arguments[1] : arguments[2];
@@ -21,7 +29,7 @@ function template(str = "", data = {}) {
  * @param opt options to use
  * @return array of urls
 */
-function getUrls(opt = {}) {
+export function getUrls(opt = {}) {
     let url = opt.url || "";
     let subdomains = opt.subdomains || "";
 
@@ -36,8 +44,3 @@ function getUrls(opt = {}) {
     }
     return ['a', 'b', 'c'].map( c => template(url.replace("{s}", c), opt));
 }
-
-module.exports = {
-    getUrls,
-    template
-};

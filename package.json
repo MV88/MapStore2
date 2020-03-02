@@ -80,6 +80,7 @@
   },
   "//": "replace react-sortable-items with official on npm when it will support React 15",
   "dependencies": {
+    "5to6-codemod": "1.8.0",
     "@boundlessgeo/jsonix": "2.4.3",
     "@carnesen/redux-add-action-listener-enhancer": "0.0.1",
     "@geosolutions/proj4": "2.4.7",
@@ -165,7 +166,7 @@
     "react-addons-css-transition-group": "15.6.2",
     "react-addons-shallow-compare": "15.6.2",
     "react-bootstrap": "0.31.0",
-    "react-checkbox-tree": "^1.5.1",
+    "react-checkbox-tree": "1.5.1",
     "react-codemirror2": "4.0.0",
     "react-color": "2.17.0",
     "react-confirm-button": "0.0.2",

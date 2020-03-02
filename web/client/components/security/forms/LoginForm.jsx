@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -7,11 +8,12 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {FormControl, FormGroup, ControlLabel, Button, Alert} = require('react-bootstrap');
-const Spinner = require('react-spinkit');
-const Message = require('../../I18N/Message');
-const LocaleUtils = require('../../../utils/LocaleUtils');
+import React from 'react';
+
+import { FormControl, FormGroup, ControlLabel, Button, Alert } from 'react-bootstrap';
+import Spinner from 'react-spinkit';
+import Message from '../../I18N/Message';
+import LocaleUtils from '../../../utils/LocaleUtils';
 
 /**
  * A Form to login menu for user details:
@@ -167,4 +169,4 @@ class LoginForm extends React.Component {
     };
 }
 
-module.exports = LoginForm;
+export default LoginForm;

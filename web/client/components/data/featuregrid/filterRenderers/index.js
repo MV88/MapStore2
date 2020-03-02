@@ -6,13 +6,19 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const {withProps} = require('recompose');
-const DefaultFilter = require('./DefaultFilter');
-const StringFilter = require('./StringFilter');
-const NumberFilter = require('./NumberFilter');
-const DateTimeFilter = require('./DateTimeFilter').default;
+import { withProps } from 'recompose';
 
-const types = {
+import DefaultFilterComp from './DefaultFilter';
+import StringFilterComp from './StringFilter';
+import NumberFilterComp from './NumberFilter';
+import DateTimeFilterComp from './DateTimeFilter';
+
+export const DefaultFilter = DefaultFilterComp;
+export const StringFilter = StringFilterComp;
+export const NumberFilter = NumberFilterComp;
+export const DateTimeFilter = DateTimeFilterComp;
+
+export const types = {
     "defaultFilter": (type) => withProps(() =>({type: type}))(DefaultFilter),
     "string": () => StringFilter,
     "number": () => NumberFilter,
@@ -21,10 +27,5 @@ const types = {
     "time": () => withProps(() =>({type: "time"}))(DateTimeFilter),
     "date-time": () => withProps(() =>({type: "date-time"}))(DateTimeFilter)
 };
-module.exports = {
-    getFilterRenderer: (type, props) => types[type] ? types[type](type, props) : types.defaultFilter(type, props),
-    DefaultFilter,
-    StringFilter,
-    NumberFilter,
-    DateTimeFilter
-};
+
+export const getFilterRenderer = (type, props) => types[type] ? types[type](type, props) : types.defaultFilter(type, props);

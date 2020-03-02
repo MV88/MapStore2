@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const { isOpenlayers } = require('../selectors/maptype');
-const { showCoordinateEditorSelector } = require('../selectors/controls');
-const { set } = require('../utils/ImmutableUtils');
-const { validateFeatureCoordinates } = require('../utils/MeasureUtils');
+import { showCoordinateEditorSelector } from '../selectors/controls';
+import { isOpenlayers } from '../selectors/maptype';
+import { set } from '../utils/ImmutableUtils';
+import { validateFeatureCoordinates } from '../utils/MeasureUtils';
 
 /**
  * selects measurement state
@@ -24,8 +24,8 @@ const { validateFeatureCoordinates } = require('../utils/MeasureUtils');
  * @param  {object} state the state
  * @return {boolean} the showCoordinateEditor in the state
  */
-const isCoordinateEditorEnabledSelector = (state) => showCoordinateEditorSelector(state) && !state.measurement.isDrawing && isOpenlayers(state);
-const showAddAsAnnotationSelector = (state) => state && state.measurement && state.measurement.showAddAsAnnotation;
+export const isCoordinateEditorEnabledSelector = (state) => showCoordinateEditorSelector(state) && !state.measurement.isDrawing && isOpenlayers(state);
+export const showAddAsAnnotationSelector = (state) => state && state.measurement && state.measurement.showAddAsAnnotation;
 
 /**
  * validating feature that can contain invalid coordinates
@@ -33,7 +33,7 @@ const showAddAsAnnotationSelector = (state) => state && state.measurement && sta
  * if the number of valid coords is < min for that geomType then
  * return empty coordinates
 */
-const getValidFeatureSelector = (state) => {
+export const getValidFeatureSelector = (state) => {
     let feature = state.measurement.feature || {};
     if (feature.geometry) {
         feature = set("geometry.coordinates", validateFeatureCoordinates(feature.geometry || {}), feature);
@@ -41,16 +41,10 @@ const getValidFeatureSelector = (state) => {
     return feature;
 };
 
-const measurementSelector = (state) => {
+export const measurementSelector = (state) => {
     return state.measurement && {
         ...state.measurement,
         feature: getValidFeatureSelector(state)
     } || {};
 };
 
-module.exports = {
-    measurementSelector,
-    getValidFeatureSelector,
-    isCoordinateEditorEnabledSelector,
-    showAddAsAnnotationSelector
-};

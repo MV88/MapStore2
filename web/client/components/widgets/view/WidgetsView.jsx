@@ -4,27 +4,29 @@
  *
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
- */
-const React = require('react');
+*/
+import 'react-grid-layout/css/styles.css';
 
-const { pure, branch } = require('recompose');
-const { find, mapValues } = require('lodash');
+import { find, mapValues } from 'lodash';
+import React from 'react';
+import { Responsive, WidthProvider as widthProvider } from 'react-grid-layout';
+import { branch, pure } from 'recompose';
 
-const { Responsive, WidthProvider: widthProvider } = require('react-grid-layout');
+import withGroupColor from '../enhancers/withGroupColor';
+import DefaultWidgetComp from '../widget/DefaultWidget';
+
 const ResponsiveReactGridLayout =
     branch(
         ({ useDefaultWidthProvider = true }) => useDefaultWidthProvider,
         widthProvider
     )(Responsive);
-const withGroupColor = require('../enhancers/withGroupColor');
-const DefaultWidget = withGroupColor(require('../widget/DefaultWidget'));
+const DefaultWidget = withGroupColor(DefaultWidgetComp);
 const getWidgetGroups = (groups = [], w) => groups.filter(g => find(g.widgets, id => id === w.id));
-require('react-grid-layout/css/styles.css');
 
 const WIDGET_MOBILE_RIGHT_SPACE = 34;
 const getResponsiveWidgetWidth = width => width < 480 ? width - WIDGET_MOBILE_RIGHT_SPACE : width;
 
-module.exports = pure(({
+export default pure(({
     id,
     style,
     className = "",

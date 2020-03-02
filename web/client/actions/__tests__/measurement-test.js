@@ -6,19 +6,31 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {
-    toggleMeasurement, CHANGE_MEASUREMENT_TOOL,
-    changeMeasurementState, CHANGE_MEASUREMENT_STATE,
-    resetGeometry, RESET_GEOMETRY,
-    changeUom, CHANGE_UOM,
-    changeFormatMeasurement, CHANGE_FORMAT,
-    init, INIT,
-    changeGeometry, CHANGED_GEOMETRY,
-    changeCoordinates, CHANGE_COORDINATES,
-    addAnnotation, ADD_MEASURE_AS_ANNOTATION,
-    updateMeasures, UPDATE_MEASURES
-} = require('../measurement');
+import expect from 'expect';
+
+import {
+    toggleMeasurement,
+    CHANGE_MEASUREMENT_TOOL,
+    changeMeasurementState,
+    CHANGE_MEASUREMENT_STATE,
+    resetGeometry,
+    RESET_GEOMETRY,
+    changeUom,
+    CHANGE_UOM,
+    changeFormatMeasurement,
+    CHANGE_FORMAT,
+    init,
+    INIT,
+    changeGeometry,
+    CHANGED_GEOMETRY,
+    changeCoordinates,
+    CHANGE_COORDINATES,
+    addAnnotation,
+    ADD_MEASURE_AS_ANNOTATION,
+    updateMeasures,
+    UPDATE_MEASURES
+} from '../measurement';
+
 const feature = {type: "Feature", geometry: {
     coordinates: [],
     type: "LineString"

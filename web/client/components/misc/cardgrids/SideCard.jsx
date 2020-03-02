@@ -6,10 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-const React = require('react');
-
-const Loader = require('../Loader');
+import Loader from '../Loader';
+import React from 'react';
 
 /**
  * Component for rendering a rectangular card with preview, title, description and caption.
@@ -34,7 +32,7 @@ const Loader = require('../Loader');
  * @prop {node}         tools           add a node to the right of card
  */
 
-module.exports = ({
+export default ({
     body,
     caption,
     className = '',

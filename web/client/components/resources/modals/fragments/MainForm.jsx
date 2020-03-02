@@ -6,15 +6,33 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const Message = require('../../../I18N/Message');
-const {Row, Col} = require('react-bootstrap');
-const Metadata = require('../../forms/Metadata');
-const Thumbnail = require('../../forms/Thumbnail');
-const FileDrop = require('../../forms/FileDrop').default;
-const uuid = require('uuid/v1');
+import FileDrop from '../../forms/FileDrop';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+import uuid from 'uuid/v1';
 
-module.exports = class MainForm extends React.Component {
+import Message from '../../../I18N/Message';
+import Metadata from '../../forms/Metadata';
+import Thumbnail from '../../forms/Thumbnail';
+
+class MainForm extends React.Component {
+    static propTypes = {
+        acceptedDropFileName: PropTypes.any, // don't know the type here
+        fileDropLabel: PropTypes.any,
+        fileDropStatus: PropTypes.any,
+        fileDropErrorMessage: PropTypes.any,
+        fileDropClearMessage: PropTypes.any,
+        resource: PropTypes.object,
+        linkedResources: PropTypes.object,
+        enableFileDrop: PropTypes.bool,
+        onError: PropTypes.func,
+        onFileDropClear: PropTypes.func,
+        onFileDrop: PropTypes.func,
+        nameFieldFilter: PropTypes.func,
+        onUpdate: PropTypes.func,
+        onUpdateLinkedResource: PropTypes.func
+    }
     render() {
         const {
             resource,
@@ -74,6 +92,6 @@ module.exports = class MainForm extends React.Component {
             </Col>
         </Row>);
     }
-};
+}
 
-
+export default MainForm;

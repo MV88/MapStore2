@@ -8,17 +8,11 @@
 // Disable ESLint because some of the names to include are not in camel case
 /* eslint-disable */
 // include base schemas and name spaces
-const {
-        OWS_1_0_0,
-        Filter_1_1_0,
-        GML_3_1_1,
-        SMIL_2_0,
-        SMIL_2_0_Language,
-        WFS_1_1_0
-} = require('ogc-schemas');
 
-const {XLink_1_0, XSD_1_0} = require('w3c-schemas');
-const {Jsonix} = require('jsonix');
+import { Jsonix } from 'jsonix';
+import { Filter_1_1_0, GML_3_1_1, OWS_1_0_0, SMIL_2_0, SMIL_2_0_Language, WFS_1_1_0 } from 'ogc-schemas';
+import { XLink_1_0, XSD_1_0 } from 'w3c-schemas';
+
 const context = new Jsonix.Context([
     XLink_1_0,
     XSD_1_0,
@@ -37,10 +31,7 @@ const context = new Jsonix.Context([
     }
 });
 /* eslint-enable */
-const marshaller = context.createMarshaller();
-const unmarshaller = context.createUnmarshaller();
-const WFS = {
-};
+export const marshaller = context.createMarshaller();
+export const unmarshaller = context.createUnmarshaller();
+export const WFS = {};
 
-
-module.exports = {WFS, marshaller, unmarshaller};

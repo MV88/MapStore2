@@ -5,14 +5,13 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
+import React from 'react';
 
-const {Glyphicon} = require('react-bootstrap');
-const assign = require('object-assign');
+import { Glyphicon } from 'react-bootstrap';
+import assign from 'object-assign';
+import ExpanderPlugin from '../components/buttons/ToggleButton';
 
-const ExpanderPlugin = require('../components/buttons/ToggleButton');
-
-module.exports = {
+export default {
     ExpanderPlugin: assign(ExpanderPlugin, {
         Toolbar: {
             name: 'expand',

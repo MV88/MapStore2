@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { isNil, isEqual, isArray, isFunction } = require('lodash');
-const { withState, withHandlers, compose, lifecycle } = require('recompose');
+import { isNil, isEqual, isArray, isFunction } from 'lodash';
+
+import { withState, withHandlers, compose, lifecycle } from 'recompose';
 
 /**
  * Enhancer for settings state needed in TOCItemsSettings plugin
@@ -16,7 +17,7 @@ const { withState, withHandlers, compose, lifecycle } = require('recompose');
  * @memberof enhancers.settingsState
  * @class
  */
-const settingsState = compose(
+export const settingsState = compose(
     withState('alertModal', 'onShowAlertModal', false),
     withState('showEditor', 'onShowEditor', false)
 );
@@ -33,7 +34,7 @@ const settingsState = compose(
  * @memberof enhancers.settingsLifecycle
  * @class
  */
-const settingsLifecycle = compose(
+export const settingsLifecycle = compose(
     withHandlers({
         onClose: ({ onUpdateInitialSettings = () => {}, onUpdateOriginalSettings = () => {}, onUpdateNode = () => {}, originalSettings, settings, onHideSettings = () => {}, onShowAlertModal = () => {} }) => (forceClose, tabsCloseActions = []) => {
             const originalOptions = Object.keys(settings.options).reduce((options, key) => ({ ...options, [key]: key === 'opacity' && !originalSettings[key] && 1.0 || originalSettings[key] }), {});
@@ -117,16 +118,12 @@ const settingsLifecycle = compose(
     })
 );
 
-module.exports = {
+/**
+ * Enhancer for compose together settings lifecycle and state
+ * @memberof enhancers.updateSettingsLifecycle
+ * @class
+ */
+export const updateSettingsLifecycle = compose(
     settingsState,
-    settingsLifecycle,
-    /**
-     * Enhancer for compose together settings lifecycle and state
-     * @memberof enhancers.updateSettingsLifecycle
-     * @class
-     */
-    updateSettingsLifecycle: compose(
-        settingsState,
-        settingsLifecycle
-    )
-};
+    settingsLifecycle
+);

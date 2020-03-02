@@ -14,7 +14,12 @@ import last from 'lodash/last';
 
 import SecurityUtils from '../../../../utils/SecurityUtils';
 import WMTSUtils from '../../../../utils/WMTSUtils';
-import CoordinatesUtils from '../../../../utils/CoordinatesUtils';
+import {
+    normalizeSRS,
+    parseString,
+    getEquivalentSRS,
+    getEPSGCode
+} from '../../../../utils/CoordinatesUtils';
 import MapUtils from '../../../../utils/MapUtils';
 import { isVectorFormat} from '../../../../utils/VectorTileUtils';
 import urlParser from 'url';
@@ -52,7 +57,7 @@ const createLayer = options => {
     // WMTS Capabilities has "RESTful"/"KVP", OpenLayers uses "REST"/"KVP";
     let requestEncoding = options.requestEncoding === "RESTful" ? "REST" : options.requestEncoding;
     const urls = getWMSURLs(castArray(options.url), requestEncoding);
-    const srs = CoordinatesUtils.normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS);
+    const srs = normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS);
     const projection = get(srs);
     const metersPerUnit = projection.getMetersPerUnit();
     const { tileMatrixSetName, tileMatrixSet } = getTileMatrix(options, srs);
@@ -77,7 +82,7 @@ const createLayer = options => {
     const origins = tileMatrixSet
         && tileMatrixSet.TileMatrix
         && tileMatrixSet.TileMatrix
-            .map(({ TopLeftCorner } = {}) => TopLeftCorner && CoordinatesUtils.parseString(TopLeftCorner))
+            .map(({ TopLeftCorner } = {}) => TopLeftCorner && parseString(TopLeftCorner))
             .map(({ x, y } = {}) => switchOriginXY ? [y, x] : [x, y]);
 
     const sizes = tileMatrixSet
@@ -161,13 +166,13 @@ const updateLayer = (layer, newOptions, oldOptions) => {
 const hasSRS = (srs, layer) => {
     const { tileMatrixSetName, tileMatrixSet } = getTileMatrix(layer, srs);
     if (tileMatrixSet) {
-        return CoordinatesUtils.getEPSGCode(tileMatrixSet["ows:SupportedCRS"]) === srs;
+        return getEPSGCode(tileMatrixSet["ows:SupportedCRS"]) === srs;
     }
     return tileMatrixSetName === srs;
 };
 
 const compatibleLayer = layer =>
-    head(CoordinatesUtils.getEquivalentSRS(layer.srs || 'EPSG:3857').filter(srs => hasSRS(srs, layer))) ? true : false;
+    head(getEquivalentSRS(layer.srs || 'EPSG:3857').filter(srs => hasSRS(srs, layer))) ? true : false;
 
 
 Layers.registerType('wmts', { create: createLayer, update: updateLayer, isCompatible: compatibleLayer });

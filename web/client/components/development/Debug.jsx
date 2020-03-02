@@ -6,18 +6,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var url = require('url');
+import url from 'url';
+
+import React from 'react';
+
 if (!global.Symbol) {
     require("babel-polyfill");
 }
+import DevTools from './DevTools';
 
 const urlQuery = url.parse(window.location.href, true).query;
 
 class Debug extends React.Component {
     render() {
         if (urlQuery && urlQuery.debug && __DEVTOOLS__ && !window.devToolsExtension) {
-            const DevTools = require('./DevTools');
             return (
                 <DevTools/>
             );
@@ -26,4 +28,4 @@ class Debug extends React.Component {
     }
 }
 
-module.exports = Debug;
+export default Debug;

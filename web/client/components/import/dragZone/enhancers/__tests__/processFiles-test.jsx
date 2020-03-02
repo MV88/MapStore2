@@ -6,13 +6,14 @@
  * LICENSE file in the root directory of this source tree.p
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const { createSink, setObservableConfig, compose, mapPropsStream } = require('recompose');
-const expect = require('expect');
-const processFiles = require('../processFiles');
+import React from 'react';
 
-const {
+import ReactDOM from 'react-dom';
+import { createSink, setObservableConfig, compose, mapPropsStream } from 'recompose';
+import expect from 'expect';
+import processFiles from '../processFiles';
+
+import {
     getShapeFile,
     getKmlFile,
     getKmzFile,
@@ -20,9 +21,9 @@ const {
     getGeoJsonFile,
     getMapFile,
     getUnsupportedMapFile
-} = require('./testData');
+} from './testData';
 
-const rxjsConfig = require('recompose/rxjsObservableConfig').default;
+import rxjsConfig from 'recompose/rxjsObservableConfig';
 setObservableConfig(rxjsConfig);
 
 describe('processFiles enhancer', () => {

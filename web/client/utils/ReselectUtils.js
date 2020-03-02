@@ -1,5 +1,5 @@
-const { isEqualWith, isObject } = require('lodash');
-const { defaultMemoize, createSelectorCreator } = require('reselect');
+import { isEqualWith, isObject } from 'lodash';
+import { defaultMemoize, createSelectorCreator } from 'reselect';
 
 const defaultCompare = (a, b) => a === b;
 
@@ -23,7 +23,7 @@ const isShallowEqualBy = (compare = defaultCompare) => (el1, el2) => {
  * This allows to avoid re-render when dependencies if the dependency keys do not change
  * @returns {function} selector that does shallow compare
  */
-const createShallowSelector = createSelectorCreator(
+export const createShallowSelector = createSelectorCreator(
     defaultMemoize,
     (a, b) => isEqualWith(a, b, isShallowEqualBy())
 );
@@ -33,11 +33,7 @@ const createShallowSelector = createSelectorCreator(
  * You can use isEqual from lodash (to do a deep compare) or compare only certain properties you're interested to.
  * @param {function} compare a function for compare elements
  */
-const createShallowSelectorCreator = (compare) => createSelectorCreator(
+export const createShallowSelectorCreator = (compare) => createSelectorCreator(
     defaultMemoize,
     (a, b) => isEqualWith(a, b, isShallowEqualBy(compare))
 );
-module.exports = {
-    createShallowSelector,
-    createShallowSelectorCreator
-};

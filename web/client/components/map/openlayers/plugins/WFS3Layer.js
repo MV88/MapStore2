@@ -9,7 +9,7 @@
 import head from 'lodash/head';
 import urlParser from 'url';
 
-import CoordinatesUtils from '../../../../utils/CoordinatesUtils';
+import {normalizeSRS} from '../../../../utils/CoordinatesUtils';
 import MapUtils from '../../../../utils/MapUtils';
 import Layers from '../../../../utils/openlayers/Layers';
 import SecurityUtils from '../../../../utils/SecurityUtils';
@@ -26,7 +26,7 @@ import { OL_VECTOR_FORMATS, applyStyle } from '../../../../utils/openlayers/Vect
 
 const createLayer = (options) => {
 
-    const srs = CoordinatesUtils.normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS);
+    const srs = normalizeSRS(options.srs || 'EPSG:3857', options.allowedSRS);
     const projection = get(srs);
     const metersPerUnit = projection.getMetersPerUnit();
 

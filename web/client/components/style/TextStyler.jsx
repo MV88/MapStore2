@@ -6,20 +6,21 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {Grid, Row, Col, FormControl} = require('react-bootstrap');
-const Combobox = require('react-widgets').Combobox;
-const assign = require('object-assign');
-const ColorSelector = require('./ColorSelector');
-const StyleCanvas = require('./StyleCanvas');
-const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { Grid, Row, Col, FormControl } from 'react-bootstrap';
+import { Combobox } from 'react-widgets';
+import assign from 'object-assign';
+import ColorSelector from './ColorSelector';
+import StyleCanvas from './StyleCanvas';
+import numberLocalizer from 'react-widgets/lib/localizers/simple-number';
 numberLocalizer();
-require('react-widgets/lib/less/react-widgets.less');
-const LocaleUtils = require('../../utils/LocaleUtils');
-const {createFont} = require('../../utils/AnnotationsUtils');
-const Message = require('../I18N/Message');
-const tinycolor = require("tinycolor2");
+import 'react-widgets/lib/less/react-widgets.less';
+import LocaleUtils from '../../utils/LocaleUtils';
+import { createFont } from '../../utils/AnnotationsUtils';
+import Message from '../I18N/Message';
+import tinycolor from 'tinycolor2';
 
 class TextStyler extends React.Component {
     static propTypes = {
@@ -240,4 +241,4 @@ class TextStyler extends React.Component {
     }
 }
 
-module.exports = TextStyler;
+export default TextStyler;

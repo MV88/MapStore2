@@ -6,20 +6,31 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {Grid, Row, Col, FormGroup, ControlLabel, FormControl, MenuItem, DropdownButton: DropdownButtonRB, Glyphicon: GlyphiconRB} = require('react-bootstrap');
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const tooltip = require('../../misc/enhancers/tooltip');
+import {
+    Grid,
+    Row,
+    Col,
+    FormGroup,
+    ControlLabel,
+    FormControl,
+    MenuItem,
+    DropdownButton as DropdownButtonRB,
+    Glyphicon as GlyphiconRB
+} from 'react-bootstrap';
+
+import tooltip from '../../misc/enhancers/tooltip';
 const Glyphicon = tooltip(GlyphiconRB);
 const DropdownButton = tooltip(DropdownButtonRB);
-const {head, isNaN} = require('lodash');
-const Toolbar = require('../../misc/toolbar/Toolbar');
-const draggableContainer = require('../../misc/enhancers/draggableContainer');
-const Message = require('../../I18N/Message');
-const {validateCoords, coordToArray} = require('../../../utils/AnnotationsUtils');
-const CoordinatesRow = require('../../misc/coordinateeditors/CoordinatesRow');
-const MeasureEditor = require('./MeasureEditor');
+import { head, isNaN } from 'lodash';
+import Toolbar from '../../misc/toolbar/Toolbar';
+import draggableContainer from '../../misc/enhancers/draggableContainer';
+import Message from '../../I18N/Message';
+import { validateCoords, coordToArray } from '../../../utils/AnnotationsUtils';
+import CoordinatesRow from '../../misc/coordinateeditors/CoordinatesRow';
+import MeasureEditor from './MeasureEditor';
 
 /**
  * Geometry editor for annotation Features.
@@ -366,4 +377,4 @@ class CoordinatesEditor extends React.Component {
     }
 }
 
-module.exports = draggableContainer(CoordinatesEditor);
+export default draggableContainer(CoordinatesEditor);

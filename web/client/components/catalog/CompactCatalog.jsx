@@ -5,28 +5,33 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const {compose, mapPropsStream} = require('recompose');
-const {isNil} = require('lodash');
-const Message = require('../I18N/Message');
-const Rx = require('rxjs');
+import React from 'react';
+
+import { compose, mapPropsStream } from 'recompose';
+import { isNil } from 'lodash';
+import Message from '../I18N/Message';
+import Rx from 'rxjs';
+import CSW from '../../api/CSW';
+import WMS from '../../api/WMS';
+import WMTS from '../../api/WMTS';
+import backgrounds from '../../api/mapBackground';
 
 const API = {
-    "csw": require('../../api/CSW'),
-    "wms": require('../../api/WMS'),
-    "wmts": require('../../api/WMTS'),
-    "backgrounds": require('../../api/mapBackground')
+    "csw": CSW,
+    "wms": WMS,
+    "wmts": WMTS,
+    backgrounds
 };
-
-const BorderLayout = require('../layout/BorderLayout');
-const LoadingSpinner = require('../misc/LoadingSpinner');
-const withVirtualScroll = require('../misc/enhancers/infiniteScroll/withInfiniteScroll');
-const loadingState = require('../misc/enhancers/loadingState');
-const emptyState = require('../misc/enhancers/emptyState');
-const withControllableState = require('../misc/enhancers/withControllableState');
-const CatalogForm = require('./CatalogForm');
-const {getCatalogRecords} = require('../../utils/CatalogUtils');
-const Icon = require('../misc/FitIcon');
+import SideGridComp from '../misc/cardgrids/SideGrid';
+import BorderLayout from '../layout/BorderLayout';
+import LoadingSpinner from '../misc/LoadingSpinner';
+import withVirtualScroll from '../misc/enhancers/infiniteScroll/withInfiniteScroll';
+import loadingState from '../misc/enhancers/loadingState';
+import emptyState from '../misc/enhancers/emptyState';
+import withControllableState from '../misc/enhancers/withControllableState';
+import CatalogForm from './CatalogForm';
+import { getCatalogRecords } from '../../utils/CatalogUtils';
+import Icon from '../misc/FitIcon';
 const defaultPreview = <Icon glyph="geoserver" padding={20}/>;
 const SideGrid = compose(
     loadingState(({loading, items = []} ) => items.length === 0 && loading),
@@ -37,7 +42,7 @@ const SideGrid = compose(
             style: { transform: "translateY(50%)"}
         })
 
-)(require('../misc/cardgrids/SideGrid'));
+)(SideGridComp);
 /*
  * converts record item into a item for SideGrid
  */
@@ -75,7 +80,7 @@ const scrollSpyOptions = {querySelector: ".ms2-border-layout-body", pageSize: PA
  * @prop {string} [searchText] the search text (if you want to control it)
  * @prop {function} [setSearchText] handler to get search text changes (if not defined, the component will control the text by it's own)
  */
-module.exports = compose(
+export default compose(
     withControllableState('searchText', "setSearchText", ""),
     withVirtualScroll({loadPage, scrollSpyOptions}),
     mapPropsStream( props$ =>

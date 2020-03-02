@@ -1,11 +1,4 @@
-const PropTypes = require('prop-types');
-/**
- * Copyright 2016, GeoSolutions Sas.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree.
- */
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -14,10 +7,11 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {FormControl, FormGroup, ControlLabel} = require('react-bootstrap');
-const moment = require('moment');
-const ConfigUtils = require('../../../utils/ConfigUtils');
+import moment from 'moment';
+import ConfigUtils from '../../../utils/ConfigUtils';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 
 /**
  * A DropDown menu for user details:
@@ -113,4 +107,4 @@ class Metadata extends React.Component {
 }
 
 
-module.exports = Metadata;
+export default Metadata;

@@ -5,14 +5,14 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const { compose, mapPropsStream, createEventHandler} = require('recompose');
-const { get, some, every } = require('lodash');
-const FileUtils = require('../../../../utils/FileUtils');
-const LayersUtils = require('../../../../utils/LayersUtils');
-const ConfigUtils = require('../../../../utils/ConfigUtils');
+import Rx from 'rxjs';
+import { get, some, every } from 'lodash';
+import JSZip from 'jszip';
+import { compose, mapPropsStream, createEventHandler } from 'recompose';
 
-const JSZip = require('jszip');
+import FileUtils from '../../../../utils/FileUtils';
+import LayersUtils from '../../../../utils/LayersUtils';
+import ConfigUtils from '../../../../utils/ConfigUtils';
 
 const tryUnzip = (file) => {
     return FileUtils.readZip(file).then((buffer) => {
@@ -110,7 +110,7 @@ const isMap = json => json && json.version && json.map;
  * Recognizes map files (JSON format) or vector data in various formats.
  * They are converted in JSON as a "files" property.
  */
-module.exports = compose(
+export default compose(
     mapPropsStream(
         props$ => {
             const { handler: onDrop, stream: drop$ } = createEventHandler();

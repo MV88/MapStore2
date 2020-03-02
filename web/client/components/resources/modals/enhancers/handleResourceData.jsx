@@ -5,17 +5,26 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const { compose, withStateHandlers, withState, branch, withHandlers, renderComponent} = require('recompose');
-const {set} = require('../../../../utils/ImmutableUtils');
-const Message = require('../../../I18N/Message');
-const ConfirmDialog = require('../ConfirmModal');
+import React from 'react';
+
+import {
+    compose,
+    withStateHandlers,
+    withState,
+    branch,
+    withHandlers,
+    renderComponent
+} from 'recompose';
+
+import { set } from '../../../../utils/ImmutableUtils';
+import Message from '../../../I18N/Message';
+import ConfirmDialog from '../ConfirmModal';
 
 /**
  * Enhancer to manage resource data for a Save dialog.
  * Stores the original data to handle changes.
  */
-module.exports = compose(
+export default compose(
     withStateHandlers(
         ({resource = {}}) => ({
             originalData: resource,

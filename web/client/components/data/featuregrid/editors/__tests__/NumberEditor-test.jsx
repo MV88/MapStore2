@@ -1,7 +1,7 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const NumberEditor = require('../NumberEditor');
-var expect = require('expect');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import NumberEditor from '../NumberEditor';
+import expect from 'expect';
 
 let testColumn = {
     key: 'columnKey'

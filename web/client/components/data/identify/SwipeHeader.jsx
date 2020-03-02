@@ -1,4 +1,5 @@
-const PropTypes = require('prop-types');
+import PropTypes from 'prop-types';
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,9 +8,9 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+import React from 'react';
 
-const {Glyphicon, Button, ButtonGroup} = require('react-bootstrap');
+import { Glyphicon, Button, ButtonGroup } from 'react-bootstrap';
 
 class SwipeHeader extends React.Component {
     static propTypes = {
@@ -50,4 +51,4 @@ class SwipeHeader extends React.Component {
     }
 }
 
-module.exports = SwipeHeader;
+export default SwipeHeader;

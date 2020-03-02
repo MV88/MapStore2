@@ -6,8 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
+
+import PropTypes from 'prop-types';
 
 const sizeToClass = size => size > 100
     ? 'full'
@@ -26,4 +27,4 @@ Loader.propTypes = {
     style: PropTypes.object
 };
 
-module.exports = Loader;
+export default Loader;

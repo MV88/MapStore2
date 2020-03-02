@@ -3677,7 +3677,7 @@ define("inherit", [], function() {
                 return new t
             }
             ,
-            module.exports = C
+            export default C
         } else
             "function" == typeof define && define.amd ? define("knockoutes5", ["Knockout"], function(t) {
                 return C = t,
@@ -3877,7 +3877,7 @@ void function(e, t, n) {
         return {}
     }
     ;
-    "undefined" != typeof module ? module.exports = m : "undefined" != typeof exports ? exports.WeakMap = m : "WeakMap" in e || (e.WeakMap = m),
+    "undefined" != typeof module ? export default m : "undefined" != typeof exports ? exports.WeakMap = m : "WeakMap" in e || (e.WeakMap = m),
     m.createStorage = a,
     e.WeakMap && (e.WeakMap.createStorage = a)
 }(function() {
@@ -5771,11 +5771,11 @@ html4.ELEMENTS.audio = 0,
 html4.ATTRIBS["audio::src"] = 0,
 html4.ATTRIBS["video::autoplay"] = 0,
 html4.ATTRIBS["video::controls"] = 0,
-"undefined" != typeof module && (module.exports = html_sanitize),
+"undefined" != typeof module && (export default html_sanitize),
 define("sanitizeCaja", [], function() {}),
 !function(e) {
     if ("object" == typeof exports && "undefined" != typeof module)
-        module.exports = e();
+        export default e();
     else if ("function" == typeof define && define.amd)
         define("MarkdownIt", [], e);
     else {
@@ -12339,7 +12339,7 @@ define("KnockoutMarkdownBinding", ["sanitizeCaja", "MarkdownIt"], function(e, t)
     }),
     typeof define == le && define.amd ? define("Hammer", [], function() {
         return ie
-    }) : "undefined" != typeof module && module.exports ? module.exports = ie : e[n] = ie
+    }) : "undefined" != typeof module && module.exports ? export default ie : e[n] = ie
 }(window, document, "Hammer"),
 define("KnockoutHammerBinding", ["Knockout", "Hammer"], function(e, t) {
     var n = {

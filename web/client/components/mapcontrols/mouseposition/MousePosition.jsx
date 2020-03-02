@@ -5,19 +5,20 @@
 * This source code is licensed under the BSD-style license found in the
 * LICENSE file in the root directory of this source tree.
 */
-const PropTypes = require('prop-types');
-const React = require('react');
-const proj4js = require('proj4').default;
-const {Glyphicon, Button, Label} = require('react-bootstrap');
-const CopyToClipboard = require('react-copy-to-clipboard');
-const CoordinatesUtils = require('../../../utils/CoordinatesUtils');
-const MousePositionLabelDMS = require('./MousePositionLabelDMS');
-const MousePositionLabelYX = require('./MousePositionLabelYX');
-const CRSSelector = require('./CRSSelector');
-const Message = require('../../I18N/Message');
-const {isNumber} = require('lodash');
+import PropTypes from 'prop-types';
 
-require('./mousePosition.css');
+import React from 'react';
+const proj4 = require('proj4').default;
+
+import { Glyphicon, Button, Label } from 'react-bootstrap';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import CoordinatesUtils from '../../../utils/CoordinatesUtils';
+import MousePositionLabelDMS from './MousePositionLabelDMS';
+import MousePositionLabelYX from './MousePositionLabelYX';
+import CRSSelector from './CRSSelector';
+import Message from '../../I18N/Message';
+import { isNumber } from 'lodash';
+import './mousePosition.css';
 /**
  * MousePosition is a component that shows the coordinate of the mouse position in a selected crs.
  * @class
@@ -83,7 +84,7 @@ class MousePosition extends React.Component {
         if (!x && !y) {
             // if we repoject null coordinates we can end up with -0.00 instead of 0.00
             ({x, y} = {x: 0, y: 0, z});
-        } else if (proj4js.defs(this.props.mousePosition.crs) !== proj4js.defs(this.props.crs)) {
+        } else if (proj4.defs(this.props.mousePosition.crs) !== proj4.defs(this.props.crs)) {
             ({x, y} = CoordinatesUtils.reproject([x, y], this.props.mousePosition.crs, this.props.crs));
         }
         let units = CoordinatesUtils.getUnits(this.props.crs);
@@ -136,4 +137,4 @@ class MousePosition extends React.Component {
     }
 }
 
-module.exports = MousePosition;
+export default MousePosition;

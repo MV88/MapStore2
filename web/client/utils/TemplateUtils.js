@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {isString, has, trim, template} from 'lodash';
+import {has, isString, template, trim} from 'lodash';
 
 /**
  * check if a string attribute is inside of a given object
@@ -84,17 +84,15 @@ export const generateTemplateString = (function() {
     return generateTemplate;
 })();
 
-export const parseTemplate = function(temp, callback) {
-    require.ensure(['babel-standalone'], function() {
-        const Babel = require('babel-standalone');
-        let chosenTemplate = typeof temp === 'function' ? temp() : temp;
-        try {
-            const comp = Babel.transform(chosenTemplate, { presets: ['es2015', 'react', 'stage-0'] }).code;
-            callback(comp);
-        } catch (e) {
-            callback(null, e);
-        }
-    });
+export const parseTemplate = async function(temp, callback) {
+    const Babel = await import('babel-standalone');
+    let chosenTemplate = typeof temp === 'function' ? temp() : temp;
+    try {
+        const comp = Babel.transform(chosenTemplate, { presets: ['es2015', 'react', 'stage-0'] }).code;
+        callback(comp);
+    } catch (e) {
+        callback(null, e);
+    }
 };
 
 const TemplateUtils = {

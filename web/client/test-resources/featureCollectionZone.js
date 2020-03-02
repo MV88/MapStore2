@@ -281,6 +281,6 @@ const featureCollection = {
     }
 };
 
-module.exports = {
+export default {
     featureCollection
 };

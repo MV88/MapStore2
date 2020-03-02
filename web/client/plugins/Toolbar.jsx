@@ -6,20 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
+import './toolbar/assets/css/toolbar.css';
 
-require('./toolbar/assets/css/toolbar.css');
+import assign from 'object-assign';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+import { CSSTransitionGroup } from 'react-transition-group';
+import { createSelector } from 'reselect';
 
-const {CSSTransitionGroup} = require('react-transition-group');
-const {isFeatureGridOpen} = require('../selectors/featuregrid');
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-const {createSelector} = require('reselect');
-
-const assign = require('object-assign');
-
-const ToolsContainer = require('./containers/ToolsContainer');
+import controls from '../reducers/controls';
+import { isFeatureGridOpen } from '../selectors/featuregrid';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import ToolsContainer from './containers/ToolsContainer';
 
 class AnimatedContainer extends React.Component {
     render() {
@@ -147,7 +146,7 @@ const toolbarSelector = stateSelector => createSelector([
     style
 }));
 
-module.exports = {
+export default {
     ToolbarPlugin: (stateSelector = 'toolbar') => connect(toolbarSelector(stateSelector))(Toolbar),
-    reducers: {controls: require('../reducers/controls')}
+    reducers: {controls}
 };

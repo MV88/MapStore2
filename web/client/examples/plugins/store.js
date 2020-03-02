@@ -5,30 +5,32 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {combineReducers, combineEpics} = require('../../utils/PluginsUtils');
-const {createDebugStore} = require('../../utils/DebugUtils').default;
-const LayersUtils = require('../../utils/LayersUtils');
+import { combineReducers, combineEpics } from '../../utils/PluginsUtils';
+import { createDebugStore } from '../../utils/DebugUtils';
+import LayersUtils from '../../utils/LayersUtils';
+import { createEpicMiddleware } from 'redux-observable';
+import map from '../../reducers/map';
+import layers from '../../reducers/layers';
+import mapConfig from '../../reducers/config';
+import locale from '../../reducers/locale';
+import browser from '../../reducers/browser';
+import theme from '../../reducers/theme';
+import pluginsConfig from './reducers/config';
+import controlsEpics from '../../epics/controls';
 
-const {createEpicMiddleware} = require('redux-observable');
-
-const map = require('../../reducers/map');
-
-const layers = require('../../reducers/layers');
-const mapConfig = require('../../reducers/config');
-
-module.exports = (plugins, custom) => {
+export default (plugins, custom) => {
     const allReducers = combineReducers(plugins, {
-        locale: require('../../reducers/locale'),
-        browser: require('../../reducers/browser'),
-        theme: require('../../reducers/theme'),
+        locale,
+        browser,
+        theme,
         map: () => {return null; },
         mapInitialConfig: () => {return null; },
         layers: () => {return null; },
-        pluginsConfig: require('./reducers/config'),
+        pluginsConfig,
         custom
     });
     const standardEpics = {
-        ...require('../../epics/controls')
+        ...controlsEpics
     };
     const rootEpic = combineEpics(plugins, {...standardEpics });
     const epicMiddleware = createEpicMiddleware(rootEpic);

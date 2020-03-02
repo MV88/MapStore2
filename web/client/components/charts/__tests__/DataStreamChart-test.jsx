@@ -6,12 +6,12 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Rx = require('rxjs');
+import React from 'react';
 
-const expect = require('expect');
-const DataStreamChart = require('../DataStreamChart');
+import ReactDOM from 'react-dom';
+import Rx from 'rxjs';
+import expect from 'expect';
+import DataStreamChart from '../DataStreamChart';
 const data = [
     {name: 'Page A', uv: 0, pv: 0, amt: 0},
     {name: 'Page B', uv: 1, pv: 1, amt: 1},

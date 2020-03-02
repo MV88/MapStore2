@@ -1,10 +1,17 @@
-// const wfsRequestBuilder = require('../WFS/RequestBuilder');
-// const {getFeature, property, query} = wfsRequestBuilder({wfsVersion: "1.1.0"});
-const FilterUtils = require('../../FilterUtils');
-const filterBuilder = require('../Filter/FilterBuilder');
+/*
+ * Copyright 2019, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import FilterUtils from '../../FilterUtils';
+import filterBuilder from '../Filter/FilterBuilder';
+
 const {and} = filterBuilder({});
 
-const getWpsPayload = ({layerName, layerFilter, attribute, maxFeatures, startIndex, value}) => {
+export const getWpsPayload = ({layerName, layerFilter, attribute, maxFeatures, startIndex, value}) => {
     const attributeFilterObj = value
         ? '<ogc:PropertyIsLike matchCase="false" wildCard="*" singleChar="." escapeChar="!">'
     + '   <ogc:PropertyName>' + attribute + '</ogc:PropertyName>'
@@ -74,8 +81,4 @@ const getWpsPayload = ({layerName, layerFilter, attribute, maxFeatures, startInd
     + ' </wps:ResponseForm>'
     + '</wps:Execute>';
     return requestBody;
-};
-
-module.exports = {
-    getWpsPayload
 };

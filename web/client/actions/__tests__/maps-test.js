@@ -6,52 +6,88 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var expect = require('expect');
-const assign = require('object-assign');
-const axios = require("../../libs/ajax");
-const MockAdapter = require("axios-mock-adapter");
-const {
-    toggleDetailsSheet, TOGGLE_DETAILS_SHEET,
-    toggleGroupProperties, TOGGLE_GROUP_PROPERTIES,
-    toggleUnsavedChanges, TOGGLE_UNSAVED_CHANGES,
-    deleteMap, DELETE_MAP,
-    updateDetails, UPDATE_DETAILS,
-    saveDetails, SAVE_DETAILS,
-    deleteDetails, DELETE_DETAILS,
-    setDetailsChanged, SET_DETAILS_CHANGED,
-    saveResourceDetails, SAVE_RESOURCE_DETAILS,
-    backDetails, BACK_DETAILS,
-    undoDetails, UNDO_DETAILS,
-    doNothing, DO_NOTHING,
-    setUnsavedChanged, SET_UNSAVED_CHANGES,
-    openDetailsPanel, OPEN_DETAILS_PANEL,
-    closeDetailsPanel, CLOSE_DETAILS_PANEL,
-    MAP_UPDATING, mapUpdating,
-    DETAILS_LOADED, detailsLoaded,
-    PERMISSIONS_UPDATED, permissionsUpdated,
+import expect from 'expect';
+
+import assign from 'object-assign';
+import axios from "../../libs/ajax";
+import MockAdapter from "axios-mock-adapter";
+
+import {
+    toggleDetailsSheet,
+    TOGGLE_DETAILS_SHEET,
+    toggleGroupProperties,
+    TOGGLE_GROUP_PROPERTIES,
+    toggleUnsavedChanges,
+    TOGGLE_UNSAVED_CHANGES,
+    deleteMap,
+    DELETE_MAP,
+    updateDetails,
+    UPDATE_DETAILS,
+    saveDetails,
+    SAVE_DETAILS,
+    deleteDetails,
+    DELETE_DETAILS,
+    setDetailsChanged,
+    SET_DETAILS_CHANGED,
+    saveResourceDetails,
+    SAVE_RESOURCE_DETAILS,
+    backDetails,
+    BACK_DETAILS,
+    undoDetails,
+    UNDO_DETAILS,
+    doNothing,
+    DO_NOTHING,
+    setUnsavedChanged,
+    SET_UNSAVED_CHANGES,
+    openDetailsPanel,
+    OPEN_DETAILS_PANEL,
+    closeDetailsPanel,
+    CLOSE_DETAILS_PANEL,
+    MAP_UPDATING,
+    mapUpdating,
+    DETAILS_LOADED,
+    detailsLoaded,
+    PERMISSIONS_UPDATED,
+    permissionsUpdated,
+    ATTRIBUTE_UPDATED,
+    attributeUpdated,
+    SAVE_MAP,
+    saveMap,
+    DISPLAY_METADATA_EDIT,
+    onDisplayMetadataEdit,
+    RESET_UPDATING,
+    resetUpdating,
+    THUMBNAIL_ERROR,
+    thumbnailError,
+    TOGGLE_DETAILS_EDITABILITY,
+    toggleDetailsEditability,
+    MAPS_SEARCH_TEXT_CHANGED,
+    mapsSearchTextChanged,
+    MAPS_LIST_LOAD_ERROR,
+    loadError,
+    MAP_ERROR,
+    mapError,
+    updatePermissions,
+    MAP_METADATA_UPDATED,
+    mapMetadataUpdated,
+    METADATA_CHANGED,
+    metadataChanged,
+    setShowMapDetails,
+    SHOW_DETAILS,
+    updateAttribute,
+    saveAll,
+    SAVE_MAP_RESOURCE,
+    saveMapResource,
+    FEATURED_MAPS_SET_LATEST_RESOURCE,
+    setFeaturedMapsLatestResource,
+    PERMISSIONS_LIST_LOADED,
+    PERMISSIONS_LIST_LOADING,
     loadPermissions,
-    PERMISSIONS_LIST_LOADING, PERMISSIONS_LIST_LOADED,
-    ATTRIBUTE_UPDATED, attributeUpdated,
-    SAVE_MAP, saveMap,
-    DISPLAY_METADATA_EDIT, onDisplayMetadataEdit,
-    RESET_UPDATING, resetUpdating,
-    THUMBNAIL_ERROR, thumbnailError,
-    TOGGLE_DETAILS_EDITABILITY, toggleDetailsEditability,
-    MAPS_SEARCH_TEXT_CHANGED, mapsSearchTextChanged,
-    MAPS_LIST_LOAD_ERROR, loadError,
-    MAP_ERROR, mapError, updatePermissions,
-    MAP_METADATA_UPDATED, mapMetadataUpdated,
-    METADATA_CHANGED, metadataChanged,
-    setShowMapDetails, SHOW_DETAILS,
-    updateAttribute, saveAll,
-    SAVE_MAP_RESOURCE, saveMapResource,
-    FEATURED_MAPS_SET_LATEST_RESOURCE, setFeaturedMapsLatestResource,
     updateMapMetadata, RESET_CURRENT_MAP
-} = require('../maps');
+} from '../maps';
 
-const { SHOW_NOTIFICATION } = require('../notifications');
-
-let GeoStoreDAO = require('../../api/GeoStoreDAO');
+import { SHOW_NOTIFICATION } from '../notifications';
+import GeoStoreDAO from '../../api/GeoStoreDAO';
 let oldAddBaseUri = GeoStoreDAO.addBaseUrl;
 
 const BASE_URL = 'base/web/client/test-resources/geostore/';

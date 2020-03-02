@@ -1,25 +1,28 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
- */
-const React = require('react');
+*/
 
-const { connect } = require('react-redux');
+import url from 'url';
 
-const url = require('url');
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
+
+import BorderLayout from '../components/layout/BorderLayout';
+import PluginsContainerComp from '../components/plugins/PluginsContainer';
+import ConfigUtils from '../utils/ConfigUtils';
+import PluginsUtils from '../utils/PluginsUtils';
+
 const urlQuery = url.parse(window.location.href, true).query;
-const PluginsUtils = require('../utils/PluginsUtils');
-const ConfigUtils = require('../utils/ConfigUtils');
-const BorderLayout = require('../components/layout/BorderLayout');
 
 const PluginsContainer = connect((state) => ({
     mode: urlQuery.mode || (urlQuery.mobile || state.browser && state.browser.mobile ? 'mobile' : 'desktop'),
     monitoredState: PluginsUtils.getMonitoredState(state, ConfigUtils.getConfigProp('monitorState'))
-}))(require('../components/plugins/PluginsContainer'));
+}))(PluginsContainerComp);
 
 class HolyGrail extends React.Component {
     static propTypes = {
@@ -62,4 +65,4 @@ class HolyGrail extends React.Component {
     }
 }
 
-module.exports = HolyGrail;
+export default HolyGrail;

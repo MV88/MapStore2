@@ -7,14 +7,16 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import expect from 'expect';
-import PluginsUtils from '../PluginsUtils';
 import assign from 'object-assign';
-import axios from '../../libs/ajax';
 import Rx from 'rxjs';
 import { ActionsObservable } from 'redux-observable';
+
+import PluginsUtils from '../PluginsUtils';
+import axios from '../../libs/ajax';
 import MapSearchPlugin from '../../plugins/MapSearch';
+
 
 const epicTest = (epic, count, action, callback, state = {}) => {
     const actions = new Rx.Subject();

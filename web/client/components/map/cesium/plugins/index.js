@@ -7,12 +7,12 @@
  */
 
 module.exports = {
-    BingLayer: require('./BingLayer'),
-    OSMLayer: require('./OSMLayer'),
-    TileProviderLayer: require('./TileProviderLayer'),
-    WMSLayer: require('./WMSLayer'),
-    WMTSLayer: require('./WMTSLayer'),
-    GraticuleLayer: require('./GraticuleLayer'),
-    MarkerLayer: require('./MarkerLayer'),
-    OverlayLayer: require('./OverlayLayer')
+    BingLayer: require('./BingLayer').default,
+    OSMLayer: require('./OSMLayer').default,
+    TileProviderLayer: require('./TileProviderLayer').default,
+    WMSLayer: require('./WMSLayer').default,
+    WMTSLayer: require('./WMTSLayer').default,
+    GraticuleLayer: require('./GraticuleLayer').default,
+    MarkerLayer: require('./MarkerLayer').default,
+    OverlayLayer: require('./OverlayLayer').default
 };

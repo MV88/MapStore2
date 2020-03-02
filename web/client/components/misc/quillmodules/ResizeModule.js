@@ -6,15 +6,17 @@
     - exported as function to use current Quill (not window.Quill)
 */
 
-const { defaultsDeep, isObject, isString } = require('lodash');
+import './assets/css/resizemodule.css';
+
+import { defaultsDeep, isObject, isString } from 'lodash';
+
 const IconAlignLeft = '<span class="glyphicon glyphicon-align-left" style="display: inline-block; margin-top: 4px;"></span>';
 const IconAlignCenter = '<span class="glyphicon glyphicon-align-center" style="display: inline-block; margin-top: 4px;"></span>';
 const IconAlignRight = '<span class="glyphicon glyphicon-align-right" style="display: inline-block; margin-top: 4px;"></span>';
 const IconAlignClear = '<span class="glyphicon glyphicon-remove" style="display: inline-block; margin-top: 4px;"></span>';
 const iframeHeight = 200;
-require('./assets/css/resizemodule.css');
 
-module.exports = Quill => {
+export default Quill => {
 
     const Embed = Quill.import('blots/embed');
     const Link = Quill.import('formats/link');
@@ -784,9 +786,9 @@ module.exports = Quill => {
      * How to enable ResizeModule with iframe.
      *
      * // require library, format and modules
-     * const ReactQuill = require('react-quill');
-     * const {Quill} = ReactQuill;
-     * const {ResizeModule, IFrame, toolbarConfig} = require('path-to/ResizeModule')(Quill);
+     * import {Quill} from 'react-quill';
+     * import resizeModule from 'path-to/ResizeModule';
+     * const {ResizeModule, IFrame, toolbarConfig} = ResizeModule(Quill);
      *
      * // register new modules and format in Quill
      * Quill.register({

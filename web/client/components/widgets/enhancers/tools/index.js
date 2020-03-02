@@ -5,42 +5,42 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {compose} = require('recompose');
-const withTools = require('./withTools');
-const pinnableWidget = require('./pinnableWidget');
-const hidableWidget = require('./hidableWidget');
-const withInfo = require('./withInfo');
-const withMenu = require('./withMenu');
-const withIcons = require('./withIcons');
-const editableWidget = require('./editableWidget');
-const exportableWidget = require('./exportableWidget');
-const collapsibleWidget = require('./collapsibleWidget');
+import { compose } from 'recompose';
+
+import collapsibleWidgetTool from './collapsibleWidget';
+import editableWidgetTool from './editableWidget';
+import exportableWidgetTool from './exportableWidget';
+import hidableWidgetTool from './hidableWidget';
+import pinnableWidgetTool from './pinnableWidget';
+import withIconsTool from './withIcons';
+import withInfoTool from './withInfo';
+import withMenuTool from './withMenu';
+import withToolsTool from './withTools';
+
+export const withTools = withToolsTool;
+export const pinnableWidget = pinnableWidgetTool;
+export const hidableWidget = hidableWidgetTool;
+export const withMenu = withMenuTool;
+export const withIcons = withIconsTool;
+export const editableWidget = editableWidgetTool;
+export const exportableWidget = exportableWidgetTool;
+export const collapsibleWidget = collapsibleWidgetTool;
 
 
-module.exports = {
-    withTools,
-    pinnableWidget,
-    hidableWidget,
-    withMenu,
-    withIcons,
-    editableWidget,
-    exportableWidget,
-    collapsibleWidget,
-    /**
+/**
      * widgets icons of collapse/pin
      */
-    defaultIcons: () => compose(
-        pinnableWidget(),
-        collapsibleWidget(),
-        withInfo()
-    ),
+export const defaultIcons = () => compose(
+    pinnableWidget(),
+    collapsibleWidget(),
+    withInfoTool()
+);
     /**
      * transform `widgetTools` prop into `topLeftItems` and `icons` props
      * user to in the widget header
      */
-    withHeaderTools: () => compose(
-        withTools(),
-        withIcons(),
-        withMenu()
-    )
-};
+export const withHeaderTools = () => compose(
+    withTools(),
+    withIcons(),
+    withMenu()
+);

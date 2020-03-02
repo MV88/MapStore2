@@ -5,8 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {withProps} = require('recompose');
-const {pick} = require('lodash');
+import {withProps} from 'recompose';
+import {pick} from 'lodash';
 /**
  * re-map widget `dependencies` based on `dependenciesMap` property (if `dependenciesMap` is present).
  * Dependencies can be also transitive:
@@ -92,7 +92,7 @@ const buildDependencies = (map, deps, originalWidgetId) => {
  * return <EnhancedCmp dependenciesMap={dependenciesMap} dependencies={dependencies} />
  * // the enhancer will pass to the component dependencies={x: "b"}
  */
-module.exports = withProps(
+export default withProps(
     ({ dependenciesMap, dependencies, id }) => ({
         dependencies: dependenciesMap
             ? buildDependencies(dependenciesMap, dependencies, id)

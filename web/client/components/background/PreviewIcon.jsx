@@ -6,10 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {indexOf, has} = require('lodash');
-require('./css/previewicon.css');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { indexOf, has } from 'lodash';
+import './css/previewicon.css';
 
 class PreviewIcon extends React.Component {
     static propTypes = {
@@ -66,4 +67,4 @@ class PreviewIcon extends React.Component {
     }
 }
 
-module.exports = PreviewIcon;
+export default PreviewIcon;

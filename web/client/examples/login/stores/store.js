@@ -6,20 +6,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var DebugUtils = require('../../../utils/DebugUtils').default;
+import {createDebugStore} from '../../../utils/DebugUtils';
 
-const {combineReducers} = require('redux');
+import { combineReducers } from 'redux';
+import map from '../../../reducers/map';
 
-const map = require('../../../reducers/map');
+import browser from '../../../reducers/browser';
+import config from '../../../reducers/config';
+import locale from '../../../reducers/locale';
+import security from '../../../reducers/security';
+import controls from '../../../reducers/controls';
 
 // reducers
 const allReducers = combineReducers({
-    browser: require('../../../reducers/browser'),
-    config: require('../../../reducers/config'),
-    locale: require('../../../reducers/locale'),
     map: () => {return null; },
-    security: require('../../../reducers/security'),
-    controls: require('../../../reducers/controls')
+    browser,
+    config,
+    locale,
+    security,
+    controls
 });
 
 const rootReducer = (state, action) => {
@@ -31,7 +36,7 @@ const rootReducer = (state, action) => {
 };
 
 // export the store with the given reducers
-module.exports = DebugUtils.createDebugStore(rootReducer, {
+export default createDebugStore(rootReducer, {
     controls: {
         LoginForm: {
             enabled: true

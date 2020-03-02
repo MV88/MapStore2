@@ -5,19 +5,25 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Rx = require('rxjs');
-const { get } = require('lodash');
-const { setCollapsed: setTimelineCollapsed, SET_COLLAPSED } = require('../actions/timeline');
-const { TOGGLE_COLLAPSE, INSERT, TOGGLE_COLLAPSE_ALL, UPDATE_PROPERTY, toggleCollapseAll, DELETE } = require('../actions/widgets');
+import Rx from 'rxjs';
 
-const { MAP_CONFIG_LOADED } = require('../actions/config');
-const { info } = require('../actions/notifications');
+import { get } from 'lodash';
+import { setCollapsed as setTimelineCollapsed, SET_COLLAPSED } from '../actions/timeline';
 
+import {
+    TOGGLE_COLLAPSE,
+    INSERT,
+    TOGGLE_COLLAPSE_ALL,
+    UPDATE_PROPERTY,
+    toggleCollapseAll,
+    DELETE
+} from '../actions/widgets';
 
-const { getVisibleFloatingWidgets } = require('../selectors/widgets');
-const { CHANGE_LAYER_PROPERTIES } = require('../actions/layers');
-
-const { isVisible: isTimelineVisible, hasLayers: hasTimelineLayers } = require('../selectors/timeline');
+import { MAP_CONFIG_LOADED } from '../actions/config';
+import { info } from '../actions/notifications';
+import { getVisibleFloatingWidgets } from '../selectors/widgets';
+import { CHANGE_LAYER_PROPERTIES } from '../actions/layers';
+import { isVisible as isTimelineVisible, hasLayers as hasTimelineLayers } from '../selectors/timeline';
 
 
 const areWidgetsExpanded = state =>
@@ -39,7 +45,7 @@ const notifyCollapsedTimeline = (messageProps) => stream$ =>
  * @name widgetsTray
  * @memberof epics
  */
-module.exports = {
+export default {
     /**
      * Manages mutual exclusion of visibility between timeline and widgets.
      * This collapse timeline when one widget is expanded or added to the map

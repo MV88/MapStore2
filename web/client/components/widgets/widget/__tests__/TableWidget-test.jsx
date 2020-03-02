@@ -14,18 +14,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const ReactTestUtils = require('react-dom/test-utils');
-const expect = require('expect');
-const { compose, defaultProps } = require('recompose');
-const tableWidget = require('../../enhancers/tableWidget');
+import expect from 'expect';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
+import { compose, defaultProps } from 'recompose';
+
+import describePois from '../../../../test-resources/wfs/describe-pois.json';
+import tableWidget from '../../enhancers/tableWidget';
+import TableWidgetComp from '../TableWidget';
 
 const TableWidget = compose(
     defaultProps({ canEdit: true }),
     tableWidget
-)(require('../TableWidget'));
-const describePois = require('../../../../test-resources/wfs/describe-pois.json');
+)(TableWidgetComp);
 
 describe('TableWidget component', () => {
     beforeEach((done) => {

@@ -6,9 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {withState} = require('recompose');
-module.exports = {
-    manageFilterRendererState: withState("value", "onValueChange", event => {
-        return event.value;
-    })
-};
+import { withState } from 'recompose';
+
+export const manageFilterRendererState = withState("value", "onValueChange", event => {
+    return event.value;
+});

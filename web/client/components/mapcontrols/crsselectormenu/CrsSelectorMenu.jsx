@@ -5,9 +5,10 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const PropTypes = require('prop-types');
-const { ListGroupItem, ListGroup, FormControl } = require('react-bootstrap');
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { ListGroupItem, ListGroup, FormControl } from 'react-bootstrap';
 
 class CrsSelectorMenu extends React.Component {
     static propTypes = {
@@ -59,4 +60,4 @@ class CrsSelectorMenu extends React.Component {
 
 }
 
-module.exports = CrsSelectorMenu;
+export default CrsSelectorMenu;

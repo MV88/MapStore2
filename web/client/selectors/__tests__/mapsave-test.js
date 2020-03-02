@@ -6,11 +6,11 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-const expect = require('expect');
-const {
+import expect from 'expect';
+import {
     mapOptionsToSaveSelector,
     registerCustomSaveHandler
-} = require("../mapsave");
+} from "../mapsave";
 
 const state = {
     custom: {

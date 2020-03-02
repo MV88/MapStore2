@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const {
+import {
     editWidget,
     editNewWidget,
     changeEditorSetting,
@@ -24,15 +24,16 @@ const {
     toggleCollapseAll,
     toggleTray,
     DEFAULT_TARGET
-} = require('../../actions/widgets');
-const {configureMap} = require('../../actions/config');
-const {dashboardLoaded} = require('../../actions/dashboard');
-const widgets = require('../widgets');
-const {getFloatingWidgets, getVisibleFloatingWidgets, getCollapsedIds} = require('../../selectors/widgets');
+} from '../../actions/widgets';
+import {configureMap} from '../../actions/config';
+import {dashboardLoaded} from '../../actions/dashboard';
+import widgets from '../widgets';
+import {getFloatingWidgets, getVisibleFloatingWidgets, getCollapsedIds} from '../../selectors/widgets';
 
+import {initialState, initialStateWithLayers, changeLayoutAction} from '../../test-resources/widgets/layout-state-collapse.js';
 
-const expect = require('expect');
-const {find, get} = require('lodash');
+import expect from 'expect';
+import {find, get} from 'lodash';
 
 describe('Test the widgets reducer', () => {
     it('initial state', () => {
@@ -190,7 +191,7 @@ describe('Test the widgets reducer', () => {
         expect(state.containers[DEFAULT_TARGET].widgets.length).toBe(1);
     });
     it('widgets toggleCollapse and toggleCollapseAll', () => {
-        const {initialState, changeLayoutAction} = require('../../test-resources/widgets/layout-state-collapse.js');
+
         const widgetToCollapse = getFloatingWidgets({
             widgets: initialState
         })[0];
@@ -273,7 +274,7 @@ describe('Test the widgets reducer', () => {
         expect(widgets(state, toggleTray(false)).tray).toBe(false);
     });
     it('widgets updateWidgetProperty', () => {
-        const {initialState} = require('../../test-resources/widgets/layout-state-collapse.js');
+
         const id = "a7122cc0-f7a9-11e8-8602-03b7e0c9537b";
         const state = widgets({
             ...initialState
@@ -285,7 +286,6 @@ describe('Test the widgets reducer', () => {
         expect(widget.key).toBe("value");
     });
     it('widgets updateWidgetProperty, merge mode', () => {
-        const {initialStateWithLayers} = require('../../test-resources/widgets/layout-state-collapse.js');
         const id = "a7122cc0-f7a9-11e8-8602-03b7e0c9537b";
         const state = widgets({
             ...initialStateWithLayers

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {
+import {
     UPDATE_TEMPORARY_STYLE,
     UPDATE_STATUS,
     ERROR_STYLE,
@@ -16,7 +16,7 @@ const {
     LOADED_STYLE,
     INIT_STYLE_SERVICE,
     SET_EDIT_PERMISSION
-} = require('../actions/styleeditor');
+} from '../actions/styleeditor';
 
 function styleeditor(state = {}, action) {
     switch (action.type) {
@@ -115,4 +115,4 @@ function styleeditor(state = {}, action) {
     }
 }
 
-module.exports = styleeditor;
+export default styleeditor;

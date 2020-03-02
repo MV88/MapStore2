@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var {CHANGE_MAP_VIEW, CHANGE_MOUSE_POINTER,
+import {CHANGE_MAP_VIEW, CHANGE_MOUSE_POINTER,
     CHANGE_ZOOM_LVL, CHANGE_MAP_CRS, CHANGE_MAP_SCALES, PAN_TO,
     CHANGE_MAP_STYLE, CHANGE_ROTATION, UPDATE_VERSION, ZOOM_TO_POINT,
     RESIZE_MAP, CHANGE_MAP_LIMITS, SET_MAP_RESOLUTIONS,
-    TOGGLE_UNSAVED_MAP_CHANGES_DIALOG} = require('../actions/map');
+    TOGGLE_UNSAVED_MAP_CHANGES_DIALOG} from '../actions/map';
 
-var assign = require('object-assign');
-var MapUtils = require('../utils/MapUtils');
-var CoordinatesUtils = require('../utils/CoordinatesUtils');
+import assign from 'object-assign';
+import MapUtils from '../utils/MapUtils';
+import CoordinatesUtils from '../utils/CoordinatesUtils';
 
 function mapConfig(state = null, action) {
     switch (action.type) {
@@ -118,4 +118,4 @@ function mapConfig(state = null, action) {
     }
 }
 
-module.exports = mapConfig;
+export default mapConfig;

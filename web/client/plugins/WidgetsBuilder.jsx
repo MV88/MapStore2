@@ -6,30 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
 import PropTypes from 'prop-types';
-import * as epics from '../epics/widgetsbuilder';
-import { createPlugin } from '../utils/PluginsUtils';
-
-import DockPanel from "../components/misc/panels/DockPanel";
-
-import {connect} from 'react-redux';
-import {createSelector} from 'reselect';
+import React from 'react';
+import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { createSelector } from 'reselect';
 
-import {setControlProperty} from '../actions/controls';
-
-import {mapLayoutValuesSelector} from '../selectors/maplayout';
-import {widgetBuilderSelector} from '../selectors/controls';
-import { dependenciesSelector, availableDependenciesForEditingWidgetSelector} from '../selectors/widgets';
+import { setControlProperty } from '../actions/controls';
 import { toggleConnection } from '../actions/widgets';
-import withMapExitButton from './widgetbuilder/enhancers/withMapExitButton';
+import DockPanel from '../components/misc/panels/DockPanel';
+import epics from '../epics/widgetsbuilder';
+import { widgetBuilderSelector } from '../selectors/controls';
+import { mapLayoutValuesSelector } from '../selectors/maplayout';
+import { availableDependenciesSelector, dependenciesSelector } from '../selectors/widgets';
 import WidgetTypeBuilder from './widgetbuilder/WidgetTypeBuilder';
+import withMapExitButton from './widgetbuilder/enhancers/withMapExitButton';
+
 const Builder = compose(
     connect(
         createSelector(
             dependenciesSelector,
-            availableDependenciesForEditingWidgetSelector,
+            availableDependenciesSelector,
             (dependencies, availableDependenciesProps) => ({ dependencies, ...availableDependenciesProps }))
         , { toggleConnection }),
     withMapExitButton
@@ -115,14 +112,7 @@ const Plugin = connect(
     }
 
 )(SideBarComponent);
-
-export default createPlugin('WidgetsBuilder', {
-    component: Plugin,
-    epics,
-    containers: {
-        TOC: {
-            doNotHide: true,
-            name: "WidgetBuilder"
-        }
-    }
-});
+export default {
+    WidgetsBuilderPlugin: Plugin,
+    epics
+};

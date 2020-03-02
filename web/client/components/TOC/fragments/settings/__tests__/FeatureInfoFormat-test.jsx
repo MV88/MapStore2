@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ReactTestUtils = require('react-dom/test-utils');
-var FeatureInfoFormat = require('../FeatureInfoFormat');
+import React from 'react';
 
-var expect = require('expect');
+import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
+import FeatureInfoFormat from '../FeatureInfoFormat';
+import expect from 'expect';
 
 describe('test Layer Properties FeatureInfoFormat module component', () => {
     beforeEach((done) => {

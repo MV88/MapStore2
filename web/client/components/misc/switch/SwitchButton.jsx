@@ -6,8 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
+import PropTypes from 'prop-types';
 /**
  * Graphical Switch button.
  * @param {boolean} [checked=false] the status of the button
@@ -40,4 +40,4 @@ class SwitchButton extends React.Component {
     }
 }
 
-module.exports = SwitchButton;
+export default SwitchButton;

@@ -6,37 +6,46 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
-const assign = require('object-assign');
-const {createSelector} = require("reselect");
-const {Glyphicon, Panel} = require('react-bootstrap');
-const ContainerDimensions = require('react-container-dimensions').default;
-const {changeLayerProperties} = require('../actions/layers');
-const {addService, deleteService, textSearch, changeCatalogFormat, changeCatalogMode,
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import assign from 'object-assign';
+import {createSelector} from "reselect";
+import {Glyphicon, Panel} from 'react-bootstrap';
+import ContainerDimensions from 'react-container-dimensions';
+import {changeLayerProperties} from '../actions/layers';
+import {addService, deleteService, textSearch, changeCatalogFormat, changeCatalogMode,
     changeUrl, changeTitle, changeAutoload, changeType, changeServiceFormat, changeSelectedService,
     addLayer, addLayerError, focusServicesList, changeText,
-    changeMetadataTemplate, toggleAdvancedSettings, toggleThumbnail, toggleTemplate, catalogClose} = require("../actions/catalog");
-const {zoomToExtent} = require("../actions/map");
-const {addBackgroundProperties, updateThumbnail, removeThumbnail, clearModalParameters, backgroundAdded} = require('../actions/backgroundselector');
-const {currentLocaleSelector, currentMessagesSelector} = require("../selectors/locale");
-const {layersSelector} = require('../selectors/layers');
-const {setControlProperty, toggleControl} = require("../actions/controls");
-const {resultSelector, serviceListOpenSelector, newServiceSelector,
+    changeMetadataTemplate, toggleAdvancedSettings, toggleThumbnail, toggleTemplate, catalogClose} from "../actions/catalog";
+import {zoomToExtent} from "../actions/map";
+import csw from '../api/CSW';
+import wms from '../api/WMS';
+import wmts from '../api/WMTS';
+import mapBackground from '../api/mapBackground';
+import {addBackgroundProperties, updateThumbnail, removeThumbnail, clearModalParameters, backgroundAdded} from '../actions/backgroundselector';
+import {currentLocaleSelector, currentMessagesSelector} from "../selectors/locale";
+import {layersSelector} from '../selectors/layers';
+import {setControlProperty, toggleControl} from "../actions/controls";
+import {resultSelector, serviceListOpenSelector, newServiceSelector,
     newServiceTypeSelector, selectedServiceTypeSelector, searchOptionsSelector, servicesSelector,
     servicesSelectorWithBackgrounds, formatsSelector, loadingErrorSelector, selectedServiceSelector,
     modeSelector, layerErrorSelector, activeSelector, savingSelector, authkeyParamNameSelector,
     searchTextSelector, groupSelector, pageSizeSelector, loadingSelector, selectedServiceLayerOptionsSelector
-} = require("../selectors/catalog");
-const {projectionSelector} = require('../selectors/map');
+} from "../selectors/catalog";
+import {projectionSelector} from '../selectors/map';
 
-const {mapLayoutValuesSelector} = require('../selectors/maplayout');
-const {metadataSourceSelector, modalParamsSelector} = require('../selectors/backgroundselector');
-const Message = require("../components/I18N/Message");
-const DockPanel = require("../components/misc/panels/DockPanel");
-require('./metadataexplorer/css/style.css');
-const CatalogUtils = require('../utils/CatalogUtils');
+import {mapLayoutValuesSelector} from '../selectors/maplayout';
+import {metadataSourceSelector, modalParamsSelector} from '../selectors/backgroundselector';
+import Message from "../components/I18N/Message";
+import CatalogComp from '../components/catalog/Catalog';
+import DockPanel from "../components/misc/panels/DockPanel";
+import CatalogUtils from '../utils/CatalogUtils';
+
+import('./metadataexplorer/css/style.css');
+
+import catalog from '../reducers/catalog';
+import epics from '../epics/catalog';
 
 const catalogSelector = createSelector([
     (state) => layersSelector(state),
@@ -83,7 +92,7 @@ const Catalog = connect(catalogSelector, {
     onToggle: toggleControl.bind(null, 'backgroundSelector', null),
     onLayerChange: setControlProperty.bind(null, 'backgroundSelector'),
     onStartChange: setControlProperty.bind(null, 'backgroundSelector', 'start')
-})(require('../components/catalog/Catalog'));
+})(CatalogComp);
 
 
 class MetadataExplorerComponent extends React.Component {
@@ -235,10 +244,10 @@ const MetadataExplorerPlugin = connect(metadataExplorerSelector, {
 })(MetadataExplorerComponent);
 
 const API = {
-    csw: require('../api/CSW'),
-    wms: require('../api/WMS'),
-    wmts: require('../api/WMTS'),
-    backgrounds: require('../api/mapBackground')
+    csw,
+    wms,
+    wmts,
+    backgrounds: mapBackground
 };
 /**
  * MetadataExplorer (Catalog) plugin. Shows the catalogs results (CSW, WMS and WMTS).
@@ -254,7 +263,7 @@ const API = {
  * @prop {number} cfg.zoomToLayer enable/disable zoom to layer when added
  * @prop {number} [delayAutoSearch] time in ms passed after a search is triggered by filter changes, default 1000
  */
-module.exports = {
+export default {
     MetadataExplorerPlugin: assign(MetadataExplorerPlugin, {
         BurgerMenu: {
             name: 'metadataexplorer',
@@ -273,6 +282,6 @@ module.exports = {
             doNotHide: true
         }
     }),
-    reducers: {catalog: require('../reducers/catalog')},
-    epics: require("../epics/catalog").default(API)
+    reducers: {catalog},
+    epics: epics(API)
 };

@@ -6,29 +6,77 @@
   * LICENSE file in the root directory of this source tree.
   */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {bindActionCreators} = require('redux');
-const {createSelector, createStructuredSelector} = require('reselect');
-const {widgetBuilderAvailable, wfsDownloadAvailable} = require('../../../selectors/controls');
-const {paginationInfo, featureLoadingSelector, resultsSelector, isSyncWmsActive, featureCollectionResultSelector} = require('../../../selectors/query');
-const { getTitleSelector, modeSelector, selectedFeaturesCount, hasChangesSelector, hasGeometrySelector, isSimpleGeomSelector, hasNewFeaturesSelector, isSavingSelector, isSavedSelector, isDrawingSelector, canEditSelector, getAttributeFilter, hasSupportedGeometry, editingAllowedRolesSelector, timeSyncActive, showTimeSync} = require('../../../selectors/featuregrid');
-const {userRoleSelector} = require('../../../selectors/security');
-const {isCesium} = require('../../../selectors/maptype');
-const {mapLayoutValuesSelector} = require('../../../selectors/maplayout');
-const {chartDisabledSelector, showAgainSelector, showPopoverSyncSelector, selectedLayerNameSelector} = require('../../../selectors/featuregrid');
-const {deleteFeatures, toggleTool, clearChangeConfirmed, closeFeatureGridConfirmed, closeFeatureGrid} = require('../../../actions/featuregrid');
-const {toolbarEvents, pageEvents} = require('../index');
-const {getAttributeFields} = require('../../../utils/FeatureGridUtils');
-const {getFilterRenderer} = require('../../../components/data/featuregrid/filterRenderers');
-const {isDescribeLoaded, isFilterActive} = require('../../../selectors/query');
+import React from 'react';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createSelector, createStructuredSelector } from 'reselect';
+import { widgetBuilderAvailable, wfsDownloadAvailable } from '../../../selectors/controls';
+
+import {
+    paginationInfo,
+    featureLoadingSelector,
+    resultsSelector,
+    isSyncWmsActive,
+    featureCollectionResultSelector,
+    isDescribeLoaded,
+    isFilterActive
+} from '../../../selectors/query';
+
+import {
+    getTitleSelector,
+    modeSelector,
+    selectedFeaturesCount,
+    hasChangesSelector,
+    hasGeometrySelector,
+    isSimpleGeomSelector,
+    hasNewFeaturesSelector,
+    isSavingSelector,
+    isSavedSelector,
+    isDrawingSelector,
+    canEditSelector,
+    getAttributeFilter,
+    hasSupportedGeometry,
+    editingAllowedRolesSelector,
+    timeSyncActive,
+    showTimeSync,
+    chartDisabledSelector,
+    showAgainSelector,
+    showPopoverSyncSelector,
+    selectedLayerNameSelector
+} from '../../../selectors/featuregrid';
+
+import { userRoleSelector } from '../../../selectors/security';
+import { isCesium } from '../../../selectors/maptype';
+import { mapLayoutValuesSelector } from '../../../selectors/maplayout';
+
+import {
+    deleteFeatures,
+    toggleTool,
+    clearChangeConfirmed,
+    closeFeatureGridConfirmed,
+    closeFeatureGrid
+} from '../../../actions/featuregrid';
+
+import { toolbarEvents, pageEvents } from '../index';
+import { getAttributeFields } from '../../../utils/FeatureGridUtils';
+import { getFilterRenderer } from '../../../components/data/featuregrid/filterRenderers';
+
+import EmptyRowsViewComp from '../../../components/data/featuregrid/EmptyRowsView';
+import ToolbarComp from '../../../components/data/featuregrid/toolbars/Toolbar';
+import HeaderComp from '../../../components/data/featuregrid/Header';
+import FooterComp from '../../../components/data/featuregrid/Footer';
+import ConfirmDeleteComp from '../../../components/data/featuregrid/dialog/ConfirmDelete';
+import ConfirmClearComp from '../../../components/data/featuregrid/dialog/ConfirmClear';
+import ConfirmFeatureCloseComp from '../../../components/data/featuregrid/dialog/ConfirmFeatureClose';
+
 
 const filterEditingAllowedUser = (role, editingAllowedRoles = ["ADMIN"]) => {
     return editingAllowedRoles.indexOf(role) !== -1;
 };
 const EmptyRowsView = connect(createStructuredSelector({
     loading: featureLoadingSelector
-}))(require('../../../components/data/featuregrid/EmptyRowsView'));
+}))(EmptyRowsViewComp);
 const Toolbar = connect(
     createStructuredSelector({
         saving: isSavingSelector,
@@ -61,7 +109,7 @@ const Toolbar = connect(
         timeSync: timeSyncActive
     }),
     (dispatch) => ({events: bindActionCreators(toolbarEvents, dispatch)})
-)(require('../../../components/data/featuregrid/toolbars/Toolbar'));
+)(ToolbarComp);
 
 
 const Header = connect(
@@ -71,7 +119,7 @@ const Header = connect(
     {
         onClose: toolbarEvents.onClose
     }
-)(require('../../../components/data/featuregrid/Header'));
+)(HeaderComp);
 
 // loading={props.featureLoading} totalFeatures={props.totalFeatures} resultSize={props.resultSize}/
 const Footer = connect(
@@ -85,25 +133,27 @@ const Footer = connect(
             virtualScroll
         })),
     pageEvents
-)(require('../../../components/data/featuregrid/Footer'));
+)(FooterComp);
 const DeleteDialog = connect(
     createSelector(selectedFeaturesCount, (count) => ({count})), {
         onClose: () => toggleTool("deleteConfirm", false),
         onConfirm: () => deleteFeatures()
-    })(require('../../../components/data/featuregrid/dialog/ConfirmDelete'));
+    })(ConfirmDeleteComp);
 const ClearDialog = connect(
     createSelector(selectedFeaturesCount, (count) => ({count})), {
         onClose: () => toggleTool("clearConfirm", false),
         onConfirm: () => clearChangeConfirmed()
-    })(require('../../../components/data/featuregrid/dialog/ConfirmClear'));
+    })(ConfirmClearComp);
 const FeatureCloseDialog = connect(() => {}
     , {
         onClose: () => closeFeatureGridConfirmed(),
         onConfirm: () => closeFeatureGrid()
-    })(require('../../../components/data/featuregrid/dialog/ConfirmFeatureClose'));
+    })(ConfirmFeatureCloseComp);
+
+import settings from './AttributeSelector';
 
 const panels = {
-    settings: require('./AttributeSelector')
+    settings
 };
 
 const dialogs = {
@@ -117,49 +167,48 @@ const panelDefaultProperties = {
     }
 };
 
-module.exports = {
-    getPanels: (tools = {}) =>
-        Object.keys(tools)
-            .filter(t => tools[t] && panels[t])
-            .map(t => {
-                const Panel = panels[t];
-                return <Panel key={t} {...(panelDefaultProperties[t] || {})} />;
-            }),
-    getHeader: () => {
-        return <Header ><Toolbar /></Header>;
-    },
-    getFooter: (props) => {
-        return ( props.focusOnEdit && props.hasChanges || props.newFeatures.length > 0) ? null : <Footer />;
-    },
-    getEmptyRowsView: () => {
-        return EmptyRowsView;
-    },
-    getFilterRenderers: createSelector((d) => d,
-        (describe) =>
-            describe ? getAttributeFields(describe).reduce( (out, cur) => ({
-                ...out,
-                [cur.name]: connect(
-                    createSelector(
-                        (state) => getAttributeFilter(state, cur.name),
-                        modeSelector,
-                        (filter, mode) => {
-                            const props = {
-                                value: filter && (filter.rawValue || filter.value)
-                            };
-                            const editProps = {
-                                disabled: true,
-                                tooltipMsgId: "featuregrid.filter.tooltips.editMode"
-                            };
-                            return mode === "EDIT" ? {...props, ...editProps} : props;
-                        }
-                    ))(getFilterRenderer(cur.localType, {name: cur.name}))
-            }), {}) : {}),
-    getDialogs: (tools = {}) => {
-        return Object.keys(tools)
-            .filter(t => tools[t] && dialogs[t])
-            .map(t => {
-                const Dialog = dialogs[t];
-                return <Dialog key={t} />;
-            });
-    }
+
+export const getPanels = (tools = {}) =>
+    Object.keys(tools)
+        .filter(t => tools[t] && panels[t])
+        .map(t => {
+            const Panel = panels[t];
+            return <Panel key={t} {...(panelDefaultProperties[t] || {})} />;
+        });
+export const getHeader = () => {
+    return <Header ><Toolbar /></Header>;
+};
+export const getFooter = (props) => {
+    return ( props.focusOnEdit && props.hasChanges || props.newFeatures.length > 0) ? null : <Footer />;
+};
+export const getEmptyRowsView = () => {
+    return EmptyRowsView;
+};
+export const getFilterRenderers = createSelector((d) => d,
+    (describe) =>
+        describe ? getAttributeFields(describe).reduce( (out, cur) => ({
+            ...out,
+            [cur.name]: connect(
+                createSelector(
+                    (state) => getAttributeFilter(state, cur.name),
+                    modeSelector,
+                    (filter, mode) => {
+                        const props = {
+                            value: filter && (filter.rawValue || filter.value)
+                        };
+                        const editProps = {
+                            disabled: true,
+                            tooltipMsgId: "featuregrid.filter.tooltips.editMode"
+                        };
+                        return mode === "EDIT" ? {...props, ...editProps} : props;
+                    }
+                ))(getFilterRenderer(cur.localType, {name: cur.name}))
+        }), {}) : {});
+export const getDialogs = (tools = {}) => {
+    return Object.keys(tools)
+        .filter(t => tools[t] && dialogs[t])
+        .map(t => {
+            const Dialog = dialogs[t];
+            return <Dialog key={t} />;
+        });
 };

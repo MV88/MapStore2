@@ -6,17 +6,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const {connect} = require('react-redux');
-const {bindActionCreators} = require('redux');
-const {initTutorial, startTutorial, updateTutorial, disableTutorial, resetTutorial, closeTutorial, toggleTutorial} = require('../actions/tutorial');
-const presetList = require('./tutorial/preset');
-const assign = require('object-assign');
-const I18N = require('../components/I18N/I18N');
-const {Glyphicon} = require('react-bootstrap');
-const {createSelector} = require('reselect');
-const {tutorialSelector} = require('../selectors/tutorial');
-const {closeTutorialEpic, switchTutorialEpic, getActionsFromStepEpic} = require('../epics/tutorial');
+import assign from 'object-assign';
+import React from 'react';
+import { Glyphicon } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createSelector } from 'reselect';
+
+import {
+    closeTutorial,
+    disableTutorial,
+    initTutorial,
+    resetTutorial,
+    startTutorial,
+    toggleTutorial,
+    updateTutorial
+} from '../actions/tutorial';
+import I18N from '../components/I18N/I18N';
+import TutorialComp from '../components/tutorial/Tutorial';
+import { closeTutorialEpic, getActionsFromStepEpic, switchTutorialEpic } from '../epics/tutorial';
+import tutorialReducer from '../reducers/tutorial';
+import { tutorialSelector } from '../selectors/tutorial';
+import presetList from './tutorial/preset';
 
 /**
  * Tutorial plugin. Enables the steps of tutorial.
@@ -147,9 +158,9 @@ const Tutorial = connect(tutorialPluginSelector, (dispatch) => {
         ...presetList,
         ...ownProps.presetList
     }
-}))(require('../components/tutorial/Tutorial'));
+}))(TutorialComp);
 
-module.exports = {
+export default {
     TutorialPlugin: assign(Tutorial, {
         BurgerMenu: {
             name: 'tutorial',
@@ -162,7 +173,7 @@ module.exports = {
         }
     }),
     reducers: {
-        tutorial: require('../reducers/tutorial')
+        tutorial: tutorialReducer
     },
     epics: {
         closeTutorialEpic,

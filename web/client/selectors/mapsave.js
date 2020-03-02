@@ -6,20 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {createStructuredSelector} = require('reselect');
-const {servicesSelector, selectedServiceSelector} = require('./catalog');
-const {getFloatingWidgets, getCollapsedState, getFloatingWidgetsLayout} = require('./widgets');
-const { mapInfoConfigurationSelector } = require('./mapInfo');
-
+import { createStructuredSelector } from 'reselect';
 const customSaveHandlers = {};
 
-const registerCustomSaveHandler = (section, handler) => {
-    if (handler) {
-        customSaveHandlers[section] = handler;
-    } else {
-        delete customSaveHandlers[section];
-    }
-};
+import { selectedServiceSelector, servicesSelector } from './catalog';
+import { mapInfoConfigurationSelector } from './mapInfo';
+import { getCollapsedState, getFloatingWidgets, getFloatingWidgetsLayout } from './widgets';
 
 const basicMapOptionsToSaveSelector = createStructuredSelector({
     catalogServices: createStructuredSelector({
@@ -34,7 +26,7 @@ const basicMapOptionsToSaveSelector = createStructuredSelector({
     mapInfoConfiguration: mapInfoConfigurationSelector
 });
 
-const mapOptionsToSaveSelector = (state) => {
+export const mapOptionsToSaveSelector = (state) => {
     const customState = Object.keys(customSaveHandlers).reduce((acc, fragment) => {
         return {
             ...acc,
@@ -44,4 +36,10 @@ const mapOptionsToSaveSelector = (state) => {
     return { ...basicMapOptionsToSaveSelector(state), ...customState};
 };
 
-module.exports = {mapOptionsToSaveSelector, registerCustomSaveHandler};
+export const registerCustomSaveHandler = (section, handler) => {
+    if (handler) {
+        customSaveHandlers[section] = handler;
+    } else {
+        delete customSaveHandlers[section];
+    }
+};
