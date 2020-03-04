@@ -25,13 +25,13 @@ import SecurityUtils from './SecurityUtils';
 
 let regGeoServerRule = /\/[\w- ]*geoserver[\w- ]*\//;
 
-const getGroup = (groupId, groups) => {
+export const getGroup = (groupId, groups) => {
     return head(groups.filter((subGroup) => isObject(subGroup) && subGroup.id === groupId));
 };
-const getLayer = (layerName, allLayers) => {
+export const getLayer = (layerName, allLayers) => {
     return head(allLayers.filter((layer) => layer.id === layerName));
 };
-const getLayersId = (groupId, allLayers) => {
+export const getLayersId = (groupId, allLayers) => {
     return allLayers.filter((layer) => (layer.group || 'Default') === groupId).map((layer) => layer.id).reverse();
 };
 /**
@@ -80,14 +80,8 @@ export const addBaseParams = (url, params) => {
     const query = Object.keys(params).map((key) => key + '=' + encodeURIComponent(params[key])).join('&');
     return url.indexOf('?') === -1 ? (url + '?' + query) : (url + '&' + query);
 };
-
-export const isSupportedLayerForMapType = async(layer, maptype) => {
-
-    const Module = await import(
-        /* webpackChunkName: "maptype_layers" */
-        `./${maptype}/Layers`
-    );
-    const Layers = Module.default;
+export const isSupportedLayerForMapType = (layer, maptype) => {
+    const Layers = require('./' + maptype + '/Layers');
     if (layer.type === "mapquest" || layer.type === "bing") {
         return Layers.isSupported(layer.type) && layer.apiKey && layer.apiKey !== "__API_KEY_MAPQUEST__" && !layer.invalid;
     }
@@ -103,11 +97,11 @@ export const isSupportedLayerForMapType = async(layer, maptype) => {
 };
 
 
-const checkInvalidParam = (layer) => {
+export const checkInvalidParam = (layer) => {
     return layer && layer.invalid ? assign({}, layer, {invalid: false}) : layer;
 };
 
-const getNode = (nodes, id) => {
+export const getNode = (nodes, id) => {
     if (nodes && isArray(nodes)) {
         return nodes.reduce((previous, node) => {
             if (previous) {
@@ -125,7 +119,7 @@ const getNode = (nodes, id) => {
     return null;
 };
 
-const getGroupNodes = (node) => {
+export const getGroupNodes = (node) => {
     if (node && node.nodes) {
         return node.nodes.reduce((a, b) => {
             let nodes = [].concat(a);
@@ -146,7 +140,7 @@ const getGroupNodes = (node) => {
  * adds or update node property in a nested node
  * if propName is an object it overrides a whole group of options instead of one
 */
-const deepChange = (nodes, findValue, propName, propValue) => {
+export const deepChange = (nodes, findValue, propName, propValue) => {
     if (nodes && isArray(nodes) && nodes.length > 0) {
         return nodes.map((node) => {
             if (isObject(node)) {
@@ -166,7 +160,7 @@ const deepChange = (nodes, findValue, propName, propValue) => {
  * Extracts the sourceID of a layer.
  * @param {object} layer the layer object
  */
-const getSourceId = (layer = {}) => layer.capabilitiesURL || head(castArray(layer.url));
+export const getSourceId = (layer = {}) => layer.capabilitiesURL || head(castArray(layer.url));
 /**
 * It extracts tile matrix set from sources and add them to the layer
 *
@@ -174,7 +168,7 @@ const getSourceId = (layer = {}) => layer.capabilitiesURL || head(castArray(laye
 * @param layer {object} layer to check
 * @return {object} new layers with tileMatrixSet and matrixIds (if needed)
 */
-const extractTileMatrixFromSources = (sources, layer) => {
+export const extractTileMatrixFromSources = (sources, layer) => {
     if (!sources || !layer) {
         return {};
     }
@@ -194,7 +188,7 @@ const extractTileMatrixFromSources = (sources, layer) => {
 * @param {object} [sources] current sources map object
 * @return {object} new sources object with data from layers
 */
-const extractTileMatrixSetFromLayers = (sourcesFromLayers, sources = {}) => {
+export const extractTileMatrixSetFromLayers = (sourcesFromLayers, sources = {}) => {
     return sourcesFromLayers && Object.keys(sourcesFromLayers).reduce((src, url) => {
         const matrixIds = sourcesFromLayers[url].reduce((a, b) => {
             return assign(a, { [b.id || b.name]: { srs: [...Object.keys(b.matrixIds)], matrixIds: assign({}, b.matrixIds) } });
@@ -225,7 +219,7 @@ const extractTileMatrixSetFromLayers = (sourcesFromLayers, sources = {}) => {
  * Creates a map of `sourceId: sourceObject` from the layers array.
  * @param {object[]} layers array of layer objects
  */
-const extractSourcesFromLayers = layers => {
+export const extractSourcesFromLayers = layers => {
     /* layers grouped by url to create the source object */
     const groupByUrl = layers.filter(l => l.tileMatrixSet).reduce((a, l) => {
         const sourceId = getSourceId(l);
@@ -243,7 +237,7 @@ const extractSourcesFromLayers = layers => {
 * @return {object} new sources object with data from layers
 */
 
-const extractDataFromSources = mapState => {
+export const extractDataFromSources = mapState => {
     if (!mapState || !mapState.layers || !isArray(mapState.layers)) {
         return null;
     }
@@ -262,7 +256,7 @@ export const getURLs = (urls, queryParametersString = '') => {
 };
 
 
-const LayerCustomUtils = {};
+export const LayerCustomUtils = {};
 
 export const getDimension = (dimensions, dimension) => {
     switch (dimension.toLowerCase()) {
@@ -465,7 +459,7 @@ export const saveLayer = (layer) => {
         id: layer.id,
         features: layer.features,
         format: layer.format,
-        thumbURL: layer.thumbURL,
+        thumbURL: layer.thumbURL && layer.thumbURL.split(':')[0] === 'blob' ? undefined : layer.thumbURL,
         group: layer.group,
         search: layer.search,
         source: layer.source,

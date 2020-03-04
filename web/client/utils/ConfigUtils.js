@@ -24,7 +24,7 @@ const centerPropType = PropTypesLib.shape({
 });
 
 const urlQuery = url.parse(window.location.href, true).query;
-
+let ConfigUtils = {};
 let localConfigFile = 'localConfig.json';
 
 let defaultConfig = {
@@ -83,7 +83,7 @@ export const cleanDuplicatedQuestionMarks = (urlToNormalize) => {
  * it removes some params from the query string
  * return the shrinked url
 */
-const getUrlWithoutParameters = (urlToFilter, skip) => {
+export const getUrlWithoutParameters = (urlToFilter, skip) => {
     const urlparts = cleanDuplicatedQuestionMarks(urlToFilter).split('?');
     let paramsFiltered = "";
     if (urlparts.length >= 2 && urlparts[1]) {
@@ -235,8 +235,8 @@ export const convertFromLegacy = (config) => {
     var maxExtent = mapConfig.maxExtent || mapConfig.extent;
 
     // setup layers and sources with defaults
-    this.setupSources(sources, config.defaultSourceType);
-    this.setupLayers(layers, sources, ["gxp_osmsource", "gxp_wmssource", "gxp_googlesource", "gxp_bingsource", "gxp_mapquestsource", "gxp_olsource"]);
+    ConfigUtils.setupSources(sources, config.defaultSourceType);
+    ConfigUtils.setupLayers(layers, sources, ["gxp_osmsource", "gxp_wmssource", "gxp_googlesource", "gxp_bingsource", "gxp_mapquestsource", "gxp_olsource"]);
     return normalizeConfig({
         center: latLng,
         zoom: zoom,
@@ -309,7 +309,7 @@ export const setupLayers = (layers, sources, supportedSourceTypes) => {
         }
         if (layer) {
             if (supportedSourceTypes.indexOf(source && source.ptype) >= 0) {
-                if (layer.group === this.backgroundGroup) {
+                if (layer.group === ConfigUtils.backgroundGroup) {
                     // force to false if undefined
                     layer.visibility = layer.visibility || false;
                     if (candidateVisible && candidateVisible.visibility) {
@@ -457,7 +457,7 @@ export const removeConfigProp = (prop) => {
     delete defaultConfig[prop];
 };
 
-const ConfigUtils = {
+ConfigUtils = {
     defaultSourceType,
     backgroundGroup,
     PropTypes,

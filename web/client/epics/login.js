@@ -26,7 +26,7 @@ import {get} from 'lodash';
  * @memberof epics.login
  * @return {external:Observable} emitting {@link #actions.security.refreshAccessToken} events
  */
-const refreshTokenEpic = (action$, store) =>
+export const refreshTokenEpic = (action$, store) =>
     action$.ofType(LOCATION_CHANGE)
         .take(1)
         // do not launch the session verify is there is no stored session
@@ -44,7 +44,7 @@ const refreshTokenEpic = (action$, store) =>
         );
 
 
-const reloadMapConfig = (action$, store) =>
+export const reloadMapConfig = (action$, store) =>
     Rx.Observable.merge(
         action$.ofType(LOGIN_SUCCESS, LOGOUT)
             .filter(() => pathnameSelector(store.getState()).indexOf("viewer") !== -1)
@@ -68,7 +68,7 @@ const reloadMapConfig = (action$, store) =>
             return Rx.Observable.of(configureError(e));
         });
 
-const promptLoginOnMapError = (actions$, store) =>
+export const promptLoginOnMapError = (actions$, store) =>
     actions$.ofType(LOGIN_REQUIRED)
         .switchMap(() => {
             return Rx.Observable.of(setControlProperty('LoginForm', 'enabled', true))
@@ -82,13 +82,13 @@ const promptLoginOnMapError = (actions$, store) =>
                 );
         });
 
-const initCatalogOnLoginOutEpic = (action$) =>
+export const initCatalogOnLoginOutEpic = (action$) =>
     action$.ofType(LOGIN_SUCCESS, LOGOUT)
         .switchMap(() => {
             return Rx.Observable.of(initCatalog());
         });
 
-const redirectOnLogout = action$ =>
+export const redirectOnLogout = action$ =>
     action$.ofType(LOGOUT)
         .filter(({ redirectUrl }) => redirectUrl)
         .switchMap(({ redirectUrl }) => Rx.Observable.of(push(redirectUrl)));

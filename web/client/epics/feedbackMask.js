@@ -37,7 +37,7 @@ import {isSharedStory} from '../selectors/geostory';
  * @memberof epics.feedbackMask
  * @return {Observable}
  */
-const updateVisibility = (action$, loadActions, isEnabled = () => {}, mode) =>
+export const updateVisibility = (action$, loadActions, isEnabled = () => {}, mode) =>
     Rx.Observable.concat(
         Rx.Observable.of(feedbackMaskLoading(mode)),
         action$.ofType(...loadActions)
@@ -56,7 +56,7 @@ const updateVisibility = (action$, loadActions, isEnabled = () => {}, mode) =>
  * @memberof epics.feedbackMask
  * @return {Observable}
  */
-const updateMapVisibility = (action$, store) =>
+export const updateMapVisibility = (action$, store) =>
     action$.ofType(INIT_MAP)
         .switchMap(({disableFeedbackMask}) => {
             const loadActions = [MAP_CONFIG_LOADED, MAP_CONFIG_LOAD_ERROR];
@@ -79,7 +79,7 @@ const updateMapVisibility = (action$, store) =>
  * @memberof epics.feedbackMask
  * @return {Observable}
  */
-const updateDashboardVisibility = action$ =>
+export const updateDashboardVisibility = action$ =>
     action$.ofType(LOAD_DASHBOARD)
         .switchMap(() => {
             const loadActions = [DASHBOARD_LOADED, DASHBOARD_LOAD_ERROR];
@@ -98,7 +98,7 @@ const updateDashboardVisibility = action$ =>
  * @memberof epics.feedbackMask
  * @return {Observable}
  */
-const updateGeoStoryFeedbackMaskVisibility = action$ =>
+export const updateGeoStoryFeedbackMaskVisibility = action$ =>
     action$.ofType(LOAD_GEOSTORY)
         .switchMap(() => {
             const loadActions = [GEOSTORY_LOADED, LOAD_GEOSTORY_ERROR];
@@ -118,7 +118,7 @@ const updateGeoStoryFeedbackMaskVisibility = action$ =>
  * @memberof epics.feedbackMask
  * @return {Observable}
  */
-const updateContextFeedbackMaskVisibility = action$ =>
+export const updateContextFeedbackMaskVisibility = action$ =>
     action$.ofType(LOAD_CONTEXT)
         .switchMap(() => {
             const loadActions = [LOAD_FINISHED, CONTEXT_LOAD_ERROR, MAP_CONFIG_LOAD_ERROR, MAP_INFO_LOAD_ERROR];
@@ -139,7 +139,7 @@ const updateContextFeedbackMaskVisibility = action$ =>
  * @memberof epics.feedbackMask
  * @return {Observable}
  */
-const updateContextCreatorFeedbackMaskVisibility = action$ =>
+export const updateContextCreatorFeedbackMaskVisibility = action$ =>
     action$.ofType(LOAD_CONTEXT_CONTEXTCREATOR)
         .switchMap(() => {
             const loadActions = [LOAD_FINISHED_CONTEXTCREATOR, CONTEXT_LOAD_ERROR_CONTEXTCREATOR];
@@ -160,7 +160,7 @@ const updateContextCreatorFeedbackMaskVisibility = action$ =>
  * @memberof epics.feedbackMask
  * @return {Observable}
  */
-const detectNewPage = (action$, store) =>
+export const detectNewPage = (action$, store) =>
     action$.ofType(LOCATION_CHANGE)
         .filter(action => {
             const pathname = action.payload && action.payload.location && action.payload.location.pathname;
@@ -179,7 +179,7 @@ const detectNewPage = (action$, store) =>
  * Prompts login when page some resource is not accessible and you're not logged in
  * @param {stream} action$ the action stream
  */
-const feedbackMaskPromptLogin = (action$, store) => // TODO: separate login required logic (403) condition from feedback mask
+export const feedbackMaskPromptLogin = (action$, store) => // TODO: separate login required logic (403) condition from feedback mask
     action$.ofType(MAP_CONFIG_LOAD_ERROR, DASHBOARD_LOAD_ERROR, LOAD_GEOSTORY_ERROR, CONTEXT_LOAD_ERROR, CONTEXT_LOAD_ERROR_CONTEXTCREATOR)
         .filter((action) => action.error &&
             action.error.status === 403 &&

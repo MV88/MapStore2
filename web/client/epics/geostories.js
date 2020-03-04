@@ -15,7 +15,7 @@ import {
     DELETE_GEOSTORY,
     GEOSTORY_DELETED,
     RELOAD,
-    searchGeostories,
+    searchGeostories as searchGeostoriesAction,
     geostoriesListLoaded,
     geostoryDeleted,
     geostoriesLoading
@@ -41,52 +41,58 @@ const calculateNewParams = state => {
     };
 };
 
+export const searchGeostoriesOnMapSearch = action$ =>
+    action$.ofType(MAPS_LIST_LOADING)
+        .switchMap(({ searchText }) => Rx.Observable.of(searchGeostoriesAction(searchText)));
+export const searchGeostories = (action$, { getState = () => { } }) =>
+    action$.ofType(SEARCH_GEOSTORIES)
+        .map( ({params, searchText, geoStoreUrl}) => ({
+            searchText,
+            options: {
+                params: params || searchParamsSelector(getState()) || {start: 0, limit: 12},
+                ...(geoStoreUrl ? { baseURL: geoStoreUrl } : {})
+            }
+        }))
+        .switchMap(
+            ({ searchText, options }) =>
+                Rx.Observable.defer(() => GeoStoreApi.getResourcesByCategory("GEOSTORY", searchText, options))
+                    .map(results => geostoriesListLoaded(results, {searchText, options}))
+                    .let(wrapStartStop(
+                        geostoriesLoading(true, "loading"),
+                        geostoriesLoading(false, "loading"),
+                        () => Rx.Observable.of(error({
+                            title: "notification.error",
+                            message: "resources.geostories.errorLoadingGeostories",
+                            autoDismiss: 6,
+                            position: "tc"
+                        }))
+                    ))
+        );
+export const deleteGeostory = action$ => action$
+    .ofType(DELETE_GEOSTORY)
+    .switchMap(id => deleteResource(id).map(() => geostoryDeleted(id)))
+    .let(wrapStartStop(
+        geostoriesLoading(true, "loading"),
+        geostoriesLoading(false, "loading"),
+        () => Rx.Observable.of(error({
+            title: "notification.error",
+            message: "resources.geostories.deleteError",
+            autoDismiss: 6,
+            position: "tc"
+        }))
+    ));
+export const reloadOnGeostories = (action$, { getState = () => { } }) =>
+    action$.ofType(GEOSTORY_DELETED, RELOAD, ATTRIBUTE_UPDATED, GEOSTORY_SAVED)
+        .delay(1000) // delay as a workaround for geostore issue #178
+        .switchMap( () => Rx.Observable.of(searchGeostoriesAction(
+            searchTextSelector(getState()),
+            calculateNewParams(getState())
+        )));
+
+
 export default {
-    searchGeostoriesOnMapSearch: action$ =>
-        action$.ofType(MAPS_LIST_LOADING)
-            .switchMap(({ searchText }) => Rx.Observable.of(searchGeostories(searchText))),
-    searchGeostories: (action$, { getState = () => { } }) =>
-        action$.ofType(SEARCH_GEOSTORIES)
-            .map( ({params, searchText, geoStoreUrl}) => ({
-                searchText,
-                options: {
-                    params: params || searchParamsSelector(getState()) || {start: 0, limit: 12},
-                    ...(geoStoreUrl ? { baseURL: geoStoreUrl } : {})
-                }
-            }))
-            .switchMap(
-                ({ searchText, options }) =>
-                    Rx.Observable.defer(() => GeoStoreApi.getResourcesByCategory("GEOSTORY", searchText, options))
-                        .map(results => geostoriesListLoaded(results, {searchText, options}))
-                        .let(wrapStartStop(
-                            geostoriesLoading(true, "loading"),
-                            geostoriesLoading(false, "loading"),
-                            () => Rx.Observable.of(error({
-                                title: "notification.error",
-                                message: "resources.geostories.errorLoadingGeostories",
-                                autoDismiss: 6,
-                                position: "tc"
-                            }))
-                        ))
-            ),
-    deleteGeostory: action$ => action$
-        .ofType(DELETE_GEOSTORY)
-        .switchMap(id => deleteResource(id).map(() => geostoryDeleted(id)))
-        .let(wrapStartStop(
-            geostoriesLoading(true, "loading"),
-            geostoriesLoading(false, "loading"),
-            () => Rx.Observable.of(error({
-                title: "notification.error",
-                message: "resources.geostories.deleteError",
-                autoDismiss: 6,
-                position: "tc"
-            }))
-        )),
-    reloadOnGeostories: (action$, { getState = () => { } }) =>
-        action$.ofType(GEOSTORY_DELETED, RELOAD, ATTRIBUTE_UPDATED, GEOSTORY_SAVED)
-            .delay(1000) // delay as a workaround for geostore issue #178
-            .switchMap( () => Rx.Observable.of(searchGeostories(
-                searchTextSelector(getState()),
-                calculateNewParams(getState())
-            )))
+    searchGeostoriesOnMapSearch,
+    searchGeostories,
+    deleteGeostory,
+    reloadOnGeostories
 };

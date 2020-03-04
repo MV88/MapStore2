@@ -18,7 +18,7 @@ import {isObject, omitBy, isNil} from 'lodash';
 /**
  * Internal helper that adds an extra parameter to an axios configuration.
  */
-function addParameterToAxiosConfig(axiosConfig, parameterName, parameterValue) {
+export function addParameterToAxiosConfig(axiosConfig, parameterName, parameterValue) {
     // FIXME: the parameters can also be a URLSearchParams
     axiosConfig.params = assign({}, axiosConfig.params, {[parameterName]: parameterValue});
     // remove from URL auth parameters if any, to avoid possible duplication
@@ -28,7 +28,7 @@ function addParameterToAxiosConfig(axiosConfig, parameterName, parameterValue) {
 /**
  * Internal helper that adds or overrides an http header in a axios configuration.
  */
-function addHeaderToAxiosConfig(axiosConfig, headerName, headerValue) {
+export function addHeaderToAxiosConfig(axiosConfig, headerName, headerValue) {
     axiosConfig.headers = assign({}, axiosConfig.headers, {[headerName]: headerValue});
 }
 
@@ -38,7 +38,7 @@ const corsDisabled = [];
  * Internal helper that will add to the axios config object the correct
  * authentication method based on the request URL.
  */
-function addAuthenticationToAxios(axiosConfig) {
+export function addAuthenticationToAxios(axiosConfig) {
     if (!axiosConfig || !axiosConfig.url || !SecurityUtils.isAuthenticationActivated()) {
         return axiosConfig;
     }

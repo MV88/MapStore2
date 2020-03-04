@@ -573,7 +573,7 @@ describe('OpenlayersMap', () => {
     });
 
     it('check if the map reprojects the view coordinates when the projection is changed', () => {
-        proj.defs("EPSG:25830", "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+        proj4.defs("EPSG:25830", "+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
         const projectionDefs = [{
             code: "EPSG:25830",
             extent: [-1300000, 4000000, 1900000, 7500000],

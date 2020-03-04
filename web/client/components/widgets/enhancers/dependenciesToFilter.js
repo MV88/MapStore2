@@ -18,7 +18,7 @@ const getCqlFilter = (layer, dependencies) => {
     const cqlFilterKey = find(Object.keys(params || {}), (k = "") => k.toLowerCase() === "cql_filter");
     return params && cqlFilterKey && params[cqlFilterKey];
 };
-import { read } from '../../../utils/ogc/Filter/CQL/parser';
+import read from '../../../utils/ogc/Filter/CQL/parser';
 const getLayerFilter = ({layerFilter} = {}) => layerFilter;
 
 /**

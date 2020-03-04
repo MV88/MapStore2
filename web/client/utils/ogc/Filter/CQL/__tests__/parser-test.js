@@ -1,6 +1,6 @@
 import expect from 'expect';
 import { get } from 'lodash';
-import parser from '../parser';
+import { read } from '../parser';
 
 const COMPARISON_TESTS = [
     // numeric
@@ -144,7 +144,7 @@ const REAL_WORLD = [
     }
 ];
 const testRules = rules => rules.map(({ cql, expected }) => {
-    const res = parser.read(cql);
+    const res = read(cql);
     Object.keys(expected).map(k =>
         expect(get(res, k)).toBe(expected[k])
     );

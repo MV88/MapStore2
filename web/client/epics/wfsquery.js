@@ -48,7 +48,7 @@ import CoordinatesUtils from '../utils/CoordinatesUtils';
 import { describeFeatureTypeToAttributes } from '../utils/FeatureTypeUtils';
 import FilterUtils from '../utils/FilterUtils';
 import { addTimeParameter } from '../utils/WFSTimeUtils';
-import { read } from '../utils/ogc/Filter/CQL/parser';
+import read from '../utils/ogc/Filter/CQL/parser';
 import filterBuilder from '../utils/ogc/Filter/FilterBuilder';
 import fromObject from '../utils/ogc/Filter/fromObject';
 

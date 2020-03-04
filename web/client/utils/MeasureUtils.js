@@ -8,7 +8,7 @@
 
 import { head, isArray, isNaN } from 'lodash';
 
-function degToDms(deg) {
+export function degToDms(deg) {
     // convert decimal deg to minutes and seconds
     var d = Math.floor(deg);
     var minfloat = (deg - d) * 60;
@@ -35,7 +35,7 @@ export function getFormattedBearingValue(azimuth = 0) {
 }
 
 
-const CONVERSION_RATE = {
+export const CONVERSION_RATE = {
     // length
     "yd": {
         "ft": 3,

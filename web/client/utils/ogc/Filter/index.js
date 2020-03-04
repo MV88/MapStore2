@@ -39,9 +39,9 @@ const context = new Jsonix.Context([
         }
 });
 /* eslint-enable */
-const marshaller = context.createMarshaller();
-const unmarshaller = context.createUnmarshaller();
-const Filter = {
+export const marshaller = context.createMarshaller();
+export const unmarshaller = context.createUnmarshaller();
+export const Filter = {
     propertyName: function(propertyName) {
         return {
             PropertyName: propertyName

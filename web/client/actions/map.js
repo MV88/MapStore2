@@ -27,6 +27,8 @@ export const CHANGE_MAP_LIMITS = 'CHANGE_MAP_LIMITS';
 export const SET_MAP_RESOLUTIONS = 'SET_MAP_RESOLUTIONS';
 export const CHECK_MAP_CHANGES = 'CHECK_MAP_CHANGES';
 
+export const creationError = () => ({type: "NONE"});
+
 export function errorLoadingFont(err = {family: ""}) {
     return error({
         title: "warning",

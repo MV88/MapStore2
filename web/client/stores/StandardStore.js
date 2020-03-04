@@ -28,9 +28,18 @@ import { routerMiddleware, connectRouter } from 'connected-react-router';
 
 import layersEpics from '../epics/layers';
 import controlsEpics from '../epics/controls';
-import configEpics from '../epics/config';
+import * as configEpics from '../epics/config';
 import timeManagerEpics from '../epics/dimension';
 import {persistMiddleware, persistEpic} from '../utils/StateUtils';
+
+
+import localConfig from '../reducers/localConfig';
+import locale from '../reducers/locale';
+import browser from '../reducers/browser';
+import controls from '../reducers/controls';
+import theme from '../reducers/theme';
+import help from '../reducers/help';
+
 
 const standardEpics = {
     ...layersEpics,
@@ -43,13 +52,13 @@ export default (initialState = {defaultState: {}, mobile: {}}, appReducers = {},
     const history = storeOpts.noRouter ? null : require('./History').default;
     const allReducers = combineReducers(plugins, {
         ...appReducers,
-        localConfig: require('../reducers/localConfig'),
-        locale: require('../reducers/locale'),
+        localConfig,
+        locale,
         locales: () => {return null; },
-        browser: require('../reducers/browser'),
-        controls: require('../reducers/controls'),
-        theme: require('../reducers/theme').default,
-        help: require('../reducers/help'),
+        browser,
+        controls,
+        theme,
+        help,
         map: () => {return null; },
         mapInitialConfig: () => {return null; },
         mapConfigRawData: () => null,

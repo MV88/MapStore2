@@ -7,7 +7,7 @@
  */
 
 export default (mapType) => {
-    const StyleUtils = import(`./${mapType}/StyleUtils`);
+    const StyleUtils = require(`./${mapType}/StyleUtils`);
     return {
         toVectorStyle: StyleUtils.default || StyleUtils
     };

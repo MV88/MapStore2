@@ -11,16 +11,18 @@ import url from 'url';
 
 const urlQuery = url.parse(window.location.href, true).query;
 
-var DebugUtils = {
-    createDebugStore: function(reducer, initialState, userMiddlewares, enhancer) {
-        return createStore({
-            rootReducer: reducer,
-            state: initialState,
-            middlewares: userMiddlewares,
-            enhancer,
-            debug: urlQuery && urlQuery.debug && __DEVTOOLS__
-        });
-    }
+export const createDebugStore = (reducer, initialState, userMiddlewares, enhancer) => {
+    return createStore({
+        rootReducer: reducer,
+        state: initialState,
+        middlewares: userMiddlewares,
+        enhancer,
+        debug: urlQuery && urlQuery.debug && __DEVTOOLS__
+    });
+};
+
+const DebugUtils = {
+    createDebugStore
 };
 
 export default DebugUtils;

@@ -17,7 +17,7 @@ import { onTabSelected } from '../actions/contenttabs';
 * Update Maps, Dashboards and Geostories counts to select contenttabs each tab has to have a key in its ContentTab configuration
 * @param {object} action
 */
-const updateMapsDashboardTabs = (action$, {getState = () => {}}) =>
+export const updateMapsDashboardTabs = (action$, {getState = () => {}}) =>
     action$.ofType(MAPS_LOAD_MAP)
         .switchMap(() => {
             return Rx.Observable.forkJoin(action$.ofType(MAPS_LIST_LOADED).take(1), action$.ofType(DASHBOARDS_LIST_LOADED).take(1), action$.ofType(GEOSTORIES_LIST_LOADED).take(1))

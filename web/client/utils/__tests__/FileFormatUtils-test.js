@@ -7,12 +7,12 @@
  */
 import expect from 'expect';
 
-import FileFormatUtils from '../FileFormatUtils';
+import { getByOutputFormat }  from '../FileFormatUtils';
 
 
 describe('FileFormatUtils', () => {
     it('getByOutputFormat custom format', () => {
-        const result = FileFormatUtils.getByOutputFormat("TEST-CSV");
+        const result = getByOutputFormat("TEST-CSV");
         expect(result).toExist();
         expect(result.extension).toBe("csv");
         expect(result.outputFormat).toBe("TEST-CSV");

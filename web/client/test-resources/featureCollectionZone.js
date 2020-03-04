@@ -1,4 +1,4 @@
-const featureCollection = {
+export const featureCollection = {
     "type": "FeatureCollection",
     "totalFeatures": 6,
     "features": [

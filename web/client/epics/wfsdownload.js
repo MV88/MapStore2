@@ -87,78 +87,84 @@ const str2bytes = (str) => {
     return bytes;
 };
 */
-export default {
-    openDownloadTool: (action$) =>
-        action$.ofType(DOWNLOAD)
-            .switchMap((action) => {
-                return Rx.Observable.from([
-                    toggleControl("wfsdownload"),
-                    onDownloadOptionChange("singlePage", false),
-                    createQuery(action.layer.url, {featureTypeName: action.layer.name})
-                ]);
-            }),
-    fetchFormatsWFSDownload: (action$) =>
-        action$.ofType(FORMAT_OPTIONS_FETCH)
-            .switchMap( action => {
-                return getLayerWFSCapabilities(action)
-                    .map((data) => {
-                        return updateFormats(hasOutputFormat(data));
-                    });
-            }),
-    startFeatureExportDownload: (action$, store) =>
-        action$.ofType(DOWNLOAD_FEATURES).switchMap(action => {
-            const {virtualScroll = false} = (store.getState()).featuregrid;
-            return getWFSFeature({
-                url: action.url,
-                downloadOptions: action.downloadOptions,
-                filterObj: {
-                    ...action.filterObj,
-                    pagination: !virtualScroll && get(action, "downloadOptions.singlePage") ? action.filterObj && action.filterObj.pagination : null
+export const openDownloadTool = (action$) =>
+    action$.ofType(DOWNLOAD)
+        .switchMap((action) => {
+            return Rx.Observable.from([
+                toggleControl("wfsdownload"),
+                onDownloadOptionChange("singlePage", false),
+                createQuery(action.layer.url, {featureTypeName: action.layer.name})
+            ]);
+        });
+export const fetchFormatsWFSDownload = (action$) =>
+    action$.ofType(FORMAT_OPTIONS_FETCH)
+        .switchMap( action => {
+            return getLayerWFSCapabilities(action)
+                .map((data) => {
+                    return updateFormats(hasOutputFormat(data));
+                });
+        });
+export const startFeatureExportDownload = (action$, store) =>
+    action$.ofType(DOWNLOAD_FEATURES).switchMap(action => {
+        const {virtualScroll = false} = (store.getState()).featuregrid;
+        return getWFSFeature({
+            url: action.url,
+            downloadOptions: action.downloadOptions,
+            filterObj: {
+                ...action.filterObj,
+                pagination: !virtualScroll && get(action, "downloadOptions.singlePage") ? action.filterObj && action.filterObj.pagination : null
+            }
+        })
+            .do(({data, headers}) => {
+                if (headers["content-type"] === "application/xml") { // TODO add expected mimetypes in the case you want application/dxf
+                    let xml = String.fromCharCode.apply(null, new Uint8Array(data));
+                    if (xml.indexOf("<ows:ExceptionReport") === 0 ) {
+                        throw xml;
+                    }
                 }
             })
-                .do(({data, headers}) => {
+            .catch( () => {
+                return getWFSFeature({
+                    url: action.url,
+                    downloadOptions: action.downloadOptions,
+                    filterObj: {
+                        ...action.filterObj,
+                        pagination: !virtualScroll && get(action, "downloadOptions.singlePage") ? action.filterObj && action.filterObj.pagination : null,
+                        sortOptions: getDefaultSortOptions(getFirstAttribute(store.getState()))
+                    }
+                }).do(({data, headers}) => {
                     if (headers["content-type"] === "application/xml") { // TODO add expected mimetypes in the case you want application/dxf
                         let xml = String.fromCharCode.apply(null, new Uint8Array(data));
                         if (xml.indexOf("<ows:ExceptionReport") === 0 ) {
                             throw xml;
                         }
                     }
-                })
-                .catch( () => {
-                    return getWFSFeature({
-                        url: action.url,
-                        downloadOptions: action.downloadOptions,
-                        filterObj: {
-                            ...action.filterObj,
-                            pagination: !virtualScroll && get(action, "downloadOptions.singlePage") ? action.filterObj && action.filterObj.pagination : null,
-                            sortOptions: getDefaultSortOptions(getFirstAttribute(store.getState()))
-                        }
-                    }).do(({data, headers}) => {
-                        if (headers["content-type"] === "application/xml") { // TODO add expected mimetypes in the case you want application/dxf
-                            let xml = String.fromCharCode.apply(null, new Uint8Array(data));
-                            if (xml.indexOf("<ows:ExceptionReport") === 0 ) {
-                                throw xml;
-                            }
-                        }
-                        saveAs(new Blob([data], {type: headers && headers["content-type"]}), getFileName(action));
-                    });
-                }).do(({data, headers}) => {
                     saveAs(new Blob([data], {type: headers && headers["content-type"]}), getFileName(action));
-                })
-                .map( () => onDownloadFinished() )
-                .catch( (e) => Rx.Observable.of(
-                    error({
-                        error: e,
-                        title: "wfsdownload.error.title",
-                        message: "wfsdownload.error.invalidOutputFormat",
-                        autoDismiss: 5,
-                        position: "tr"
-                    }),
-                    onDownloadFinished())
-                );
-        }),
-    closeExportDownload: (action$, store) =>
-        action$.ofType(TOGGLE_CONTROL)
-            .filter((a) => a.control === "queryPanel" && !queryPanelSelector(store.getState()) && wfsDownloadSelector(store.getState()))
-            .switchMap( () => Rx.Observable.of(toggleControl("wfsdownload")))
+                });
+            }).do(({data, headers}) => {
+                saveAs(new Blob([data], {type: headers && headers["content-type"]}), getFileName(action));
+            })
+            .map( () => onDownloadFinished() )
+            .catch( (e) => Rx.Observable.of(
+                error({
+                    error: e,
+                    title: "wfsdownload.error.title",
+                    message: "wfsdownload.error.invalidOutputFormat",
+                    autoDismiss: 5,
+                    position: "tr"
+                }),
+                onDownloadFinished())
+            );
+    });
+export const closeExportDownload = (action$, store) =>
+    action$.ofType(TOGGLE_CONTROL)
+        .filter((a) => a.control === "queryPanel" && !queryPanelSelector(store.getState()) && wfsDownloadSelector(store.getState()))
+        .switchMap( () => Rx.Observable.of(toggleControl("wfsdownload")));
+
+
+export default {
+    openDownloadTool,
+    fetchFormatsWFSDownload,
+    startFeatureExportDownload,
+    closeExportDownload
 };

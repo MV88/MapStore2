@@ -20,7 +20,7 @@ import {
 } from '../../actions/config';
 
 import { testEpic } from './epicTestUtils';
-import Persistence from '../../api/persistence';
+import {addApi, setApi} from '../../api/persistence';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../../libs/ajax';
 import configBroken from "raw-loader!../../test-resources/testConfig.broken.json.txt";
@@ -173,12 +173,12 @@ describe('config epics', () => {
     });
 
     describe('loadMapInfo', () => {
-        Persistence.addApi("testConfig", api);
+        addApi("testConfig", api);
         beforeEach(() => {
-            Persistence.setApi("testConfig");
+            setApi("testConfig");
         });
         afterEach(() => {
-            Persistence.setApi("geostore");
+            setApi("geostore");
         });
 
         it('load map info', (done) => {

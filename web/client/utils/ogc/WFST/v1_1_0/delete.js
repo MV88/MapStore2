@@ -17,10 +17,10 @@ import { getTypeName } from '../../WFS/base';
  * @param  {object} describeFeatureType describeFeatureType object
  * @return {string}                     the XML for the update
  */
-const deleteFeaturesByFilter = (content, typeName) =>
+export const deleteFeaturesByFilter = (content, typeName) =>
     `<wfs:Delete typeName="${typeName}">${content}</wfs:Delete>`;
-const deleteById = (fid, typeName) => deleteFeaturesByFilter(fidFilter("ogc", fid), typeName);
-const deleteFeature = (feature, describe) => deleteById(feature.features && feature.features.length === 1 ? feature.features[0].id : feature.id, getTypeName(describe));
+export const deleteById = (fid, typeName) => deleteFeaturesByFilter(fidFilter("ogc", fid), typeName);
+export const deleteFeature = (feature, describe) => deleteById(feature.features && feature.features.length === 1 ? feature.features[0].id : feature.id, getTypeName(describe));
 export default {
     deleteFeaturesByFilter,
     deleteById,

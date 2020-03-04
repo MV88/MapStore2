@@ -7,10 +7,10 @@
 */
 const {createSink} = require('recompose');
 module.exports = () => {
-    require('../cesium/plugins/index');
+    require('../cesium/plugins/index').default;
     return {
-        Map: require('../cesium/Map'),
-        Layer: require('../cesium/Layer'),
+        Map: require('../cesium/Map').default,
+        Layer: require('../cesium/Layer').default,
         Feature: createSink(() => {})
     };
 };

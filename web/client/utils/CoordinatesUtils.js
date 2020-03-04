@@ -484,6 +484,19 @@ export const extendExtent = (extent1, extent2) => {
     return newExtent;
 };
 /**
+ * Check extent validity
+ *
+ * @param extent {array} [minx, miny, maxx, maxy]
+ *
+ * @return {bool}
+ */
+export const isValidExtent = (extent) => {
+    return !(
+        extent.indexOf(Infinity) !== -1 || extent.indexOf(-Infinity) !== -1 ||
+        extent[0] > extent[2] || extent[1] > extent[3]
+    );
+};
+/**
  * Calculates the extent for the geoJSON passed. It used a small buffer for points.
  * Like turf/bbox but works only with simple geometries.
  * @deprecated  We may replace it with turf/bbox + turf/buffer in the future, so using it with geometry is discouraged
@@ -494,8 +507,8 @@ export const getGeoJSONExtent = (geoJSON) => {
     let newExtent = [Infinity, Infinity, -Infinity, -Infinity];
     const reduceCollectionExtent = (extent, collectionElement) => {
         let ext = getGeoJSONExtent(collectionElement);
-        if (this.isValidExtent(ext)) {
-            return this.extendExtent(ext, extent);
+        if (isValidExtent(ext)) {
+            return extendExtent(ext, extent);
         }
         return ext;
     };
@@ -531,19 +544,7 @@ export const getGeoJSONExtent = (geoJSON) => {
 
     return newExtent;
 };
-/**
- * Check extent validity
- *
- * @param extent {array} [minx, miny, maxx, maxy]
- *
- * @return {bool}
- */
-export const isValidExtent = (extent) => {
-    return !(
-        extent.indexOf(Infinity) !== -1 || extent.indexOf(-Infinity) !== -1 ||
-        extent[0] > extent[2] || extent[1] > extent[3]
-    );
-};
+
 export const calculateCircleCoordinates = (center, radius, sides, rotation) => {
     let angle = Math.PI * (1 / sides - 1 / 2);
 

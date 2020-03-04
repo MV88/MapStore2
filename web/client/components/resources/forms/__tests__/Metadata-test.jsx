@@ -12,7 +12,7 @@ import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 import expect from 'expect';
 import Metadata from '../Metadata';
-describe('Metadata component', () => {
+describe('Metadata resources forms component', () => {
     beforeEach((done) => {
         document.body.innerHTML = '<div id="container"></div>';
         setTimeout(done);

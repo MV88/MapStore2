@@ -6,13 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+
 /* eslint-disable */
-import Bootstrap from 'react-bootstrap';
 
-import Message from '../../../I18N/Message';
-import React from 'react';
+// only require() is working
+const Bootstrap = require('react-bootstrap');
+const React = require('react');
 
-const RenderTemplate = function(comp, props) {
+const Message = require('../../../I18N/Message');
+
+export const RenderTemplate = function(comp, props) {
     let model = props.model;
     return eval(comp);
 };

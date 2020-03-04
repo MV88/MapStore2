@@ -50,7 +50,7 @@ const removeWorkspace = (layer) => {
  * @return {external:Observable}
  */
 
-const refresh = action$ =>
+export const refresh = action$ =>
     action$.ofType(REFRESH_LAYERS)
         .debounce(({debounceTime = 500} = {}) => Rx.Observable.timer(debounceTime) )
         .switchMap(action => {
@@ -106,7 +106,7 @@ const refresh = action$ =>
  * @param {external:Observable} action$ manages `UPDATE_LAYERS_DIMENSION`
  * @return {external:Observable}
  */
-const updateDimension = (action$, {getState = () => {}} = {}) =>
+export const updateDimension = (action$, {getState = () => {}} = {}) =>
     action$.ofType(UPDATE_LAYERS_DIMENSION)
         .map(({ layers, dimension, ...other }) => ({ ...other, dimension, layers: layers || getLayersWithDimension(getState(), dimension)}))
         .switchMap(({layers, dimension, value}) =>
@@ -129,7 +129,7 @@ const updateDimension = (action$, {getState = () => {}} = {}) =>
  * @param {external:Observable} action$ manages `UPDATE_SETTINGS_PARAMS`
  * @return {external:Observable}
  */
-const updateSettingsParamsEpic = (action$, store) =>
+export const updateSettingsParamsEpic = (action$, store) =>
     action$.ofType(UPDATE_SETTINGS_PARAMS)
         .switchMap(({ newParams = {}, update }) => {
 

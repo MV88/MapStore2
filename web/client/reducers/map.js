@@ -9,8 +9,7 @@
 import {CHANGE_MAP_VIEW, CHANGE_MOUSE_POINTER,
     CHANGE_ZOOM_LVL, CHANGE_MAP_CRS, CHANGE_MAP_SCALES, PAN_TO,
     CHANGE_MAP_STYLE, CHANGE_ROTATION, UPDATE_VERSION, ZOOM_TO_POINT,
-    RESIZE_MAP, CHANGE_MAP_LIMITS, SET_MAP_RESOLUTIONS,
-    TOGGLE_UNSAVED_MAP_CHANGES_DIALOG} from '../actions/map';
+    RESIZE_MAP, CHANGE_MAP_LIMITS, SET_MAP_RESOLUTIONS } from '../actions/map';
 
 import assign from 'object-assign';
 import MapUtils from '../utils/MapUtils';
@@ -109,9 +108,6 @@ function mapConfig(state = null, action) {
     }
     case UPDATE_VERSION: {
         return assign({}, state, {version: action.version});
-    }
-    case TOGGLE_UNSAVED_MAP_CHANGES_DIALOG: {
-        return assign({}, state, { showUnsavedMapChangesDialog: !(state && state.showUnsavedMapChangesDialog) });
     }
     default:
         return state;

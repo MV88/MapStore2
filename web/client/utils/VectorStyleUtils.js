@@ -178,7 +178,7 @@ export const addOpacityToColor = (color = "#FFCC33", opacity = 0.2) => (set("a",
  * @param {string} str to hash
  * @return the hash number
 */
-const hashCode = function(str) {
+export const hashCode = function(str) {
     let hash = 0;
     let i;
     let chr;

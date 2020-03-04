@@ -16,7 +16,7 @@ import { get } from 'lodash';
 const defaultRegexes = [/\/viewer\/\w+\/(\w+)/, /\/viewer\/(\w+)/];
 import { push } from 'connected-react-router';
 
-const replaceMapType = (path, newMapType) => {
+export const replaceMapType = (path, newMapType) => {
     const match = defaultRegexes.reduce((previous, regex) => {
         return previous || path.match(regex);
     }, null);
@@ -31,7 +31,7 @@ const replaceMapType = (path, newMapType) => {
  * @param {external:Observable} action$ manages `TOGGLE_3D`.
  * @return {external:Observable} emitting connected-react-router push action and {@link #actions.globeswitcher.updateLast2dMapType} actions
  */
-const updateRouteOn3dSwitch = (action$, store) =>
+export const updateRouteOn3dSwitch = (action$, store) =>
     action$.ofType(TOGGLE_3D)
         .switchMap( (action) => {
             const newPath = replaceMapType(action.hash || location.hash, action.enable ? "cesium" : get(store.getState(), "globeswitcher.last2dMapType") || 'leaflet');
@@ -40,7 +40,7 @@ const updateRouteOn3dSwitch = (action$, store) =>
             }
             return Rx.Observable.empty();
         });
-const updateLast2dMapTypeOnChangeEvents = (action$, store) => action$
+export const updateLast2dMapTypeOnChangeEvents = (action$, store) => action$
     .ofType(LOCAL_CONFIG_LOADED).map(() => mapTypeSelector(store.getState()))
     .merge(action$.ofType(MAP_TYPE_CHANGED, TOGGLE_3D).pluck('mapType').filter((mapType) => mapType && mapType !== "cesium"))
     .switchMap(type => Rx.Observable.of(updateLast2dMapType(type)));

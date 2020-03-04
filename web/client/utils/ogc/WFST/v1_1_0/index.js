@@ -10,6 +10,7 @@ import { transaction } from './transaction';
 import { insert } from './insert';
 import { update, property } from './update';
 import { deleteFeature, deleteFeaturesByFilter, deleteById } from './delete';
+
 export default {
     insert,
     update,
@@ -19,3 +20,8 @@ export default {
     deleteById,
     transaction
 };
+
+export * from './transaction';
+export * from './update';
+export * from './insert';
+export * from './delete';

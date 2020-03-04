@@ -7,9 +7,11 @@
  */
 import expect from 'expect';
 
-import { extraMarkers, getGlyphs } from '../MarkerUtils';
+import MarkerUtils from '../MarkerUtils';
 
 describe('Test the MarkerUtils', () => {
+    const extraMarkers = MarkerUtils.extraMarkers;
+    const getGlyphs = MarkerUtils.getGlyphs;
     it('extraMarker offsets', () => {
         expect(extraMarkers.getOffsets(extraMarkers.colors[0], extraMarkers.shapes[0])).toEqual([-2, 0]);
         expect(extraMarkers.getOffsets(extraMarkers.colors[1], extraMarkers.shapes[0])).toEqual([-(extraMarkers.size[0] + 2), 0]);

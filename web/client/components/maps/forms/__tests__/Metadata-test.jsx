@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const expect = require('expect');
-const Metadata = require('../Metadata');
 
-describe('Metadata component', () => {
+import React from 'react';
+import ReactDOM from 'react-dom';
+import expect from 'expect';
+import Metadata from '../Metadata';
+
+describe('Metadata forms component', () => {
     beforeEach((done) => {
         document.body.innerHTML = '<div id="container"></div>';
         setTimeout(done);

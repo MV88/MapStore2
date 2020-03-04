@@ -18,7 +18,7 @@ import { saveDashboard, triggerSave, triggerSaveAs } from '../actions/dashboard'
 import handleSaveModal from '../components/resources/modals/enhancers/handleSaveModal';
 import { createPlugin } from '../utils/PluginsUtils';
 import dashboard from '../reducers/dashboard';
-
+import Save from '../components/resources/modals/Save';
 /**
  * Save dialog component enhanced for dashboard
  *
@@ -34,7 +34,7 @@ const SaveBaseDialog = compose(
         onSave: saveDashboard
     }),
     handleSaveModal
-)(require('../components/resources/modals/Save'));
+)(Save);
 
 
 export const DashboardSave = createPlugin('DashboardSave', {

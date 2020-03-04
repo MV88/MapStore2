@@ -40,6 +40,9 @@ import { EMPTY_RESOURCE_VALUE } from '../../utils/MapInfoUtils';
 import ConfigUtils from '../../utils/ConfigUtils';
 const params = {start: 0, limit: 12 };
 const baseUrl = "base/web/client/test-resources/geostore/";
+import { addApi, setApi } from "../../api/persistence";
+
+import Rx from "rxjs";
 
 const locale = {
     messages: {
@@ -581,20 +584,19 @@ describe('Get Map Resource By Category Epic', () => {
         });
     });
 });
-const Persistence from "../../api/persistence";
-const Rx from "rxjs";
+
 const api = {
     createResource: () => Rx.Observable.of(10),
     updateResource: () => Rx.Observable.of(10)
 };
 
 describe('Create and update flow using persistence api', () => {
-    Persistence.addApi("testMaps", api);
+    addApi("testMaps", api);
     beforeEach(() => {
-        Persistence.setApi("testMaps");
+        setApi("testMaps");
     });
     afterEach(() => {
-        Persistence.setApi("geostore");
+        setApi("geostore");
     });
     it('test create flow ', done => {
         testEpic(addTimeoutEpic(mapSaveMapResourceEpic), 6, saveMapResource( {}), actions => {

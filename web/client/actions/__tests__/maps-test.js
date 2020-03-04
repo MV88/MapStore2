@@ -83,8 +83,9 @@ import {
     PERMISSIONS_LIST_LOADED,
     PERMISSIONS_LIST_LOADING,
     loadPermissions,
-    updateMapMetadata, RESET_CURRENT_MAP
+    updateMapMetadata
 } from '../maps';
+import { RESET_CURRENT_MAP } from '../currentMap';
 
 import { SHOW_NOTIFICATION } from '../notifications';
 import GeoStoreDAO from '../../api/GeoStoreDAO';

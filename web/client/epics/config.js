@@ -18,9 +18,9 @@ import {
     mapInfoLoadError,
     loadMapInfo
 } from '../actions/config';
-import Persistence from '../api/persistence';
+import { getResource } from '../api/persistence';
 import { isLoggedIn } from '../selectors/security';
-import {projectionDefsSelector} from '../selectors/map';
+import { projectionDefsSelector } from '../selectors/map';
 
 export const loadMapConfigAndConfigureMap = (action$, store) =>
     action$.ofType(LOAD_MAP_CONFIG)
@@ -59,7 +59,7 @@ export const loadMapInfoEpic = action$ =>
     action$.ofType(LOAD_MAP_INFO)
         .switchMap(({mapId}) =>
             Observable
-                .defer(() => Persistence.getResource(mapId))
+                .defer(() => getResource(mapId))
                 .map(resource => mapInfoLoaded(resource, mapId))
                 .catch((e) => Observable.of(mapInfoLoadError(mapId, e)))
                 .startWith(mapInfoLoadStart(mapId))

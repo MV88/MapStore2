@@ -8,10 +8,13 @@
 
 
 import { connect } from 'react-redux';
-import { searchContexts } from '../../actions/contextmanager';
-import { withHandlers, renameProp, compose } from 'recompose';
-import { searchTextSelector, resultsSelector, searchParamsSelector, totalCountSelector, isLoadingSelector } from '../../selectors/contextmanager';
 import { createSelector } from 'reselect';
+import { withHandlers, renameProp, compose } from 'recompose';
+
+import { searchContexts } from '../../actions/contextmanager';
+import { searchTextSelector, resultsSelector, searchParamsSelector, totalCountSelector, isLoadingSelector } from '../../selectors/contextmanager';
+import PagToolbar from '../../components/misc/PaginationToolbar';
+
 export default compose(
     connect(
         createSelector(
@@ -46,5 +49,5 @@ export default compose(
             loadPage(searchText, {params: { start, limit }});
         }
     })
-)(require('../../components/misc/PaginationToolbar'));
+)(PagToolbar);
 

@@ -35,32 +35,39 @@ const getEditor = (type, name, props) => {
     }
     return null;
 };
-export default {
-    get: () => Editors,
-    register: ({name, editors}) => {
-        if (!!editors) {
-            Editors[name] = editors;
-        }
-    },
-    remove: (name) => {
-        if (isPresent(name)) {
-            try {
-                delete Editors[name];
-                return true;
-            } catch (e) {
-                return false;
-            }
-        }
-        return false;
-    },
-    clean: () => {
-        Editors = {};
-    },
-    getCustomEditor: ({attribute, url, typeName}, rules = [], {type, props}) => {
-        const editor = find(rules, (r) => testRule(r.regex, {attribute, url, typeName }));
-        if (!!editor) {
-            return getEditor(type, editor.editor, {...props, ...editor.editorProps || {}});
-        }
-        return null;
+export const get = () => Editors;
+export const register = ({name, editors}) => {
+    if (!!editors) {
+        Editors[name] = editors;
     }
+};
+export const remove = (name) => {
+    if (isPresent(name)) {
+        try {
+            delete Editors[name];
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+    return false;
+};
+export const clean = () => {
+    Editors = {};
+};
+export const getCustomEditor = ({attribute, url, typeName}, rules = [], {type, props}) => {
+    const editor = find(rules, (r) => testRule(r.regex, {attribute, url, typeName }));
+    if (!!editor) {
+        return getEditor(type, editor.editor, {...props, ...editor.editorProps || {}});
+    }
+    return null;
+};
+
+
+export default {
+    get,
+    register,
+    remove,
+    clean,
+    getCustomEditor
 };

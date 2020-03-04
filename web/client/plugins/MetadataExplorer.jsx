@@ -23,7 +23,7 @@ import csw from '../api/CSW';
 import wms from '../api/WMS';
 import wmts from '../api/WMTS';
 import mapBackground from '../api/mapBackground';
-import {addBackgroundProperties, updateThumbnail, removeThumbnail, clearModalParameters, backgroundAdded} from '../actions/backgroundselector';
+import {addBackgroundProperties, updateThumbnail, clearModalParameters, backgroundAdded} from '../actions/backgroundselector';
 import {currentLocaleSelector, currentMessagesSelector} from "../selectors/locale";
 import {layersSelector} from '../selectors/layers';
 import {setControlProperty, toggleControl} from "../actions/controls";
@@ -88,7 +88,6 @@ const Catalog = connect(catalogSelector, {
     onFocusServicesList: focusServicesList,
     onPropertiesChange: changeLayerProperties,
     onAddBackground: backgroundAdded,
-    removeThumbnail,
     onToggle: toggleControl.bind(null, 'backgroundSelector', null),
     onLayerChange: setControlProperty.bind(null, 'backgroundSelector'),
     onStartChange: setControlProperty.bind(null, 'backgroundSelector', 'start')

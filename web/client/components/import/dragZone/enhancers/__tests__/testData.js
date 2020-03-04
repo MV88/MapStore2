@@ -17,7 +17,7 @@ import GEO_JSON_FILE_URL from 'file-loader!../../../../../test-resources/caput-m
 import MAP_FILE from 'file-loader!../../../../../test-resources/map.config';
 import UNSUPPORTED_MAP_FILE from 'file-loader!../../../../../test-resources/unsupportedMap.config';
 
-const getFile = (url, fileName = "file") =>
+export const getFile = (url, fileName = "file") =>
     Rx.Observable.defer( () => axios.get(url, {
         responseType: 'arraybuffer'
     }))
@@ -25,12 +25,21 @@ const getFile = (url, fileName = "file") =>
             new File([new Blob([res.data], {type: res.headers['response-type']})], fileName)
         );
 
+
+export const getShapeFile = () => getFile(SHP_FILE_URL, "shape.zip");
+export const getGpxFile = () => getFile(GPX_FILE_URL, "file.gpx");
+export const getKmlFile = () => getFile(KML_FILE_URL, "file.kml");
+export const getKmzFile = () => getFile(KMZ_FILE_URL, "file.kmz");
+export const getGeoJsonFile = (name = "file.json") => getFile(GEO_JSON_FILE_URL, name);
+export const getMapFile = () => getFile(MAP_FILE, "map.json");
+export const getUnsupportedMapFile = () => getFile(UNSUPPORTED_MAP_FILE, "unsupportedMap.json");
+
 export default {
-    getShapeFile: () => getFile(SHP_FILE_URL, "shape.zip"),
-    getGpxFile: () => getFile(GPX_FILE_URL, "file.gpx"),
-    getKmlFile: () => getFile(KML_FILE_URL, "file.kml"),
-    getKmzFile: () => getFile(KMZ_FILE_URL, "file.kmz"),
-    getGeoJsonFile: (name = "file.json") => getFile(GEO_JSON_FILE_URL, name),
-    getMapFile: () => getFile(MAP_FILE, "map.json"),
-    getUnsupportedMapFile: () => getFile(UNSUPPORTED_MAP_FILE, "unsupportedMap.json")
+    getShapeFile,
+    getGpxFile,
+    getKmlFile,
+    getKmzFile,
+    getGeoJsonFile,
+    getMapFile,
+    getUnsupportedMapFile
 };

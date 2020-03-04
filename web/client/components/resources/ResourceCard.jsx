@@ -12,7 +12,7 @@ import Message from '../I18N/Message';
 import GridCard from '../misc/GridCard';
 import thumbUrl from '../maps/style/default.jpg';
 import assign from 'object-assign';
-import ConfirmModal from './modals/ConfirmModal';
+import ConfirmModal from '../misc/ResizableModal';
 
 class ResourceCard extends React.Component {
     static propTypes = {

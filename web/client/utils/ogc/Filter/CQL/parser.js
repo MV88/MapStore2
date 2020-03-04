@@ -357,3 +357,5 @@ const buildAst = (tokens) => {
  */
 export const read = (text) => buildAst(tokenize(text));
 
+export default read;
+

@@ -25,6 +25,15 @@ import {
 import timeline from '../../reducers/timeline';
 import dimension from '../../reducers/dimension';
 import widgets from '../../reducers/widgets';
+
+// EPICS TO TEST
+import {
+    collapseTimelineOnWidgetsEvents,
+    collapseWidgetsOnTimelineEvents,
+    expandTimelineIfCollapsedOnTrayUnmount
+} from '../widgetsTray';
+
+
 // TEST DATA
 const T1 = '2016-01-01T00:00:00.000Z';
 const T2 = '2016-02-01T00:00:00.000Z';
@@ -94,14 +103,6 @@ const WIDGETS_STATE = {
 const NO_WIDGETS_STATE = {
     widgets: widgets(undefined, { type: "DUMMY" })
 };
-
-// EPICS TO TEST
-import {
-    collapseTimelineOnWidgetsEvents,
-    collapseWidgetsOnTimelineEvents,
-    expandTimelineIfCollapsedOnTrayUnmount
-} from '../widgetsTray';
-
 
 describe('widgetsTray epics', () => {
     describe('collapseTimelineOnWidgetsEvents', () => {

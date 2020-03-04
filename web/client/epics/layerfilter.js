@@ -45,7 +45,6 @@ const addFilterToLayer = (layer, filter) => {
 };
 
 
-export default {
 /**
  * It manages the initialization of the query builder used to build the layerFilter
  * and the update of layerFilter in layer state
@@ -55,62 +54,68 @@ export default {
  * and on `QUERY_FORM_SEARCH` `CHANGE_LAYERPROPERTIS` adding layerFilter to selected layer
  * terminate on `LOCATION_CHANGE` `TOGGLE_CONTROL` with queryPanel enabled === false
  */
-    handleLayerFilterPanel: (action$, {getState}) =>
-        action$.ofType(OPEN_QUERY_BUILDER).switchMap(() => {
-            const layer = getSelectedLayer(getState());
-            const {url, name, layerFilter} = layer || {};
-            const searchUrl = layer && layer.search && layer.search.url;
-            return Rx.Observable.of(
-                featureTypeSelected(searchUrl || url, name),
-                // Load the filter from the layer if it exist
-                loadFilter(layerFilter),
-                initLayerFilter(layerFilter),
-                setControlProperty('queryPanel', "enabled", true)
-            )
-                .merge(
-                    Rx.Observable.of(toggleLayerFilter()).filter(() => !get(getState(), "query.isLayerFilter")),
-                    action$.ofType(QUERY_FORM_SEARCH)
-                        .switchMap( ({filterObj}) => {
-                            let newFilter = isNotEmptyFilter(filterObj) ? {...get(getState(), "queryform", {})} : undefined;
-                            if (newFilter) {
-                                newFilter.filterFields = newFilter.attributePanelExpanded && newFilter.filterFields || [];
-                                newFilter.spatialField = newFilter.spatialPanelExpanded && newFilter.spatialField || null;
-                                newFilter.crossLayerFilter = newFilter.crossLayerExpanded && FilterUtils.setupCrossLayerFilterDefaults(newFilter.crossLayerFilter) || null;
-                            }
-                            return Rx.Observable.of(addFilterToLayer(layer.id, newFilter));
-                        })
-                ).let(endLayerFilterEpic(action$)).concat(Rx.Observable.from([toggleLayerFilter(), reset(), changeDrawingStatus("clean", "", "queryform", [], {})]))
-            ;
-        }),
-    /**
+export const handleLayerFilterPanel = (action$, {getState}) =>
+    action$.ofType(OPEN_QUERY_BUILDER).switchMap(() => {
+        const layer = getSelectedLayer(getState());
+        const {url, name, layerFilter} = layer || {};
+        const searchUrl = layer && layer.search && layer.search.url;
+        return Rx.Observable.of(
+            featureTypeSelected(searchUrl || url, name),
+            // Load the filter from the layer if it exist
+            loadFilter(layerFilter),
+            initLayerFilter(layerFilter),
+            setControlProperty('queryPanel', "enabled", true)
+        )
+            .merge(
+                Rx.Observable.of(toggleLayerFilter()).filter(() => !get(getState(), "query.isLayerFilter")),
+                action$.ofType(QUERY_FORM_SEARCH)
+                    .switchMap( ({filterObj}) => {
+                        let newFilter = isNotEmptyFilter(filterObj) ? {...get(getState(), "queryform", {})} : undefined;
+                        if (newFilter) {
+                            newFilter.filterFields = newFilter.attributePanelExpanded && newFilter.filterFields || [];
+                            newFilter.spatialField = newFilter.spatialPanelExpanded && newFilter.spatialField || null;
+                            newFilter.crossLayerFilter = newFilter.crossLayerExpanded && FilterUtils.setupCrossLayerFilterDefaults(newFilter.crossLayerFilter) || null;
+                        }
+                        return Rx.Observable.of(addFilterToLayer(layer.id, newFilter));
+                    })
+            ).let(endLayerFilterEpic(action$)).concat(Rx.Observable.from([toggleLayerFilter(), reset(), changeDrawingStatus("clean", "", "queryform", [], {})]))
+        ;
+    });
+/**
  * It throws the correct actions to discard the current applied filter and reload the last saved if present
  * @memberof epics.layerFilter
  * @param {external:Observable} action$ manages `DISCARD_CURRENT_FILTER`
  * @return {external:Observable} `QUERYFORM:LOAD_FILTER` `QUERY_FORM_SEARCH` `INIT_QUERY_PANEL`
  */
-    restoreSavedFilter: (action$, {getState}) =>
-        action$.ofType(DISCARD_CURRENT_FILTER)
-            .switchMap(() => {
-                const params = {typeName: get(getState(), "state.query.typeName")};
-                const searchUrl = get(getState(), "state.query.url");
-                const filter = get(getState(), "layerFilter.persisted");
-                return Rx.Observable.of(changeDrawingStatus('clean', '', "queryform", []),
-                    loadFilter(filter),
-                    search(searchUrl, filter, params),
-                    initQueryPanel());
+export const restoreSavedFilter = (action$, {getState}) =>
+    action$.ofType(DISCARD_CURRENT_FILTER)
+        .switchMap(() => {
+            const params = {typeName: get(getState(), "state.query.typeName")};
+            const searchUrl = get(getState(), "state.query.url");
+            const filter = get(getState(), "layerFilter.persisted");
+            return Rx.Observable.of(changeDrawingStatus('clean', '', "queryform", []),
+                loadFilter(filter),
+                search(searchUrl, filter, params),
+                initQueryPanel());
 
-            }),
-    /**
+        });
+/**
  * It Persists the current applied filter
  * @memberof epics.layerFilter
  * @param {external:Observable} action$ manages `APPLY_FILTER`
  * @return {external:Observable} `APPLIED_FILTER`
  */
-    onApplyFilter: (action$, {getState}) =>
-        action$.ofType(APPLY_FILTER)
-            .map(() => {
-                const newFilter = {...get(getState(), "queryform", {})};
-                return storeAppliedFilter(newFilter);
+export const onApplyFilter = (action$, {getState}) =>
+    action$.ofType(APPLY_FILTER)
+        .map(() => {
+            const newFilter = {...get(getState(), "queryform", {})};
+            return storeAppliedFilter(newFilter);
 
-            })
+        });
+
+
+export default {
+    handleLayerFilterPanel,
+    restoreSavedFilter,
+    onApplyFilter
 };

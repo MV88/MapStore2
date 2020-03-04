@@ -15,7 +15,7 @@ const xmlBuilder = new xml2js.Builder();
 import axios from '../libs/ajax';
 import ConfigUtils from '../utils/ConfigUtils';
 import { registerErrorParser } from '../utils/LocaleUtils';
-
+let API = {};
 export const generateMetadata = (name = "", description = "") =>
     "<description><![CDATA[" + description + "]]></description>"
     + "<metadata></metadata>"
@@ -109,40 +109,40 @@ export const addBaseUrl = function(options) {
 };
 export const getData = function(id, options) {
     const url = "data/" + id;
-    return axios.get(url, addBaseUrl(parseOptions(options))).then(function(response) {
+    return axios.get(url, API.addBaseUrl(parseOptions(options))).then(function(response) {
         return response.data;
     });
 };
 export const getResource = function(resourceId, options) {
     return axios.get(
         "resources/resource/" + resourceId,
-        addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+        API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 export const getResourceIdByName = function(category, name, options) {
     return axios.get(
         "misc/category/name/" + category + "/resource/name/" + name,
-        addBaseUrl(parseOptions(options))).then(response => get(response, 'data.Resource.id'));
+        API.addBaseUrl(parseOptions(options))).then(response => get(response, 'data.Resource.id'));
 };
 export const getResourceDataByName = function(category, name, options) {
     return axios.get(
         "misc/category/name/" + category + "/resource/name/" + name + "/data",
-        addBaseUrl(parseOptions(options))).then(response => get(response, 'data'));
+        API.addBaseUrl(parseOptions(options))).then(response => get(response, 'data'));
 };
 export const getShortResource = function(resourceId, options) {
     return axios.get(
         "extjs/resource/" + resourceId,
-        addBaseUrl(parseOptions(options))).then(function(response) { return response.data; });
+        API.addBaseUrl(parseOptions(options))).then(function(response) { return response.data; });
 };
 export const getResourcesByCategory = function(category, query, options) {
     const q = query || "*";
     const url = "extjs/search/category/" + category + "/*" + q + "*/thumbnail,details,featured"; // comma-separated list of wanted attributes
-    return axios.get(url, addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+    return axios.get(url, API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 export const createCategory = function(category) {
     return axios.post(
         "categories",
         `<Category><name>${category}</name></Category>`,
-        addBaseUrl({
+        API.addBaseUrl({
             headers: {
                 'Content-Type': "application/xml"
             }
@@ -151,7 +151,7 @@ export const createCategory = function(category) {
 };
 export const getUserDetails = function(username, password, options) {
     const url = "users/user/details";
-    return axios.get(url, addBaseUrl(merge({
+    return axios.get(url, API.addBaseUrl(merge({
         auth: {
             username: username,
             password: password
@@ -166,14 +166,14 @@ export const getUserDetails = function(username, password, options) {
 export const login = function(username, password, options) {
     const url = "session/login";
     let authData;
-    return axios.post(url, null, addBaseUrl(merge((username && password) ? {
+    return axios.post(url, null, API.addBaseUrl(merge((username && password) ? {
         auth: {
             username: username,
             password: password
         }
     } : {}, options))).then((response) => {
         authData = response.data;
-        return axios.get("users/user/details", addBaseUrl(merge({
+        return axios.get("users/user/details", API.addBaseUrl(merge({
             headers: {
                 'Authorization': 'Bearer ' + response.data.access_token
             },
@@ -188,7 +188,7 @@ export const login = function(username, password, options) {
 export const changePassword = function(user, newPassword, options) {
     return axios.put(
         "users/user/" + user.id, "<User><newPassword>" + newPassword + "</newPassword></User>",
-        addBaseUrl(merge({
+        API.addBaseUrl(merge({
             headers: {
                 'Content-Type': "application/xml"
             }
@@ -202,7 +202,7 @@ export const updateResourceAttribute = function(resourceId, name, value, type, o
                 value
             }
         },
-        addBaseUrl(merge({
+        API.addBaseUrl(merge({
             headers: {
                 'Content-Type': "application/json"
             }
@@ -211,7 +211,7 @@ export const updateResourceAttribute = function(resourceId, name, value, type, o
 export const getResourceAttribute = function(resourceId, name, options = {}) {
     return axios.get(
         "resources/resource/" + resourceId + "/attributes/" + name,
-        addBaseUrl(merge({
+        API.addBaseUrl(merge({
             headers: {
                 'Content-Type': "application/xml"
             }
@@ -220,7 +220,7 @@ export const getResourceAttribute = function(resourceId, name, options = {}) {
 export const getResourceAttributes = function(resourceId, options = {}) {
     return axios.get(
         "resources/resource/" + resourceId + "/attributes",
-        addBaseUrl({
+        API.addBaseUrl({
             headers: {
                 'Accept': "application/json"
             },
@@ -231,7 +231,7 @@ export const getResourceAttributes = function(resourceId, options = {}) {
 };
 export const getPermissions = function(mapId, options) {
     const url = "resources/resource/" + mapId + "/permissions";
-    return axios.get(url, addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+    return axios.get(url, API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 /**
  * same of getPermissions but clean data properly and returns only the array of rules.
@@ -245,7 +245,7 @@ export const putResourceMetadata = function(resourceId, newName, newDescription,
     return axios.put(
         "resources/resource/" + resourceId,
         "<Resource>" + generateMetadata(newName, newDescription) + "</Resource>",
-        addBaseUrl(merge({
+        API.addBaseUrl(merge({
             headers: {
                 'Content-Type': "application/xml"
             }
@@ -255,7 +255,7 @@ export const putResourceMetadataAndAttributes = function(resourceId, metadata, o
     return axios.put(
         "resources/resource/" + resourceId,
         "<Resource>" + generateMetadata(metadata.name, metadata.description) + createAttributeList(metadata) + "</Resource>",
-        addBaseUrl(merge({
+        API.addBaseUrl(merge({
             headers: {
                 'Content-Type': "application/xml"
             }
@@ -265,7 +265,7 @@ export const putResource = function(resourceId, content, options) {
     return axios.put(
         "data/" + resourceId,
         content,
-        addBaseUrl(merge({
+        API.addBaseUrl(merge({
             headers: {
                 'Content-Type': typeof content === 'string' ? "text/plain; charset=utf-8" : 'application/json; charset=utf-8"'
             }
@@ -299,7 +299,7 @@ export const updateResourcePermissions = function(resourceId, securityRules) {
     return axios.post(
         "resources/resource/" + resourceId + "/permissions",
         payload,
-        addBaseUrl({
+        API.addBaseUrl({
             headers: {
                 'Content-Type': "application/xml"
             }
@@ -321,7 +321,7 @@ export const createResource = function(metadata, data, category, options) {
                             ? JSON.stringify(data)
                             : data)
                     || "") + "]]></data></store></Resource>",
-        addBaseUrl(merge({
+        API.addBaseUrl(merge({
             headers: {
                 'Content-Type': "application/xml"
             }
@@ -330,12 +330,12 @@ export const createResource = function(metadata, data, category, options) {
 export const deleteResource = function(resourceId, options) {
     return axios.delete(
         "resources/resource/" + resourceId,
-        addBaseUrl(merge({
+        API.addBaseUrl(merge({
         }, options)));
 };
 export const getUserGroups = function(options) {
     const url = "usergroups/";
-    return axios.get(url, addBaseUrl(parseOptions(options))).then(function(response) {
+    return axios.get(url, API.addBaseUrl(parseOptions(options))).then(function(response) {
         return response.data;
     });
 };
@@ -344,7 +344,7 @@ export const getAvailableGroups = function(user) {
     if (user && user.role === "ADMIN") {
         return axios.get(
             "usergroups/?all=true",
-            addBaseUrl({
+            API.addBaseUrl({
                 headers: {
                     'Accept': "application/json"
                 }
@@ -354,7 +354,7 @@ export const getAvailableGroups = function(user) {
     }
     return axios.get(
         "users/user/details",
-        addBaseUrl({
+        API.addBaseUrl({
             headers: {
                 'Accept': "application/json"
             }
@@ -364,11 +364,11 @@ export const getAvailableGroups = function(user) {
 };
 export const getUsers = function(textSearch, options = {}) {
     const url = "extjs/search/users" + (textSearch ? "/" + textSearch : "");
-    return axios.get(url, addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+    return axios.get(url, API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 export const getUser = function(id, options = {params: {includeattributes: true}}) {
     const url = "users/user/" + id;
-    return axios.get(url, addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+    return axios.get(url, API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 export const updateUser = function(id, user, options) {
     const url = "users/user/" + id;
@@ -376,24 +376,24 @@ export const updateUser = function(id, user, options) {
     if (postUser.newPassword === "") {
         delete postUser.newPassword;
     }
-    return axios.put(url, {User: postUser}, addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+    return axios.put(url, {User: postUser}, API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 export const createUser = function(user, options) {
     const url = "users/";
 
-    return axios.post(url, {User: utils.initUser(user)}, addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+    return axios.post(url, {User: utils.initUser(user)}, API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 export const deleteUser = function(id, options = {}) {
     const url = "users/user/" + id;
-    return axios.delete(url, addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+    return axios.delete(url, API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 export const getGroups = function(textSearch, options = {}) {
     const url = "extjs/search/groups" + (textSearch ? "/" + textSearch : "");
-    return axios.get(url, addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+    return axios.get(url, API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 export const getGroup = function(id, options = {}) {
     const url = "usergroups/group/" + id;
-    return axios.get(url, addBaseUrl(parseOptions(options))).then(function(response) {
+    return axios.get(url, API.addBaseUrl(parseOptions(options))).then(function(response) {
         let groupLoaded = response.data.UserGroup;
         let users = groupLoaded && groupLoaded.restUsers && groupLoaded.restUsers.User;
         return {...groupLoaded, users: users && (Array.isArray(users) ? users : [users]) || []};
@@ -401,11 +401,11 @@ export const getGroup = function(id, options = {}) {
 };
 export const addUserToGroup = function(userId, groupId, options = {}) {
     const url = "/usergroups/group/" + userId + "/" + groupId + "/";
-    return axios.post(url, null, addBaseUrl(parseOptions(options)));
+    return axios.post(url, null, API.addBaseUrl(parseOptions(options)));
 };
 export const removeUserFromGroup = function(userId, groupId, options = {}) {
     const url = "/usergroups/group/" + userId + "/" + groupId + "/";
-    return axios.delete(url, addBaseUrl(parseOptions(options)));
+    return axios.delete(url, API.addBaseUrl(parseOptions(options)));
 };
 export const updateGroupMembers = function(group, options) {
     // No GeoStore API to update group name and description. only update new users
@@ -439,7 +439,7 @@ export const updateGroupMembers = function(group, options) {
 export const createGroup = function(group, options) {
     const url = "usergroups/";
     let groupId;
-    return axios.post(url, {UserGroup: {...group}}, addBaseUrl(parseOptions(options)))
+    return axios.post(url, {UserGroup: {...group}}, API.addBaseUrl(parseOptions(options)))
         .then(function(response) {
             groupId = response.data;
             return updateGroupMembers({...group, id: groupId}, options);
@@ -447,12 +447,12 @@ export const createGroup = function(group, options) {
 };
 export const deleteGroup = function(id, options = {}) {
     const url = "usergroups/group/" + id;
-    return axios.delete(url, addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
+    return axios.delete(url, API.addBaseUrl(parseOptions(options))).then(function(response) {return response.data; });
 };
 
 export const verifySession = function(options) {
     const url = "users/user/details";
-    return axios.get(url, addBaseUrl(merge({
+    return axios.get(url, API.addBaseUrl(merge({
         params: {
             includeattributes: true
         }
@@ -463,7 +463,7 @@ export const verifySession = function(options) {
 export const refreshToken = function(accessToken, refreshingToken, options) {
     // accessToken is actually the sessionID
     const url = "session/refresh/" + accessToken + "/" + refreshingToken;
-    return axios.post(url, null, addBaseUrl(parseOptions(options))).then(function(response) {
+    return axios.post(url, null, API.addBaseUrl(parseOptions(options))).then(function(response) {
         return response.data;
     });
 };
@@ -497,7 +497,7 @@ export const searchListByAttributes = (filter, options, url = "/extjs/search/lis
     return axios.post(
         url,
         xmlFilter,
-        addBaseUrl({
+        API.addBaseUrl({
             ...parseOptions(options),
             headers: {
                 "Content-Type": "application/xml",
@@ -512,7 +512,7 @@ export const searchListByAttributes = (filter, options, url = "/extjs/search/lis
  * API for local config
  */
 
-const Api = {
+API = {
     createAttributeList,
     generateMetadata,
     authProviderName,
@@ -560,4 +560,4 @@ const Api = {
     errorParser
 };
 
-export default Api;
+export default API;

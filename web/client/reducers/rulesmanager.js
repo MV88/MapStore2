@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { castArray, head, isEmpty } from 'lodash';
+import _ from 'lodash';
 import assign from 'object-assign';
 import wk from 'wellknown';
 
@@ -57,7 +57,7 @@ const getPosition = ({targetPosition = {}}, priority) => {
 };
 // GEOFENCE ACCEPTS ONLY MULTYPOLYGON
 const fixGeometry = (g, method = "") => {
-    if (method === "" || isEmpty(g) || !g.coordinates || g.coordinates.length === 0) {
+    if (method === "" || _.isEmpty(g) || !g.coordinates || g.coordinates.length === 0) {
         return g;
     }
     const c = g.coordinates[0];
@@ -80,12 +80,12 @@ function rulesmanager(state = defaultState, action) {
         const existingRules = state.selectedRules || [];
         if (action.unselect) {
             return assign({}, state, {
-                selectedRules: castArray(existingRules).filter(
-                    rule => !head(newRules.filter(unselected => unselected.id === rule.id))).value()
+                selectedRules: _(existingRules).filter(
+                    rule => !_.head(newRules.filter(unselected => unselected.id === rule.id))).value()
             });
         }
         return assign({}, state, {
-            selectedRules: castArray(existingRules).concat(newRules).uniq(rule => rule.id).value()});
+            selectedRules: _(existingRules).concat(newRules).uniq(rule => rule.id).value()});
     }
     case UPDATE_FILTERS_VALUES: {
         const filtersValues = state.filtersValues || {};
@@ -137,7 +137,7 @@ function rulesmanager(state = defaultState, action) {
             const geometry = fixGeometry(((action.features || [])[0] || {}), action.method);
             newState = assign({}, state, {geometryState: assign({}, {
                 geometry,
-                wkt: !isEmpty(geometry) && wk.stringify(geometry) || undefined
+                wkt: !_.isEmpty(geometry) && wk.stringify(geometry) || undefined
             })});
         } else {
             newState = state;

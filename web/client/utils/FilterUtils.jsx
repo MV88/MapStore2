@@ -9,7 +9,7 @@
 import {processOGCGeometry as processOGCGeometryHandler, pointElement, polygonElement, lineStringElement, closePolygon } from "./ogc/GML";
 import {wfsToGmlVersion} from './ogc/WFS/base';
 import {ogcComparisonOperators, ogcLogicalOperators, ogcSpatialOperators} from "./ogc/Filter/operators";
-import { read } from './ogc/Filter/CQL/parser';
+import read from './ogc/Filter/CQL/parser';
 import fromObject from './ogc/Filter/fromObject';
 import filterBuilder from './ogc/Filter/FilterBuilder';
 import CoordinatesUtils from './CoordinatesUtils';

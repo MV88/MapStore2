@@ -11,6 +11,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LayerMetadataModal from '../LayerMetadataModal';
 import RenderTemplate from '../template/index';
+
 import expect from 'expect';
 import TestUtils from 'react-dom/test-utils';
 import { Promise } from 'es6-promise';

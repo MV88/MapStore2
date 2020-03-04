@@ -108,7 +108,7 @@ export const getRoles = (roleFilter = "", page = 0, size = 10, countEl = false) 
 };
 export const getWorkspaces = ({size}) => Rx.Observable.defer(() => GeoFence.getWorkspaces())
     .map(({workspaces = {}}) => ({count: size, data: [].concat(workspaces.workspace)}));
-export const loadLayers= (layerFilter = "", page = 0, size = 10, parentsFilter = {}) =>
+export const loadLayers = (layerFilter = "", page = 0, size = 10, parentsFilter = {}) =>
     Rx.Observable.defer( () => GeoFence.getLayers(layerFilter, page, size, parentsFilter));
 export const updateRule = (rule, origRule) => {
     const fullUp = Rx.Observable.of({rule, origRule}).let(fullUpdate);

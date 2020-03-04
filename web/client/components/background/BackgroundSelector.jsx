@@ -17,8 +17,7 @@ import PreviewButton from './PreviewButton';
 import PreviewList from './PreviewList';
 import PreviewIcon from './PreviewIcon';
 import PropTypes from 'prop-types';
-import './css/background.css';
-import defaultImg from './img/dafault.jpg';
+import defaultImg from './img/default.jpg';
 
 class BackgroundSelector extends React.Component {
     static propTypes = {

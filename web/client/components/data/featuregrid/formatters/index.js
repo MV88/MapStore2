@@ -12,3 +12,5 @@ import {isNil} from 'lodash';
 export const getFormatter = (desc) => desc.localType === 'boolean' ?
     ({value} = {}) => !isNil(value) ? <span>{value.toString()}</span> : null :
     null;
+
+export default getFormatter;

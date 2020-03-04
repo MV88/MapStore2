@@ -16,7 +16,7 @@ import turfCenter from '@turf/center';
 import missingSVG from '../product/assets/symbols/symbolMissing.svg';
 import { set } from './ImmutableUtils';
 import LocaleUtils from './LocaleUtils';
-import { extraMarkers } from './MarkerUtils';
+import MarkersUtils from './MarkerUtils';
 import { fetchStyle, geometryFunctions, hashAndStringify } from './VectorStyleUtils';
 
 export const COMPONENTS_VALIDATION = {
@@ -147,29 +147,29 @@ export const getStartEndPointsForLinestring = () => {
         {...DEFAULT_ANNOTATIONS_STYLES.Point, highlight: true, iconAnchor: [0.5, 0.5], type: "Point", title: "EndPoint Style", geometry: "endPoint", filtering: false, id: uuidv1()}];
 };
 
-const rgbaTorgb = (rgba = "") => {
+export const rgbaTorgb = (rgba = "") => {
     return rgba.indexOf("rgba") !== -1 ? `rgb${rgba.slice(rgba.indexOf("("), rgba.lastIndexOf(","))})` : rgba;
 };
 
-const textAlignTolabelAlign = (a) => (a === "start" && "lm") || (a === "end" && "rm") || "cm";
+export const textAlignTolabelAlign = (a) => (a === "start" && "lm") || (a === "end" && "rm") || "cm";
 
-const getStylesObject = ({type = "Point", features = []} = {}) => {
+export const getStylesObject = ({type = "Point", features = []} = {}) => {
     return type === "FeatureCollection" ? features.reduce((p, c) => {
         p[c.geometry.type] = DEFAULT_ANNOTATIONS_STYLES[c.geometry.type];
         return p;
     }, {type: "FeatureCollection"}) : {...DEFAULT_ANNOTATIONS_STYLES[type]};
 };
-const getProperties = (props = {}, messages = {}) => ({title: LocaleUtils.getMessageById(messages, "annotations.defaulttitle") !== "annotations.defaulttitle" ? LocaleUtils.getMessageById(messages, "annotations.defaulttitle") : "Default title", id: uuidv1(), ...props});
+export const getProperties = (props = {}, messages = {}) => ({title: LocaleUtils.getMessageById(messages, "annotations.defaulttitle") !== "annotations.defaulttitle" ? LocaleUtils.getMessageById(messages, "annotations.defaulttitle") : "Default title", id: uuidv1(), ...props});
 
-const getDashArrayFromStyle = dashArray => {
+export const getDashArrayFromStyle = dashArray => {
     return isString(dashArray) && dashArray || isArray(dashArray) && dashArray.join(" ");
 };
 
-const hasOutline = (style) => {
+export const hasOutline = (style) => {
     return style.color && style.opacity && style.weight;
 };
 
-const annStyleToOlStyle = (type, tempStyle, label = "") => {
+export const annStyleToOlStyle = (type, tempStyle, label = "") => {
     let style = tempStyle && tempStyle[type] ? tempStyle[type] : tempStyle;
     const s = style;
     const dashArray = s.dashArray ? getDashArrayFromStyle(s.dashArray) : "solid";
@@ -218,7 +218,7 @@ const annStyleToOlStyle = (type, tempStyle, label = "") => {
     case "Point":
     case "MultiPoint": {
         // TODO TEST THIS
-        const externalGraphic = s.symbolUrl && fetchStyle(hashAndStringify(s), "base64") || extraMarkers.markerToDataUrl(s);
+        const externalGraphic = s.symbolUrl && fetchStyle(hashAndStringify(s), "base64") ||  MarkersUtils.extraMarkers.markerToDataUrl(s);
         let graphicXOffset = -18;
         let graphicYOffset = -46;
         if (s.iconAnchor && isArray(s.iconAnchor) && s.size) {

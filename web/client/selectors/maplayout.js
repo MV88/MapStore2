@@ -59,7 +59,7 @@ export const mapLayoutValuesSelector = (state, attributes = {}) => {
  * @param  {array} conditions array of object, [{ key: 'left', value: 300 }, { key: 'right', value: 0, type: 'not' }]
  * @return {boolean} returns true if the layout attributes match with the provided conditions
  */
-const checkConditionsSelector = (state, conditions = []) => {
+export const checkConditionsSelector = (state, conditions = []) => {
     const layout = mapLayoutSelector(state);
     const check = !!head(conditions.filter(c => layout[c.key]).map(c => {
         if (c.type === 'not') {
@@ -78,7 +78,7 @@ const checkConditionsSelector = (state, conditions = []) => {
  * @return {boolean} returns true if right panels are open
  */
 export const rightPanelOpenSelector = state => {
-    // need to remove 658 and manage it from the state with all dafault layout variables
+    // need to remove 658 and manage it from the state with all default layout variables
     return checkConditionsSelector(state, [{ key: 'right', value: 658 }]);
 };
 /**
@@ -89,7 +89,7 @@ export const rightPanelOpenSelector = state => {
  * @return {boolean} returns true if bottom panel is open
  */
 export const bottomPanelOpenSelector = state => {
-    // need to remove 30 and manage it from the state with all dafault layout variables
+    // need to remove 30 and manage it from the state with all default layout variables
     return checkConditionsSelector(state, [{ key: 'bottom', value: 30, type: 'not' }]);
 };
 

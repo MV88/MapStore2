@@ -88,7 +88,7 @@ export const persistReducer = (reducer, storeName = PERSISTED_STORE_NAME, name =
  * @param {string} storeName optional store name the reducer is used by
  * @param {string} name optional name (if you want to persist more than one reducer)
  */
-const fetchReducer = (storeName = PERSISTED_STORE_NAME, name = 'rootReducer') => {
+export const fetchReducer = (storeName = PERSISTED_STORE_NAME, name = 'rootReducer') => {
     return ConfigUtils.getConfigProp(storeName + '.' + name) || {};
 };
 
@@ -115,7 +115,7 @@ export const persistEpic = (epic, storeName = PERSISTED_STORE_NAME, name = 'root
  * @param {string} storeName optional store name the epic is used by
  * @param {string} name optional name (if you want to persist more than one epic)
  */
-const fetchEpic = (storeName = PERSISTED_STORE_NAME, name = 'rootEpic') => {
+export const fetchEpic = (storeName = PERSISTED_STORE_NAME, name = 'rootEpic') => {
     return ConfigUtils.getConfigProp(storeName + '.' + name) || {};
 };
 

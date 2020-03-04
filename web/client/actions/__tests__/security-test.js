@@ -8,66 +8,84 @@
 
 import expect from 'expect';
 
-import security from '../security';
+import {
+    CHECK_LOGGED_USER,
+    LOGIN_PROMPT_CLOSED,
+    LOGIN_REQUIRED,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    RESET_ERROR,
+    LOGOUT,
+    SESSION_VALID,
+    loginSuccess,
+    loginFail,
+    resetError,
+    logout,
+    loginRequired,
+    loginPromptClosed,
+    sessionValid,
+    checkLoggedUser
+} from '../security';
+
 
 describe('Test correctness of the close actions', () => {
     it('resetError', () => {
-        const retval = security.resetError();
+        const retval = resetError();
         expect(retval).toExist().toIncludeKey('type');
-        expect(retval.type).toBe(security.RESET_ERROR);
+        expect(retval.type).toBe(RESET_ERROR);
     });
     it('loginSuccess', () => {
-        const retval = security.loginSuccess();
+        const retval = loginSuccess();
         expect(retval).toExist().toIncludeKey('type')
             .toIncludeKey('userDetails')
             .toIncludeKey('authHeader')
             .toIncludeKey('username')
             .toIncludeKey('password')
             .toIncludeKey('authProvider');
-        expect(retval.type).toBe(security.LOGIN_SUCCESS);
+        expect(retval.type).toBe(LOGIN_SUCCESS);
     });
     it('loginFail', () => {
-        const retval = security.loginFail();
+        const retval = loginFail();
         expect(retval).toExist().toIncludeKey('type')
             .toIncludeKey('error');
-        expect(retval.type).toBe(security.LOGIN_FAIL);
+        expect(retval.type).toBe(LOGIN_FAIL);
     });
     it('logout', () => {
-        const retval = security.logout();
+        const retval = logout();
         expect(retval).toExist().toIncludeKey('type')
             .toIncludeKey('redirectUrl');
-        expect(retval.type).toBe(security.LOGOUT);
+        expect(retval.type).toBe(LOGOUT);
     });
     /* These are not exposed by the API
     it('changePasswordSuccess', () => {
-        const retval = security.changePasswordSuccess();
+        const retval = changePasswordSuccess();
         expect(retval).toExist().toIncludeKey('type')
         .toIncludeKey('user')
         .toIncludeKey('authHeader');
-        expect(retval.type).toBe(security.CHANGE_PASSWORD_SUCCESS);
+        expect(retval.type).toBe(CHANGE_PASSWORD_SUCCESS);
     });
     it('changePasswordFail', () => {
-        const retval = security.changePasswordFail();
+        const retval = changePasswordFail();
         expect(retval).toExist().toIncludeKey('type')
         .toIncludeKey('error');
-        expect(retval.type).toBe(security.CHANGE_PASSWORD_FAIL);
+        expect(retval.type).toBe(CHANGE_PASSWORD_FAIL);
     });
     */
     it('sessionValid', () => {
-        const retval = security.sessionValid("aaa", "bbb");
+        const retval = sessionValid("aaa", "bbb");
         expect(retval).toExist().toIncludeKey('type')
             .toIncludeKey('userDetails')
             .toIncludeKey('authProvider');
-        expect(retval.type).toBe(security.SESSION_VALID);
+        expect(retval.type).toBe(SESSION_VALID);
         expect(retval.userDetails).toBe("aaa");
         expect(retval.authProvider).toBe("bbb");
     });
     it('loginRequired, loginPromptClosed', () => {
-        expect(security.loginRequired().type).toBe(security.LOGIN_REQUIRED);
-        expect(security.loginPromptClosed().type).toBe(security.LOGIN_PROMPT_CLOSED);
+        expect(loginRequired().type).toBe(LOGIN_REQUIRED);
+        expect(loginPromptClosed().type).toBe(LOGIN_PROMPT_CLOSED);
     });
     it('checkLoggedUser', () => {
-        expect(security.checkLoggedUser().type).toBe(security.CHECK_LOGGED_USER);
+        expect(checkLoggedUser().type).toBe(CHECK_LOGGED_USER);
     });
 
 

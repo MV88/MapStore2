@@ -1,5 +1,5 @@
 import expect from 'expect';
-import { read } from '../CQL/parser';
+import read from '../CQL/parser';
 import filterBuilder from '../FilterBuilder';
 import fromObject from '../fromObject';
 

@@ -62,9 +62,9 @@ const context = new Jsonix.Context([
     }
 });
 /* eslint-enable */
-const marshaller = context.createMarshaller();
-const unmarshaller = context.createUnmarshaller();
-const CSW = {
+export const marshaller = context.createMarshaller();
+export const unmarshaller = context.createUnmarshaller();
+export const CSW = {
     getRecords: function(startPosition, maxRecords, query, outputSchema) {
         let body = {
             startPosition: startPosition,

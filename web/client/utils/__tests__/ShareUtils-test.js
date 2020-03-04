@@ -7,7 +7,7 @@
  */
 import expect from 'expect';
 
-import ShareUtils from '../ShareUtils';
+import { getAbsoluteURL, getConfigUrl, getApiUrl, removeQueryFromUrl, getSharedGeostoryUrl } from '../ShareUtils';
 
 
 const MAPSTORE_PATH = "/mapstore/";
@@ -30,37 +30,37 @@ const EXTERNAL_GEOSTORE = "http://dev.mapstore.geo-solutions.it/geostore/rest/";
 
 describe('ShareUtils test', () => {
     it('getAbsoluteURL', () => {
-        expect(ShareUtils.getAbsoluteURL(LOCALURL, MS_GEOSTORE_EMBEDDED_PATH)).toBe( LOCALURL + MS_GEOSTORE_EMBEDDED_PATH );
-        expect(ShareUtils.getAbsoluteURL(DEV_URL, MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH);
-        expect(ShareUtils.getAbsoluteURL(DEV_URL_PATH, MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH);
-        expect(ShareUtils.getAbsoluteURL(SOMEHOST_PATH, STANDALONE_GEOSTORE_PATH)).toBe(SOMEHOST + STANDALONE_GEOSTORE_PATH);
-        expect(ShareUtils.getAbsoluteURL(SOMEHOST_PATH_QUERY_STRING, STANDALONE_GEOSTORE_PATH)).toBe(SOMEHOST + STANDALONE_GEOSTORE_PATH);
-        expect(ShareUtils.getAbsoluteURL(SOMEHOST_PATH_QUERY_STRING, EXTERNAL_GEOSTORE)).toBe(EXTERNAL_GEOSTORE);
+        expect(getAbsoluteURL(LOCALURL, MS_GEOSTORE_EMBEDDED_PATH)).toBe( LOCALURL + MS_GEOSTORE_EMBEDDED_PATH );
+        expect(getAbsoluteURL(DEV_URL, MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH);
+        expect(getAbsoluteURL(DEV_URL_PATH, MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH);
+        expect(getAbsoluteURL(SOMEHOST_PATH, STANDALONE_GEOSTORE_PATH)).toBe(SOMEHOST + STANDALONE_GEOSTORE_PATH);
+        expect(getAbsoluteURL(SOMEHOST_PATH_QUERY_STRING, STANDALONE_GEOSTORE_PATH)).toBe(SOMEHOST + STANDALONE_GEOSTORE_PATH);
+        expect(getAbsoluteURL(SOMEHOST_PATH_QUERY_STRING, EXTERNAL_GEOSTORE)).toBe(EXTERNAL_GEOSTORE);
     });
     it('getConfigUrl', () => {
-        expect(ShareUtils.getConfigUrl(DEV_URL_MAP_PATH + "1", MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH + "1");
-        expect(ShareUtils.getConfigUrl(DEV_URL_MAP_PATH + "11", MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH + "11");
-        expect(ShareUtils.getConfigUrl(DEV_URL_MAP_PATH + "111", MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH + "111");
-        expect(ShareUtils.getConfigUrl(DEV_URL_MAP_PATH + "111?abc=def", MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH + "111");
-        expect(ShareUtils.getConfigUrl(DEV_URL_MAP_PATH, MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH);
-        expect(ShareUtils.getConfigUrl(SOMEHOST_PATH, MS_GEOSTORE_EMBEDDED_PATH)).toBe(null);
+        expect(getConfigUrl(DEV_URL_MAP_PATH + "1", MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH + "1");
+        expect(getConfigUrl(DEV_URL_MAP_PATH + "11", MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH + "11");
+        expect(getConfigUrl(DEV_URL_MAP_PATH + "111", MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH + "111");
+        expect(getConfigUrl(DEV_URL_MAP_PATH + "111?abc=def", MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH + "111");
+        expect(getConfigUrl(DEV_URL_MAP_PATH, MS_GEOSTORE_EMBEDDED_PATH)).toBe(DEV_URL + MS_GEOSTORE_EMBEDDED_PATH + GEOSTORE_DATA_PATH);
+        expect(getConfigUrl(SOMEHOST_PATH, MS_GEOSTORE_EMBEDDED_PATH)).toBe(null);
     });
     it('getApiUrl', () => {
-        expect(ShareUtils.getApiUrl(DEV_URL_MAP_PATH)).toBe(DEV_URL_PATH);
-        expect(ShareUtils.getApiUrl(LOCALURL_PATH)).toBe(LOCALURL_PATH);
-        expect(ShareUtils.getApiUrl(LOCALURL_PATH + MAPSTORE_PATH + QUERY_STRING)).toBe(LOCALURL_PATH + MAPSTORE_PATH);
+        expect(getApiUrl(DEV_URL_MAP_PATH)).toBe(DEV_URL_PATH);
+        expect(getApiUrl(LOCALURL_PATH)).toBe(LOCALURL_PATH);
+        expect(getApiUrl(LOCALURL_PATH + MAPSTORE_PATH + QUERY_STRING)).toBe(LOCALURL_PATH + MAPSTORE_PATH);
     });
     it('removeQueryFromUrl', () => {
         const expectedUrl = 'http://my-url/#/viewer/openlayers/1';
         const urlWithQueries = 'http://my-url/?debug=true#/viewer/openlayers/1?bbox=minx,miny,maxx,maxy';
-        const urlWithoutQueries = ShareUtils.removeQueryFromUrl(urlWithQueries);
+        const urlWithoutQueries = removeQueryFromUrl(urlWithQueries);
         expect(urlWithoutQueries).toBe(expectedUrl);
     });
     it('getSharedGeostoryUrl', () => {
         const expectedURL = 'http://test-url/#/geostory/shared/111';
-        expect(ShareUtils.getSharedGeostoryUrl(expectedURL)).toBe(expectedURL);
-        expect(ShareUtils.getSharedGeostoryUrl('http://test-url/#/geostory/111')).toBe(expectedURL);
-        expect(ShareUtils.getSharedGeostoryUrl('http://test-url/#/geostory/newgeostory')).toBe('http://test-url/#/geostory/newgeostory');
-        expect(ShareUtils.getSharedGeostoryUrl('http://test-url/#/other')).toBe('http://test-url/#/other');
+        expect(getSharedGeostoryUrl(expectedURL)).toBe(expectedURL);
+        expect(getSharedGeostoryUrl('http://test-url/#/geostory/111')).toBe(expectedURL);
+        expect(getSharedGeostoryUrl('http://test-url/#/geostory/newgeostory')).toBe('http://test-url/#/geostory/newgeostory');
+        expect(getSharedGeostoryUrl('http://test-url/#/other')).toBe('http://test-url/#/other');
     });
 });

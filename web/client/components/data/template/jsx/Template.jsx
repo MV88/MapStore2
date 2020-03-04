@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,10 +5,12 @@ import PropTypes from 'prop-types';
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-import { isEqual } from 'lodash';
-import TemplateUtils from '../../../../utils/TemplateUtils';
+// import will not work in tests, React is not defined..
+const React = require('react');
+const {isEqual} = require("lodash");
+const TemplateUtils = require('../../../../utils/TemplateUtils');
+const PropTypes = require('prop-types');
 
 class Template extends React.Component {
     static propTypes = {

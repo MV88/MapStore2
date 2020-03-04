@@ -16,7 +16,7 @@ import {
     dashboardDeleted,
     dashboardListLoaded,
     dashboardsLoading,
-    searchDashboards
+    searchDashboards as searchDashboardsAction
 } from '../actions/dashboards';
 import { ATTRIBUTE_UPDATED, MAPS_LIST_LOADING, MAP_DELETED, MAP_METADATA_UPDATED } from '../actions/maps';
 import { error } from '../actions/notifications';
@@ -39,52 +39,59 @@ const calculateNewParams = state => {
     };
 };
 
+export const searchDashboardsOnMapSearch = (action$) =>
+    action$.ofType(MAPS_LIST_LOADING)
+        .switchMap(({ searchText }) => Rx.Observable.of(searchDashboardsAction(searchText)));
+
+export const searchDashboards = (action$, { getState = () => { } }) =>
+    action$.ofType(SEARCH_DASHBOARDS)
+        .map( ({params, searchText, geoStoreUrl}) => ({
+            searchText,
+            options: {
+                params: params || searchParamsSelector(getState()) || {start: 0, limit: 12},
+                ...(geoStoreUrl ? { baseURL: geoStoreUrl } : {})
+            }
+        }))
+        .switchMap(
+            ({ searchText, options }) =>
+                Rx.Observable.defer(() => GeoStoreApi.getResourcesByCategory("DASHBOARD", searchText, options))
+                    .map(results => dashboardListLoaded(results, {searchText, options}))
+                    .let(wrapStartStop(
+                        dashboardsLoading(true, "loading"),
+                        dashboardsLoading(false, "loading"),
+                        () => Rx.Observable.of(error({
+                            title: "notification.error",
+                            message: "resources.dashboards.errorLoadingDashboards",
+                            autoDismiss: 6,
+                            position: "tc"
+                        }))
+                    ))
+        );
+export const deleteDashboard = action$ => action$
+    .ofType(DELETE_DASHBOARD)
+    .switchMap(id => deleteResource(id).map(() => dashboardDeleted(id)))
+    .let(wrapStartStop(
+        dashboardsLoading(true, "loading"),
+        dashboardsLoading(false, "loading"),
+        () => Rx.Observable.of(error({
+            title: "notification.error",
+            message: "resources.dashboards.deleteError",
+            autoDismiss: 6,
+            position: "tc"
+        }))
+    ));
+export const reloadOnDashboards = (action$, { getState = () => { } }) =>
+    action$.ofType(DASHBOARD_DELETED, MAP_DELETED, MAP_METADATA_UPDATED, RELOAD, ATTRIBUTE_UPDATED, DASHBOARD_SAVED)
+        .delay(1000) // delay as a workaround for geostore issue #178
+        .switchMap( () => Rx.Observable.of(searchDashboardsAction(
+            searchTextSelector(getState()),
+            calculateNewParams(getState())
+        )));
+
+
 export default {
-    searchDashboardsOnMapSearch: action$ =>
-        action$.ofType(MAPS_LIST_LOADING)
-            .switchMap(({ searchText }) => Rx.Observable.of(searchDashboards(searchText))),
-    searchDashboards: (action$, { getState = () => { } }) =>
-        action$.ofType(SEARCH_DASHBOARDS)
-            .map( ({params, searchText, geoStoreUrl}) => ({
-                searchText,
-                options: {
-                    params: params || searchParamsSelector(getState()) || {start: 0, limit: 12},
-                    ...(geoStoreUrl ? { baseURL: geoStoreUrl } : {})
-                }
-            }))
-            .switchMap(
-                ({ searchText, options }) =>
-                    Rx.Observable.defer(() => GeoStoreApi.getResourcesByCategory("DASHBOARD", searchText, options))
-                        .map(results => dashboardListLoaded(results, {searchText, options}))
-                        .let(wrapStartStop(
-                            dashboardsLoading(true, "loading"),
-                            dashboardsLoading(false, "loading"),
-                            () => Rx.Observable.of(error({
-                                title: "notification.error",
-                                message: "resources.dashboards.errorLoadingDashboards",
-                                autoDismiss: 6,
-                                position: "tc"
-                            }))
-                        ))
-            ),
-    deleteDashboard: action$ => action$
-        .ofType(DELETE_DASHBOARD)
-        .switchMap(id => deleteResource(id).map(() => dashboardDeleted(id)))
-        .let(wrapStartStop(
-            dashboardsLoading(true, "loading"),
-            dashboardsLoading(false, "loading"),
-            () => Rx.Observable.of(error({
-                title: "notification.error",
-                message: "resources.dashboards.deleteError",
-                autoDismiss: 6,
-                position: "tc"
-            }))
-        )),
-    reloadOnDashboards: (action$, { getState = () => { } }) =>
-        action$.ofType(DASHBOARD_DELETED, MAP_DELETED, MAP_METADATA_UPDATED, RELOAD, ATTRIBUTE_UPDATED, DASHBOARD_SAVED)
-            .delay(1000) // delay as a workaround for geostore issue #178
-            .switchMap( () => Rx.Observable.of(searchDashboards(
-                searchTextSelector(getState()),
-                calculateNewParams(getState())
-            )))
+    searchDashboardsOnMapSearch,
+    searchDashboards,
+    deleteDashboard,
+    reloadOnDashboards
 };

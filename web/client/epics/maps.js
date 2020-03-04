@@ -100,7 +100,7 @@ const manageMapResource = ({map = {}, attribute = "", resource = null, type = "S
 /**
     If details are changed from the original ones then set unsavedChanges to true
 */
-const setDetailsChangedEpic = (action$, store) =>
+export const setDetailsChangedEpic = (action$, store) =>
     action$.ofType(SAVE_DETAILS)
         .switchMap((a) => {
             let actions = [];
@@ -125,7 +125,7 @@ const setDetailsChangedEpic = (action$, store) =>
  * If the details resource does not exist it saves it, and it updates its permission with the one set for the mapPermissionsFromIdSelector
  * and it updates the attribute details in map resource
 */
-const saveResourceDetailsEpic = (action$, store) =>
+export const saveResourceDetailsEpic = (action$, store) =>
     action$.ofType(SAVE_RESOURCE_DETAILS)
         .switchMap(() => {
             const state = store.getState();
@@ -163,7 +163,7 @@ const saveResourceDetailsEpic = (action$, store) =>
 /**
     Epics used to fetch and/or open the details modal
 */
-const fetchDetailsFromResourceEpic = (action$, store) =>
+export const fetchDetailsFromResourceEpic = (action$, store) =>
     action$.ofType(EDIT_MAP)
         .switchMap(() => {
             const state = store.getState();
@@ -189,7 +189,7 @@ const fetchDetailsFromResourceEpic = (action$, store) =>
                 });
         });
 
-const loadMapsEpic = (action$) =>
+export const loadMapsEpic = (action$) =>
     action$.ofType(MAPS_LOAD_MAP)
         .switchMap((action) => {
             let {params, searchText, geoStoreUrl} = action;
@@ -202,7 +202,7 @@ const loadMapsEpic = (action$) =>
 
         });
 
-const reloadMapsEpic = (action$, { getState = () => { } }) =>
+export const reloadMapsEpic = (action$, { getState = () => { } }) =>
     action$.ofType(MAP_DELETED, MAP_SAVED)
         .delay(1000)
         .switchMap(() => Rx.Observable.of(loadMaps(false,
@@ -210,7 +210,7 @@ const reloadMapsEpic = (action$, { getState = () => { } }) =>
             calculateNewParams(getState())
         )));
 
-const getMapsResourcesByCategoryEpic = (action$) =>
+export const getMapsResourcesByCategoryEpic = (action$) =>
     action$.ofType(MAPS_GET_MAP_RESOURCES_BY_CATEGORY)
         .switchMap((action) => {
             let {map, searchText, opts } = action;
@@ -221,7 +221,7 @@ const getMapsResourcesByCategoryEpic = (action$) =>
                 ))
                 .catch((e) => loadError(e));
         });
-const deleteMapAndAssociatedResourcesEpic = (action$, store) =>
+export const deleteMapAndAssociatedResourcesEpic = (action$, store) =>
     action$.ofType(DELETE_MAP)
         .switchMap((action) => {
             const state = store.getState();
@@ -267,7 +267,7 @@ const deleteMapAndAssociatedResourcesEpic = (action$, store) =>
             }).startWith(mapDeleting(mapId));
         });
 
-const fetchDataForDetailsPanel = (action$, store) =>
+export const fetchDataForDetailsPanel = (action$, store) =>
     action$.ofType(OPEN_DETAILS_PANEL)
         .switchMap(() => {
             const state = store.getState();
@@ -290,21 +290,21 @@ const fetchDataForDetailsPanel = (action$, store) =>
                 });
         });
 
-const closeDetailsPanelEpic = (action$) =>
+export const closeDetailsPanelEpic = (action$) =>
     action$.ofType(CLOSE_DETAILS_PANEL)
         .switchMap(() => Rx.Observable.from( [
             toggleControl("details", "enabled"),
             resetCurrentMap()
         ])
         );
-const resetCurrentMapEpic = (action$) =>
+export const resetCurrentMapEpic = (action$) =>
     action$.ofType(RESET_UPDATING)
         .switchMap(() => Rx.Observable.from( [
             onDisplayMetadataEdit(false),
             resetCurrentMap()
         ])
         );
-const storeDetailsInfoEpic = (action$, store) =>
+export const storeDetailsInfoEpic = (action$, store) =>
     action$.ofType(MAP_INFO_LOADED)
         .switchMap(() => {
             const mapId = mapIdSelector(store.getState());
@@ -326,7 +326,7 @@ const storeDetailsInfoEpic = (action$, store) =>
 /**
  * Create or update map resource with persistence api
  */
-const mapSaveMapResourceEpic = (action$, store) =>
+export const mapSaveMapResourceEpic = (action$, store) =>
     action$.ofType(SAVE_MAP_RESOURCE)
         .exhaustMap(({resource}) => (!resource.id ? createResource(resource) : updateResource(resource))
             .switchMap((rid) => Rx.Observable.from([

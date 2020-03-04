@@ -20,6 +20,7 @@ import {mapTypeSelector} from '../../selectors/maptype';
 import {textSearchConfigSelector} from '../../selectors/searchconfig';
 import {currentContextSelector} from '../../selectors/context';
 import MapUtils from '../../utils/MapUtils';
+import Save from '../../components/resources/modals/Save';
 
 const saveSelector = createSelector(
     userSelector,
@@ -66,7 +67,7 @@ const SaveBaseDialog = compose(
         }
     }),
     handleSaveModal
-)(require('../../components/resources/modals/Save'));
+)(Save);
 
 export default SaveBaseDialog;
 

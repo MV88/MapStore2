@@ -45,6 +45,7 @@ const MULTI_POINT = "MultiPoint";
 const MULTI_LINE_STRING = "MultiLineString";
 const MULTI_POLYGON = "MultiPolygon";
 const GEOMETRY_COLLECTION = "GeometryCollection";
+
 describe('Test the MapUtils', () => {
     it('dpi2dpm', () => {
         const inch2mm = 25.4;
@@ -582,7 +583,7 @@ describe('Test the MapUtils', () => {
         };
 
         const saved = saveMapConfiguration(mapConfig, flat, groups, backgrounds, '', {});
-        expect(saved).toEqual({
+        const comparisonSavedMap = {
             map: {
                 center: {crs: 'EPSG:4326', x: 0, y: 0},
                 backgrounds: [{id: 'layer005', thumbnail: 'data'}],
@@ -883,7 +884,9 @@ describe('Test the MapUtils', () => {
                 zoom: 10
             },
             version: 2
-        });
+        };
+
+        expect(saved).toEqual(comparisonSavedMap);
     });
 
     it('save map configuration with map options', () => {

@@ -47,7 +47,7 @@ import { unsavedMapSelector } from '../selectors/controls';
 import { push } from 'connected-react-router';
 const textSearchConfigSelector = state => state.searchconfig && state.searchconfig.textSearchConfig;
 
-const handleCreationBackgroundError = (action$, store) =>
+export const handleCreationBackgroundError = (action$, store) =>
     action$.ofType(CREATION_ERROR_LAYER)
     // added delay because the CREATION_ERROR_LAYER needs to be initialized after MAP_CONFIG_LOADED
         .delay(500)
@@ -84,7 +84,7 @@ const handleCreationBackgroundError = (action$, store) =>
                     position: "tc"
                 }));
         });
-const handleCreationLayerError = (action$, store) =>
+export const handleCreationLayerError = (action$, store) =>
     action$.ofType(CREATION_ERROR_LAYER)
     // added delay because the CREATION_ERROR_LAYER needs to be initialized after MAP_CONFIG_LOADED
         .delay(500)
@@ -96,7 +96,7 @@ const handleCreationLayerError = (action$, store) =>
             ]) : Rx.Observable.empty();
         });
 
-const resetLimitsOnInit = (action$, store) =>
+export const resetLimitsOnInit = (action$, store) =>
     action$.ofType(MAP_CONFIG_LOADED, CHANGE_MAP_CRS)
         .switchMap(() => {
             const confExtentCrs = configuredExtentCrsSelector(store.getState());
@@ -150,7 +150,7 @@ const toBoundsArray = extent => {
  * @param {object} action
  * @param {object} mapState the map object in state
  */
-const legacyZoomToExtent = (action, mapState) => {
+export const legacyZoomToExtent = (action, mapState) => {
     let zoom = 0;
     let {extent = []} = action;
     let bounds = CoordinatesUtils.reprojectBbox(extent, action.crs, mapState.bbox && mapState.bbox.crs || "EPSG:4326");
@@ -190,7 +190,7 @@ const legacyZoomToExtent = (action, mapState) => {
  * (mapping libraries have maxZoom and padding support). Otherwise, triggers a changeMapView to emulate the same operation.
  * @memberof epics.map
  */
-const zoomToExtentEpic = (action$, {getState = () => {} }) =>
+export const zoomToExtentEpic = (action$, {getState = () => {} }) =>
     action$.ofType(ZOOM_TO_EXTENT).switchMap(( action ) => {
         const extent = toBoundsArray(action.extent);
         if (!extent) {
@@ -214,7 +214,7 @@ const zoomToExtentEpic = (action$, {getState = () => {} }) =>
  * @memberof epics.map
  * @param {object} action$
  */
-const checkMapPermissions = (action$, {getState = () => {} }) =>
+export const checkMapPermissions = (action$, {getState = () => {} }) =>
     action$.ofType(LOGIN_SUCCESS)
         .filter(() => {
             const mapId = mapIdSelector(getState());
@@ -225,7 +225,7 @@ const checkMapPermissions = (action$, {getState = () => {} }) =>
             return loadMapInfo(mapId);
         });
 
-const compareMapChanges = (action$, { getState = () => {} }) =>
+export const compareMapChanges = (action$, { getState = () => {} }) =>
     action$
         .ofType(CHECK_MAP_CHANGES)
         .switchMap(({ action, source }) => {
@@ -256,7 +256,7 @@ const compareMapChanges = (action$, { getState = () => {} }) =>
             return action ? Rx.Observable.of(action) : Rx.Observable.empty();
         });
 
-const redirectUnauthorizedUserOnNewMap = (action$, { getState = () => {}}) =>
+export const redirectUnauthorizedUserOnNewMap = (action$, { getState = () => {}}) =>
     action$.ofType(MAP_CONFIG_LOAD_ERROR)
         .filter((action) => action.error && action.error.status === 403 && unsavedMapSelector(getState()))
         .filter(() => !isLoggedIn(getState()))

@@ -137,7 +137,7 @@ const getSLDObjc = function(layer, rasterSymbolizer) {
                         "rule": [{"TYPE_NAME": "SLD_1_0_0.Rule", "symbolizer": [{"sld:RasterSymbolizer": rasterSymbolizer}]}]}]}]}]}};
 
 };
-const jsonToSLD = function({styletype, opacity = "1.0", state, layer} = {}) {
+export const jsonToSLD = function({styletype, opacity = "1.0", state, layer} = {}) {
 
     let rasterSymbolizer = {TYPE_NAME: "SLD_1_0_0.RasterSymbolizer"};
     rasterSymbolizer.opacity = convertOpacity(opacity);
@@ -233,7 +233,7 @@ const getRules = function(rules) {
     );
 };
 
-const vecStyleToSLD = function({rules = [], layer = {}} = {}) {
+export const vecStyleToSLD = function({rules = [], layer = {}} = {}) {
     return marshall.marshalString({
         "sld:StyledLayerDescriptor": {"TYPE_NAME": "SLD_1_0_0.StyledLayerDescriptor", "version": "1.0.0",
             "namedLayerOrUserLayer": [{"TYPE_NAME": "SLD_1_0_0.NamedLayer", "name": layer.name,

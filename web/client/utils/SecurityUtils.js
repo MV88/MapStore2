@@ -14,7 +14,7 @@ import URL from 'url';
 import assign from 'object-assign';
 import { head, isNil } from 'lodash';
 
-let SecurityUtils = {};
+export let SecurityUtils = {};
 /**
  * This utility class will get information about the current logged user directly from the store.
  */
@@ -37,7 +37,7 @@ export const getSecurityInfo = () => {
  * Returns the current user or undefined if not available.
  */
 export const getUser = () => {
-    const securityInfo = getSecurityInfo();
+    const securityInfo = SecurityUtils.getSecurityInfo();
     return securityInfo && securityInfo.user;
 };
 
@@ -45,7 +45,7 @@ export const getUser = () => {
  * Returns the current user basic authentication header value.
  */
 export const getBasicAuthHeader = () => {
-    const securityInfo = getSecurityInfo();
+    const securityInfo = SecurityUtils.getSecurityInfo();
     return securityInfo && securityInfo.authHeader;
 };
 
@@ -53,7 +53,7 @@ export const getBasicAuthHeader = () => {
  * Returns the current user access token value.
  */
 export const getToken = () => {
-    const securityInfo = getSecurityInfo();
+    const securityInfo = SecurityUtils.getSecurityInfo();
     return securityInfo && securityInfo.token;
 };
 
@@ -62,7 +62,7 @@ export const getToken = () => {
  * The refresh token is used to get a new access token.
  */
 export const getRefreshToken = () => {
-    const securityInfo = getSecurityInfo();
+    const securityInfo = SecurityUtils.getSecurityInfo();
     return securityInfo && securityInfo.refresh_token;
 };
 
@@ -71,7 +71,7 @@ export const getRefreshToken = () => {
  * doesn't have any attributes an empty array is returned.
  */
 export const getUserAttributes = function(providedUser) {
-    const user = providedUser ? providedUser : getUser();
+    const user = providedUser ? providedUser : SecurityUtils.getUser();
     if (!user || !user.attribute) {
         // not user defined or the user doesn't have any attributes
         return [];
@@ -88,7 +88,7 @@ export const getUserAttributes = function(providedUser) {
  */
 export const findUserAttribute = function(attributeName) {
     // getting the user attributes
-    let userAttributes = getUserAttributes();
+    let userAttributes = SecurityUtils.getUserAttributes();
     if (!userAttributes || !attributeName ) {
         // the user as no attributes or the provided attribute name is undefined
         return null;
@@ -104,7 +104,7 @@ export const findUserAttribute = function(attributeName) {
  * value is returned.
  */
 export const findUserAttributeValue = function(attributeName) {
-    let userAttribute = findUserAttribute(attributeName);
+    let userAttribute = SecurityUtils.findUserAttribute(attributeName);
     return userAttribute && userAttribute.value;
 };
 
@@ -129,7 +129,7 @@ export const isAuthenticationActivated = function() {
  * the provided URL, if no rule matches the provided URL undefined is returned.
  */
 export const getAuthenticationMethod = function(url) {
-    const foundRule = head(getAuthenticationRules().filter(
+    const foundRule = head(SecurityUtils.getAuthenticationRules().filter(
         rule => rule && rule.urlPattern && url.match(new RegExp(rule.urlPattern, "i"))));
     return foundRule ? foundRule.method : undefined;
 };
@@ -140,7 +140,7 @@ export const getAuthenticationMethod = function(url) {
  * the provided URL, if no rule matches the provided URL undefined is returned.
  */
 export const getAuthenticationRule = function(url) {
-    return head(getAuthenticationRules().filter(
+    return head(SecurityUtils.getAuthenticationRules().filter(
         rule => rule && rule.urlPattern && url.match(new RegExp(rule.urlPattern, "i"))));
 };
 
@@ -148,7 +148,7 @@ export const getAuthenticationRule = function(url) {
  * This method will add query parameter based authentications to an url.
  */
 export const addAuthenticationToUrl = function(url) {
-    if (!url || !isAuthenticationActivated()) {
+    if (!url || !SecurityUtils.isAuthenticationActivated()) {
         return url;
     }
     const parsedUrl = URL.parse(url, true);
@@ -163,12 +163,12 @@ export const addAuthenticationToUrl = function(url) {
  * containing query parameters.
  */
 export const addAuthenticationParameter = function(url, parameters, securityToken) {
-    if (!url || !isAuthenticationActivated()) {
+    if (!url || !SecurityUtils.isAuthenticationActivated()) {
         return parameters;
     }
-    switch (getAuthenticationMethod(url)) {
+    switch (SecurityUtils.getAuthenticationMethod(url)) {
     case 'authkey': {
-        const token = !isNil(securityToken) ? securityToken : getToken();
+        const token = !isNil(securityToken) ? securityToken : SecurityUtils.getToken();
         if (!token) {
             return parameters;
         }
