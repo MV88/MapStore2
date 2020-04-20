@@ -36,7 +36,7 @@ class Home extends React.Component {
     };
 
     render() {
-        const { tooltipPosition, ...restProps} = this.props;
+        const { tooltipPosition} = this.props;
         let tooltip = <Tooltip id="toolbar-home-button">{<Message msgId="gohome"/>}</Tooltip>;
         return (
             <React.Fragment>
@@ -47,7 +47,6 @@ class Home extends React.Component {
                         bsStyle="primary"
                         onClick={this.checkUnsavedChanges}
                         tooltip={tooltip}
-                        {...restProps}
                     >{this.props.icon}</Button>
                 </OverlayTrigger>
                 <ConfirmModal

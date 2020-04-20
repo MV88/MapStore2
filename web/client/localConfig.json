@@ -163,7 +163,8 @@
       }
     },
     "plugins": {
-        "mobile": [{
+        "mobile": [
+          {
                 "name": "Map",
                 "cfg": {
                     "mapOptions": {
@@ -459,7 +460,8 @@
             "FeedbackMask",
             "StyleEditor"
         ],
-        "embedded": [{
+        "embedded": [
+          {
                 "name": "Map",
                 "cfg": {
                     "tools": ["locate"],
@@ -570,7 +572,8 @@
             },
             "FeedbackMask"
         ],
-        "common": [{
+        "common": [
+          {
             "name": "OmniBar",
             "cfg": {
                 "className": "navbar shadow navbar-home"
@@ -581,7 +584,8 @@
                 "enableContextManager": true
             }
         }, "Login","Language", "NavMenu", "Attribution", "ScrollTop", "Notifications"],
-        "maps": ["HomeDescription", "Fork", "MapSearch", "CreateNewMap", "FeaturedMaps", "ContentTabs",
+        "maps": [
+          "HomeDescription", "Fork", "MapSearch", "CreateNewMap", "FeaturedMaps", "ContentTabs",
 
           {
             "name": "Maps",
@@ -629,7 +633,8 @@
             "declineUrl" : "http://www.google.com"
           }
         }],
-        "dashboard": [{
+        "dashboard": [
+          {
             "name": "OmniBar",
             "cfg": {
                 "containerPosition": "header",

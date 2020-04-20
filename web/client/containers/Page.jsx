@@ -34,7 +34,6 @@ class Page extends React.Component {
     };
 
     static defaultProps = {
-        mode: 'desktop',
         onMount: () => {},
         className: '',
         includeCommon: true
@@ -63,7 +62,11 @@ class Page extends React.Component {
             desktop: [...commonPluginsConfig.desktop, ...specificPluginsConfig.desktop],
             mobile: [...commonPluginsConfig.mobile, ...specificPluginsConfig.mobile]
         };
-        return (<PluginsContainer key={this.props.id} id={"page-" + this.props.id} component={this.props.component} className={"page page-" + this.props.id + " " + this.props.className}
+        return (<PluginsContainer
+            key={this.props.id}
+            id={"page-" + this.props.id}
+            component={this.props.component}
+            className={"page page-" + this.props.id + " " + this.props.className}
             pluginsConfig={pluginsConfig}
             plugins={this.props.plugins}
             params={this.props.params}

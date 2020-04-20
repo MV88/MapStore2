@@ -50,6 +50,8 @@ class BaseMap extends React.Component {
         map: {},
         styleMap: {},
         tools: [],
+        layers: [],
+        plugins: {},
         projectionDefs: [],
         eventHandlers: {
             onMapViewChanges: () => {},
