@@ -8,6 +8,7 @@
 var Proj4js = require('proj4').default;
 const PropTypes = require('prop-types');
 var url = require('url');
+const jiff = require("jiff");
 
 var axios = require('axios');
 const {isArray, isObject, endsWith, isNil} = require('lodash');
@@ -139,6 +140,18 @@ var ConfigUtils = {
         localConfigFile = file;
     },
     loadConfiguration: function() {
+        if (localConfigFile) {
+
+        }
+        return axios.all([
+                () => ({}).catch(() => null),
+                () => ({}).catch(() => {})
+            ])
+                .then(([patch, original]) => {
+                    let merged = jiff.patch(patch, original);
+                    return {...merged};
+                });
+        }
         if (localConfigFile) {
             return axios.get(localConfigFile).then(response => {
                 if (typeof response.data === 'object') {
