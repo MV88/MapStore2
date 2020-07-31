@@ -8,9 +8,10 @@
 var Proj4js = require('proj4').default;
 const PropTypes = require('prop-types');
 var url = require('url');
+const jiff = require("jiff");
 
 var axios = require('axios');
-const {isArray, isObject, endsWith, isNil} = require('lodash');
+const {isArray, isObject, endsWith, isNil, isEmpty} = require('lodash');
 const assign = require('object-assign');
 const {Promise} = require('es6-promise');
 
@@ -140,13 +141,39 @@ var ConfigUtils = {
     },
     loadConfiguration: function() {
         if (localConfigFile) {
-            return axios.get(localConfigFile).then(response => {
-                if (typeof response.data === 'object') {
-                    defaultConfig = assign({}, defaultConfig, response.data);
-                }
-                return {...defaultConfig};
-            });
+            let [localConfigMapstore, localConfigPatch] = ["MapStore2/web/client/localConfig.json", ""];
+            if (isArray(localConfigFile) && localConfigFile.length === 2) {
+                [localConfigMapstore, localConfigPatch] = localConfigFile;
+            } else {
+                localConfigMapstore = localConfigFile;
+            }
+            return axios.all([
+                axios.get(localConfigMapstore).then(response => {
+                    return isObject(response.data) ? {...defaultConfig, ...response.data} : {...defaultConfig};
+                    // if the main localConfig is not found it will shown a blank page
+                    // because there are no default plugins configured in desktop
+                }).catch((e) => {
+                    // eslint-disable-next-line
+                    console.log(e);
+                    return {...defaultConfig};
+                }),
+                axios.get(localConfigPatch).then(response => {
+                    return isObject(response.data) ? response.data : {};
+                }).catch((e) => {
+                    // eslint-disable-next-line
+                    console.log(e);
+                    return {};
+                })
+            ])
+                .then(([original, patch]) => {
+                    let merged = original;
+                    if (!isEmpty(patch)) {
+                        merged = jiff.patch(patch, original);
+                    }
+                    return {...merged};
+                });
         }
+
         return new Promise((resolve) => {
             resolve({...defaultConfig});
         });

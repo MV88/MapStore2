@@ -20,7 +20,7 @@ ConfigUtils.setConfigProp('themePrefix', '__PROJECTNAME__');
  *
  * ConfigUtils.setLocalConfigurationFile('localConfig.json');
  */
-ConfigUtils.setLocalConfigurationFile('MapStore2/web/client/localConfig.json');
+ConfigUtils.setLocalConfigurationFile(["MapStore2/web/client/localConfig.json", "patch/localConfig.patch.json"]);
 
 /**
  * Use a custom application configuration file with:
