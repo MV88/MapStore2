@@ -11,7 +11,7 @@ var url = require('url');
 const jiff = require("jiff");
 
 var axios = require('axios');
-const {isArray, isObject, endsWith, isNil, isEmpty} = require('lodash');
+const {isArray, isObject, endsWith, isNil, isEmpty, castArray} = require('lodash');
 const assign = require('object-assign');
 const {Promise} = require('es6-promise');
 
@@ -26,7 +26,7 @@ const urlQuery = url.parse(window.location.href, true).query;
 
 const isMobile = require('ismobilejs');
 
-let localConfigFile = 'localConfig.json';
+let localConfigFile = "localConfig.json";
 
 let defaultConfig = {
     // TODO: these should be changed tp relative paths, without /mapstore/ or / (to avoid the needing of overriding in default cases)
@@ -141,12 +141,7 @@ var ConfigUtils = {
     },
     loadConfiguration: function() {
         if (localConfigFile) {
-            let [localConfigMapstore, localConfigPatch] = ["MapStore2/web/client/localConfig.json", ""];
-            if (isArray(localConfigFile) && localConfigFile.length === 2) {
-                [localConfigMapstore, localConfigPatch] = localConfigFile;
-            } else {
-                localConfigMapstore = localConfigFile;
-            }
+            const [localConfigMapstore, localConfigPatch] = castArray(localConfigFile);
             return axios.all([
                 axios.get(localConfigMapstore).then(response => {
                     return isObject(response.data) ? {...defaultConfig, ...response.data} : {...defaultConfig};
