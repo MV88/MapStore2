@@ -9,6 +9,7 @@ var Proj4js = require('proj4').default;
 const PropTypes = require('prop-types');
 var url = require('url');
 const jiff = require("jiff");
+const { trasformPathToJsonPatch } = require('./PatchUtils');
 
 var axios = require('axios');
 const {isArray, isObject, endsWith, isNil, isEmpty, castArray} = require('lodash');
@@ -140,6 +141,7 @@ var ConfigUtils = {
         localConfigFile = file;
     },
     loadConfiguration: function() {
+        trasformPathToJsonPatch();
         if (localConfigFile) {
             const [localConfigMapstore, localConfigPatch] = castArray(localConfigFile);
             return axios.all([
