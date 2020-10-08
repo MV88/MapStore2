@@ -132,7 +132,6 @@ class StandardApp extends React.Component {
                 onInit(config);
             }
         });
-
     }
 
     render() {

@@ -213,5 +213,5 @@ module.exports = (bundles, themeEntries, paths, extractThemesPlugin, prod, publi
         }
     },
 
-    devtool: !prod ? 'eval' : undefined
+    devtool: !prod ? 'eval-cheap-source-map' : undefined
 });

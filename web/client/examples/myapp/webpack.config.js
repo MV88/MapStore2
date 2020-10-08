@@ -28,7 +28,7 @@ module.exports = {
             }
         ]
     },
-    devtool: 'inline-source-map',
+    devtool: 'eval-cheap-source-map',
     plugins: [
         new LoaderOptionsPlugin({
             debug: true

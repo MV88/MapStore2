@@ -8,8 +8,7 @@
 var Proj4js = require('proj4').default;
 const PropTypes = require('prop-types');
 var url = require('url');
-const jiff = require("jiff");
-const { trasformPathToJsonPatch } = require('./PatchUtils');
+const { mergePatchFiles } = require('./PatchUtils');
 
 var axios = require('axios');
 const {isArray, isObject, endsWith, isNil, isEmpty, castArray} = require('lodash');
@@ -140,8 +139,16 @@ var ConfigUtils = {
     setLocalConfigurationFile(file) {
         localConfigFile = file;
     },
-    loadConfiguration: function() {
-        trasformPathToJsonPatch();
+
+    /**
+     * array patch + file original mapstore --> generato [patch, patch, patch, intero.json, intero.json]
+     * oppure setDefaultLocalConfigurationObject con oggetto
+     */
+    loadConfiguration: async function() {
+        const result = mergePatchFiles(["patch/localConfig.patch.json", "localConfig.json"]);
+        const config = await result;
+        console.log("config", config);
+
         if (localConfigFile) {
             const [localConfigMapstore, localConfigPatch] = castArray(localConfigFile);
             return axios.all([
@@ -165,7 +172,8 @@ var ConfigUtils = {
                 .then(([original, patch]) => {
                     let merged = original;
                     if (!isEmpty(patch)) {
-                        merged = jiff.patch(patch, original);
+                        // merged = jiff.patch(patch, original);
+                        console.log(merged);
                     }
                     return {...merged};
                 });

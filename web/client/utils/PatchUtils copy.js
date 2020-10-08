@@ -1,9 +1,10 @@
+// const jiff = require("jiff");
 const jp = require( 'jsonpath');
 const jiff = require("jiff");
 const isArray = require( 'lodash/isArray');
 const isString = require( 'lodash/isString');
 const castArray = require( 'lodash/castArray');
-const axios = require('axios');
+const axios = require( 'axios');
 
 /**
  * convert paths from jsonpath format to json patch format
@@ -28,23 +29,25 @@ const transformPath = (paths) => {
  * @example rule for changing config to all ZoomIn plugins
  * {op: "replace", jsonpath: "$.plugins..[?(@.name == 'ZoomIn')].cfg.maxZoom, value: 3}
  */
-const convertToJsonPatch = (sourceJSON = {}, rawRule = {}) => {
-    const {op, jsonpath, value} = rawRule;
-    let transformedPaths;
-    try {
-        transformedPaths = transformPath(jp.paths(sourceJSON, jsonpath));
-    } catch (e) {
-        // in this case the jsonpath lib failed because the path was not a valid jsonpath one
-        transformedPaths = [jsonpath];
-    }
-    let transformedRules = transformedPaths.map((path) => {
-        let transformedRule = { op, path };
-        if (value) {
-            transformedRule.value = value;
+const convertToJsonPatch = (sourceJSON = {}, rawRules = [{op: "remove", jsonpath: "$..name", value: ""}, {op: "add", jsonpath: "$..name", value: ""}]) => {
+    const patchRules = rawRules.reduce((p, {op, jsonpath, value}) => {
+        let transformedPaths;
+        try {
+            transformedPaths = transformPath(jp.paths(sourceJSON, jsonpath));
+        } catch (e) {
+            // in this case the jsonpath lib failed because the path was not a valid jsonpath one
+            transformedPaths = [jsonpath];
         }
-        return transformedRule;
-    });
-    return transformedRules;
+        let transformedRules = transformedPaths.map((path) => {
+            let transformedRule = { op, path };
+            if (value) {
+                transformedRule.value = value;
+            }
+            return transformedRule;
+        });
+        return p.concat(transformedRules);
+    }, []);
+    return patchRules;
 };
 
 
@@ -60,7 +63,7 @@ const convertToJsonPatch = (sourceJSON = {}, rawRule = {}) => {
  * `
  */
 
-const isFullFile = (path) => path?.indexOf("patch") === -1;
+const isFullFile = (path) => path?.indexOf("patch.json") === -1;
 
 function getFirstValid([f1, ...nextFiles]) {
     return axios.get(f1).then(({data}) => data).catch(e => {
@@ -73,27 +76,6 @@ function getFirstValid([f1, ...nextFiles]) {
 }
 
 /**
- * apply recursively a single json path rule
- * @param {*} fullConfig main json file to perform checks
- * @param {object[]} patch array of jsonpath rules
- * @return the final json patched
- */
-const checkAgainTheSameRule = (fullConfig, patch, counter = 0) => {
-    let full = fullConfig;
-    let c = counter;
-    let rules = convertToJsonPatch(fullConfig, patch);
-    if (rules.length > 0) {
-        full = jiff.patch([rules[counter] ? rules[counter] : rules[0]], fullConfig);
-        c += 1;
-    }
-    if ((rules.length - c) > 0) {
-        return checkAgainTheSameRule(full, patch, c);
-    }
-    return full;
-};
-
-
-/**
  * it takes the first config file provided and it
  * @param {string[] | string} configsToFetch a list of paths where a request is performed in order to fetch a config file or patch
  */
@@ -101,27 +83,33 @@ const mergePatchFiles = async(configsToFetch) => {
 
     const files = castArray(configsToFetch);
 
+    // --------------------------------------------------
     const patchOnlyFiles = files.filter((file) => !isFullFile(file)); // todo filter empty or errors
-    const rules = await axios
-        .all(patchOnlyFiles.map(patch => axios
-            .get(patch)
+    const patchFiles = await axios
+        .all(patchOnlyFiles.map(patch => axios.get(patch)
             .then(({data}) => data)
             .catch((e) => {
                 // eslint-disable-next-line
-                console.error(e);
-                return [];
+                console.log(e);
+                return null;
             }))
         )
-        .then((patches) => patches.flat());
+        .then((patches) => patches);
 
-    // get the first full localConfig file
+    //
     const fullOnlyFiles = files.filter((file) => isFullFile(file));
+
+    // --------------------------------------------------
+    // get the first full localConfig file
+
     const fullFile = await getFirstValid(fullOnlyFiles);
 
-    return rules.reduce((fullConfig, patch) => {
-        return checkAgainTheSameRule(fullConfig, patch);
-    }, fullFile);
 
+    // --------------------------------------------------
+    return patchFiles.reduce((fullconfig, patch) => {
+        const jsonPatchFormat = convertToJsonPatch(fullconfig, patch); // convert to json patch format
+        return jiff.patch(jsonPatchFormat, fullconfig);
+    }, fullFile);
 };
 
 /* TODO
@@ -137,8 +125,6 @@ const mergePatchFiles = async(configsToFetch) => {
 module.exports = {
     transformPath,
     convertToJsonPatch,
-    checkAgainTheSameRule,
     isFullFile,
-    getFirstValid,
     mergePatchFiles
 };

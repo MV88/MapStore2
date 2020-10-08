@@ -7,7 +7,8 @@ module.exports = function(api) {
         ],
         "plugins": [
             "@babel/plugin-proposal-class-properties",
-            "@babel/plugin-syntax-dynamic-import"
+            "@babel/plugin-syntax-dynamic-import",
+            "@babel/plugin-transform-regenerator"
         ]
     };
 };
