@@ -33,13 +33,11 @@ import LocateTool from "../components/mapcontrols/locate/LocateTool";
   */
 
 const LocatePlugin = connect((state) => ({
-    locate: state.locate && state.locate.state || 'DISABLED',
-    tooltip: state.locate && state.locate.state === 'FOLLOWING' ? "locate.tooltipDeactivate" : "locate.tooltip"
+    locate: state?.locate?.state || 'DISABLED',
+    tooltip: state?.locate?.state === 'FOLLOWING' ? "locate.tooltipDeactivate" : "locate.tooltip"
 }), {
     onClick: changeLocateState
 })(LocateBtn);
-
-require('./locate/locate.css');
 
 
 export default createPlugin('Locate', {
