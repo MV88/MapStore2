@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
+import { Glyphicon } from 'react-bootstrap';
 import Spinner from 'react-spinkit';
 import Dialog from '../../misc/Dialog';
 import Message from '../../I18N/Message';
 import DownloadOptions from './DownloadOptions';
 import assign from 'object-assign';
+import Button from '../../misc/Button';
 
 class DownloadDialog extends React.Component {
     static propTypes = {

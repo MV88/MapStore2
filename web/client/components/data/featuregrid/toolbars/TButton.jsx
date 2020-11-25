@@ -6,7 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
+import {  Glyphicon } from 'react-bootstrap';
+import Button from '../../../misc/Button';
+
 
 const hideStyle = {
     width: 0,
