@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Message from '../../I18N/Message';
+import {Row} from 'react-boostrap';
 import Button from '../../misc/Button';
 
 /**
