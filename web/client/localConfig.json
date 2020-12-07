@@ -609,6 +609,7 @@
                 "start": 0,
                 "limit": 12
               },
+              "shareToolEnabled": false,
               "fluid": true
             }
           }, {

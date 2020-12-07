@@ -78,6 +78,7 @@ class Maps extends React.Component {
         searchText: PropTypes.string,
         mapsOptions: PropTypes.object,
         colProps: PropTypes.object,
+        shareToolEnabled: PropTypes.bool,
         version: PropTypes.string,
         fluid: PropTypes.bool,
         showAPIShare: PropTypes.bool
@@ -110,6 +111,7 @@ class Maps extends React.Component {
             resources={this.props.maps}
             fluid={this.props.fluid}
             title={this.props.title}
+            shareToolEnabled={this.props.shareToolEnabled}
             colProps={this.props.colProps}
             viewerUrl={(map = {}) => {
                 if (map.contextName) {
