@@ -126,9 +126,10 @@ export const validResponsesSelector = createSelector(
     });
 
 export const currentResponseSelector = createSelector(
-    validResponsesSelector, indexSelector,
+    responsesSelector, indexSelector,
     (responses = [], index = 0) => responses[index]
 );
+
 export const currentFeatureSelector = state => {
     const currentResponse = currentResponseSelector(state) || {};
     return get(currentResponse, 'layerMetadata.features');

@@ -18,8 +18,8 @@ import { getDefaultInfoFormatValue, getValidator } from '../../../../utils/MapIn
  * @class
  */
 export const defaultViewerHandlers = withHandlers({
-    onNext: ({index = 0, setIndex = () => {}, validResponses = []}) => () => {
-        setIndex(Math.min(validResponses.length - 1, index + 1));
+    onNext: ({index = 0, setIndex = () => {}, responses = []}) => () => {
+        setIndex(Math.min(responses.length - 1, index + 1));
     },
     onPrevious: ({index, setIndex = () => {}}) => () => {
         setIndex(Math.max(0, index - 1));

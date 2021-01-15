@@ -80,6 +80,7 @@ class DefaultViewer extends React.Component {
         const emptyResponses = this.props.requests.length === invalidResponses.length;
         const currResponse = this.getCurrentResponse(validResponses[this.props.index]);
         return {
+            responses,
             validResponses,
             currResponse,
             emptyResponses,
@@ -140,7 +141,7 @@ class DefaultViewer extends React.Component {
     }
 
     renderPages = () => {
-        const {validResponses: responses} = this.getResponseProperties();
+        const {responses} = this.getResponseProperties();
         return responses.map((res, i) => {
             const {response, layerMetadata} = res;
             const format = getFormatForResponse(res, this.props);
