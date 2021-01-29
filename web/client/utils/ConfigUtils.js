@@ -9,7 +9,7 @@ import Proj4js from 'proj4';
 import PropTypes from 'prop-types';
 import url from 'url';
 import axios from 'axios';
-import { isArray, isObject, endsWith, isNil } from 'lodash';
+import { castArray, isArray, isObject, endsWith, isNil } from 'lodash';
 import assign from 'object-assign';
 import { Promise } from 'es6-promise';
 import isMobile from 'ismobilejs';
@@ -133,12 +133,24 @@ export const getDefaults = function() {
 export const setLocalConfigurationFile = function(file) {
     localConfigFile = file;
 };
+
+const mergeConfigsPatch = (configs) => {
+    return configs.reduce((mergedConfig, cfg) => {
+        return {...mergedConfig, ...cfg};
+    });
+};
 export const loadConfiguration = function() {
     if (localConfigFile) {
-        return axios.get(localConfigFile).then(response => {
-            if (typeof response.data === 'object') {
-                defaultConfig = assign({}, defaultConfig, response.data);
-            }
+        const configFiles = castArray(localConfigFile);
+        return axios.all(configFiles.map(config =>
+            axios.get(config)
+                .then(response => response.data)
+                .catch(() => null)
+        )).then(configs => {
+            const [main] = configs;
+            if (!main) throw new Error("main configuration file is broken");
+            const merged = mergeConfigsPatch(configs.filter(c => c && typeof c === "object"));
+            defaultConfig = merged ? {...defaultConfig, ...merged} : defaultConfig;
             return {...defaultConfig};
         });
     }
@@ -147,6 +159,44 @@ export const loadConfiguration = function() {
     });
 };
 
+/*
+const loadConfigurationWithPatch = function() {
+    const result = mergePatchFiles(["localConfig.json", "patch/localConfig.patch.json"]);
+    const config = result;
+    console.log("config", config);
+
+    if (localConfigFile) {
+        const [localConfigMapstore, localConfigPatch] = castArray(localConfigFile);
+        return axios.all([
+            axios.get(localConfigMapstore).then(response => {
+                return isObject(response.data) ? {...defaultConfig, ...response.data} : {...defaultConfig};
+                // if the main localConfig is not found it will shown a blank page
+                // because there are no default plugins configured in desktop
+            }).catch((e) => {
+                // eslint-disable-next-line
+                console.log(e);
+                return {...defaultConfig};
+            }),
+            axios.get(localConfigPatch).then(response => {
+                return isObject(response.data) ? response.data : {};
+            }).catch((e) => {
+                // eslint-disable-next-line
+                console.log(e);
+                return {};
+            })
+        ])
+            .then(([original, patch]) => {
+                let merged = original;
+                if (!isEmpty(patch)) {
+                    // merged = jiff.patch(patch, original);
+                    console.log(merged);
+                }
+                return {...merged};
+            });
+    }
+
+
+*/
 export const getCenter = function(center, projection) {
     const point = isArray(center) ? {x: center[0], y: center[1]} : center;
     const crs = center.crs || projection || 'EPSG:4326';
