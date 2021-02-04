@@ -43,6 +43,8 @@ import {generateTemplateString} from '../utils/TemplateUtils';
 
 import {API} from '../api/searchText';
 import {getFeatureSimple} from '../api/WFS';
+import { getDefaultInfoFormatValueFromLayer } from '../utils/MapInfoUtils';
+import { identifyOptionsSelector } from '../selectors/mapInfo';
 
 
 /**
