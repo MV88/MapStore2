@@ -11,6 +11,7 @@ export const INFO_FORMATS = {
     "HTML": "text/html",
     "JSONP": "text/javascript",
     "PROPERTIES": "application/json",
+    "CUSTOM": "application/json",
     "JSON": "application/json",
     "GML2": "application/vnd.ogc.gml",
     "GML3": "application/vnd.ogc.gml/3.1.1",
@@ -21,7 +22,7 @@ export const INFO_FORMATS_BY_MIME_TYPE = {
     "text/plain": "TEXT",
     "text/html": "HTML",
     "text/javascript": "JSONP",
-    "application/json": "JSON",
+    "application/json": "CUSTOM",
     "application/vnd.ogc.gml": "GML2",
     "application/vnd.ogc.gml/3.1.1": "GML3"
 };
@@ -94,6 +95,20 @@ export const Validator = {
         }
     },
     PROPERTIES: {
+        /**
+         *Parse the JSON to get only the valid json responses
+         */
+        getValidResponses(responses) {
+            return responses.filter((res) => res.response && res.response.features && res.response.features.length);
+        },
+        /**
+         * Parse the JSON to get only the NOT valid json responses
+         */
+        getNoValidResponses(responses) {
+            return responses.filter((res) => res.response && res.response.features && res.response.features.length === 0);
+        }
+    },
+    CUSTOM: {
         /**
          *Parse the JSON to get only the valid json responses
          */

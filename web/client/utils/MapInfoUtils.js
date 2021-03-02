@@ -12,6 +12,7 @@ import pointOnSurface from 'turf-point-on-surface';
 import { findIndex } from 'lodash';
 import iconUrl from '../components/map/openlayers/img/marker-icon.png';
 import JSONViewer from '../components/data/identify/viewers/JSONViewer';
+import CustomViewer from '../components/data/identify/viewers/CustomViewer';
 import HTMLViewer from '../components/data/identify/viewers/HTMLViewer';
 import TextViewer from '../components/data/identify/viewers/TextViewer';
 import wfs from './mapinfo/wfs';
@@ -24,7 +25,7 @@ let MapInfoUtils;
  * specifies which info formats are currently supported
  */
 //           default format ↴
-export const AVAILABLE_FORMAT = ['TEXT', 'PROPERTIES', 'HTML', 'TEMPLATE'];
+export const AVAILABLE_FORMAT = ['TEXT', 'CUSTOM', 'PROPERTIES', 'HTML', 'TEMPLATE'];
 
 export const EMPTY_RESOURCE_VALUE = 'NODATA';
 
@@ -208,7 +209,7 @@ export const getValidator = (format) => {
 export const getViewers = () => {
     return {
         [INFO_FORMATS.PROPERTIES]: JSONViewer,
-        [INFO_FORMATS.JSON]: JSONViewer,
+        [INFO_FORMATS.JSON]: CustomViewer,
         [INFO_FORMATS.HTML]: HTMLViewer,
         [INFO_FORMATS.TEXT]: TextViewer
     };
