@@ -15,6 +15,7 @@ import Message from '../../I18N/Message';
 import { getMessageById } from '../../../utils/LocaleUtils';
 import { isAnnotation } from '../../../utils/AnnotationsUtils';
 import { toVectorStyle } from '../../../utils/StyleUtils';
+import { checkFeaturesStyle } from '../../../utils/ImporterUtils';
 
 import Button from '../../misc/Button';
 
@@ -73,13 +74,6 @@ class StylePanel extends React.Component {
 
     componentDidMount() {
         this.setState({initialLayers: [...this.props.layers]});
-        this.setState({currentActiveLayer: this.props.selected});
-        this.checkAndDisableStyleCustomization();
-    }
-    componentDidUpdate(prevProps) {
-        if (prevProps.selected.name !== this.props.selected.name) {
-            this.checkAndDisableStyleCustomization();
-        }
     }
 
     getGeometryType = (geometry) => {
@@ -146,38 +140,44 @@ class StylePanel extends React.Component {
         </Row>);
     };
 
-    renderDisableStyleCustomization = () => {
-        if (this.state.disableStyleCustomization) {
-            return (
-                <div className="alert alert-info mb-2 style-customisation-disabled-container">
-                    <Message msgId="shapefile.styleCustomizationDisabled"/>
-                </div>
-            );
-        }
-        return null;
+    renderDisableStyleCustomization = (hasCustomStyle) => {
+        return hasCustomStyle ? (
+            <div className="alert alert-info mb-2 style-customisation-disabled-container">
+                <Message msgId="shapefile.styleCustomizationDisabled"/>
+            </div>
+        ) : null;
     }
 
     render() {
+        const hasCustomStyle = checkFeaturesStyle(this.props.selected);
         return (
             <Grid role="body" style={{width: "400px"}} fluid>
                 {this.props.errors ? this.renderError() : null}
                 {this.props.success ? this.renderSuccess() : null}
                 <Row>
                     <h4>
-                        <span style={{fontWeight: 'bold'}}><Message msgId="shapefile.layerOf" msgParams={{ count: this.findLayerSerialNumber(this.props.selected), total: this.state.initialLayers.length}} /></span> {this.props.selected.name}
+                        <span style={{fontWeight: 'bold'}}>
+                            <Message msgId="shapefile.layerOf" msgParams={{ count: this.findLayerSerialNumber(this.props.selected), total: this.state.initialLayers.length}} /></span> {this.props.selected.name}
                     </h4>
                 </Row>
                 <Row key="styler" style={{marginBottom: 10}}>
                     {this.state.useDefaultStyle ? null : this.props.stylers[this.getGeomType(this.props.selected)]}
                 </Row>
-                {this.renderDisableStyleCustomization()}
+                {this.renderDisableStyleCustomization(hasCustomStyle)}
                 <Row key="options">
                     {isAnnotation(this.props.selected) ?
                         this.annotationOptions()
                         :
                         <>
                             <Col xs={2}>
-                                <input aria-label="..." type="checkbox" disabled={this.state.disableStyleCustomization} checked={this.state.useDefaultStyle} defaultChecked={this.state.useDefaultStyle} onChange={(e) => { this.setState({ useDefaultStyle: e.target.checked }); }} />
+                                <input
+                                    aria-label="..."
+                                    type="checkbox"
+                                    disabled={hasCustomStyle}
+                                    checked={hasCustomStyle || this.state.useDefaultStyle}
+                                    defaultChecked={hasCustomStyle || this.state.useDefaultStyle}
+                                    onChange={(e) => { this.setState({ useDefaultStyle: e.target.checked }); }}
+                                />
                             </Col>
                             <Col style={{ paddingLeft: 0, paddingTop: 1 }} xs={10}>
                                 <label><Message msgId="shapefile.defaultStyle" /></label>
@@ -259,30 +259,6 @@ class StylePanel extends React.Component {
         </>
     );
 
-    checkAndDisableStyleCustomization = () => {
-        this.setState({disableStyleCustomization: false, useDefaultStyle: false});
-        const layer =  this.props.selected;
-        if (layer) {
-            if (layer.features.length) {
-                for (let i = 0; i < layer.features.length; i++) {
-                    const feature = layer.features[i];
-                    if (feature.style) {
-                        if (Array.isArray(feature.style)) {
-                            if (feature.style.length) {
-                                this.setState({disableStyleCustomization: true, useDefaultStyle: true});
-                                break;
-                            }
-                        } else {
-                            if (Object.keys(feature.style).length) {
-                                this.setState({disableStyleCustomization: true, useDefaultStyle: true});
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 
