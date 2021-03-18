@@ -73,7 +73,13 @@ class StylePanel extends React.Component {
 
     componentDidMount() {
         this.setState({initialLayers: [...this.props.layers]});
+        this.setState({currentActiveLayer: this.props.selected});
         this.checkAndDisableStyleCustomization();
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.selected.name !== this.props.selected.name) {
+            this.checkAndDisableStyleCustomization();
+        }
     }
 
     getGeometryType = (geometry) => {
@@ -229,7 +235,6 @@ class StylePanel extends React.Component {
             this.props.onSuccess(this.props.layers.length > 1
                 ? isAnnotationLayer ? "Annotation" : this.props.layers[0].name + getMessageById(this.context.messages, "shapefile.success")
                 : undefined);
-
             this.props.onLayerAdded(this.props.selected);
         }).catch(e => {
             this.props.onError({ type: "error", name: isAnnotationLayer ? "Annotation" : this.props.layers[0].name, error: e, message: 'shapefile.error.genericLoadError'});
@@ -255,8 +260,9 @@ class StylePanel extends React.Component {
     );
 
     checkAndDisableStyleCustomization = () => {
-        if (this.props.layers[0]) {
-            const [layer] = this.props.layers;
+        this.setState({disableStyleCustomization: false, useDefaultStyle: false});
+        const layer =  this.props.selected;
+        if (layer) {
             if (layer.features.length) {
                 for (let i = 0; i < layer.features.length; i++) {
                     const feature = layer.features[i];
