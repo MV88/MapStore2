@@ -20,8 +20,9 @@ const hr = require('react-intl/locale-data/hr');
 const pt = require('react-intl/locale-data/pt');
 const vi = require('react-intl/locale-data/vi');
 const fi = require('react-intl/locale-data/fi');
+const se = require('react-intl/locale-data/se');
 
-addLocaleData([...en, ...it, ...fr, ...de, ...es, ...nl, ...zh, ...hr, ...pt, ...vi, ...fi]);
+addLocaleData([...en, ...it, ...fr, ...de, ...es, ...nl, ...zh, ...hr, ...pt, ...vi, ...fi, ...se]);
 
 /*
  * it, en, fr, de, es are the default locales and it is preferrable to customize them via configuration.
@@ -106,6 +107,7 @@ export const ensureIntl = (callback) => {
         require('intl/locale-data/jsonp/pt.js');
         require('intl/locale-data/jsonp/vi.js');
         require('intl/locale-data/jsonp/fi.js');
+        require('intl/locale-data/jsonp/se.js');
         if (callback) {
             callback();
         }

@@ -167,6 +167,10 @@
             "es": {
               "code": "es-ES",
               "description": "Español"
+            },
+            "se": {
+              "code": "sv-SE",
+              "description": "Svenska"
             }
           }
         }
