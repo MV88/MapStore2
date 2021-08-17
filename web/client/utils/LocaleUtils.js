@@ -20,9 +20,9 @@ const hr = require('react-intl/locale-data/hr');
 const pt = require('react-intl/locale-data/pt');
 const vi = require('react-intl/locale-data/vi');
 const fi = require('react-intl/locale-data/fi');
-const se = require('react-intl/locale-data/se');
+const sv = require('react-intl/locale-data/sv');
 
-addLocaleData([...en, ...it, ...fr, ...de, ...es, ...nl, ...zh, ...hr, ...pt, ...vi, ...fi, ...se]);
+addLocaleData([...en, ...it, ...fr, ...de, ...es, ...nl, ...zh, ...hr, ...pt, ...vi, ...fi, ...sv]);
 
 /*
  * it, en, fr, de, es are the default locales and it is preferrable to customize them via configuration.
@@ -32,6 +32,10 @@ let supportedLocales = {
     "it": {
         code: "it-IT",
         description: "Italiano"
+    },
+	"sv": {
+        code: "sv-SE",
+        description: "SVENKSA"
     },
     "en": {
         code: "en-US",
@@ -94,7 +98,7 @@ let errorParser = {};
  */
 let LocaleUtils;
 export const ensureIntl = (callback) => {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js', 'intl/locale-data/jsonp/fr.js', 'intl/locale-data/jsonp/de.js', 'intl/locale-data/jsonp/es.js', 'intl/locale-data/jsonp/nl.js', 'intl/locale-data/jsonp/zh.js', 'intl/locale-data/jsonp/hr.js', 'intl/locale-data/jsonp/vi.js', 'intl/locale-data/jsonp/fi.js'], (require) => {
+    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js', 'intl/locale-data/jsonp/fr.js', 'intl/locale-data/jsonp/de.js', 'intl/locale-data/jsonp/es.js', 'intl/locale-data/jsonp/nl.js', 'intl/locale-data/jsonp/zh.js', 'intl/locale-data/jsonp/hr.js', 'intl/locale-data/jsonp/vi.js', 'intl/locale-data/jsonp/fi.js', 'intl/locale-data/jsonp/sv.js'], (require) => {
         global.Intl = require('intl');
         require('intl/locale-data/jsonp/en.js');
         require('intl/locale-data/jsonp/it.js');
@@ -107,7 +111,7 @@ export const ensureIntl = (callback) => {
         require('intl/locale-data/jsonp/pt.js');
         require('intl/locale-data/jsonp/vi.js');
         require('intl/locale-data/jsonp/fi.js');
-        require('intl/locale-data/jsonp/se.js');
+        require('intl/locale-data/jsonp/sv.js');
         if (callback) {
             callback();
         }
