@@ -33,7 +33,7 @@ let supportedLocales = {
         code: "it-IT",
         description: "Italiano"
     },
-	"sv": {
+    "sv": {
         code: "sv-SE",
         description: "SVENKSA"
     },
