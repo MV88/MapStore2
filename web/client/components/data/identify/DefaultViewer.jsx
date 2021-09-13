@@ -95,22 +95,6 @@ class DefaultViewer extends React.Component {
         return validator.getValidResponses([response]);
     }
 
-    getInvalidTitles = () => {
-        const {invalidResponses} = this.getResponseProperties();
-        const titlesWithResponse = invalidResponses
-            .filter(({response}) => response !== "")
-            .map((res) => {
-                const {layerMetadata} = res;
-                return layerMetadata.title;
-            });
-        const titlesEmptyResponse = invalidResponses
-            .filter(({response}) => response === "")
-            .map((res) => {
-                const {layerMetadata} = res;
-                return layerMetadata.title;
-            });
-        return {titlesWithResponse, titlesEmptyResponse};
-    };
     renderEmptyLayers = () => {
         const {invalidResponses, emptyResponses} = this.getResponseProperties();
         if (this.props.missingResponses === 0 && emptyResponses) {
@@ -121,17 +105,15 @@ class DefaultViewer extends React.Component {
             allowRender =  allowRender && this.props.missingResponses === 0;
         }
         if (allowRender) {
-            const {titlesWithResponse, titlesEmptyResponse} = this.getInvalidTitles();
+            const titles = invalidResponses.map((res) => {
+                const {layerMetadata} = res;
+                return layerMetadata.title;
+            });
             return this.props.showEmptyMessageGFI ? (
-                <>
-                    {titlesWithResponse.length ? <Alert bsStyle={"info"}>
-                        <Message msgId={"noInfoForLayers"} />
-                        <b>{titlesWithResponse.join(', ')}</b>
-                    </Alert> : null}
-                    {titlesEmptyResponse.length ? <Alert bsStyle={"danger"}>
-                        <h5><HTML msgId="emptyResponse" msgParams={{layers: titlesEmptyResponse.join(', ')}}/></h5>
-                    </Alert> : null
-                    }</>
+                <Alert bsStyle={"info"}>
+                    <Message msgId={"noInfoForLayers"} />
+                    <b>{titles.join(', ')}</b>
+                </Alert>
             ) : null;
         }
         return null;
@@ -148,18 +130,10 @@ class DefaultViewer extends React.Component {
     renderEmptyPages = () => {
         const {emptyResponses} = this.getResponseProperties();
         if (this.props.missingResponses === 0 && emptyResponses) {
-            const {titlesWithResponse, titlesEmptyResponse} = this.getInvalidTitles();
-
             return (
-                <>{
-                    titlesWithResponse.length ? <Alert bsStyle={"info"}>
-                        <Message msgId={"noInfoForLayers"} />
-                        <b>{titlesWithResponse.join(', ')}</b>
-                    </Alert> : null}
-                {titlesEmptyResponse.length ? <Alert bsStyle={"danger"}>
-                    <h5><HTML msgId="emptyResponse" msgParams={{layers: titlesEmptyResponse.join(', ')}}/></h5>
-                </Alert> : null
-                }</>
+                <Alert bsStyle={"danger"}>
+                    <h4><HTML msgId="noFeatureInfo"/></h4>
+                </Alert>
             );
         }
         return null;
@@ -218,7 +192,7 @@ class DefaultViewer extends React.Component {
         componentOrder = this.props.isMobile ? componentOrder : reverse(componentOrder);
         return (
             <div className="mapstore-identify-viewer">
-                {!emptyResponses ? componentOrder.map((c)=> c) : this.renderEmptyPages(this.props)}
+                {!emptyResponses ? componentOrder.map((c)=> c) : this.renderEmptyPages()}
             </div>
         );
     }
