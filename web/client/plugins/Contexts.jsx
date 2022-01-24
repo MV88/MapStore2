@@ -31,15 +31,13 @@ import ContextGrid from './contexts/ContextsGrid';
 import { mapTypeSelector } from '../selectors/maptype';
 import { isFeaturedMapsEnabled } from '../selectors/featuredmaps';
 import emptyState from '../components/misc/enhancers/emptyState';
-
-import EmptyMaps from '../plugins/maps/EmptyMaps';
-
 import { loadMaps } from '../actions/maps';
 import { setContextsAvailable } from '../actions/contexts';
 
 import * as contextsEpics from '../epics/contexts';
 import maps from '../reducers/maps';
 import contexts from '../reducers/contexts';
+import {CONTEXT_DEFAULT_SHARE_OPTIONS} from "../utils/ShareUtils";
 
 
 const contextsCountSelector = createSelector(
@@ -69,6 +67,8 @@ class Contexts extends React.Component {
         colProps: PropTypes.object,
         fluid: PropTypes.bool,
         title: PropTypes.string,
+        shareOptions: PropTypes.object,
+        shareToolEnabled: PropTypes.bool,
         editDataEnabled: PropTypes.bool
     };
 
@@ -102,6 +102,8 @@ class Contexts extends React.Component {
         },
         fluid: true,
         editDataEnabled: true,
+        shareOptions: CONTEXT_DEFAULT_SHARE_OPTIONS,
+        shareToolEnabled: true,
         onEditData: () => {}
     };
 
@@ -125,6 +127,8 @@ class Contexts extends React.Component {
                 showDetails: "resources.resource.showDetails",
                 removeFromFeatured: "resources.resource.removeFromFeatured"
             }}
+            shareToolEnabled={this.props.shareToolEnabled}
+            shareOptions={this.props.shareOptions}
             bottom={<PaginationToolbar/>} />
         );
     }
@@ -165,10 +169,9 @@ const ContextsPlugin = compose(
     }),
     emptyState(
         ({resources = [], loading}) => !loading && resources.length === 0,
-        ({showCreateButton = false}) => ({
-            glyph: "wrench",
-            title: <Message msgId="resources.contexts.noContextAvailable" />,
-            content: <EmptyMaps showCreateButton={showCreateButton} />
+        () => ({
+            glyph: "map-context",
+            title: <Message msgId="resources.contexts.noContextAvailable" />
         })
     )
 )(Contexts);
@@ -179,7 +182,8 @@ const ContextsPlugin = compose(
  * @name Contexts
  * @memberof plugins
  * @class
- * @prop {boolean} cfg.showCreateButton default true. Flag to show/hide the button "create a new one" when there is no dashboard yet.
+ * @prop {object} cfg.shareOptions configuration applied to share panel
+ * @prop {boolean} cfg.shareToolEnabled default true. Flag to show/hide the "share" button on the item.
  */
 
 export default createPlugin('Contexts', {

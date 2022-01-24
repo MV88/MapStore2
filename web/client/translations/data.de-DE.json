@@ -345,6 +345,7 @@
             "confirm": "Ich stimme zu"
         },
         "manager": {
+            "managerMenu": "Manager-Menü",
             "openInANewTab":"Karte öffnen",
             "deleteMap":"Karte löschen",
             "deleteMapMessage": "Möchten Sie diese Karte wirklich löschen?",
@@ -688,9 +689,14 @@
             },
             "layoutWarning": "Layout nicht erlaubt",
             "scale": "Maßstab",
-            "includeScale": "in Druck einschließen"
+            "includeScale": "in Druck einschließen",
+            "disabledpreview": "Die Vorschau ist mit diesen Druckparametern nicht verfügbar",
+            "outputFormat": "Format",
+            "previewFormatUnsupported": "Nicht unterstütztes Format für die Vorschau",
+            "projection": "Koordinatensystem",
+            "projectionmismatch": "Nichtübereinstimmung des Koordinatensystems zwischen gedruckter und Bildschirmkarte"
         },
-        "backgroundSwither":{
+        "backgroundSwitcher":{
             "tooltip": "Wähle Hintergrund"
         },
         "info":{
@@ -1217,7 +1223,7 @@
             "passwordInvalid": "Ungültiges Passwort",
             "username": "Benutzername",
             "password": "Passwort",
-            "passwordMessage": "Das Passwort muss aus mindestens 6 Zeichen bestehen. Gültige Werte für Kennwörter sind Ziffern, Klein- oder Großbuchstaben und die folgenden Sonderzeichen: !,@,#,$,%,&,*,_",
+            "passwordMessage": "Das Passwort muss aus mindestens 6 Zeichen bestehen.",
             "passwordInvalidChar": "Das Passwort darf diese Zeichen nicht enthalten: {data}",
             "passwordChanged": "Passwort geändert",
             "passwordError": "Fehler beim Ändern des Passworts",
@@ -1232,7 +1238,10 @@
             "detailsGroups": "Gruppen",
             "detailsEmail": "E-mail",
             "detailsCompany": "Unternehmen",
-            "detailsNotes": "Anmerkungen"
+            "detailsNotes": "Anmerkungen",
+            "userMenu": "Benutzermenü",
+            "generalInformation": "Allgemein",
+            "attributes": "Attribute"
         },
         "users": {
             "title": "Accounts verwalten",
@@ -1283,7 +1292,9 @@
           "noUsers": "Keine Benutzer für diese Gruppe gefunden",
           "errorSaving": "Es gab einen Fehler beim Speichern dieser Gruppe",
           "errorDelete": "Es gab einen Fehler beim Löschen dieser Gruppe",
-          "confirmDeleteGroup": "Sind Sie sicher, das Sie diese Gruppe löschen möchten?"
+          "confirmDeleteGroup": "Sind Sie sicher, das Sie diese Gruppe löschen möchten?",
+          "generalInformation": "Allgemein",
+          "members": "Mitglied"
         },
         "share":{
             "title": "Teilen",
@@ -1831,9 +1842,11 @@
                         "classLabel": "Klassenbezeichnung",
                         "classValue": "Klassenwert",
                         "color": "Farbe",
+                        "confirmModalMessage": "Nicht klassifizierte Werte schließen und verwerfen?",
                         "classificationAttribute": "Klassifizierungsattribut",
                         "customLabels": "Benutzerdefinierte Etiketten",
-                        "customLabelsExample": "<div><p><code>${legendValue}</code> kann als Platzhalter verwendet werden, um den Wert der ursprünglichen Beschriftung zu ersetzen.</p><p>Legendenelemente mit gleichem Textinhalt werden im Diagramm gruppiert.</p><h5>Beispiel</h5><dl><dt><b>Attribut:</b></dt><dd>POPULATION</dd><dt><b>Klassenbezeichnung:</b></dt><dd><code>${legendValue}</code> California</dd><dt><b>Ergebnisse:</b></dt><dd>POPULATION California</dd></dl></div>",
+                        "barChartCustomLabelsExample": "<div><p><code>${legendValue}</code> kann als Platzhalter für das Y-Attribut verwendet werden.</p><p></p><h5>Beispiel</h5><dl><dt><b>Y-Attribut:</b></dt><dd>POPULATION</dd><dt><b>Klassenbezeichnung:</b></dt><dd><code>${legendValue}</code> California</dd><dt><b>Ergebnisse:</b></dt><dd>POPULATION California</dd></dl></div>",
+                        "pieChartCustomLabelsExample": "<div><p><code>${groupByValue}</code> kann als Platzhalter für das Attribut „Gruppieren nach“ verwendet werden.</p><p>Legendenelemente mit gleichem Textinhalt werden im Diagramm gruppiert.</p><h5>Beispiel</h5><dl><dt><b>Attribut „Gruppieren nach“:</b></dt><dd>POPULATION</dd><dt><b>Klassenbezeichnung:</b></dt><dd><code>${groupByValue}</code> California</dd><dt><b>Ergebnisse:</b></dt><dd>POPULATION California</dd></dl></div>",
                         "defaultClassLabel": "Standardklassenbezeichnung",
                         "defaultColorRamp": "Standard-Farbrampe",
                         "defaultColor": "Standardfarbe",
@@ -1975,6 +1988,9 @@
                 "yAxisLabel": "Legend Label",
                 "title": "Erweiterte Optionen",
                 "legend": "Legende",
+                "barChartType": "Balkendiagrammtyp",
+                "groupedBarChart": "Gruppiert",
+                "stackedBarChart": "Gestapelt",
                 "axisTypes": {
                   "auto": "Auto",
                   "linear": "linear",
@@ -2747,6 +2763,8 @@
         "defaultMapBackgroundsServiceTitle": "Standardhintergründe",
         "backgroundSelector": {
             "addTooltip": "Neuen Hintergrund hinzufügen",
+            "editTooltip": "Hintergrund bearbeiten",
+            "deleteTooltip": "Hintergrund löschen",
             "confirmDelete": "Möchten Sie den \"{title}\" - Hintergrund wirklich löschen?"
         },
         "stepper": {
