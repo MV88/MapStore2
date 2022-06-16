@@ -16,6 +16,7 @@ import {
     SNAPPING_IS_LOADING,
     SET_SNAPPING_CONFIG
 } from '../actions/draw';
+import  { normalizeLng } from '../../client/utils/CoordinatesUtils';
 
 import assign from 'object-assign';
 
@@ -49,7 +50,26 @@ function draw(state = initialState, action) {
             currentStyle: action.currentStyle
         });
     case GEOMETRY_CHANGED:
-        return assign({}, state, {tempFeatures: action.features});
+        let newData = assign({}, action.features);
+        if (newData[0].geometry.type === 'Point') {
+            const normalizedPoint = [normalizeLng(newData[0].geometry.coordinates[0]), newData[0].geometry.coordinates[1]];
+            newData[0].geometry.coordinates = normalizedPoint;
+            return assign({}, state, {tempFeatures: newData});
+        } else if (newData[0].geometry.type === 'LineString' || newData[0].geometry.type === 'MultiPoint') {
+            const normalizedCoord =  newData[0].geometry.coordinates.map((item) => [normalizeLng(item[0]), item[1]]);
+            newData[0].geometry.coordinates = normalizedCoord;
+            return assign({}, state, {tempFeatures: newData});
+        } else if (newData[0].geometry.type === 'Polygon' || newData[0].geometry.type === 'MultiLineString' ) {
+            const normalizedData = newData[0].geometry.coordinates.map(x => x.map((item) => [normalizeLng(item[0]), item[1]]));
+            newData[0].geometry.coordinates = normalizedData;
+            return assign({}, state, {tempFeatures: newData});
+        } else if (newData[0].geometry.type === 'MultiPolygon') {
+            const normalizedData = newData[0].geometry.coordinates.map(i => i.map(x => x.map((item) => [normalizeLng(item[0]), item[1]])));
+            newData[0].geometry.coordinates = normalizedData;
+            return assign({}, state, {tempFeatures: newData});
+        }
+        return assign({}, state, {tempFeatures: []});
+
     case DRAW_SUPPORT_STOPPED:
         return assign({}, state, {tempFeatures: []});
     case TOGGLE_SNAPPING:
