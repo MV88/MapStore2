@@ -24,7 +24,7 @@ import {
     loading,
     LOADING,
     openDock,
-    setup,
+    setupPlugin,
     SETUP,
     TEAR_DOWN,
     tearDown,
@@ -37,7 +37,7 @@ import {
 describe('Test correctness of the actions', () => {
     it('setup', () => {
         const config = {configProp1: 'example', configProp2: 'test'};
-        const action = setup(config);
+        const action = setupPlugin(config);
         expect(action).toExist();
         expect(action.type).toBe(SETUP);
         expect(action.config).toEqual(config);
