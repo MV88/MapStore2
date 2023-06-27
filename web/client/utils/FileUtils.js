@@ -8,6 +8,7 @@
 
 import FileSaver from 'file-saver';
 
+import { DxfParser } from 'dxf-parser';
 import toBlob from 'canvas-to-blob';
 import shp from 'shpjs';
 import tj from '@mapbox/togeojson';
