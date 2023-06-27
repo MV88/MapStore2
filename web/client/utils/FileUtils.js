@@ -18,8 +18,6 @@ import assign from 'object-assign';
 import { hint as geojsonhint } from '@mapbox/geojsonhint/lib/object';
 import { toMapConfig } from './ogc/WMC';
 
-const parser = new DOMParser();
-
 const cleanStyleFromKml = (xml) => {
 
     [].slice.call(xml.documentElement.getElementsByTagName("StyleMap")).map(el => el.parentNode.removeChild(el));
