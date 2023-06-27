@@ -5,16 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import toBlob from 'canvas-to-blob';
-import { DxfParser } from 'dxf-parser';
-import { Promise } from 'es6-promise';
-import FileSaver from 'file-saver';
-import JSZip from 'jszip';
-import assign from 'object-assign';
-import shp from 'shpjs';
 
-import { hint as geojsonhint } from '@mapbox/geojsonhint/lib/object';
+import FileSaver from 'file-saver';
+
+import toBlob from 'canvas-to-blob';
+import shp from 'shpjs';
 import tj from '@mapbox/togeojson';
+import JSZip from 'jszip';
+import { Promise } from 'es6-promise';
+const parser = new DOMParser();
+import assign from 'object-assign';
+import { hint as geojsonhint } from '@mapbox/geojsonhint/lib/object';
 import { toMapConfig } from './ogc/WMC';
 
 const parser = new DOMParser();

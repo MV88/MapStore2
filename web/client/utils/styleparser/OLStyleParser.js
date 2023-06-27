@@ -5,17 +5,23 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 // part of the code below is from https://github.com/geostyler/geostyler-openlayers-parser/tree/v4.1.2
 // BSD 2-Clause License
+
 // Copyright (c) 2018, terrestris GmbH & Co. KG
 // All rights reserved.
+
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
+
 // * Redistributions of source code must retain the above copyright notice, this
 //   list of conditions and the following disclaimer.
+
 // * Redistributions in binary form must reproduce the above copyright notice,
 //   this list of conditions and the following disclaimer in the documentation
 //   and/or other materials provided with the distribution.
+
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -26,24 +32,24 @@
 // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-import isString from 'lodash/isString';
-import { getCenter } from 'ol/extent';
-import GeoJSON from 'ol/format/GeoJSON';
-import OlGeomLineString from 'ol/geom/LineString';
-import OlGeomPoint from 'ol/geom/Point';
+
 import OlImageState from 'ol/ImageState';
-import { METERS_PER_UNIT } from 'ol/proj/Units';
-import { toContext } from 'ol/render';
+
+import OlGeomPoint from 'ol/geom/Point';
+
+import OlStyle from 'ol/style/Style';
+import OlStyleImage from 'ol/style/Image';
+import OlStyleStroke from 'ol/style/Stroke';
+import OlStyleText from 'ol/style/Text';
 import OlStyleCircle from 'ol/style/Circle';
 import OlStyleFill from 'ol/style/Fill';
 import OlStyleIcon from 'ol/style/Icon';
-import OlStyleImage from 'ol/style/Image';
 import OlStyleRegularshape from 'ol/style/RegularShape';
-import OlStyleStroke from 'ol/style/Stroke';
-import OlStyle from 'ol/style/Style';
-import OlStyleText from 'ol/style/Text';
-
-import { geometryFunctionsLibrary } from './GeometryFunctionsUtils';
+import { METERS_PER_UNIT } from 'ol/proj/Units';
+import { getCenter } from 'ol/extent';
+import OlGeomLineString from 'ol/geom/LineString';
+import { toContext } from 'ol/render';
+import GeoJSON from 'ol/format/GeoJSON';
 import {
     expressionsUtils,
     resolveAttributeTemplate,
@@ -54,6 +60,8 @@ import {
     drawIcons,
     getImageIdFromSymbolizer
 } from './StyleParserUtils';
+import isString from 'lodash/isString';
+import { geometryFunctionsLibrary } from './GeometryFunctionsUtils';
 
 const getGeometryFunction = geometryFunctionsLibrary.openlayers({
     Point: OlGeomPoint,

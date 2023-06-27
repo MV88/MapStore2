@@ -1,4 +1,3 @@
-
 const port = process.env.MAPSTORE_BACKEND_PORT || 8080;
 const protocol = process.env.MAPSTORE_BACKEND_PROTOCOL || "http";
 const host = process.env.MAPSTORE_BACKEND_HOST || "localhost";

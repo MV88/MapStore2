@@ -5,33 +5,37 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-import {head, get, findIndex, keys} from 'lodash';
 import Rx from 'rxjs';
 
-import { MAP_CONFIG_LOADED } from '../actions/config';
+import {UPDATE_DOCK_PANELS, updateMapLayout, FORCE_UPDATE_MAP_LAYOUT} from '../actions/maplayout';
 import {TOGGLE_CONTROL, SET_CONTROL_PROPERTY, SET_CONTROL_PROPERTIES, setControlProperty} from '../actions/controls';
+import { MAP_CONFIG_LOADED } from '../actions/config';
 import {SIZE_CHANGE, CLOSE_FEATURE_GRID, OPEN_FEATURE_GRID, closeFeatureGrid} from '../actions/featuregrid';
-import { SHOW_SETTINGS, HIDE_SETTINGS } from '../actions/layers';
+
 import {
     CLOSE_IDENTIFY,
     TOGGLE_MAPINFO_STATE,
     NO_QUERYABLE_LAYERS
 } from '../actions/mapInfo';
-import {UPDATE_DOCK_PANELS, updateMapLayout, FORCE_UPDATE_MAP_LAYOUT} from '../actions/maplayout';
-import { showCoordinateEditorSelector } from '../selectors/controls';
-import { isFeatureGridOpen, getDockSize } from '../selectors/featuregrid';
-import { mapInfoDetailsSettingsFromIdSelector, isMouseMoveIdentifyActiveSelector } from '../selectors/map';
-import {isMapInfoOpen, mapInfoEnabledSelector} from '../selectors/mapInfo';
-import {dockPanelsSelector} from "../selectors/maplayout";
 
+import { SHOW_SETTINGS, HIDE_SETTINGS } from '../actions/layers';
+import {isMapInfoOpen, mapInfoEnabledSelector} from '../selectors/mapInfo';
+import { showCoordinateEditorSelector } from '../selectors/controls';
 import ConfigUtils from '../utils/ConfigUtils';
-import {DEFAULT_MAP_LAYOUT} from "../utils/MapUtils";
+import { mapInfoDetailsSettingsFromIdSelector, isMouseMoveIdentifyActiveSelector } from '../selectors/map';
 
 /**
  * Epìcs for feature grid
  * @memberof epics
  * @name mapLayout
  */
+
+import {head, get, findIndex, keys} from 'lodash';
+
+import { isFeatureGridOpen, getDockSize } from '../selectors/featuregrid';
+import {DEFAULT_MAP_LAYOUT} from "../utils/MapUtils";
+import {dockPanelsSelector} from "../selectors/maplayout";
+
 /**
  * Capture that cause layout change to update the proper object.
  * Configures a map layout based on state of panels.
@@ -40,6 +44,7 @@ import {DEFAULT_MAP_LAYOUT} from "../utils/MapUtils";
  * @memberof epics.mapLayout
  * @return {external:Observable} emitting {@link #actions.map.updateMapLayout} action
  */
+
 export const updateMapLayoutEpic = (action$, store) =>
 
     action$.ofType(

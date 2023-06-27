@@ -5,27 +5,30 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-import React from 'react';
-import {get} from 'lodash';
-import PropTypes from 'prop-types';
-import {Glyphicon, Tooltip, OverlayTrigger, Alert} from 'react-bootstrap';
-import Dropzone from 'react-dropzone';
-import Spinner from "react-spinkit";
-import {compose, withState, lifecycle, getContext} from 'recompose';
 
-import ConfigureMapTemplates from './ConfigureMapTemplates';
-import tutorialEnhancer from './enhancers/tutorialEnhancer';
+import React from 'react';
+import {compose, withState, lifecycle, getContext} from 'recompose';
+import {get} from 'lodash';
+import {Glyphicon, Tooltip, OverlayTrigger, Alert} from 'react-bootstrap';
 import CodeMirror from '../../libs/codemirror/react-codemirror-suspense';
-import Message from '../I18N/Message';
+
 import Button from '../misc/Button';
-import Modal from "../misc/Modal";
+import Transfer from '../misc/transfer/Transfer';
 import ResizableModal from '../misc/ResizableModal';
 import ToolbarButton from '../misc/toolbar/ToolbarButton';
-import Transfer from '../misc/transfer/Transfer';
+import Message from '../I18N/Message';
+import ConfigureMapTemplates from './ConfigureMapTemplates';
+import tutorialEnhancer from './enhancers/tutorialEnhancer';
+
+import Dropzone from 'react-dropzone';
+import Spinner from "react-spinkit";
+
+import {getMessageById} from '../../utils/LocaleUtils';
+import PropTypes from 'prop-types';
 import ConfirmModal from '../resources/modals/ConfirmModal';
 
 import {ERROR, checkZipBundle} from '../../utils/ExtensionsUtils';
-import {getMessageById} from '../../utils/LocaleUtils';
+import Modal from "../misc/Modal";
 
 const getEnabledTools = (plugin, isMandatory, editedPlugin, documentationBaseURL, onEditPlugin,
     onShowDialog, changePluginsKey) => {
@@ -179,9 +182,9 @@ const renderPluginError = (error) => {
     );
 };
 
-const renderPluginsToUpload = (plugin, onRemove = () => {}, idx) => {
+const renderPluginsToUpload = (plugin, onRemove = () => {}) => {
     const uploadingStatus = plugin.error ? <Glyphicon glyph="remove" /> : <Glyphicon glyph="ok"/>;
-    return (<div key={idx} className="uploading-file">
+    return (<div key={plugin.name} className="uploading-file">
         {uploadingStatus}<span className="plugin-name">{plugin.name}</span>
         <span className="upload-remove" onClick={onRemove}><Glyphicon glyph="trash" /></span>
         <span className="upload-error">{plugin.error && renderPluginError(plugin.error)}</span>
@@ -224,7 +227,7 @@ const renderUploadModal = ({
                         </span>
                     </div>
                 </Dropzone>
-                <div className="uploads-list">{toUpload.map((plugin, idx) => renderPluginsToUpload(plugin, () => onRemove(idx), idx))}</div>
+                <div className="uploads-list">{toUpload.map((plugin, idx) => renderPluginsToUpload(plugin, () => onRemove(idx)))}</div>
                 {uploadStatus && uploadStatus.result === "error" && <Alert bsStyle="danger"><Message msgId="contextCreator.configurePlugins.uploadError"/>{uploadStatus.error.message}</Alert>}
                 {uploadStatus && uploadStatus.result === "ok" && <Alert bsStyle="info"><Message msgId="contextCreator.configurePlugins.uploadOk"/></Alert>}
             </div>}

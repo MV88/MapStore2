@@ -7,14 +7,14 @@
 */
 import React from 'react';
 
-import MapViewer from '../../containers/MapViewer';
 import Message from '../I18N/Message';
 import ConfirmDialog from '../misc/ConfirmDialog';
+import MapViewer from '../../containers/MapViewer';
 
 import { MapLibraries } from '../../utils/MapTypeUtils';
 
 export default ({
-    pluginsConfig   = {},
+    pluginsConfig = {},
     plugins = {},
     mapType = MapLibraries.OPENLAYERS,
     className = 'viewer context-creator-viewer',

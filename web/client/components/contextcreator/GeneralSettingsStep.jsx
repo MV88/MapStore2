@@ -5,12 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
+
 import React from 'react';
-import {FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap';
 import Spinner from 'react-spinkit';
-
 import Message from '../I18N/Message';
-
+import {FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap';
 import {getMessageById} from '../../utils/LocaleUtils';
 
 export default ({contextId, contextName = "", windowTitle = "", isValidContextName = true, contextNameChecked = true, loading = false, onChange = () => {}, context = {}}) => (

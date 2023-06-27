@@ -1,4 +1,3 @@
-import { toJSONPromise } from './common';
 /*
  * Copyright 2019, GeoSolutions Sas.
  * All rights reserved.
@@ -7,6 +6,8 @@ import { toJSONPromise } from './common';
  * LICENSE file in the root directory of this source tree.
  */
 import axios from '../../libs/ajax';
+
+import { toJSONPromise } from './common';
 
 const EMPTY_RULE = {
     constraints: {},
