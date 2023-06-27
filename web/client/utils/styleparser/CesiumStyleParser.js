@@ -336,6 +336,7 @@ const getGraphics = ({
                 billboard: new Cesium.BillboardGraphics({
                     image,
                     scale,
+                    pixelOffset: new Cesium.Cartesian2(symbolizer.offset[0], symbolizer.offset[1]),
                     rotation: Cesium.Math.toRadians(-1 * symbolizer.rotate || 0),
                     disableDepthTestDistance: symbolizer.msBringToFront ? Number.POSITIVE_INFINITY : 0,
                     heightReference: Cesium.HeightReference[HEIGHT_REFERENCE_CONSTANTS_MAP[symbolizer.msHeightReference] || 'NONE'],

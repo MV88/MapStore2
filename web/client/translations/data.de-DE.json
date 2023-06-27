@@ -3778,6 +3778,14 @@
           "downloadCSV": "CSV",
           "downloadPNG": "PNG",
           "downloadPDF": "PDF",
+          "info": {
+            "points": " punkte",
+            "totalPoints": "Anzahl der verarbeiteten Punkte:",
+            "layer":"Schicht:",
+            "line":"Distance:",
+            "up":"Kumulierter Höhenunterschied:",
+            "down":"Kumulativer Höhenverlust:"
+          },
           "help": {
             "draw": "Klicken Sie auf die Karte, um die Linie zu zeichnen. Klicken Sie zum Abschluss noch einmal auf den Endpunkt.",
             "select": "Bitte wählen Sie die Ebene im Inhaltsverzeichnis aus und klicken Sie auf das Linienmerkmal, um ein Profil zu erstellen.<br/>Ausgewählte Ebenen: {layerName}",
@@ -3792,6 +3800,7 @@
             "fallbackToProjection": "Projektion der Standardreferenz \"{defaultReferential}\" wird nicht unterstützt. Rückgriff auf Referenzen \"{referential}\" mit \"{projection}\" Projektion."
           },
           "errors": {
+            "outsideCoverage": "Die angegebene Zeile liegt außerhalb der Profilabdeckung",
             "loadingError": "Fehler beim Laden der Daten für das Längsprofil",
             "unableToSetupPlugin": "Die Längsprofilverlängerung kann nicht eingerichtet werden.",
             "defaultReferentialNotFound": "Die Standardreferenz ist konfiguriert, kann jedoch nicht in der Referenzliste gefunden werden. Bitte aktualisieren Sie die Erweiterungskonfiguration.",

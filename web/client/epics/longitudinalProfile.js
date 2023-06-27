@@ -40,7 +40,7 @@ import {
     HIDE_MARKER
 } from "../actions/longitudinalProfile";
 import {
-    changeMapView,
+    zoomToExtent,
     CLICK_ON_MAP,
     registerEventListener,
     unRegisterEventListener
@@ -185,6 +185,14 @@ export const LPonChartPropsChangeEpic = (action$, store) =>
             const wpsBody = profileEnLong({identifier, geometry, distance, referential });
             return executeProcess(wpsurl, wpsBody, {outputsExtractor: makeOutputsExtractor()})
                 .switchMap((result) => {
+                    if (typeof result === "string" && result.includes("ows:ExceptionReport")) {
+                        return Rx.Observable.of(error({
+                            title: "errorTitleDefault",
+                            message: "longitudinalProfile.errors.loadingError",
+                            autoDismiss: 6,
+                            position: "tc"
+                        }));
+                    }
                     const feature = {
                         type: 'Feature',
                         geometry,
@@ -192,8 +200,6 @@ export const LPonChartPropsChangeEpic = (action$, store) =>
                             id: "line"
                         }
                     };
-                    const map = mapSelector(state);
-                    const center = turfCenter(reprojectGeoJson(feature, geometry.projection, 'EPSG:4326')).geometry.coordinates;
                     const bbox = turfBbox(reprojectGeoJson(feature, geometry.projection, 'EPSG:4326'));
                     const [minx, minY, maxX, maxY] = bbox;
                     const { infos, profile: points } = result ?? {};
@@ -232,20 +238,25 @@ export const LPonChartPropsChangeEpic = (action$, store) =>
                                 name: "selectedLine",
                                 visibility: true
                             }),
-                        changeMapView({x: center[0], y: center[1]}, map.zoom, [minx, minY, maxX, maxY], map.size, null, map.projection),
+                        zoomToExtent([minx, minY, maxX, maxY], 'EPSG:4326', 21),
                         addProfileData(infos, points, geometry.projection)
                     ]) : Rx.Observable.empty();
                 })
                 .catch(e => {
-                    console.log("Error while obtaining data for longitudinal profile"); // eslint-disable-line no-console
-                    console.log(e); // eslint-disable-line no-console
-                    return Rx.Observable.empty();
+                    console.error("Error while obtaining data for longitudinal profile"); // eslint-disable-line no-console
+                    console.error(e); // eslint-disable-line no-console
+                    return Rx.Observable.of(error({
+                        title: "errorTitleDefault",
+                        message: e.message.includes("outside coverage") ? "longitudinalProfile.errors.outsideCoverage" : "longitudinalProfile.errors.loadingError",
+                        autoDismiss: 6,
+                        position: "tc"
+                    }));
                 })
                 .let(wrapStartStop(
                     [loading(true), ...(!isDockOpenSelector(state) ? [openDock()] : [])],
                     loading(false),
                     () => Rx.Observable.of(error({
-                        title: "notification.error",
+                        title: "errorTitleDefault",
                         message: "longitudinalProfile.errors.loadingError",
                         autoDismiss: 6,
                         position: "tc"
@@ -291,6 +302,7 @@ export const LPonAddMarkerEpic = (action$) =>
                                             opacity: 1,
                                             size: 32,
                                             anchor: [0.5, 1],
+                                            offset: [0, -16],
                                             rotate: 0,
                                             msBringToFront: true,
                                             msHeightReference: 'none',
@@ -387,7 +399,7 @@ export const LPdeactivateIdentifyEnabledEpic = (action$, store) =>
         .filter(() => mapInfoEnabledSelector(store.getState()))
         .switchMap(() => {
             const mode = dataSourceModeSelector(store.getState());
-            return mode !== "idle"
+            return mode === "draw"
                 ? Rx.Observable.from([
                     toggleMode("idle")
                 ])
@@ -453,7 +465,7 @@ export const LPclickToProfileEpic = (action$, {getState}) =>
                         [loading(true)],
                         [loading(false)],
                         () => Rx.Observable.of(error({
-                            title: "notification.error",
+                            title: "errorTitleDefault",
                             message: "longitudinalProfile.errors.loadingError",
                             autoDismiss: 6,
                             position: "tc"

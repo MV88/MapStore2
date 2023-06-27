@@ -3741,6 +3741,14 @@
           "downloadCSV": "CSV",
           "downloadPNG": "PNG",
           "downloadPDF": "PDF",
+          "info": {
+            "points": " punti",
+            "totalPoints": "Numero di punti processati:",
+            "layer":"Livello:",
+            "line":"Distanza:",
+            "up":"Dislivello Positiva:",
+            "down":"Dislivello Negativo:"
+          },
           "help": {
             "draw": "Clicca per disegnare una linea in mappa. Clicca ancora una volta per concludere l'interazione.",
             "select": "Per favore seleziona una livello nella TOC e clicca una linea in mappa per generare il profilo<br/>Livello selezionato: {layerName}",
@@ -3755,6 +3763,7 @@
             "fallbackToProjection": "La proiezione del livello di riferimento \"{defaultReferential}\" non è supportata. Viene pertanto usato questo  livello di riferimento \"{referential}\" con questa proiezione \"{projection}\"."
           },
           "errors": {
+            "outsideCoverage": "La linea fornita si trova al di fuori del bbox del livello",
             "loadingError": "Errore durante il caricamento di dati per il profilo longitudinale",
             "unableToSetupPlugin": "Impossibile inizializzare il profilo longitudinale",
             "defaultReferentialNotFound": "Il livello di riferimento di default è configurato ma non è stato trovato nella lista. Per favore aggiorna il problema della configurazione dello strumento.",

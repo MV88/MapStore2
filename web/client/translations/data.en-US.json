@@ -3752,6 +3752,14 @@
           "downloadCSV": "CSV",
           "downloadPNG": "PNG",
           "downloadPDF": "PDF",
+          "info": {
+            "points": " points",
+            "totalPoints": "Number of points processed:",
+            "layer":"Layer:",
+            "line":"Distance:",
+            "up":"Cumulative elevation gain:",
+            "down":"Cumulative elevation loss:"
+          },
           "help": {
             "draw": "Click on the map to draw the line. Click one more time on end point to finish.",
             "select": "Please select layer in TOC and click on the line feature to generate profile.<br/>Selected layer: {layerName}",
@@ -3766,6 +3774,7 @@
             "fallbackToProjection": "Projection of default referential \"{defaultReferential}\" is not supported. Falling back to referential \"{referential}\" with \"{projection}\" projection."
           },
           "errors": {
+            "outsideCoverage": "The provided line is outside the profile coverage",
             "loadingError": "Error loading data for longitudinal profile",
             "unableToSetupPlugin": "Unable to setup longitudinal profile extension",
             "defaultReferentialNotFound": "Default referential is configured but cannot be found in referentials list. Please update extension configuration.",

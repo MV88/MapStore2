@@ -3740,6 +3740,14 @@
           "downloadCSV": "CSV",
           "downloadPNG": "PNG",
           "downloadPDF": "PDF",
+          "info": {
+            "points": " puntos",
+            "totalPoints": "Número de puntos procesados:",
+            "layer":"Capa:",
+            "line":"Couche:",
+            "up":"Ganancia de elevación acumulada:",
+            "down":"Pérdida de elevación acumulada:"
+          },
           "help": {
             "draw": "Haga clic en el mapa para dibujar la línea. Haga clic una vez más en el punto final para terminar.",
             "select": "Seleccione la capa en TOC y haga clic en la entidad de línea para generar el perfil.<br/>capa seleccionada: {layerName}",
@@ -3754,6 +3762,7 @@
             "fallbackToProjection": "Proyección de referencial por defecto \"{defaultReferential}\" no es apoyado. Volviendo a las referencias \"{referential}\" con este \"{projection}\" proyección."
           },
           "errors": {
+            "outsideCoverage": "La línea proporcionada está fuera de la cobertura del perfil.",
             "loadingError": "Error al cargar datos para perfil longitudinal",
             "unableToSetupPlugin": "No se puede configurar la extensión del perfil longitudinal.",
             "defaultReferentialNotFound": "El referencial predeterminado está configurado pero no se puede encontrar en la lista de referencias. Actualice la configuración de la extensión.",

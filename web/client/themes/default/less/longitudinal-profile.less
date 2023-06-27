@@ -36,6 +36,9 @@
     .properties {
         padding: 15px;
     }
+    .info-label {
+        padding-right: 15px;
+    }
 }
 
 .longitudinal-profile-crs {
@@ -74,7 +77,7 @@
 
     &.maximized {
         height: calc(100% - 30px);
-        width: 100%;
+        width: calc(100% - 20px);
         background: inherit;
         z-index: 2000;
     }
@@ -98,10 +101,13 @@
 }
 
 .stats-entry {
+    align-items: center;
+    display: flex;
     padding: 5px 0;
 }
 
 .stats-value {
+    display: flex;
     padding-left: 10px;
 }
 

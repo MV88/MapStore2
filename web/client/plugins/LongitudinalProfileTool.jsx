@@ -5,7 +5,6 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-// import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -73,7 +72,7 @@ import { createPlugin } from '../utils/PluginsUtils';
  * @prop {number} cfg.config.defaultDistance the default distance value in meters
  * @prop {string} cfg.config.identifier the profile to use in the wps request, defaulted to gs:LongitudinalProfile
  * @prop {string} cfg.config.defaultReferentialName the default referential name
- * @prop {Object[]} cfg.config.referentials the layers that can be used as referentials
+ * @prop {Object[]} cfg.config.referentials (required) the layers that can be used as referentials
  * @prop {string[]} cfg.filterAllowedCRS the allowed crs to be proposed when dropping a DXF file, (needs to be supported by mapstore)
  * @prop {Object} cfg.additionalCRS the crs object that allow to define also a label
  *

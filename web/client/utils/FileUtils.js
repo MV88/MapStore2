@@ -38,7 +38,7 @@ export const MIME_LOOKUPS = {
     'gpx': 'application/gpx+xml',
     'kmz': 'application/vnd.google-earth.kmz',
     'kml': 'application/vnd.google-earth.kml+xml',
-    'dxf': 'image/x-dxf',
+    'dxf': 'image/vnd.dxf',
     'zip': 'application/zip',
     'json': 'application/json',
     'geojson': 'application/json',

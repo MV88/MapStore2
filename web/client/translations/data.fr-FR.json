@@ -3741,6 +3741,14 @@
           "downloadCSV": "CSV",
           "downloadPNG": "PNG",
           "downloadPDF": "PDF",
+          "info": {
+            "points": " points:",
+            "totalPoints": "Nombre de points traités:",
+            "layer":"Layer:",
+            "line":"Distance:",
+            "up":"Gain d'altitude cumulé.",
+            "down":"Perte d'altitude cumulée:"
+          },
           "help": {
             "draw": "Cliquez sur la carte pour tracer la ligne. Cliquez une fois de plus sur le point final pour terminer.",
             "select": "Veuillez sélectionner la couche dans la table des matières et cliquez sur l'entité linéaire pour générer le profil.<br/>Couches sélectionnées: {layerName}",
@@ -3755,6 +3763,7 @@
             "fallbackToProjection": "Projection du référentiel par défaut \"{defaultReferential}\" n'est pas pris en charge. Se replier sur des référentiels \"{referential}\" avec ça \"{projection}\" projection."
           },
           "errors": {
+            "outsideCoverage": "La ligne fournie est en dehors de la couverture du profil",
             "loadingError": "Erreur lors du chargement des données pour le profil longitudinal",
             "unableToSetupPlugin": "Impossible de configurer l'extension du profil longitudinal.",
             "defaultReferentialNotFound": "Le référentiel par défaut est configuré mais introuvable dans la liste des référentiels. Veuillez mettre à jour la configuration de l'extension.",

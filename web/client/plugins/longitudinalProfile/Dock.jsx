@@ -21,7 +21,6 @@ import LoadingView from "../../components/misc/LoadingView";
 import ResponsivePanel from "../../components/misc/panels/ResponsivePanel";
 import Toolbar from "../../components/misc/toolbar/Toolbar";
 import Chart from "./Chart";
-import Properties from "./Properties";
 
 const NavItemT = tooltip(NavItem);
 
@@ -259,28 +258,33 @@ const Information = ({
     const infoConfig = [
         {
             glyph: '1-layer',
-            prop: 'layer'
+            prop: 'layer',
+            label: <Message msgId="longitudinalProfile.info.layer" />
         },
         {
             glyph: 'line',
             prop: 'totalDistance',
             round: true,
-            suffix: ' m'
+            suffix: ' m',
+            label: <Message msgId="longitudinalProfile.info.line" />
         },
         {
             glyph: 'chevron-up',
             prop: 'altitudePositive',
-            suffix: ' m'
+            suffix: ' m',
+            label: <Message msgId="longitudinalProfile.info.up" />
         },
         {
             glyph: 'chevron-down',
             prop: 'altitudeNegative',
-            suffix: ' m'
+            suffix: ' m',
+            label: <Message msgId="longitudinalProfile.info.down" />
         },
         {
             glyph: 'cog',
             prop: 'processedPoints',
-            suffix: ` ${messages.longitudinalProfile.points ?? 'points'}`
+            suffix: messages.longitudinalProfile.points ?? <Message msgId="longitudinalProfile.info.points" />,
+            label: <Message msgId="longitudinalProfile.info.totalPoints" />
         }
     ];
 
@@ -290,12 +294,17 @@ const Information = ({
                 <div className="stats-entry" key={conf.prop}>
                     <Glyphicon glyph={conf.glyph} />
                     <span className="stats-value">
-                        {
-                            [
+                        <span className="info-label">
+                            {[
+                                ...[conf.label ? [conf.label] : []]
+                            ]}
+                        </span>
+                        <div className="info-value">
+                            {[
                                 ...[conf.round ? [Math.round(infos[conf.prop])] : [infos[conf.prop]]],
                                 ...[conf.suffix ? [conf.suffix] : []]
-                            ]
-                        }
+                            ]}
+                        </div>
                     </span>
                 </div>))
         }
@@ -318,14 +327,6 @@ const tabs = [
         glyph: 'info-sign',
         visible: true,
         Component: Information
-    },
-    {
-        id: 'props',
-        titleId: 'longitudinalProfile.preferences',
-        tooltipId: 'longitudinalProfile.preferences',
-        glyph: 'cog',
-        visible: true,
-        Component: Properties
     }
 ];
 
@@ -415,7 +416,6 @@ const Dock = ({
                     messages={messages}
                     loading={loading}
                 /> : null}
-            {activeTab === "props" ? <div className="properties"><Properties/></div> : null}
         </ResponsivePanel>
     ) : null;
 };

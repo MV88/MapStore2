@@ -35,8 +35,7 @@ const checkFileType = (file) => {
     return new Promise((resolve, reject) => {
         const ext = recognizeExt(file.name);
         const type = file.type || MIME_LOOKUPS[ext];
-        if (
-            includes(FILE_TYPE_ALLOWED, type)) {
+        if (includes(FILE_TYPE_ALLOWED, type)) {
             resolve(file);
         } else {
             reject(new Error("FILE_NOT_SUPPORTED"));
@@ -87,7 +86,7 @@ const readFile = (onWarnings) => (file) => {
                 });
         });
     }
-    if (type === 'image/x-dxf') {
+    if (type === 'image/x-dxf' || type === 'image/vnd.dxf') {
         return readDxf(file)
             .then(({entities}) => {
                 const geoJSON = {

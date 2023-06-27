@@ -16,6 +16,7 @@ export const LONGITUDINAL_OWNER = 'LongitudinalTool';
 export const FILE_TYPE_ALLOWED = [
     "application/json",
     "image/x-dxf",
+    "image/vnd.dxf",
     "application/x-zip-compressed",
     "application/zip"
 ];
