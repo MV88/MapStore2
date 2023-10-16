@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import {every, includes, isNumber, isString, union, orderBy, flatten} from 'lodash';
+import {round, every, includes, isNumber, isString, union, orderBy, flatten} from 'lodash';
 import {format} from 'd3-format';
 
 import LoadingView from '../misc/LoadingView';
@@ -262,6 +262,7 @@ function getData({
     formula,
     yAxisOpts,
     textinfo,
+    includeLegendPercent,
     classificationAttr,
     yAxisLabel,
     autoColorOptions,
@@ -317,6 +318,9 @@ function getData({
             text,
             pull: 0.005
         };
+        const total = y.reduce((p, c) => {
+            return p + c;
+        }, 0);
         /* pie chart is classified colored */
         if (classificationType !== 'default' && classificationColors.length) {
             const legendLabels = classifications.map((item, index) => {
@@ -330,7 +334,7 @@ function getData({
             });
             pieChartTrace = {
                 ...pieChartTrace,
-                labels: legendLabels,
+                labels: !includeLegendPercent ? legendLabels : legendLabels.map((v, i) => v + round(y[i] / total, 2) + " %"),
                 marker: {colors: classificationColors}
             };
             return pieChartTrace;
@@ -339,7 +343,7 @@ function getData({
         return {
             ...(yDataKey && { legendgroup: yDataKey }),
             ...pieChartTrace,
-            labels: x,
+            labels: !includeLegendPercent ? x : x.map((v, i) => v + " - " + round(y[i] / total * 100, 2) + "%"),
             ...(customColorEnabled ? { marker: {colors: x.reduce((acc) => ([...acc, autoColorOptions?.defaultCustomColor || '#0888A1']), [])} } : {})
         };
 
@@ -472,6 +476,7 @@ export const toPlotly = (props) => {
         series = [],
         yAxisLabel,
         textinfo,
+        includeLegendPercent,
         type = 'line',
         height,
         width,
@@ -501,7 +506,7 @@ export const toPlotly = (props) => {
             uirevision: true
         },
         data: series.map(({ dataKey: yDataKey }) => {
-            let allData = getData({ ...props, xDataKey, yDataKey, classificationAttr, type, textinfo, yAxisLabel, autoColorOptions, customColorEnabled, classificationType });
+            let allData = getData({ ...props, xDataKey, yDataKey, classificationAttr, type, textinfo, includeLegendPercent, yAxisLabel, autoColorOptions, customColorEnabled, classificationType });
             const chartData = allData ? allData?.x?.map((axis, index) => {
                 return { xAxis: axis, yAxis: allData.y[index]};
             }) : {};
@@ -553,6 +558,7 @@ export const toPlotly = (props) => {
  * @prop {string} [yAxisOpts.format] format for y axis value. See {@link https://d3-wiki.readthedocs.io/zh_CN/master/Formatting/}
  * @prop {string} [yAxisOpts.tickPrefix] the prefix on y value
  * @prop {string} [yAxisOpts.tickSuffix] the suffix of y value.
+ * @prop {boolean} [includeLegendPercent] if true, it adds the % on the label legend
  * @prop {string} [formula] a formula to calculate the final value
  * @prop {string} [yAxisLabel] the label of yAxis, to show in the legend
  * @prop {boolean} [cartesian] show the cartesian grid behind the chart
