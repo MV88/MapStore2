@@ -16,6 +16,7 @@ import { Tooltip, Glyphicon } from 'react-bootstrap';
 import { isDate, isNil, omit } from 'lodash';
 import OverlayTrigger from '../OverlayTrigger';
 import Hours from './Hours';
+import Popover from '../../styleeditor/Popover';
 
 localizer(moment);
 
@@ -118,7 +119,7 @@ class DateTimePicker extends Component {
         } else if (this.props.value && typeof this.props.value === 'string') calendarVal = this.props.value;
 
         return (
-            <div style={{display: 'flex', flexDirection: 'column', border: 'solid 5px', maxHeight: '260px', overflowY: 'auto'}}>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
                 <div style={{display: 'flex', flexDirection: 'column', overflow: 'auto', height: 'inherit'}}>
                     <div>
                         <Calendar
@@ -160,7 +161,7 @@ class DateTimePicker extends Component {
     }
 
     render() {
-        const { open, inputValue, operator, focused, openDateTime } = this.state;
+        const { open, inputValue, operator, focused } = this.state;
         const { calendar, time, toolTip, placeholder, tabIndex, popupPosition, type } = this.props;
         const props = Object.keys(this.props).reduce((acc, key) => {
             if (['placeholder', 'calendar', 'time', 'onChange', 'value'].includes(key)) {
@@ -173,24 +174,30 @@ class DateTimePicker extends Component {
         }, {});
         const calendarVisible = open === 'date';
         const timeVisible = open === 'time';
-        const dateTimeVisible = openDateTime === 'dateTime';
         let calendarVal;
         if ( this.props.value && typeof this.props.value === 'object')  {
             calendarVal = this.props.value?.startDate;
-        } else if (this.props.value && typeof this.props.value === 'string') calendarVal = this.props.value;
+        } else if (this.props.value && typeof this.props.value === 'string') {
+            calendarVal = this.props.value;
+        }
         if (type === 'date-time') {
             return (<div tabIndex="-1" onBlur={this.handleWidgetBlur} onKeyDown={this.handleKeyDown} onFocus={this.handleWidgetFocus} className={`rw-datetimepicker range-time-input rw-widget ${focused ? 'rw-state-focus' : ''}`}>
                 {this.renderInput(inputValue, operator, toolTip, placeholder, tabIndex, true, true)}
                 <span className="rw-select">
-                    <button tabIndex="-1" title="Select Date" type="button" aria-disabled="false" aria-label="Select Date" className="rw-btn-calendar rw-btn" onClick={this.toggleDateTime}>
-                        <Glyphicon glyph={'date-time'} />
-                    </button>
+                    <Popover
+                        disabled={false}
+                        placement={"top"}
+                        content={
+                            <div className="shadow-soft" style={{position: "relative", width: 300, height: 300, overflow: "auto" }}>
+                                {this.renderCustomDateTimePopup()}
+                            </div>
+                        }
+                    >
+                        <button tabIndex="-1" title="Select Date" type="button" aria-disabled="false" aria-label="Select Date" className="rw-btn-calendar rw-btn" onClick={this.toggleDateTime}>
+                            <Glyphicon glyph={'date-time'} />
+                        </button>
+                    </Popover>
                 </span>
-                { dateTimeVisible && <>
-                    <div className={`rw-calendar-popup rw-popup-container ${popupPosition === 'top' ? 'rw-dropup' : ''} ${!dateTimeVisible ? 'rw-popup-animating' : ''}`} style={{ display: dateTimeVisible ? 'block' : 'none', overflow: dateTimeVisible ? 'visible' : 'hidden' }}>
-                        {this.renderCustomDateTimePopup()}
-                    </div>
-                </> }
             </div>);
         }
         return (
@@ -199,9 +206,10 @@ class DateTimePicker extends Component {
                 {calendar || time ?
                     <span className="rw-select">
                         {
-                            calendar ? <button tabIndex="-1" title="Select Date" type="button" aria-disabled="false" aria-label="Select Date" className="rw-btn-calendar rw-btn" onClick={this.toggleCalendar}>
-                                <span aria-hidden="true" className="rw-i rw-i-calendar"></span>
-                            </button> : ''
+                            calendar ?
+                                <button tabIndex="-1" title="Select Date" type="button" aria-disabled="false" aria-label="Select Date" className="rw-btn-calendar rw-btn" onClick={this.toggleCalendar}>
+                                    <span aria-hidden="true" className="rw-i rw-i-calendar"></span>
+                                </button> : ''
                         }
                         {
                             time ? <button tabIndex="-1" title="Select Time" type="button" aria-disabled="false" aria-label="Select Time" className="rw-btn-time rw-btn" onClick={this.toggleTime}>
