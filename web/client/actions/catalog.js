@@ -16,6 +16,9 @@ var API = {
     wmts,
     backgrounds
 };
+const x = Math.random();
+console.log(x);
+
 
 export const ADD_LAYERS_FROM_CATALOGS = 'CATALOG:ADD_LAYERS_FROM_CATALOGS';
 export const ADD_LAYER_AND_DESCRIBE = 'CATALOG:ADD_LAYER_AND_DESCRIBE';

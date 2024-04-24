@@ -9,9 +9,10 @@ module.exports = {
     },
     "plugins": [
         "@babel",
-        "no-only-tests",                 // https://github.com/levibuzolic/eslint-plugin-no-only-tests
+        "no-only-tests",                 // https://github.com/levibuzolic/eslint-plug  in-no-only-tests
         "react",                         // https://github.com/yannickcr/eslint-plugin-react
-        "import"                         // https://github.com/benmosher/eslint-plugin-import
+        "import",                        // https://github.com/benmosher/eslint-plugin-import,
+        "security-node" // https://github.com/gkouziik/eslint-plugin-security-node/blob/master/README.md
     ],
     "env": {                           // http://eslint.org/docs/user-guide/configuring.html#specifying-environments
         "browser": true,                 // browser global variables
