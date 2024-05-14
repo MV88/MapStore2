@@ -536,6 +536,63 @@ export const fields = {
                 />
             </PropertyField>
         );
+    },
+    customParams: (props) => {
+        const {
+            label,
+            value,
+            config: {
+                isValid
+            },
+            thematicCustomParams,
+            onChange
+        } = props;
+        // if there is no params it will be hidden
+        if (!(thematicCustomParams?.length)) {
+            return null;
+        }
+        const valid = !isValid || isValid({ value });
+        const handleCustomParamChange = (key, selectedVal) => {
+            onChange({
+                [key]: selectedVal
+            });
+        };
+
+        return (
+            <div style={{ width: '100%' }}>
+                <hr />
+                <div className="ms-symbolizer-field"><Message msgId={label} /></div>
+                <div>
+                    {thematicCustomParams?.map(param=> {
+                        const currentValue = value ? value[param?.field] : undefined;
+                        const valueObj = param?.values?.find(val => val.value === currentValue);
+                        return (
+                            <PropertyField
+                                key={param?.field}
+                                label={param?.title || param?.field}
+                                invalid={!valid}>
+                                <SelectInput
+                                    {...props}
+                                    value={valueObj?.value
+                                        ? { value: valueObj.value, label: valueObj.name ?? valueObj.value }
+                                        : currentValue }
+                                    onChange={(val)=> handleCustomParamChange(param.field, val)}
+                                    config={{...props.config, getOptions: () => {
+                                        return param?.values?.map(val => {
+                                            return {
+                                                value: val.value,
+                                                label: val.name
+                                            };
+                                        });
+                                    }}}
+                                />
+                            </PropertyField>
+                        );
+                    })}
+                </div>
+                <hr />
+            </div>
+        );
     }
 };
 
@@ -590,7 +647,7 @@ function Fields({
                 const Component = isPropertyField ? PropertySelector : FieldComponent;
                 const disabled = isDisabled && isDisabled(properties[key], state.current.properties, fieldsConfig);
                 const visible = isVisible ? isVisible(properties[key], state.current.properties, format) : true;
-                return visible ? (<div className="ms-symbolizer-field-wrapper">
+                return visible ? (<div className={`ms-symbolizer-field-wrapper ${type || ""}`}>
                     <Component
                         {...fieldsConfig}
                         key={key}

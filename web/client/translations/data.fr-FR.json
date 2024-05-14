@@ -173,6 +173,16 @@
                     "eyeDomeLightingRadius": "Rayon d'éclairage"
                 }
             },
+            "modelLayer": {
+                "modelCenterLat": "Latitude du centre (DD)",
+                "modelCenterLng": "Longitude du centre(DD)",
+                "height": "Hauteur (m)",
+                "heading": "Angle de cap (DD)",
+                "warnings": {
+                    "projectedCrsNotSupported": "Le modèle est placé au centre de la vue actuelle car: le modèle a une projection CRS {modelProjection}, mais elle n'est pas prise en charge.",
+                    "projectedCrsNotProvided": "Le modèle est placé au centre de la vue actuelle car: le modèle n'a pas de projection CRS définie."
+                }
+            },
             "tooltip": {
                 "label": "Infobulle",
                 "title": "Titre",
@@ -192,6 +202,11 @@
               "legendWidth": "Largeur",
               "legendHeight": "Hauteur",
               "legendPreview": "Aperçu"
+            },
+            "enableInteractiveLegendInfo": {
+                "label": "Activer la légende interactive",
+                "info": "Si cette option est activée, le filtre par légende peut être appliqué en cliquant sur les éléments de légende de cette couche depuis la table des matières. Remarque: ce paramètre nécessite des configurations spécifiques sur GeoServer",
+                "fetchError": "Impossible d'obtenir les informations de légende du service"
             },
             "enableLocalizedLayerStyles": {
                 "label": "Activer le style localisé",
@@ -547,11 +562,6 @@
                 }
             }
         },
-        "floatinglegend": {
-            "showTOC": "Afficher les couches",
-            "showLegend": "Afficher la légende",
-            "hideLegend": "Cacher la légende"
-        },
         "addgroup": {
             "addbtn": "Ajouter",
             "groupName": "Nom de groupe"
@@ -578,6 +588,7 @@
             "layerFilterTooltip": "Filtrer les couches",
             "toolDownloadTooltip": "Exporter les données de la couche",
             "noFilteredResults": "Aucun résultat",
+            "emptyLayerTree": "L'arborescence des calques est vide. Veuillez ajouter un nouveau calque du catalogue",
             "filterPlaceholder": "Filtrer les couches",
             "clearFilter": "Supprimer le filtre",
             "toolReloadLayerTooltip": "Forcer le rechargement de la couche sélectionnée",
@@ -615,6 +626,22 @@
             "notVisibleZoomOut": "Le calque n'est pas visible car il est en dehors des limites de résolution. Faites un zoom arrière pour afficher le calque",
             "notVisibleSwitchTo3D": "Passer en mode carte 3D pour voir cette couche",
             "notVisibleSwitchTo2D": "Passer en mode carte 2D pour voir cette couche",
+            "toolGroupShowAllChildren": "Activer la visibilité de tous les nœuds enfants",
+            "toolGroupHideAllChildren": "Désactiver la visibilité de tous les nœuds enfants",
+            "activateToolGroupMutuallyExclusive": "Activer la visibilité mutuellement exclusive des nœuds enfants",
+            "deactivateToolGroupMutuallyExclusive": "Désactiver la visibilité mutuellement exclusive des nœuds enfants",
+            "toolGroupCollapseAllChildren": "Réduire tous les nœuds enfants",
+            "toolGroupExpandAllChildren": "Développer tous les nœuds enfants",
+            "closeOnMapInitialization": "Garder fermé lors de l'initialisation de la carte",
+            "openOnMapInitialization": "Ouvrir sur l'initialisation de la carte",
+            "defaultTheme": "Thème par défaut",
+            "legendTheme": "Thème Légende",
+            "showFullTitle": "Afficher le titre complet",
+            "hideFullTitle": "Titre sur une seule ligne",
+            "showOpacitySlider": "Afficher le curseur d'opacité",
+            "hideOpacitySlider": "Masquer le curseur d'opacité",
+            "showOpacityTooltip": "Afficher l'info-bulle d'opacité",
+            "hideOpacityTooltip": "Masquer l'info-bulle d'opacité",
             "refreshOptions": {
                 "bbox": "Mettre à jour la BBOX",
                 "search": "Mettre à jour les options de recherche",
@@ -680,7 +707,7 @@
                 "configuration": "Configuration",
                 "apply": "Appliquer la classification",
                 "restore": "Réinitialiser les personnalisations",
-                "go_to_cfg": "Configurer...",
+                "goToCfg": "Configurer...",
                 "go_to_thema": "Utilisez cette configuration",
                 "cfgError": "Erreur dans la configuration JSON",
                 "classify": "Classer",
@@ -809,6 +836,7 @@
             "saveMeasure": "Enregistrer les mesures dans l'annotation",
             "resetTooltip": "Effacer les mesures",
             "addAsLayer": "Ajouter comme couche",
+            "lengthMeasure": "Mesurez la distance géodésique dans l'espace 3D qui est calculée sur l'ellipsoïde, mais rendue là où vous cliquez",
             "polylineDistance3DMeasure": "Mesurer la distance dans l'espace 3D",
             "area3DMeasure": "Mesurer la zone dans l'espace 3D",
             "pointCoordinatesMeasure": "Mesurer les coordonnées du point",
@@ -1081,7 +1109,7 @@
             "title": "Recherche avancée",
             "query": "Recherche",
             "apply": "Appliquer",
-            "reset": "Recommencer",
+            "reset": "Réinitialiser: réinitialiser tous les filtres, y compris tous les autres filtres externes",
             "save": "Enregistrer",
             "discard": "Annuler",
             "query_request_exception": "Erreur de requête",
@@ -1120,7 +1148,18 @@
                     "wrong_range": "La limite inférieure doit être plus petite que la limite supérieure"
                 },
                 "datefield": {
-                    "wrong_date_range": "La date de début doit être antérieure à la date de fin"
+                    "wrong_date_range": "La date de début doit être antérieure à la date de fin",
+                    "placeholder": "Insérer la date",
+                    "tooltip": "Insérer la date au format {format}",
+                    "quickSelectors": {
+                        "today": "Aujourd'hui",
+                        "now": "Maintenant",
+                        "tomorrow": "Demain",
+                        "yesterday": "Hier",
+                        "thisWeek": "Cette semaine",
+                        "thisMonth": "Ce mois-ci",
+                        "nDaysFrom": "{n} jours à partir de {todayNow}"
+                    }
                 },
                 "autocomplete": {
                     "emptyList": "Aucun résultat",
@@ -1628,7 +1667,12 @@
             "allowUnsecureLayers": {
               "label": "Autoriser les couches non sécurisées",
               "tooltip": "L'ajout d'une couche à la carte avec cette option activée force l'application à appliquer un proxy"
-            }
+            },
+            "sortBy": {
+                "label": "Trier par",
+                "tooltip": "Ajoutez un préfixe d’espace de noms à la propriété name. c'est-à-dire ${namespace}:${name}",
+                "placeholder": "Entrer un nom"
+              }
         },
         "uploader": {
             "filename": "Nom du fichier",
@@ -2557,6 +2601,8 @@
             "alertForceTranslate": "Vous perdrez toutes les modifications ajoutées dans le texte en passant à l'éditeur visuel. Êtes-vous sûr de passer en mode éditeur de style visuel?",
             "stayInTextareaEditor": "Non, continuez dans la zone de texte",
             "useLatestValidStyle": "Oui, passez à l'éditeur visuel",
+            "alertCustomParamsNotValid": "Vous perdrez toutes les modifications ajoutées en mode texte en fermant l'éditeur de paramètres personnalisés. Êtes-vous sûr de fermer l'éditeur?",
+            "closeCustomParamsEditor": "Oui, fermez l'éditeur",
             "validationError": "Erreur de validation",
             "incorrectPropertyInputError": "Ceci est probablement dû à une valeur manquante ou non valide dans les entrées de propriétés de l'éditeur de style.",
             "emptyRuleEditorTitle": "Ajouter de nouvelles règles",
@@ -2568,6 +2614,7 @@
             "redChannel": "Red channel",
             "greenChannel": "Green channel",
             "blueChannel": "Blue channel",
+            "alphaChannel": "Alpha channel",
             "grayChannel": "Channel",
             "ruleClassification": "Classification",
             "ruleRaster": "Raster",
@@ -2634,7 +2681,15 @@
             "msExtrudedHeight": "Hauteur extrudée",
             "msExtrusionColor": "Couleur d'extrusion",
             "msExtrusionType": "Type d'extrusion",
-            "wall": "Mur"
+            "wall": "Mur",
+            "enableBanding": "Style de bande",
+            "selectChannel": "Sélectionnez un groupe",
+            "minLabel": "Min",
+            "maxLabel": "Max",
+            "minSourceValue": "Valeur minimale des données sources",
+            "maxSourceValue": "Valeur maximale des données sources",
+            "customParams": "Paramètres personnalisés",
+            "wrongFormatMsg": "La configuration entrée est en mauvais format !!"
         },
         "playback": {
             "settings": {
@@ -3020,7 +3075,10 @@
             "saveSuccessTitle": "Succès",
             "saveSuccessMessage": "Enregistré avec succès",
             "saveTooltip": "Enregistrer",
-            "saveAsTooltip": "Enregistrer sous"
+            "saveAsTooltip": "Enregistrer sous",
+            "unadvertised": "Non annoncé",
+            "creator": "Créé par",
+            "editor": "Dernière modification par"
         },
         "mapEditor": {
             "modalTitle": "Editeur de carte",
@@ -3917,8 +3975,10 @@
           "emptyDescription": "Cliquez sur la carte pour commencer à parcourir les images de Street View",
           "messages": {
             "noDataForPosition": "pas de données Street View pour cette position",
-            "unknownError": "erreur inconnue, voir console"
-          },
+            "unknownError": "erreur inconnue, voir console",
+            "errorServiceUrl": "Service non disponible. Veuillez vérifier l'URL fournie",
+            "errorRetriveingLayerData": "Une erreur s'est produite lors du chargement des données de la couche"
+        },
           "loadingAPI": "Chargement de l'API...",
           "cyclomedia": {
             "initializing": "Initialisation de l'API Street Smart...",

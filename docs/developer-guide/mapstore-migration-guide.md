@@ -20,35 +20,102 @@ This is a list of things to check if you want to update from a previous version 
 - Optionally check also accessory files like `.eslinrc`, if you want to keep aligned with lint standards.
 - Follow the instructions below, in order, from your version to the one you want to update to.
 
-## Migration from 2023.02.xx to 2024.01.00
+## Migration from 2023.02.02 to 2024.01.00
+
+### TOC plugin refactor
+
+The table of content (TOC) has been refactored with following changes:
+
+- Removal of hardcoded tools from the toolbar. Now all the toolbar's elements are injected by related plugins. This includes also the introduction of a new plugin called `MetadataInfo` for layer metadata.
+- Refactors of TOC components
+- Review of plugin configuration (cfg). List of changed configuration properties:
+  - `activateSettingsTool` removed property, now the button will be added directly from `TOCItemsSettings` when available
+  - `activateQueryTool` removed property, now the button will be directly added by `FilterLayer` plugin, when available
+  - `activateDownloadTool` removed property, now the button will be added directly from `LayerDownload` when available
+  - `activateMetedataTool` removed property, now the button will be added directly from `MetadataInfo` when availables
+  - `checkPlugins` remove property, now availability of tools rely on the related plugin so this check is not needed anymore  
+  - `showFullTitleOnExpand`  removed property, the new style allows for seeing the full title inline without duplicating it
+  - `metadataTemplate` this configuration has been moved to `MetadataInfo` plugin
+  - `metadataOptions` this configuration has been moved to `MetadataInfo` plugin
+
+### Introduction of MetadataInfo plugin
+
+The `MetadataInfo` plugin has been introduced to include the layer metadata info button of the TOC toolbar has separated plugin as expected by the new TOC.
+Some steps are needed to correctly configure it:
+
+- Ensure to import the `MetadataInfo` plugin in the downstream project
+- Include the plugin definition in the `pluginsConfig.json` to make it available inside contexts
+- Move the related configuration (cfg) from the TOC to the `MetadataInfo` plugin definition in `localConfig.json` file. This is only necessary if the layer metadata button was configured at the application level
+- Update your contexts to use `MetadataInfo` plugin, properly configured, when needed
+
+expected changes in the `pluginsConfig.json` file:
+
+- add `MetadataInfo` entry to the list
+
+```js
+{
+    "name": "MetadataInfo"
+}
+```
+
+### Maven project update
+
+With this release the maven `pom.xml` files has been restructured to centralize dependencies version in the `dependencyManagement` section and then in some properties in the root `pom.xml` file.
+This regards also the projects that now hold the versions of the dependencies in the properties section.
+Your projects will work in any case, but we suggest to update your `pom.xml` files to align them to the new structure (see template file in the MapStore2 repository for more details).
+
+### Database update
+
+The resource metadata has been recently extented to include  information about resource creator and editor and to provide the advertises/unadvertised resource functionalities.
+If your installation has the [database creation mode](https://docs.mapstore.geosolutionsgroup.com/en/latest/developer-guide/database-setup/#database-creation-mode) set to `update` (the default), the columns will be added automatically and you do not have to do any action. If it is set to `validate` instead you will have to run the update scripts.
+
+*In any case*, the update scripts contain also a part to populate the `creator` column, that can not be applied automatically with  [database creation mode](https://docs.mapstore.geosolutionsgroup.com/en/latest/developer-guide/database-setup/#database-creation-mode) set to `update`.
+So if you want to see this information, even if it is not strictily required, you will have to run the migration scripts anyway.
+
+- For script reference see:
+
+    [postgresql migration script 2.0.0 to 2.1.0](https://github.com/geosolutions-it/geostore/blob/master/doc/sql/migration/postgresql/postgresql-migration-from-v.2.0.0-to-v2.1.0.sql)
+
+    [h2 migration script 2.0.0 to 2.1.0](https://github.com/geosolutions-it/geostore/blob/master/doc/sql/migration/h2/h2-migration-from-v.2.0.0-to-v2.1.0.sql)
+
+    [oracle migration script 2.0.0 to 2.1.0](https://github.com/geosolutions-it/geostore/blob/master/doc/sql/migration/oracle/oracle-migration-from-v.2.0.0-to-v2.1.0.sql)
 
 ### Restructuring of Login and Home in Dashboard page
 
 We recently added the sidebar to the dashboard page and by doing so we wanted to keep a uniform position of login and home plugins, by putting them in the omnibar container rather than the sidebar one. The viewer is a specific case that will be reviewed in the future.
 
-In order to align the configuration of the two mentioned plugin you have t
+In order to align the configuration of the two mentioned plugin you have to:
 
-- edit locaConfig.json plugins.dashboard
-- remove Home and Login items
+- edit `localConfig.json` `plugins.dashboard` section
+- remove `BurgerMenu`, `Home` and `Login` items
 - add the following
 
 ```json
+"Details",
+"AddWidgetDashboard",
+"MapConnectionDashboard",
 {
-    "name": "Home",
-    "override": {
-        "OmniBar": {
-            "priority": 5
-        }
-    }
+  "name": "SidebarMenu",
+  "cfg": {
+    "containerPosition": "columns"
+  }
 },
 {
-    "name": "Login",
-    "override": {
-        "OmniBar": {
-        "priority": 5
-        }
+  "name": "Home",
+  "override": {
+    "OmniBar": {
+      "priority": 5
     }
-}
+  }
+},
+{
+  "name": "Login",
+  "override": {
+    "OmniBar": {
+      "priority": 5
+    }
+  }
+},
 ```
 
 ### Using `elevation` layer type instead of wms layer with useForElevation property
@@ -153,7 +220,7 @@ For this reason, if you are using the printing plugin in your project you have t
                     <groupId>org.mapfish.print</groupId>
                     <artifactId>print-lib</artifactId>
 -                    <version>geosolutions-2.3-SNAPSHOT</version>
-+                    <version>2.3-SNAPSHOT</version>
++                    <version>2.4-SNAPSHOT</version>
 
 ```
 
@@ -169,6 +236,44 @@ For this reason, if you are using the printing plugin in your project you have t
             </snapshots>
         </repository>
 ```
+
+#### Print config file update
+
+Due to the introduction of the new `Jackson Yaml` parser, the MapStore `config.yaml` file has been reviewed and updated. Below are reported all the relevant changes that need to be applied also to `config.yaml` of MapStore donwstream projects where the printing engine is present.
+
+Due to the new library being stricter on the format of the Yaml, some changes in the configuration files were made, to make them compliant with yaml format:
+
+- Removed not allowed characters from property values (`@` in `@shared.privileged.geoserver.pass@`)
+- Removed references without anchors (document declares link to `*commonFooter` but anchor `&commonFooter` was not defined previously)
+- Added a space between key\value pairs (`"absoluteX: 30"` instead of `"absoluteX:30"`)
+
+Some additional updates has been provided due to parsing issue with the new library:
+
+```yaml
+- !ipMatch
+    host: 127.0.0.1
+    # Allow to all hosts
+    mask: 0.0.0.0
+```
+
+`!ipMatch` is mapped to [AddressHostMatcher](https://github.com/mapfish/mapfish-print-v2/blob/0c055e2a36bec3b12eafd207144ff8eb7b37f987/src/main/java/org/mapfish/print/config/AddressHostMatcher.java#L26), which does not have host property. Should instead use ip property (e.g IP: 127.0.0.1)
+
+```yaml
+- !text
+              width: 300
+              text: '${comment}'
+              ...
+```
+
+`!text` is mapped to [TextBlock class](https://github.com/mapfish/mapfish-print-v2/blob/4b73912e5565ae206af5b5c434ef37454a98c252/src/main/java/org/mapfish/print/config/layout/TextBlock.java#L37). It does not have width property, so it should be removed.
+
+```yaml
+lastPage:
+    rotation: true
+    ...
+```
+
+lastPage is mapped to [LastPage class](https://github.com/mapfish/mapfish-print-v2/blob/4b73912e5565ae206af5b5c434ef37454a98c252/src/main/java/org/mapfish/print/config/layout/LastPage.java#L30), and does not have rotation property.
 
 ### Annotations plugin refactor
 
@@ -572,6 +677,12 @@ where `LogManager` can be imported as:
 
 ```java
 import org.apache.logging.log4j.LogManager;
+```
+
+and `Logger` can be imported as:
+
+```java
+import org.apache.logging.log4j.Logger;
 ```
 
 ### Update database schema

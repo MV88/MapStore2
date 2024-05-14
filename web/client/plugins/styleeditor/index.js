@@ -48,6 +48,7 @@ import {
     styleServiceSelector,
     templateIdSelector
 } from '../../selectors/styleeditor';
+import {getSelectedLayer } from "../../selectors/layers";
 import {
     STYLE_OWNER_NAME,
     getStyleTemplates
@@ -110,13 +111,15 @@ export const StyleList = compose(
         createSelector(
             [
                 statusStyleSelector,
-                getAllStyles
+                getAllStyles,
+                getSelectedLayer
             ],
-            (status, { defaultStyle, enabledStyle, availableStyles }) => ({
+            (status, { defaultStyle, enabledStyle, availableStyles }, layer) => ({
                 status,
                 defaultStyle,
                 enabledStyle,
-                availableStyles
+                availableStyles,
+                layer
             })
         ),
         {
@@ -155,7 +158,8 @@ export const StyleToolbar = compose(
                 canEditStyleSelector,
                 getAllStyles,
                 styleServiceSelector,
-                selectedStyleFormatSelector
+                selectedStyleFormatSelector,
+                getSelectedLayer
             ],
             (status, templateId, error, initialCode, code, loading, selectedStyle, canEdit, { defaultStyle }, { formats = [ 'sld' ] } = {}, format) => ({
                 status,
