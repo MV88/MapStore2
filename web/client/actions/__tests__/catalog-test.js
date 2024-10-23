@@ -70,7 +70,9 @@ import {
     FORMAT_OPTIONS_LOADING,
     formatsLoading,
     SET_FORMAT_OPTIONS,
-    setSupportedFormats, addLayerAndDescribe, ADD_LAYER_AND_DESCRIBE
+    setSupportedFormats, addLayerAndDescribe, ADD_LAYER_AND_DESCRIBE,
+    updateCatalogServices,
+    UPDATE_CATALOG_SERVICES
 } from '../catalog';
 
 import { SHOW_NOTIFICATION } from '../notifications';
@@ -251,6 +253,14 @@ describe('Test correctness of the catalog actions', () => {
         expect(retval).toExist();
         expect(retval.type).toBe(ADD_CATALOG_SERVICE);
         expect(retval.service).toBe(service);
+    });
+    it('updateCatalogServices', () => {
+        const services = [{}];
+        var retval = updateCatalogServices(services);
+
+        expect(retval).toExist();
+        expect(retval.type).toBe(UPDATE_CATALOG_SERVICES);
+        expect(retval.service).toBe(services);
     });
     it('resetCatalog', () => {
         var retval = resetCatalog();

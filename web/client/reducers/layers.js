@@ -31,7 +31,8 @@ import {
     SELECT_NODE,
     FILTER_LAYERS,
     SHOW_LAYER_METADATA,
-    HIDE_LAYER_METADATA
+    HIDE_LAYER_METADATA,
+    UPDATE_ALL_LAYERS
 } from '../actions/layers';
 
 import { TOGGLE_CONTROL } from '../actions/controls';
@@ -228,6 +229,12 @@ function layers(state = { flat: [] }, action) {
             return assign({}, state, {groups: newNodes, flat: newLayers});
         }
         return state;
+    }
+    case UPDATE_ALL_LAYERS: {
+        return {
+            ...state,
+            layers: action.layers
+        };
     }
     case UPDATE_NODE: {
         const selector = action.nodeType === 'groups' ? 'group' : 'id';
